@@ -64,7 +64,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     SharedPreferencesHelper sharedPreferencesHelper;
     LoginPresenter loginPresenter;
     private static boolean isExit = false;
-    String userName,userName1, userPassword,userPassword1;
+    String userName,userName1, userPassword,userPassword1,cid;
     String access;
     Intent intent;
 
@@ -125,6 +125,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
         loginPresenter = new LoginPresenterImpl(this, this);
         userName = sharedPreferencesHelper.getData(this, "userName", "");
         userPassword = sharedPreferencesHelper.getData(this, "userPwd", "");
+        cid = sharedPreferencesHelper.getData(this, "cid", "");
+        Log.i("loginXXX",cid);
         if (!userName.isEmpty()) {
 //            intent = new Intent(LoginActivity.this, .class);
 //            startActivity(intent);

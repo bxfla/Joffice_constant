@@ -23,7 +23,7 @@ public class FirstActivity extends AppCompatActivity {
 //        sharedPreferencesHelper.saveData(this,"Address","宜春");
 
         sharedPreferencesHelper.saveData(this,"Ip","58.17.74.135");
-        sharedPreferencesHelper.saveData(this,"Socket","6770");
+        sharedPreferencesHelper.saveData(this,"Socket","6775");
         sharedPreferencesHelper.saveData(this,"Found","joffice");
         sharedPreferencesHelper.saveData(this,"Address","宜春");
 

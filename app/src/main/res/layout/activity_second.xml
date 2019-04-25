@@ -9,6 +9,7 @@
     <com.hy.powerplatform.my_utils.myViews.Header
         android:id="@+id/header"
         style="@style/Heander"
+        app:header_is_left_iv_visiable="false"
         app:header_title="@string/app_name">
     </com.hy.powerplatform.my_utils.myViews.Header>
     <LinearLayout
