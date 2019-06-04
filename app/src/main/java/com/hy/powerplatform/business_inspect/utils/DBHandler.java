@@ -6774,4 +6774,47 @@ public class DBHandler {
         }
         return "获取数据失败";
     }
+
+
+    //提交服务卫生数据
+    public String Test() {
+        HttpClient httpClient = new DefaultHttpClient();
+        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+        HttpPost httpRequst = new HttpPost("http://192.168.2.132:8080/joffice21/info/newAppNews.do");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        httpRequst.setHeader("Cookie", Session);
+        try {
+            // 将参数添加的POST请求中
+            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
+            httpRequst.setEntity(uefEntity);
+            // 发送请求
+            HttpResponse res = httpClient.execute(httpRequst);
+            HttpEntity entity = res.getEntity();
+            // 读取返回值
+            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+            StringBuffer sb = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            Log.i("weisheng",sb.toString());
+            reader.close();
+            JSONObject json_ = new JSONObject(sb.toString());
+            System.out.println("json=" + json_);
+            if (json_ != null) {
+                String msg = json_.get("msg").toString();
+                String show = json_.get("show").toString();
+                if (msg.equals("保存成功")) {
+                    return "";
+                } else {
+                    return msg;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+        return "保存失败";
+    }
+
 }

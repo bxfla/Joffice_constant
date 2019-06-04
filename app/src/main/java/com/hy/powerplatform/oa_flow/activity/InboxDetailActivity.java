@@ -62,7 +62,7 @@ public class InboxDetailActivity extends BaseActivity {
         String content = intent.getStringExtra("content");
         String person = intent.getStringExtra("person");
         String time = intent.getStringExtra("time");
-        String title = intent.getStringExtra("title");
+        final String title = intent.getStringExtra("title");
         final String fujian = intent.getStringExtra("fijian");
         final String fujianId = intent.getStringExtra("fijianId");
         if (fujian.equals("")){
@@ -74,10 +74,11 @@ public class InboxDetailActivity extends BaseActivity {
         tvfujian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<String> dataList = new MyStringSpilt().stringSpiltList(fujianId);
+                final List<String> dataList = new MyStringSpilt().stringSpiltList(fujianId);
+                final List<String> dataList1 = new MyStringSpilt().stringSpiltList(fujian);
                 if (dataList.size() == 1) {
-//                    String id = new MyStringSpilt().stringSpilt(dataList.get(0));
-                    final String url = Constant.BASE_URL2 + Constant.FILEDATA + "?fileId=" + fujianId;
+                    String newString = fujianId.toString().replace(",","");
+                    final String url = Constant.BASE_URL2 + Constant.FILEDATA + "?fileId=" + newString;
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -91,11 +92,16 @@ public class InboxDetailActivity extends BaseActivity {
                         }
                     }).start();
                 } else if (dataList.size() > 1) {
-                    MyAlertDialog.MyListAlertDialog(InboxDetailActivity.this, dataList, new AlertDialogCallBackP() {
+                    MyAlertDialog.MyListAlertDialog(InboxDetailActivity.this, dataList1, new AlertDialogCallBackP() {
                         @Override
                         public void oneselect(final String data1) {
-                            String id = new MyStringSpilt().stringSpilt(data1);
-                            final String url = Constant.BASE_URL2 + Constant.FILEDATA + "?fileId=" + id;
+                            String selectId = "";
+                            for (int i = 0;i<dataList1.size();i++){
+                                if (data1.equals(dataList1.get(i))){
+                                    selectId = dataList.get(i);
+                                }
+                            }
+                            final String url = Constant.BASE_URL2 + Constant.FILEDATA + "?fileId=" + selectId;
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {

@@ -171,7 +171,6 @@ public class MainActivity extends BaseActivity implements MainView {
      * @param limit
      */
     private void getData(final int start, final int limit) {
-        beanList.clear();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -193,6 +192,7 @@ public class MainActivity extends BaseActivity implements MainView {
             super.handleMessage(msg);
             switch (msg.what) {
                 case TAG_ONE:
+                    mainDataList.clear();
                     String data = msg.obj.toString();
                     bean = new Gson().fromJson(data, MainData.class);
                     mainDataList.clear();

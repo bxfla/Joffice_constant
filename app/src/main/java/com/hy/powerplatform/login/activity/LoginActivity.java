@@ -181,7 +181,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
                     //final String url1 = "http://"+Ip+":"+Socket+"/"+Found+"/"+"mobile.do"+"?username="+userName1+"&password="+userPassword1;
                     String url1 = null;
                     try {
-                        url1 = Constant.BASE_URL2+"mobile.do"+"?username="+ URLEncoder.encode(userName1, "utf-8")+"&password="+userPassword1;
+                        url1 = Constant.BASE_URL2+"mobile.do"+"?username="+ URLEncoder.encode(userName1, "utf-8")+"&password="+userPassword1+"&clientid="+cid;
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
@@ -324,7 +324,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
             sharedPreferencesHelper.saveData(this, "userCode", login.getUserId());
             sharedPreferencesHelper.saveData(this, "userStatus", login.getUsername());
             hideLoading();
-            intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent = new Intent(LoginActivity.this, SecondActivity.class);
             startActivity(intent);
             finish();
         } else {

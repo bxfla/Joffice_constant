@@ -152,7 +152,7 @@ public class SecondActivity extends BaseActivity {
                     ProgressDialogUtil.stopLoad();
                     Gson gson = new Gson();
                     Version version = gson.fromJson(versiondata, Version.class);
-                    if (version.getData() != null) {
+                    if (version!=null&&version.getData() != null) {
                         String nnm = version.getData().getVersionNo();
                         if (!nnm.equals(versionName)&&Double.valueOf(nnm)>Double.valueOf(versionName)){
 //                        if (!nnm.equals("2")) {

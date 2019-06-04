@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.hy.powerplatform.login.FirstActivity">
+    tools:context=".login.activity.FirstActivity">
 
     <LinearLayout
         android:id="@+id/llHeard"
@@ -26,16 +26,16 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
-            android:text="@string/logo_big_text"
+            android:text="@string/logo_small_text"
             android:textColor="@color/color_bg_selected"
-            android:textSize="32dp"
+            android:textSize="26dp"
             android:layout_marginLeft="5dp"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/logo_small_text"
+        android:text="@string/welcome_user_app"
         android:gravity="center"
         android:textColor="@color/color_bg_selected"
         android:layout_below="@+id/llHeard"

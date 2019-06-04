@@ -31,8 +31,7 @@ public class MyApplication extends LitePalApplication {
         IS_DEBUG=true;
         //防止出现危险弹窗
         closeAndroidPDialog();
-
-//个推
+        //个推
         PushManager.getInstance().initialize(getApplicationContext(), DemoPushService.class);
         // 注册 intentService 后 PushDemoReceiver 无效, sdk 会使用 DemoIntentService 传递数据,
         // AndroidManifest 对应保留一个即可(如果注册 DemoIntentService, 可以去掉 PushDemoReceiver, 如果注册了

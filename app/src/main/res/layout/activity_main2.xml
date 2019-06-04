@@ -21,7 +21,7 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             app:header_is_right_tv_visiable="true"
-            app:header_title="@string/app_name">
+            app:header_title="@string/logo_small_text">
         </com.hy.powerplatform.my_utils.myViews.Header>
         <!--<TextView-->
             <!--android:id="@+id/tvAddress"-->

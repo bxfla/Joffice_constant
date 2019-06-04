@@ -38,7 +38,7 @@
     <string name="check_pwd">修改密码</string>
     <string name="assessLine">考试列表</string>
     <string name="my_infoorm">个人信息</string>
-    <string name="app_name">宜春公交ERP办公系统</string>
+    <string name="app_name">宜春公交ERP信息管理系统</string>
     <string name="work_add">添加</string>
     <string name="btn_login">登录</string>
     <string name="register">注册</string>
@@ -87,7 +87,7 @@
     <string name="current_time">当前时间</string>
 
     <!--login-->
-    <string name="logo_big_text">公交协同办公</string>
+    <string name="logo_big_text">公交ERP办公系统</string>
     <string name="logo_small_text">宜春公交ERP信息管理系统</string>
     <string name="company_name">宜春公交集团有限公司</string>
     <string name="welcome_user_app">欢迎使用宜春公交ERP信息管理系统</string>
