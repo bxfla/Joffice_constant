@@ -32,15 +32,15 @@ public class FirstActivity extends AppCompatActivity {
 //        sharedPreferencesHelper.saveData(this,"Found","joffice");
 //        sharedPreferencesHelper.saveData(this,"Address","宜春");
 
-//        sharedPreferencesHelper.saveData(this,"Ip","192.168.2.132");
-//        sharedPreferencesHelper.saveData(this,"Socket","6080");
-//        sharedPreferencesHelper.saveData(this,"Found","joffice");
-//        sharedPreferencesHelper.saveData(this,"Address","宜春");
-
-        sharedPreferencesHelper.saveData(this,"Ip","58.17.74.135");
-        sharedPreferencesHelper.saveData(this,"Socket","6775");
+        sharedPreferencesHelper.saveData(this,"Ip","192.168.2.114");
+        sharedPreferencesHelper.saveData(this,"Socket","6080");
         sharedPreferencesHelper.saveData(this,"Found","joffice");
         sharedPreferencesHelper.saveData(this,"Address","宜春");
+
+//        sharedPreferencesHelper.saveData(this,"Ip","58.17.74.135");
+//        sharedPreferencesHelper.saveData(this,"Socket","6775");
+//        sharedPreferencesHelper.saveData(this,"Found","joffice");
+//        sharedPreferencesHelper.saveData(this,"Address","宜春");
 
 //        sharedPreferencesHelper.saveData(this,"Ip","221.195.69.109");
 //        sharedPreferencesHelper.saveData(this,"Socket","7080");

@@ -660,7 +660,7 @@
                 <TextView
                     android:id="@+id/tvLeader3"
                     style="@style/textWrite"
-                    android:hint="财务领导意见" />
+                    android:hint="采购领导意见" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout

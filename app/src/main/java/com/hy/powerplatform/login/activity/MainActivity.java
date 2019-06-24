@@ -195,9 +195,14 @@ public class MainActivity extends BaseActivity implements MainView {
                     mainDataList.clear();
                     String data = msg.obj.toString();
                     bean = new Gson().fromJson(data, MainData.class);
-                    mainDataList.clear();
                     for (int i = 0; i < bean.getData().size(); i++) {
-                        mainDataList.add(bean.getData().get(i));
+                        if (bean.getData().get(i).getModuleName().equals("历史流程")){
+                            if (userName.equals("admin")){
+                                mainDataList.add(bean.getData().get(i));
+                            }
+                        }else {
+                            mainDataList.add(bean.getData().get(i));
+                        }
                     }
 //                    MainData.DataBean bean1 = new MainData.DataBean();
 //                    bean1.setModuleCode("GRZX");
