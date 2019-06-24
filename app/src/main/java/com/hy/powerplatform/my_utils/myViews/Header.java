@@ -55,6 +55,7 @@ public class Header extends LinearLayout{
     }
 
     public void setTvRight(String tvRight) {
+        tviewRight.setText(tvRight);
         this.tvRight = tvRight;
     }
 

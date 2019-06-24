@@ -42,6 +42,7 @@ import com.hy.powerplatform.news.activity.NoticeActivity;
 import com.hy.powerplatform.oa_flow.activity.HistoryListActivity;
 import com.hy.powerplatform.oa_flow.activity.InboxActivity;
 import com.hy.powerplatform.oa_flow.activity.ListActivity;
+import com.hy.powerplatform.oa_flow.activity.MyBackFlowListActivity;
 import com.hy.powerplatform.oa_flow.activity.MyFlowListActivity;
 import com.hy.powerplatform.oa_flow.activity.MyWillDoActivity;
 import com.hy.powerplatform.oa_flow.activity.WithMeListActivity;
@@ -204,10 +205,6 @@ public class MainActivity extends BaseActivity implements MainView {
                             mainDataList.add(bean.getData().get(i));
                         }
                     }
-//                    MainData.DataBean bean1 = new MainData.DataBean();
-//                    bean1.setModuleCode("GRZX");
-//                    bean1.setModuleName("个人中心");
-//                    mainDataList.add(bean1);
                     getData(start, limit);
                     break;
                 case TAG_TWO:
@@ -289,6 +286,13 @@ public class MainActivity extends BaseActivity implements MainView {
                                 }else if (mainDataList.get(position).getModuleCode().equals("SJX")) {
                                     intent = new Intent(MainActivity.this, InboxActivity.class);
                                     startActivity(intent);
+                                } else if (mainDataList.get(position).getModuleCode().equals("LCZH")) {
+                                    intent = new Intent(MainActivity.this, MyBackFlowListActivity.class);
+                                    startActivity(intent);
+                                }else if (mainDataList.get(position).getModuleCode().equals("ZHQR")) {
+//                                    intent = new Intent(MainActivity.this, InboxActivity.class);
+//                                    startActivity(intent);
+                                    Toast.makeText(MainActivity.this, "YYY", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

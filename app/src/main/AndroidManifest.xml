@@ -596,6 +596,7 @@
         <activity android:name=".oa_flow.activity.InboxActivity" />
         <activity android:name=".oa_flow.activity.InboxDetailActivity" />
         <activity android:name=".login.activity.SecondActivity"></activity>
+        <activity android:name=".oa_flow.activity.MyBackFlowListActivity"></activity>
     </application>
 
 </manifest>

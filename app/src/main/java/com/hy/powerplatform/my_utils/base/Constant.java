@@ -92,6 +92,11 @@ public class Constant {
     // 审核人签字提交
     public static final String  EXAMINEDATA = "flow/nextProcessActivity.do";
 
+    // 获取追回列表
+    public static final String  BACKFLOWLIST = "flow/myRunningProcessRun.do";
+    // 获取追回
+    public static final String  BACKFLOW = "flow/rollbackRevokeFlowDetail.do?runId=";
+
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";
     public static final String  CONTRACEPAYNAME = "合同付款审批单";

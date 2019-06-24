@@ -21,6 +21,7 @@ import com.hy.powerplatform.R;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
+import com.hy.powerplatform.my_utils.base.BaseRequestBackLisenter;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
@@ -29,6 +30,7 @@ import com.hy.powerplatform.oa_flow.adapter.FlowMessageAdapter;
 import com.hy.powerplatform.oa_flow.bean.File;
 import com.hy.powerplatform.oa_flow.bean.FlowInstallDetail;
 import com.hy.powerplatform.oa_flow.bean.FlowMessage1;
+import com.hy.powerplatform.oa_flow.util.AlertDialogEditText;
 import com.hy.powerplatform.oa_flow.util.MyStringSpilt;
 
 import org.json.JSONArray;
@@ -42,8 +44,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_FIVE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_NINE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_SIX;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
 
 public class FlowInstallDetailActivity extends BaseActivity {
@@ -152,7 +156,8 @@ public class FlowInstallDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        header.setTvRight("追回");
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         btnT.setVisibility(View.GONE);
         tvText.setVisibility(View.GONE);
@@ -187,7 +192,25 @@ public class FlowInstallDetailActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
+        new AlertDialogEditText().showDialog(this, runID, new BaseRequestBackLisenter() {
+            @Override
+            public void success(Object o) {
+                Message message = new Message();
+                message.what = Constant.TAG_FIVE;
+                Bundle bundle=new Bundle();
+                bundle.putString("msg", o.toString());
+                message.setData(bundle);
+                handler.sendMessage(message);
+                finish();
+            }
 
+            @Override
+            public void fail(String message) {
+                Message message1 = new Message();
+                message1.what = Constant.TAG_SIX;
+                handler.sendMessage(message1);
+            }
+        });
     }
 
     @OnClick({R.id.tvData, R.id.btnHistory})
@@ -195,14 +218,14 @@ public class FlowInstallDetailActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btnHistory:
                 recyclerView.setVisibility(View.VISIBLE);
-                ProgressDialogUtil.startLoad(FlowInstallDetailActivity.this,"获取数据中");
+                ProgressDialogUtil.startLoad(FlowInstallDetailActivity.this, "获取数据中");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         //String name =URLDecoder.decode(待转值,"utf-8");
                         String url = Constant.BASE_URL2 + Constant.FLOWMESSAGE;
                         DBHandler dbA = new DBHandler();
-                        flowMessage = dbA.OAFlowMessage(url,runID);
+                        flowMessage = dbA.OAFlowMessage(url, runID);
                         if (flowMessage.equals("获取数据失败") || flowMessage.equals("")) {
                             handler.sendEmptyMessage(TAG_TWO);
                         } else {
@@ -280,10 +303,10 @@ public class FlowInstallDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowInstallDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowInstallDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
                     break;
@@ -342,6 +365,15 @@ public class FlowInstallDetailActivity extends BaseActivity {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));
                     startActivity(intent);
+                    break;
+                case TAG_FIVE:
+                    Toast.makeText(FlowInstallDetailActivity.this, msg.getData().getString("msg"), Toast.LENGTH_SHORT).show();
+                    ProgressDialogUtil.stopLoad();
+                    finish();
+                    break;
+                case TAG_SIX:
+                    Toast.makeText(FlowInstallDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    ProgressDialogUtil.stopLoad();
                     break;
             }
         }
