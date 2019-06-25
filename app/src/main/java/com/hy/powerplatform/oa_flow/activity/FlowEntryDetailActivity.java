@@ -19,6 +19,7 @@ import com.hy.powerplatform.R;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
+import com.hy.powerplatform.my_utils.base.BaseRequestBackLisenter;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
@@ -27,6 +28,7 @@ import com.hy.powerplatform.oa_flow.adapter.FlowMessageAdapter;
 import com.hy.powerplatform.oa_flow.bean.File;
 import com.hy.powerplatform.oa_flow.bean.FlowMessage1;
 import com.hy.powerplatform.oa_flow.bean.MyEntry;
+import com.hy.powerplatform.oa_flow.util.AlertDialogEditText;
 import com.hy.powerplatform.oa_flow.util.MyStringSpilt;
 
 import org.json.JSONArray;
@@ -40,8 +42,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_FIVE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_NINE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_SIX;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
 
 public class FlowEntryDetailActivity extends BaseActivity {
@@ -104,6 +108,7 @@ public class FlowEntryDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        header.setTvRight("追回");
         LinearLayoutManager manager  = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
@@ -136,7 +141,25 @@ public class FlowEntryDetailActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
+        new AlertDialogEditText().showDialog(this, runID, new BaseRequestBackLisenter() {
+            @Override
+            public void success(Object o) {
+                Message message = new Message();
+                message.what = TAG_FIVE;
+                Bundle bundle=new Bundle();
+                bundle.putString("msg", o.toString());
+                message.setData(bundle);
+                handler.sendMessage(message);
+                finish();
+            }
 
+            @Override
+            public void fail(String message) {
+                Message message1 = new Message();
+                message1.what = TAG_SIX;
+                handler.sendMessage(message1);
+            }
+        });
     }
 
     @OnClick({R.id.tvData,R.id.btnHistory})
@@ -318,6 +341,15 @@ public class FlowEntryDetailActivity extends BaseActivity {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));
                     startActivity(intent);
+                    break;
+                case TAG_FIVE:
+                    Toast.makeText(FlowEntryDetailActivity.this, msg.getData().getString("msg"), Toast.LENGTH_SHORT).show();
+                    ProgressDialogUtil.stopLoad();
+                    finish();
+                    break;
+                case TAG_SIX:
+                    Toast.makeText(FlowEntryDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    ProgressDialogUtil.stopLoad();
                     break;
             }
         }
