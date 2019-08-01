@@ -595,8 +595,9 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".oa_flow.activity.InboxActivity" />
         <activity android:name=".oa_flow.activity.InboxDetailActivity" />
-        <activity android:name=".login.activity.SecondActivity"></activity>
-        <activity android:name=".oa_flow.activity.MyBackFlowListActivity"></activity>
+        <activity android:name=".login.activity.SecondActivity"/>
+        <activity android:name=".oa_flow.activity.MyBackFlowListActivity"/>
+        <activity android:name=".oa_flow.activity.MyBackSureFlowListActivity"/>
     </application>
 
 </manifest>

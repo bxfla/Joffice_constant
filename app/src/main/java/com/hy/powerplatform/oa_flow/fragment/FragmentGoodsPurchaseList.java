@@ -84,7 +84,7 @@ public class FragmentGoodsPurchaseList extends Fragment implements FlowContractP
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = Constant.BASE_URL2 + Constant.MYLIST+start+"&limit="+limit+"&Q_subject_S_LK="+Constant.GOODSPUECHASENAME;
+                String url = Constant.BASE_URL2 + Constant.MYLIST+start+"&limit="+limit+"&Q_processName_S_EQ="+Constant.GOODSPUECHASENAME;
                 DBHandler dbA = new DBHandler();
                 res = dbA.OAQingJiaMy(url);
                 if (res.equals("获取数据失败") || res.equals("")) {

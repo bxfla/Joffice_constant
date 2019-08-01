@@ -21,8 +21,8 @@ public class MyHttpURLConnection {
             connection.setRequestMethod("GET");
             connection.setDoOutput(false);
             connection.setDoInput(true);
-            connection.setConnectTimeout(10000);
-            connection.setReadTimeout(10000);
+            connection.setConnectTimeout(20000);
+            connection.setReadTimeout(20000);
             connection.connect();
 
             //获取响应状态

@@ -96,6 +96,10 @@ public class Constant {
     public static final String  BACKFLOWLIST = "flow/myRunningProcessRun.do";
     // 获取追回
     public static final String  BACKFLOW = "flow/rollbackRevokeFlowDetail.do?runId=";
+    // 获取确认列表
+    public static final String  BACKFLOWSURELIST = "flow/listRevokeFlowDetail.do";
+    // 获取确认
+    public static final String  BACKFLOWSURE = "flow/checkRevokeFlowDetail.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";

@@ -22,25 +22,26 @@ public class FirstActivity extends AppCompatActivity {
 //        sharedPreferencesHelper.saveData(this,"Found","joffice");
 //        sharedPreferencesHelper.saveData(this,"Address","宜春");
 
-        sharedPreferencesHelper.saveData(this,"Ip","192.168.2.150");
-        sharedPreferencesHelper.saveData(this,"Socket","80");
-        sharedPreferencesHelper.saveData(this,"Found","joffice");
-        sharedPreferencesHelper.saveData(this,"Address","宜春");
-
-//        sharedPreferencesHelper.saveData(this,"Ip","58.17.74.135");
-//        sharedPreferencesHelper.saveData(this,"Socket","6775");
+//        sharedPreferencesHelper.saveData(this,"Ip","192.168.2.150");
+//        sharedPreferencesHelper.saveData(this,"Socket","80");
 //        sharedPreferencesHelper.saveData(this,"Found","joffice");
 //        sharedPreferencesHelper.saveData(this,"Address","宜春");
+
+//测试
+        sharedPreferencesHelper.saveData(this,"Ip","58.17.74.135");
+        sharedPreferencesHelper.saveData(this,"Socket","6775");
+        sharedPreferencesHelper.saveData(this,"Found","joffice");
+        sharedPreferencesHelper.saveData(this,"Address","宜春");
 
 //        sharedPreferencesHelper.saveData(this,"Ip","221.195.69.109");
 //        sharedPreferencesHelper.saveData(this,"Socket","7080");
 //        sharedPreferencesHelper.saveData(this,"Found","joffice");
 //        sharedPreferencesHelper.saveData(this,"Address","沧州");
 
-//        sharedPreferencesHelper.saveData(this, "Ip", "192.168.2.116");
-//        sharedPreferencesHelper.saveData(this, "Socket", "6080");
-//        sharedPreferencesHelper.saveData(this, "Found", "jofficejz");
-//        sharedPreferencesHelper.saveData(this, "Address", "晋中");
+//        sharedPreferencesHelper.saveData(this, "Ip", "192.168.43.31");
+//        sharedPreferencesHelper.saveData(this, "Socket", "8080");
+//        sharedPreferencesHelper.saveData(this, "Found", "joffice");
+//        sharedPreferencesHelper.saveData(this, "Address", "宜春");
         new StatusBarUtils().setWindowStatusBarColor(FirstActivity.this, R.color.white);
         new Handler().postDelayed(new Runnable() {
             public void run() {

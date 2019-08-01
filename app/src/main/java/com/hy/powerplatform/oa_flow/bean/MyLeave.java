@@ -93,6 +93,15 @@ public class MyLeave implements Serializable {
         private String defId;
         private Object userId;
         private Object defHtml;
+        String id;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         public Object getVersion() {
             return version;

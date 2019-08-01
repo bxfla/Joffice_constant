@@ -43,6 +43,7 @@ import com.hy.powerplatform.oa_flow.activity.HistoryListActivity;
 import com.hy.powerplatform.oa_flow.activity.InboxActivity;
 import com.hy.powerplatform.oa_flow.activity.ListActivity;
 import com.hy.powerplatform.oa_flow.activity.MyBackFlowListActivity;
+import com.hy.powerplatform.oa_flow.activity.MyBackSureFlowListActivity;
 import com.hy.powerplatform.oa_flow.activity.MyFlowListActivity;
 import com.hy.powerplatform.oa_flow.activity.MyWillDoActivity;
 import com.hy.powerplatform.oa_flow.activity.WithMeListActivity;
@@ -198,7 +199,7 @@ public class MainActivity extends BaseActivity implements MainView {
                     bean = new Gson().fromJson(data, MainData.class);
                     for (int i = 0; i < bean.getData().size(); i++) {
                         if (bean.getData().get(i).getModuleName().equals("历史流程")){
-                            if (userName.equals("admin")){
+                            if (userName.equals("admin")||userName.equals("王少云")||userName.equals("唐根六")){
                                 mainDataList.add(bean.getData().get(i));
                             }
                         }else {
@@ -290,9 +291,8 @@ public class MainActivity extends BaseActivity implements MainView {
                                     intent = new Intent(MainActivity.this, MyBackFlowListActivity.class);
                                     startActivity(intent);
                                 }else if (mainDataList.get(position).getModuleCode().equals("ZHQR")) {
-//                                    intent = new Intent(MainActivity.this, InboxActivity.class);
-//                                    startActivity(intent);
-                                    Toast.makeText(MainActivity.this, "YYY", Toast.LENGTH_SHORT).show();
+                                    intent = new Intent(MainActivity.this, MyBackSureFlowListActivity.class);
+                                    startActivity(intent);
                                 }
                             }
                         });

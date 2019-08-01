@@ -944,7 +944,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                             bmfzryj, fgldyj, jbfgldyj, jbbmyj, bjap, bjr, bjpj, serialNumber, comment, date1, liushuihao);
                 } else {
                     res = dbA.OAInstallder(url, department, date, data, userCode, destName, taskId, flowAssignld, mainId,
-                            bmfzryj, fgldyj, jbfgldyj, jbbmyj, bjap, bjr, bjpj, serialNumber, comment, liushuihao);
+                            bmfzryj, fgldyj, jbfgldyj, jbbmyj, bjap, bjr, bjpj, serialNumber, comment, liushuihao,signaName);
                 }
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);

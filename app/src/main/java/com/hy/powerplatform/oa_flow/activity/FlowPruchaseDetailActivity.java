@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -139,6 +140,8 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.ll1)
+    LinearLayout ll1;
     private String res;
     String xiangguanfujian = "";
     String flowMessage = "";
@@ -150,6 +153,7 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        ll1.setVisibility(View.VISIBLE);
         header.setTvRight("追回");
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
@@ -189,7 +193,7 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
             public void success(Object o) {
                 Message message = new Message();
                 message.what = TAG_FIVE;
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putString("msg", o.toString());
                 message.setData(bundle);
                 handler.sendMessage(message);
@@ -205,19 +209,19 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.tvData,R.id.btnHistory})
+    @OnClick({R.id.tvData, R.id.btnHistory})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnHistory:
                 recyclerView.setVisibility(View.VISIBLE);
-                ProgressDialogUtil.startLoad(FlowPruchaseDetailActivity.this,"获取数据中");
+                ProgressDialogUtil.startLoad(FlowPruchaseDetailActivity.this, "获取数据中");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         //String name =URLDecoder.decode(待转值,"utf-8");
                         String url = Constant.BASE_URL2 + Constant.FLOWMESSAGE;
                         DBHandler dbA = new DBHandler();
-                        flowMessage = dbA.OAFlowMessage(url,runID);
+                        flowMessage = dbA.OAFlowMessage(url, runID);
                         if (flowMessage.equals("获取数据失败") || flowMessage.equals("")) {
                             handler.sendEmptyMessage(TAG_TWO);
                         } else {
@@ -295,10 +299,10 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowPruchaseDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowPruchaseDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
                     break;

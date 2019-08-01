@@ -1,6 +1,8 @@
 package com.hy.powerplatform.login.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,7 +29,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static android.R.attr.versionName;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_FOUR;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
 
@@ -154,6 +155,22 @@ public class SecondActivity extends BaseActivity {
                     Version version = gson.fromJson(versiondata, Version.class);
                     if (version!=null&&version.getData() != null) {
                         String nnm = version.getData().getVersionNo();
+                        String versionName = "";
+                        int versionCode = 0;
+                        try {
+                            // ---get the package info---
+                            PackageManager pm = SecondActivity.this.getPackageManager();
+                            PackageInfo pi = pm.getPackageInfo(SecondActivity.this.getPackageName(), 0);
+                            versionName = pi.versionName;
+                            versionCode = pi.versionCode;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        if (versionName == null || versionName.length() <= 0) {
+                            versionName = "";
+                        }
+
                         if (!nnm.equals(versionName)&&Double.valueOf(nnm)>Double.valueOf(versionName)){
 //                        if (!nnm.equals("2")) {
                             final String url = Constant.BASE_URL2 + "attachFiles/" + version.getData().getDownurl();

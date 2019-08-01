@@ -21,7 +21,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +33,7 @@ import java.util.Map;
 public class DBHandler {
     //提交优服数据
     public String kaoheCommitValue_(String url, String userName, String kaoheDate, String dirverName,
-                                    String userCode, String lineString,String carNo, String busCode,
+                                    String userCode, String lineString, String carNo, String busCode,
                                     String gffwYrybyt, String gffwYrybytBz, String gffwYrybytPic, String gffwPth, String gffwPthBz,
                                     String gffwPthPic, String gffwSzwmyy, String gffwSzwmyyBz, String gffwSzwmyyPic, String gffwFwyytd,
                                     String gffwFwyytdBz, String gffwFwyytdPic, String gffwZgsd, String gffwZgsdBz, String gffwZgsdPic,
@@ -192,7 +196,7 @@ public class DBHandler {
             JSONObject json_ = new JSONObject(sb.toString());
             System.out.println("json=" + json_.toString());
             if (json_ != null) {
-               // String msg = json_.get("msg").toString();
+                // String msg = json_.get("msg").toString();
                 String show = json_.get("success").toString();
                 if (show.equals("true")) {
                     return "";
@@ -284,7 +288,7 @@ public class DBHandler {
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
-            Log.i("weisheng",sb.toString());
+            Log.i("weisheng", sb.toString());
             reader.close();
             JSONObject json_ = new JSONObject(sb.toString());
             System.out.println("json=" + json_);
@@ -449,7 +453,7 @@ public class DBHandler {
 
 
     // 提交技术状况数据
-    public String anquanzhixuCommitValueS(String url, String examiner, String kaoheDate, String kaoheTime,String dirverName,
+    public String anquanzhixuCommitValueS(String url, String examiner, String kaoheDate, String kaoheTime, String dirverName,
                                           String userCode, String lineString, String carNo,
                                           String busCode, String section, Map<String, String> map_project, Map<String, String> map_photoName,
                                           Map<String, String> map_beizhu, String position) {
@@ -563,9 +567,10 @@ public class DBHandler {
         }
         return "保存失败";
     }
+
     // 提交综合评定考核数据
     public String kaoheCommitValue(String url, String userName, String kaoheDate, String dirverName,
-                                   String userCode, String lineString,String carNo, String busCode,
+                                   String userCode, String lineString, String carNo, String busCode,
                                    String aqxcWmjs, String aqxcWmjsBz, String aqxcWmjsPic, String aqxcPwjs, String aqxcPwjsBz,
                                    String aqxcPwjsPic, String aqxcJcz, String aqxcJczBz, String aqxcJczPic, String aqxcAnjian,
                                    String aqxcAnjianBz, String aqxcAnjianPic, String aqxcZdgfyy, String aqxcZdgfyyBz, String aqxcZdgfyyPic,
@@ -828,7 +833,7 @@ public class DBHandler {
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
-            Log.i("XXX",sb.toString());
+            Log.i("XXX", sb.toString());
             reader.close();
             JSONObject json_ = new JSONObject(sb.toString());
             System.out.println("json=" + json_.toString());
@@ -849,13 +854,12 @@ public class DBHandler {
     }
 
 
-
     //签到
     public String qiandaoCommitValue(String url, String username, String addr, String rq, String sj, String gps,
-                                     String userCode,String photoName) {
+                                     String userCode, String photoName) {
         HttpClient httpClient = new DefaultHttpClient();
-        httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,20000);//连接时间
-        httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT,20000);//数据传输时间
+        httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 20000);//连接时间
+        httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 20000);//数据传输时间
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
         System.out.println("url=" + url);
@@ -1073,9 +1077,9 @@ public class DBHandler {
     // 提交事故数据
     public String accidentCommitValue(String url, String atAtDate, String atTime, String carNo, String carId,
                                       String depId, String depName, String lineCode, String profileId, String atType, String atLiability,
-                                      String acNature, String atPlace, String atReason,String atPhoto,String sideName,
-                                      String sideSex,String sideContact,String sideCarPlate,String sideLicenseNum,
-                                      String atOtherPay,String atPersonPay,String userCode) {
+                                      String acNature, String atPlace, String atReason, String atPhoto, String sideName,
+                                      String sideSex, String sideContact, String sideCarPlate, String sideLicenseNum,
+                                      String atOtherPay, String atPersonPay, String userCode) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -1130,7 +1134,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             System.out.println("json=" + json_);
             if (json_ != null) {
@@ -1152,10 +1156,10 @@ public class DBHandler {
     // 提交事故编辑数据
     public String accidentCommitValue(String url, String atAtDate, String atTime, String carNo, String carId,
                                       String depId, String depName, String lineCode, String profileId, String atType, String atLiability,
-                                      String acNature, String atPlace, String atReason,String atPhoto,String sideName,
-                                      String sideSex,String sideContact,String sideCarPlate,String sideLicenseNum,
-                                      String atOthrPay,String atPersonPay,String userCode,
-                                      String atId,String partyId,String atTreatmentId) {
+                                      String acNature, String atPlace, String atReason, String atPhoto, String sideName,
+                                      String sideSex, String sideContact, String sideCarPlate, String sideLicenseNum,
+                                      String atOthrPay, String atPersonPay, String userCode,
+                                      String atId, String partyId, String atTreatmentId) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -1213,7 +1217,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             System.out.println("json=" + json_);
             if (json_ != null) {
@@ -1233,10 +1237,9 @@ public class DBHandler {
     }
 
 
-
     //提交晋中卫生检查
     public String matterCommitValue(String url, String busCode, String carNo, String xcgCode, String xcgName,
-                                    String jcrName, String jcDate, List<Matter.ResultBean> resultBeanList,List<String> stringList) {
+                                    String jcrName, String jcDate, List<Matter.ResultBean> resultBeanList, List<String> stringList) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -1252,7 +1255,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("xcgName", xcgName));
         nvs.add(new BasicNameValuePair("jcrName", jcrName));
         nvs.add(new BasicNameValuePair("jcDate", jcDate));
-        for (int i = 0;i<resultBeanList.size();i++){
+        for (int i = 0; i < resultBeanList.size(); i++) {
             nvs.add(new BasicNameValuePair(resultBeanList.get(i).getProjectName(), stringList.get(i)));
         }
         try {
@@ -1270,7 +1273,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             System.out.println("json=" + json_);
             if (json_ != null) {
@@ -1290,13 +1293,12 @@ public class DBHandler {
     }
 
 
-
     //流程前获取数据步骤1
-    public String OAQingJiaMor(String turl, String tag){
+    public String OAQingJiaMor(String turl, String tag) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("defId", tag));
         try {
@@ -1314,12 +1316,12 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
-                    String data = json_.toString()+"";
+                    String data = json_.toString() + "";
                     return data;
                 } else {
                     return msg;
@@ -1331,12 +1333,13 @@ public class DBHandler {
         }
         return "保存失败";
     }
+
     //流程前获取数据步骤2
-    public String OAQingJiaMorNext(String turl, String tag,String name){
+    public String OAQingJiaMorNext(String turl, String tag, String name) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("defId", tag));
         nvs.add(new BasicNameValuePair("activityName", name));
@@ -1352,10 +1355,10 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
-                String data = json_+"";
+                String data = json_ + "";
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
                     return data;
@@ -1367,21 +1370,22 @@ public class DBHandler {
         }
         return "保存失败";
     }
+
     //请假流程
     public String OAQingJia(String turl, String person, String time, String startDay, String endDay,
                             String startTime, String endTime, String type, String reason, String dayNum
-                            ,String userName,String userId,String uName,String uId){
+            , String userName, String userId, String uName, String uId) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
         nvs.add(new BasicNameValuePair("destName", uName));
         nvs.add(new BasicNameValuePair("sendMsg", "false"));
         nvs.add(new BasicNameValuePair("sendMail", "false"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("defId", Constant.LEAVERDIFID));
         nvs.add(new BasicNameValuePair("formDefId", Constant.LEAVER));
@@ -1412,7 +1416,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -1430,48 +1434,176 @@ public class DBHandler {
     }
 
     //请假待处理流程
-    public String OAQingJiaWillDo(String turl){
-        HttpClient httpClient = new DefaultHttpClient();
-        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
-        HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
-        httpRequst.setHeader("Cookie", Session);
+    public String OAQingJiaWillDo(final String turl) {
+        HttpURLConnection connection = null;
+        BufferedReader reader = null;
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         try {
-            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
-            httpRequst.setEntity(uefEntity);
-            HttpResponse res = httpClient.execute(httpRequst);
-            HttpEntity entity = res.getEntity();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+            URL url = new URL(turl);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(8000);
+            connection.setReadTimeout(8000);
+            connection.addRequestProperty("Cookie", Session);
+            //此时获取的是字节流
+            InputStream in = connection.getInputStream();
+            //对获取到的输入流进行读取
+            reader = new BufferedReader(new InputStreamReader(in)); //将字节流转化成字符流
             StringBuffer sb = new StringBuffer();
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
-                    return json_+"";
+                    return json_ + "";
                 } else {
                     return msg;
                 }
             }
         } catch (Exception e) {
-            System.out.println(e);
             e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
+//
+//
+//
+//        HttpClient httpClient = new DefaultHttpClient();
+//        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+//        HttpPost httpRequst = new HttpPost(turl);
+//        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+//        httpRequst.setHeader("Cookie", Session);
+//        try {
+//            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
+//            httpRequst.setEntity(uefEntity);
+//            HttpResponse res = httpClient.execute(httpRequst);
+//            HttpEntity entity = res.getEntity();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+//            StringBuffer sb = new StringBuffer();
+//            String line = null;
+//            while ((line = reader.readLine()) != null) {
+//                sb.append(line + "\n");
+//            }
+//            reader.close();
+//            Log.i("sb=", sb.toString());
+//            JSONObject json_ = new JSONObject(sb.toString());
+//            if (json_ != null) {
+//                String msg = json_.get("success").toString();
+//                if (msg.equals("true")) {
+//                    return json_ + "";
+//                } else {
+//                    return msg;
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//            e.printStackTrace();
+//            HttpClient httpClient1 = new DefaultHttpClient();
+//            List<NameValuePair> nvs1 = new ArrayList<NameValuePair>();
+//            HttpPost httpRequst1 = new HttpPost(turl);
+//            String Session1 = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+//            httpRequst1.setHeader("Cookie", Session1);
+//            try {
+//                UrlEncodedFormEntity uefEntity1 = new UrlEncodedFormEntity(nvs1, "utf-8");
+//                httpRequst1.setEntity(uefEntity1);
+//                HttpResponse res1 = httpClient1.execute(httpRequst);
+//                HttpEntity entity1 = res1.getEntity();
+//                BufferedReader reader1 = new BufferedReader(new InputStreamReader(entity1.getContent()));
+//                StringBuffer sb1 = new StringBuffer();
+//                String line = null;
+//                while ((line = reader1.readLine()) != null) {
+//                    sb1.append(line + "\n");
+//                }
+//                reader1.close();
+//                Log.i("sb=", sb1.toString());
+//                JSONObject json_ = new JSONObject(sb1.toString());
+//                if (json_ != null) {
+//                    String msg = json_.get("success").toString();
+//                    if (msg.equals("true")) {
+//                        return json_ + "";
+//                    } else {
+//                        return msg;
+//                    }
+//                }
+//            } catch (Exception e1) {
+//                System.out.println(e1);
+//                e1.printStackTrace();
+//            }
+//        }
         return "获取数据失败";
     }
 
 
     //追回流程
-    public String BackFlowList(String turl){
+    public String BackFlowList(final String turl) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                HttpURLConnection connection=null;
+//                BufferedReader reader = null;
+//                try {
+//                    URL url=new URL(turl);
+//                    connection= (HttpURLConnection) url.openConnection();
+//                    connection.setRequestMethod("GET");
+//                    connection.setReadTimeout(200000);
+//                    connection.setConnectTimeout(200000);
+//                    InputStream in=connection.getInputStream();
+//                    reader=new BufferedReader(new InputStreamReader(in));
+//                    StringBuilder builder=new StringBuilder();
+//                    String line;
+//                    int responseCode = connection.getResponseCode();
+//                    if (200 == responseCode) {
+//                        while ((line=reader.readLine())!=null){
+//                            builder.append(line);
+//                        }
+//                    }
+//                    JSONObject jsonObject = new JSONObject(builder.toString());
+//                    if (jsonObject != null) {
+//                        String msg = jsonObject.get("success").toString();
+//                        if (msg.equals("true")) {
+//                            return jsonObject + "";
+//                        } else {
+//                            return msg;
+//                        }
+//                    }
+//                } catch (MalformedURLException e) {
+//                    Log.i("XXX",e.toString());
+//                } catch (IOException e) {
+//                    Log.i("XXX",e.toString());
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                } finally {
+//                    if (reader!=null){
+//                        try {
+//                            reader.close();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    if (connection!=null){
+//                        connection.disconnect();
+//                    }
+//                }
+//            }
+//        }).start();
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         try {
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
@@ -1485,12 +1617,12 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
-                    return json_+"";
+                    return json_ + "";
                 } else {
                     return msg;
                 }
@@ -1503,47 +1635,93 @@ public class DBHandler {
     }
 
     //请假待处理流程详情
-    public String OAQingJiaWillDoDex(String turl){
-        HttpClient httpClient = new DefaultHttpClient();
-        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
-        HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
-        httpRequst.setHeader("Cookie", Session);
+    public String OAQingJiaWillDoDex(String turl) {
+        HttpURLConnection connection = null;
+        BufferedReader reader = null;
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         try {
-            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
-            httpRequst.setEntity(uefEntity);
-            HttpResponse res = httpClient.execute(httpRequst);
-            HttpEntity entity = res.getEntity();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+            URL url = new URL(turl);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(8000);
+            connection.setReadTimeout(8000);
+            connection.addRequestProperty("Cookie", Session);
+            //此时获取的是字节流
+            InputStream in = connection.getInputStream();
+            //对获取到的输入流进行读取
+            reader = new BufferedReader(new InputStreamReader(in)); //将字节流转化成字符流
             StringBuffer sb = new StringBuffer();
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
-                    return json_+"";
+                    return json_ + "";
                 } else {
                     return msg;
                 }
             }
         } catch (Exception e) {
-            System.out.println(e);
             e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
+//
+//
+//        HttpClient httpClient = new DefaultHttpClient();
+//        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+//        HttpPost httpRequst = new HttpPost(turl);
+//        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+//        httpRequst.setHeader("Cookie", Session);
+//        try {
+//            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
+//            httpRequst.setEntity(uefEntity);
+//            HttpResponse res = httpClient.execute(httpRequst);
+//            HttpEntity entity = res.getEntity();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+//            StringBuffer sb = new StringBuffer();
+//            String line = null;
+//            while ((line = reader.readLine()) != null) {
+//                sb.append(line + "\n");
+//            }
+//            reader.close();
+//            Log.i("sb=", sb.toString());
+//            JSONObject json_ = new JSONObject(sb.toString());
+//            if (json_ != null) {
+//                String msg = json_.get("success").toString();
+//                if (msg.equals("true")) {
+//                    return json_ + "";
+//                } else {
+//                    return msg;
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//            e.printStackTrace();
+//        }
         return "获取数据失败";
     }
 
     //提交数据前获取下一步接收人步骤
-    public String OAQingJiaFornt1(String turl, String tag,String name){
+    public String OAQingJiaFornt1(String turl, String tag, String name) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("taskId", tag));
         nvs.add(new BasicNameValuePair("isParentFlow", "flase"));
@@ -1560,14 +1738,14 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
-                String data = json_+"";
+                String data = json_ + "";
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
                     return data;
-                }else {
+                } else {
                     return "";
                 }
             }
@@ -1579,11 +1757,11 @@ public class DBHandler {
     }
 
     //最后需要签字的流程  处理之后其他人不再处理
-    public String OAQingJiaLast(String turl, String tag){
+    public String OAQingJiaLast(String turl, String tag) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("taskId", tag));
         try {
@@ -1598,14 +1776,14 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
-                String data = json_+"";
+                String data = json_ + "";
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
                     return data;
-                }else {
+                } else {
                     return "";
                 }
             }
@@ -1617,11 +1795,11 @@ public class DBHandler {
     }
 
     //获取我的申请列表
-    public String OAQingJiaMy(String turl){
+    public String OAQingJiaMy(String turl) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         try {
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
@@ -1635,14 +1813,14 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
-                String data = json_+"";
+                String data = json_ + "";
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
                     return data;
-                }else {
+                } else {
                     return "";
                 }
             }
@@ -1652,8 +1830,9 @@ public class DBHandler {
         }
         return "获取数据失败";
     }
+
     //获取我的申请详情
-    public String OAQingJiaMyDetail(String turl){
+    public String OAQingJiaMyDetail(String turl) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
@@ -1671,14 +1850,14 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-             Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
-                String data = json_+"";
+                String data = json_ + "";
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
                     return data;
-                }else {
+                } else {
                     return "";
                 }
             }
@@ -1690,11 +1869,11 @@ public class DBHandler {
     }
 
     //获取我的申请详情
-    public String FlowBack(String turl){
+    public String FlowBack(String turl) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         try {
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
@@ -1708,14 +1887,14 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
-                String data = json_+"";
+                String data = json_ + "";
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
                     return data;
-                }else {
+                } else {
                     return "";
                 }
             }
@@ -1729,13 +1908,13 @@ public class DBHandler {
     //请假流程领导意见提交
     public String OAQingJiaLeader(String url, String person, String time, String type, String reason,
                                   String beginDate, String endDate, String userName, String userCode,
-                                  String signaName, String destName,String taskId,String comments,
-                                  String days,String fullnameUId,String fullName, String flowAssignld,
-                                  String mainId,String bmfzr,String fgfze,String zjl){
+                                  String signaName, String destName, String taskId, String comments,
+                                  String days, String fullnameUId, String fullName, String flowAssignld,
+                                  String mainId, String bmfzr, String fgfze, String zjl) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
@@ -1762,7 +1941,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("fgldyj", fgfze));
         nvs.add(new BasicNameValuePair("zjlyj", zjl));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -1774,7 +1953,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -1796,15 +1975,15 @@ public class DBHandler {
      * 合同付款
      */
     //获取流水号
-    public String OAContractPayLiuSHui(String url, String data){
+    public String OAContractPayLiuSHui(String url, String data) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
 //        httpRequst.setHeader("Cookie", Session);
 //        nvs.add(new BasicNameValuePair("alias", data));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -1816,7 +1995,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -1837,11 +2016,11 @@ public class DBHandler {
     public String OAFuKuanLiuCHeng(String turl, String person, String time, String department,
                                    String type, String classD, String bigMoney, String smallMoney,
                                    String data, String userName, String userId, String uName,
-                                   String uId,String liushuihao){
+                                   String uId, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.PAYFLOWDIFID));
@@ -1850,7 +2029,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", uName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.PAYFLOW));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
@@ -1880,7 +2059,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -1899,13 +2078,13 @@ public class DBHandler {
 
     //工会付款流程申请
     public String OAGHPay(String turl, String person, String time, String department,
-                                   String type, String classD, String bigMoney, String smallMoney,
-                                   String data, String userName, String userId, String uName,
-                                   String uId,String liushuihao){
+                          String type, String classD, String bigMoney, String smallMoney,
+                          String data, String userName, String userId, String uName,
+                          String uId, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.GHPAYFLOWDIFID));
@@ -1914,7 +2093,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", uName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.GHPAYFLOW));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
@@ -1944,7 +2123,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -1963,11 +2142,11 @@ public class DBHandler {
 
     //合同付款生成表单提交
     public String OAContractPayUp(String turl, String uName, String uId, String liuShuiNo, String department
-            , String userId, String jsb, String name, String time, String situation){
+            , String userId, String jsb, String name, String time, String situation) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "10093"));
@@ -1975,9 +2154,9 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", uName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
-        nvs.add(new BasicNameValuePair("formDefId",Constant.CONTRACEPAY));
+        nvs.add(new BasicNameValuePair("formDefId", Constant.CONTRACEPAY));
         nvs.add(new BasicNameValuePair("htbh", liuShuiNo));
 //        nvs.add(new BasicNameValuePair("fullnameUId", userId));
         nvs.add(new BasicNameValuePair("cbbmDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
@@ -2003,7 +2182,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2022,11 +2201,11 @@ public class DBHandler {
 
     //合同签订生成表单提交
     public String OAContractSignUp(String turl, String uName, String uId, String name, String department
-            , String userId, String person, String time, String situation){
+            , String userId, String person, String time, String situation) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.CONTRACTSIGNDIFID));
@@ -2034,7 +2213,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", uName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", "66"));
 //        nvs.add(new BasicNameValuePair("fullnameUId", userId));
@@ -2062,7 +2241,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2081,11 +2260,11 @@ public class DBHandler {
 
     //工会合同签订生成表单提交
     public String OAGHContractSignUp(String turl, String uName, String uId, String name, String department
-            , String userId, String person, String time, String situation){
+            , String userId, String person, String time, String situation) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.GHCONTRACTSIGNDIFID));
@@ -2093,7 +2272,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", uName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.GHCONTRACTSINGLE));
 //        nvs.add(new BasicNameValuePair("fullnameUId", userId));
@@ -2121,7 +2300,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2140,11 +2319,11 @@ public class DBHandler {
 
     //工会付款生成表单提交
     public String OAGHPayUp(String turl, String uName, String uId, String liuShuiNo, String department
-            , String userId, String jsb, String name, String time, String situation){
+            , String userId, String jsb, String name, String time, String situation) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "10093"));
@@ -2152,9 +2331,9 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", uName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
-        nvs.add(new BasicNameValuePair("formDefId",Constant.GHPAYFLOW));
+        nvs.add(new BasicNameValuePair("formDefId", Constant.GHPAYFLOW));
         nvs.add(new BasicNameValuePair("htbh", liuShuiNo));
 //        nvs.add(new BasicNameValuePair("fullnameUId", userId));
         nvs.add(new BasicNameValuePair("cbbmDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
@@ -2180,7 +2359,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2202,11 +2381,11 @@ public class DBHandler {
     public String OAContractPayLeader(String url, String department, String person, String name,
                                       String time, String situation, String userCode, String destName,
                                       String taskId, String flowAssignld, String mainId, String bmfzr,
-                                      String fgfze, String zjl, String fgcwze, String serialNumber, String comment){
+                                      String fgfze, String zjl, String fgcwze, String serialNumber, String comment) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.CONTRACEPAYDIFID));
@@ -2236,7 +2415,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("fgcwldyj", fgcwze));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -2248,7 +2427,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2266,15 +2445,15 @@ public class DBHandler {
     }
 
     //付款流程待办签字提交
-    public String OAPayLiuChengLeader( String url, String time, String person, String department,
+    public String OAPayLiuChengLeader(String url, String time, String person, String department,
                                       String classY, String moneyB, String moneyS, String userCode,
                                       String destName, String signaName, String taskId, String flowAssignld,
                                       String mainId, String bmfzr, String fgfze, String zjl, String fgcwze,
-                                      String serialNumber, String comment,String use){
+                                      String serialNumber, String comment, String use) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
@@ -2302,7 +2481,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("cwzjyj", fgcwze));
 
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -2314,7 +2493,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2332,15 +2511,15 @@ public class DBHandler {
     }
 
     //工会付款流程待办签字提交
-    public String OAGHPayLeader( String url, String time, String person, String department,
-                                       String classY, String moneyB, String moneyS, String userCode,
-                                       String destName, String signaName, String taskId, String flowAssignld,
-                                       String mainId, String bmfzr, String zjl, String fgcwze,
-                                       String serialNumber, String comment,String use){
+    public String OAGHPayLeader(String url, String time, String person, String department,
+                                String classY, String moneyB, String moneyS, String userCode,
+                                String destName, String signaName, String taskId, String flowAssignld,
+                                String mainId, String bmfzr, String zjl, String fgcwze,
+                                String serialNumber, String comment, String use) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
@@ -2367,7 +2546,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("cwzjyj", fgcwze));
 
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -2379,7 +2558,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2398,13 +2577,13 @@ public class DBHandler {
 
     //合同签订流程待办签字提交
     public String OAContractSignLeader(String url, String department, String person, String name,
-                     String time, String situation, String userCode, String destName, String taskId,
-                     String flowAssignld, String mainId, String csbmyj, String jgbmyj, String flgwyj,
-                     String fgldyj, String zjl, String serialNumber, String comment,String signaName){
+                                       String time, String situation, String userCode, String destName, String taskId,
+                                       String flowAssignld, String mainId, String csbmyj, String jgbmyj, String flgwyj,
+                                       String fgldyj, String zjl, String serialNumber, String comment, String signaName) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
@@ -2431,7 +2610,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("fgldyj", fgldyj));
         nvs.add(new BasicNameValuePair("zjlyj", zjl));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -2443,7 +2622,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2462,13 +2641,13 @@ public class DBHandler {
 
     //工会合同签订流程待办签字提交
     public String OAGHContractSignLeader(String url, String department, String person, String name,
-                                       String time, String situation, String userCode, String destName, String taskId,
-                                       String flowAssignld, String mainId, String csbmyj, String jgbmyj, String flgwyj,
-                                       String fgldyj, String zjl, String serialNumber, String comment,String signaName){
+                                         String time, String situation, String userCode, String destName, String taskId,
+                                         String flowAssignld, String mainId, String csbmyj, String jgbmyj, String flgwyj,
+                                         String fgldyj, String zjl, String serialNumber, String comment, String signaName) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
@@ -2495,7 +2674,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("flgwyj", fgldyj));
         nvs.add(new BasicNameValuePair("ghzx", zjl));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -2507,7 +2686,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2531,11 +2710,11 @@ public class DBHandler {
             , String num3, String num4, String num5, String money1, String money2, String money3, String money4
             , String money5, String allMoney1, String allMoney2, String allMoney3, String allMoney4
             , String allMoney5, String userCode, String uName, String uId, String hejisl, String hejidj
-            , String hejije,String use, String other){
+            , String hejije, String use, String other) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.GOODSPUECHASEDIFID));
@@ -2543,7 +2722,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
         nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.GOODSPUECHASE));
         nvs.add(new BasicNameValuePair("sqrq", time));
@@ -2594,7 +2773,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("cwzjyj", ""));
         nvs.add(new BasicNameValuePair("zjlyj", ""));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -2606,7 +2785,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2629,11 +2808,11 @@ public class DBHandler {
             , String num3, String num4, String num5, String money1, String money2, String money3, String money4
             , String money5, String allMoney1, String allMoney2, String allMoney3, String allMoney4
             , String allMoney5, String userCode, String uName, String uId, String hejisl, String hejidj
-            , String hejije,String use, String other){
+            , String hejije, String use, String other) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.CCTPUECHASEDIFID));
@@ -2641,7 +2820,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
         nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.CCTPUECHASE));
         nvs.add(new BasicNameValuePair("sqrq", time));
@@ -2693,7 +2872,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("cwzjyj", ""));
         nvs.add(new BasicNameValuePair("zjlyj", ""));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -2705,7 +2884,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2728,11 +2907,11 @@ public class DBHandler {
             , String num3, String num4, String num5, String money1, String money2, String money3, String money4
             , String money5, String allMoney1, String allMoney2, String allMoney3, String allMoney4
             , String allMoney5, String userCode, String uName, String uId, String hejisl, String hejidj
-            , String hejije,String use, String other){
+            , String hejije, String use, String other) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.GHPUECHASEDIFID));
@@ -2740,7 +2919,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
         nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.GHPUECHASE));
         nvs.add(new BasicNameValuePair("sqrq", time));
@@ -2792,7 +2971,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("cwzjyj", ""));
         nvs.add(new BasicNameValuePair("zjlyj", ""));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -2804,7 +2983,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2827,11 +3006,11 @@ public class DBHandler {
             , String num3, String num4, String num5, String money1, String money2, String money3, String money4
             , String money5, String allMoney1, String allMoney2, String allMoney3, String allMoney4
             , String allMoney5, String userCode, String uName, String uId, String hejisl, String hejidj,
-                               String hejije,String use,String other){
+                               String hejije, String use, String other) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.PUECHASEFLOWDIFID));
@@ -2839,7 +3018,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
         nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.PUECHASEFLOW));
         nvs.add(new BasicNameValuePair("sqrq", time));
@@ -2882,7 +3061,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("fgldyj", ""));
         nvs.add(new BasicNameValuePair("zjlyj", ""));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -2894,7 +3073,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -2913,17 +3092,17 @@ public class DBHandler {
 
     //物质采购流程待办签字提交
     public String OAGoodsPurchaseLeader(String url, String department, String person, String name,
-                 String time, String name1, String name2, String name3, String name4, String name5,
-                 String num1, String num2, String num3, String num4, String num5, String money1,
-                 String money2, String money3, String money4, String money5, String allMoney1,
-                 String allMoney2, String allMoney3, String allMoney4, String allMoney5, String userCode,
-                 String destName, String taskId, String flowAssignld, String mainId, String bmfzryj,
-                 String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
-                 String comment, String signaName,String hejisl,String hejidj,String hejije,String use,String other){
+                                        String time, String name1, String name2, String name3, String name4, String name5,
+                                        String num1, String num2, String num3, String num4, String num5, String money1,
+                                        String money2, String money3, String money4, String money5, String allMoney1,
+                                        String allMoney2, String allMoney3, String allMoney4, String allMoney5, String userCode,
+                                        String destName, String taskId, String flowAssignld, String mainId, String bmfzryj,
+                                        String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
+                                        String comment, String signaName, String hejisl, String hejidj, String hejije, String use, String other) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
@@ -2979,7 +3158,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("cwzjyj", cwzjyj));
         nvs.add(new BasicNameValuePair("zjlyj", zjl));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -2991,7 +3170,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3011,17 +3190,17 @@ public class DBHandler {
 
     //物质采购流程待办签字提交
     public String OACCTPurchaseLeader(String url, String department, String person, String name,
-                                        String time, String name1, String name2, String name3, String name4, String name5,
-                                        String num1, String num2, String num3, String num4, String num5, String money1,
-                                        String money2, String money3, String money4, String money5, String allMoney1,
-                                        String allMoney2, String allMoney3, String allMoney4, String allMoney5, String userCode,
-                                        String destName, String taskId, String flowAssignld, String mainId, String bmfzryj,
-                                        String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
-                                        String comment, String signaName,String hejisl,String hejidj,String hejije,String use,String other){
+                                      String time, String name1, String name2, String name3, String name4, String name5,
+                                      String num1, String num2, String num3, String num4, String num5, String money1,
+                                      String money2, String money3, String money4, String money5, String allMoney1,
+                                      String allMoney2, String allMoney3, String allMoney4, String allMoney5, String userCode,
+                                      String destName, String taskId, String flowAssignld, String mainId, String bmfzryj,
+                                      String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
+                                      String comment, String signaName, String hejisl, String hejidj, String hejije, String use, String other) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
@@ -3077,7 +3256,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("cwzjyj", cwzjyj));
         nvs.add(new BasicNameValuePair("zjlyj", zjl));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -3089,7 +3268,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3109,18 +3288,18 @@ public class DBHandler {
 
     //工会采购流程待办签字提交
     public String OAGhPurchaseLeader(String url, String department, String person, String name,
-                                      String time, String name1, String name2, String name3, String name4, String name5,
-                                      String num1, String num2, String num3, String num4, String num5, String money1,
-                                      String money2, String money3, String money4, String money5, String allMoney1,
-                                      String allMoney2, String allMoney3, String allMoney4, String allMoney5, String userCode,
-                                      String destName, String taskId, String flowAssignld, String mainId, String bmfzryj,
-                                      String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
-                                      String comment, String signaName,String hejisl,String hejidj,String hejije
-                                    ,String use,String other){
+                                     String time, String name1, String name2, String name3, String name4, String name5,
+                                     String num1, String num2, String num3, String num4, String num5, String money1,
+                                     String money2, String money3, String money4, String money5, String allMoney1,
+                                     String allMoney2, String allMoney3, String allMoney4, String allMoney5, String userCode,
+                                     String destName, String taskId, String flowAssignld, String mainId, String bmfzryj,
+                                     String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
+                                     String comment, String signaName, String hejisl, String hejidj, String hejije
+            , String use, String other) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
@@ -3174,7 +3353,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("ghzx", cwzjyj));
         nvs.add(new BasicNameValuePair("cwzjyj", fgldyj));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -3186,7 +3365,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3202,6 +3381,7 @@ public class DBHandler {
         }
         return "保存失败";
     }
+
     //办公采购流程待办签字提交
     public String OAWorkPurchaseLeader(String url, String department, String person, String name, String time
             , String name1, String name2, String name3, String name4, String name5, String dep1, String dep2
@@ -3210,11 +3390,11 @@ public class DBHandler {
             , String allMoney1, String allMoney2, String allMoney3, String allMoney4, String allMoney5
             , String userCode, String destName, String taskId, String flowAssignld, String mainId
             , String bmfzryj, String fgldyj, String zjl, String serialNumber, String comment
-            , String signaName, String hejisl, String hejidj, String hejije,String other,String type){
+            , String signaName, String hejisl, String hejidj, String hejije, String other, String type) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
@@ -3273,7 +3453,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("fgldyj", fgldyj));
         nvs.add(new BasicNameValuePair("zjlyj", zjl));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -3285,7 +3465,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3308,12 +3488,12 @@ public class DBHandler {
             , String num3, String num4, String num5, String money1, String money2, String money3, String money4
             , String money5, String allMoney1, String allMoney2, String allMoney3, String allMoney4
             , String allMoney5, String userCode, String uName, String uId, String hejisl, String hejidj
-            , String hejije,String depart1,String depart2,String depart3,String depart4,String depar5,String other
-    ,String type){
+            , String hejije, String depart1, String depart2, String depart3, String depart4, String depar5, String other
+            , String type) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.WORKPUECHASEDIFID));
@@ -3321,7 +3501,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
         nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.WORKPUECHASE));
         nvs.add(new BasicNameValuePair("sqrq", time));
@@ -3374,7 +3554,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("cwzjyj", ""));
         nvs.add(new BasicNameValuePair("zjlyj", ""));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -3386,7 +3566,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3405,18 +3585,18 @@ public class DBHandler {
 
     //物质采购流程待办签字提交3000以上
     public String OAPurchaseLeader(String url, String department, String person, String name,
-                                        String time, String name1, String name2, String name3, String name4, String name5,
-                                        String num1, String num2, String num3, String num4, String num5, String money1,
-                                        String money2, String money3, String money4, String money5, String allMoney1,
-                                        String allMoney2, String allMoney3, String allMoney4, String allMoney5, String userCode,
-                                        String destName, String taskId, String flowAssignld, String mainId, String bmfzryj,
-                                        String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
-                                        String comment, String signaName,String hejisl,String hejidj,String hejije,String use
-                                        ,String jbldyj,String other){
+                                   String time, String name1, String name2, String name3, String name4, String name5,
+                                   String num1, String num2, String num3, String num4, String num5, String money1,
+                                   String money2, String money3, String money4, String money5, String allMoney1,
+                                   String allMoney2, String allMoney3, String allMoney4, String allMoney5, String userCode,
+                                   String destName, String taskId, String flowAssignld, String mainId, String bmfzryj,
+                                   String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
+                                   String comment, String signaName, String hejisl, String hejidj, String hejije, String use
+            , String jbldyj, String other) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
@@ -3472,7 +3652,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("cwzjyj", cwzjyj));
         nvs.add(new BasicNameValuePair("zjlyj", zjl));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -3484,7 +3664,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3503,14 +3683,14 @@ public class DBHandler {
 
     //驾驶员入职待办签字
     public String OAEntryLeader(String url, String person, String phone, String idCard, String sex,
-           String carType1, String carType2, String carType3, String rlzy1,
-           String rlzy2, String rlzy3, String userCode, String destName, String taskId, String flowAssignld,
-           String mainId, String cwsjbyj, String yyglbyj, String xxjsbyj, String cctkjyxgsyj, String zhglbyj,
-           String rlzyb1, String comment,String signaName,String jbbmyj,String fgs){
+                                String carType1, String carType2, String carType3, String rlzy1,
+                                String rlzy2, String rlzy3, String userCode, String destName, String taskId, String flowAssignld,
+                                String mainId, String cwsjbyj, String yyglbyj, String xxjsbyj, String cctkjyxgsyj, String zhglbyj,
+                                String rlzyb1, String comment, String signaName, String jbbmyj, String fgs) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
@@ -3545,7 +3725,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jbbmyj", jbbmyj));
         nvs.add(new BasicNameValuePair("rlzybyj", rlzyb1));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -3557,7 +3737,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3576,11 +3756,11 @@ public class DBHandler {
 
     //驾驶员入职待办签字
     public String OAEntryUp(String turl, String uName, String uId, String person, String phone, String idCard
-            , String sex, String carType, String liushuihao){
+            , String sex, String carType, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.ENTRYDIFID));
@@ -3589,7 +3769,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("sendMsg", "false"));
         nvs.add(new BasicNameValuePair("sendMail", "false"));
         nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.ENTRY));
 
@@ -3609,7 +3789,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("rlzybyj", ""));
         nvs.add(new BasicNameValuePair("jbbmyj", ""));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -3621,7 +3801,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3642,14 +3822,14 @@ public class DBHandler {
     //集团发文流程提交
     public String OAOutMessageUp(String turl, String uName, String uId, String title, String zhuSong
             , String chaoBao, String chaoSong, String niGao, String heGao, String num, String wenHao
-            , String riQi, String xuHao, String userId, String userName,String time){
+            , String riQi, String xuHao, String userId, String userName, String time) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("defId", Constant.OUTMESSAGEDIFID));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
         nvs.add(new BasicNameValuePair("destName", uName));
@@ -3677,7 +3857,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("fgldyj", ""));
         nvs.add(new BasicNameValuePair("zjlyj", ""));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -3689,7 +3869,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3708,14 +3888,14 @@ public class DBHandler {
 
     //集团发文待办签字
     public String OAOutMessageLeader(String url, String title, String zhuSong, String chaoBao,
-           String chaoSong, String niGao, String heGao, String num, String wenHao, String date,
-           String xuHao, String userCode, String destName, String taskId, String flowAssignld,
-           String mainId, String fgldyj, String zjl, String serialNumber, String comment,
-           String signaName,String userName,String time){
+                                     String chaoSong, String niGao, String heGao, String num, String wenHao, String date,
+                                     String xuHao, String userCode, String destName, String taskId, String flowAssignld,
+                                     String mainId, String fgldyj, String zjl, String serialNumber, String comment,
+                                     String signaName, String userName, String time) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
@@ -3748,7 +3928,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("fgldyj", fgldyj));
         nvs.add(new BasicNameValuePair("zjlyj", zjl));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -3760,7 +3940,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3779,11 +3959,11 @@ public class DBHandler {
 
     //报修审批发布
     public String OARepairUp(String turl, String uName, String uId, String department, String address
-            , String date, String data, String departP, String userId, String userName,String liushuihao){
+            , String date, String data, String departP, String userId, String userName, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.REPAIRDIFID));
@@ -3791,7 +3971,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", uName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.REPAIR));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
@@ -3819,7 +3999,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3839,12 +4019,12 @@ public class DBHandler {
     //保修项目待办签字
     public String OARepairLeader(String url, String departement, String address, String date, String data
             , String yj, String userCode, String destName, String taskId, String flowAssignld, String mainId
-            , String etLeaderW1 , String etLeaderW2 , String etLeaderW3 , String etLeaderW4 , String etLeaderW5
-            , String zjl, String serialNumber, String comment, String signaName, String userName){
+            , String etLeaderW1, String etLeaderW2, String etLeaderW3, String etLeaderW4, String etLeaderW5
+            , String zjl, String serialNumber, String comment, String signaName, String userName) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
@@ -3872,7 +4052,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("bjap", etLeaderW4));
         nvs.add(new BasicNameValuePair("bjpj", etLeaderW5));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -3884,7 +4064,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3906,11 +4086,11 @@ public class DBHandler {
             , String days, String addres1, String addres2, String addres3, String car, String reason
             , String yjMoney, String zjMoney, String userCode, String destName, String taskId
             , String flowAssignld, String mainId, String bmfzr, String fgfze, String zjl, String comment
-            ,String signName,String userName,String jygj1,String jygj2,String jygj3,String jygj4,String chuCaiCode ){
+            , String signName, String userName, String jygj1, String jygj2, String jygj3, String jygj4, String chuCaiCode) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
@@ -3950,7 +4130,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("fgldyj", fgfze));
         nvs.add(new BasicNameValuePair("zjlyj", zjl));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -3962,7 +4142,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -3983,12 +4163,12 @@ public class DBHandler {
     public String OAChuCaiup(String turl, String uName, String uId, String date, String person
             , String startTime, String endTime, String days, String address1, String address2
             , String address3, String carType, String reason, String yjMoney, String zjMoney
-            , String userId, String userName,String jtgj1,String jtgj2,String jtgj3,String jtgj4
-            ,String department){
+            , String userId, String userName, String jtgj1, String jtgj2, String jtgj3, String jtgj4
+            , String department) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.CHUCAIDIFID));
@@ -3996,7 +4176,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", uName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.CHUCAI));
         nvs.add(new BasicNameValuePair("sbbm", department));
@@ -4023,7 +4203,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("zjxj", zjMoney));
 
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -4035,7 +4215,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4054,11 +4234,11 @@ public class DBHandler {
 
     //工程量增加申请提交
     public String OAGCAddUp(String turl, String uName, String uId, String date, String department
-            , String person, String data, String userId, String userName,String defId,String liushuihao){
+            , String person, String data, String userId, String userName, String defId, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", defId));
@@ -4066,7 +4246,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", uName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.GCADD));
         nvs.add(new BasicNameValuePair("XuQiuBuMenDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
@@ -4095,7 +4275,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4114,11 +4294,11 @@ public class DBHandler {
 
     //工程量变更申请提交
     public String OAGCAddUp1(String turl, String uName, String uId, String date, String department
-            , String person, String data, String userId, String userName,String defId,String liushuihao){
+            , String person, String data, String userId, String userName, String defId, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", defId));
@@ -4126,7 +4306,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", uName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", uName+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.GCCHECK));
         nvs.add(new BasicNameValuePair("XuQiuBuMenDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
@@ -4155,7 +4335,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4176,11 +4356,11 @@ public class DBHandler {
     public String OAGCAddLeader(String url, String department, String person, String time, String userCode
             , String destName, String taskId, String flowAssignld, String mainId, String xqbmyj
             , String xqbmldyj, String jsbmyj, String jsbmldyj, String csbmyj, String jcbmyj
-            , String zjl, String serialNumber, String comment,String tag1,String formDefId){
+            , String zjl, String serialNumber, String comment, String tag1, String formDefId) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", tag1));
@@ -4210,7 +4390,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jcbmyj", jcbmyj));
         nvs.add(new BasicNameValuePair("zjlyj", zjl));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -4222,7 +4402,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4242,11 +4422,11 @@ public class DBHandler {
     //加班审批发布
     public String OAOverTime(String turl, String date, String person, String department, String startDay
             , String endDay, String startTime, String endTime, String address, String task, String userName
-            , String userId, String userDepart, String uId,String days,String liushuihao){
+            , String userId, String userDepart, String uId, String days, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.OVERTIMEDIFID));
@@ -4254,7 +4434,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.OVERTIME));
         nvs.add(new BasicNameValuePair("applyNameUId", userId));
@@ -4288,7 +4468,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4310,11 +4490,11 @@ public class DBHandler {
             , String startTime, String endDay, String endTime, String userName, String userCode
             , String signaName, String destName, String taskId, String comments, String days
             , String fullnameUId, String fullname, String flowAssignld, String mainId, String bmfzr
-            , String fgfze, String zjl,String address,String task){
+            , String fgfze, String zjl, String address, String task) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
@@ -4342,7 +4522,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("addClassPlace", address));
         nvs.add(new BasicNameValuePair("addClassContent", task));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -4354,7 +4534,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4378,21 +4558,21 @@ public class DBHandler {
             , String carNo5, String comp1, String comp2, String comp3, String comp4, String comp5
             , String type1, String type2, String type3, String type4, String type5, String money1
             , String money2, String money3, String money4, String money5, String date1, String date2
-            , String date3, String date4, String date5, String userId,String allMonet){
+            , String date3, String date4, String date5, String userId, String allMonet) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
-        nvs.add(new BasicNameValuePair("defId",Constant.CARSAFEDIFID));
+        nvs.add(new BasicNameValuePair("defId", Constant.CARSAFEDIFID));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
-        nvs.add(new BasicNameValuePair("formDefId",Constant.CARSAFE));
+        nvs.add(new BasicNameValuePair("formDefId", Constant.CARSAFE));
         nvs.add(new BasicNameValuePair("sqrq", time));
         nvs.add(new BasicNameValuePair("cbbmDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
         nvs.add(new BasicNameValuePair("bm", department));
@@ -4444,7 +4624,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4469,11 +4649,11 @@ public class DBHandler {
             , String money5, String date1, String date2, String date3, String date4, String date5
             , String myAllMoney, String userCode, String destName, String taskId, String flowAssignld
             , String mainId, String bmfzryj, String fgldyj, String zjl, String serialNumber
-            , String comment, String signaName,String userName){
+            , String comment, String signaName, String userName) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "10150"));
@@ -4528,7 +4708,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("fgldyj", fgldyj));
         nvs.add(new BasicNameValuePair("bmfzryj", bmfzryj));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -4540,7 +4720,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4561,14 +4741,14 @@ public class DBHandler {
     public String OACarVideoUp(String turl, String userDepart, String uId, String zhiDanRen, String zhiDanDate
             , String department, String person, String carNo, String line1, String time, String address
             , String xingZhi, String staus, String bigMonet, String smallMoney, String userId
-            , String userName, String card, String diaoQu,String liushuihao){
+            , String userName, String card, String diaoQu, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("defId", Constant.CARVIDEODIFID));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
         nvs.add(new BasicNameValuePair("destName", userDepart));
@@ -4601,7 +4781,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("xxjsbyj", ""));
         nvs.add(new BasicNameValuePair("jkczyyj", ""));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -4613,7 +4793,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4635,11 +4815,11 @@ public class DBHandler {
             , String person, String carNo, String line1, String time, String address, String xingZhi
             , String zhuangKuang, String bigMoney, String smallMoney, String card, String diaoQu
             , String userCode, String destName, String taskId, String flowAssignld, String mainId
-            , String bmfzr, String fgfze, String zjl, String serialNumber, String comment){
+            , String bmfzr, String fgfze, String zjl, String serialNumber, String comment) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20324"));
@@ -4675,7 +4855,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jkczyyj", zjl));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -4687,7 +4867,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4706,11 +4886,11 @@ public class DBHandler {
 
 
     //驾驶员考核审批发布
-    public String OADriverAssessUp(String turl1, String person, String userDepart, String uId){
+    public String OADriverAssessUp(String turl1, String person, String userDepart, String uId) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl1);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.DRIVERASSESSDIFID));
@@ -4718,9 +4898,9 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
-        nvs.add(new BasicNameValuePair("formDefId",Constant.DRIVERASSESS));
+        nvs.add(new BasicNameValuePair("formDefId", Constant.DRIVERASSESS));
         nvs.add(new BasicNameValuePair("xm", person));
         nvs.add(new BasicNameValuePair("bmfzryj", ""));
         nvs.add(new BasicNameValuePair("jbbmyj", ""));
@@ -4737,7 +4917,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4757,11 +4937,11 @@ public class DBHandler {
     //驾驶员考核审批待办签字提交
     public String OADriverAssessLeader(String url, String person, String userCode, String destName
             , String taskId, String flowAssignld, String mainId, String bmfzryj, String fgldyj
-            , String zjl, String serialNumber, String comment, String signaName, String userName,String comments){
+            , String zjl, String serialNumber, String comment, String signaName, String userName, String comments) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20373"));
@@ -4781,7 +4961,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jbbmyj", fgldyj));
         nvs.add(new BasicNameValuePair("rlzybyj", zjl));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -4793,7 +4973,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4814,12 +4994,12 @@ public class DBHandler {
     //用车审批发布
     public String OAUserCarUp(String turl, String userDepart, String uId, String job, String phone
             , String task, String address, String startMile, String endMile, String allMile
-            , String userId,String person,String department,String startTime,String endTime
-            ,String time,String carNo,String carType,String liushuihao,String pcPerson){
+            , String userId, String person, String department, String startTime, String endTime
+            , String time, String carNo, String carType, String liushuihao, String pcPerson) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.USERCARDIFID));
@@ -4827,9 +5007,9 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
-        nvs.add(new BasicNameValuePair("formDefId",Constant.USERCAR));
+        nvs.add(new BasicNameValuePair("formDefId", Constant.USERCAR));
         nvs.add(new BasicNameValuePair("YongCheBuMenDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
         nvs.add(new BasicNameValuePair("YongCheBuMen", department));
         nvs.add(new BasicNameValuePair("PaiCheShiJian", time));
@@ -4870,7 +5050,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4892,11 +5072,11 @@ public class DBHandler {
             , String phone, String task, String address, String carNo, String carType, String startMile
             , String endMile, String allMile, String startTime, String endTime, String userCode
             , String destName, String taskId, String flowAssignld, String mainId, String bmfzryj
-            , String fgldyj, String zjlyj, String zhglyj,String pcryj, String serialNumber, String comment){
+            , String fgldyj, String zjlyj, String zhglyj, String pcryj, String serialNumber, String comment) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20209"));
@@ -4936,7 +5116,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("zhglbyj", zhglyj));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -4948,7 +5128,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -4968,14 +5148,14 @@ public class DBHandler {
     //用餐流程提交
     public String OADinnerUp(String turl, String userDepart, String uId, String time, String person
             , String department, String pcPerson, String lkDepartment, String lkPerson, String eatBz
-            , String bigMoney, String smallMoney, String userId, String userName){
+            , String bigMoney, String smallMoney, String userId, String userName) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("defId", Constant.DINNERDIFID));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
         nvs.add(new BasicNameValuePair("destName", userDepart));
@@ -5001,7 +5181,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("fgldyj", ""));
         nvs.add(new BasicNameValuePair("zjlyj", ""));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -5013,7 +5193,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5034,11 +5214,11 @@ public class DBHandler {
     public String OADinnerder(String url, String person, String department, String pcPerson
             , String lkDepartment, String lkPerson, String eatBz, String bigMoney, String smallMoney
             , String userCode, String destName, String taskId, String flowAssignld, String mainId
-            , String bmfzr, String fgfze, String zjl, String serialNumber, String comment){
+            , String bmfzr, String fgfze, String zjl, String serialNumber, String comment) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "10152"));
@@ -5071,7 +5251,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("zjlyj", zjl));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -5083,7 +5263,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5103,14 +5283,14 @@ public class DBHandler {
     //投诉流程提交
     public String OAComplainUp(String turl, String userDepart, String uId, String person, String time
             , String sex, String phone, String person1, String carNo, String department, String line1
-            , String shouLi, String data, String userId, String userName,String liushuihao){
+            , String shouLi, String data, String userId, String userName, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("defId", Constant.COMPLAINDIFID));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
         nvs.add(new BasicNameValuePair("destName", userDepart));
@@ -5139,7 +5319,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("AnQuanFuWuBuYiJian", ""));
         nvs.add(new BasicNameValuePair("FanKuiTouSuRenJieGuo", ""));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -5151,7 +5331,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5173,11 +5353,11 @@ public class DBHandler {
             , String person1, String carNo, String department, String line1, String shouLi
             , String data, String userCode, String destName, String taskId, String flowAssignld
             , String mainId, String bmfzr, String fgsfze, String yygs, String aqfy, String fkts
-            , String serialNumber, String comment){
+            , String serialNumber, String comment) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.COMPLAINDIFID));
@@ -5215,7 +5395,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("bjpj", fkts));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -5227,7 +5407,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5246,11 +5426,11 @@ public class DBHandler {
 
     //安装改造审批发布
     public String OAInstallUp(String turl, String userDepart, String uId, String department
-            , String date, String data, String userId, String userName,String liushuihao){
+            , String date, String data, String userId, String userName, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.INSTALLDIFID));
@@ -5258,7 +5438,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.INSTALL));
 
@@ -5289,7 +5469,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5310,11 +5490,12 @@ public class DBHandler {
     public String OAInstallder(String url, String department, String date, String data
             , String userCode, String destName, String taskId, String flowAssignld
             , String mainId, String bmfzryj, String fgldyj, String jbfgldyj, String jbbmyj
-            , String bjap, String bjr, String bjpj, String serialNumber, String comment,String liushuihao){
+            , String bjap, String bjr, String bjpj, String serialNumber, String comment
+            , String liushuihao,String signaName) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20232"));
@@ -5325,6 +5506,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
         nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
+        nvs.add(new BasicNameValuePair("signalName", signaName));
 
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("showvalue", ""));
@@ -5333,8 +5515,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("ShenBanBuMenDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
         nvs.add(new BasicNameValuePair("ShenBanBuMen", department));
         nvs.add(new BasicNameValuePair("ShenBanShiJian", date));
-        nvs.add(new BasicNameValuePair("ShenBanShiXiang", data));
-        nvs.add(new BasicNameValuePair("BanJieShiJian", liushuihao));
+        nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
 
         nvs.add(new BasicNameValuePair("bmfzryj", bmfzryj));
         nvs.add(new BasicNameValuePair("fgldyj", fgldyj));
@@ -5346,7 +5527,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("bjpj", bjpj));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -5358,7 +5539,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5380,11 +5561,11 @@ public class DBHandler {
             , String userCode, String destName, String taskId, String flowAssignld
             , String mainId, String bmfzryj, String fgldyj, String jbfgldyj, String jbbmyj
             , String bjap, String bjr, String bjpj, String serialNumber, String comment
-            ,String date1,String liushuihao){
+            , String date1, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20232"));
@@ -5417,7 +5598,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("bjpj", bjpj));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -5429,7 +5610,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5449,11 +5630,11 @@ public class DBHandler {
 
     //工程启动申请提交
     public String OAGCQDUp(String turl, String userDepart, String uId, String date, String department
-            , String person, String data, String userId, String userName,String liushuihao){
+            , String person, String data, String userId, String userName, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.GCQDDIFID));
@@ -5461,7 +5642,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.GCQD));
         nvs.add(new BasicNameValuePair("XuQiuBuMenDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
@@ -5488,7 +5669,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5509,11 +5690,11 @@ public class DBHandler {
     public String OAJSGCLeader(String url, String department, String person, String time, String userCode
             , String destName, String taskId, String flowAssignld, String mainId, String xqbmyj
             , String xqbmldyj, String jsbmyj, String jsbmldyj, String zjlyj, String serialNumber
-            , String comment,String liushuihao){
+            , String comment, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20233"));
@@ -5542,7 +5723,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jbfgldyj", jsbmldyj));
         nvs.add(new BasicNameValuePair("zjlyj", zjlyj));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -5554,7 +5735,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5573,11 +5754,11 @@ public class DBHandler {
 
     //电子设备申请提交
     public String OAEMaintainUp(String turl, String userDepart, String uId, String date, String department
-            , String person, String data, String userId, String userName,String liushuihao){
+            , String person, String data, String userId, String userName, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.EMAINTAINDIFID));
@@ -5585,7 +5766,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.EMAINTAIN));
         nvs.add(new BasicNameValuePair("BaoXiuBuMenDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
@@ -5614,7 +5795,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5635,11 +5816,11 @@ public class DBHandler {
     public String OAEMaintainder1(String url, String department, String time, String data, String userCode
             , String destName, String taskId, String flowAssignld, String mainId, String bxbmyj
             , String wxbmyj, String wxryyj, String wxqkyj, String sbsyryj, String wxfkyj
-            , String serialNumber, String comment, String date){
+            , String serialNumber, String comment, String date) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20411"));
@@ -5671,7 +5852,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("comments", comment));
 
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -5683,7 +5864,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5704,11 +5885,11 @@ public class DBHandler {
     public String OAEMaintainder(String url, String department, String time, String data
             , String userCode, String destName, String taskId, String flowAssignld
             , String mainId, String bxbmyj, String wxbmyj, String wxryyj, String wxqkyj
-            , String sbsyryj, String wxfkyj, String serialNumber, String comment){
+            , String sbsyryj, String wxfkyj, String serialNumber, String comment) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20411"));
@@ -5739,7 +5920,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("bjpj", wxfkyj));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -5751,7 +5932,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5771,11 +5952,11 @@ public class DBHandler {
     //员工宿舍审批发布
     public String OADormUp(String turl, String userDepart, String uId, String person, String time
             , String sex, String age, String idCard, String phone, String address, String userId
-            , String userName, String liushuihao,String reason){
+            , String userName, String liushuihao, String reason) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.DORMDIFID));
@@ -5783,7 +5964,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.DORM));
 
@@ -5817,7 +5998,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5840,11 +6021,11 @@ public class DBHandler {
             , String startTime, String home, String endTime, String chuangHao, String money
             , String destName, String taskId, String flowAssignld, String mainId, String bmfzryj
             , String wygsyj, String cwsjyj, String bzyj, String serialNumber
-            , String comment, String liushuihao){
+            , String comment, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20308"));
@@ -5883,7 +6064,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("bjpj", bzyj));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -5895,7 +6076,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5914,11 +6095,11 @@ public class DBHandler {
 
     //上诉申请提交
     public String OAAppealUp(String turl, String userDepart, String uId, String date, String department
-            , String person, String data, String userId, String userName,String liushuihao){
+            , String person, String data, String userId, String userName, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.APPEALDIFID));
@@ -5926,7 +6107,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.APPEAL));
 //        nvs.add(new BasicNameValuePair("XuQiuBuMenDid", "378"));
@@ -5952,7 +6133,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -5971,13 +6152,13 @@ public class DBHandler {
 
     //工程启动待办签字提交
     public String OAAppealLeader(String url, String department, String person, String time
-            , String userCode,String data, String destName, String taskId, String flowAssignld
+            , String userCode, String data, String destName, String taskId, String flowAssignld
             , String mainId, String xqbmyj, String xqbmldyj, String jsbmyj, String jsbmldyj
-            , String serialNumber, String comment, String liushuihao){
+            , String serialNumber, String comment, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20321"));
@@ -6007,7 +6188,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jbbmyj", jsbmyj));
         nvs.add(new BasicNameValuePair("zjlyj", jsbmldyj));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -6019,7 +6200,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6041,11 +6222,11 @@ public class DBHandler {
             , String department, String JKPerson, String driver, String carNo, String str
             , String address, String use, String otherPerson, String otherPhone, String reason
             , String smallMoney, String bigMoney, String type, String blame, String num, String money
-            , String allMoneyM, String allmoneyY, String userId, String userName, String liushuihao, String s){
+            , String allMoneyM, String allmoneyY, String userId, String userName, String liushuihao, String s) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.BILLDIFID));
@@ -6053,7 +6234,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.BILL));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
@@ -6084,7 +6265,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("ZhiDanUId", userId));
         nvs.add(new BasicNameValuePair("ZhiDan", zdPerson));
         nvs.add(new BasicNameValuePair("zhidanshijian", zdTime));
-        nvs.add(new BasicNameValuePair("danyueleiji",allMoneyM));
+        nvs.add(new BasicNameValuePair("danyueleiji", allMoneyM));
         nvs.add(new BasicNameValuePair("bennianleiji", allmoneyY));
         try {
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
@@ -6098,7 +6279,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6121,11 +6302,11 @@ public class DBHandler {
             , String reason, String smallMoney, String bigMoney, String type, String blame, String num
             , String money, String allMoneyM, String allmoneyY, String userCode, String destName
             , String taskId, String flowAssignld, String mainId, String aqfwyj, String fgldyj
-            , String ldspyj, String serialNumber, String comment, String liushuihao,String shiJian){
+            , String ldspyj, String serialNumber, String comment, String liushuihao, String shiJian) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20226"));
@@ -6166,11 +6347,11 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("ZhiDanUId", userCode));
         nvs.add(new BasicNameValuePair("ZhiDan", zdPerson));
         nvs.add(new BasicNameValuePair("zhidanshijian", zdTime));
-        nvs.add(new BasicNameValuePair("danyueleiji",allMoneyM));
+        nvs.add(new BasicNameValuePair("danyueleiji", allMoneyM));
         nvs.add(new BasicNameValuePair("bennianleiji", allmoneyY));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -6182,7 +6363,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6202,27 +6383,27 @@ public class DBHandler {
     //保险审批发布
     public String OASaferUp(String turl, String userDepart, String uId, String time, String num
             , String smallMoney, String bigMoney, String userId, String userName, String liushuihao
-            ,String tag){
+            , String tag) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
-        if (tag.equals("1")){
+        if (tag.equals("1")) {
             nvs.add(new BasicNameValuePair("defId", Constant.SAFER1DIFID));
-        }else {
+        } else {
             nvs.add(new BasicNameValuePair("defId", Constant.SAFER2DIFID));
         }
         nvs.add(new BasicNameValuePair("startFlow", "true"));
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
-        if (tag.equals("1")){
+        if (tag.equals("1")) {
             nvs.add(new BasicNameValuePair("formDefId", Constant.SAFER1));
-        }else {
+        } else {
             nvs.add(new BasicNameValuePair("formDefId", Constant.SAFER2));
         }
         nvs.add(new BasicNameValuePair("TuanTiYiWaiXianRenShu", num));
@@ -6246,7 +6427,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6267,16 +6448,16 @@ public class DBHandler {
     public String OASaferder1(String url, String liuShuiHao, String time, String num, String smallMoney
             , String bigMoney, String userCode, String destName, String taskId, String flowAssignld
             , String mainId, String bmfzryj, String fgldyj, String cwldyj, String serialNumber
-            , String comment, String liushuihao,String tag){
+            , String comment, String liushuihao, String tag) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
-        if (tag.equals("1")){
+        if (tag.equals("1")) {
             nvs.add(new BasicNameValuePair("defId", "20224"));
-        }else {
+        } else {
             nvs.add(new BasicNameValuePair("defId", "20225"));
         }
         nvs.add(new BasicNameValuePair("taskId", taskId));
@@ -6291,9 +6472,9 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("showvalue", ""));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
-        if (tag.equals("1")){
+        if (tag.equals("1")) {
             nvs.add(new BasicNameValuePair("formDefId", Constant.SAFER1));
-        }else {
+        } else {
             nvs.add(new BasicNameValuePair("formDefId", Constant.SAFER2));
         }
         nvs.add(new BasicNameValuePair("TuanTiYiWaiXianRenShu", num));
@@ -6307,7 +6488,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("cwzjyj", cwldyj));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -6319,7 +6500,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6339,11 +6520,11 @@ public class DBHandler {
 
     //会签申请提交
     public String OAHuiQianUp(String turl, String userDepart, String uId, String person, String data
-            , String userId, String userName, String liushuihao){
+            , String userId, String userName, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.HUIQIANDIFID));
@@ -6351,7 +6532,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.HUIQIAN));
         nvs.add(new BasicNameValuePair("HuiQianShiXiang", data));
@@ -6373,7 +6554,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6393,11 +6574,11 @@ public class DBHandler {
     //会签签字提交
     public String OAHuiQiander(String url, String person, String data, String userCode, String destName
             , String taskId, String flowAssignld, String mainId, String bxbmyj, String wxbmyj
-            , String wxryyj, String serialNumber, String comment,String liushuihao){
+            , String wxryyj, String serialNumber, String comment, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20411"));
@@ -6423,7 +6604,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("comments", comment));
 
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -6435,7 +6616,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6455,11 +6636,11 @@ public class DBHandler {
     //公司信息发布申请提交
     public String OACompMessageUp(String turl, String userDepart, String uId, String date, String person
             , String title, String fbpt1, String fbpt2, String fbpt3, String userId, String userName
-            , String liushuihao){
+            , String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.COMPMESSAGEDIFID));
@@ -6467,7 +6648,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignId", userDepart+"|"+uId));
+        nvs.add(new BasicNameValuePair("flowAssignId", userDepart + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.COMPMESSAGE));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
@@ -6495,7 +6676,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6516,11 +6697,11 @@ public class DBHandler {
     public String OACompMessageLeader(String url, String title, String person, String time, String fbpt1
             , String fbpt2, String fbpt3, String userCode, String destName, String taskId
             , String flowAssignld, String mainId, String xqbmyj, String xqbmldyj, String jsbmyj
-            , String jsbmldyj, String zjlyj, String serialNumber, String comment, String liushuihao){
+            , String jsbmldyj, String zjlyj, String serialNumber, String comment, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", Constant.COMPMESSAGEDIFID));
@@ -6552,7 +6733,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jbbmyj", jsbmldyj));
         nvs.add(new BasicNameValuePair("zjlyj", zjlyj));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -6564,7 +6745,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6582,11 +6763,11 @@ public class DBHandler {
     }
 
     //获取代办数量
-    public String getNumDaiBan(String turl){
+    public String getNumDaiBan(String turl) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         try {
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
@@ -6600,7 +6781,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6618,11 +6799,11 @@ public class DBHandler {
     }
 
     //获取员工
-    public String personList(String turl){
+    public String personList(String turl) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         try {
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
@@ -6636,7 +6817,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6655,7 +6836,7 @@ public class DBHandler {
 
 
     //获取我的申请详情
-    public String OAFiel(String turl){
+    public String OAFiel(String turl) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
@@ -6671,14 +6852,14 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
-                String data = json_+"";
+                String data = json_ + "";
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
                     return data;
-                }else {
+                } else {
                     return "";
                 }
             }
@@ -6690,15 +6871,15 @@ public class DBHandler {
     }
 
     //查询版本
-    public String getAPKVerson(String url){
-        String versor="";
+    public String getAPKVerson(String url) {
+        String versor = "";
         HttpClient httpClient = new DefaultHttpClient();
         httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
         try {
             // 将参数添加的POST请求中
-            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs,"utf-8");
+            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
 
             // 发送请求
@@ -6714,11 +6895,11 @@ public class DBHandler {
             reader.close();
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
-                String data = json_+"";
+                String data = json_ + "";
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
                     return data;
-                }else {
+                } else {
                     return "";
                 }
             }
@@ -6731,11 +6912,11 @@ public class DBHandler {
 
     //获取历史列表
     public String OAHistory(String url, String type, String name, String person, String startTime
-            , String endTime,String tag){
+            , String endTime, String tag) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
 //        httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("proTypeId", tag));
         nvs.add(new BasicNameValuePair("Q_subject_S_LK", name));
@@ -6744,7 +6925,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("Q_createtime_D_GE", startTime));
         nvs.add(new BasicNameValuePair("Q_createtime_D_LE", endTime));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -6756,7 +6937,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6774,15 +6955,15 @@ public class DBHandler {
     }
 
     //获取流水号
-    public String OAFlowMessage(String url, String runId){
+    public String OAFlowMessage(String url, String runId) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
 //        httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("runId", runId));
         try {
-            Log.e("XXXXH",nvs.toString());
+            Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -6794,7 +6975,7 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
@@ -6812,11 +6993,11 @@ public class DBHandler {
     }
 
     //获取收件箱列表
-    public String getInbox(String turl){
+    public String getInbox(String turl) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("folderId", "1"));
         try {
@@ -6831,14 +7012,14 @@ public class DBHandler {
                 sb.append(line + "\n");
             }
             reader.close();
-            Log.i("sb=" ,sb.toString());
+            Log.i("sb=", sb.toString());
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
-                String data = json_+"";
+                String data = json_ + "";
                 String msg = json_.get("success").toString();
                 if (msg.equals("true")) {
                     return data;
-                }else {
+                } else {
                     return "";
                 }
             }
@@ -6855,7 +7036,7 @@ public class DBHandler {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost("http://192.168.2.132:8080/joffice21/info/newAppNews.do");
-        String Session = new SharedPreferencesHelper(MyApplication.getContext(),"login").getData(MyApplication.getContext(),"session","");
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         try {
             // 将参数添加的POST请求中
@@ -6871,7 +7052,7 @@ public class DBHandler {
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
-            Log.i("weisheng",sb.toString());
+            Log.i("weisheng", sb.toString());
             reader.close();
             JSONObject json_ = new JSONObject(sb.toString());
             System.out.println("json=" + json_);
