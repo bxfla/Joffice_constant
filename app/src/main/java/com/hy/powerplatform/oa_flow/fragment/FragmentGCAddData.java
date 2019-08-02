@@ -344,7 +344,11 @@ public class FragmentGCAddData extends Fragment {
                                     public void run() {
                                         String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMorNext(url, "20334", namelist.get(0));
+                                        if (tag.equals("1")) {
+                                            res = dbA.OAQingJiaMorNext(url, defId1, namelist.get(0));
+                                        } else if (tag.equals("2")) {
+                                            res = dbA.OAQingJiaMorNext(url, defId2, namelist.get(0));
+                                        }
                                         userDepart = namelist.get(0);
                                         if (res.equals("保存失败") || res.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
@@ -363,7 +367,11 @@ public class FragmentGCAddData extends Fragment {
                                                 String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
                                                 DBHandler dbA = new DBHandler();
                                                 userDepart = data;
-                                                res = dbA.OAQingJiaMorNext(url, "20334", data);
+                                                if (tag.equals("1")) {
+                                                    res = dbA.OAQingJiaMorNext(url, defId1, namelist.get(0));
+                                                } else if (tag.equals("2")) {
+                                                    res = dbA.OAQingJiaMorNext(url, defId2, namelist.get(0));
+                                                }
                                                 if (res.equals("保存失败") || res.equals("")) {
                                                     handler.sendEmptyMessage(TAG_TWO);
                                                 } else {

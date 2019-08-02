@@ -128,9 +128,9 @@
                     android:inputType="number|numberDecimal" />
             </LinearLayout>
 
-            <View style="@style/line"></View>
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:orientation="horizontal">
@@ -192,22 +192,21 @@
                     android:layout_width="1dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
                     android:background="@color/shouye" />
 
                 <TextView
                     android:id="@+id/tvStartTime"
-                    style="@style/oaEditText"
-                    android:layout_weight="1.5" />
+                    style="@style/textWrite" />
 
                 <View
+                    android:visibility="gone"
                     android:layout_width="1dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="10dp"
                     android:background="@color/shouye" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tvAM"
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
@@ -231,15 +230,14 @@
                     android:layout_width="1dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
                     android:background="@color/shouye" />
 
                 <TextView
                     android:id="@+id/tvEndTime"
-                    style="@style/oaEditText"
-                    android:layout_weight="1.5" />
+                    style="@style/textWrite" />
 
                 <View
+                    android:visibility="gone"
                     android:layout_width="1dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
@@ -247,6 +245,7 @@
                     android:background="@color/shouye" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tvPM"
                     android:layout_width="120dp"
                     android:layout_height="match_parent"

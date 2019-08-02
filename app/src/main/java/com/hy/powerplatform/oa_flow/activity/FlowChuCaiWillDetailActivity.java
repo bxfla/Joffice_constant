@@ -283,6 +283,8 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
      * 设置多选框显示
      */
     private void setCbRbVer() {
+        resultList.clear();
+        bigResultList.clear();
         if (codetemp != null) {
             for (String s : codetemp) {
                 resultList.add(s);
@@ -484,6 +486,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                             }
                         }).start();
                     } else {
+                        namelist.clear();
                         for (int i = 0; i < beanList.size(); i++) {
                             namelist.add(beanList.get(i).getDestination());
                         }
@@ -527,7 +530,6 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                 } else {
                     Toast.makeText(FlowChuCaiWillDetailActivity.this, "审批人为空", Toast.LENGTH_SHORT).show();
                 }
-                btnT.setEnabled(false);
                 break;
             case R.id.tvData:
                 List<String> dataList = new ArrayList<>();
@@ -893,10 +895,10 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                     tvZJMoney.setText(zjMoney);
                     tvDepartment.setText(department);
                     if (jygj1.equals("on")) {
-                        jygj01 = "火车";
+                        jygj01 = "飞机";
                     }
                     if (jygj2.equals("on")) {
-                        jygj02 = "飞机";
+                        jygj02 = "火车";
                     }
                     if (jygj3.equals("on")) {
                         jygj03 = "驾车";
@@ -968,6 +970,8 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                     getNextPerson();
                     break;
                 case TAG_SEVEN:
+                    bigNametemp = null;
+                    bigCodetemp = null;
                     Gson gson1 = new Gson();
                     FlowContractPerson bean1 = gson1.fromJson(qianzhiData, FlowContractPerson.class);
                     if (bean1.getData() != null) {

@@ -224,6 +224,10 @@ public class LoginActivity extends BaseActivity implements LoginView {
                                         sharedPreferencesHelper.saveData(LoginActivity.this, "userStatus", jsonObject.getString("username"));
                                         sharedPreferencesHelper.saveData(LoginActivity.this, "userId", jsonObject.getString("userId"));
                                         sharedPreferencesHelper.saveData(LoginActivity.this, "rolues", jsonObject.getString("rolues"));
+                                        String superRoleName = jsonObject.getString("superRoleName");
+                                        if (jsonObject.getString("superRoleName")!=null){
+                                            sharedPreferencesHelper.saveData(LoginActivity.this, "superRoleName", jsonObject.getString("superRoleName"));
+                                        }
                                         if (jsonObject.getString("depName")==null||jsonObject.getString("depName").equals("null")||jsonObject.getString("depName").equals("")){
                                             sharedPreferencesHelper.saveData(LoginActivity.this, "depName", "宜春公交集团有限公司");
                                             sharedPreferencesHelper.saveData(LoginActivity.this, "depId", "378");

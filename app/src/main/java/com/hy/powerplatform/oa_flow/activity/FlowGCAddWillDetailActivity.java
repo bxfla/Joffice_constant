@@ -287,6 +287,8 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
      * 设置多选框显示
      */
     private void setCbRbVer() {
+        resultList.clear();
+        bigResultList.clear();
         if (codetemp != null) {
             for (String s : codetemp) {
                 resultList.add(s);
@@ -488,6 +490,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                             }
                         }).start();
                     } else {
+                        namelist.clear();
                         for (int i = 0; i < beanList.size(); i++) {
                             namelist.add(beanList.get(i).getDestination());
                         }
@@ -877,7 +880,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     DBHandler dbA = new DBHandler();
                     res = dbA.OAGCAddLeader(url, department, person, time, userCode,
                             destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, csbmyj, jcbmyj,
-                            zjl, serialNumber, comment, defId2, Constant.GCCHECK);
+                            zjl, serialNumber, comment, defId2, Constant.GCADD);
                     if (res.equals("")) {
                         handler.sendEmptyMessage(TAG_THERE);
                     } else {
@@ -1115,6 +1118,8 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     getNextPerson();
                     break;
                 case TAG_SEVEN:
+                    bigNametemp = null;
+                    bigCodetemp = null;
                     Gson gson1 = new Gson();
                     FlowContractPerson bean1 = gson1.fromJson(qianzhiData, FlowContractPerson.class);
                     if (bean1.getData() != null) {

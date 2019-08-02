@@ -267,7 +267,7 @@ public class MainActivity extends BaseActivity implements MainView {
                                 } else if (mainDataList.get(position).getModuleCode().equals("JLWX")) {
                                     intent = new Intent(MainActivity.this, MainTainActivity1.class);
                                     startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("SPLC")) {
+                                } else if (mainDataList.get(position).getModuleCode().equals("FQSQ")) {
                                     intent = new Intent(MainActivity.this, ListActivity.class);
                                     startActivity(intent);
                                 }else if (mainDataList.get(position).getModuleCode().equals("DBLC")) {

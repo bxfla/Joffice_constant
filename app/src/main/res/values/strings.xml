@@ -96,7 +96,7 @@
     <string name="login_pwd">请输入密码</string>
     <string name="fit_ip">请输入IP地址</string>
     <string name="fit_socket">请输入端口号</string>
-    <string name="login">登陆</string>
+    <string name="login">登录</string>
     <string name="save">保存</string>
     <string name="toast_infor">Ip、端口和地区不能为空</string>
     <string name="toast_login_infor">用户名和密码不能为空</string>

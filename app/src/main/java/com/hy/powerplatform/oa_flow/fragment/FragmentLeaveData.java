@@ -26,6 +26,7 @@ import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
 import com.hy.powerplatform.oa_flow.activity.PersonListActivity;
 import com.hy.powerplatform.oa_flow.bean.Name;
+import com.hy.powerplatform.oa_flow.util.CompareDiff;
 import com.leon.lfilepickerlibrary.LFilePicker;
 import com.leon.lfilepickerlibrary.utils.Constant;
 
@@ -34,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -118,6 +120,7 @@ public class FragmentLeaveData extends Fragment {
     List<String> selectList = new ArrayList<>();
     String userDepart = "";
     String isShow = "true";
+    int daynumber;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -185,15 +188,62 @@ public class FragmentLeaveData extends Fragment {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, 1); //向前走一天
         tvEndTime.setText(sdf.format(calendar.getTime()).split(" ")[0]);
+        etDays.setText("1");
 
         customDatePicker1 = new CustomDatePickerDay(getActivity(), new CustomDatePickerDay.ResultHandler() {
             @Override
             public void handle(String time) {
                 // 回调接口，获得选中的时间
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                Date dt1;
+                Date dt2;
                 if (tag.equals("st")) {
-                    tvStartTime.setText(time.split(" ")[0]);
+                    try {
+                        dt1 = df.parse(time.split(" ")[0]);
+                        dt2 = df.parse(tvEndTime.getText().toString());
+                        if (dt1.getTime() > dt2.getTime()) {
+                            Toast.makeText(getActivity(), "请选择正确的时间", Toast.LENGTH_SHORT).show();
+                        } else if (dt1.getTime() <= dt2.getTime()) {
+                            tvStartTime.setText(time.split(" ")[0]);
+                            daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
+                                    , tvEndTime.getText().toString(), "yyyy-MM-dd");
+                            if (spinnerAM.getSelectedItem().toString().equals(spinnerPM.getSelectedItem().toString())) {
+                                etDays.setText(daynumber + "");
+                            } else if (spinnerAM.getSelectedItem().toString().equals("上午")
+                                    && spinnerPM.getSelectedItem().equals("下午")) {
+                                etDays.setText((daynumber + 0.5) + "");
+                            } else if (spinnerAM.getSelectedItem().toString().equals("下午")
+                                    && spinnerPM.getSelectedItem().equals("上午")) {
+                                etDays.setText((daynumber - 0.5) + "");
+                            }
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
                 } else if (tag.equals("ed")) {
-                    tvEndTime.setText(time.split(" ")[0]);
+                    try {
+                        dt1 = df.parse(tvStartTime.getText().toString());
+                        dt2 = df.parse(time.split(" ")[0]);
+                        if (dt1.getTime() > dt2.getTime()) {
+                            Toast.makeText(getActivity(), "请选择正确的时间", Toast.LENGTH_SHORT).show();
+                        } else if (dt1.getTime() < dt2.getTime()) {
+                            tvEndTime.setText(time.split(" ")[0]);
+                            daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
+                                    , tvEndTime.getText().toString(), "yyyy-MM-dd");
+                            if (spinnerAM.getSelectedItem().toString().equals(spinnerPM.getSelectedItem().toString())) {
+                                etDays.setText(daynumber + "");
+                            } else if (spinnerAM.getSelectedItem().toString().equals("上午")
+                                    && spinnerPM.getSelectedItem().equals("下午")) {
+                                etDays.setText((daynumber + 0.5) + "");
+                            } else if (spinnerAM.getSelectedItem().toString().equals("下午")
+                                    && spinnerPM.getSelectedItem().equals("上午")) {
+                                etDays.setText((daynumber - 0.5) + "");
+                            }
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+
                 }
             }
             // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
@@ -338,42 +388,111 @@ public class FragmentLeaveData extends Fragment {
                                     }
                                 }).start();
                             } else {
-                                MyAlertDialog.MyListAlertDialog(getActivity(), namelist, new AlertDialogCallBackP() {
-                                    @Override
-                                    public void oneselect(final String data) {
-                                        ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
-                                        new Thread(new Runnable() {
+                                String superRoleName = new SharedPreferencesHelper(getActivity(), "login")
+                                        .getData(getActivity(), "superRoleName", "");
+                                for (int i = 0; i < namelist.size(); i++) {
+//                                    namelist.add(namelist.get(i));
+                                    if (superRoleName.indexOf("部负责人") != -1 || superRoleName.indexOf("公司负责人") != -1) {
+                                        if (namelist.get(i).indexOf("负责人") != -1 || namelist.get(i).indexOf("公司负责人") != -1) {
+                                            userDepart = namelist.get(i);
+                                        }
+                                    } else if (superRoleName.indexOf("分管领导") != -1) {
+                                        if (namelist.get(i).indexOf("分管领导") != -1) {
+                                            userDepart = namelist.get(i);
+                                        }
+                                    } else if (superRoleName.indexOf("总经理") != -1) {
+                                        if (namelist.get(i).indexOf("总经理") != -1) {
+                                            userDepart = namelist.get(i);
+                                        }
+                                    } else {
+                                        MyAlertDialog.MyListAlertDialog(getActivity(), namelist, new AlertDialogCallBackP() {
                                             @Override
-                                            public void run() {
-                                                String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
-                                                DBHandler dbA = new DBHandler();
-                                                userDepart = data;
-                                                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.LEAVERDIFID, data);
-                                                if (res.equals("保存失败") || res.equals("")) {
-                                                    handler.sendEmptyMessage(TAG_TWO);
-                                                } else {
-                                                    handler.sendEmptyMessage(TAG_FOUR);
-                                                }
+                                            public void oneselect(final String data) {
+                                                ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
+                                                new Thread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
+                                                        DBHandler dbA = new DBHandler();
+                                                        userDepart = data;
+                                                        res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.LEAVERDIFID, data);
+                                                        if (res.equals("保存失败") || res.equals("")) {
+                                                            handler.sendEmptyMessage(TAG_TWO);
+                                                        } else {
+                                                            handler.sendEmptyMessage(TAG_FOUR);
+                                                        }
+                                                    }
+                                                }).start();
+
                                             }
-                                        }).start();
 
+                                            @Override
+                                            public void select(List<String> list) {
+
+                                            }
+
+                                            @Override
+                                            public void confirm() {
+
+                                            }
+
+                                            @Override
+                                            public void cancel() {
+
+                                            }
+                                        });
                                     }
-
+                                }
+                                new Thread(new Runnable() {
                                     @Override
-                                    public void select(List<String> list) {
-
+                                    public void run() {
+                                        String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
+                                        DBHandler dbA = new DBHandler();
+                                        res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.LEAVERDIFID, userDepart);
+                                        if (res.equals("保存失败") || res.equals("")) {
+                                            handler.sendEmptyMessage(TAG_TWO);
+                                        } else {
+                                            handler.sendEmptyMessage(TAG_FOUR);
+                                        }
                                     }
+                                }).start();
 
-                                    @Override
-                                    public void confirm() {
-
-                                    }
-
-                                    @Override
-                                    public void cancel() {
-
-                                    }
-                                });
+//                                MyAlertDialog.MyListAlertDialog(getActivity(), namelist, new AlertDialogCallBackP() {
+//                                    @Override
+//                                    public void oneselect(final String data) {
+//                                        ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
+//                                        new Thread(new Runnable() {
+//                                            @Override
+//                                            public void run() {
+//                                                String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
+//                                                DBHandler dbA = new DBHandler();
+//                                                userDepart = data;
+//                                                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.LEAVERDIFID, data);
+//                                                if (res.equals("保存失败") || res.equals("")) {
+//                                                    handler.sendEmptyMessage(TAG_TWO);
+//                                                } else {
+//                                                    handler.sendEmptyMessage(TAG_FOUR);
+//                                                }
+//                                            }
+//                                        }).start();
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void select(List<String> list) {
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void confirm() {
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void cancel() {
+//
+//                                    }
+//                                });
                             }
                         } else {
                             Toast.makeText(getActivity(), "审批人为空", Toast.LENGTH_SHORT).show();

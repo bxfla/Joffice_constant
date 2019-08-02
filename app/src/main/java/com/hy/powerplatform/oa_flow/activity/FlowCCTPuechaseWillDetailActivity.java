@@ -733,6 +733,8 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
      * 设置多选框显示
      */
     private void setCbRbVer() {
+        resultList.clear();
+        bigResultList.clear();
         if (codetemp != null) {
             for (String s : codetemp) {
                 resultList.add(s);
@@ -997,6 +999,7 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                             }
                         }).start();
                     } else {
+                        namelist.clear();
                         for (int i = 0; i < beanList.size(); i++) {
                             namelist.add(beanList.get(i).getDestination());
                         }
@@ -1040,7 +1043,6 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                 } else {
                     Toast.makeText(FlowCCTPuechaseWillDetailActivity.this, "审批人为空", Toast.LENGTH_SHORT).show();
                 }
-                btnT.setEnabled(false);
                 break;
             case R.id.tvData:
                 List<String> dataList = new ArrayList<>();
@@ -1609,6 +1611,8 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                     getNextPerson();
                     break;
                 case TAG_SEVEN:
+                    bigNametemp = null;
+                    bigCodetemp = null;
                     Gson gson1 = new Gson();
                     FlowContractPerson bean1 = gson1.fromJson(qianzhiData, FlowContractPerson.class);
                     if (bean1.getData() != null) {

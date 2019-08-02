@@ -177,7 +177,7 @@ public class Constant {
     public static final String  LEAVERDIFID = "10135";
     public static final String  PAYFLOWDIFID = "10151";
     public static final String  CONTRACEPAYDIFID = "10093";
-    public static final String  CONTRACTSIGNDIFID = "20408";
+    public static final String  CONTRACTSIGNDIFID = "10165";
     public static final String  GHCONTRACTSIGNDIFID = "20461";
     public static final String  GOODSPUECHASEDIFID = "10183";
     public static final String  CCTPUECHASEDIFID = "20274";

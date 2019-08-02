@@ -2,7 +2,6 @@ package com.hy.powerplatform.my_utils.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
 import java.util.regex.Matcher;
@@ -38,34 +37,34 @@ public class IDCardSession {
             //errorInfo = "身份证15位号码都应为数字 ; 18位号码除最后一位外，都应为数字。";
             return false;
         }
-        // ================ 出生年月是否有效 ================
-        String strYear = Ai.substring(6, 10);// 年份
-        String strMonth = Ai.substring(10, 12);// 月份
-        String strDay = Ai.substring(12, 14);// 日
-        if (isDate(strYear + "-" + strMonth + "-" + strDay) == false) {
-//          errorInfo = "身份证生日无效。";
-            return false;
-        }
+//        // ================ 出生年月是否有效 ================
+//        String strYear = Ai.substring(6, 10);// 年份
+//        String strMonth = Ai.substring(10, 12);// 月份
+//        String strDay = Ai.substring(12, 14);// 日
+//        if (isDate(strYear + "-" + strMonth + "-" + strDay) == false) {
+////          errorInfo = "身份证生日无效。";
+//            return false;
+//        }
         GregorianCalendar gc = new GregorianCalendar();
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            if ((gc.get(Calendar.YEAR) - Integer.parseInt(strYear)) > 150 || (gc.getTime().getTime() - s.parse(strYear + "-" + strMonth + "-" + strDay).getTime()) < 0) {
-                //errorInfo = "身份证生日不在有效范围。";
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-        if (Integer.parseInt(strMonth) > 12 || Integer.parseInt(strMonth) == 0) {
-            //errorInfo = "身份证月份无效";
-            return false;
-        }
-        if (Integer.parseInt(strDay) > 31 || Integer.parseInt(strDay) == 0) {
-            //errorInfo = "身份证日期无效";
-            return false;
-        }
+//        try {
+//            if ((gc.get(Calendar.YEAR) - Integer.parseInt(strYear)) > 150 || (gc.getTime().getTime() - s.parse(strYear + "-" + strMonth + "-" + strDay).getTime()) < 0) {
+//                //errorInfo = "身份证生日不在有效范围。";
+//                return false;
+//            }
+//        } catch (NumberFormatException e) {
+//            e.printStackTrace();
+//        } catch (java.text.ParseException e) {
+//            e.printStackTrace();
+//        }
+//        if (Integer.parseInt(strMonth) > 12 || Integer.parseInt(strMonth) == 0) {
+//            //errorInfo = "身份证月份无效";
+//            return false;
+//        }
+//        if (Integer.parseInt(strDay) > 31 || Integer.parseInt(strDay) == 0) {
+//            //errorInfo = "身份证日期无效";
+//            return false;
+//        }
         // ================ 地区码时候有效 ================
         Hashtable h = GetAreaCode();
         if (h.get(Ai.substring(0, 2)) == null) {

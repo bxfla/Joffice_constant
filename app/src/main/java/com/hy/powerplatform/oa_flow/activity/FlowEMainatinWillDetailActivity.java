@@ -320,6 +320,8 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
      * 设置多选框显示
      */
     private void setCbRbVer() {
+        resultList.clear();
+        bigResultList.clear();
         if (codetemp != null) {
             for (String s : codetemp) {
                 resultList.add(s);
@@ -584,6 +586,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                             }
                         }).start();
                     } else {
+                        namelist.clear();
                         for (int i = 0; i < beanList.size(); i++) {
                             namelist.add(beanList.get(i).getDestination());
                         }
@@ -1148,6 +1151,8 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                     getNextPerson();
                     break;
                 case TAG_SEVEN:
+                    bigNametemp = null;
+                    bigCodetemp = null;
                     Gson gson1 = new Gson();
                     FlowContractPerson bean1 = gson1.fromJson(qianzhiData, FlowContractPerson.class);
                     if (bean1.getData() != null) {

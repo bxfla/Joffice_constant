@@ -1442,8 +1442,8 @@ public class DBHandler {
             URL url = new URL(turl);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setConnectTimeout(8000);
-            connection.setReadTimeout(8000);
+            connection.setConnectTimeout(40000);
+            connection.setReadTimeout(40000);
             connection.addRequestProperty("Cookie", Session);
             //此时获取的是字节流
             InputStream in = connection.getInputStream();
@@ -1643,8 +1643,8 @@ public class DBHandler {
             URL url = new URL(turl);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setConnectTimeout(8000);
-            connection.setReadTimeout(8000);
+            connection.setConnectTimeout(10000);
+            connection.setReadTimeout(10000);
             connection.addRequestProperty("Cookie", Session);
             //此时获取的是字节流
             InputStream in = connection.getInputStream();
@@ -5505,7 +5505,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", destName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
+        nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
         nvs.add(new BasicNameValuePair("signalName", signaName));
 
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
@@ -5575,7 +5575,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", destName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
+        nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
 
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("showvalue", ""));
