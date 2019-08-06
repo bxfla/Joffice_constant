@@ -564,10 +564,10 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                     flowAssignld = flowAssignld.replace(":|", "|");
                     flowAssignld = flowAssignld.replace(":", "");
                 }
-                res = dbA.OAQingJiaLeader(url, person, time, type, reason, beginDate, endDate, userName,
+                String upData = dbA.OAQingJiaLeader(url, person, time, type, reason, beginDate, endDate, userName,
                         userCode, signaName, destName, taskId, comments, days, fullnameUId, fullname,
                         flowAssignld, mainId, bmfzr, fgfze, zjl);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

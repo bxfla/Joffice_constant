@@ -154,7 +154,6 @@ public class XingZengActivity extends BaseActivity {
         ButterKnife.bind(this);
         rolues = new SharedPreferencesHelper(this, "login").getData(this, "rolues", "");
         String userName = new SharedPreferencesHelper(this, "login").getData(this, "userStatus", "");
-
         if (userName.equals("超级管理员")) {
             getData();
         } else {
@@ -261,7 +260,7 @@ public class XingZengActivity extends BaseActivity {
                 if (!dataList.contains(Constant.GHCONTRACTSIGNNAME)) {
                     flGHSingle.setVisibility(View.GONE);
                 }
-                getData();
+//                getData();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -271,7 +270,7 @@ public class XingZengActivity extends BaseActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        getData();
+//        getData();
     }
 
     @Override

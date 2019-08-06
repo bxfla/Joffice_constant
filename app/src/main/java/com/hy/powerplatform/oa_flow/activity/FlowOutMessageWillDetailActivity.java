@@ -907,10 +907,10 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAOutMessageLeader(url, title, zhuSong, chaoBao, chaoSong, niGao, heGao,
+                String upData = dbA.OAOutMessageLeader(url, title, zhuSong, chaoBao, chaoSong, niGao, heGao,
                         num, wenHao, date1, xuHao, userCode, destName, taskId, flowAssignld, mainId,
                         fgldyj, zjl, serialNumber, comment, signaName, userName, time);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

@@ -182,422 +182,611 @@
             android:name=".getui.DemoIntentService"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
 
-        <activity android:name=".login.activity.FirstActivity">
+        <activity
+            android:name=".login.activity.FirstActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.activity.FitWindowActivity" />
+        <activity
+            android:name=".login.activity.FitWindowActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".login.activity.LoginActivity"
-            android:configChanges="orientation|keyboardHidden" />
-        <activity android:name=".signin.activity.SignInActivity" />
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".signin.activity.SignInActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".select_photo.ImagesSelectorActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity android:name=".news.activity.NewsAndNoticeActivity" />
-        <activity android:name=".news.activity.NewsDetailActivity" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".news.activity.NewsAndNoticeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".news.activity.NewsDetailActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.SelectCarActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.InspectLineSelectTypeActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.InspectDriveSelectTypeActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.SelectOneCarActivity"
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".NoOpenActivity" />
+        <activity
+            android:name=".NoOpenActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.ShiGuActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.InspectDrivePSelectTypeActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".login.activity.MainActivity" />
-        <activity android:name=".news.activity.NewsActivity" />
-        <activity android:name=".news.activity.NoticeActivity" />
-        <activity android:name=".login.activity.MyPersonalActivity" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".login.activity.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".news.activity.NewsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".news.activity.NoticeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".login.activity.MyPersonalActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.InspectYeWuActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.SelectOneCheckUpActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".phone.activity.PhoneListActivity" />
-        <activity android:name=".phone.activity.PhoneAddActivity" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".phone.activity.PhoneListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".phone.activity.PhoneAddActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.ShiGuCheckActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.InspectStarteActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.InspectHealthActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.InspectSufferActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.InspectKillActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.activity.InspectAllActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.newactivity.InspectAllActivity"
             android:configChanges="orientation|keyboardHidden"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.newactivity.InspectStarteActivity"
             android:configChanges="orientation|keyboardHidden"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.newactivity.InspectHealthActivity"
             android:configChanges="orientation|keyboardHidden"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.newactivity.InspectSufferActivity"
             android:configChanges="orientation|keyboardHidden"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".business_inspect.newactivity.InspectKillActivity"
             android:configChanges="orientation|keyboardHidden"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".signin.activity.NewSignActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".signin.activity.SignHisActivity" />
-        <activity android:name=".business_inspect.activity.ShiGuListActivity" />
-        <activity android:name=".business_inspect.activity.InspectYeWuListActivity" />
-        <activity android:name=".business_inspect.newactivity.CheckPersonActivity" />
-        <activity android:name=".business_inspect.newactivity.CheckOnePersonActivity" />
-        <activity android:name=".business_inspect.newactivity.HealthCheckPersonActivity" />
-        <activity android:name=".business_inspect.newactivity.StarteCheckPersonActivity" />
-        <activity android:name=".business_inspect.newactivity.KillCheckPersonActivity" />
-        <activity android:name=".business_inspect.newactivity.MainTainActivity" />
-        <activity android:name=".car_maintain.activity.MainTainActivity" />
-        <activity android:name=".car_maintain.activity.MainTainListActivity" />
-        <activity android:name=".car_maintain.activity.SelfNumbActivity" />
-        <activity android:name=".car_maintain.activity.MainTainDetailActivity" />
-        <activity android:name=".car_maintain.activity.AddMainTainActivity" />
-        <activity android:name=".car_maintain.activity.SelectDataActivity" />
-        <activity android:name=".car_maintain.activity.ZiBianHaoActivity" />
-        <activity android:name=".car_maintain.activity.CarNoActivity" />
-        <activity android:name=".car_maintain.activity.LineActivity" />
-        <activity android:name=".car_maintain.activity.DriverActivity" />
-        <activity android:name=".car_maintain.activity.MainPaiDanActivity" />
-        <activity android:name=".car_maintain.activity.MainXiangMuActivity" />
-        <activity android:name=".car_maintain.activity.MainShenYanActivity" />
-        <activity android:name=".car_maintain.activity.MainOverActivity" />
-        <activity android:name=".car_maintain.activity.BaoxiuActivity" />
-        <activity android:name=".car_maintain.activity.JianChaRenActivity" />
-        <activity android:name=".car_maintain.activity.WeiXiuChangActivity" />
-        <activity android:name=".car_maintain.activity.BaoxiuTypeActivity" />
-        <activity android:name=".car_maintain.activity.MainLingLiaoActivity" />
-        <activity android:name=".car_maintain.activity.LingLiaoItemActivity" />
-        <activity android:name=".car_maintain.activity.LingLiaoItemDetailActivity" />
-        <activity android:name=".car_maintain.activity.ClassIfyActivity" />
-        <activity android:name=".car_maintain.activity.ClassIfySmallActivity" />
-        <activity android:name=".car_maintain.activity.MainTainListActivity1" />
-        <activity android:name=".car_maintain.activity.MainLingLiaoActivity1" />
-        <activity android:name=".car_maintain.activity.MainTainActivity1" />
-        <activity android:name=".car_maintain.activity.AddMainTainActivity1" />
-        <activity android:name=".oa_flow.activity.MainFlowActivity" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".signin.activity.SignHisActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".business_inspect.activity.ShiGuListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".business_inspect.activity.InspectYeWuListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".business_inspect.newactivity.CheckPersonActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".business_inspect.newactivity.CheckOnePersonActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".business_inspect.newactivity.HealthCheckPersonActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".business_inspect.newactivity.StarteCheckPersonActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".business_inspect.newactivity.KillCheckPersonActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".business_inspect.newactivity.MainTainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.MainTainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.MainTainListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.SelfNumbActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.MainTainDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.AddMainTainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.SelectDataActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.ZiBianHaoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.CarNoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.LineActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.DriverActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.MainPaiDanActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.MainXiangMuActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.MainShenYanActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.MainOverActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.BaoxiuActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.JianChaRenActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.WeiXiuChangActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.BaoxiuTypeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.MainLingLiaoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.LingLiaoItemActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.LingLiaoItemDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.ClassIfyActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.ClassIfySmallActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.MainTainListActivity1"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.MainLingLiaoActivity1"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.MainTainActivity1"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".car_maintain.activity.AddMainTainActivity1"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.MainFlowActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowLeaveActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowLeaveDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCarActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowEntryActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowOutMessageActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowContractPayActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowPurchaseActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowApproveActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowBillActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCarVideoActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowOverTimeActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCarSafeActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowDriverAssessActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowChuCaiActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowFuKuanLiuChengActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowReceiveDinnerActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowJSGCActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowNewGCActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowContractSignActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowGoodsPurchaseActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowLeaveWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".oa_flow.activity.FlowContractPayDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowContracterPayWillDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowPayLiuChengWillDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowContractSignWillDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowGoodsPuechaseWillDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowPuechaseWillDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowEntryWillDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowOutMessageWillDetailActivity" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowContractPayDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowContracterPayWillDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowPayLiuChengWillDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowContractSignWillDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowGoodsPuechaseWillDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowPuechaseWillDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowEntryWillDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowOutMessageWillDetailActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowWorkPurchaseActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".oa_flow.activity.FlowWorkPuechaseWillDetailActivity" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowWorkPuechaseWillDetailActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowRepairActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".oa_flow.activity.FlowRepairWillDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowChuCaiWillDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowFuKuanLiuChengDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowGoodsPruchaseDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowWorkPruchaseDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowPruchaseDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowEntryDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowOutMessageDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowRepairDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowChuCaiDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowGCAddDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowContractSignDetailActivity" />
-        <activity android:name=".TestActivity" />
-        <activity android:name=".oa_flow.activity.FlowGCAddWillDetailActivity" />
-        <activity android:name=".oa_flow.activity.FlowOverTimeDetailActivity" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowRepairWillDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowChuCaiWillDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowFuKuanLiuChengDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowGoodsPruchaseDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowWorkPruchaseDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowPruchaseDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowEntryDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowOutMessageDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowRepairDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowChuCaiDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowGCAddDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowContractSignDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TestActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowGCAddWillDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FlowOverTimeDetailActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowOverTimeWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCarSafeDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCarSafeWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCarVideoWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCarVideoDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowDriverAssessDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowDriverAssessWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowUseCarDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowUseCarWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowDinnerDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowreceiveDinnerWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowComplainActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowComplainDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowComplainWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowInstallActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowInstallDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowInstallWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowJSGCDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowJSGCWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowEMainTainActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowEMaintainDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowEMainatinWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowDormActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowDormDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowDormWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowAppealActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowAppealDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowAppealWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowBillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowBillWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowSaferActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowSaferllDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowSaferWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowHuiQianActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowHuiQianDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowHuiQianWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.HistoryFlowActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.HistoryListActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.MyFlowListActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.WithMeListActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCompMessageActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCompMessageDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCompMessageWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".oa_flow.activity.PersonListActivity" />
-        <activity android:name=".oa_flow.activity.ListActivity" />
-        <activity android:name=".oa_flow.activity.XingZengActivity" />
-        <activity android:name=".oa_flow.activity.RenZiActivity" />
-        <activity android:name=".oa_flow.activity.CaiWuActivity" />
-        <activity android:name=".oa_flow.activity.CaiGouActivity" />
-        <activity android:name=".oa_flow.activity.FaWenActivity" />
-        <activity android:name=".oa_flow.activity.MyWillDoActivity" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.PersonListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.ListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.XingZengActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.RenZiActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.CaiWuActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.CaiGouActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.FaWenActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.MyWillDoActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCCTTPurchaseActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCCTPruchaseDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowCCTPuechaseWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowGHPurchaseActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowGHPruchaseDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowGHPuechaseWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowGHPayActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowGHPayDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowGHPayWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowGHContractSignActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowGHContractSignDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".oa_flow.activity.FlowGHContractSignWillDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".qrcode.zxing.activity.CaptureActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".oa_flow.activity.InboxActivity" />
-        <activity android:name=".oa_flow.activity.InboxDetailActivity" />
-        <activity android:name=".login.activity.SecondActivity"/>
-        <activity android:name=".oa_flow.activity.MyBackFlowListActivity"/>
-        <activity android:name=".oa_flow.activity.MyBackSureFlowListActivity"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.InboxActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.InboxDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".login.activity.SecondActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.MyBackFlowListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".oa_flow.activity.MyBackSureFlowListActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

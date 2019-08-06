@@ -301,18 +301,21 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
             intent = new Intent(this, FlowWorkPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("taskName", beanList.get(position).getTaskName());
             startActivity(intent);
         }
         if (beanList.get(position).getFormDefId().equals(Constant.GOODSPUECHASE)){
             intent = new Intent(this, FlowGoodsPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("taskName", beanList.get(position).getTaskName());
             startActivity(intent);
         }
         if (beanList.get(position).getFormDefId().equals(Constant.PUECHASEFLOW)){
             intent = new Intent(this, FlowPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("taskName", beanList.get(position).getTaskName());
             startActivity(intent);
         }
         if (beanList.get(position).getFormDefId().equals(Constant.REPAIR)){

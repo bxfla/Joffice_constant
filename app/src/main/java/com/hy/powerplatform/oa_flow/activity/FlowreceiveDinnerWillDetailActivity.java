@@ -831,10 +831,10 @@ public class FlowreceiveDinnerWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OADinnerder(url, person, department, pcPerson, lkDepartment, lkPerson,
+                String upData = dbA.OADinnerder(url, person, department, pcPerson, lkDepartment, lkPerson,
                         eatBz, bigMoney, smallMoney, userCode, destName, taskId, flowAssignld, mainId,
                         bmfzr, fgfze, zjl, serialNumber, comment);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

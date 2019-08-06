@@ -649,7 +649,7 @@ public class FlowGHPayWillDetailActivity extends BaseActivity {
                         zjl = zjl.toString().replace("],[", ",");
                     }
                 }
-                if (comment.equals("")) {
+                if (comment!=null&&comment.equals("")) {
                     if (!bmreout.equals("2") && !fgcwreout.equals("2") && !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
@@ -759,9 +759,9 @@ public class FlowGHPayWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAGHPayLeader(url, time, person, department, classY, moneyB, moneyS, userCode,
+                String upData = dbA.OAGHPayLeader(url, time, person, department, classY, moneyB, moneyS, userCode,
                         destName, signaName, taskId, flowAssignld, mainId, bmfzr, zjl, fgcwze, serialNumber, comment, use);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

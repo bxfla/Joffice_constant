@@ -1289,12 +1289,12 @@ public class FlowGHPuechaseWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAGhPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
+                String upData = dbA.OAGhPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                         , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
                         , allMoney4, allMoney5, userCode, destName, taskId, flowAssignld, mainId,
                         bmfzryj, zcgkbmyj, fgldyj, ghzx, zjl, serialNumber, comment, signaName, hejisl,
                         hejidj, hejije, use, other);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

@@ -780,10 +780,10 @@ public class FlowCarVideoWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OACarVideoLeader(url, zhiNanRen, zhiDanRiQi, department, person, carNo,
+                String upData = dbA.OACarVideoLeader(url, zhiNanRen, zhiDanRiQi, department, person, carNo,
                         line, time, address, xingZhi, zhuangKuang, bigMoney, smallMoney, card, diaoQu, userCode,
                         destName, taskId, flowAssignld, mainId, bmfzr, fgfze, zjl, serialNumber, comment);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

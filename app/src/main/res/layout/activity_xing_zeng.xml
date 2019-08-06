@@ -11,7 +11,7 @@
     <com.hy.powerplatform.my_utils.myViews.Header
         android:id="@+id/header"
         style="@style/Heander"
-        app:header_title="@string/oa_flow">
+        app:header_title="行政管理">
     </com.hy.powerplatform.my_utils.myViews.Header>
 
     <include

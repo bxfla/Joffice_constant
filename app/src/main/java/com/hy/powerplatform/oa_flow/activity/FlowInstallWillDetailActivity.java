@@ -150,7 +150,11 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    private String name, taskId, res, bmfzryj, fgldyj, jbfgldyj, jbbmyj, bjap, bjr, bjpj, liushuihao;
+    @BindView(R.id.tvLeaderzjl)
+    TextView tvLeaderzjl;
+    @BindView(R.id.etLeaderzjl)
+    EditText etLeaderzjl;
+    private String name, taskId, res, bmfzryj, fgldyj, jbfgldyj, jbbmyj, zjlyj, bjap, bjr, bjpj, liushuihao;
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
     String leaderCode = "";
@@ -158,7 +162,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
-    String bmreout, fgreout, jbfgreout, jbreout, bjapreout, bjrreout, bjpjreout, flowAssignld, serialNumber = "";
+    String bmreout, zjlreout, fgreout, jbfgreout, jbreout, bjapreout, bjrreout, bjpjreout, flowAssignld, serialNumber = "";
 
     String[] bigNametemp = null;
     String[] bigCodetemp = null;
@@ -188,7 +192,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         initDatePicker();
         Intent intent = getIntent();
@@ -539,19 +543,19 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
         getLastPerson();
     }
 
-    @OnClick({R.id.btnUp, R.id.tvDate1, R.id.tvData, R.id.btnT,R.id.btnHistory})
+    @OnClick({R.id.btnUp, R.id.tvDate1, R.id.tvData, R.id.btnT, R.id.btnHistory})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnHistory:
                 recyclerView.setVisibility(View.VISIBLE);
-                ProgressDialogUtil.startLoad(FlowInstallWillDetailActivity.this,"获取数据中");
+                ProgressDialogUtil.startLoad(FlowInstallWillDetailActivity.this, "获取数据中");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         //String name =URLDecoder.decode(待转值,"utf-8");
                         String url = Constant.BASE_URL2 + Constant.FLOWMESSAGE;
                         DBHandler dbA = new DBHandler();
-                        flowMessage = dbA.OAFlowMessage(url,runID);
+                        flowMessage = dbA.OAFlowMessage(url, runID);
                         if (flowMessage.equals("获取数据失败") || flowMessage.equals("")) {
                             handler.sendEmptyMessage(TAG_TWO);
                         } else {
@@ -740,6 +744,26 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         fgldyj = fgldyj.toString().replace("],[", ",");
                     }
                 }
+
+                if (etLeaderzjl.getVisibility() == View.VISIBLE) {
+                    comment = etLeaderzjl.getText().toString();
+                    try {
+                        jsonObject.put("ui", userCode);
+                        jsonObject.put("un", userName);
+                        jsonObject.put("c", str);
+                        jsonObject.put("v", etLeaderzjl.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    jsonArray.put(jsonObject);
+                    if (zjlyj.equals("")) {
+                        zjlyj = jsonArray.toString();
+                    } else {
+                        zjlyj = zjlyj + "," + jsonArray.toString();
+                        zjlyj = zjlyj.toString().replace("],[", ",");
+                    }
+                }
+
                 if (etLeader2.getVisibility() == View.VISIBLE) {
                     comment = etLeader2.getText().toString();
                     try {
@@ -943,14 +967,15 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
+                String upData = "";
                 if (bjrreout.equals("2") && !date1.equals("")) {
-                    res = dbA.OAInstallder1(url, department, date, data, userCode, destName, taskId, flowAssignld, mainId,
-                            bmfzryj, fgldyj, jbfgldyj, jbbmyj, bjap, bjr, bjpj, serialNumber, comment, date1, liushuihao);
+                    upData = dbA.OAInstallder1(url, department, date, data, userCode, destName, taskId, flowAssignld, mainId,
+                            bmfzryj, fgldyj, jbfgldyj, jbbmyj, bjap, bjr, bjpj, serialNumber, comment, date1, liushuihao,zjlyj);
                 } else {
-                    res = dbA.OAInstallder(url, department, date, data, userCode, destName, taskId, flowAssignld, mainId,
-                            bmfzryj, fgldyj, jbfgldyj, jbbmyj, bjap, bjr, bjpj, serialNumber, comment, liushuihao,signaName);
+                    upData = dbA.OAInstallder(url, department, date, data, userCode, destName, taskId, flowAssignld, mainId,
+                            bmfzryj, fgldyj, jbfgldyj, jbbmyj, bjap, bjr, bjpj, serialNumber, comment, liushuihao, signaName,zjlyj);
                 }
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);
@@ -967,10 +992,10 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowInstallWillDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowInstallWillDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
                     break;
@@ -994,6 +1019,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                     bjap = bean.getMainform().get(0).getBjap();
                     bjr = bean.getMainform().get(0).getBanJieRen();
                     bjpj = bean.getMainform().get(0).getBjpj();
+                    zjlyj = bean.getMainform().get(0).getZjlyj();
                     tvDepartment.setText(department);
                     tvDate.setText(date);
                     tvDataW.setText(data);
@@ -1019,6 +1045,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         bjapreout = jsonObject.getString("bjap");
                         bjrreout = jsonObject.getString("BanJieRen");
                         bjpjreout = jsonObject.getString("bjpj");
+                        zjlreout = jsonObject.getString("zjlyj");
                         if (bmreout.equals("2")) {
                             tvLeader.setVisibility(View.GONE);
                             etLeader.setVisibility(View.VISIBLE);
@@ -1032,6 +1059,13 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader1.setVisibility(View.VISIBLE);
                             etLeader1.setVisibility(View.GONE);
+                        }
+                        if (zjlreout.equals("2")) {
+                            tvLeaderzjl.setVisibility(View.GONE);
+                            etLeaderzjl.setVisibility(View.VISIBLE);
+                        } else {
+                            tvLeaderzjl.setVisibility(View.VISIBLE);
+                            etLeaderzjl.setVisibility(View.GONE);
                         }
                         if (jbfgreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
@@ -1077,6 +1111,20 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                             String word3 = "";
                             try {
                                 JSONArray jsonArray = new JSONArray(bjpj);
+                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
+                                word3 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            tvLeader6.setText(word3);
+                        }
+                    }
+
+                    if (zjlyj != null && !zjlyj.equals("")) {
+                        if (tvLeaderzjl.getVisibility() == View.VISIBLE) {
+                            String word3 = "";
+                            try {
+                                JSONArray jsonArray = new JSONArray(zjlyj);
                                 JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
                                 word3 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
                             } catch (JSONException e) {
@@ -1167,6 +1215,20 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                                 e.printStackTrace();
                             }
                             tvLeader.setText(word1);
+                        }
+                    }
+
+                    if (zjlyj != null && !zjlyj.equals("")) {
+                        if (tvLeaderzjl.getVisibility() == View.VISIBLE) {
+                            String word1 = "";
+                            try {
+                                JSONArray jsonArray = new JSONArray(zjlyj);
+                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
+                                word1 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            tvLeaderzjl.setText(word1);
                         }
                     }
                     break;

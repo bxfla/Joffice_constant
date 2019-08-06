@@ -154,10 +154,29 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
+                    android:text="总经理:"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:background="@color/shouye"
+                    android:layout_gravity="center_vertical"/>
+                <TextView
+                    android:id="@+id/tvLeader2"
+                    style="@style/oaEditText"
+                    android:hint="总经理意见"/>
+            </LinearLayout>
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/oaTextView"
                     android:text="经办分管:"/>
 
                 <TextView
-                    android:id="@+id/tvLeader2"
+                    android:id="@+id/tvLeader3"
                     style="@style/oaEditText"
                     android:hint="经办分管领导意见" />
 
@@ -182,7 +201,7 @@
                     android:background="@color/shouye"
                     android:layout_gravity="center_vertical"/>
                 <TextView
-                    android:id="@+id/tvLeader3"
+                    android:id="@+id/tvLeader4"
                     style="@style/oaEditText"
                     android:hint="经办部门领导意见"/>
             </LinearLayout>
@@ -194,20 +213,20 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="办结计划	:"/>
+                    android:text="办结安排	:"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
                     android:background="@color/shouye"
                     android:layout_gravity="center_vertical"/>
                 <TextView
-                    android:id="@+id/tvLeader4"
-                    android:hint="办结计划"
+                    android:id="@+id/tvLeader5"
+                    android:hint="办结安排"
                     style="@style/oaEditText"/>
             </LinearLayout>
-            <View style="@style/line"/>
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:orientation="horizontal">
@@ -220,7 +239,7 @@
                     android:background="@color/shouye"
                     android:layout_gravity="center_vertical"/>
                 <TextView
-                    android:id="@+id/tvLeader5"
+                    android:id="@+id/tvLeader6"
                     android:hint="办结人签名"
                     style="@style/oaEditText"/>
                 <TextView
@@ -243,7 +262,7 @@
                     android:background="@color/shouye"
                     android:layout_gravity="center_vertical"/>
                 <TextView
-                    android:id="@+id/tvLeader6"
+                    android:id="@+id/tvLeader7"
                     android:hint="办结情况"
                     style="@style/oaEditText"/>
             </LinearLayout>

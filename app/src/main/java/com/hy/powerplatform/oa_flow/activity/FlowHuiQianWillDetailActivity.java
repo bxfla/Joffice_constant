@@ -830,9 +830,9 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAHuiQiander(url, person, data, userCode, destName, taskId, flowAssignld, mainId,
+                String upData = dbA.OAHuiQiander(url, person, data, userCode, destName, taskId, flowAssignld, mainId,
                         bxbmyj, wxbmyj, wxryyj, serialNumber, comment, liushuihao);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

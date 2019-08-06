@@ -882,11 +882,11 @@ public class FlowBillWillDetailActivity extends BaseActivity {
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
 
-                res = dbA.OABillder1(url, zdPerson, zdTime, department, JKPerson, driver, carNo,
+                String upData = dbA.OABillder1(url, zdPerson, zdTime, department, JKPerson, driver, carNo,
                         address, use, otherPerson, otherPhone, reason, smallMoney, bigMoney, type, blame,
                         num, money, allMoneyM, allmoneyY, userCode, destName, taskId, flowAssignld,
                         mainId, aqfwyj, fgldyj, ldspyj, serialNumber, comment, liushuihao, shiJian);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

@@ -776,9 +776,9 @@ public class FlowContracterPayWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAContractPayLeader(url, department, person, name, time, situation, userCode,
+                String upData = dbA.OAContractPayLeader(url, department, person, name, time, situation, userCode,
                         destName, taskId, flowAssignld, mainId, bmfzr, fgfze, zjl, fgcwze, serialNumber, comment);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

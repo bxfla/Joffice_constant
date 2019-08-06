@@ -927,14 +927,15 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
+                String upData = "";
                 if (wxryreout.equals("2") && !date.equals("")) {
-                    res = dbA.OAEMaintainder1(url, department, time, data, userCode, destName, taskId, flowAssignld, mainId,
+                    upData = dbA.OAEMaintainder1(url, department, time, data, userCode, destName, taskId, flowAssignld, mainId,
                             bxbmyj, wxbmyj, wxryyj, wxqkyj, sbsyryj, wxfkyj, serialNumber, comment, date);
                 } else {
-                    res = dbA.OAEMaintainder(url, department, time, data, userCode, destName, taskId, flowAssignld, mainId,
+                    upData = dbA.OAEMaintainder(url, department, time, data, userCode, destName, taskId, flowAssignld, mainId,
                             bxbmyj, wxbmyj, wxryyj, wxqkyj, sbsyryj, wxfkyj, serialNumber, comment);
                 }
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

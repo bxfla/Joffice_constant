@@ -669,7 +669,7 @@ public class FlowPayLiuChengWillDetailActivity extends BaseActivity {
                         zjl = zjl.toString().replace("],[", ",");
                     }
                 }
-                if (comment.equals("")) {
+                if (comment!=null&&comment.equals("")) {
                     if (!bmreout.equals("2") && !fgreout.equals("2") && !fgcwreout.equals("2") && !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
@@ -779,9 +779,9 @@ public class FlowPayLiuChengWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAPayLiuChengLeader(url, time, person, department, classY, moneyB, moneyS, userCode,
+                String upData = dbA.OAPayLiuChengLeader(url, time, person, department, classY, moneyB, moneyS, userCode,
                         destName, signaName, taskId, flowAssignld, mainId, bmfzr, fgfze, zjl, fgcwze, serialNumber, comment, use);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

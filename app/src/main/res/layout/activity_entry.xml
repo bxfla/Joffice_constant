@@ -105,8 +105,8 @@
                     android:id="@+id/tvCarType"
                     style="@style/oaEditText"/>
             </LinearLayout>
-            <View style="@style/line"></View>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

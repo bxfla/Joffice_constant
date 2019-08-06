@@ -976,10 +976,10 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
 
-                res = dbA.OADormder1(url, person, time, sex, age, idCard, phone, address, reason, userCode,
+                String upData = dbA.OADormder1(url, person, time, sex, age, idCard, phone, address, reason, userCode,
                         startTime, home, endTime, chuangHao, money, destName, taskId, flowAssignld, mainId,
                         bmfzryj, wygsyj, cwsjyj, bzyj, serialNumber, comment, liushuihao);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

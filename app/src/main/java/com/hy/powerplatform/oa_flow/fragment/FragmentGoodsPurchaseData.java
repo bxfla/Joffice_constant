@@ -197,7 +197,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     AllMoney1 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }else {
@@ -219,7 +219,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     AllMoney2 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }else {
@@ -241,7 +241,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     AllMoney3 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }else {
@@ -263,7 +263,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     AllMoney4 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }else {
@@ -285,7 +285,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     AllMoney5 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }else {
@@ -308,7 +308,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     allNum1 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney1.getText().toString().equals("")) {
@@ -336,7 +336,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     allNum2 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney2.getText().toString().equals("")) {
@@ -364,7 +364,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     allNum3 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney3.getText().toString().equals("")) {
@@ -392,7 +392,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     allNum4 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney4.getText().toString().equals("")) {
@@ -420,7 +420,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     allNum5 = (Integer.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney5.getText().toString().equals("")) {
@@ -449,7 +449,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     moneyS1 = (Double.valueOf(s.toString()));
                     if (!etNum1.getText().toString().equals("")) {
                         etAllMoney1.setText(String.valueOf(Double.valueOf(etNum1.getText().toString()) * moneyS1));
@@ -474,7 +474,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     moneyS2 = (Double.valueOf(s.toString()));
                     if (!etNum2.getText().toString().equals("")) {
                         etAllMoney2.setText(String.valueOf(Double.valueOf(etNum2.getText().toString()) * moneyS2));
@@ -499,7 +499,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     moneyS3 = (Double.valueOf(s.toString()));
                     if (!etNum3.getText().toString().equals("")) {
                         etAllMoney3.setText(String.valueOf(Double.valueOf(etNum3.getText().toString()) * moneyS3));
@@ -524,7 +524,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     moneyS4 = (Double.valueOf(s.toString()));
                     if (!etNum4.getText().toString().equals("")) {
                         etAllMoney4.setText(String.valueOf(Double.valueOf(etNum4.getText().toString()) * moneyS4));
@@ -549,7 +549,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("")&&!s.toString().equals(".")) {
                     moneyS5 = (Double.valueOf(s.toString()));
                     if (!etNum5.getText().toString().equals("")) {
                         etAllMoney5.setText(String.valueOf(Double.valueOf(etNum4.getText().toString()) * moneyS4));

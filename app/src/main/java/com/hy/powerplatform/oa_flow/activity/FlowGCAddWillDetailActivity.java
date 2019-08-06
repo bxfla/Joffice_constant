@@ -866,10 +866,10 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                 if (tag1.equals("1")) {
                     String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                     DBHandler dbA = new DBHandler();
-                    res = dbA.OAGCAddLeader(url, department, person, time, userCode,
+                    String upData = dbA.OAGCAddLeader(url, department, person, time, userCode,
                             destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, csbmyj, jcbmyj,
                             zjl, serialNumber, comment, defId1, Constant.GCADD);
-                    if (res.equals("")) {
+                    if (upData.equals("")) {
                         handler.sendEmptyMessage(TAG_THERE);
                     } else {
                         handler.sendEmptyMessage(TAG_FOUR);
@@ -878,10 +878,10 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                 if (tag1.equals("2")) {
                     String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                     DBHandler dbA = new DBHandler();
-                    res = dbA.OAGCAddLeader(url, department, person, time, userCode,
+                    String upData = dbA.OAGCAddLeader(url, department, person, time, userCode,
                             destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, csbmyj, jcbmyj,
                             zjl, serialNumber, comment, defId2, Constant.GCADD);
-                    if (res.equals("")) {
+                    if (upData.equals("")) {
                         handler.sendEmptyMessage(TAG_THERE);
                     } else {
                         handler.sendEmptyMessage(TAG_FOUR);

@@ -376,7 +376,7 @@
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
-                    android:text="其他: *" />
+                    android:text="其他: " />
 
                 <View
                     android:layout_width="1dp"

@@ -959,17 +959,18 @@ public class FlowUseCarWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
+                String upData = "";
                 if (tagT.equals("N")) {
-                    res = dbA.OAUseCarLeader(url, time, person, department, job, phone, task, address,
+                    upData = dbA.OAUseCarLeader(url, time, person, department, job, phone, task, address,
                             carNo, carType, startMile, endMile, allMile, "", "", userCode, destName,
                             taskId, flowAssignld, mainId, bmfzryj, fgldyj, zjlyj, zhglyj, pcryj, serialNumber, comment);
                 } else {
-                    res = dbA.OAUseCarLeader(url, time, person, department, job, phone, task, address,
+                    upData = dbA.OAUseCarLeader(url, time, person, department, job, phone, task, address,
                             carNo, carType, startMile, endMile, allMile, startTime, endTime, userCode, destName,
                             taskId, flowAssignld, mainId, bmfzryj, fgldyj, zjlyj, zhglyj, pcryj, serialNumber, comment);
                 }
 
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

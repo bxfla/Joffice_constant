@@ -276,6 +276,8 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         name = intent.getStringExtra("activityName");
         taskId = intent.getStringExtra("taskId");
+        String taskName = intent.getStringExtra("taskName");
+        header.setTvTitle(taskName);
         tvAllMoney1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -1457,8 +1459,9 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
+                String upData = "";
                 if (zcreout.equals("2")){
-                    res = dbA.OAPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
+                    upData = dbA.OAPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                             , etNum1.getText().toString(), etNum2.getText().toString(), etNum3.getText().toString()
                             , etNum4.getText().toString(), etNum5.getText().toString(), etMoney1.getText().toString()
                             , etMoney2.getText().toString(), etMoney3.getText().toString(), etMoney4.getText().toString()
@@ -1468,14 +1471,14 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             bmfzryj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
                             hejidj, allMoney, use, cgfgyj, other);
                 }else {
-                    res = dbA.OAPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
+                    upData = dbA.OAPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                             , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
                             , allMoney4, allMoney5, userCode, destName, taskId, flowAssignld, mainId,
                             bmfzryj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
                             hejidj, allMoney, use, cgfgyj, other);
                 }
 
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

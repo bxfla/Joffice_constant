@@ -9,9 +9,10 @@ import java.util.List;
 
 public class FlowInstallDetail implements Serializable {
 
+
     /**
      * success : true
-     * mainform : [{"BanJieQingKuangYuPingJia":"","runId":51477,"$type$":"WF_ycsgjjtazgzxmsbb","jbfgldyj":"","BanJieRen":"","fgldyj":"","ShenBanBuMen":"宜春公交集团有限公司","ShenBanShiJian":"2019-02-21","xiangguanfujian":"","bjap":"","mainId":14,"ShenBanShiXiang":"同意","BanJieShiJian":"","jbbmyj":"","bjpj":"","BanJieJiHuaAnPai":"","bmfzryj":"","LiuShuiHao":"No.20190221024","ShenBanBuMenYiJian":""}]
+     * mainform : [{"BanJieQingKuangYuPingJia":"","runId":51706,"wczt":"已完成","$type$":"WF_ycsgjjtazgzxmsbb","jbfgldyj":"[{\"ui\":\"9390\",\"un\":\"李健\",\"c\":\"2019-05-13 09:06\",\"v\":\"同意\"}]","BanJieRen":"","fgldyj":"[{\"ui\":\"153\",\"un\":\"袁斌\",\"c\":\"2019-04-30 15:24\",\"v\":\"属实\"}]","ShenBanBuMen":"营运二分公司","ShenBanShiJian":"2019-04-30","xiangguanfujian":"","bjap":"","mainId":30,"ShenBanShiXiang":"南站场站需要加设进出站减速带和场站内需要加两个消防栓。","BanJieShiJian":"","zjlyj":"","jbbmyj":"[{\"ui\":\"9467\",\"un\":\"易睿\",\"c\":\"2019-05-13 09:08\",\"v\":\"已安排进行加装改造\"}]","bjpj":"","BanJieJiHuaAnPai":"","bmfzryj":"[{\"ui\":\"9408\",\"un\":\"余清华\",\"c\":\"2019-04-30 15:23\",\"v\":\"请领导审批！\"}]","LiuShuiHao":"No.20190430032","ShenBanBuMenYiJian":""}]
      */
 
     private boolean success;
@@ -36,28 +37,31 @@ public class FlowInstallDetail implements Serializable {
     public static class MainformBean {
         /**
          * BanJieQingKuangYuPingJia :
-         * runId : 51477
+         * runId : 51706
+         * wczt : 已完成
          * $type$ : WF_ycsgjjtazgzxmsbb
-         * jbfgldyj :
+         * jbfgldyj : [{"ui":"9390","un":"李健","c":"2019-05-13 09:06","v":"同意"}]
          * BanJieRen :
-         * fgldyj :
-         * ShenBanBuMen : 宜春公交集团有限公司
-         * ShenBanShiJian : 2019-02-21
+         * fgldyj : [{"ui":"153","un":"袁斌","c":"2019-04-30 15:24","v":"属实"}]
+         * ShenBanBuMen : 营运二分公司
+         * ShenBanShiJian : 2019-04-30
          * xiangguanfujian :
          * bjap :
-         * mainId : 14
-         * ShenBanShiXiang : 同意
+         * mainId : 30
+         * ShenBanShiXiang : 南站场站需要加设进出站减速带和场站内需要加两个消防栓。
          * BanJieShiJian :
-         * jbbmyj :
+         * zjlyj :
+         * jbbmyj : [{"ui":"9467","un":"易睿","c":"2019-05-13 09:08","v":"已安排进行加装改造"}]
          * bjpj :
          * BanJieJiHuaAnPai :
-         * bmfzryj :
-         * LiuShuiHao : No.20190221024
+         * bmfzryj : [{"ui":"9408","un":"余清华","c":"2019-04-30 15:23","v":"请领导审批！"}]
+         * LiuShuiHao : No.20190430032
          * ShenBanBuMenYiJian :
          */
 
         private String BanJieQingKuangYuPingJia;
         private String runId;
+        private String wczt;
         private String $type$;
         private String jbfgldyj;
         private String BanJieRen;
@@ -69,6 +73,7 @@ public class FlowInstallDetail implements Serializable {
         private int mainId;
         private String ShenBanShiXiang;
         private String BanJieShiJian;
+        private String zjlyj;
         private String jbbmyj;
         private String bjpj;
         private String BanJieJiHuaAnPai;
@@ -90,6 +95,14 @@ public class FlowInstallDetail implements Serializable {
 
         public void setRunId(String runId) {
             this.runId = runId;
+        }
+
+        public String getWczt() {
+            return wczt;
+        }
+
+        public void setWczt(String wczt) {
+            this.wczt = wczt;
         }
 
         public String get$type$() {
@@ -178,6 +191,14 @@ public class FlowInstallDetail implements Serializable {
 
         public void setBanJieShiJian(String BanJieShiJian) {
             this.BanJieShiJian = BanJieShiJian;
+        }
+
+        public String getZjlyj() {
+            return zjlyj;
+        }
+
+        public void setZjlyj(String zjlyj) {
+            this.zjlyj = zjlyj;
         }
 
         public String getJbbmyj() {

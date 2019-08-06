@@ -884,10 +884,10 @@ public class FlowJSGCWillDetailActivity extends BaseActivity {
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAJSGCLeader(url, department, person, time, userCode,
+                String upData = dbA.OAJSGCLeader(url, department, person, time, userCode,
                         destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj,
                         zjlyj, serialNumber, comment, liushuihao);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

@@ -3779,7 +3779,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("xb", sex));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
 
-        nvs.add(new BasicNameValuePair("zjce", carType));
+        nvs.add(new BasicNameValuePair("zjcx", carType));
 
         nvs.add(new BasicNameValuePair("cwsjbyj", ""));
         nvs.add(new BasicNameValuePair("yyglbyj", ""));
@@ -5491,7 +5491,7 @@ public class DBHandler {
             , String userCode, String destName, String taskId, String flowAssignld
             , String mainId, String bmfzryj, String fgldyj, String jbfgldyj, String jbbmyj
             , String bjap, String bjr, String bjpj, String serialNumber, String comment
-            , String liushuihao,String signaName) {
+            , String liushuihao,String signaName, String zjlyj) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -5517,6 +5517,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("ShenBanShiJian", date));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
 
+        nvs.add(new BasicNameValuePair("zjlyj", zjlyj));
         nvs.add(new BasicNameValuePair("bmfzryj", bmfzryj));
         nvs.add(new BasicNameValuePair("fgldyj", fgldyj));
         nvs.add(new BasicNameValuePair("jbfgldyj", jbfgldyj));
@@ -5561,7 +5562,7 @@ public class DBHandler {
             , String userCode, String destName, String taskId, String flowAssignld
             , String mainId, String bmfzryj, String fgldyj, String jbfgldyj, String jbbmyj
             , String bjap, String bjr, String bjpj, String serialNumber, String comment
-            , String date1, String liushuihao) {
+            , String date1, String liushuihao, String zjlyj) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -5569,6 +5570,7 @@ public class DBHandler {
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("defId", "20232"));
+        nvs.add(new BasicNameValuePair("zjlyj", zjlyj));
         nvs.add(new BasicNameValuePair("taskId", taskId));
         nvs.add(new BasicNameValuePair("mainId", mainId));
         nvs.add(new BasicNameValuePair("startFlow", "true"));

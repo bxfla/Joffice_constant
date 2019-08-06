@@ -264,6 +264,7 @@
     <string name="write_data">填写数据</string>
     <string name="flow_list">申请列表</string>
     <string name="flow_willdo">待办流程</string>
+    <string name="send_flow">发起审批</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

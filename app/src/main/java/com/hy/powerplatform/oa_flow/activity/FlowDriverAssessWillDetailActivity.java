@@ -822,10 +822,10 @@ public class FlowDriverAssessWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OADriverAssessLeader(url, person, userCode, destName, taskId
+                String upData = dbA.OADriverAssessLeader(url, person, userCode, destName, taskId
                         , flowAssignld, mainId, bmfzryj, fgldyj, zjl, serialNumber
                         , comment, signaName, userName, comment);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

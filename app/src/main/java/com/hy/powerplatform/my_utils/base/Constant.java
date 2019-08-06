@@ -23,7 +23,7 @@ public class Constant {
     public static final String DOWNLOAD="下载中";
     public static final String GETDATA="获取数据中";
     public static final String REGISTER="注册中...";
-    public static final String LOGIN="登陆中...";
+    public static final String LOGIN="登录中...";
     public static final String UPRESULT="提交成绩";
     public static final String UPDATA="提交数据";
     public static final String CHECK="修改中";

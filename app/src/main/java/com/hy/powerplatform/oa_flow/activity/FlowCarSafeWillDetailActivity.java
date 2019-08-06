@@ -826,11 +826,11 @@ public class FlowCarSafeWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OACarSafeLeader(url, time, person, department, carNo1, carNo2, carNo3, carNo4, carNo5
+                String upData = dbA.OACarSafeLeader(url, time, person, department, carNo1, carNo2, carNo3, carNo4, carNo5
                         , comp1, comp2, comp3, comp4, comp5, type1, type2, type3, type4, type5, money1, money2, money3
                         , money4, money5, date1, date2, date3, date4, date5, myAllMoney, userCode, destName, taskId
                         , flowAssignld, mainId, bmfzryj, fgldyj, zjl, serialNumber, comment, signaName, userName);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

@@ -301,15 +301,15 @@ public class FragmentBillData extends Fragment {
                     break;
                 }
                 if (type.equals("")) {
-                    Toast.makeText(getActivity(), "类型不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "险种不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (blame.equals("")) {
-                    Toast.makeText(getActivity(), "责任不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "事故责任不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (reason.equals("")) {
-                    Toast.makeText(getActivity(), "具体事项不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "事故原因不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (!PhoneSession.isPhoneNumber(otherPhone)) {

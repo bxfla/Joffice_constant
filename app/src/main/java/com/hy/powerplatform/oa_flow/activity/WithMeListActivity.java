@@ -65,11 +65,13 @@ public class WithMeListActivity extends BaseActivity implements WithMeListAdapte
     @Override
     protected void onRestart() {
         super.onRestart();
-//        beanList.clear();
-//        adapter.notifyDataSetChanged();
-//        ProgressDialogUtil.startLoad(this, "获取数据中");
-//        getData(0, 20);
-//        setClient();
+        beanList.clear();
+        limit = 20;
+        start = 0;
+        adapter.notifyDataSetChanged();
+        ProgressDialogUtil.startLoad(this, "获取数据中");
+        getData(0, 20);
+        setClient();
     }
 
     /**

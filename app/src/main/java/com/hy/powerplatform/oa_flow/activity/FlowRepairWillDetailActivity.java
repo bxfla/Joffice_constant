@@ -903,11 +903,11 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OARepairLeader(url, departement, address, date, data, yj,
+                String upData = dbA.OARepairLeader(url, departement, address, date, data, yj,
                         userCode, destName, taskId, flowAssignld, mainId,
                         etLeaderW1, etLeaderW2, etLeaderW3, etLeaderW4, etLeaderW5
                         , depPerson, serialNumber, comment, signaName, userName);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

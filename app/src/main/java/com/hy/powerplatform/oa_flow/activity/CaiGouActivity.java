@@ -144,7 +144,7 @@ public class CaiGouActivity extends BaseActivity {
                 if (!dataList.contains(Constant.GHPUECHASENAME)) {
                     flGHPurchase.setVisibility(View.GONE);
                 }
-                getData();
+//                getData();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -154,7 +154,7 @@ public class CaiGouActivity extends BaseActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        getData();
+//        getData();
     }
 
     @Override

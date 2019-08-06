@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -219,6 +220,7 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
     String allMoney1, allMoney2, allMoney3, allMoney4, allMoney5 = "";
     List<String> resultList = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
+    List<String> bigResultList1 = new ArrayList<>();
 
     String role = "";
     String url;
@@ -247,6 +249,8 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         name = intent.getStringExtra("activityName");
         taskId = intent.getStringExtra("taskId");
+        String taskName = intent.getStringExtra("taskName");
+        header.setTvTitle(taskName);
         getData(name, taskId);
     }
 
@@ -357,6 +361,7 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
         if (bigCodetemp != null) {
             for (String s : bigCodetemp) {
                 bigResultList.add(s);
+                bigResultList1.add(s);
             }
         }
         if (nametemp != null) {
@@ -653,19 +658,19 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
         getLastPerson();
     }
 
-    @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT,R.id.btnHistory})
+    @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT, R.id.btnHistory})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnHistory:
                 recyclerView.setVisibility(View.VISIBLE);
-                ProgressDialogUtil.startLoad(FlowWorkPuechaseWillDetailActivity.this,"获取数据中");
+                ProgressDialogUtil.startLoad(FlowWorkPuechaseWillDetailActivity.this, "获取数据中");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         //String name =URLDecoder.decode(待转值,"utf-8");
                         String url = Constant.BASE_URL2 + Constant.FLOWMESSAGE;
                         DBHandler dbA = new DBHandler();
-                        flowMessage = dbA.OAFlowMessage(url,runID);
+                        flowMessage = dbA.OAFlowMessage(url, runID);
                         if (flowMessage.equals("获取数据失败") || flowMessage.equals("")) {
                             handler.sendEmptyMessage(TAG_TWO);
                         } else {
@@ -969,39 +974,50 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                     bigResultList.remove(0);
                 }
 
-                String userCodes = resultList.toString();
-                userCodes = userCodes.toString().replace("[", "");
-                userCodes = userCodes.toString().replace("]", "");
-
-                String bigUserCodes = bigResultList.toString();
-                bigUserCodes = bigUserCodes.toString().replace("[", "");
-                bigUserCodes = bigUserCodes.toString().replace("]", "");
-
-                if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                    flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                    flowAssignld = leader + ":" + role + "|" + bigUserCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
+                Log.e("XXX", bigResultList.get(0).toString() + "--------");
+                if (bigResultList.size() == 0 || bigResultList.get(0).equals("")) {
+                    handler.sendEmptyMessage(222);
                 } else {
-                    flowAssignld = destName + "|" + userCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                    flowAssignld = flowAssignld.replace(":", "");
-                }
-                String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
-                DBHandler dbA = new DBHandler();
-                res = dbA.OAWorkPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
-                        , dep1, dep2, dep3, dep4, dep5, num1, num2, num3, num4, num5, money1, money2, money3, money4, money5
-                        , allMoney1, allMoney2, allMoney3, allMoney4, allMoney5, userCode, destName, taskId, flowAssignld
-                        , mainId, bmfzryj, fgldyj, zjl, serialNumber, comment, signaName, tvAllNum.getText().toString()
-                        , hejidj, tvAllMoney.getText().toString(), other, type);
-                if (res.equals("")) {
-                    handler.sendEmptyMessage(TAG_THERE);
-                } else {
-                    handler.sendEmptyMessage(TAG_FOUR);
+                    String userCodes = resultList.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
+
+                    String bigUserCodes = bigResultList.toString();
+                    if (bigResultList.size() == 1) {
+                        bigUserCodes = bigUserCodes.toString().replace(",", "");
+                        bigUserCodes = bigUserCodes.toString().replace("[", "");
+                        bigUserCodes = bigUserCodes.toString().replace("]", "");
+                    } else {
+                        bigUserCodes = bigUserCodes.toString().replace("[", "");
+                        bigUserCodes = bigUserCodes.toString().replace("]", "");
+                    }
+
+                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else {
+                        flowAssignld = destName + "|" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                        flowAssignld = flowAssignld.replace(":", "");
+                    }
+                    String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
+                    DBHandler dbA = new DBHandler();
+                    String upData = dbA.OAWorkPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
+                            , dep1, dep2, dep3, dep4, dep5, num1, num2, num3, num4, num5, money1, money2, money3, money4, money5
+                            , allMoney1, allMoney2, allMoney3, allMoney4, allMoney5, userCode, destName, taskId, flowAssignld
+                            , mainId, bmfzryj, fgldyj, zjl, serialNumber, comment, signaName, tvAllNum.getText().toString()
+                            , hejidj, tvAllMoney.getText().toString(), other, type);
+                    if (upData.equals("")) {
+                        handler.sendEmptyMessage(TAG_THERE);
+                    } else {
+                        handler.sendEmptyMessage(TAG_FOUR);
+                    }
                 }
             }
         }).start();
@@ -1015,12 +1031,16 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowWorkPuechaseWillDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowWorkPuechaseWillDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
+                    break;
+                case 222:
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowWorkPuechaseWillDetailActivity.this, "请选择审批人", Toast.LENGTH_SHORT).show();
                     break;
                 case TAG_ONE:
                     Gson gson = new Gson();

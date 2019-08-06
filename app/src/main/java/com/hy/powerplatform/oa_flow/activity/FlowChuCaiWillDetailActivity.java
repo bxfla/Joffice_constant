@@ -790,11 +790,11 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAChuCaiLeader(url, time, person, startTime, endTine, days, addres1,
+                String upData = dbA.OAChuCaiLeader(url, time, person, startTime, endTine, days, addres1,
                         addres2, addres3, car, reason, yjMoney, zjMoney, userCode, destName, taskId,
                         flowAssignld, mainId, bmfzr, fgfze, zjl, comment, signaName, userName, jygj1,
                         jygj2, jygj3, jygj4, chuCaiCode);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

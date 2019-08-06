@@ -123,9 +123,9 @@
                         android:text="计划外"/>
                 </RadioGroup>
             </LinearLayout>
-            <View style="@style/line"></View>
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -526,7 +526,7 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="其他: *"
+                    android:text="其他: "
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
                 <View

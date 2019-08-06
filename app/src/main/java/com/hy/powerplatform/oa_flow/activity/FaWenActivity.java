@@ -95,7 +95,7 @@ public class FaWenActivity extends BaseActivity {
                 getData();
             }
 
-            getData();
+//            getData();
         } catch (JSONException e) {
             e.printStackTrace();
         }

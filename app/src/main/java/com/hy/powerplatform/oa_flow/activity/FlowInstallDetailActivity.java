@@ -143,6 +143,10 @@ public class FlowInstallDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.tvLeaderzjl)
+    TextView tvLeaderzjl;
+    @BindView(R.id.etLeaderzjl)
+    EditText etLeaderzjl;
     private String res;
 
     String xiangguanfujian = "";
@@ -197,7 +201,7 @@ public class FlowInstallDetailActivity extends BaseActivity {
             public void success(Object o) {
                 Message message = new Message();
                 message.what = Constant.TAG_FIVE;
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putString("msg", o.toString());
                 message.setData(bundle);
                 handler.sendMessage(message);
@@ -323,6 +327,7 @@ public class FlowInstallDetailActivity extends BaseActivity {
                     String bjap = bean.getMainform().get(0).getBjap();
                     String bjr = bean.getMainform().get(0).getBanJieRen();
                     String bjpj = bean.getMainform().get(0).getBjpj();
+                    String zjlyj = bean.getMainform().get(0).getZjlyj();
                     xiangguanfujian = bean.getMainform().get(0).getXiangguanfujian();
                     runID = bean.getMainform().get(0).getRunId();
                     tvData.setText(xiangguanfujian);
@@ -332,6 +337,9 @@ public class FlowInstallDetailActivity extends BaseActivity {
 
                     if (!bmfzryj.equals("")) {
                         tvLeader.setText(getJSONData(bmfzryj));
+                    }
+                    if (!zjlyj.equals("")) {
+                        tvLeaderzjl.setText(getJSONData(bmfzryj));
                     }
                     if (!fgldyj.equals("")) {
                         tvLeader1.setText(getJSONData(fgldyj));

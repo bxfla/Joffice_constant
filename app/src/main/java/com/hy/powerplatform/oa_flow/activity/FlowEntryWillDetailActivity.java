@@ -798,7 +798,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
         } else {
             if (btnTTag.equals("N")) {
                 Gson gson = new Gson();
-                FlowEntry bean = gson.fromJson(res, FlowEntry.class);
+                FlowEntry bean = gson.fromJson(tagData, FlowEntry.class);
                 cwsjbyj = bean.getMainform().get(0).getCwsjbyj();
                 yyglbyj = bean.getMainform().get(0).getYyglbyj();
                 xxjsbyj = bean.getMainform().get(0).getXxjsbyj();
@@ -896,11 +896,11 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAEntryLeader(url, person, phone, idCard, sex, zjce1, zjce2, zjce3,
+                String upData = dbA.OAEntryLeader(url, person, phone, idCard, sex, zjce1, zjce2, zjce3,
                         rlzy1, rlzy2, rlzy3, userCode, destName, taskId, flowAssignld, mainId,
                         cwsjbyj, yyglbyj, xxjsbyj, cctkjyxgsyj, zhglbyj, rlzyb1, comment, signaName,
                         jbbmyj, fgs);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

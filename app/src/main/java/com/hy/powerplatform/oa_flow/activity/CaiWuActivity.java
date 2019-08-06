@@ -128,7 +128,7 @@ public class CaiWuActivity extends BaseActivity {
                 if (!dataList.contains(Constant.GHPAYFLOWNAME)) {
                     flGHPay.setVisibility(View.GONE);
                 }
-                getData();
+//                getData();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -138,7 +138,7 @@ public class CaiWuActivity extends BaseActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        getData();
+//        getData();
     }
 
     @Override

@@ -901,10 +901,10 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAComplainder(url, person, time, sex, phone, person1,
+                String upData = dbA.OAComplainder(url, person, time, sex, phone, person1,
                         carNo, department, line, shouLi, data, userCode, destName, taskId, flowAssignld, mainId,
                         bmfzr, fgsfze, yygs, aqfy, fkts, serialNumber, comment);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

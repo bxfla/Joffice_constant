@@ -884,10 +884,10 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                res = dbA.OACompMessageLeader(url, title, person, time,fbpt1,fbpt2,fbpt3, userCode,
+                String upData = dbA.OACompMessageLeader(url, title, person, time,fbpt1,fbpt2,fbpt3, userCode,
                         destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj,
                         zjlyj, serialNumber, comment, liushuihao);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);

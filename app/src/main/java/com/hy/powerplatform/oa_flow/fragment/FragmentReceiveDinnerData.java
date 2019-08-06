@@ -224,11 +224,11 @@ public class FragmentReceiveDinnerData extends Fragment {
                     break;
                 }
                 if (pcPerson.equals("")) {
-                    Toast.makeText(getActivity(), "配餐人不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "陪餐人不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (lkDepartment.equals("")) {
-                    Toast.makeText(getActivity(), "来客公司不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "来客单位不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (lkPerson.equals("")) {

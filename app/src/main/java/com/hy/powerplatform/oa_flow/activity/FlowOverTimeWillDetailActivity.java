@@ -555,10 +555,10 @@ public class FlowOverTimeWillDetailActivity extends BaseActivity {
                     flowAssignld = flowAssignld.replace(":|", "|");
                     flowAssignld = flowAssignld.replace(":", "");
                 }
-                res = dbA.OAOverTimeLeader(url, time, person, department, startDay, startTime, endDay,
+                String upData = dbA.OAOverTimeLeader(url, time, person, department, startDay, startTime, endDay,
                         endTime, userName, userCode, signaName, destName, taskId, comments, days, fullnameUId, fullname,
                         flowAssignld, mainId, bmfzr, fgfze, zjl, address, task);
-                if (res.equals("")) {
+                if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);
