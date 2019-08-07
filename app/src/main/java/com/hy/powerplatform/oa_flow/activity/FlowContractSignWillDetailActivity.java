@@ -133,7 +133,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    private String name, taskId, res, fullnameUId, fullname, csbmyj, jgbmyj, flgwyj, fgldyj, zjl, cbbmfzr = "";
+    private String name, taskId, res, fullnameUId, fullname, bmjlyj,csbmyj, jgbmyj, flgwyj, fgldyj, zjl, cbbmfzr = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
     String leaderCode = "";
@@ -141,7 +141,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
-    String csreout = "", jgreout = "", flreout = "", fgreout = "", zjlreout = "", flowAssignld, serialNumber = "";
+    String bmjlreout,csreout = "", jgreout = "", flreout = "", fgreout = "", zjlreout = "", flowAssignld, serialNumber = "";
 
     String[] bigNametemp = null;
     String[] bigCodetemp = null;
@@ -162,6 +162,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     String btnTTag = "N";
     String flowMessage = "";
     String runID = "";
+    String upData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -169,7 +170,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
         name = intent.getStringExtra("activityName");
@@ -436,19 +437,19 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
         getLastPerson();
     }
 
-    @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT,R.id.btnHistory})
+    @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT, R.id.btnHistory})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnHistory:
                 recyclerView.setVisibility(View.VISIBLE);
-                ProgressDialogUtil.startLoad(FlowContractSignWillDetailActivity.this,"获取数据中");
+                ProgressDialogUtil.startLoad(FlowContractSignWillDetailActivity.this, "获取数据中");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         //String name =URLDecoder.decode(待转值,"utf-8");
                         String url = Constant.BASE_URL2 + Constant.FLOWMESSAGE;
                         DBHandler dbA = new DBHandler();
-                        flowMessage = dbA.OAFlowMessage(url,runID);
+                        flowMessage = dbA.OAFlowMessage(url, runID);
                         if (flowMessage.equals("获取数据失败") || flowMessage.equals("")) {
                             handler.sendEmptyMessage(TAG_TWO);
                         } else {
@@ -801,7 +802,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OAContractSignLeader(url, department, person, name, time, situation, userCode,
+                upData = dbA.OAContractSignLeader(url, department, person, name, time, situation, userCode,
                         destName, taskId, flowAssignld, mainId, csbmyj, jgbmyj, flgwyj, fgldyj, zjl,
                         serialNumber, comment, signaName);
                 if (upData.equals("")) {
@@ -821,10 +822,10 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowContractSignWillDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowContractSignWillDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
                     break;
@@ -837,6 +838,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                     String name = bean.getMainform().get(0).getHtmc();
                     String time = bean.getMainform().get(0).getSpsj();
                     String staction = bean.getMainform().get(0).getJbqk();
+//                    bmjlyj = bean.getMainform().get(0).getBM();
                     csbmyj = bean.getMainform().get(0).getCwsjbyj();
                     jgbmyj = bean.getMainform().get(0).getJcbmyj();
                     flgwyj = bean.getMainform().get(0).getFlgwyj();
@@ -986,7 +988,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowContractSignWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowContractSignWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

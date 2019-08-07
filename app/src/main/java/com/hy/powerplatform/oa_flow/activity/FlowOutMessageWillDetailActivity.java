@@ -177,6 +177,7 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
     String url;
     String userCode = "";
     String userName = "";
+    String upData = "";
     String[] nametemp = null;
     String[] codetemp = null;
     List<String> namelist = new ArrayList<>();
@@ -907,7 +908,7 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OAOutMessageLeader(url, title, zhuSong, chaoBao, chaoSong, niGao, heGao,
+                upData = dbA.OAOutMessageLeader(url, title, zhuSong, chaoBao, chaoSong, niGao, heGao,
                         num, wenHao, date1, xuHao, userCode, destName, taskId, flowAssignld, mainId,
                         fgldyj, zjl, serialNumber, comment, signaName, userName, time);
                 if (upData.equals("")) {
@@ -1123,7 +1124,7 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowOutMessageWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowOutMessageWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

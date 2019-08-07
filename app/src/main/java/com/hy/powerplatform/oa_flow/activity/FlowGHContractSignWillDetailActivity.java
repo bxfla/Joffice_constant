@@ -152,6 +152,7 @@ public class FlowGHContractSignWillDetailActivity extends BaseActivity {
     String url;
     String userCode = "";
     String userName = "";
+    String upData = "";
     String[] nametemp = null;
     String[] codetemp = null;
     List<String> namelist = new ArrayList<>();
@@ -801,7 +802,7 @@ public class FlowGHContractSignWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OAGHContractSignLeader(url, department, person, name, time, situation, userCode,
+                upData = dbA.OAGHContractSignLeader(url, department, person, name, time, situation, userCode,
                         destName, taskId, flowAssignld, mainId, csbmyj, jgbmyj, flgwyj, fgldyj, zjl,
                         serialNumber, comment, signaName);
                 if (upData.equals("")) {
@@ -986,7 +987,7 @@ public class FlowGHContractSignWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowGHContractSignWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowGHContractSignWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

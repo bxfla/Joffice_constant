@@ -180,6 +180,7 @@ public class FlowUseCarWillDetailActivity extends BaseActivity {
     String leader = "";
     String leaderCode = "";
     String leaderName = "";
+    String upData = "";
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
@@ -959,7 +960,6 @@ public class FlowUseCarWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = "";
                 if (tagT.equals("N")) {
                     upData = dbA.OAUseCarLeader(url, time, person, department, job, phone, task, address,
                             carNo, carType, startMile, endMile, allMile, "", "", userCode, destName,
@@ -1197,7 +1197,7 @@ public class FlowUseCarWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowUseCarWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowUseCarWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

@@ -169,6 +169,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
     String url;
     String userCode = "";
     String userName = "";
+    String upData = "";
     String liushuihao = "";
     String[] nametemp = null;
     String[] codetemp = null;
@@ -927,7 +928,6 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = "";
                 if (wxryreout.equals("2") && !date.equals("")) {
                     upData = dbA.OAEMaintainder1(url, department, time, data, userCode, destName, taskId, flowAssignld, mainId,
                             bxbmyj, wxbmyj, wxryyj, wxqkyj, sbsyryj, wxfkyj, serialNumber, comment, date);
@@ -1142,7 +1142,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowEMainatinWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowEMainatinWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

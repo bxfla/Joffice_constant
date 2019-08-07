@@ -143,6 +143,7 @@ public class FlowGHPayWillDetailActivity extends BaseActivity {
     String role = "";
     String userCode = "";
     String userName = "";
+    String upData = "";
     String[] nametemp = null;
     String[] codetemp = null;
     boolean assigned;
@@ -759,7 +760,7 @@ public class FlowGHPayWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OAGHPayLeader(url, time, person, department, classY, moneyB, moneyS, userCode,
+                upData = dbA.OAGHPayLeader(url, time, person, department, classY, moneyB, moneyS, userCode,
                         destName, signaName, taskId, flowAssignld, mainId, bmfzr, zjl, fgcwze, serialNumber, comment, use);
                 if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
@@ -899,7 +900,7 @@ public class FlowGHPayWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowGHPayWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowGHPayWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

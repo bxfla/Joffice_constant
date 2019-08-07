@@ -159,6 +159,7 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
     String url;
     String userCode = "";
     String userName = "";
+    String upData = "";
     String[] nametemp = null;
     String[] codetemp = null;
     List<String> namelist = new ArrayList<>();
@@ -564,7 +565,7 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                     flowAssignld = flowAssignld.replace(":|", "|");
                     flowAssignld = flowAssignld.replace(":", "");
                 }
-                String upData = dbA.OAQingJiaLeader(url, person, time, type, reason, beginDate, endDate, userName,
+                upData = dbA.OAQingJiaLeader(url, person, time, type, reason, beginDate, endDate, userName,
                         userCode, signaName, destName, taskId, comments, days, fullnameUId, fullname,
                         flowAssignld, mainId, bmfzr, fgfze, zjl);
                 if (upData.equals("")) {
@@ -931,7 +932,7 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowLeaveWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowLeaveWillDetailActivity.this,upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
 //                case TAG_FIVE:

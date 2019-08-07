@@ -161,6 +161,7 @@ public class FlowCarVideoWillDetailActivity extends BaseActivity {
 
     String role = "";
     String url;
+    String upData = "";
     String userCode = "";
     String userName = "";
     String[] nametemp = null;
@@ -780,7 +781,7 @@ public class FlowCarVideoWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OACarVideoLeader(url, zhiNanRen, zhiDanRiQi, department, person, carNo,
+                upData = dbA.OACarVideoLeader(url, zhiNanRen, zhiDanRiQi, department, person, carNo,
                         line, time, address, xingZhi, zhuangKuang, bigMoney, smallMoney, card, diaoQu, userCode,
                         destName, taskId, flowAssignld, mainId, bmfzr, fgfze, zjl, serialNumber, comment);
                 if (upData.equals("")) {
@@ -935,7 +936,7 @@ public class FlowCarVideoWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowCarVideoWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowCarVideoWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

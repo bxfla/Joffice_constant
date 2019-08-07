@@ -162,6 +162,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
     String url;
     String userCode = "";
     String userName = "";
+    String upData = "";
     String[] nametemp = null;
     String[] codetemp = null;
     List<String> namelist = new ArrayList<>();
@@ -790,7 +791,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OAChuCaiLeader(url, time, person, startTime, endTine, days, addres1,
+                upData = dbA.OAChuCaiLeader(url, time, person, startTime, endTine, days, addres1,
                         addres2, addres3, car, reason, yjMoney, zjMoney, userCode, destName, taskId,
                         flowAssignld, mainId, bmfzr, fgfze, zjl, comment, signaName, userName, jygj1,
                         jygj2, jygj3, jygj4, chuCaiCode);
@@ -960,7 +961,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowChuCaiWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowChuCaiWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

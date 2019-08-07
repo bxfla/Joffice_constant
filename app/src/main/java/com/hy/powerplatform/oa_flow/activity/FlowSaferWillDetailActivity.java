@@ -169,6 +169,7 @@ public class FlowSaferWillDetailActivity extends BaseActivity {
     String flowMessage = "";
     String btnTTag = "N";
     String runID = "";
+    String upData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -836,7 +837,7 @@ public class FlowSaferWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OASaferder1(url, liuShuiHao, time, num, smallMoney, bigMoney,
+                upData = dbA.OASaferder1(url, liuShuiHao, time, num, smallMoney, bigMoney,
                         userCode, destName, taskId, flowAssignld, mainId, bmfzryj, fgldyj,
                         cwldyj, serialNumber, comment, liushuihao, tag1);
                 if (upData.equals("")) {
@@ -975,7 +976,7 @@ public class FlowSaferWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowSaferWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowSaferWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

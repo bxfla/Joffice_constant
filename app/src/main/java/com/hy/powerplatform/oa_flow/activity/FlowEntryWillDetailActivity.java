@@ -179,6 +179,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
 
     String role = "";
     String url;
+    String upData = "";
     String userCode = "";
     String userName = "";
     String[] nametemp = null;
@@ -896,7 +897,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OAEntryLeader(url, person, phone, idCard, sex, zjce1, zjce2, zjce3,
+                upData = dbA.OAEntryLeader(url, person, phone, idCard, sex, zjce1, zjce2, zjce3,
                         rlzy1, rlzy2, rlzy3, userCode, destName, taskId, flowAssignld, mainId,
                         cwsjbyj, yyglbyj, xxjsbyj, cctkjyxgsyj, zhglbyj, rlzyb1, comment, signaName,
                         jbbmyj, fgs);
@@ -1161,7 +1162,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowEntryWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowEntryWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

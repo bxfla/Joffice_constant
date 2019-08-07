@@ -248,6 +248,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
 
     String role = "";
     String url;
+    String upData = "";
     String userCode = "";
     String userName = "";
     String[] nametemp = null;
@@ -1459,7 +1460,6 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = "";
                 if (zcreout.equals("2")){
                     upData = dbA.OAPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                             , etNum1.getText().toString(), etNum2.getText().toString(), etNum3.getText().toString()
@@ -1791,7 +1791,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowPuechaseWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowPuechaseWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

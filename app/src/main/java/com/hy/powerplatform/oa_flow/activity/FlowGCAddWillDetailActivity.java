@@ -161,6 +161,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
 
     String role = "";
     String url;
+    String upData = "";
     String userCode = "";
     String userName = "";
     String[] nametemp = null;
@@ -866,7 +867,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                 if (tag1.equals("1")) {
                     String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                     DBHandler dbA = new DBHandler();
-                    String upData = dbA.OAGCAddLeader(url, department, person, time, userCode,
+                    upData = dbA.OAGCAddLeader(url, department, person, time, userCode,
                             destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, csbmyj, jcbmyj,
                             zjl, serialNumber, comment, defId1, Constant.GCADD);
                     if (upData.equals("")) {
@@ -878,7 +879,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                 if (tag1.equals("2")) {
                     String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                     DBHandler dbA = new DBHandler();
-                    String upData = dbA.OAGCAddLeader(url, department, person, time, userCode,
+                    upData = dbA.OAGCAddLeader(url, department, person, time, userCode,
                             destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, csbmyj, jcbmyj,
                             zjl, serialNumber, comment, defId2, Constant.GCADD);
                     if (upData.equals("")) {
@@ -1108,7 +1109,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowGCAddWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowGCAddWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

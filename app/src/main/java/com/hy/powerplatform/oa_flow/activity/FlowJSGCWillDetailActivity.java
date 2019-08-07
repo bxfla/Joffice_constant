@@ -159,6 +159,7 @@ public class FlowJSGCWillDetailActivity extends BaseActivity {
 
     String role = "";
     String url;
+    String upData = "";
     String userCode = "";
     String userName = "";
     String liushuihao = "";
@@ -884,7 +885,7 @@ public class FlowJSGCWillDetailActivity extends BaseActivity {
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OAJSGCLeader(url, department, person, time, userCode,
+                upData = dbA.OAJSGCLeader(url, department, person, time, userCode,
                         destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj,
                         zjlyj, serialNumber, comment, liushuihao);
                 if (upData.equals("")) {
@@ -1068,7 +1069,7 @@ public class FlowJSGCWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowJSGCWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowJSGCWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

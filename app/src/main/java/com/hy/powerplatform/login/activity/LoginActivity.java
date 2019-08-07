@@ -24,7 +24,6 @@ import com.hy.powerplatform.my_utils.base.AlertDialogCallBack;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.MyApplication;
-import com.hy.powerplatform.my_utils.myViews.EditTextChange;
 import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
 
@@ -136,14 +135,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
         if (!userPassword.isEmpty()) {
             etLoginPassword.setText(userPassword);
         }
-        //监听软键盘的删除键
-        setTextChangeListener();
     }
 
-    private void setTextChangeListener() {
-        new EditTextChange(etLoginName).changeText();
-        new EditTextChange(etLoginPassword).changeText();
-    }
 
     @Override
     protected int provideContentViewId() {

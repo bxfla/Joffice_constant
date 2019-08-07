@@ -161,6 +161,7 @@ public class FlowreceiveDinnerWillDetailActivity extends BaseActivity {
     String url;
     String userCode = "";
     String userName = "";
+    String upData = "";
     String[] nametemp = null;
     String[] codetemp = null;
     List<String> namelist = new ArrayList<>();
@@ -831,7 +832,7 @@ public class FlowreceiveDinnerWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OADinnerder(url, person, department, pcPerson, lkDepartment, lkPerson,
+                upData = dbA.OADinnerder(url, person, department, pcPerson, lkDepartment, lkPerson,
                         eatBz, bigMoney, smallMoney, userCode, destName, taskId, flowAssignld, mainId,
                         bmfzr, fgfze, zjl, serialNumber, comment);
                 if (upData.equals("")) {
@@ -975,7 +976,7 @@ public class FlowreceiveDinnerWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowreceiveDinnerWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowreceiveDinnerWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

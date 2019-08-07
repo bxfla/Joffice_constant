@@ -173,6 +173,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
     String url;
     String userCode = "";
     String userName = "";
+    String upData = "";
     String[] nametemp = null;
     String[] codetemp = null;
     List<String> namelist = new ArrayList<>();
@@ -967,7 +968,6 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = "";
                 if (bjrreout.equals("2") && !date1.equals("")) {
                     upData = dbA.OAInstallder1(url, department, date, data, userCode, destName, taskId, flowAssignld, mainId,
                             bmfzryj, fgldyj, jbfgldyj, jbbmyj, bjap, bjr, bjpj, serialNumber, comment, date1, liushuihao,zjlyj);
@@ -1242,7 +1242,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowInstallWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowInstallWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

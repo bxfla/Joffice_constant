@@ -230,6 +230,7 @@ public class FlowGHPuechaseWillDetailActivity extends BaseActivity {
     String url;
     String userCode = "";
     String userName = "";
+    String upData = "";
     String[] nametemp = null;
     String[] codetemp = null;
     List<String> namelist = new ArrayList<>();
@@ -1289,7 +1290,7 @@ public class FlowGHPuechaseWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OAGhPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
+                upData = dbA.OAGhPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                         , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
                         , allMoney4, allMoney5, userCode, destName, taskId, flowAssignld, mainId,
                         bmfzryj, zcgkbmyj, fgldyj, ghzx, zjl, serialNumber, comment, signaName, hejisl,
@@ -1497,7 +1498,7 @@ public class FlowGHPuechaseWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowGHPuechaseWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowGHPuechaseWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

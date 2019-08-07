@@ -196,6 +196,7 @@ public class FlowBillWillDetailActivity extends BaseActivity {
     String btnTTag = "N";
     String flowMessage = "";
     String runID = "";
+    String upData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -882,7 +883,7 @@ public class FlowBillWillDetailActivity extends BaseActivity {
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
 
-                String upData = dbA.OABillder1(url, zdPerson, zdTime, department, JKPerson, driver, carNo,
+                upData = dbA.OABillder1(url, zdPerson, zdTime, department, JKPerson, driver, carNo,
                         address, use, otherPerson, otherPhone, reason, smallMoney, bigMoney, type, blame,
                         num, money, allMoneyM, allmoneyY, userCode, destName, taskId, flowAssignld,
                         mainId, aqfwyj, fgldyj, ldspyj, serialNumber, comment, liushuihao, shiJian);
@@ -1050,7 +1051,7 @@ public class FlowBillWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowBillWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowBillWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

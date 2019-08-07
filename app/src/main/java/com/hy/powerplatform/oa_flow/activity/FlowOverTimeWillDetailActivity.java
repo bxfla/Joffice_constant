@@ -153,6 +153,7 @@ public class FlowOverTimeWillDetailActivity extends BaseActivity {
     String url;
     String userCode = "";
     String userName = "";
+    String upData = "";
     String[] nametemp = null;
     String[] codetemp = null;
     String startDay = "", startTime1 = "", endDay = "", endTime1 = "";
@@ -555,7 +556,7 @@ public class FlowOverTimeWillDetailActivity extends BaseActivity {
                     flowAssignld = flowAssignld.replace(":|", "|");
                     flowAssignld = flowAssignld.replace(":", "");
                 }
-                String upData = dbA.OAOverTimeLeader(url, time, person, department, startDay, startTime, endDay,
+                upData = dbA.OAOverTimeLeader(url, time, person, department, startDay, startTime, endDay,
                         endTime, userName, userCode, signaName, destName, taskId, comments, days, fullnameUId, fullname,
                         flowAssignld, mainId, bmfzr, fgfze, zjl, address, task);
                 if (upData.equals("")) {
@@ -923,7 +924,7 @@ public class FlowOverTimeWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowOverTimeWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowOverTimeWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

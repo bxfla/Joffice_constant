@@ -158,6 +158,7 @@ public class FlowDriverAssessWillDetailActivity extends BaseActivity {
     String flowMessage = "";
     String btnTTag = "N";
     String runID = "";
+    String upData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -822,7 +823,7 @@ public class FlowDriverAssessWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OADriverAssessLeader(url, person, userCode, destName, taskId
+                upData = dbA.OADriverAssessLeader(url, person, userCode, destName, taskId
                         , flowAssignld, mainId, bmfzryj, fgldyj, zjl, serialNumber
                         , comment, signaName, userName, comment);
                 if (upData.equals("")) {
@@ -952,7 +953,7 @@ public class FlowDriverAssessWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowDriverAssessWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowDriverAssessWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

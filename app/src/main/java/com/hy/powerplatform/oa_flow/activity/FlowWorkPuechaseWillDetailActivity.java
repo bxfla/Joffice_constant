@@ -224,6 +224,7 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
 
     String role = "";
     String url;
+    String upData = "";
     String userCode = "";
     String userName = "";
     String[] nametemp = null;
@@ -1008,7 +1009,7 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                     }
                     String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                     DBHandler dbA = new DBHandler();
-                    String upData = dbA.OAWorkPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
+                    upData = dbA.OAWorkPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                             , dep1, dep2, dep3, dep4, dep5, num1, num2, num3, num4, num5, money1, money2, money3, money4, money5
                             , allMoney1, allMoney2, allMoney3, allMoney4, allMoney5, userCode, destName, taskId, flowAssignld
                             , mainId, bmfzryj, fgldyj, zjl, serialNumber, comment, signaName, tvAllNum.getText().toString()
@@ -1223,7 +1224,7 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowWorkPuechaseWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowWorkPuechaseWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

@@ -240,6 +240,7 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
     String btnTTag = "N";
     String flowMessage = "";
     String runID = "";
+    String upData = "";
     FlowMessageAdapter adapter;
     double AllMoney1 = 0.0, AllMoney2 = 0.0, AllMoney3 = 0.0, AllMoney4 = 0.0, AllMoney5 = 0.0;
     int numS1 = 0, numS2 = 0, numS3 = 0, numS4 = 0, numS5 = 0;
@@ -1312,7 +1313,7 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OACCTPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
+                upData = dbA.OACCTPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                         , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
                         , allMoney4, allMoney5, userCode, destName, taskId, flowAssignld, mainId,
                         bmfzryj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, hejisl,
@@ -1406,53 +1407,6 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                                 tvLeader.setVisibility(View.VISIBLE);
                                 etLeader.setVisibility(View.GONE);
                             }
-//                            if (zcreout.equals("2")) {
-//                                tvLeader1.setVisibility(View.GONE);
-//                                etLeader1.setVisibility(View.VISIBLE);
-//                                tvNum1.setVisibility(View.GONE);
-//                                tvNum2.setVisibility(View.GONE);
-//                                tvNum3.setVisibility(View.GONE);
-//                                tvNum4.setVisibility(View.GONE);
-//                                tvNum5.setVisibility(View.GONE);
-//                                tvMoney1.setVisibility(View.GONE);
-//                                tvMoney2.setVisibility(View.GONE);
-//                                tvMoney3.setVisibility(View.GONE);
-//                                tvMoney4.setVisibility(View.GONE);
-//                                tvMoney5.setVisibility(View.GONE);
-//                                etNum1.setVisibility(View.VISIBLE);
-//                                etNum2.setVisibility(View.VISIBLE);
-//                                etNum3.setVisibility(View.VISIBLE);
-//                                etNum4.setVisibility(View.VISIBLE);
-//                                etNum5.setVisibility(View.VISIBLE);
-//                                etMoney1.setVisibility(View.VISIBLE);
-//                                etMoney2.setVisibility(View.VISIBLE);
-//                                etMoney3.setVisibility(View.VISIBLE);
-//                                etMoney4.setVisibility(View.VISIBLE);
-//                                etMoney5.setVisibility(View.VISIBLE);
-//                            } else {
-//                                tvLeader1.setVisibility(View.VISIBLE);
-//                                etLeader1.setVisibility(View.GONE);
-//                                tvNum1.setVisibility(View.VISIBLE);
-//                                tvNum2.setVisibility(View.VISIBLE);
-//                                tvNum3.setVisibility(View.VISIBLE);
-//                                tvNum4.setVisibility(View.VISIBLE);
-//                                tvNum5.setVisibility(View.VISIBLE);
-//                                tvMoney1.setVisibility(View.VISIBLE);
-//                                tvMoney2.setVisibility(View.VISIBLE);
-//                                tvMoney3.setVisibility(View.VISIBLE);
-//                                tvMoney4.setVisibility(View.VISIBLE);
-//                                tvMoney5.setVisibility(View.VISIBLE);
-//                                etNum1.setVisibility(View.GONE);
-//                                etNum2.setVisibility(View.GONE);
-//                                etNum3.setVisibility(View.GONE);
-//                                etNum4.setVisibility(View.GONE);
-//                                etNum5.setVisibility(View.GONE);
-//                                etMoney1.setVisibility(View.GONE);
-//                                etMoney2.setVisibility(View.GONE);
-//                                etMoney3.setVisibility(View.GONE);
-//                                etMoney4.setVisibility(View.GONE);
-//                                etMoney5.setVisibility(View.GONE);
-//                            }
                             if (fgreout.equals("2")) {
                                 tvLeader1.setVisibility(View.GONE);
                                 etLeader1.setVisibility(View.VISIBLE);
@@ -1460,20 +1414,6 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                                 tvLeader1.setVisibility(View.VISIBLE);
                                 etLeader1.setVisibility(View.GONE);
                             }
-//                            if (cwreout.equals("2")) {
-//                                tvLeader3.setVisibility(View.GONE);
-//                                etLeader3.setVisibility(View.VISIBLE);
-//                            } else {
-//                                tvLeader3.setVisibility(View.VISIBLE);
-//                                etLeader3.setVisibility(View.GONE);
-//                            }
-//                            if (zjlreout.equals("2")) {
-//                                tvLeader4.setVisibility(View.GONE);
-//                                etLeader4.setVisibility(View.VISIBLE);
-//                            } else {
-//                                tvLeader4.setVisibility(View.VISIBLE);
-//                                etLeader4.setVisibility(View.GONE);
-//                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -1518,34 +1458,6 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                         tvAllMoney4.setText(allMoney4);
                         tvAllMoney5.setText(allMoney5);
 
-//                        if (zjl != null && !zjl.equals("")) {
-//                            if (tvLeader4.getVisibility() == View.VISIBLE) {
-//                                String word3 = "";
-//                                try {
-//                                    JSONArray jsonArray = new JSONArray(zjl);
-//                                    JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-//                                    word3 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                                tvLeader4.setText(word3);
-//                            }
-//                        }
-//
-//                        if (cwzjyj != null && !cwzjyj.equals("")) {
-//                            if (tvLeader3.getVisibility() == View.VISIBLE) {
-//                                String word1 = "";
-//                                try {
-//                                    JSONArray jsonArray = new JSONArray(cwzjyj);
-//                                    JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-//                                    word1 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                                tvLeader3.setText(word1);
-//                            }
-//                        }
-
                         if (fgldyj != null && !fgldyj.equals("")) {
                             if (tvLeader1.getVisibility() == View.VISIBLE) {
                                 String word2 = "";
@@ -1559,21 +1471,6 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                                 tvLeader1.setText(word2);
                             }
                         }
-
-
-//                        if (zcgkbmyj != null && !zcgkbmyj.equals("")) {
-//                            if (tvLeader1.getVisibility() == View.VISIBLE) {
-//                                String word = "";
-//                                try {
-//                                    JSONArray jsonArray = new JSONArray(zcgkbmyj);
-//                                    JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-//                                    word = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                                tvLeader1.setText(word);
-//                            }
-//                        }
 
                         if (bmfzryj != null && !bmfzryj.equals("")) {
                             if (tvLeader.getVisibility() == View.VISIBLE) {
@@ -1601,7 +1498,7 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowCCTPuechaseWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowCCTPuechaseWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

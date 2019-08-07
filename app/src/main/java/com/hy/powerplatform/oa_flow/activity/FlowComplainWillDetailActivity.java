@@ -182,6 +182,7 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
     String btnTTag = "N";
     String flowMessage = "";
     String runID = "";
+    String upData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -901,7 +902,7 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OAComplainder(url, person, time, sex, phone, person1,
+                upData = dbA.OAComplainder(url, person, time, sex, phone, person1,
                         carNo, department, line, shouLi, data, userCode, destName, taskId, flowAssignld, mainId,
                         bmfzr, fgsfze, yygs, aqfy, fkts, serialNumber, comment);
                 if (upData.equals("")) {
@@ -1096,7 +1097,7 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowComplainWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowComplainWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

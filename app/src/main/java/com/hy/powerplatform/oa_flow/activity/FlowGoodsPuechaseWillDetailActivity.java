@@ -230,6 +230,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
     String url;
     String userCode = "";
     String userName = "";
+    String upData = "";
     String[] nametemp = null;
     String[] codetemp = null;
     List<String> namelist = new ArrayList<>();
@@ -1332,7 +1333,6 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = "";
                 if (zcreout.equals("2")){
                     upData = dbA.OAGoodsPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                             , etNum1.getText().toString(), etNum2.getText().toString(), etNum3.getText().toString()
@@ -1646,7 +1646,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowGoodsPuechaseWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowGoodsPuechaseWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

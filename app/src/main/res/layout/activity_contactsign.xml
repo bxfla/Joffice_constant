@@ -113,8 +113,8 @@
                     style="@style/textWrite"
                     android:hint="请填写基本情况" />
             </LinearLayout>
-            <View style="@style/line"></View>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

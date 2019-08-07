@@ -354,6 +354,28 @@
                         <ImageView style="@style/ycGO"/>
                     </LinearLayout>
                 </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/ycFrameLayout"
+                    style="@style/ycFrameLayout">
+                    <LinearLayout
+                    android:id="@+id/llCompMessage"
+                    style="@style/ycLinearLayout">
+
+                    <ImageView
+                        style="@style/ycImageView"
+                        android:src="@drawable/flow_item4" />
+
+                    <TextView
+                        style="@style/ycTextView"
+                        android:text="公司信息发布" />
+
+                    <TextView
+                        android:id="@+id/tvCompMessage"
+                        style="@style/numTextView" />
+
+                    <ImageView style="@style/ycGO" />
+                </LinearLayout>
+                </FrameLayout>
             </LinearLayout>
 
 

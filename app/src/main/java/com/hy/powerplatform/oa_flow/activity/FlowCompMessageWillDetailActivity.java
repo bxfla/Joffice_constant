@@ -161,6 +161,7 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
 
     String role = "";
     String url;
+    String upData = "";
     String userCode = "";
     String userName = "";
     String liushuihao = "";
@@ -884,7 +885,7 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OACompMessageLeader(url, title, person, time,fbpt1,fbpt2,fbpt3, userCode,
+                upData = dbA.OACompMessageLeader(url, title, person, time,fbpt1,fbpt2,fbpt3, userCode,
                         destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj,
                         zjlyj, serialNumber, comment, liushuihao);
                 if (upData.equals("")) {
@@ -1078,7 +1079,7 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowCompMessageWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowCompMessageWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

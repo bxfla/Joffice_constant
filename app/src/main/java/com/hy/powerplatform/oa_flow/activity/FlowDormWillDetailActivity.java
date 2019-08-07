@@ -176,6 +176,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
+    String upData = "";
     String bmreout = "", wyreout = "", blrzreout = "", cwsgreout = "", zlfsqreout = "", bzreout = "", flowAssignld, serialNumber = "";
 
     String[] bigNametemp = null;
@@ -976,7 +977,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
 
-                String upData = dbA.OADormder1(url, person, time, sex, age, idCard, phone, address, reason, userCode,
+                upData = dbA.OADormder1(url, person, time, sex, age, idCard, phone, address, reason, userCode,
                         startTime, home, endTime, chuangHao, money, destName, taskId, flowAssignld, mainId,
                         bmfzryj, wygsyj, cwsjyj, bzyj, serialNumber, comment, liushuihao);
                 if (upData.equals("")) {
@@ -1179,7 +1180,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowDormWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowDormWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

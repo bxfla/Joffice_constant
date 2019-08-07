@@ -167,6 +167,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     String xiangguanfujian = "";
     String btnTTag = "N";
     String runID = "";
+    String upData = "";
     String flowMessage = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
@@ -865,7 +866,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OAAppealLeader(url, department, person, time, userCode, data,
+                upData = dbA.OAAppealLeader(url, department, person, time, userCode, data,
                         destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj,
                         serialNumber, comment, liushuihao);
                 if (upData.equals("")) {
@@ -1027,7 +1028,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowAppealWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowAppealWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

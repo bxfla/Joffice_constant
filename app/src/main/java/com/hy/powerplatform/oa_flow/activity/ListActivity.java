@@ -141,7 +141,8 @@ public class ListActivity extends BaseActivity {
                     && !dataList.contains(Constant.SAFERNAMEY)
                     && !dataList.contains(Constant.USERCARNAME)
                     && !dataList.contains(Constant.HUIQIANNAME)
-                    && !dataList.contains(Constant.GHCONTRACTSIGNNAME)) {
+                    && !dataList.contains(Constant.GHCONTRACTSIGNNAME)
+                    && !dataList.contains(Constant.COMPMESSAGENAME)) {
                 roluesList.remove(0);
                 numList.remove(0);
             }

@@ -161,6 +161,7 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
     String url;
     String userCode = "";
     String userName = "";
+    String upData = "";
     String[] nametemp = null;
     String[] codetemp = null;
     List<String> namelist = new ArrayList<>();
@@ -903,7 +904,7 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OARepairLeader(url, departement, address, date, data, yj,
+                upData = dbA.OARepairLeader(url, departement, address, date, data, yj,
                         userCode, destName, taskId, flowAssignld, mainId,
                         etLeaderW1, etLeaderW2, etLeaderW3, etLeaderW4, etLeaderW5
                         , depPerson, serialNumber, comment, signaName, userName);
@@ -1098,7 +1099,7 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowRepairWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowRepairWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

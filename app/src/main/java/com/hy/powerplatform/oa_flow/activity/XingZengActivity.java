@@ -147,6 +147,8 @@ public class XingZengActivity extends BaseActivity {
     LinearLayout llGHSingle;
     @BindView(R.id.flGHSingle)
     FrameLayout flGHSingle;
+    @BindView(R.id.tvCompMessage)
+    TextView tvCompMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,7 +206,8 @@ public class XingZengActivity extends BaseActivity {
                     && !dataList.contains(Constant.SAFERNAMEY)
                     && !dataList.contains(Constant.USERCARNAME)
                     && !dataList.contains(Constant.HUIQIANNAME)
-                    && !dataList.contains(Constant.GHCONTRACTSIGNNAME)) {
+                    && !dataList.contains(Constant.GHCONTRACTSIGNNAME)
+                    && !dataList.contains(Constant.COMPMESSAGENAME)) {
                 llNoContent.setVisibility(View.VISIBLE);
             } else {
                 if (!dataList.contains(Constant.EMAINTAINNAME)) {
@@ -291,12 +294,16 @@ public class XingZengActivity extends BaseActivity {
     @OnClick({R.id.llEMaintain, R.id.llCarVideo, R.id.llDorm, R.id.llNewGC, R.id.llGCCheck
             , R.id.llCompliain, R.id.llJZGC, R.id.llInstall, R.id.llReceiveDinner
             , R.id.llContractSign, R.id.llAppeal, R.id.llCarSafe, R.id.llSaferS, R.id.llSaferY
-            , R.id.llCar, R.id.llHuiQian, R.id.llGHSingle})
+            , R.id.llCar, R.id.llHuiQian, R.id.llGHSingle,R.id.llCompMessage})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.llEMaintain:
                 intent = new Intent(this, FlowEMainTainActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.llCompMessage:
+                Intent intent1 = new Intent(this, FlowCompMessageActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.llCarVideo:
                 intent = new Intent(this, FlowCarVideoActivity.class);

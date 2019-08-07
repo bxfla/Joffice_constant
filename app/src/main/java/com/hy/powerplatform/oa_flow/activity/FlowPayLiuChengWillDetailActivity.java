@@ -163,6 +163,7 @@ public class FlowPayLiuChengWillDetailActivity extends BaseActivity {
     String btnTTag = "N";
     String flowMessage = "";
     String runID = "";
+    String upData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -779,7 +780,7 @@ public class FlowPayLiuChengWillDetailActivity extends BaseActivity {
                 }
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OAPayLiuChengLeader(url, time, person, department, classY, moneyB, moneyS, userCode,
+                upData = dbA.OAPayLiuChengLeader(url, time, person, department, classY, moneyB, moneyS, userCode,
                         destName, signaName, taskId, flowAssignld, mainId, bmfzr, fgfze, zjl, fgcwze, serialNumber, comment, use);
                 if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
@@ -942,7 +943,7 @@ public class FlowPayLiuChengWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowPayLiuChengWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowPayLiuChengWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:

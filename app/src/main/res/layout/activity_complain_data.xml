@@ -496,6 +496,7 @@
             <View style="@style/line"></View>
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -525,14 +526,13 @@
 
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="营运公司:"
+                    android:text="办结人员:"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
 
@@ -545,12 +545,12 @@
                 <TextView
                     android:id="@+id/tvLeader2"
                     style="@style/textWrite"
-                    android:hint="营运公司意见" />
+                    android:hint="办结人员意见" />
                 <EditText
                     android:visibility="gone"
                     android:id="@+id/etLeader2"
                     style="@style/textWrite"
-                    android:hint="营运公司意见" />
+                    android:hint="办结人员意见" />
             </LinearLayout>
 
             <View style="@style/line"></View>

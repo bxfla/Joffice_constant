@@ -151,6 +151,7 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
     String userCode = "";
     String userName = "";
     String liushuihao = "";
+    String upData = "";
     String[] nametemp = null;
     String[] codetemp = null;
     List<String> namelist = new ArrayList<>();
@@ -830,7 +831,7 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                String upData = dbA.OAHuiQiander(url, person, data, userCode, destName, taskId, flowAssignld, mainId,
+                upData = dbA.OAHuiQiander(url, person, data, userCode, destName, taskId, flowAssignld, mainId,
                         bxbmyj, wxbmyj, wxryyj, serialNumber, comment, liushuihao);
                 if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
@@ -964,7 +965,7 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
                     finish();
                     break;
                 case TAG_FOUR:
-                    Toast.makeText(FlowHuiQianWillDetailActivity.this, "提交数据失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowHuiQianWillDetailActivity.this, upData, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:
