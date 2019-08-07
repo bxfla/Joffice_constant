@@ -1212,17 +1212,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                     setCbRbVer();
                     break;
                 case TAG_EIGHT:
-                    try {
-                        JSONObject jsonObject = new JSONObject(checkTask);
-                        if (!jsonObject.isNull("assigned")) {
-                            assigned = true;
-                        } else {
-                            assigned = jsonObject.getBoolean("assigned");
-                        }
-                        tag = "end";
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    Toast.makeText(FlowDormWillDetailActivity.this, "流程已到最后一步，请提交", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_NINE:
