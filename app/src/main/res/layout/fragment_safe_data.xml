@@ -112,7 +112,13 @@
 
                 <TextView
                     android:id="@+id/tvType3"
-                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
                     android:text="名，商业险小写" />
 
                 <TextView

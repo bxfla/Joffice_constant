@@ -217,17 +217,6 @@ public class FragmentGCAddData extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvData:
-//                if (ContextCompat.checkSelfPermission(getActivity(),
-//                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions(getActivity(),
-//                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-//                } else {
-//                    new LFilePicker().withSupportFragment(this)
-//                            .withRequestCode(1)
-//                            .withIconStyle(Constant.ICON_STYLE_BLUE)
-//                            .withTitle("Open From Fragment")
-//                            .start();
-//                }
                 break;
             case R.id.tvTime:
                 customDatePicker1.show(tvTime.getText().toString());

@@ -8,9 +8,12 @@ import android.os.Message;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,7 +66,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     SharedPreferencesHelper sharedPreferencesHelper;
     LoginPresenter loginPresenter;
     private static boolean isExit = false;
-    String userName,userName1, userPassword,userPassword1,cid;
+    String userName, userName1, userPassword, userPassword1, cid;
     String access;
     Intent intent;
 
@@ -76,6 +79,10 @@ public class LoginActivity extends BaseActivity implements LoginView {
             isExit = false;
         }
     };
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
+    @BindView(R.id.activity_login)
+    LinearLayout activityLogin;
 
     //推出程序
     @Override
@@ -117,6 +124,20 @@ public class LoginActivity extends BaseActivity implements LoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        etLoginName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                changeScrollView();
+                return false;
+            }
+        });
+        etLoginPassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                changeScrollView();
+                return false;
+            }
+        });
         //密码隐藏
         etLoginPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
         alertDialogUtil = new AlertDialogUtil(this);
@@ -125,7 +146,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         userName = sharedPreferencesHelper.getData(this, "userName", "");
         userPassword = sharedPreferencesHelper.getData(this, "userPwd", "");
         cid = sharedPreferencesHelper.getData(this, "cid", "");
-        Log.i("loginXXX",cid);
+        Log.i("loginXXX", cid);
         if (!userName.isEmpty()) {
 //            intent = new Intent(LoginActivity.this, .class);
 //            startActivity(intent);
@@ -137,6 +158,17 @@ public class LoginActivity extends BaseActivity implements LoginView {
         }
     }
 
+    /**
+     * 100毫秒之后使ScrollView指向底部
+     */
+    private void changeScrollView() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                scrollView.scrollTo(0, scrollView.getHeight());
+            }
+        }, 100);
+    }
 
     @Override
     protected int provideContentViewId() {
@@ -174,7 +206,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
                     //final String url1 = "http://"+Ip+":"+Socket+"/"+Found+"/"+"mobile.do"+"?username="+userName1+"&password="+userPassword1;
                     String url1 = null;
                     try {
-                        url1 = Constant.BASE_URL2+"mobile.do"+"?username="+ URLEncoder.encode(userName1, "utf-8")+"&password="+userPassword1+"&clientid="+cid;
+                        url1 = Constant.BASE_URL2 + "mobile.do" + "?username=" + URLEncoder.encode(userName1, "utf-8") + "&password=" + userPassword1 + "&clientid=" + cid;
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
@@ -183,28 +215,28 @@ public class LoginActivity extends BaseActivity implements LoginView {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            HttpURLConnection connection=null;
+                            HttpURLConnection connection = null;
                             BufferedReader reader = null;
                             try {
-                                URL url=new URL(finalUrl);
-                                connection= (HttpURLConnection) url.openConnection();
+                                URL url = new URL(finalUrl);
+                                connection = (HttpURLConnection) url.openConnection();
                                 connection.setRequestMethod("GET");
                                 connection.setReadTimeout(200000);
                                 connection.setConnectTimeout(200000);
 //                                connection.setRequestProperty("Content-type", "application/json;charset=UTF-8");
 //                                connection.setRequestProperty("Accept", "application/json");
 //                                connection.setRequestProperty("Charset", "UTF-8");
-                                InputStream in=connection.getInputStream();
-                                reader=new BufferedReader(new InputStreamReader(in));
-                                StringBuilder builder=new StringBuilder();
+                                InputStream in = connection.getInputStream();
+                                reader = new BufferedReader(new InputStreamReader(in));
+                                StringBuilder builder = new StringBuilder();
                                 String line;
                                 int responseCode = connection.getResponseCode();
                                 if (200 == responseCode) {
-                                    while ((line=reader.readLine())!=null){
+                                    while ((line = reader.readLine()) != null) {
                                         builder.append(line);
                                     }
                                     JSONObject jsonObject = new JSONObject(builder.toString());
-                                    if (jsonObject.get("success").equals(true)){
+                                    if (jsonObject.get("success").equals(true)) {
 //                                        sharedPreferencesHelper.saveData(LoginActivity.this, "userName", userName1);
 //                                        sharedPreferencesHelper.saveData(LoginActivity.this, "userId", jsonObject.getString("userId"));
 //                                        sharedPreferencesHelper.saveData(LoginActivity.this, "userStatus", jsonObject.getString("username"));
@@ -218,13 +250,13 @@ public class LoginActivity extends BaseActivity implements LoginView {
                                         sharedPreferencesHelper.saveData(LoginActivity.this, "userId", jsonObject.getString("userId"));
                                         sharedPreferencesHelper.saveData(LoginActivity.this, "rolues", jsonObject.getString("rolues"));
                                         String superRoleName = jsonObject.getString("superRoleName");
-                                        if (jsonObject.getString("superRoleName")!=null){
+                                        if (jsonObject.getString("superRoleName") != null) {
                                             sharedPreferencesHelper.saveData(LoginActivity.this, "superRoleName", jsonObject.getString("superRoleName"));
                                         }
-                                        if (jsonObject.getString("depName")==null||jsonObject.getString("depName").equals("null")||jsonObject.getString("depName").equals("")){
+                                        if (jsonObject.getString("depName") == null || jsonObject.getString("depName").equals("null") || jsonObject.getString("depName").equals("")) {
                                             sharedPreferencesHelper.saveData(LoginActivity.this, "depName", "宜春公交集团有限公司");
                                             sharedPreferencesHelper.saveData(LoginActivity.this, "depId", "378");
-                                        }else {
+                                        } else {
                                             sharedPreferencesHelper.saveData(LoginActivity.this, "depName", jsonObject.getString("depName"));
                                             sharedPreferencesHelper.saveData(LoginActivity.this, "depId", jsonObject.getString("depId"));
                                         }
@@ -239,25 +271,25 @@ public class LoginActivity extends BaseActivity implements LoginView {
                                     }
                                     String cookieString = connection.getHeaderField("Set-Cookie");
                                     cookieString = cookieString.substring(0, cookieString.indexOf(";"));
-                                    new SharedPreferencesHelper(MyApplication.getContextObject(),"login").saveData(MyApplication.getContextObject(),
-                                            "session",cookieString);
-                                    Log.e("XXXH",cookieString);
+                                    new SharedPreferencesHelper(MyApplication.getContextObject(), "login").saveData(MyApplication.getContextObject(),
+                                            "session", cookieString);
+                                    Log.e("XXXH", cookieString);
                                 }
                             } catch (MalformedURLException e) {
-                                    Log.i("XXX",e.toString());
+                                Log.i("XXX", e.toString());
                             } catch (IOException e) {
-                                Log.i("XXX",e.toString());
+                                Log.i("XXX", e.toString());
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             } finally {
-                                if (reader!=null){
+                                if (reader != null) {
                                     try {
                                         reader.close();
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
                                 }
-                                if (connection!=null){
+                                if (connection != null) {
                                     connection.disconnect();
                                 }
                             }
@@ -296,12 +328,12 @@ public class LoginActivity extends BaseActivity implements LoginView {
 ////                            Looper.loop();
 //                        }
 //                    });
-                    //loginPresenter.getLoginPresenterData(userName1, userPassword1);
+                //loginPresenter.getLoginPresenterData(userName1, userPassword1);
                 break;
         }
     }
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

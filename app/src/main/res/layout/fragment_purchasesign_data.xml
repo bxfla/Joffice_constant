@@ -161,7 +161,6 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/shouye" />
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -246,7 +245,7 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number" />
 
                     <View style="@style/line"></View>
 
@@ -255,7 +254,7 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number" />
 
                     <View style="@style/line"></View>
 
@@ -264,7 +263,7 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number" />
 
                     <View style="@style/line"></View>
 
@@ -273,21 +272,20 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number" />
                     <View style="@style/line"></View>
                     <EditText
                         android:id="@+id/etNum5"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/shouye" />
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -366,7 +364,7 @@
 
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney1"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -375,7 +373,7 @@
 
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney2"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -384,7 +382,7 @@
 
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney3"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -393,7 +391,7 @@
 
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney4"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -401,7 +399,7 @@
                         android:inputType="number|numberDecimal" />
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney5"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"

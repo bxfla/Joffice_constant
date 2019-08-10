@@ -397,7 +397,7 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="分管财务:"
+                    android:text="财务总监:"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
 
@@ -410,7 +410,7 @@
                 <TextView
                     android:id="@+id/tvLeader2"
                     style="@style/textWrite"
-                    android:hint="分管领导签名" />
+                    android:hint="财务总监签名" />
                 <EditText
                     android:id="@+id/etLeader2"
                     android:visibility="gone"

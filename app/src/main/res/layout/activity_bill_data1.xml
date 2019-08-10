@@ -198,7 +198,7 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="受伤人员: *" />
+                    android:text="受伤人数: *" />
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -340,12 +340,12 @@
                     android:text="第" />
                 <TextView
                     android:id="@+id/tvNum"
-                    android:layout_width="45dp"
+                    android:layout_width="35dp"
                     android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="15dp"
                     android:layout_height="match_parent"
-                    android:background="@null"/>
+                    android:background="@color/lightgray"/>
                 <TextView
                     style="@style/oaTextView"
                     android:text="次借款，已借" />
@@ -356,9 +356,13 @@
                     android:textColor="@color/black"
                     android:textSize="15dp"
                     android:layout_height="match_parent"
-                    android:background="@null"/>
+                    android:background="@color/lightgray"/>
                 <TextView
-                    style="@style/oaTextView"
+                    android:layout_height="match_parent"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:layout_width="45dp"
                     android:text="元" />
             </LinearLayout>
             <View style="@style/line"></View>

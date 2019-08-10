@@ -298,42 +298,75 @@ public class FragmentGHContractSignData extends Fragment {
                                     }
                                 }).start();
                             } else {
-                                MyAlertDialog.MyListAlertDialog(getActivity(), namelist, new AlertDialogCallBackP() {
-                                    @Override
-                                    public void oneselect(final String data) {
-                                        ProgressDialogUtil.startLoad(getActivity(),"获取数据中");
-                                        new Thread(new Runnable() {
+                                String superRoleName = new SharedPreferencesHelper(getActivity(), "login")
+                                        .getData(getActivity(), "superRoleName", "");
+                                for (int i = 0; i < namelist.size(); i++) {
+//                                    namelist.add(namelist.get(i));
+                                    if (superRoleName.indexOf("部负责人") != -1 || superRoleName.indexOf("公司负责人") != -1) {
+                                        if (namelist.get(i).indexOf("负责人") != -1 || namelist.get(i).indexOf("公司负责人") != -1) {
+                                            userDepart = namelist.get(i);
+                                        }
+                                    } else if (superRoleName.indexOf("分管领导") != -1) {
+                                        if (namelist.get(i).indexOf("分管领导") != -1) {
+                                            userDepart = namelist.get(i);
+                                        }
+                                    } else if (superRoleName.indexOf("总经理") != -1) {
+                                        if (namelist.get(i).indexOf("总经理") != -1) {
+                                            userDepart = namelist.get(i);
+                                        }
+                                    } else {
+                                        MyAlertDialog.MyListAlertDialog(getActivity(), namelist, new AlertDialogCallBackP() {
                                             @Override
-                                            public void run() {
-                                                String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
-                                                DBHandler dbA = new DBHandler();
-                                                userDepart = data;
-                                                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.GHCONTRACTSIGNDIFID, data);
-                                                if (res.equals("保存失败") || res.equals("")) {
-                                                    handler.sendEmptyMessage(TAG_TWO);
-                                                } else {
-                                                    handler.sendEmptyMessage(TAG_FOUR);
-                                                }
+                                            public void oneselect(final String data) {
+                                                ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
+                                                new Thread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
+                                                        DBHandler dbA = new DBHandler();
+                                                        userDepart = data;
+                                                        res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.LEAVERDIFID, data);
+                                                        if (res.equals("保存失败") || res.equals("")) {
+                                                            handler.sendEmptyMessage(TAG_TWO);
+                                                        } else {
+                                                            handler.sendEmptyMessage(TAG_FOUR);
+                                                        }
+                                                    }
+                                                }).start();
+
                                             }
-                                        }).start();
 
+                                            @Override
+                                            public void select(List<String> list) {
+
+                                            }
+
+                                            @Override
+                                            public void confirm() {
+
+                                            }
+
+                                            @Override
+                                            public void cancel() {
+
+                                            }
+                                        });
                                     }
-
+                                }
+                                ProgressDialogUtil.startLoad(getActivity(),"获取数据中");
+                                new Thread(new Runnable() {
                                     @Override
-                                    public void select(List<String> list) {
-
+                                    public void run() {
+                                        String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
+                                        DBHandler dbA = new DBHandler();
+                                        res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.GHCONTRACTSIGNDIFID, userDepart);
+                                        if (res.equals("保存失败") || res.equals("")) {
+                                            handler.sendEmptyMessage(TAG_TWO);
+                                        } else {
+                                            handler.sendEmptyMessage(TAG_FOUR);
+                                        }
                                     }
-
-                                    @Override
-                                    public void confirm() {
-
-                                    }
-
-                                    @Override
-                                    public void cancel() {
-
-                                    }
-                                });
+                                }).start();
                             }
                         } else {
                             Toast.makeText(getActivity(), "审批人为空", Toast.LENGTH_SHORT).show();

@@ -82,7 +82,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="采购流程"
+                android:text="3000元以上采购流程"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 

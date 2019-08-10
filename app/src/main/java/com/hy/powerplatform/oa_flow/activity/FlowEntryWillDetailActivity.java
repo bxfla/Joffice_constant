@@ -172,6 +172,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
     String[] bigCodetemp = null;
     List<String> resultList = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
+    List<String> bigResultList1 = new ArrayList<>();
     ArrayAdapter<String> carAdapter;
     ArrayAdapter<String> rlAdapter;
     List<String> carList = new ArrayList<String>();
@@ -323,6 +324,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
         if (bigCodetemp != null) {
             for (String s : bigCodetemp) {
                 bigResultList.add(s);
+                bigResultList1.add(s);
             }
         }
         if (nametemp != null) {
@@ -469,7 +471,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                 cb6.setVisibility(View.VISIBLE);
             }
         }
-        getLastPerson();
+        ProgressDialogUtil.stopLoad();
     }
 
     @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT, R.id.btnHistory})
@@ -877,24 +879,47 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                 userCodes = userCodes.toString().replace("[", "");
                 userCodes = userCodes.toString().replace("]", "");
 
-                String bigUserCodes = bigResultList.toString();
-                bigUserCodes = bigUserCodes.toString().replace("[", "");
-                bigUserCodes = bigUserCodes.toString().replace("]", "");
+                if (bigResultList.size()==0&&bigResultList1.size()!=0){
 
-                if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                    flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                    flowAssignld = leader + ":" + role + "|" + bigUserCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                } else {
-                    flowAssignld = destName + "|" + userCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                    flowAssignld = flowAssignld.replace(":", "");
+                    String bigUserCodes = bigResultList1.toString();
+                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+
+                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else {
+                        flowAssignld = destName + "|" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                        flowAssignld = flowAssignld.replace(":", "");
+                    }
+                }else {
+                    String bigUserCodes = bigResultList.toString();
+                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+
+                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else {
+                        flowAssignld = destName + "|" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                        flowAssignld = flowAssignld.replace(":", "");
+                    }
                 }
+
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
                 upData = dbA.OAEntryLeader(url, person, phone, idCard, sex, zjce1, zjce2, zjce3,

@@ -155,6 +155,7 @@ public class FlowJSGCWillDetailActivity extends BaseActivity {
     String[] bigCodetemp = null;
     List<String> resultList = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
+    List<String> bigResultList1 = new ArrayList<>();
     String tag1;
 
     String role = "";
@@ -299,6 +300,7 @@ public class FlowJSGCWillDetailActivity extends BaseActivity {
         if (bigCodetemp != null) {
             for (String s : bigCodetemp) {
                 bigResultList.add(s);
+                bigResultList1.add(s);
             }
         }
         if (nametemp != null) {
@@ -508,7 +510,7 @@ public class FlowJSGCWillDetailActivity extends BaseActivity {
                 cb9.setVisibility(View.VISIBLE);
             }
         }
-        getLastPerson();
+        ProgressDialogUtil.stopLoad();
     }
 
     @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT,R.id.btnHistory})
@@ -748,29 +750,31 @@ public class FlowJSGCWillDetailActivity extends BaseActivity {
                 }
                 if (etLeader4.getVisibility() == View.VISIBLE) {
                     comment = etLeader4.getText().toString();
-                    try {
-                        jsonObject.put("ui", userCode);
-                        jsonObject.put("un", userName);
-                        jsonObject.put("c", str);
-                        jsonObject.put("v", etLeader4.getText().toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    jsonArray.put(jsonObject);
-                    if (zjlyj.equals("")) {
-                        zjlyj = jsonArray.toString();
-                    } else {
-                        zjlyj = zjlyj + "," + jsonArray.toString();
-                        zjlyj = zjlyj.toString().replace("],[", ",");
+                    if (!etLeader4.getText().equals("")){
+                        try {
+                            jsonObject.put("ui", userCode);
+                            jsonObject.put("un", userName);
+                            jsonObject.put("c", str);
+                            jsonObject.put("v", etLeader4.getText().toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        jsonArray.put(jsonObject);
+                        if (zjlyj.equals("")) {
+                            zjlyj = jsonArray.toString();
+                        } else {
+                            zjlyj = zjlyj + "," + jsonArray.toString();
+                            zjlyj = zjlyj.toString().replace("],[", ",");
+                        }
+                    }else {
+                        zjlyj = "";
                     }
                 }
                 if (comment.equals("")) {
-                    if (!xqreout.equals("2") && !xqldreout.equals("2") && !jsreout.equals("2") && !jsldreout.equals("2")
-                            && !zjlreout.equals("2")) {
+                    if (!xqreout.equals("2") & !xqldreout.equals("2") & !jsreout.equals("2") & !jsldreout.equals("2") & !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!zjlyj.equals("") && !jsbmldyj.equals("") && !jsbmyj.equals("")
-                            && !xqbmldyj.equals("") && !jsbmyj.equals("")) {
+                    } else if (!zjlyj.equals("") & !jsbmldyj.equals("") & !jsbmyj.equals("") & !xqbmldyj.equals("") & !jsbmyj.equals("")) {
                         comment = "";
                         personSession();
                     } else {
@@ -864,23 +868,45 @@ public class FlowJSGCWillDetailActivity extends BaseActivity {
                 userCodes = userCodes.toString().replace("[", "");
                 userCodes = userCodes.toString().replace("]", "");
 
-                String bigUserCodes = bigResultList.toString();
-                bigUserCodes = bigUserCodes.toString().replace("[", "");
-                bigUserCodes = bigUserCodes.toString().replace("]", "");
+                if (bigResultList.size()==0&&bigResultList1.size()!=0){
 
-                if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                    flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                    flowAssignld = leader + ":" + role + "|" + bigUserCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                } else {
-                    flowAssignld = destName + "|" + userCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                    flowAssignld = flowAssignld.replace(":", "");
+                    String bigUserCodes = bigResultList1.toString();
+                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+
+                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else {
+                        flowAssignld = destName + "|" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                        flowAssignld = flowAssignld.replace(":", "");
+                    }
+                }else {
+                    String bigUserCodes = bigResultList.toString();
+                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+
+                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else {
+                        flowAssignld = destName + "|" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                        flowAssignld = flowAssignld.replace(":", "");
+                    }
                 }
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;

@@ -1547,6 +1547,119 @@ public class DBHandler {
         return "获取数据失败";
     }
 
+    public String GoodsPurchaseAboutDep(final String turl) {
+        HttpURLConnection connection = null;
+        BufferedReader reader = null;
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+        try {
+            URL url = new URL(turl);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(40000);
+            connection.setReadTimeout(40000);
+            connection.addRequestProperty("Cookie", Session);
+            //此时获取的是字节流
+            InputStream in = connection.getInputStream();
+            //对获取到的输入流进行读取
+            reader = new BufferedReader(new InputStreamReader(in)); //将字节流转化成字符流
+            StringBuffer sb = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            reader.close();
+            Log.i("sb=", sb.toString());
+            JSONObject json_ = new JSONObject(sb.toString());
+            if (json_ != null) {
+                String msg = json_.get("success").toString();
+                if (msg.equals("true")) {
+                    return json_ + "";
+                } else {
+                    return msg;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+//
+//
+//
+//        HttpClient httpClient = new DefaultHttpClient();
+//        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+//        HttpPost httpRequst = new HttpPost(turl);
+//        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+//        httpRequst.setHeader("Cookie", Session);
+//        try {
+//            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
+//            httpRequst.setEntity(uefEntity);
+//            HttpResponse res = httpClient.execute(httpRequst);
+//            HttpEntity entity = res.getEntity();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+//            StringBuffer sb = new StringBuffer();
+//            String line = null;
+//            while ((line = reader.readLine()) != null) {
+//                sb.append(line + "\n");
+//            }
+//            reader.close();
+//            Log.i("sb=", sb.toString());
+//            JSONObject json_ = new JSONObject(sb.toString());
+//            if (json_ != null) {
+//                String msg = json_.get("success").toString();
+//                if (msg.equals("true")) {
+//                    return json_ + "";
+//                } else {
+//                    return msg;
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//            e.printStackTrace();
+//            HttpClient httpClient1 = new DefaultHttpClient();
+//            List<NameValuePair> nvs1 = new ArrayList<NameValuePair>();
+//            HttpPost httpRequst1 = new HttpPost(turl);
+//            String Session1 = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+//            httpRequst1.setHeader("Cookie", Session1);
+//            try {
+//                UrlEncodedFormEntity uefEntity1 = new UrlEncodedFormEntity(nvs1, "utf-8");
+//                httpRequst1.setEntity(uefEntity1);
+//                HttpResponse res1 = httpClient1.execute(httpRequst);
+//                HttpEntity entity1 = res1.getEntity();
+//                BufferedReader reader1 = new BufferedReader(new InputStreamReader(entity1.getContent()));
+//                StringBuffer sb1 = new StringBuffer();
+//                String line = null;
+//                while ((line = reader1.readLine()) != null) {
+//                    sb1.append(line + "\n");
+//                }
+//                reader1.close();
+//                Log.i("sb=", sb1.toString());
+//                JSONObject json_ = new JSONObject(sb1.toString());
+//                if (json_ != null) {
+//                    String msg = json_.get("success").toString();
+//                    if (msg.equals("true")) {
+//                        return json_ + "";
+//                    } else {
+//                        return msg;
+//                    }
+//                }
+//            } catch (Exception e1) {
+//                System.out.println(e1);
+//                e1.printStackTrace();
+//            }
+//        }
+        return "获取数据失败";
+    }
+
 
     //追回流程
     public String BackFlowList(final String turl) {
@@ -1643,8 +1756,8 @@ public class DBHandler {
             URL url = new URL(turl);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setConnectTimeout(10000);
-            connection.setReadTimeout(10000);
+            connection.setConnectTimeout(20000);
+            connection.setReadTimeout(20000);
             connection.addRequestProperty("Cookie", Session);
             //此时获取的是字节流
             InputStream in = connection.getInputStream();
@@ -2716,7 +2829,8 @@ public class DBHandler {
             , String num3, String num4, String num5, String money1, String money2, String money3, String money4
             , String money5, String allMoney1, String allMoney2, String allMoney3, String allMoney4
             , String allMoney5, String userCode, String uName, String uId, String hejisl, String hejidj
-            , String hejije, String use, String other) {
+            , String hejije, String use, String other,String iszc ,String goodsType,String zcDepName
+            , String depart1, String depart2, String depart3, String depart4, String depar5) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
@@ -2767,13 +2881,23 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jine4", allMoney4));
         nvs.add(new BasicNameValuePair("jine5", allMoney5));
 
+        nvs.add(new BasicNameValuePair("danwei1", depart1));
+        nvs.add(new BasicNameValuePair("danwei2", depart2));
+        nvs.add(new BasicNameValuePair("danwei3", depart3));
+        nvs.add(new BasicNameValuePair("danwei4", depart4));
+        nvs.add(new BasicNameValuePair("danwei5", depar5));
+
         nvs.add(new BasicNameValuePair("hejisl", hejisl));
         nvs.add(new BasicNameValuePair("hejidj", ""));
         nvs.add(new BasicNameValuePair("hejije", hejije));
 
+        nvs.add(new BasicNameValuePair("iszc", iszc ));
+        nvs.add(new BasicNameValuePair("goodsType", goodsType));
+        nvs.add(new BasicNameValuePair("zcDepName", zcDepName));
         nvs.add(new BasicNameValuePair("yt", use));
         nvs.add(new BasicNameValuePair("QiTa", other));
         nvs.add(new BasicNameValuePair("bmfzryj", ""));
+        nvs.add(new BasicNameValuePair("jcbmyj", ""));
         nvs.add(new BasicNameValuePair("zcgkbmyj", ""));
         nvs.add(new BasicNameValuePair("fgldyj", ""));
         nvs.add(new BasicNameValuePair("cwzjyj", ""));
@@ -3012,7 +3136,8 @@ public class DBHandler {
             , String num3, String num4, String num5, String money1, String money2, String money3, String money4
             , String money5, String allMoney1, String allMoney2, String allMoney3, String allMoney4
             , String allMoney5, String userCode, String uName, String uId, String hejisl, String hejidj,
-                               String hejije, String use, String other) {
+                               String hejije, String use, String other,String iszc ,String goodsType,String zcDepName
+            , String depart1, String depart2, String depart3, String depart4) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
@@ -3058,12 +3183,22 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jine4", allMoney4));
         nvs.add(new BasicNameValuePair("jine5", allMoney5));
 
+        nvs.add(new BasicNameValuePair("danwei1", depart1));
+        nvs.add(new BasicNameValuePair("danwei2", depart2));
+        nvs.add(new BasicNameValuePair("danwei3", depart3));
+        nvs.add(new BasicNameValuePair("danwei4", depart4));
+        nvs.add(new BasicNameValuePair("danwei5", depart4));
+
+        nvs.add(new BasicNameValuePair("iszc", iszc ));
+        nvs.add(new BasicNameValuePair("goodsType", goodsType));
+        nvs.add(new BasicNameValuePair("zcDepName", zcDepName));
         nvs.add(new BasicNameValuePair("hejisl", hejisl));
         nvs.add(new BasicNameValuePair("hejidj", ""));
         nvs.add(new BasicNameValuePair("hejije", hejije));
         nvs.add(new BasicNameValuePair("yt", use));
 
         nvs.add(new BasicNameValuePair("bmfzryj", ""));
+        nvs.add(new BasicNameValuePair("jcbmyj", ""));
         nvs.add(new BasicNameValuePair("fgldyj", ""));
         nvs.add(new BasicNameValuePair("zjlyj", ""));
         try {
@@ -3104,7 +3239,10 @@ public class DBHandler {
                                         String allMoney2, String allMoney3, String allMoney4, String allMoney5, String userCode,
                                         String destName, String taskId, String flowAssignld, String mainId, String bmfzryj,
                                         String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
-                                        String comment, String signaName, String hejisl, String hejidj, String hejije, String use, String other) {
+                                        String comment, String signaName, String hejisl, String hejidj, String hejije, String use,
+                                        String other,String jcbmyj,String danwei1,String danwei2,String danwei3,String danwei4,
+                                        String danwei5,String zc,String type) {
+        //,String jcbmyj,String danwei1,String danwei2,String danwei3,String danwei4,String danwei5
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -3152,13 +3290,22 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jine1", allMoney4));
         nvs.add(new BasicNameValuePair("jine1", allMoney5));
 
+        nvs.add(new BasicNameValuePair("danwei1", danwei1));
+        nvs.add(new BasicNameValuePair("danwei2", danwei2));
+        nvs.add(new BasicNameValuePair("danwei3", danwei3));
+        nvs.add(new BasicNameValuePair("danwei4", danwei4));
+        nvs.add(new BasicNameValuePair("danwei5", danwei5));
+
         nvs.add(new BasicNameValuePair("hejisl", hejisl));
         nvs.add(new BasicNameValuePair("hejidj", hejidj));
         nvs.add(new BasicNameValuePair("hejije", hejije));
 
+        nvs.add(new BasicNameValuePair("iszc ", zc));
+        nvs.add(new BasicNameValuePair("goodsType", type));
         nvs.add(new BasicNameValuePair("yt", use));
         nvs.add(new BasicNameValuePair("QiTa", other));
         nvs.add(new BasicNameValuePair("bmfzryj", bmfzryj));
+        nvs.add(new BasicNameValuePair("jcbmyj", jcbmyj));
         nvs.add(new BasicNameValuePair("zcgkbmyj", zcgkbmyj));
         nvs.add(new BasicNameValuePair("fgldyj", fgldyj));
         nvs.add(new BasicNameValuePair("cwzjyj", cwzjyj));
@@ -3602,7 +3749,8 @@ public class DBHandler {
                                    String destName, String taskId, String flowAssignld, String mainId, String bmfzryj,
                                    String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
                                    String comment, String signaName, String hejisl, String hejidj, String hejije, String use
-            , String jbldyj, String other) {
+            , String jbldyj, String other,String jcbmyj,String danwei1,String danwei2,String danwei3,String danwei4,
+                                   String danwei5,String zc,String type) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -3650,12 +3798,21 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jine1", allMoney4));
         nvs.add(new BasicNameValuePair("jine1", allMoney5));
 
+        nvs.add(new BasicNameValuePair("danwei1", danwei1));
+        nvs.add(new BasicNameValuePair("danwei2", danwei2));
+        nvs.add(new BasicNameValuePair("danwei3", danwei3));
+        nvs.add(new BasicNameValuePair("danwei4", danwei4));
+        nvs.add(new BasicNameValuePair("danwei5", danwei5));
+
         nvs.add(new BasicNameValuePair("hejisl", hejisl));
         nvs.add(new BasicNameValuePair("hejidj", hejidj));
         nvs.add(new BasicNameValuePair("hejije", hejije));
 
+        nvs.add(new BasicNameValuePair("iszc ", zc));
+        nvs.add(new BasicNameValuePair("goodsType", type));
         nvs.add(new BasicNameValuePair("yt", use));
         nvs.add(new BasicNameValuePair("bmfzryj", bmfzryj));
+        nvs.add(new BasicNameValuePair("jcbmyj", jcbmyj));
         nvs.add(new BasicNameValuePair("zcgkbmyj", zcgkbmyj));
         nvs.add(new BasicNameValuePair("fgldyj", fgldyj));
         nvs.add(new BasicNameValuePair("cbfgldyj", jbldyj));

@@ -220,7 +220,27 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     EditText etMoney4;
     @BindView(R.id.etMoney5)
     EditText etMoney5;
-    private String name, taskId, res, bmfzryj, zcgkbmyj, fgldyj, cgfgyj, cwzjyj, zjl = "";
+    @BindView(R.id.tvzc)
+    TextView tvzc;
+    @BindView(R.id.tvtype)
+    TextView tvtype;
+    @BindView(R.id.etDepartment1)
+    EditText etDepartment1;
+    @BindView(R.id.etDepartment2)
+    EditText etDepartment2;
+    @BindView(R.id.etDepartment3)
+    EditText etDepartment3;
+    @BindView(R.id.etDepartment4)
+    EditText etDepartment4;
+    @BindView(R.id.etDepartment5)
+    EditText etDepartment5;
+    @BindView(R.id.tvDepartment5)
+    TextView tvDepartment5;
+    @BindView(R.id.etLeaderJG)
+    EditText etLeaderJG;
+    @BindView(R.id.tvLeaderJG)
+    TextView tvLeaderJG;
+    private String name, taskId, res, bmfzryj, jcbmyj, zcgkbmyj, fgldyj, cgfgyj, cwzjyj, zjl = "";
     private String mainId, signaName, destName = "", destType, checkTask, qianzhiData = "";
     String leader = "";
     String leaderCode = "";
@@ -228,7 +248,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
-    String bmreout = "", zcreout = "", fgreout = "", cwfgreout = "", cwreout = "", zjlreout = "", flowAssignld, serialNumber = "";
+    String bmreout = "", zcreout = "", fgreout = "", jcreout = "", cwfgreout = "", cwreout = "", zjlreout = "", flowAssignld, serialNumber = "";
     String hejidj, hejije, hejisl = "";
     String[] bigNametemp = null;
     String[] bigCodetemp = null;
@@ -238,6 +258,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     String allMoney1, allMoney2, allMoney3, allMoney4, allMoney5 = "";
     List<String> resultList = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
+    List<String> bigResultList1 = new ArrayList<>();
 
     List<Name.DataBean> datalist = new ArrayList<>();
     String userDepart = "";
@@ -253,6 +274,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     String userName = "";
     String[] nametemp = null;
     String[] codetemp = null;
+    String danwei1, danwei2, danwei3, danwei4, danwei5 = "";
     List<String> namelist = new ArrayList<>();
     List<FlowPuechase.TransBean> beanList = new ArrayList<>();
     List<String> selectList = new ArrayList<>();
@@ -408,7 +430,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     if (!etMoney1.getText().toString().equals("")) {
                         tvAllMoney1.setText(String.valueOf(Double.valueOf(etMoney1.getText().toString()) * numS1));
-                    }else {
+                    } else {
                         tvAllMoney1.setText(String.valueOf(0 * numS1));
                     }
                 } else {
@@ -436,7 +458,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     if (!etMoney2.getText().toString().equals("")) {
                         tvAllMoney2.setText(String.valueOf(Double.valueOf(etMoney2.getText().toString()) * numS2));
-                    }else {
+                    } else {
                         tvAllMoney2.setText(String.valueOf(0 * numS2));
                     }
                 } else {
@@ -464,7 +486,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     if (!etMoney3.getText().toString().equals("")) {
                         tvAllMoney3.setText(String.valueOf(Double.valueOf(etMoney3.getText().toString()) * numS3));
-                    }else {
+                    } else {
                         tvAllMoney3.setText(String.valueOf(0 * numS3));
                     }
                 } else {
@@ -492,7 +514,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     if (!etMoney4.getText().toString().equals("")) {
                         tvAllMoney4.setText(String.valueOf(Double.valueOf(etMoney4.getText().toString()) * numS4));
-                    }else {
+                    } else {
                         tvAllMoney4.setText(String.valueOf(0 * numS4));
                     }
                 } else {
@@ -520,7 +542,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     if (!etMoney5.getText().toString().equals("")) {
                         tvAllMoney5.setText(String.valueOf(Double.valueOf(etMoney5.getText().toString()) * numS5));
-                    }else {
+                    } else {
                         tvAllMoney5.setText(String.valueOf(0 * numS5));
                     }
                 } else {
@@ -548,7 +570,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     moneyS1 = (Double.valueOf(s.toString()));
                     if (!etNum1.getText().toString().equals("")) {
                         tvAllMoney1.setText(String.valueOf(Double.valueOf(etNum1.getText().toString()) * moneyS1));
-                    }else {
+                    } else {
                         tvAllMoney1.setText(String.valueOf(0 * moneyS1));
                     }
                 } else {
@@ -573,7 +595,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     moneyS2 = (Double.valueOf(s.toString()));
                     if (!etNum2.getText().toString().equals("")) {
                         tvAllMoney2.setText(String.valueOf(Double.valueOf(etNum2.getText().toString()) * moneyS2));
-                    }else {
+                    } else {
                         tvAllMoney2.setText(String.valueOf(0 * moneyS2));
                     }
                 } else {
@@ -598,7 +620,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     moneyS3 = (Double.valueOf(s.toString()));
                     if (!etNum3.getText().toString().equals("")) {
                         tvAllMoney3.setText(String.valueOf(Double.valueOf(etNum3.getText().toString()) * moneyS3));
-                    }else {
+                    } else {
                         tvAllMoney3.setText(String.valueOf(0 * moneyS3));
                     }
                 } else {
@@ -623,7 +645,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     moneyS4 = (Double.valueOf(s.toString()));
                     if (!etNum4.getText().toString().equals("")) {
                         tvAllMoney4.setText(String.valueOf(Double.valueOf(etNum4.getText().toString()) * moneyS4));
-                    }else {
+                    } else {
                         tvAllMoney4.setText(String.valueOf(0 * moneyS4));
                     }
                 } else {
@@ -648,7 +670,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     moneyS5 = (Double.valueOf(s.toString()));
                     if (!etNum5.getText().toString().equals("")) {
                         tvAllMoney5.setText(String.valueOf(Double.valueOf(etNum5.getText().toString()) * moneyS5));
-                    }else {
+                    } else {
                         tvAllMoney5.setText(String.valueOf(0 * moneyS5));
                     }
                 } else {
@@ -766,6 +788,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
         if (bigCodetemp != null) {
             for (String s : bigCodetemp) {
                 bigResultList.add(s);
+                bigResultList1.add(s);
             }
         }
         if (nametemp != null) {
@@ -1059,7 +1082,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                 cb12.setVisibility(View.VISIBLE);
             }
         }
-        getLastPerson();
+        ProgressDialogUtil.stopLoad();
     }
 
     @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT, R.id.btnHistory})
@@ -1217,6 +1240,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                 cgfgyj = bean.getMainform().get(0).getCbfgldyj();
                 cwzjyj = bean.getMainform().get(0).getCwzjyj();
                 zjl = bean.getMainform().get(0).getZjlyj();
+                jcbmyj = bean.getMainform().get(0).getJcbmyj();
                 userName = new SharedPreferencesHelper(FlowPuechaseWillDetailActivity.this,
                         "login").getData(FlowPuechaseWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowPuechaseWillDetailActivity.this,
@@ -1244,6 +1268,26 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                         bmfzryj = bmfzryj.toString().replace("],[", ",");
                     }
                 }
+
+                if (etLeaderJG.getVisibility() == View.VISIBLE) {
+                    comment = etLeaderJG.getText().toString();
+                    try {
+                        jsonObject.put("ui", userCode);
+                        jsonObject.put("un", userName);
+                        jsonObject.put("c", str);
+                        jsonObject.put("v", etLeaderJG.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    jsonArray.put(jsonObject);
+                    if (jcbmyj.equals("")) {
+                        jcbmyj = jsonArray.toString();
+                    } else {
+                        jcbmyj = jcbmyj + "," + jsonArray.toString();
+                        jcbmyj = jcbmyj.toString().replace("],[", ",");
+                    }
+                }
+
                 if (etLeader1.getVisibility() == View.VISIBLE) {
                     comment = etLeader1.getText().toString();
                     try {
@@ -1335,12 +1379,12 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (comment.equals("")) {
-                    if (!bmreout.equals("2") && !zcreout.equals("2") && !fgreout.equals("2")
+                    if (!bmreout.equals("2") &&!jcbmyj.equals("2") && !zcreout.equals("2") && !fgreout.equals("2")
                             && !cwreout.equals("2") && !cwfgreout.equals("2") && !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
                     } else if (!zjl.equals("") && !cwzjyj.equals("") && !cgfgyj.equals("") && !fgldyj.equals("") && !zcgkbmyj.equals("")
-                            && !bmfzryj.equals("")) {
+                            && !jcreout.equals("")&& !bmfzryj.equals("")) {
                         comment = "";
                         personSession();
                     } else {
@@ -1438,29 +1482,50 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                 userCodes = userCodes.toString().replace("[", "");
                 userCodes = userCodes.toString().replace("]", "");
 
-                String bigUserCodes = bigResultList.toString();
-                bigUserCodes = bigUserCodes.toString().replace("[", "");
-                bigUserCodes = bigUserCodes.toString().replace("]", "");
+                if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
 
-                if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                    flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                    flowAssignld = leader + ":" + role + "|" + bigUserCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
+                    String bigUserCodes = bigResultList1.toString();
+                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+
+                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else {
+                        flowAssignld = destName + "|" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                        flowAssignld = flowAssignld.replace(":", "");
+                    }
                 } else {
-                    flowAssignld = destName + "|" + userCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                    flowAssignld = flowAssignld.replace(":", "");
-                }
+                    String bigUserCodes = bigResultList.toString();
+                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+                    bigUserCodes = bigUserCodes.toString().replace("]", "");
 
+                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else {
+                        flowAssignld = destName + "|" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                        flowAssignld = flowAssignld.replace(":", "");
+                    }
+                }
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                if (zcreout.equals("2")){
+                if (zcreout.equals("2")) {
                     upData = dbA.OAPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                             , etNum1.getText().toString(), etNum2.getText().toString(), etNum3.getText().toString()
                             , etNum4.getText().toString(), etNum5.getText().toString(), etMoney1.getText().toString()
@@ -1469,13 +1534,14 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             , tvAllMoney3.getText().toString(), tvAllMoney4.getText().toString(), tvAllMoney5.getText().toString()
                             , userCode, destName, taskId, flowAssignld, mainId,
                             bmfzryj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
-                            hejidj, allMoney, use, cgfgyj, other);
-                }else {
+                            hejidj, allMoney, use, cgfgyj, other,jcbmyj
+                            ,danwei1,danwei2,danwei3,danwei4,danwei5,tvzc.getText().toString(),tvtype.getText().toString());
+                } else {
                     upData = dbA.OAPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                             , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
                             , allMoney4, allMoney5, userCode, destName, taskId, flowAssignld, mainId,
                             bmfzryj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
-                            hejidj, allMoney, use, cgfgyj, other);
+                            hejidj, allMoney, use, cgfgyj, other,jcbmyj,danwei1,danwei2,danwei3,danwei4,danwei5,tvzc.getText().toString(),tvtype.getText().toString());
                 }
 
                 if (upData.equals("")) {
@@ -1510,6 +1576,10 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     String person = bean.getMainform().get(0).getSqr();
                     String time = bean.getMainform().get(0).getSqrq();
                     String use = bean.getMainform().get(0).getYt();
+                    String iszc = bean.getMainform().get(0).getIszc();
+                    String goodsType = bean.getMainform().get(0).getGoodsType();
+                    tvzc.setText(iszc);
+                    tvtype.setText(goodsType);
                     xiangguanfujian = bean.getMainform().get(0).getXgfj();
                     runID = bean.getMainform().get(0).getRunId();
                     tvData.setText(xiangguanfujian);
@@ -1528,6 +1598,12 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     num4 = bean.getMainform().get(0).getShuliang4();
                     num5 = bean.getMainform().get(0).getShuliang5();
 
+                    danwei1 = bean.getMainform().get(0).getDanwei1();
+                    danwei2 = bean.getMainform().get(0).getDanwei2();
+                    danwei3 = bean.getMainform().get(0).getDanwei3();
+                    danwei4 = bean.getMainform().get(0).getDanwei4();
+                    danwei5 = bean.getMainform().get(0).getDanwei5();
+
                     money1 = bean.getMainform().get(0).getDanjia1();
                     money2 = bean.getMainform().get(0).getDanjia2();
                     money3 = bean.getMainform().get(0).getDanjia3();
@@ -1540,11 +1616,18 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     allMoney4 = bean.getMainform().get(0).getJine4();
                     allMoney5 = bean.getMainform().get(0).getJine5();
 
+                    etDepartment1.setText(bean.getMainform().get(0).getDanwei1());
+                    etDepartment2.setText(bean.getMainform().get(0).getDanwei2());
+                    etDepartment3.setText(bean.getMainform().get(0).getDanwei3());
+                    etDepartment4.setText(bean.getMainform().get(0).getDanwei4());
+                    etDepartment5.setText(bean.getMainform().get(0).getDanwei5());
+
                     hejisl = bean.getMainform().get(0).getHejisl();
                     hejidj = bean.getMainform().get(0).getHejidj();
                     hejije = bean.getMainform().get(0).getHejije();
 
                     bmfzryj = bean.getMainform().get(0).getBmfzryj();
+                    jcbmyj = bean.getMainform().get(0).getJcbmyj();
                     zcgkbmyj = bean.getMainform().get(0).getZcgkbmyj();
                     fgldyj = bean.getMainform().get(0).getFgldyj();
                     cgfgyj = bean.getMainform().get(0).getCbfgldyj();
@@ -1568,12 +1651,20 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                         cwfgreout = jsonObject.getString("cbfgldyj");
                         cwreout = jsonObject.getString("cwzjyj");
                         zjlreout = jsonObject.getString("zjlyj");
+                        jcreout = jsonObject.getString("jcbmyj");
                         if (bmreout.equals("2")) {
                             tvLeader.setVisibility(View.GONE);
                             etLeader.setVisibility(View.VISIBLE);
                         } else {
                             tvLeader.setVisibility(View.VISIBLE);
                             etLeader.setVisibility(View.GONE);
+                        }
+                        if (jcreout.equals("2")) {
+                            tvLeaderJG.setVisibility(View.GONE);
+                            etLeaderJG.setVisibility(View.VISIBLE);
+                        } else {
+                            tvLeaderJG.setVisibility(View.VISIBLE);
+                            etLeaderJG.setVisibility(View.GONE);
                         }
                         if (zcreout.equals("2")) {
                             tvLeader1.setVisibility(View.GONE);
@@ -1663,26 +1754,26 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     tvName3.setText(name3);
                     tvName4.setText(name4);
                     tvName5.setText(name5);
-                    if (zcreout.equals("2")){
+                    if (zcreout.equals("2")) {
                         etNum1.setText(num1);
                         etNum2.setText(num2);
                         etNum3.setText(num3);
                         etNum4.setText(num4);
                         etNum5.setText(num5);
-                    }else {
+                    } else {
                         tvNum1.setText(num1);
                         tvNum2.setText(num2);
                         tvNum3.setText(num3);
                         tvNum4.setText(num4);
                         tvNum5.setText(num5);
                     }
-                    if (zcreout.equals("2")){
+                    if (zcreout.equals("2")) {
                         etMoney1.setText(money1);
                         etMoney2.setText(money2);
                         etMoney3.setText(money3);
                         etMoney4.setText(money4);
                         etMoney5.setText(money5);
-                    }else {
+                    } else {
                         tvMoney1.setText(money1);
                         tvMoney2.setText(money2);
                         tvMoney3.setText(money3);
@@ -1764,6 +1855,21 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                                 e.printStackTrace();
                             }
                             tvLeader1.setText(word);
+                        }
+                    }
+
+
+                    if (jcbmyj != null && !jcbmyj.equals("")) {
+                        if (tvLeaderJG.getVisibility() == View.VISIBLE) {
+                            String word = "";
+                            try {
+                                JSONArray jsonArray = new JSONArray(jcbmyj);
+                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
+                                word = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            tvLeaderJG.setText(word);
                         }
                     }
 

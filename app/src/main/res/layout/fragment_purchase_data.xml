@@ -84,7 +84,50 @@
                     style="@style/oaEditText"
                     android:layout_weight="2.5" />
             </LinearLayout>
+            <View style="@style/line"></View>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="资产类型: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <Spinner
+                    android:id="@+id/spinnerzc"
+                    style="@style/oaEditText"
+                    android:layout_weight="2.5" />
+            </LinearLayout>
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="物品类型: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <Spinner
+                    android:id="@+id/spinnertype"
+                    style="@style/oaEditText"
+                    android:layout_weight="2.5" />
+            </LinearLayout>
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -137,7 +180,64 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
                 </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/shouye" />
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:gravity="center"
+                        android:text="单位"
+                        android:textColor="@color/black" />
+
+                    <View style="@style/line"></View>
+
+                    <EditText
+                        android:id="@+id/etDepartment1"
+                        style="@style/oaEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp" />
+
+                    <View style="@style/line"></View>
+
+                    <EditText
+                        android:id="@+id/etDepartment2"
+                        style="@style/oaEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp" />
+
+                    <View style="@style/line"></View>
+
+                    <EditText
+                        android:id="@+id/etDepartment3"
+                        style="@style/oaEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp" />
+
+                    <View style="@style/line"></View>
+
+                    <EditText
+                        android:id="@+id/etDepartment4"
+                        style="@style/oaEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp" />
+
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tvDepartment5"
+                        style="@style/oaEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp" />
+                </LinearLayout>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
@@ -161,7 +261,7 @@
                     <EditText
                         android:id="@+id/etNum1"
                         style="@style/oaEditText1"
-                        android:inputType="number|numberDecimal"
+                        android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
 
@@ -172,7 +272,7 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="numberDecimal" />
+                        android:inputType="number" />
 
                     <View style="@style/line"></View>
 
@@ -181,7 +281,7 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number" />
 
                     <View style="@style/line"></View>
 
@@ -190,7 +290,7 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number" />
                 </LinearLayout>
 
                 <View
@@ -268,7 +368,7 @@
 
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney1"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -277,7 +377,7 @@
 
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney2"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -286,7 +386,7 @@
 
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney3"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -295,7 +395,7 @@
 
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney4"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -466,6 +566,35 @@
                     android:id="@+id/etLeader"
                     style="@style/oaEditText"
                     android:hint="部门领导意见" />
+            </LinearLayout>
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="监管部门:" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etLeaderJG"
+                    style="@style/textWrite"
+                    android:hint="监管部门意见"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvLeaderJG"
+                    style="@style/textWrite"
+                    android:hint="监管部门意见" />
             </LinearLayout>
             <View style="@style/line"></View>
 

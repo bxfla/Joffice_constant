@@ -157,6 +157,7 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
     String[] bigCodetemp = null;
     List<String> resultList = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
+    List<String> bigResultList1 = new ArrayList<>();
     String tag1;
 
     String role = "";
@@ -304,6 +305,7 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
         if (bigCodetemp != null) {
             for (String s : bigCodetemp) {
                 bigResultList.add(s);
+                bigResultList1.add(s);
             }
         }
         if (nametemp != null) {
@@ -513,7 +515,7 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
                 cb9.setVisibility(View.VISIBLE);
             }
         }
-        getLastPerson();
+        ProgressDialogUtil.stopLoad();
     }
 
     @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT, R.id.btnHistory})
@@ -833,54 +835,94 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
                 }
 
                 if (!cb9.isChecked()) {
-                    bigResultList.remove(8);
+                    if (bigResultList.size()>=9){
+                        bigResultList.remove(8);
+                    }
                 }
                 if (!cb8.isChecked()) {
-                    bigResultList.remove(7);
+                    if (bigResultList.size()>=8){
+                        bigResultList.remove(7);
+                    }
                 }
                 if (!cb7.isChecked()) {
-                    bigResultList.remove(6);
+                    if (bigResultList.size()>=7){
+                        bigResultList.remove(6);
+                    }
                 }
                 if (!cb6.isChecked()) {
-                    bigResultList.remove(5);
+                    if (bigResultList.size()>=6){
+                        bigResultList.remove(5);
+                    }
                 }
                 if (!cb5.isChecked()) {
-                    bigResultList.remove(4);
+                    if (bigResultList.size()>=5){
+                        bigResultList.remove(4);
+                    }
                 }
                 if (!cb4.isChecked()) {
-                    bigResultList.remove(3);
+                    if (bigResultList.size()>=4){
+                        bigResultList.remove(3);
+                    }
                 }
                 if (!cb3.isChecked()) {
-                    bigResultList.remove(2);
+                    if (bigResultList.size()>=3){
+                        bigResultList.remove(2);
+                    }
                 }
                 if (!cb2.isChecked()) {
-                    bigResultList.remove(1);
+                    if (bigResultList.size()>=2){
+                        bigResultList.remove(1);
+                    }
                 }
                 if (!cb1.isChecked()) {
-                    bigResultList.remove(0);
+                    if (bigResultList.size()>=1){
+                        bigResultList.remove(0);
+                    }
                 }
 
                 String userCodes = resultList.toString();
                 userCodes = userCodes.toString().replace("[", "");
                 userCodes = userCodes.toString().replace("]", "");
 
-                String bigUserCodes = bigResultList.toString();
-                bigUserCodes = bigUserCodes.toString().replace("[", "");
-                bigUserCodes = bigUserCodes.toString().replace("]", "");
+                if (bigResultList.size()==0&&bigResultList1.size()!=0){
 
-                if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                    flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                    flowAssignld = leader + ":" + role + "|" + bigUserCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                } else {
-                    flowAssignld = destName + "|" + userCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                    flowAssignld = flowAssignld.replace(":", "");
+                    String bigUserCodes = bigResultList1.toString();
+                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+
+                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else {
+                        flowAssignld = destName + "|" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                        flowAssignld = flowAssignld.replace(":", "");
+                    }
+                }else {
+                    String bigUserCodes = bigResultList.toString();
+                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+
+                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else {
+                        flowAssignld = destName + "|" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                        flowAssignld = flowAssignld.replace(":", "");
+                    }
                 }
 
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;

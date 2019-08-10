@@ -229,7 +229,7 @@ public class FragmentEMaintainData extends Fragment {
                     break;
                 }
                 if (data.equals("")) {
-                    Toast.makeText(getActivity(), "具体事项不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "故障状况不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 ProgressDialogUtil.startLoad(getActivity(), "数据上传中");

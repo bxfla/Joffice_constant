@@ -155,6 +155,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
     String[] bigCodetemp = null;
     List<String> resultList = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
+    List<String> bigResultList1 = new ArrayList<>();
     String tag1;
     String defId1 = "20249";
     String defId2 = "20244";
@@ -298,6 +299,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
         if (bigCodetemp != null) {
             for (String s : bigCodetemp) {
                 bigResultList.add(s);
+                bigResultList1.add(s);
             }
         }
         if (nametemp != null) {
@@ -444,7 +446,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                 cb6.setVisibility(View.VISIBLE);
             }
         }
-        getLastPerson();
+        ProgressDialogUtil.stopLoad();
     }
 
     @OnClick({R.id.btnUp, R.id.tvData1, R.id.btnT, R.id.btnHistory})
@@ -827,21 +829,6 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     bigResultList.remove(0);
                 }
 
-//                String userCodes = resultList.toString();
-//                userCodes = userCodes.toString().replace("[", "");
-//                userCodes = userCodes.toString().replace("]", "");
-//
-//                String bigUserCodes = bigResultList.toString();
-//                bigUserCodes = bigUserCodes.toString().replace("[", "");
-//                bigUserCodes = bigUserCodes.toString().replace("]", "");
-//
-//                if (!userCodes.equals("")){
-//                    flowAssignld = leader + ":" + role + "|" + bigUserCodes;
-//                }else {
-//                    flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-//                    flowAssignld = flowAssignld.replace(":","");
-//                    flowAssignld = flowAssignld.replace(" ","");
-//                }
                 String userCodes = resultList.toString();
                 userCodes = userCodes.toString().replace("[", "");
                 userCodes = userCodes.toString().replace("]", "");

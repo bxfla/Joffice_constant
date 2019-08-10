@@ -46,7 +46,7 @@ public class FlowCompMessageActivity extends BaseActivity implements RadioGroup.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        header.setTvTitle("新建工程审批单");
+        header.setTvTitle("公司信息发布审批单");
         fragment01 = new FragmentCompMessageData();
         fragment02 = new FragmentCompMessageList();
         fragment011 = new FragmentTestList();

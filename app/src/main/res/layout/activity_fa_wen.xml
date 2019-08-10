@@ -41,9 +41,12 @@
         </LinearLayout>
     </FrameLayout>
 
-    <FrameLayout style="@style/ycFrameLayout">
+    <FrameLayout
+        android:visibility="gone"
+        style="@style/ycFrameLayout">
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/llCompMessage"
             style="@style/ycLinearLayout">
 

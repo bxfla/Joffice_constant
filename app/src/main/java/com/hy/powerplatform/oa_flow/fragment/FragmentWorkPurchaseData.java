@@ -35,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -90,13 +91,13 @@ public class FragmentWorkPurchaseData extends Fragment {
     @BindView(R.id.etMoney4)
     EditText etMoney4;
     @BindView(R.id.etAllMoney1)
-    EditText etAllMoney1;
+    TextView etAllMoney1;
     @BindView(R.id.etAllMoney2)
-    EditText etAllMoney2;
+    TextView etAllMoney2;
     @BindView(R.id.etAllMoney3)
-    EditText etAllMoney3;
+    TextView etAllMoney3;
     @BindView(R.id.etAllMoney4)
-    EditText etAllMoney4;
+    TextView etAllMoney4;
     @BindView(R.id.etLeader1)
     TextView etLeader1;
     @BindView(R.id.etLeader2)
@@ -145,7 +146,7 @@ public class FragmentWorkPurchaseData extends Fragment {
     @BindView(R.id.etMoney5)
     EditText etMoney5;
     @BindView(R.id.etAllMoney5)
-    EditText etAllMoney5;
+    TextView etAllMoney5;
     @BindView(R.id.tvPerson)
     TextView tvPerson;
     @BindView(R.id.tvAllNum)
@@ -317,13 +318,18 @@ public class FragmentWorkPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum1 = (Integer.valueOf(s.toString()));
-                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney1.getText().toString().equals("")) {
-                        etAllMoney1.setText(String.valueOf(Double.valueOf(etMoney1.getText().toString()) * allNum1));
-                    }else {
-                        etAllMoney1.setText(String.valueOf(0 * allNum1));
+                    if (!etMoney1.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(allNum1));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney1.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
+                        if (!etMoney1.getText().toString().equals("")) {
+                            etAllMoney1.setText(s1);
+                        } else {
+                            etAllMoney1.setText(String.valueOf(0 * allNum1));
+                        }
                     }
                 } else {
                     allNum1 = 0;
@@ -345,13 +351,18 @@ public class FragmentWorkPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum2 = (Integer.valueOf(s.toString()));
-                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney2.getText().toString().equals("")) {
-                        etAllMoney2.setText(String.valueOf(Double.valueOf(etMoney2.getText().toString()) * allNum2));
-                    }else {
-                        etAllMoney2.setText(String.valueOf(0 * allNum2));
+                    if (!etMoney2.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(allNum2));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney2.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
+                        if (!etMoney2.getText().toString().equals("")) {
+                            etAllMoney2.setText(s1);
+                        } else {
+                            etAllMoney2.setText(String.valueOf(0 * allNum2));
+                        }
                     }
                 } else {
                     allNum2 = 0;
@@ -373,13 +384,18 @@ public class FragmentWorkPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum3 = (Integer.valueOf(s.toString()));
-                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney3.getText().toString().equals("")) {
-                        etAllMoney3.setText(String.valueOf(Double.valueOf(etMoney3.getText().toString()) * allNum3));
-                    }else {
-                        etAllMoney3.setText(String.valueOf(0 * allNum3));
+                    if (!etMoney3.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(allNum3));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney3.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
+                        if (!etMoney3.getText().toString().equals("")) {
+                            etAllMoney3.setText(s1);
+                        } else {
+                            etAllMoney3.setText(String.valueOf(0 * allNum3));
+                        }
                     }
                 } else {
                     allNum3 = 0;
@@ -401,46 +417,23 @@ public class FragmentWorkPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum4 = (Integer.valueOf(s.toString()));
-                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney4.getText().toString().equals("")) {
-                        etAllMoney4.setText(String.valueOf(Double.valueOf(etMoney4.getText().toString()) * allNum4));
-                    }else {
-                        etAllMoney4.setText(String.valueOf(0 * allNum4));
+                    if (!etMoney4.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(allNum4));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney4.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
+                        if (!etMoney4.getText().toString().equals("")) {
+                            etAllMoney4.setText(s1);
+                        } else {
+                            etAllMoney4.setText(String.valueOf(0 * allNum4));
+                        }
                     }
                 } else {
                     allNum4 = 0;
                     tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     etAllMoney4.setText(String.valueOf(0 * moneyS4));
-                }
-            }
-        });
-        etNum5.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
-                    allNum5 = (Integer.valueOf(s.toString()));
-                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney5.getText().toString().equals("")) {
-                        etAllMoney5.setText(String.valueOf(Double.valueOf(etMoney5.getText().toString()) * allNum5));
-                    }else {
-                        etAllMoney5.setText(String.valueOf(0 * allNum5));
-                    }
-                } else {
-                    allNum5 = 0;
-                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    etAllMoney5.setText(String.valueOf(0 * moneyS5));
                 }
             }
         });
@@ -458,12 +451,17 @@ public class FragmentWorkPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     moneyS1 = (Double.valueOf(s.toString()));
-                    if (!etNum1.getText().toString().equals("")) {
-                        etAllMoney1.setText(String.valueOf(Double.valueOf(etNum1.getText().toString()) * moneyS1));
-                    }else {
-                        etAllMoney1.setText(String.valueOf(0 * moneyS1));
+                    if (!etNum1.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(moneyS1));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etNum1.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        if (!etNum1.getText().toString().equals("")) {
+                            etAllMoney1.setText(s1);
+                        } else {
+                            etAllMoney1.setText(String.valueOf(0 * moneyS1));
+                        }
                     }
                 } else {
                     etAllMoney1.setText(String.valueOf(0 * moneyS1));
@@ -483,12 +481,17 @@ public class FragmentWorkPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     moneyS2 = (Double.valueOf(s.toString()));
-                    if (!etNum2.getText().toString().equals("")) {
-                        etAllMoney2.setText(String.valueOf(Double.valueOf(etNum2.getText().toString()) * moneyS2));
-                    }else {
-                        etAllMoney2.setText(String.valueOf(0 * moneyS2));
+                    if (!etNum2.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(moneyS2));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etNum2.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        if (!etNum2.getText().toString().equals("")) {
+                            etAllMoney2.setText(s1);
+                        } else {
+                            etAllMoney2.setText(String.valueOf(0 * moneyS2));
+                        }
                     }
                 } else {
                     etAllMoney2.setText(String.valueOf(0 * moneyS2));
@@ -508,12 +511,17 @@ public class FragmentWorkPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     moneyS3 = (Double.valueOf(s.toString()));
-                    if (!etNum3.getText().toString().equals("")) {
-                        etAllMoney3.setText(String.valueOf(Double.valueOf(etNum3.getText().toString()) * moneyS3));
-                    }else {
-                        etAllMoney3.setText(String.valueOf(0 * moneyS3));
+                    if (!etNum3.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(moneyS3));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etNum3.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        if (!etNum3.getText().toString().equals("")) {
+                            etAllMoney3.setText(s1);
+                        } else {
+                            etAllMoney3.setText(String.valueOf(0 * moneyS3));
+                        }
                     }
                 } else {
                     etAllMoney3.setText(String.valueOf(0 * moneyS3));
@@ -533,40 +541,20 @@ public class FragmentWorkPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     moneyS4 = (Double.valueOf(s.toString()));
-                    if (!etNum4.getText().toString().equals("")) {
-                        etAllMoney4.setText(String.valueOf(Double.valueOf(etNum4.getText().toString()) * moneyS4));
-                    }else {
-                        etAllMoney4.setText(String.valueOf(0 * moneyS4));
+                    if (!etNum4.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(moneyS4));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etNum4.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        if (!etNum4.getText().toString().equals("")) {
+                            etAllMoney4.setText(s1);
+                        } else {
+                            etAllMoney4.setText(String.valueOf(0 * moneyS4));
+                        }
                     }
                 } else {
                     etAllMoney4.setText(String.valueOf(0 * moneyS4));
-                }
-            }
-        });
-        etMoney5.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")) {
-                    moneyS5 = (Double.valueOf(s.toString()));
-                    if (!etNum5.getText().toString().equals("")) {
-                        etAllMoney5.setText(String.valueOf(Double.valueOf(etNum4.getText().toString()) * moneyS4));
-                    }else {
-                        etAllMoney5.setText(String.valueOf(0 * moneyS5));
-                    }
-                } else {
-                    etAllMoney5.setText(String.valueOf(0 * moneyS5));
                 }
             }
         });

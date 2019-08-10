@@ -11,9 +11,12 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -89,13 +93,13 @@ public class FragmentGoodsPurchaseData extends Fragment {
     @BindView(R.id.etMoney4)
     EditText etMoney4;
     @BindView(R.id.etAllMoney1)
-    EditText etAllMoney1;
+    TextView etAllMoney1;
     @BindView(R.id.etAllMoney2)
-    EditText etAllMoney2;
+    TextView etAllMoney2;
     @BindView(R.id.etAllMoney3)
-    EditText etAllMoney3;
+    TextView etAllMoney3;
     @BindView(R.id.etAllMoney4)
-    EditText etAllMoney4;
+    TextView etAllMoney4;
     @BindView(R.id.etLeader1)
     TextView etLeader1;
     @BindView(R.id.etLeader2)
@@ -109,7 +113,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
     @BindView(R.id.btnUp)
     Button btnUp;
 
-    String data1, res;
+    String data1, res,aboutData;
     List<String> namelist = new ArrayList<>();
     List<Name.DataBean> datalist = new ArrayList<>();
     List<Name.DataBean> backlist = new ArrayList<>();
@@ -118,7 +122,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
     String money1, money2, money3, money4, money5 = "";
     String allMoney1, allMoney2, allMoney3, allMoney4, allMoney5 = "";
     int hejidj, hejisl;
-    double  hejije;
+    double hejije;
     @BindView(R.id.textView8)
     TextView textView8;
     @BindView(R.id.etName5)
@@ -140,7 +144,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
     @BindView(R.id.etMoney5)
     EditText etMoney5;
     @BindView(R.id.etAllMoney5)
-    EditText etAllMoney5;
+    TextView etAllMoney5;
     @BindView(R.id.ll2)
     LinearLayout ll2;
     @BindView(R.id.tvPerson)
@@ -155,6 +159,26 @@ public class FragmentGoodsPurchaseData extends Fragment {
     EditText etApplication1;
     @BindView(R.id.etUse)
     EditText etUse;
+    @BindView(R.id.spinnerzc)
+    Spinner spinnerzc;
+    @BindView(R.id.spinnertype)
+    Spinner spinnertype;
+    @BindView(R.id.textView17)
+    TextView textView17;
+    @BindView(R.id.etLeader)
+    EditText etLeader;
+    @BindView(R.id.tvLeader)
+    TextView tvLeader;
+    @BindView(R.id.tvLeader1)
+    TextView tvLeader1;
+    @BindView(R.id.tvLeader2)
+    TextView tvLeader2;
+    @BindView(R.id.tvLeader3)
+    TextView tvLeader3;
+    @BindView(R.id.tvLeader4)
+    TextView tvLeader4;
+    @BindView(R.id.tvLeader5)
+    TextView tvLeader5;
     private CustomDatePickerDay customDatePicker1;
 
     String userId = "";
@@ -167,11 +191,14 @@ public class FragmentGoodsPurchaseData extends Fragment {
     List<String> nameList = new ArrayList<>();
     List<String> selectList = new ArrayList<>();
     List<String> namelist1 = new ArrayList<>();
-    String userDepart = "";
+    List<String> listZC = new ArrayList<String>();
+    List<String> listType = new ArrayList<String>();
+    String userDepart = "",aboutDep = "";
     String isShow = "true";
     double AllMoney1 = 0.0, AllMoney2 = 0.0, AllMoney3 = 0.0, AllMoney4 = 0.0, AllMoney5 = 0.0;
     int allNum1 = 0, allNum2 = 0, allNum3 = 0, allNum4 = 0, allNum5 = 0;
     double moneyS1 = 0.0, moneyS2 = 0.0, moneyS3 = 0.0, moneyS4 = 0.0, moneyS5 = 0.0;
+    String department1 = "", department2 = "", department3 = "", department4 = "", department5 = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -197,10 +224,10 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     AllMoney1 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
-                }else {
+                } else {
                     AllMoney1 = 0.0;
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
@@ -219,10 +246,10 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     AllMoney2 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
-                }else {
+                } else {
                     AllMoney2 = 0.0;
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
@@ -241,10 +268,10 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     AllMoney3 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
-                }else {
+                } else {
                     AllMoney3 = 0.0;
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
@@ -263,10 +290,10 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     AllMoney4 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
-                }else {
+                } else {
                     AllMoney4 = 0.0;
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
@@ -285,10 +312,10 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     AllMoney5 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
-                }else {
+                } else {
                     AllMoney5 = 0.0;
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
@@ -308,13 +335,18 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum1 = (Integer.valueOf(s.toString()));
-                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney1.getText().toString().equals("")) {
-                        etAllMoney1.setText(String.valueOf(Double.valueOf(etMoney1.getText().toString()) * allNum1));
-                    }else {
-                        etAllMoney1.setText(String.valueOf(0 * allNum1));
+                    if (!etMoney1.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(allNum1));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney1.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
+                        if (!etMoney1.getText().toString().equals("")) {
+                            etAllMoney1.setText(s1);
+                        } else {
+                            etAllMoney1.setText(String.valueOf(0 * allNum1));
+                        }
                     }
                 } else {
                     allNum1 = 0;
@@ -336,13 +368,18 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum2 = (Integer.valueOf(s.toString()));
-                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney2.getText().toString().equals("")) {
-                        etAllMoney2.setText(String.valueOf(Double.valueOf(etMoney2.getText().toString()) * allNum2));
-                    }else {
-                        etAllMoney2.setText(String.valueOf(0 * allNum2));
+                    if (!etMoney2.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(allNum2));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney2.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
+                        if (!etMoney2.getText().toString().equals("")) {
+                            etAllMoney2.setText(s1);
+                        } else {
+                            etAllMoney2.setText(String.valueOf(0 * allNum2));
+                        }
                     }
                 } else {
                     allNum2 = 0;
@@ -364,13 +401,18 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum3 = (Integer.valueOf(s.toString()));
-                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney3.getText().toString().equals("")) {
-                        etAllMoney3.setText(String.valueOf(Double.valueOf(etMoney3.getText().toString()) * allNum3));
-                    }else {
-                        etAllMoney3.setText(String.valueOf(0 * allNum3));
+                    if (!etMoney3.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(allNum3));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney3.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
+                        if (!etMoney3.getText().toString().equals("")) {
+                            etAllMoney3.setText(s1);
+                        } else {
+                            etAllMoney3.setText(String.valueOf(0 * allNum3));
+                        }
                     }
                 } else {
                     allNum3 = 0;
@@ -392,13 +434,18 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum4 = (Integer.valueOf(s.toString()));
-                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney4.getText().toString().equals("")) {
-                        etAllMoney4.setText(String.valueOf(Double.valueOf(etMoney4.getText().toString()) * allNum4));
-                    }else {
-                        etAllMoney4.setText(String.valueOf(0 * allNum4));
+                    if (!etMoney4.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(allNum4));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney4.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
+                        if (!etMoney4.getText().toString().equals("")) {
+                            etAllMoney4.setText(s1);
+                        } else {
+                            etAllMoney4.setText(String.valueOf(0 * allNum4));
+                        }
                     }
                 } else {
                     allNum4 = 0;
@@ -420,13 +467,18 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum5 = (Integer.valueOf(s.toString()));
-                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
-                    if (!etMoney5.getText().toString().equals("")) {
-                        etAllMoney5.setText(String.valueOf(Double.valueOf(etMoney5.getText().toString()) * allNum5));
-                    }else {
-                        etAllMoney5.setText(String.valueOf(0 * allNum5));
+                    if (!etMoney5.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(allNum5));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney5.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
+                        if (!etMoney5.getText().toString().equals("")) {
+                            etAllMoney5.setText(s1);
+                        } else {
+                            etAllMoney5.setText(String.valueOf(0 * allNum5));
+                        }
                     }
                 } else {
                     allNum5 = 0;
@@ -449,12 +501,17 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     moneyS1 = (Double.valueOf(s.toString()));
-                    if (!etNum1.getText().toString().equals("")) {
-                        etAllMoney1.setText(String.valueOf(Double.valueOf(etNum1.getText().toString()) * moneyS1));
-                    }else {
-                        etAllMoney1.setText(String.valueOf(0 * moneyS1));
+                    if (!etNum1.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(moneyS1));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etNum1.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        if (!etNum1.getText().toString().equals("")) {
+                            etAllMoney1.setText(s1);
+                        } else {
+                            etAllMoney1.setText(String.valueOf(0 * moneyS1));
+                        }
                     }
                 } else {
                     etAllMoney1.setText(String.valueOf(0 * moneyS1));
@@ -474,12 +531,17 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     moneyS2 = (Double.valueOf(s.toString()));
-                    if (!etNum2.getText().toString().equals("")) {
-                        etAllMoney2.setText(String.valueOf(Double.valueOf(etNum2.getText().toString()) * moneyS2));
-                    }else {
-                        etAllMoney2.setText(String.valueOf(0 * moneyS2));
+                    if (!etNum2.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(moneyS2));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etNum2.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        if (!etNum2.getText().toString().equals("")) {
+                            etAllMoney2.setText(s1);
+                        } else {
+                            etAllMoney2.setText(String.valueOf(0 * moneyS2));
+                        }
                     }
                 } else {
                     etAllMoney2.setText(String.valueOf(0 * moneyS2));
@@ -499,12 +561,17 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     moneyS3 = (Double.valueOf(s.toString()));
-                    if (!etNum3.getText().toString().equals("")) {
-                        etAllMoney3.setText(String.valueOf(Double.valueOf(etNum3.getText().toString()) * moneyS3));
-                    }else {
-                        etAllMoney3.setText(String.valueOf(0 * moneyS3));
+                    if (!etNum3.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(moneyS3));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etNum3.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        if (!etNum3.getText().toString().equals("")) {
+                            etAllMoney3.setText(s1);
+                        } else {
+                            etAllMoney3.setText(String.valueOf(0 * moneyS3));
+                        }
                     }
                 } else {
                     etAllMoney3.setText(String.valueOf(0 * moneyS3));
@@ -524,12 +591,17 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     moneyS4 = (Double.valueOf(s.toString()));
-                    if (!etNum4.getText().toString().equals("")) {
-                        etAllMoney4.setText(String.valueOf(Double.valueOf(etNum4.getText().toString()) * moneyS4));
-                    }else {
-                        etAllMoney4.setText(String.valueOf(0 * moneyS4));
+                    if (!etNum4.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(moneyS4));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etNum4.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        if (!etNum4.getText().toString().equals("")) {
+                            etAllMoney4.setText(s1);
+                        } else {
+                            etAllMoney4.setText(String.valueOf(0 * moneyS4));
+                        }
                     }
                 } else {
                     etAllMoney4.setText(String.valueOf(0 * moneyS4));
@@ -549,16 +621,64 @@ public class FragmentGoodsPurchaseData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")&&!s.toString().equals(".")) {
+                if (!s.toString().equals("") && !s.toString().equals(".")) {
                     moneyS5 = (Double.valueOf(s.toString()));
-                    if (!etNum5.getText().toString().equals("")) {
-                        etAllMoney5.setText(String.valueOf(Double.valueOf(etNum4.getText().toString()) * moneyS4));
-                    }else {
-                        etAllMoney5.setText(String.valueOf(0 * moneyS5));
+                    if (!etNum5.getText().toString().equals("")){
+                        BigDecimal b1 = new BigDecimal(Double.toString(moneyS5));
+                        BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etNum5.getText().toString())));
+                        String s1 =  b1.multiply(b2).doubleValue()+"";
+                        if (!etNum5.getText().toString().equals("")) {
+                            etAllMoney5.setText(s1);
+                        } else {
+                            etAllMoney5.setText(String.valueOf(0 * moneyS5));
+                        }
                     }
                 } else {
                     etAllMoney5.setText(String.valueOf(0 * moneyS5));
                 }
+            }
+        });
+
+        listZC.add("资产类");
+        listZC.add("非资产类");
+        ArrayAdapter adapterZC = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listZC);
+        adapterZC.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerzc.setAdapter(adapterZC);
+
+        listType.add("");
+        listType.add("办公家具");
+        listType.add("电子设备");
+        listType.add("交通设备");
+        listType.add("房屋及建筑物");
+        listType.add("修理设备");
+        listType.add("材料配件");
+        listType.add("投币机、零钞兑换机");
+        listType.add("消防、安防设备");
+        ArrayAdapter adapterType = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listType);
+        adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnertype.setAdapter(adapterType);
+        spinnertype.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                if (arg2 !=0){
+                    final String data = (String)spinnertype.getItemAtPosition(arg2);//从spinner中获取被选择的数据
+//                    Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT).show();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + "admin/getAssetsByTypeAssetsManage.do?type="+data;
+                            DBHandler dbA = new DBHandler();
+                            aboutData = dbA.GoodsPurchaseAboutDep(url);
+                            if (aboutData.equals("保存失败") || aboutData.equals("")) {
+                                handler.sendEmptyMessage(111);
+                            } else {
+                                handler.sendEmptyMessage(222);
+                            }
+                        }
+                    }).start();
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
         return view;
@@ -652,6 +772,7 @@ public class FragmentGoodsPurchaseData extends Fragment {
                 final String department = etClass.getText().toString();
                 final String person = etPerson.getText().toString();
                 final String time = tvTime.getText().toString();
+                final String use = etUse.getText().toString();
                 if (department.equals("")) {
                     Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
                     break;
@@ -662,6 +783,18 @@ public class FragmentGoodsPurchaseData extends Fragment {
                 }
                 if (time.equals("")) {
                     Toast.makeText(getActivity(), "填单日期不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (etName1.getText().toString().equals("") || etNum1.getText().toString().equals("") || etAllMoney1.getText().toString().equals("")) {
+                    Toast.makeText(getActivity(), "采购信息不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (spinnertype.getSelectedItem().toString().equals("")) {
+                    Toast.makeText(getActivity(), "物品类型不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (use.equals("")) {
+                    Toast.makeText(getActivity(), "用途不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 ProgressDialogUtil.startLoad(getActivity(), "数据上传中");
@@ -745,11 +878,19 @@ public class FragmentGoodsPurchaseData extends Fragment {
                     hejije += Double.valueOf(allMoney4);
                 }
 
+                department1 = etDepartment1.getText().toString();
+                department2 = etDepartment2.getText().toString();
+                department3 = etDepartment3.getText().toString();
+                department4 = etDepartment4.getText().toString();
+                department5 = etDepartment5.getText().toString();
+
                 final String userCode = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
-                res = dbA.OAGoodsPurchaseUp(turl, department, person, time,  name1, name2, name3, name4, name5
+                res = dbA.OAGoodsPurchaseUp(turl, department, person, time, name1, name2, name3, name4, name5
                         , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
                         , allMoney4, allMoney5, userCode, userDepart, uId, String.valueOf(hejisl), String.valueOf(hejidj)
-                        , String.valueOf(hejije), use, other);
+                        , String.valueOf(hejije), use, other,spinnerzc.getSelectedItem().toString()
+                        ,spinnertype.getSelectedItem().toString(),aboutDep, department1, department2
+                        , department3, department4, department5);
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -781,6 +922,17 @@ public class FragmentGoodsPurchaseData extends Fragment {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
+                case 111:
+                    Toast.makeText(getActivity(), "关联部门失败", Toast.LENGTH_SHORT).show();
+                    break;
+                case 222:
+                    try {
+                        JSONObject jsonObject = new JSONObject(aboutData);
+                        aboutDep = jsonObject.getString("msg");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
                 case TAG_ONE:
                     try {
                         JSONObject jsonObject = new JSONObject(data1);

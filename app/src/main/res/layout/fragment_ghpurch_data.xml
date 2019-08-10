@@ -209,7 +209,7 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number" />
 
                     <View style="@style/line"></View>
 
@@ -218,7 +218,7 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number" />
 
                     <View style="@style/line"></View>
 
@@ -227,7 +227,7 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number" />
 
                     <View style="@style/line"></View>
 
@@ -236,14 +236,14 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number" />
                     <View style="@style/line"></View>
                     <EditText
                         android:id="@+id/etNum5"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number" />
                 </LinearLayout>
 
                 <View
@@ -329,7 +329,7 @@
 
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney1"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -338,7 +338,7 @@
 
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney2"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -347,7 +347,7 @@
 
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney3"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -356,7 +356,7 @@
 
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney4"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -364,7 +364,7 @@
                         android:inputType="number|numberDecimal" />
                     <View style="@style/line"></View>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/etAllMoney5"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
@@ -562,7 +562,7 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="委员会主任意见:"
+                    android:text="财务总监意见:"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
 
@@ -575,13 +575,13 @@
                 <EditText
                     android:id="@+id/etLeader1"
                     style="@style/textWrite"
-                    android:hint="委员会主任意见"
+                    android:hint="财务总监意见"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader1"
                     style="@style/textWrite"
-                    android:hint="委员会主任意见" />
+                    android:hint="财务总监意见" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout

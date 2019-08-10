@@ -69,6 +69,10 @@ public class CaiWuActivity extends BaseActivity {
     LinearLayout llGHPay;
     @BindView(R.id.flGHPay)
     FrameLayout flGHPay;
+    @BindView(R.id.llGHSingle)
+    LinearLayout llGHSingle;
+    @BindView(R.id.flGHSingle)
+    FrameLayout flGHSingle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +132,9 @@ public class CaiWuActivity extends BaseActivity {
                 if (!dataList.contains(Constant.GHPAYFLOWNAME)) {
                     flGHPay.setVisibility(View.GONE);
                 }
+                if (!dataList.contains(Constant.GHCONTRACTSIGNNAME)) {
+                    flGHSingle.setVisibility(View.GONE);
+                }
 //                getData();
             }
         } catch (JSONException e) {
@@ -156,7 +163,7 @@ public class CaiWuActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.llBill, R.id.llFuKuanLiuCheng, R.id.llContractPay, R.id.llGHPay})
+    @OnClick({R.id.llBill, R.id.llFuKuanLiuCheng, R.id.llContractPay, R.id.llGHPay, R.id.llGHSingle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.llBill:
@@ -173,6 +180,10 @@ public class CaiWuActivity extends BaseActivity {
                 break;
             case R.id.llGHPay:
                 intent = new Intent(this, FlowGHPayActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.llGHSingle:
+                intent = new Intent(this, FlowGHContractSignActivity.class);
                 startActivity(intent);
                 break;
         }

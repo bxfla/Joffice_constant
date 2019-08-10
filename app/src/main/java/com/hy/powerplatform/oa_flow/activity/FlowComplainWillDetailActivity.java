@@ -168,6 +168,7 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
     String[] bigCodetemp = null;
     List<String> resultList = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
+    List<String> bigResultList1 = new ArrayList<>();
 
     String role = "";
     String url;
@@ -306,6 +307,7 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
         if (bigCodetemp != null) {
             for (String s : bigCodetemp) {
                 bigResultList.add(s);
+                bigResultList1.add(s);
             }
         }
         if (nametemp != null) {
@@ -515,7 +517,7 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
                 cb9.setVisibility(View.VISIBLE);
             }
         }
-        getLastPerson();
+        ProgressDialogUtil.stopLoad();
     }
 
     @OnClick({R.id.btnUp, R.id.tvData1, R.id.btnT,R.id.btnHistory})
@@ -702,21 +704,22 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
                 }
                 if (etLeader1.getVisibility() == View.VISIBLE) {
                     comment = etLeader1.getText().toString();
-//            try {
-//                jsonObject.put("ui", userCode);
-//                jsonObject.put("un", userName);
-//                jsonObject.put("c", str);
-//                jsonObject.put("v", etLeader1.getText().toString());
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//            jsonArray.put(jsonObject);
-//            if (fgsfze.equals("")) {
-//                fgsfze = jsonArray.toString();
-//            } else {
-//                fgsfze = fgsfze + "," + jsonArray.toString();
-//                fgsfze = fgsfze.toString().replace("],[", ",");
-//            }
+                    JSONArray jsonArray = new JSONArray();
+                    try {
+                        jsonObject.put("ui", userCode);
+                        jsonObject.put("un", userName);
+                        jsonObject.put("c", str);
+                        jsonObject.put("v", etLeader1.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    jsonArray.put(jsonObject);
+                    if (fgsfze.equals("")) {
+                        fgsfze = jsonArray.toString();
+                    } else {
+                        fgsfze = fgsfze + "," + jsonArray.toString();
+                        fgsfze = fgsfze.toString().replace("],[", ",");
+                    }
                     fgsfze = etLeader1.getText().toString();
                 }
                 if (etLeader2.getVisibility() == View.VISIBLE) {
@@ -882,24 +885,47 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
                 userCodes = userCodes.toString().replace("[", "");
                 userCodes = userCodes.toString().replace("]", "");
 
-                String bigUserCodes = bigResultList.toString();
-                bigUserCodes = bigUserCodes.toString().replace("[", "");
-                bigUserCodes = bigUserCodes.toString().replace("]", "");
+                if (bigResultList.size()==0&&bigResultList1.size()!=0){
 
-                if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                    flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                    flowAssignld = leader + ":" + role + "|" + bigUserCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                } else {
-                    flowAssignld = destName + "|" + userCodes;
-                    flowAssignld = flowAssignld.replace(" ", "");
-                    flowAssignld = flowAssignld.replace(":|", "|");
-                    flowAssignld = flowAssignld.replace(":", "");
+                    String bigUserCodes = bigResultList1.toString();
+                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+
+                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else {
+                        flowAssignld = destName + "|" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                        flowAssignld = flowAssignld.replace(":", "");
+                    }
+                }else {
+                    String bigUserCodes = bigResultList.toString();
+                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+
+                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else {
+                        flowAssignld = destName + "|" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                        flowAssignld = flowAssignld.replace(":", "");
+                    }
                 }
+
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
                 upData = dbA.OAComplainder(url, person, time, sex, phone, person1,

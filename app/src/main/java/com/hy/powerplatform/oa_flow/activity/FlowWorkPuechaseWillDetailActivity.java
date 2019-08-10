@@ -656,7 +656,7 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                 cb12.setVisibility(View.VISIBLE);
             }
         }
-        getLastPerson();
+        ProgressDialogUtil.stopLoad();
     }
 
     @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT, R.id.btnHistory})

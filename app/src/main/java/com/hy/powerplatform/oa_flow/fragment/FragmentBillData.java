@@ -265,7 +265,7 @@ public class FragmentBillData extends Fragment {
                 final String allmoneyY = etAllMoneyY.getText().toString();
 
                 if (bigMoney.equals("")) {
-                    Toast.makeText(getActivity(), "金额不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "借款金额不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (zdPerson.equals("")) {
@@ -289,7 +289,7 @@ public class FragmentBillData extends Fragment {
                     break;
                 }
                 if (otherPerson.equals("")) {
-                    Toast.makeText(getActivity(), "受伤人不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "受伤人数不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (otherPhone.equals("")) {

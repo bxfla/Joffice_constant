@@ -12,14 +12,15 @@ public class FlowGoodsPuechase implements Serializable {
 
     /**
      * success : true
-     * taskId : 7910042
-     * pkValue : 91
-     * formRights : {'bmfzryj':'2','heji1':'1','shuliang2':'1','jine2':'1','danjia2':'1','danjia3':'1','heji3':'1','sqr':'1','shuliang4':'1','mingcheng3':'1','danjia1':'1','QiTa':'1','zcgkbmyj':'1','shuliang1':'1','bm':'1','xgfj':'1','danjia4':'1','shuliang3':'1','jine5':'1','hejidj':'1','mingcheng5':'1','sqrq':'1','heji2':'1','yt':'1','zjlyj':'1','shuliang5':'1','jine3':'1','mingcheng1':'1','mingcheng4':'1','fgldyj':'1','bmyj':'2','jine4':'1','hejisl':'1','danjia5':'1','hejije':'1','mingcheng2':'1','jine1':'1','cwzjyj':'1'}
-     * mainform : [{"heji1":"","heji2":"","heji3":"","shuliang3":"","shuliang4":"","xgfj":"","shuliang1":"2","shuliang2":"","shuliang5":"","runId":51319,"mingcheng1":"测试app","mingcheng3":"","mingcheng2":"","hejidj":"","mingcheng4":"","mingcheng5":"","bm":"宜春公交集团有限公司","mainId":91,"sqrq":"2019-01-30","hejije":"4","QiTa":"","zcgkbmyj":"","jine2":"","sqr":"超级管理员","jine3":"","cwzjyj":"","jine4":"","jine5":"","danjia5":"","$type$":"WF_wpcgjhbnew","danjia4":"","danjia3":"","danjia2":"","fgldyj":"","jine1":"4","danjia1":"2","hejisl":"2","yt":"测试物品采购计划app","bmyj":"","zjlyj":"","bmfzryj":""}]
+     * taskId : 9380220
+     * pkValue : mainId
+     * formRights : {'iszc':'1','heji1':'1','goodsType':'1','jine1':'1','danwei5':'1','danjia2':'1','danwei1':'1','sqrq':'1','danjia3':'1','danwei2':'1','heji3':'1','shuliang4':'1','yt':'1','zjlyj':'1','mingcheng3':'1','cwzjyj':'1','danjia5':'1','zcgkbmyj':'1','shuliang1':'1','mingcheng1':'1','bm':'1','mingcheng2':'1','mingcheng4':'1','shuliang3':'1','jine4':'1','bmfzryj':'2','hejidj':'1','jine2':'1','hejisl':'1','heji2':'1','jbfgldyj':'1','QiTa':'1','shuliang5':'1','danjia1':'1','danjia4':'1','fgldyj':'1','hejije':'1','mingcheng5':'1','danwei4':'1','jine5':'1','danwei3':'1','sqr':'1','jine3':'1','xgfj':'1','shuliang2':'1','jcbmyj':'1','bmyj':'1'}
+     * mainform : [{"heji1":"","heji2":"","jcbmyj":"","heji3":"","mingcheng1":"测试","mingcheng3":"","mingcheng2":"","mingcheng4":"","mingcheng5":"","bm":"宜春公交集团有限公司","iszc":"资产类","QiTa":"其他","zcgkbmyj":"","jine2":"","cwzjyj":"","jine3":"","jine4":"","jine5":"","jbfgldyj":"","jine1":"1.0","hejisl":"1","danwei1":"个","danwei2":"","danwei3":"","bmfzryj":"","danwei4":"","danwei5":"","shuliang3":"","shuliang4":"","shuliang1":"1","xgfj":"","shuliang2":"","shuliang5":"","runId":52232,"hejidj":"","mainId":181,"sqrq":"2019-08-08","goodsType":"办公家具","hejije":"1.0","sqr":"超级管理员","$type$":"WF_wpcgjhbnew","danjia5":"","danjia4":"","danjia3":"","danjia2":"","danjia1":"1","fgldyj":"","yt":"可是","bmyj":"","zjlyj":"","zcDepName":"综合管理部"}]
      * formDefId : 84
      * preTaskName :
      * isSignTask : false
-     * trans : [{"destType":"task","destination":"资产归口部门","name":"to 资产归口部门","source":"部门负责人"},{"destType":"task","destination":"退回发起人","name":"to 退回发起人","source":"部门负责人"}]
+     * trans : [{"destType":"decision","destination":"决策1","name":"to 决策1","source":"部门负责人"}]
+     * runId : 52232
      */
 
     private boolean success;
@@ -29,6 +30,7 @@ public class FlowGoodsPuechase implements Serializable {
     private String formDefId;
     private String preTaskName;
     private boolean isSignTask;
+    private int runId;
     private List<MainformBean> mainform;
     private List<TransBean> trans;
 
@@ -88,6 +90,14 @@ public class FlowGoodsPuechase implements Serializable {
         this.isSignTask = isSignTask;
     }
 
+    public int getRunId() {
+        return runId;
+    }
+
+    public void setRunId(int runId) {
+        this.runId = runId;
+    }
+
     public List<MainformBean> getMainform() {
         return mainform;
     }
@@ -108,88 +118,108 @@ public class FlowGoodsPuechase implements Serializable {
         /**
          * heji1 :
          * heji2 :
+         * jcbmyj :
          * heji3 :
-         * shuliang3 :
-         * shuliang4 :
-         * xgfj :
-         * shuliang1 : 2
-         * shuliang2 :
-         * shuliang5 :
-         * runId : 51319
-         * mingcheng1 : 测试app
+         * mingcheng1 : 测试
          * mingcheng3 :
          * mingcheng2 :
-         * hejidj :
          * mingcheng4 :
          * mingcheng5 :
          * bm : 宜春公交集团有限公司
-         * mainId : 91
-         * sqrq : 2019-01-30
-         * hejije : 4
-         * QiTa :
+         * iszc : 资产类
+         * QiTa : 其他
          * zcgkbmyj :
          * jine2 :
-         * sqr : 超级管理员
-         * jine3 :
          * cwzjyj :
+         * jine3 :
          * jine4 :
          * jine5 :
-         * danjia5 :
+         * jbfgldyj :
+         * jine1 : 1.0
+         * hejisl : 1
+         * danwei1 : 个
+         * danwei2 :
+         * danwei3 :
+         * bmfzryj :
+         * danwei4 :
+         * danwei5 :
+         * shuliang3 :
+         * shuliang4 :
+         * shuliang1 : 1
+         * xgfj :
+         * shuliang2 :
+         * shuliang5 :
+         * runId : 52232
+         * hejidj :
+         * mainId : 181
+         * sqrq : 2019-08-08
+         * goodsType : 办公家具
+         * hejije : 1.0
+         * sqr : 超级管理员
          * $type$ : WF_wpcgjhbnew
+         * danjia5 :
          * danjia4 :
          * danjia3 :
          * danjia2 :
+         * danjia1 : 1
          * fgldyj :
-         * jine1 : 4
-         * danjia1 : 2
-         * hejisl : 2
-         * yt : 测试物品采购计划app
+         * yt : 可是
          * bmyj :
          * zjlyj :
-         * bmfzryj :
+         * zcDepName : 综合管理部
          */
 
         private String heji1;
         private String heji2;
+        private String jcbmyj;
         private String heji3;
-        private String shuliang3;
-        private String shuliang4;
-        private String xgfj;
-        private String shuliang1;
-        private String shuliang2;
-        private String shuliang5;
-        private String runId;
         private String mingcheng1;
         private String mingcheng3;
         private String mingcheng2;
-        private String hejidj;
         private String mingcheng4;
         private String mingcheng5;
         private String bm;
-        private int mainId;
-        private String sqrq;
-        private String hejije;
+        private String iszc;
         private String QiTa;
         private String zcgkbmyj;
         private String jine2;
-        private String sqr;
-        private String jine3;
         private String cwzjyj;
+        private String jine3;
         private String jine4;
         private String jine5;
-        private String danjia5;
+        private String jbfgldyj;
+        private String jine1;
+        private String hejisl;
+        private String danwei1;
+        private String danwei2;
+        private String danwei3;
+        private String bmfzryj;
+        private String danwei4;
+        private String danwei5;
+        private String shuliang3;
+        private String shuliang4;
+        private String shuliang1;
+        private String xgfj;
+        private String shuliang2;
+        private String shuliang5;
+        private String runId;
+        private String hejidj;
+        private int mainId;
+        private String sqrq;
+        private String goodsType;
+        private String hejije;
+        private String sqr;
         private String $type$;
+        private String danjia5;
         private String danjia4;
         private String danjia3;
         private String danjia2;
-        private String fgldyj;
-        private String jine1;
         private String danjia1;
-        private String hejisl;
+        private String fgldyj;
         private String yt;
         private String bmyj;
         private String zjlyj;
-        private String bmfzryj;
+        private String zcDepName;
 
         public String getHeji1() {
             return heji1;
@@ -207,68 +237,20 @@ public class FlowGoodsPuechase implements Serializable {
             this.heji2 = heji2;
         }
 
+        public String getJcbmyj() {
+            return jcbmyj;
+        }
+
+        public void setJcbmyj(String jcbmyj) {
+            this.jcbmyj = jcbmyj;
+        }
+
         public String getHeji3() {
             return heji3;
         }
 
         public void setHeji3(String heji3) {
             this.heji3 = heji3;
-        }
-
-        public String getShuliang3() {
-            return shuliang3;
-        }
-
-        public void setShuliang3(String shuliang3) {
-            this.shuliang3 = shuliang3;
-        }
-
-        public String getShuliang4() {
-            return shuliang4;
-        }
-
-        public void setShuliang4(String shuliang4) {
-            this.shuliang4 = shuliang4;
-        }
-
-        public String getXgfj() {
-            return xgfj;
-        }
-
-        public void setXgfj(String xgfj) {
-            this.xgfj = xgfj;
-        }
-
-        public String getShuliang1() {
-            return shuliang1;
-        }
-
-        public void setShuliang1(String shuliang1) {
-            this.shuliang1 = shuliang1;
-        }
-
-        public String getShuliang2() {
-            return shuliang2;
-        }
-
-        public void setShuliang2(String shuliang2) {
-            this.shuliang2 = shuliang2;
-        }
-
-        public String getShuliang5() {
-            return shuliang5;
-        }
-
-        public void setShuliang5(String shuliang5) {
-            this.shuliang5 = shuliang5;
-        }
-
-        public String getRunId() {
-            return runId;
-        }
-
-        public void setRunId(String runId) {
-            this.runId = runId;
         }
 
         public String getMingcheng1() {
@@ -295,14 +277,6 @@ public class FlowGoodsPuechase implements Serializable {
             this.mingcheng2 = mingcheng2;
         }
 
-        public String getHejidj() {
-            return hejidj;
-        }
-
-        public void setHejidj(String hejidj) {
-            this.hejidj = hejidj;
-        }
-
         public String getMingcheng4() {
             return mingcheng4;
         }
@@ -327,28 +301,12 @@ public class FlowGoodsPuechase implements Serializable {
             this.bm = bm;
         }
 
-        public int getMainId() {
-            return mainId;
+        public String getIszc() {
+            return iszc;
         }
 
-        public void setMainId(int mainId) {
-            this.mainId = mainId;
-        }
-
-        public String getSqrq() {
-            return sqrq;
-        }
-
-        public void setSqrq(String sqrq) {
-            this.sqrq = sqrq;
-        }
-
-        public String getHejije() {
-            return hejije;
-        }
-
-        public void setHejije(String hejije) {
-            this.hejije = hejije;
+        public void setIszc(String iszc) {
+            this.iszc = iszc;
         }
 
         public String getQiTa() {
@@ -375,12 +333,12 @@ public class FlowGoodsPuechase implements Serializable {
             this.jine2 = jine2;
         }
 
-        public String getSqr() {
-            return sqr;
+        public String getCwzjyj() {
+            return cwzjyj;
         }
 
-        public void setSqr(String sqr) {
-            this.sqr = sqr;
+        public void setCwzjyj(String cwzjyj) {
+            this.cwzjyj = cwzjyj;
         }
 
         public String getJine3() {
@@ -389,14 +347,6 @@ public class FlowGoodsPuechase implements Serializable {
 
         public void setJine3(String jine3) {
             this.jine3 = jine3;
-        }
-
-        public String getCwzjyj() {
-            return cwzjyj;
-        }
-
-        public void setCwzjyj(String cwzjyj) {
-            this.cwzjyj = cwzjyj;
         }
 
         public String getJine4() {
@@ -415,12 +365,180 @@ public class FlowGoodsPuechase implements Serializable {
             this.jine5 = jine5;
         }
 
-        public String getDanjia5() {
-            return danjia5;
+        public String getJbfgldyj() {
+            return jbfgldyj;
         }
 
-        public void setDanjia5(String danjia5) {
-            this.danjia5 = danjia5;
+        public void setJbfgldyj(String jbfgldyj) {
+            this.jbfgldyj = jbfgldyj;
+        }
+
+        public String getJine1() {
+            return jine1;
+        }
+
+        public void setJine1(String jine1) {
+            this.jine1 = jine1;
+        }
+
+        public String getHejisl() {
+            return hejisl;
+        }
+
+        public void setHejisl(String hejisl) {
+            this.hejisl = hejisl;
+        }
+
+        public String getDanwei1() {
+            return danwei1;
+        }
+
+        public void setDanwei1(String danwei1) {
+            this.danwei1 = danwei1;
+        }
+
+        public String getDanwei2() {
+            return danwei2;
+        }
+
+        public void setDanwei2(String danwei2) {
+            this.danwei2 = danwei2;
+        }
+
+        public String getDanwei3() {
+            return danwei3;
+        }
+
+        public void setDanwei3(String danwei3) {
+            this.danwei3 = danwei3;
+        }
+
+        public String getBmfzryj() {
+            return bmfzryj;
+        }
+
+        public void setBmfzryj(String bmfzryj) {
+            this.bmfzryj = bmfzryj;
+        }
+
+        public String getDanwei4() {
+            return danwei4;
+        }
+
+        public void setDanwei4(String danwei4) {
+            this.danwei4 = danwei4;
+        }
+
+        public String getDanwei5() {
+            return danwei5;
+        }
+
+        public void setDanwei5(String danwei5) {
+            this.danwei5 = danwei5;
+        }
+
+        public String getShuliang3() {
+            return shuliang3;
+        }
+
+        public void setShuliang3(String shuliang3) {
+            this.shuliang3 = shuliang3;
+        }
+
+        public String getShuliang4() {
+            return shuliang4;
+        }
+
+        public void setShuliang4(String shuliang4) {
+            this.shuliang4 = shuliang4;
+        }
+
+        public String getShuliang1() {
+            return shuliang1;
+        }
+
+        public void setShuliang1(String shuliang1) {
+            this.shuliang1 = shuliang1;
+        }
+
+        public String getXgfj() {
+            return xgfj;
+        }
+
+        public void setXgfj(String xgfj) {
+            this.xgfj = xgfj;
+        }
+
+        public String getShuliang2() {
+            return shuliang2;
+        }
+
+        public void setShuliang2(String shuliang2) {
+            this.shuliang2 = shuliang2;
+        }
+
+        public String getShuliang5() {
+            return shuliang5;
+        }
+
+        public void setShuliang5(String shuliang5) {
+            this.shuliang5 = shuliang5;
+        }
+
+        public String getRunId() {
+            return runId;
+        }
+
+        public void setRunId(String runId) {
+            this.runId = runId;
+        }
+
+        public String getHejidj() {
+            return hejidj;
+        }
+
+        public void setHejidj(String hejidj) {
+            this.hejidj = hejidj;
+        }
+
+        public int getMainId() {
+            return mainId;
+        }
+
+        public void setMainId(int mainId) {
+            this.mainId = mainId;
+        }
+
+        public String getSqrq() {
+            return sqrq;
+        }
+
+        public void setSqrq(String sqrq) {
+            this.sqrq = sqrq;
+        }
+
+        public String getGoodsType() {
+            return goodsType;
+        }
+
+        public void setGoodsType(String goodsType) {
+            this.goodsType = goodsType;
+        }
+
+        public String getHejije() {
+            return hejije;
+        }
+
+        public void setHejije(String hejije) {
+            this.hejije = hejije;
+        }
+
+        public String getSqr() {
+            return sqr;
+        }
+
+        public void setSqr(String sqr) {
+            this.sqr = sqr;
         }
 
         public String get$type$() {
@@ -429,6 +547,14 @@ public class FlowGoodsPuechase implements Serializable {
 
         public void set$type$(String $type$) {
             this.$type$ = $type$;
+        }
+
+        public String getDanjia5() {
+            return danjia5;
+        }
+
+        public void setDanjia5(String danjia5) {
+            this.danjia5 = danjia5;
         }
 
         public String getDanjia4() {
@@ -455,22 +581,6 @@ public class FlowGoodsPuechase implements Serializable {
             this.danjia2 = danjia2;
         }
 
-        public String getFgldyj() {
-            return fgldyj;
-        }
-
-        public void setFgldyj(String fgldyj) {
-            this.fgldyj = fgldyj;
-        }
-
-        public String getJine1() {
-            return jine1;
-        }
-
-        public void setJine1(String jine1) {
-            this.jine1 = jine1;
-        }
-
         public String getDanjia1() {
             return danjia1;
         }
@@ -479,12 +589,12 @@ public class FlowGoodsPuechase implements Serializable {
             this.danjia1 = danjia1;
         }
 
-        public String getHejisl() {
-            return hejisl;
+        public String getFgldyj() {
+            return fgldyj;
         }
 
-        public void setHejisl(String hejisl) {
-            this.hejisl = hejisl;
+        public void setFgldyj(String fgldyj) {
+            this.fgldyj = fgldyj;
         }
 
         public String getYt() {
@@ -511,20 +621,20 @@ public class FlowGoodsPuechase implements Serializable {
             this.zjlyj = zjlyj;
         }
 
-        public String getBmfzryj() {
-            return bmfzryj;
+        public String getZcDepName() {
+            return zcDepName;
         }
 
-        public void setBmfzryj(String bmfzryj) {
-            this.bmfzryj = bmfzryj;
+        public void setZcDepName(String zcDepName) {
+            this.zcDepName = zcDepName;
         }
     }
 
     public static class TransBean {
         /**
-         * destType : task
-         * destination : 资产归口部门
-         * name : to 资产归口部门
+         * destType : decision
+         * destination : 决策1
+         * name : to 决策1
          * source : 部门负责人
          */
 

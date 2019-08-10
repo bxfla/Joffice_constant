@@ -111,6 +111,26 @@
                 style="@style/ycGO" />
         </LinearLayout>
     </FrameLayout>
+    <FrameLayout
+        android:id="@+id/flGHSingle"
+        style="@style/ycFrameLayout">
+        <LinearLayout
+            android:id="@+id/llGHSingle"
+            style="@style/ycLinearLayout">
+            <ImageView
+                style="@style/ycImageView"
+                android:src="@drawable/flow_item22"
+                android:layout_gravity="center"/>
+            <TextView
+                style="@style/ycTextView"
+                android:text="工会合同签订"/>
+            <TextView
+                android:id="@+id/tvGHSingle"
+                style="@style/numTextView"/>
+            <ImageView style="@style/ycGO"/>
+        </LinearLayout>
+    </FrameLayout>
+
 
     <FrameLayout
         android:layout_width="0dp"

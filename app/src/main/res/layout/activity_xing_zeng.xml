@@ -317,6 +317,7 @@
                 </FrameLayout>
 
                 <FrameLayout
+                    android:visibility="gone"
                     android:id="@+id/flHuiQian"
                     style="@style/ycFrameLayout">
                     <LinearLayout
@@ -336,6 +337,7 @@
                     </LinearLayout>
                 </FrameLayout>
                 <FrameLayout
+                    android:visibility="gone"
                     android:id="@+id/flGHSingle"
                     style="@style/ycFrameLayout">
                     <LinearLayout

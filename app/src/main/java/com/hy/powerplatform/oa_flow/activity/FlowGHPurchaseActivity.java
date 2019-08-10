@@ -46,7 +46,7 @@ public class FlowGHPurchaseActivity extends BaseActivity implements RadioGroup.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        header.setTvTitle("春城通物品采购审批");
+        header.setTvTitle("工会采购审批");
         fragment01 = new FragmentGHPurchaseData();
         fragment02 = new FragmentGHPurchaseList();
         fragment011 = new FragmentTestList();

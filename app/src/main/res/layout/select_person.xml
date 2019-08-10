@@ -8,6 +8,7 @@
         android:layout_height="45dp"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/tv"
             style="@style/oaTextView"
             android:text="申请人: *"/>
         <View

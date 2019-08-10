@@ -142,6 +142,28 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.ll1)
     LinearLayout ll1;
+    @BindView(R.id.tvzc)
+    TextView tvzc;
+    @BindView(R.id.tvtype)
+    TextView tvtype;
+    @BindView(R.id.etDepartment1)
+    EditText etDepartment1;
+    @BindView(R.id.etDepartment2)
+    EditText etDepartment2;
+    @BindView(R.id.etDepartment3)
+    EditText etDepartment3;
+    @BindView(R.id.etDepartment4)
+    EditText etDepartment4;
+    @BindView(R.id.etDepartment5)
+    EditText etDepartment5;
+    @BindView(R.id.tvDepartment5)
+    TextView tvDepartment5;
+    @BindView(R.id.etLeaderJG)
+    EditText etLeaderJG;
+    @BindView(R.id.tvLeaderJG)
+    TextView tvLeaderJG;
+    @BindView(R.id.llcg)
+    LinearLayout llcg;
     private String res;
     String xiangguanfujian = "";
     String flowMessage = "";
@@ -320,7 +342,11 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                     etName5.setText(bean.getMainform().get(0).getMingcheng5());
                     xiangguanfujian = bean.getMainform().get(0).getXgfj();
                     runID = bean.getMainform().get(0).getRunId();
+                    String iszc = bean.getMainform().get(0).getIszc();
+                    String goodsType = bean.getMainform().get(0).getGoodsType();
                     tvData.setText(xiangguanfujian);
+                    tvzc.setText(iszc);
+                    tvtype.setText(goodsType);
 
                     etNum1.setText(bean.getMainform().get(0).getShuliang1());
                     etNum2.setText(bean.getMainform().get(0).getShuliang2());
@@ -339,14 +365,22 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                     etAllMoney3.setText(bean.getMainform().get(0).getJine3());
                     etAllMoney4.setText(bean.getMainform().get(0).getJine4());
                     etAllMoney5.setText(bean.getMainform().get(0).getJine5());
+
+                    etDepartment1.setText(bean.getMainform().get(0).getDanwei1());
+                    etDepartment2.setText(bean.getMainform().get(0).getDanwei2());
+                    etDepartment3.setText(bean.getMainform().get(0).getDanwei3());
+                    etDepartment4.setText(bean.getMainform().get(0).getDanwei4());
+                    etDepartment5.setText(bean.getMainform().get(0).getDanwei5());
+
                     tvAllNum.setText(bean.getMainform().get(0).getHejisl());
                     tvAllMoney.setText(bean.getMainform().get(0).getHejije());
                     tvOther.setText(bean.getMainform().get(0).getQiTa());
 
                     String bmfzr = bean.getMainform().get(0).getBmfzryj();
+                    String jcbmyj = bean.getMainform().get(0).getJcbmyj();
                     String zcgkbmyj = bean.getMainform().get(0).getZcgkbmyj();
                     String fgfzr = bean.getMainform().get(0).getFgldyj();
-                    String cgfgyj = bean.getMainform().get(0).getCbfgldyj();
+                    String cgyj = bean.getMainform().get(0).getCgfgldyj();
                     String cwzjyj = bean.getMainform().get(0).getCwzjyj();
                     String zjl = bean.getMainform().get(0).getZjlyj();
 
@@ -359,14 +393,17 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                     if (!bmfzr.equals("")) {
                         tvLeader.setText(getJSONData(bmfzr));
                     }
+                    if (!jcbmyj.equals("")) {
+                        tvLeaderJG.setText(getJSONData(jcbmyj));
+                    }
                     if (!zcgkbmyj.equals("")) {
                         tvLeader1.setText(getJSONData(zcgkbmyj));
                     }
                     if (!fgfzr.equals("")) {
                         tvLeader2.setText(getJSONData(fgfzr));
                     }
-                    if (!cgfgyj.equals("")) {
-                        tvLeader3.setText(getJSONData(cgfgyj));
+                    if (!cgyj.equals("")) {
+                        tvLeader3.setText(getJSONData(cgyj));
                     }
                     if (!cwzjyj.equals("")) {
                         tvLeader4.setText(getJSONData(cwzjyj));

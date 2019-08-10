@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -139,6 +140,30 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.tvzc)
+    TextView tvzc;
+    @BindView(R.id.tvtype)
+    TextView tvtype;
+    @BindView(R.id.etLeaderJG)
+    EditText etLeaderJG;
+    @BindView(R.id.tvLeaderJG)
+    TextView tvLeaderJG;
+    @BindView(R.id.ll1)
+    LinearLayout ll1;
+    @BindView(R.id.etDepartment1)
+    EditText etDepartment1;
+    @BindView(R.id.etDepartment2)
+    EditText etDepartment2;
+    @BindView(R.id.etDepartment3)
+    EditText etDepartment3;
+    @BindView(R.id.etDepartment4)
+    EditText etDepartment4;
+    @BindView(R.id.etDepartment5)
+    EditText etDepartment5;
+    @BindView(R.id.tvDepartment5)
+    TextView tvDepartment5;
+    @BindView(R.id.llcg)
+    LinearLayout llcg;
     private String res;
     String xiangguanfujian = "";
     String flowMessage = "";
@@ -150,8 +175,9 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        llcg.setVisibility(View.GONE);
         header.setTvRight("追回");
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         btnUp.setVisibility(View.GONE);
         Intent intent = getIntent();
@@ -189,7 +215,7 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
             public void success(Object o) {
                 Message message = new Message();
                 message.what = Constant.TAG_FIVE;
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putString("msg", o.toString());
                 message.setData(bundle);
                 handler.sendMessage(message);
@@ -205,19 +231,19 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.tvData,R.id.btnHistory})
+    @OnClick({R.id.tvData, R.id.btnHistory})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnHistory:
                 recyclerView.setVisibility(View.VISIBLE);
-                ProgressDialogUtil.startLoad(FlowGoodsPruchaseDetailActivity.this,"获取数据中");
+                ProgressDialogUtil.startLoad(FlowGoodsPruchaseDetailActivity.this, "获取数据中");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         //String name =URLDecoder.decode(待转值,"utf-8");
                         String url = Constant.BASE_URL2 + Constant.FLOWMESSAGE;
                         DBHandler dbA = new DBHandler();
-                        flowMessage = dbA.OAFlowMessage(url,runID);
+                        flowMessage = dbA.OAFlowMessage(url, runID);
                         if (flowMessage.equals("获取数据失败") || flowMessage.equals("")) {
                             handler.sendEmptyMessage(TAG_TWO);
                         } else {
@@ -295,10 +321,10 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowGoodsPruchaseDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowGoodsPruchaseDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
                     break;
@@ -312,9 +338,13 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
                     String other = bean.getMainform().get(0).getQiTa();
                     String allMoney = bean.getMainform().get(0).getHejije();
                     String allNum = bean.getMainform().get(0).getHejisl();
+                    String iszc = bean.getMainform().get(0).getIszc();
+                    String goodsType = bean.getMainform().get(0).getGoodsType();
                     xiangguanfujian = bean.getMainform().get(0).getXgfj();
                     runID = bean.getMainform().get(0).getRunId();
                     tvData.setText(xiangguanfujian);
+                    tvzc.setText(iszc);
+                    tvtype.setText(goodsType);
                     etName1.setText(bean.getMainform().get(0).getMingcheng1());
                     etName2.setText(bean.getMainform().get(0).getMingcheng2());
                     etName3.setText(bean.getMainform().get(0).getMingcheng3());
@@ -337,11 +367,18 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
                     etAllMoney4.setText(bean.getMainform().get(0).getJine4());
                     etAllMoney5.setText(bean.getMainform().get(0).getJine5());
 
+                    etDepartment1.setText(bean.getMainform().get(0).getDanwei1());
+                    etDepartment2.setText(bean.getMainform().get(0).getDanwei2());
+                    etDepartment3.setText(bean.getMainform().get(0).getDanwei3());
+                    etDepartment4.setText(bean.getMainform().get(0).getDanwei4());
+                    etDepartment5.setText(bean.getMainform().get(0).getDanwei5());
+
                     String bmfzr = bean.getMainform().get(0).getBmfzryj();
+                    String zjl = bean.getMainform().get(0).getZjlyj();
                     String zcgkbmyj = bean.getMainform().get(0).getZcgkbmyj();
                     String fgfzr = bean.getMainform().get(0).getFgldyj();
                     String cwzjyj = bean.getMainform().get(0).getCwzjyj();
-                    String zjl = bean.getMainform().get(0).getZjlyj();
+                    String jcbmyj = bean.getMainform().get(0).getJcbmyj();
 
                     etClass.setText(department);
                     etShenQingRen.setText(person);
@@ -361,10 +398,13 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
                         tvLeader2.setText(getJSONData(fgfzr));
                     }
                     if (!cwzjyj.equals("")) {
-                        tvLeader3.setText(getJSONData(cwzjyj));
+                        tvLeader4.setText(getJSONData(cwzjyj));
                     }
                     if (!zjl.equals("")) {
                         tvLeader4.setText(getJSONData(zjl));
+                    }
+                    if (!jcbmyj.equals("")) {
+                        tvLeaderJG.setText(getJSONData(jcbmyj));
                     }
                     ProgressDialogUtil.stopLoad();
                     break;
