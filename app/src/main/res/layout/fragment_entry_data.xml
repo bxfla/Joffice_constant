@@ -44,7 +44,7 @@
                 <EditText
                     android:id="@+id/etPhone"
                     android:hint="请填写联系电话"
-                    android:inputType="number|numberDecimal"
+                    android:inputType="number"
                     style="@style/oaEditText"/>
             </LinearLayout>
             <View style="@style/line"></View>
@@ -63,7 +63,7 @@
                 <EditText
                     android:id="@+id/etIdNum"
                     android:hint="请填写身份证号"
-                    android:inputType="number|numberDecimal"
+                    android:digits="0123456789qwertyuioplkjhgfdsazxcvbnm"
                     style="@style/oaEditText"/>
             </LinearLayout>
             <View style="@style/line"></View>
@@ -121,7 +121,6 @@
                     android:layout_weight="2.5"
                     android:layout_height="match_parent"/>
             </LinearLayout>
-            <View style="@style/line"></View>
             <LinearLayout
                 android:visibility="gone"
                 android:layout_width="match_parent"

@@ -36,6 +36,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,7 +73,7 @@ public class FragmentFuKuanLiuChengData extends Fragment {
     @BindView(R.id.etDPName)
     EditText etDPName;
     @BindView(R.id.etBigMoney)
-    EditText etBigMoney;
+    TextView etBigMoney;
     @BindView(R.id.etSmallMoney)
     EditText etSmallMoney;
     @BindView(R.id.textView)
@@ -138,7 +139,8 @@ public class FragmentFuKuanLiuChengData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                etBigMoney.setText(MoneyFormat.toChineseCharI(s.toString()));
+                BigDecimal numOfMoney = new BigDecimal(s.toString());
+                etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
             }
         });
 
@@ -364,10 +366,12 @@ public class FragmentFuKuanLiuChengData extends Fragment {
                     getActivity().finish();
                     break;
                 case TAG_FOUR:
+                    ProgressDialogUtil.stopLoad();
                     try {
                         JSONObject jsonObject = new JSONObject(res);
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         datalist.clear();
+                        nameList.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Name.DataBean name = new Name.DataBean();
                             JSONObject jsonObjectName = jsonArray.getJSONObject(i);
@@ -425,6 +429,7 @@ public class FragmentFuKuanLiuChengData extends Fragment {
                                     final String smallMoney = etSmallMoney.getText().toString();
                                     final String data = etYongTu.getText().toString();
                                     final String type = (String) spinner.getSelectedItem();
+                                    ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
                                     String res = dbA.OAFuKuanLiuCHeng(turl, person, time, department, type, classD,
                                             bigMoney, smallMoney, data, userName,userId,userDepart,uId,liushuihao);
                                     if (res.equals("")) {

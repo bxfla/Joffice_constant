@@ -331,7 +331,6 @@
                     android:background="@drawable/linearlayout" />
             </LinearLayout>
 
-            <View style="@style/line"></View>
             <LinearLayout
                 android:visibility="gone"
                 android:layout_width="match_parent"

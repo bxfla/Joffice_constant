@@ -34,6 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -127,7 +128,8 @@ public class FragmentReceiveDinnerData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                etBigMoney.setText(MoneyFormat.toChineseCharI(s.toString()));
+                BigDecimal numOfMoney = new BigDecimal(s.toString());
+                etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
             }
         });
         return view;
@@ -257,6 +259,7 @@ public class FragmentReceiveDinnerData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
+        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -404,10 +407,12 @@ public class FragmentReceiveDinnerData extends Fragment {
                     getActivity().finish();
                     break;
                 case TAG_FOUR:
+                    ProgressDialogUtil.stopLoad();
                     try {
                         JSONObject jsonObject = new JSONObject(res);
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         datalist.clear();
+                        nameList.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Name.DataBean name = new Name.DataBean();
                             JSONObject jsonObjectName = jsonArray.getJSONObject(i);

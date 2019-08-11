@@ -313,7 +313,6 @@
                     android:hint="请填写合计金额"
                     style="@style/oaEditText"/>
             </LinearLayout>
-            <View style="@style/line"></View>
 
             <LinearLayout
                 android:visibility="gone"

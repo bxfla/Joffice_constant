@@ -275,8 +275,8 @@
                     android:hint="请填写暂借现金"
                     style="@style/oaEditText" />
             </LinearLayout>
-            <View style="@style/line"></View>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:orientation="horizontal">

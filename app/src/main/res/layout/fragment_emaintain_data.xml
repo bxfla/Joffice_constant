@@ -73,7 +73,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"/>
             </LinearLayout>
-            <View style="@style/line"></View>
 
             <LinearLayout
                 android:visibility="gone"

@@ -257,9 +257,9 @@
                     android:hint="请填写处理状况" />
             </LinearLayout>
 
-            <View style="@style/line"></View>
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:orientation="horizontal">

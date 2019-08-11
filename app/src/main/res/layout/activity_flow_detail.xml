@@ -111,8 +111,8 @@
                     style="@style/oaEditText"
                     android:text="3天"/>
             </LinearLayout>
-            <View style="@style/line"></View>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:orientation="horizontal">

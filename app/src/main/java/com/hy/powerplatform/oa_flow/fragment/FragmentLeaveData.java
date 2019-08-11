@@ -511,10 +511,12 @@ public class FragmentLeaveData extends Fragment {
                     getActivity().finish();
                     break;
                 case TAG_FOUR:
+                    ProgressDialogUtil.stopLoad();
                     try {
                         JSONObject jsonObject = new JSONObject(res);
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         datalist.clear();
+                        nameList.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Name.DataBean name = new Name.DataBean();
                             JSONObject jsonObjectName = jsonArray.getJSONObject(i);
@@ -574,6 +576,7 @@ public class FragmentLeaveData extends Fragment {
                                         }
                                         uId = selectList.get(0) + "," + uId;
                                     }
+                                    ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
                                     String res = dbA.OAQingJia(turl, person, time, startDay, endDay, startTime,
                                             endTime, type, reason, dayNum, userName, userId, userDepart, uId);
                                     if (res.equals("")) {

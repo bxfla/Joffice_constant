@@ -25,6 +25,7 @@ import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
 import com.hy.powerplatform.oa_flow.activity.PersonListActivity;
 import com.hy.powerplatform.oa_flow.bean.Name;
+import com.hy.powerplatform.oa_flow.util.CompareDiff;
 import com.leon.lfilepickerlibrary.LFilePicker;
 import com.leon.lfilepickerlibrary.utils.Constant;
 
@@ -33,6 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -106,6 +108,8 @@ public class FragmentOverTimeData extends Fragment {
     String userDepart = "";
     String isShow = "true";
     String liushuihao;
+    String tag = "";
+    int daynumber;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -183,13 +187,63 @@ public class FragmentOverTimeData extends Fragment {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, 1); //向前走一天
         tvEndTime.setText(sdf.format(calendar.getTime()).split(" ")[0]);
+        etDays.setText("1");
 
         customDatePicker1 = new CustomDatePickerDay(getActivity(), new CustomDatePickerDay.ResultHandler() {
             @Override
             public void handle(String time) {
                 // 回调接口，获得选中的时间
-                tvStartTime.setText(time.split(" ")[0]);
-                tvEndTime.setText(time.split(" ")[0]);
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                Date dt1;
+                Date dt2;
+                if (tag.equals("st")) {
+                    try {
+                        dt1 = df.parse(time.split(" ")[0]);
+                        dt2 = df.parse(tvEndTime.getText().toString());
+                        if (dt1.getTime() > dt2.getTime()) {
+                            Toast.makeText(getActivity(), "请选择正确的时间", Toast.LENGTH_SHORT).show();
+                        } else if (dt1.getTime() <= dt2.getTime()) {
+                            tvStartTime.setText(time.split(" ")[0]);
+                            daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
+                                    , tvEndTime.getText().toString(), "yyyy-MM-dd");
+                            if (spinnerAM.getSelectedItem().toString().equals(spinnerPM.getSelectedItem().toString())) {
+                                etDays.setText(daynumber + "");
+                            } else if (spinnerAM.getSelectedItem().toString().equals("上午")
+                                    && spinnerPM.getSelectedItem().equals("下午")) {
+                                etDays.setText((daynumber + 0.5) + "");
+                            } else if (spinnerAM.getSelectedItem().toString().equals("下午")
+                                    && spinnerPM.getSelectedItem().equals("上午")) {
+                                etDays.setText((daynumber - 0.5) + "");
+                            }
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                } else if (tag.equals("ed")) {
+                    try {
+                        dt1 = df.parse(tvStartTime.getText().toString());
+                        dt2 = df.parse(time.split(" ")[0]);
+                        if (dt1.getTime() > dt2.getTime()) {
+                            Toast.makeText(getActivity(), "请选择正确的时间", Toast.LENGTH_SHORT).show();
+                        } else if (dt1.getTime() < dt2.getTime()) {
+                            tvEndTime.setText(time.split(" ")[0]);
+                            daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
+                                    , tvEndTime.getText().toString(), "yyyy-MM-dd");
+                            if (spinnerAM.getSelectedItem().toString().equals(spinnerPM.getSelectedItem().toString())) {
+                                etDays.setText(daynumber + "");
+                            } else if (spinnerAM.getSelectedItem().toString().equals("上午")
+                                    && spinnerPM.getSelectedItem().equals("下午")) {
+                                etDays.setText((daynumber + 0.5) + "");
+                            } else if (spinnerAM.getSelectedItem().toString().equals("下午")
+                                    && spinnerPM.getSelectedItem().equals("上午")) {
+                                etDays.setText((daynumber - 0.5) + "");
+                            }
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+
+                }
             }
             // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         }, "2000-01-01 00:00", "2030-01-01 00:00");
@@ -222,9 +276,11 @@ public class FragmentOverTimeData extends Fragment {
 //                }
                 break;
             case R.id.tvStartTime:
+                tag = "st";
                 customDatePicker1.show(tvStartTime.getText().toString());
                 break;
             case R.id.tvEndTime:
+                tag = "ed";
                 customDatePicker1.show(tvEndTime.getText().toString());
                 break;
             case R.id.btnUp:
@@ -269,6 +325,7 @@ public class FragmentOverTimeData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
+        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -435,10 +492,12 @@ public class FragmentOverTimeData extends Fragment {
                     getActivity().finish();
                     break;
                 case TAG_FOUR:
+                    ProgressDialogUtil.stopLoad();
                     try {
                         JSONObject jsonObject = new JSONObject(res);
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         datalist.clear();
+                        nameList.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Name.DataBean name = new Name.DataBean();
                             JSONObject jsonObjectName = jsonArray.getJSONObject(i);

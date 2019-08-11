@@ -72,14 +72,14 @@ public class MyAlertDialog {
                             dialog.cancel();
                         }
                     }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
-                        dialog.cancel();
-                    }
                 }).create();
+//                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // TODO Auto-generated method stub
+//                        dialog.cancel();
+//                    }
+//                }).create();
         dialog.setCanceledOnTouchOutside(false);// 使除了dialog以外的地方不能被点击
         dialog.show();
     }

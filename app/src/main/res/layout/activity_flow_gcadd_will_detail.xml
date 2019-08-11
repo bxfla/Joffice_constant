@@ -92,7 +92,6 @@
                     android:hint="请填写具体事项"
                     style="@style/textWrite"/>
             </LinearLayout>
-            <View style="@style/line"></View>
             <LinearLayout
                 android:visibility="gone"
                 android:layout_width="match_parent"

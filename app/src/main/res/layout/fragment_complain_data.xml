@@ -105,7 +105,7 @@
                     android:id="@+id/etPhone"
                     style="@style/oaEditText"
                     android:hint="请填写联系电话"
-                    android:inputType="number|numberDecimal" />
+                    android:inputType="number" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -229,7 +229,6 @@
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
 
-            <View style="@style/line"></View>
 
             <LinearLayout
                 android:visibility="gone"

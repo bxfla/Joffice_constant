@@ -153,24 +153,6 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="金额（大写）: *"/>
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:background="@color/shouye"
-                    android:layout_gravity="center_vertical"/>
-                <TextView
-                    android:id="@+id/tvBigMoney"
-                    android:hint="请填写金额（大写）"
-                    style="@style/oaEditText"/>
-            </LinearLayout>
-            <View style="@style/line"></View>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:orientation="horizontal">
-                <TextView
-                    style="@style/oaTextView"
                     android:text="金额（小写）: *"/>
                 <View
                     android:layout_width="1dp"
@@ -186,6 +168,24 @@
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="金额（大写）: *"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:background="@color/shouye"
+                    android:layout_gravity="center_vertical"/>
+                <TextView
+                    android:id="@+id/tvBigMoney"
+                    android:hint="请填写金额（大写）"
+                    style="@style/oaEditText"/>
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

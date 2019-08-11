@@ -538,7 +538,6 @@
                     style="@style/oaEditText"
                     android:hint="请填写用途" />
             </LinearLayout>
-            <View style="@style/line"></View>
 
             <LinearLayout
                 android:visibility="gone"

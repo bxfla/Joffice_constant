@@ -193,7 +193,6 @@
                     android:hint="请填写基本情况" />
             </LinearLayout>
 
-            <View style="@style/line"></View>
 
             <LinearLayout
                 android:visibility="gone"
