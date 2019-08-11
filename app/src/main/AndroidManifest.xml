@@ -196,6 +196,7 @@
         <activity
             android:name=".login.activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait"/>
         <activity android:name=".signin.activity.SignInActivity"
             android:screenOrientation="portrait"/>

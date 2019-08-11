@@ -1919,6 +1919,13 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             nametemp = userName.split(",");
                             codetemp = userCode.split(",");
                         }
+                        if (bean1.getData().size() > 2) {
+                            role = bean1.getData().get(1).getRole()+":"+bean1.getData().get(2).getRole();
+                            userCode = bean1.getData().get(1).getUserNames()+":"+ bean1.getData().get(2).getUserNames();
+                            userName = bean1.getData().get(1).getUserCodes()+","+bean1.getData().get(2).getUserCodes();
+                            nametemp = userName.split(",");
+                            codetemp = userCode.split(",");
+                        }
                         leader = bean1.getData().get(0).getRole();
                         leaderCode = bean1.getData().get(0).getUserNames();
                         leaderName = bean1.getData().get(0).getUserCodes();

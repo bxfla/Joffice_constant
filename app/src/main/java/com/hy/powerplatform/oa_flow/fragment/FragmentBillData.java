@@ -35,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -121,11 +122,9 @@ public class FragmentBillData extends Fragment {
     String isShow = "true";
     String liushuihao;
     @BindView(R.id.etBigMoney)
-    EditText etBigMoney;
+    TextView etBigMoney;
     @BindView(R.id.tvPerson)
     TextView tvPerson;
-    @BindView(R.id.textView6)
-    TextView textView6;
     @BindView(R.id.tvData)
     TextView tvData;
     private CustomDatePickerDay customDatePicker1;
@@ -156,7 +155,8 @@ public class FragmentBillData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                etBigMoney.setText(MoneyFormat.toChineseCharI(s.toString()));
+                BigDecimal numOfMoney = new BigDecimal(s.toString());
+                etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
             }
         });
         ProgressDialogUtil.startLoad(getActivity(), "获取流水号中");
