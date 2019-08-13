@@ -217,7 +217,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@color/shouye" />
 
-                <EditText
+                <TextView
                     android:id="@+id/etDays"
                     style="@style/oaEditText"
                     android:hint="请填写请假天数"

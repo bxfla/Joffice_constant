@@ -222,10 +222,10 @@ public class FragmentGCAddData extends Fragment {
                 customDatePicker1.show(tvTime.getText().toString());
                 break;
             case R.id.btnUp:
-                final String date = tvTime.getText().toString();
-                final String department = etDpartment.getText().toString();
-                final String person = etPerson.getText().toString();
-                final String data = etData.getText().toString();
+                final String date = tvTime.getText().toString().trim();
+                final String department = etDpartment.getText().toString().trim();
+                final String person = etPerson.getText().toString().trim();
+                final String data = etData.getText().toString().trim();
                 if (date.equals("")) {
                     Toast.makeText(getActivity(), "日期不能为空", Toast.LENGTH_SHORT).show();
                     break;
@@ -239,7 +239,7 @@ public class FragmentGCAddData extends Fragment {
                     break;
                 }
                 if (data.equals("")) {
-                    Toast.makeText(getActivity(), "具体事项不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "需求事项不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 ProgressDialogUtil.startLoad(getActivity(), "数据上传中");

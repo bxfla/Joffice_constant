@@ -172,17 +172,17 @@ public class FragmentGHContractSignData extends Fragment {
                 customDatePicker1.show(tvTime.getText().toString());
                 break;
             case R.id.btnUp:
-                final String department = etDepartment.getText().toString();
-                final String person = etPerson.getText().toString();
-                final String name = etContractName.getText().toString();
-                final String time = tvTime.getText().toString();
-                final String situation = etSituation.getText().toString();
+                final String department = etDepartment.getText().toString().trim();
+                final String person = etPerson.getText().toString().trim();
+                final String name = etContractName.getText().toString().trim();
+                final String time = tvTime.getText().toString().trim();
+                final String situation = etSituation.getText().toString().trim();
                 if (department.equals("")) {
                     Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (person.equals("")) {
-                    Toast.makeText(getActivity(), "部门负责人不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "申请人不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (name.equals("")) {

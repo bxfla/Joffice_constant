@@ -746,7 +746,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                             && !csreout.equals("2") && !jcreout.equals("2") && !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!zjl.equals("") && !jcbmyj.equals("") && !csbmyj.equals("") && !jsbmldyj.equals("")
+                    } else if (!etLeader6.getText().toString().equals("") && !jcbmyj.equals("") && !csbmyj.equals("") && !jsbmldyj.equals("")
                             && !jsbmyj.equals("") && !xqbmldyj.equals("") && !jsbmyj.equals("")) {
                         comment = "";
                         personSession();
@@ -868,7 +868,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     DBHandler dbA = new DBHandler();
                     upData = dbA.OAGCAddLeader(url, department, person, time, userCode,
                             destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, csbmyj, jcbmyj,
-                            zjl, serialNumber, comment, defId2, Constant.GCADD);
+                            zjl, serialNumber, comment, defId2, Constant.GCCHECK);
                     if (upData.equals("")) {
                         handler.sendEmptyMessage(TAG_THERE);
                     } else {

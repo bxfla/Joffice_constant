@@ -338,8 +338,8 @@ public class FlowGHPruchaseDetailActivity extends BaseActivity {
                     etAllMoney5.setText(bean.getMainform().get(0).getJine5());
 
                     String bmfzr = bean.getMainform().get(0).getBmfzryj();
-                    String fgfzr = bean.getMainform().get(0).getFgldyj();
-//                    String zxfzr = bean.getMainform().get(0).getGhzx();
+                    String fgfzr = bean.getMainform().get(0).getCwzjyj();
+                    String zxfzr = bean.getMainform().get(0).getGhzx();
 
                     etClass.setText(department);
                     etShenQingRen.setText(person);
@@ -354,6 +354,9 @@ public class FlowGHPruchaseDetailActivity extends BaseActivity {
                     }
                     if (!fgfzr.equals("")) {
                         tvLeader1.setText(getJSONData(fgfzr));
+                    }
+                    if (!fgfzr.equals("")) {
+                        tvLeader2.setText(getJSONData(zxfzr));
                     }
                     ProgressDialogUtil.stopLoad();
                     break;

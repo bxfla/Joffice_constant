@@ -216,15 +216,15 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
     @BindView(R.id.tvLeaderJG)
     TextView tvLeaderJG;
     @BindView(R.id.etDepartment1)
-    EditText etDepartment1;
+    TextView etDepartment1;
     @BindView(R.id.etDepartment2)
-    EditText etDepartment2;
+    TextView etDepartment2;
     @BindView(R.id.etDepartment3)
-    EditText etDepartment3;
+    TextView etDepartment3;
     @BindView(R.id.etDepartment4)
-    EditText etDepartment4;
+    TextView etDepartment4;
     @BindView(R.id.etDepartment5)
-    EditText etDepartment5;
+    TextView etDepartment5;
     @BindView(R.id.tvDepartment5)
     TextView tvDepartment5;
     private String name, taskId, res, bmfzryj, jcbmyj, zcgkbmyj, fgldyj, cwzjyj, zjl = "";
@@ -246,6 +246,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
     String allMoney1, allMoney2, allMoney3, allMoney4, allMoney5 = "";
     String danwei1, danwei2, danwei3, danwei4, danwei5 = "";
     List<String> resultList = new ArrayList<>();
+    List<String> resultList1 = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
     List<String> bigResultList1 = new ArrayList<>();
 
@@ -763,6 +764,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
         if (codetemp != null) {
             for (String s : codetemp) {
                 resultList.add(s);
+                resultList1.add(s);
             }
         }
         if (bigCodetemp != null) {
@@ -1309,55 +1311,93 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                 final String userCode = new SharedPreferencesHelper(FlowGoodsPuechaseWillDetailActivity.this,
                         "login").getData(FlowGoodsPuechaseWillDetailActivity.this, "userCode", "");
                 if (!rb6.isChecked()) {
-                    resultList.remove(5);
+                    if (resultList.size()>=6){
+                        resultList.remove(5);
+                    }
                 }
                 if (!rb5.isChecked()) {
-                    resultList.remove(4);
+                    if (resultList.size()>=5){
+                        resultList.remove(4);
+                    }
                 }
                 if (!rb4.isChecked()) {
-                    resultList.remove(3);
+                    if (resultList.size()>=4){
+                        resultList.remove(3);
+                    }
                 }
                 if (!rb3.isChecked()) {
-                    resultList.remove(2);
+                    if (resultList.size()>=3){
+                        resultList.remove(2);
+                    }
                 }
                 if (!rb2.isChecked()) {
-                    resultList.remove(1);
+                    if (resultList.size()>=2){
+                        resultList.remove(1);
+                    }
                 }
                 if (!rb1.isChecked()) {
-                    resultList.remove(0);
+                    if (resultList.size()>=1){
+                        resultList.remove(0);
+                    }
                 }
 
                 if (!cb9.isChecked()) {
-                    bigResultList.remove(8);
+                    if (bigResultList.size()>=9){
+                        bigResultList.remove(8);
+                    }
                 }
                 if (!cb8.isChecked()) {
-                    bigResultList.remove(7);
+                    if (bigResultList.size()>=8){
+                        bigResultList.remove(7);
+                    }
                 }
                 if (!cb7.isChecked()) {
-                    bigResultList.remove(6);
+                    if (bigResultList.size()>=7){
+                        bigResultList.remove(6);
+                    }
                 }
                 if (!cb6.isChecked()) {
-                    bigResultList.remove(5);
+                    if (bigResultList.size()>=6){
+                        bigResultList.remove(5);
+                    }
                 }
                 if (!cb5.isChecked()) {
-                    bigResultList.remove(4);
+                    if (bigResultList.size()>=5){
+                        bigResultList.remove(4);
+                    }
                 }
                 if (!cb4.isChecked()) {
-                    bigResultList.remove(3);
+                    if (bigResultList.size()>=4){
+                        bigResultList.remove(3);
+                    }
                 }
                 if (!cb3.isChecked()) {
-                    bigResultList.remove(2);
+                    if (bigResultList.size()>=3){
+                        bigResultList.remove(2);
+                    }
                 }
                 if (!cb2.isChecked()) {
-                    bigResultList.remove(1);
+                    if (bigResultList.size()>=2){
+                        bigResultList.remove(1);
+                    }
                 }
                 if (!cb1.isChecked()) {
-                    bigResultList.remove(0);
+                    if (bigResultList.size()>=1){
+                        bigResultList.remove(0);
+                    }
                 }
 
-                String userCodes = resultList.toString();
-                userCodes = userCodes.toString().replace("[", "");
-                userCodes = userCodes.toString().replace("]", "");
+                String userCodes = "";
+                if (resultList.size()==0){
+                    userCodes = resultList1.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
+                }else {
+                    userCodes = resultList.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
+                }
+
 
                 if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
                     String bigUserCodes = bigResultList1.toString();
@@ -1775,6 +1815,13 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             role = bean1.getData().get(1).getRole();
                             userCode = bean1.getData().get(1).getUserNames();
                             userName = bean1.getData().get(1).getUserCodes();
+                            nametemp = userName.split(",");
+                            codetemp = userCode.split(",");
+                        }
+                        if (bean1.getData().size() > 2) {
+                            role = bean1.getData().get(1).getRole()+":"+bean1.getData().get(2).getRole();
+                            userCode = bean1.getData().get(1).getUserNames()+":"+ bean1.getData().get(2).getUserNames();
+                            userName = bean1.getData().get(1).getUserCodes()+","+bean1.getData().get(2).getUserCodes();
                             nametemp = userName.split(",");
                             codetemp = userCode.split(",");
                         }

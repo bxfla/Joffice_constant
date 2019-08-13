@@ -149,8 +149,21 @@ public class FlowRepairDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this) {
+//            @Override
+//            public boolean canScrollVertically() {
+//                //解决ScrollView里存在多个RecyclerView时滑动卡顿的问题
+//                //如果你的RecyclerView是水平滑动的话可以重写canScrollHorizontally方法
+//                return false;
+//            }
+//        });
+//        //解决数据加载不完的问题
+//        recyclerView.setNestedScrollingEnabled(false);
+//        recyclerView.setHasFixedSize(true);
+//        //解决数据加载完成后, 没有停留在顶部的问题
+//        recyclerView.setFocusable(false);
         header.setTvRight("追回");
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         btnT.setVisibility(View.GONE);
         tvText.setVisibility(View.GONE);
@@ -191,7 +204,7 @@ public class FlowRepairDetailActivity extends BaseActivity {
             public void success(Object o) {
                 Message message = new Message();
                 message.what = Constant.TAG_FIVE;
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putString("msg", o.toString());
                 message.setData(bundle);
                 handler.sendMessage(message);
@@ -207,19 +220,19 @@ public class FlowRepairDetailActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.tvData,R.id.btnHistory})
+    @OnClick({R.id.tvData, R.id.btnHistory})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnHistory:
                 recyclerView.setVisibility(View.VISIBLE);
-                ProgressDialogUtil.startLoad(FlowRepairDetailActivity.this,"获取数据中");
+                ProgressDialogUtil.startLoad(FlowRepairDetailActivity.this, "获取数据中");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         //String name =URLDecoder.decode(待转值,"utf-8");
                         String url = Constant.BASE_URL2 + Constant.FLOWMESSAGE;
                         DBHandler dbA = new DBHandler();
-                        flowMessage = dbA.OAFlowMessage(url,runID);
+                        flowMessage = dbA.OAFlowMessage(url, runID);
                         if (flowMessage.equals("获取数据失败") || flowMessage.equals("")) {
                             handler.sendEmptyMessage(TAG_TWO);
                         } else {
@@ -298,10 +311,10 @@ public class FlowRepairDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowRepairDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowRepairDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
                     break;

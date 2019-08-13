@@ -809,13 +809,13 @@
                 <EditText
                     android:id="@+id/etLeader1"
                     style="@style/textWrite"
-                    android:hint="资产归口部门领导签名"
+                    android:hint="分管领导签名"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader1"
                     style="@style/textWrite"
-                    android:hint="资产归口部门领导签名" />
+                    android:hint="分管领导签名" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout

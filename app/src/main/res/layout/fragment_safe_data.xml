@@ -57,7 +57,7 @@
                     style="@style/oaEditText"
                     android:hint="请填写借款日期" />
             </LinearLayout>
-
+            <View style="@style/line"></View>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -142,7 +142,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingLeft="5dp"
-                    android:text="元合计："
+                    android:text="大写："
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 

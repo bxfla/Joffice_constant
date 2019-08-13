@@ -47,12 +47,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="地点: *" />
+                    android:text="地点: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
 
                 <View
                     android:layout_width="1dp"
@@ -62,7 +64,7 @@
 
                 <TextView
                     android:id="@+id/tvAddress"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写报修地点" />
             </LinearLayout>
 
@@ -439,7 +441,7 @@
                 <EditText
                     android:id="@+id/etLeader3"
                     style="@style/textWrite"
-                    android:hint="请填写签发人"
+                    android:hint="请填写维修情况概述"
                     android:visibility="gone" />
 
                 <TextView
@@ -505,12 +507,21 @@
                 android:text="流程审批信息"
                 android:gravity="center"
                 android:textColor="@color/whith"/>
-            <android.support.v7.widget.RecyclerView
-                android:visibility="gone"
-                android:id="@+id/recyclerView"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="60dp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <android.support.v7.widget.RecyclerView
+                    android:visibility="gone"
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="600dp">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

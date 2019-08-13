@@ -676,7 +676,7 @@ public class FlowPayLiuChengWillDetailActivity extends BaseActivity {
                     if (!bmreout.equals("2") && !fgreout.equals("2") && !fgcwreout.equals("2") && !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!zjl.equals("") && !fgcwze.equals("") && !fgfze.equals("") && !bmfzr.equals("")) {
+                    } else if (!etLeader3.getText().toString().equals("") && !fgcwze.equals("") && !fgfze.equals("") && !bmfzr.equals("")) {
                         comment = "";
                         personSession();
                     } else {

@@ -143,8 +143,8 @@ public class FragmentHuiQianData extends Fragment {
 //                }
                 break;
             case R.id.btnUp:
-                final String person = etPerson.getText().toString();
-                final String data = etShiXiang.getText().toString();
+                final String person = etPerson.getText().toString().trim();
+                final String data = etShiXiang.getText().toString().trim();
                 if (person.equals("")) {
                     Toast.makeText(getActivity(), "申请人不能为空", Toast.LENGTH_SHORT).show();
                     break;

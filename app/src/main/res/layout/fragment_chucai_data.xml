@@ -94,7 +94,7 @@
                     android:layout_height="15dp"
                     android:background="@color/shouye"
                     android:layout_gravity="center_vertical"/>
-                <EditText
+                <TextView
                     android:id="@+id/etAllTime"
                     android:hint="请填写出差天数"
                     android:inputType="number|numberDecimal"

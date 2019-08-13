@@ -669,10 +669,10 @@ public class FragmentPurchaseData extends Fragment {
                 customDatePicker1.show(tvTime.getText().toString());
                 break;
             case R.id.btnUp:
-                final String department = etClass.getText().toString();
-                final String person = etPerson.getText().toString();
-                final String time = tvTime.getText().toString();
-                final String use = etUse.getText().toString();
+                final String department = etClass.getText().toString().trim();
+                final String person = etPerson.getText().toString().trim();
+                final String time = tvTime.getText().toString().trim();
+                final String use = etUse.getText().toString().trim();
                 if (department.equals("")) {
                     Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
                     break;

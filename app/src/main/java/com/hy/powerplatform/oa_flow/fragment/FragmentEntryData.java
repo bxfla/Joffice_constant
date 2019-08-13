@@ -254,11 +254,11 @@ public class FragmentEntryData extends Fragment {
 //                }
                 break;
             case R.id.btnUp:
-                final String person = etPerson.getText().toString();
-                final String phone = etPhone.getText().toString();
-                final String idCard = etIdNum.getText().toString();
+                final String person = etPerson.getText().toString().trim();
+                final String phone = etPhone.getText().toString().trim();
+                final String idCard = etIdNum.getText().toString().trim();
                 final String sex = String.valueOf(spinnerSex.getSelectedItem());
-                final String carType = etCarType.getText().toString();
+                final String carType = etCarType.getText().toString().trim();
                 zjcx1 = carType;
                 if (person.equals("")) {
                     Toast.makeText(getActivity(), "入职人不能为空", Toast.LENGTH_SHORT).show();

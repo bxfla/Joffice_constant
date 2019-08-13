@@ -945,6 +945,9 @@ public class FlowSaferWillDetailActivity extends BaseActivity {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
                         }
+                        if (bmreout.equals("1")&&fgreout.equals("1")&&cwreout.equals("1")){
+                            Toast.makeText(FlowSaferWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

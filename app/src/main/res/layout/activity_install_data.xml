@@ -110,9 +110,7 @@
 
                 <TextView
                     android:id="@+id/tvDataW"
-                    style="@style/oaEditText"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    style="@style/textWrite"
                     android:hint="请填写申办事项" />
             </LinearLayout>
 
@@ -391,7 +389,7 @@
                 <EditText
                     android:id="@+id/etLeaderzjl"
                     style="@style/textWrite"
-                    android:hint="申办分管领导意见"
+                    android:hint="总经理意见"
                     android:visibility="gone" />
             </LinearLayout>
 

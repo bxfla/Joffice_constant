@@ -97,7 +97,9 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="收款单位: *"/>
+                    android:text="收款单位: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -106,7 +108,7 @@
                 <TextView
                     android:id="@+id/tvClass"
                     android:hint="请填写收款单位全称"
-                    style="@style/oaEditText"/>
+                    style="@style/textWrite"/>
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout

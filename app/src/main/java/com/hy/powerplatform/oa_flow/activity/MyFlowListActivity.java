@@ -153,7 +153,7 @@ public class MyFlowListActivity extends BaseActivity implements FlowContractPayL
             intent.putExtra("bean", beanList.get(position).getRunId());
             startActivity(intent);
         }
-        if (beanList.get(position).getFormDefId().equals(Constant.GCCHECKNAME)) {
+        if (beanList.get(position).getFormDefId().equals(Constant.GCCHECK)) {
             intent = new Intent(this, FlowGCAddDetailActivity.class);
             intent.putExtra("tag", "2");
             intent.putExtra("bean", beanList.get(position).getRunId());

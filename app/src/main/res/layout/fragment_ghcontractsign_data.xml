@@ -37,18 +37,52 @@
 
             <View style="@style/line"></View>
 
-            <include layout="@layout/select_person" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv"
+                    style="@style/oaTextView"
+                    android:text="部门负责人: *"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:background="@color/shouye"
+                    android:layout_gravity="center_vertical"/>
+                <LinearLayout
+                    style="@style/oaEditText"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/etPerson"
+                        android:hint="请填写部门负责人"
+                        style="@style/oaEditText"/>
+                    <TextView
+                        android:id="@+id/tvPerson"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:hint="部门负责人"
+                        android:gravity="center"
+                        android:textSize="14dp"
+                        android:layout_marginRight="5dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/linearlayout_colore_radius"/>
+                </LinearLayout>
+            </LinearLayout>
 
             <View style="@style/line"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="合同名称: *" />
+                    android:text="合同名称: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
 
                 <View
                     android:layout_width="1dp"
@@ -58,7 +92,7 @@
 
                 <EditText
                     android:id="@+id/etContractName"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写合同名称" />
             </LinearLayout>
 
@@ -105,9 +139,7 @@
 
                 <EditText
                     android:id="@+id/etSituation"
-                    style="@style/oaEditText"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    style="@style/textWrite"
                     android:hint="请填写基本情况" />
             </LinearLayout>
 

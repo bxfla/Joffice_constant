@@ -574,13 +574,13 @@
                 <EditText
                     android:id="@+id/etLeader1"
                     style="@style/textWrite"
-                    android:hint="资产归口部门领导意见"
+                    android:hint="集团分管领导意见"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader1"
                     style="@style/textWrite"
-                    android:hint="集团分管领导意见意见" />
+                    android:hint="集团分管领导意见" />
             </LinearLayout>
             <LinearLayout
                 android:visibility="gone"

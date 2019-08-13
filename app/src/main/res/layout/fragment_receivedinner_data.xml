@@ -33,11 +33,13 @@
             <View style="@style/line"></View>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="部门: *"/>
+                    android:text="部门: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -46,16 +48,18 @@
                 <EditText
                     android:id="@+id/etDpartment"
                     android:hint="请填写所在部门"
-                    style="@style/oaEditText"/>
+                    style="@style/textWrite"/>
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="陪餐人员: *"/>
+                    android:text="陪餐人员: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -64,7 +68,7 @@
                 <EditText
                     android:id="@+id/etPCPerson"
                     android:hint="请填写陪餐人员"
-                    style="@style/oaEditText"/>
+                    style="@style/textWrite"/>
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -73,7 +77,9 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="来客单位: *"/>
+                    android:text="来客单位: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -82,7 +88,7 @@
                 <EditText
                     android:id="@+id/etLKDepartment"
                     android:hint="请填写来客单位"
-                    style="@style/oaEditText"/>
+                    style="@style/textWrite"/>
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -106,11 +112,13 @@
             <View style="@style/line"></View>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="用餐标准 *"/>
+                    android:text="用餐标准 *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -119,7 +127,7 @@
                 <EditText
                     android:id="@+id/etEatBZ"
                     android:hint="请填写用餐标准"
-                    style="@style/oaEditText"/>
+                    style="@style/textWrite"/>
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -154,7 +162,7 @@
                     android:layout_height="15dp"
                     android:background="@color/shouye"
                     android:layout_gravity="center_vertical"/>
-                <EditText
+                <TextView
                     android:id="@+id/etBigMoney"
                     android:hint="请填写金额（大写）"
                     style="@style/oaEditText"/>

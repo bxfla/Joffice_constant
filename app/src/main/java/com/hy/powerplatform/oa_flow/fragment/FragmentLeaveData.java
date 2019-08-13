@@ -67,7 +67,7 @@ public class FragmentLeaveData extends Fragment {
     @BindView(R.id.spinner)
     Spinner spinner;
     @BindView(R.id.etDays)
-    EditText etDays;
+    TextView etDays;
     @BindView(R.id.tvData)
     TextView tvData;
     @BindView(R.id.etReason)
@@ -279,15 +279,15 @@ public class FragmentLeaveData extends Fragment {
                 customDatePicker1.show(tvEndTime.getText().toString());
                 break;
             case R.id.btnUp:
-                final String person = tvPerson.getText().toString();
-                final String time = tvTime.getText().toString();
+                final String person = tvPerson.getText().toString().trim();
+                final String time = tvTime.getText().toString().trim();
                 final String startDay = (String) spinnerAM.getSelectedItem();
                 final String endDay = (String) spinnerPM.getSelectedItem();
-                final String startTime = tvStartTime.getText().toString();
-                final String endTime = tvEndTime.getText().toString();
+                final String startTime = tvStartTime.getText().toString().trim();
+                final String endTime = tvEndTime.getText().toString().trim();
                 final String type = (String) spinner.getSelectedItem();
-                final String reason = etReason.getText().toString();
-                final String dayNum = etDays.getText().toString();
+                final String reason = etReason.getText().toString().trim();
+                final String dayNum = etDays.getText().toString().trim();
                 if (person.equals("")) {
                     Toast.makeText(getActivity(), "申请人不能为空", Toast.LENGTH_SHORT).show();
                     break;

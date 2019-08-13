@@ -101,12 +101,30 @@ public class FlowCCTPurchase implements Serializable {
         private String danjia3;
         private String danjia2;
         private String fgldyj;
+        private String cwzjyj;
+        private String ghzx;
         private String jine1;
         private String danjia1;
         private String hejisl;
         private String yt;
         private String bmfzryj;
         private String LiuShuiHao;
+
+        public String getCwzjyj() {
+            return cwzjyj;
+        }
+
+        public void setCwzjyj(String cwzjyj) {
+            this.cwzjyj = cwzjyj;
+        }
+
+        public String getGhzx() {
+            return ghzx;
+        }
+
+        public void setGhzx(String ghzx) {
+            this.ghzx = ghzx;
+        }
 
         public String getShuliang3() {
             return shuliang3;

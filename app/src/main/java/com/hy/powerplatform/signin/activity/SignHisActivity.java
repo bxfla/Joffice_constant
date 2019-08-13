@@ -135,7 +135,7 @@ public class SignHisActivity extends BaseActivity implements SignInHisView {
     private void sendHttpContent() {
         hisList = new ArrayList<>();
         Date startTime = null, endTime = null;
-        if (tvStartTime.getText().toString().isEmpty() || tvStartTime.getText().toString().isEmpty()) {
+        if (tvStartTime.getText().toString().trim().isEmpty() || tvStartTime.getText().toString().trim().isEmpty()) {
             Toast.makeText(this, "起止时间不能为空", Toast.LENGTH_SHORT).show();
         } else {
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");

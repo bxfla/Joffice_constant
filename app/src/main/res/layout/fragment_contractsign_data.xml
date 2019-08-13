@@ -59,7 +59,7 @@
 
                 <EditText
                     android:id="@+id/etContractName"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写合同名称" />
             </LinearLayout>
 
@@ -106,9 +106,7 @@
 
                 <EditText
                     android:id="@+id/etSituation"
-                    style="@style/oaEditText"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    style="@style/textWrite"
                     android:hint="请填写基本情况" />
             </LinearLayout>
 

@@ -381,14 +381,14 @@ public class FragmentCarSafeData extends Fragment {
 //                }
                 break;
             case R.id.btnUp:
-                final String time = tvTime.getText().toString();
-                final String person = etPerson.getText().toString();
-                final String department = etDpartment.getText().toString();
-                final String carNo = etOutCarNo1.getText().toString();
-                final String comp = etSafeSepart1.getText().toString();
-                final String type = etSafeType1.getText().toString();
-                final String money = etSafeMoney1.getText().toString();
-                final String date = tvSafeDate1.getText().toString();
+                final String time = tvTime.getText().toString().trim();
+                final String person = etPerson.getText().toString().trim();
+                final String department = etDpartment.getText().toString().trim();
+                final String carNo = etOutCarNo1.getText().toString().trim();
+                final String comp = etSafeSepart1.getText().toString().trim();
+                final String type = etSafeType1.getText().toString().trim();
+                final String money = etSafeMoney1.getText().toString().trim();
+                final String date = tvSafeDate1.getText().toString().trim();
                 if (time.equals("")) {
                     Toast.makeText(getActivity(), "填单日期不能为空", Toast.LENGTH_SHORT).show();
                     break;

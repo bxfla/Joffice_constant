@@ -35,12 +35,14 @@ import com.hy.powerplatform.oa_flow.bean.File;
 import com.hy.powerplatform.oa_flow.bean.FlowContractPerson;
 import com.hy.powerplatform.oa_flow.bean.FlowDormWillDetail;
 import com.hy.powerplatform.oa_flow.bean.FlowMessage1;
+import com.hy.powerplatform.oa_flow.util.CompareDiff;
 import com.hy.powerplatform.oa_flow.util.MyStringSpilt;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -175,6 +177,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
     String leaderName = "";
     boolean assigned;
     String tag = "noEnd";
+    String tag1 = "";
     String comment = "";
     String upData = "";
     String bmreout = "", wyreout = "", blrzreout = "", cwsgreout = "", zlfsqreout = "", bzreout = "", flowAssignld, serialNumber = "";
@@ -201,6 +204,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
     String btnTTag = "N";
     String flowMessage = "";
     String runID = "";
+    int daynumber;
     FlowMessageAdapter adapterM;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -245,27 +249,51 @@ public class FlowDormWillDetailActivity extends BaseActivity {
         String now = sdf.format(new Date());
         tvStartTime.setText(now.split(" ")[0]);
         tvEndTime.setText(now.split(" ")[0]);
-        customDatePicker1 = new CustomDatePickerDay(this, new CustomDatePickerDay.ResultHandler() {
+
+        customDatePicker1 = new CustomDatePickerDay(FlowDormWillDetailActivity.this, new CustomDatePickerDay.ResultHandler() {
             @Override
             public void handle(String time) {
-                tvStartTime.setText(time.split(" ")[0]);
+                // 回调接口，获得选中的时间
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                Date dt1;
+                Date dt2;
+                if (tag1.equals("st")) {
+                    try {
+                        dt1 = df.parse(time.split(" ")[0]);
+                        dt2 = df.parse(tvEndTime.getText().toString());
+                        if (dt1.getTime() > dt2.getTime()) {
+                            Toast.makeText(FlowDormWillDetailActivity.this, "请选择正确的时间", Toast.LENGTH_SHORT).show();
+                        } else if (dt1.getTime() <= dt2.getTime()) {
+                            tvStartTime.setText(time.split(" ")[0]);
+                            daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
+                                    , tvEndTime.getText().toString(), "yyyy-MM-dd");
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                } else if (tag1.equals("ed")) {
+                    try {
+                        dt1 = df.parse(tvStartTime.getText().toString());
+                        dt2 = df.parse(time.split(" ")[0]);
+                        if (dt1.getTime() > dt2.getTime()) {
+                            Toast.makeText(FlowDormWillDetailActivity.this, "请选择正确的时间", Toast.LENGTH_SHORT).show();
+                        } else if (dt1.getTime() < dt2.getTime()) {
+                            tvEndTime.setText(time.split(" ")[0]);
+                            daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
+                                    , tvEndTime.getText().toString(), "yyyy-MM-dd");
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+
+                }
             }
+            // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         }, "2000-01-01 00:00", "2030-01-01 00:00");
         // 不显示时和分
         customDatePicker1.showSpecificTime(false);
         // 不允许循环滚动
         customDatePicker1.setIsLoop(false);
-
-        customDatePicker2 = new CustomDatePickerDay(this, new CustomDatePickerDay.ResultHandler() {
-            @Override
-            public void handle(String time) {
-                tvEndTime.setText(time.split(" ")[0]);
-            }
-        }, "2000-01-01 00:00", "2030-01-01 00:00");
-        // 不显示时和分
-        customDatePicker2.showSpecificTime(false);
-        // 不允许循环滚动
-        customDatePicker2.setIsLoop(false);
     }
 
     /**
@@ -721,10 +749,12 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.tvStartTime:
+                tag1 = "st";
                 customDatePicker1.show(tvStartTime.getText().toString());
                 break;
             case R.id.tvEndTime:
-                customDatePicker2.show(tvEndTime.getText().toString());
+                tag1 = "ed";
+                customDatePicker1.show(tvEndTime.getText().toString());
                 break;
             case R.id.btnUp:
                 Gson gson = new Gson();

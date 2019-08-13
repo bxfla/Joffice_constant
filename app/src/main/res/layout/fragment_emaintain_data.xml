@@ -69,9 +69,7 @@
                 <EditText
                     android:id="@+id/etShiXiang"
                     android:hint="请填写故障状况"
-                    style="@style/oaEditText"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"/>
+                    style="@style/textWrite" />
             </LinearLayout>
 
             <LinearLayout

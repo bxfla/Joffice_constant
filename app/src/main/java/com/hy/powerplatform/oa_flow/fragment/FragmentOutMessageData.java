@@ -186,13 +186,13 @@ public class FragmentOutMessageData extends Fragment {
                 customDatePicker1.show(tvStartTime.getText().toString());
                 break;
             case R.id.btnUp:
-                final String title = etTitle.getText().toString();
-                final String zhuSong = etZhuSong.getText().toString();
-                final String chaoBao = etChaoBao.getText().toString();
-                final String chaoSong = etChaoSong.getText().toString();
-                final String niGao = etNiGao.getText().toString();
-                final String heGao = etHeGao.getText().toString();
-                final String num = etNum.getText().toString();
+                final String title = etTitle.getText().toString().trim();
+                final String zhuSong = etZhuSong.getText().toString().trim();
+                final String chaoBao = etChaoBao.getText().toString().trim();
+                final String chaoSong = etChaoSong.getText().toString().trim();
+                final String niGao = etNiGao.getText().toString().trim();
+                final String heGao = etHeGao.getText().toString().trim();
+                final String num = etNum.getText().toString().trim();
 
                 final String wenHao = et1.getText().toString();
                 final String riQi = et2.getText().toString();

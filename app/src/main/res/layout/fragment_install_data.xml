@@ -174,17 +174,17 @@
                 <TextView
                     style="@style/oaTextView"
                     android:text="经办分管:"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:background="@color/shouye"
+                    android:layout_gravity="center_vertical"/>
 
                 <TextView
                     android:id="@+id/tvLeader3"
                     style="@style/oaEditText"
                     android:hint="经办分管领导意见" />
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:background="@color/shouye"
-                    android:layout_gravity="center_vertical"/>
             </LinearLayout>
             <View style="@style/line"></View>
 

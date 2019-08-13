@@ -656,22 +656,22 @@ public class ShiGuInFragment extends Fragment implements CarCodeView, InspectLin
                 }
                 // 保存文字信息
                 final String turl = BASE_URL + "busmanager/saveNewAccidentBasicInformation.do";
-                final String dateText = tvTime.getText().toString();
+                final String dateText = tvTime.getText().toString().trim();
                 if (dateText.equals("")) {
                     Toast.makeText(getActivity(), "事故时间不能为空", Toast.LENGTH_LONG).show();
                     return;
                 }
-                final String line_Code = etSelectLine.getText().toString();
+                final String line_Code = etSelectLine.getText().toString().trim();
                 if (line_Code.equals("")) {
                     Toast.makeText(getActivity(), "线路编号不能为空", Toast.LENGTH_LONG).show();
                     return;
                 }
-                final String car_No = etSelectCar.getText().toString();
+                final String car_No = etSelectCar.getText().toString().trim();
                 if (car_No.equals("")) {
                     Toast.makeText(getActivity(), "车牌号码不能为空", Toast.LENGTH_LONG).show();
                     return;
                 }
-                final String driver_Name = etSelectDriver.getText().toString();
+                final String driver_Name = etSelectDriver.getText().toString().trim();
                 if (driver_Name.equals("")) {
                     Toast.makeText(getActivity(), "驾驶员不能为空", Toast.LENGTH_LONG).show();
                     return;
@@ -1097,27 +1097,27 @@ public class ShiGuInFragment extends Fragment implements CarCodeView, InspectLin
                 @Override
                 public void run() {
                     final String turl = BASE_URL + "busmanager/saveNewAccidentBasicInformation.do";
-                    final String dateText = tvTime.getText().toString();
+                    final String dateText = tvTime.getText().toString().trim();
                     if (dateText.equals("")) {
                         Toast.makeText(getActivity(), "事故时间不能为空", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    final String line_Code = etSelectLine.getText().toString();
+                    final String line_Code = etSelectLine.getText().toString().trim();
                     if (line_Code.equals("")) {
                         Toast.makeText(getActivity(), "线路编号不能为空", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    final String car_No = etSelectCar.getText().toString();
+                    final String car_No = etSelectCar.getText().toString().trim();
                     if (car_No.equals("")) {
                         Toast.makeText(getActivity(), "车牌号码不能为空", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    final String driver_Name = etSelectDriver.getText().toString();
+                    final String driver_Name = etSelectDriver.getText().toString().trim();
                     if (driver_Name.equals("")) {
                         Toast.makeText(getActivity(), "驾驶员不能为空", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    final String atAtDate = tvTime.getText().toString();
+                    final String atAtDate = tvTime.getText().toString().trim();
                     final String name = pathName0 + "," + pathName1 + "," + pathName2;
                     new Thread(new Runnable() {
                         @Override

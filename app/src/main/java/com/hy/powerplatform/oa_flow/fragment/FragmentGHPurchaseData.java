@@ -311,11 +311,11 @@ public class FragmentGHPurchaseData extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum1 = (Integer.valueOf(s.toString()));
+                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney1.getText().toString().equals("")){
                         BigDecimal b1 = new BigDecimal(Double.toString(allNum1));
                         BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney1.getText().toString())));
                         String s1 =  b1.multiply(b2).doubleValue()+"";
-                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                         if (!etMoney1.getText().toString().equals("")) {
                             etAllMoney1.setText(s1);
                         } else {
@@ -344,11 +344,11 @@ public class FragmentGHPurchaseData extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum2 = (Integer.valueOf(s.toString()));
+                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney2.getText().toString().equals("")){
                         BigDecimal b1 = new BigDecimal(Double.toString(allNum2));
                         BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney2.getText().toString())));
                         String s1 =  b1.multiply(b2).doubleValue()+"";
-                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                         if (!etMoney2.getText().toString().equals("")) {
                             etAllMoney2.setText(s1);
                         } else {
@@ -377,11 +377,11 @@ public class FragmentGHPurchaseData extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum3 = (Integer.valueOf(s.toString()));
+                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney3.getText().toString().equals("")){
                         BigDecimal b1 = new BigDecimal(Double.toString(allNum3));
                         BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney3.getText().toString())));
                         String s1 =  b1.multiply(b2).doubleValue()+"";
-                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                         if (!etMoney3.getText().toString().equals("")) {
                             etAllMoney3.setText(s1);
                         } else {
@@ -410,11 +410,11 @@ public class FragmentGHPurchaseData extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum4 = (Integer.valueOf(s.toString()));
+                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney4.getText().toString().equals("")){
                         BigDecimal b1 = new BigDecimal(Double.toString(allNum4));
                         BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney4.getText().toString())));
                         String s1 =  b1.multiply(b2).doubleValue()+"";
-                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                         if (!etMoney4.getText().toString().equals("")) {
                             etAllMoney4.setText(s1);
                         } else {
@@ -443,11 +443,11 @@ public class FragmentGHPurchaseData extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum5 = (Integer.valueOf(s.toString()));
+                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney5.getText().toString().equals("")){
                         BigDecimal b1 = new BigDecimal(Double.toString(allNum5));
                         BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney5.getText().toString())));
                         String s1 =  b1.multiply(b2).doubleValue()+"";
-                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                         if (!etMoney5.getText().toString().equals("")) {
                             etAllMoney5.setText(s1);
                         } else {
@@ -643,7 +643,7 @@ public class FragmentGHPurchaseData extends Fragment {
             public void run() {
                 String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + "flow/mobileUsersProcessActivity.do";
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.GOODSPUECHASEDIFID, data);
+                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.GHPUECHASEDIFID, data);
                 if (res.equals("保存失败") || res.equals("")) {
                     handler.sendEmptyMessage(TAG_TWO);
                 } else {
@@ -700,10 +700,10 @@ public class FragmentGHPurchaseData extends Fragment {
                 customDatePicker1.show(tvTime.getText().toString());
                 break;
             case R.id.btnUp:
-                final String department = etClass.getText().toString();
-                final String person = etPerson.getText().toString();
-                final String time = tvTime.getText().toString();
-                final String use = etUse.getText().toString();
+                final String department = etClass.getText().toString().trim();
+                final String person = etPerson.getText().toString().trim();
+                final String time = tvTime.getText().toString().trim();
+                final String use = etUse.getText().toString().trim();
                 if (department.equals("")) {
                     Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
                     break;
@@ -810,7 +810,7 @@ public class FragmentGHPurchaseData extends Fragment {
                 res = dbA.OAGHPurchaseUp(turl, department, person, time,  name1, name2, name3, name4, name5
                         , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
                         , allMoney4, allMoney5, userCode, userDepart, uId, String.valueOf(hejisl), String.valueOf(hejidj)
-                        , String.valueOf(hejije), use, other);
+                        , String.valueOf(hejije), use, other,userDepart);
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -897,7 +897,7 @@ public class FragmentGHPurchaseData extends Fragment {
                                                         String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
                                                         DBHandler dbA = new DBHandler();
                                                         userDepart = data;
-                                                        res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.LEAVERDIFID, data);
+                                                        res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.GHPUECHASEDIFID, data);
                                                         if (res.equals("保存失败") || res.equals("")) {
                                                             handler.sendEmptyMessage(TAG_TWO);
                                                         } else {
@@ -931,7 +931,7 @@ public class FragmentGHPurchaseData extends Fragment {
                                     public void run() {
                                         String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.GHCONTRACTSIGNDIFID, userDepart);
+                                        res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.GHPUECHASEDIFID, userDepart);
                                         if (res.equals("保存失败") || res.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
                                         } else {

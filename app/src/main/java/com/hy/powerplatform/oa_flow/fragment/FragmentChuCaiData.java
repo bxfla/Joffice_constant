@@ -64,7 +64,7 @@ public class FragmentChuCaiData extends Fragment {
     @BindView(R.id.tvEndTime)
     TextView tvEndTime;
     @BindView(R.id.etAllTime)
-    EditText etAllTime;
+    TextView etAllTime;
     @BindView(R.id.etAddress1)
     EditText etAddress1;
     @BindView(R.id.etAddress2)
@@ -271,18 +271,18 @@ public class FragmentChuCaiData extends Fragment {
                 customDatePicker1.show(tvStartTime.getText().toString());
                 break;
             case R.id.btnUp:
-                final String date = tvTime.getText().toString();
-                final String person = etPerson.getText().toString();
-                final String startTime = tvStartTime.getText().toString();
-                final String endTime = tvEndTime.getText().toString();
-                final String days = etAllTime.getText().toString();
-                final String address1 = etAddress1.getText().toString();
-                final String address2 = etAddress2.getText().toString();
-                final String address3 = etAddress3.getText().toString();
+                final String date = tvTime.getText().toString().trim();
+                final String person = etPerson.getText().toString().trim();
+                final String startTime = tvStartTime.getText().toString().trim();
+                final String endTime = tvEndTime.getText().toString().trim();
+                final String days = etAllTime.getText().toString().trim();
+                final String address1 = etAddress1.getText().toString().trim();
+                final String address2 = etAddress2.getText().toString().trim();
+                final String address3 = etAddress3.getText().toString().trim();
                 final String carType = String.valueOf(spinnerCar.getSelectedItem());
-                final String reason = etReason.getText().toString();
-                final String yjMoney = etYJMoney.getText().toString();
-                final String zjMoney = etZJMoney.getText().toString();
+                final String reason = etReason.getText().toString().trim();
+                final String yjMoney = etYJMoney.getText().toString().trim();
+                final String zjMoney = etZJMoney.getText().toString().trim();
 
                 if (person.equals("")) {
                     Toast.makeText(getActivity(), "出差人不能为空", Toast.LENGTH_SHORT).show();

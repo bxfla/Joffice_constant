@@ -240,14 +240,14 @@ public class FragmentDormData extends Fragment {
 //                }
                 break;
             case R.id.btnUp:
-                final String person = etPerson.getText().toString();
-                final String time = tvTime.getText().toString();
+                final String person = etPerson.getText().toString().trim();
+                final String time = tvTime.getText().toString().trim();
                 final String sex = String.valueOf(spinnerSex.getSelectedItem());
-                final String age = etAge.getText().toString();
-                final String idCard = etIdCard.getText().toString();
-                final String phone = etPhone.getText().toString();
-                final String address = etAddress.getText().toString();
-                final String reason = etReason.getText().toString();
+                final String age = etAge.getText().toString().trim();
+                final String idCard = etIdCard.getText().toString().trim();
+                final String phone = etPhone.getText().toString().trim();
+                final String address = etAddress.getText().toString().trim();
+                final String reason = etReason.getText().toString().trim();
                 if (person.equals("")) {
                     Toast.makeText(getActivity(), "姓名不能为空", Toast.LENGTH_SHORT).show();
                     break;

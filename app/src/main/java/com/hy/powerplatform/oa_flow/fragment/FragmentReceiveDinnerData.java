@@ -72,7 +72,7 @@ public class FragmentReceiveDinnerData extends Fragment {
     @BindView(R.id.etEatBZ)
     EditText etEatBZ;
     @BindView(R.id.etBigMoney)
-    EditText etBigMoney;
+    TextView etBigMoney;
     @BindView(R.id.etSmallMoney)
     EditText etSmallMoney;
     @BindView(R.id.tvData)
@@ -212,15 +212,15 @@ public class FragmentReceiveDinnerData extends Fragment {
 //                }
                 break;
             case R.id.btnUp:
-                final String time = tvTime.getText().toString()+"";
-                final String person = etPerson.getText().toString()+"";
-                final String department = etDpartment.getText().toString()+"";
-                final String pcPerson = etPCPerson.getText().toString()+"";
-                final String lkDepartment = etLKDepartment.getText().toString()+"";
-                final String lkPerson = etLKPerson.getText().toString()+"";
-                final String eatBz = etEatBZ.getText().toString()+"";
-                final String bigMoney = etBigMoney.getText().toString()+"";
-                final String smallMoney = etSmallMoney.getText().toString()+"";
+                final String time = tvTime.getText().toString().trim()+"";
+                final String person = etPerson.getText().toString().trim()+"";
+                final String department = etDpartment.getText().toString().trim()+"";
+                final String pcPerson = etPCPerson.getText().toString().trim()+"";
+                final String lkDepartment = etLKDepartment.getText().toString().trim()+"";
+                final String lkPerson = etLKPerson.getText().toString().trim()+"";
+                final String eatBz = etEatBZ.getText().toString().trim()+"";
+                final String bigMoney = etBigMoney.getText().toString().trim()+"";
+                final String smallMoney = etSmallMoney.getText().toString().trim()+"";
                 if (department.equals("")) {
                     Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
                     break;

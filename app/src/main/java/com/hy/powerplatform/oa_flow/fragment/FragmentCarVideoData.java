@@ -276,20 +276,20 @@ public class FragmentCarVideoData extends Fragment {
                 customDatePicker2.show(tvZhiDanRiQi.getText().toString());
                 break;
             case R.id.btnUp:
-                final String zhiDanRen = etPerson.getText().toString() + "";
-                final String zhiDanDate = tvZhiDanRiQi.getText().toString() + "";
-                final String department = etDpartment.getText().toString() + "";
-                final String person = etPerson.getText().toString() + "";
-                final String carNo = etCarCode.getText().toString() + "";
-                final String line = etLine.getText().toString() + "";
-                final String time = tvTime.getText().toString() + "";
+                final String zhiDanRen = etPerson.getText().toString().trim() + "";
+                final String zhiDanDate = tvZhiDanRiQi.getText().toString().trim() + "";
+                final String department = etDpartment.getText().toString().trim() + "";
+                final String person = etPerson.getText().toString().trim() + "";
+                final String carNo = etCarCode.getText().toString().trim() + "";
+                final String line = etLine.getText().toString().trim() + "";
+                final String time = tvTime.getText().toString().trim() + "";
 
-                final String address = etAddress.getText().toString() + "";
-                final String xingZhi = etXingZhi.getText().toString() + "";
-                final String staus = etStaus.getText().toString() + "";
-                final String bigMonet = etBigMoney.getText().toString() + "";
-                final String smallMoney = etSmallMoney.getText().toString() + "";
-                final String card = etCard.getText().toString() + "";
+                final String address = etAddress.getText().toString().trim() + "";
+                final String xingZhi = etXingZhi.getText().toString().trim() + "";
+                final String staus = etStaus.getText().toString().trim() + "";
+                final String bigMonet = etBigMoney.getText().toString().trim() + "";
+                final String smallMoney = etSmallMoney.getText().toString().trim() + "";
+                final String card = etCard.getText().toString().trim() + "";
                 final String diaoQu = String.valueOf(spinnerDiaoQu.getSelectedItem()) + "";
                 if (department.equals("")) {
                     Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();

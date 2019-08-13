@@ -254,12 +254,12 @@ public class FragmentContractPayData extends Fragment {
                 customDatePicker1.show(tvTime.getText().toString());
                 break;
             case R.id.btnUp:
-                final String LiuShuiNo = tvContractNo.getText().toString();
-                final String department = etClass.getText().toString();
-                final String jsb = etPerson.getText().toString();
-                final String name = etContractName.getText().toString();
-                final String time = tvTime.getText().toString();
-                final String situation = etSituation.getText().toString();
+                final String LiuShuiNo = tvContractNo.getText().toString().trim();
+                final String department = etClass.getText().toString().trim();
+                final String jsb = etPerson.getText().toString().trim();
+                final String name = etContractName.getText().toString().trim();
+                final String time = tvTime.getText().toString().trim();
+                final String situation = etSituation.getText().toString().trim();
                 if (LiuShuiNo.equals("")) {
                     Toast.makeText(getActivity(), "流水号不能为空", Toast.LENGTH_SHORT).show();
                     break;

@@ -45,7 +45,7 @@ public class FlowGHPayActivity extends BaseActivity implements RadioGroup.OnChec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        header.setTvTitle("工会合同付款单");
+        header.setTvTitle("经费审查");
         fragment01 = new FragmentGHPayData();
         fragment02 = new FragmentGHPayList();
         fragment011 = new FragmentTestList();

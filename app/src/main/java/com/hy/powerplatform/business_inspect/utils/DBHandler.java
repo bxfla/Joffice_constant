@@ -2580,7 +2580,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
         nvs.add(new BasicNameValuePair("comments", comment));
         nvs.add(new BasicNameValuePair("mainId", mainId));
-        nvs.add(new BasicNameValuePair("formDefId", Constant.PAYFLOW));
+        nvs.add(new BasicNameValuePair("formDefId", Constant.COMPMESSAGE));
         nvs.add(new BasicNameValuePair("sqrq", time));
         nvs.add(new BasicNameValuePair("bmDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
         nvs.add(new BasicNameValuePair("bm", department));
@@ -3037,13 +3037,14 @@ public class DBHandler {
             , String num3, String num4, String num5, String money1, String money2, String money3, String money4
             , String money5, String allMoney1, String allMoney2, String allMoney3, String allMoney4
             , String allMoney5, String userCode, String uName, String uId, String hejisl, String hejidj
-            , String hejije, String use, String other) {
+            , String hejije, String use, String other,String userDepart) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
         String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
+        nvs.add(new BasicNameValuePair("destName", userDepart));
         nvs.add(new BasicNameValuePair("defId", Constant.GHPUECHASEDIFID));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
@@ -6432,7 +6433,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("BuMen", department));
         nvs.add(new BasicNameValuePair("JiaShiYuan", driver));
         nvs.add(new BasicNameValuePair("JieKuanRenUId", userId));
-        nvs.add(new BasicNameValuePair("JieKuanRen", userName));
+        nvs.add(new BasicNameValuePair("JieKuanRen", JKPerson));
         nvs.add(new BasicNameValuePair("CheHao", carNo));
         nvs.add(new BasicNameValuePair("ShiJian", str));
         nvs.add(new BasicNameValuePair("DiDian", address));
@@ -6901,7 +6902,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("destName", destName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
+        nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
 
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("showvalue", ""));

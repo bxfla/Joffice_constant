@@ -183,9 +183,9 @@ public class FragmentCompMessageData extends Fragment {
                 customDatePicker1.show(tvTime.getText().toString());
                 break;
             case R.id.btnUp:
-                final String date = tvTime.getText().toString();
-                final String person = etPerson.getText().toString();
-                final String title = etTitle.getText().toString();
+                final String date = tvTime.getText().toString().trim();
+                final String person = etPerson.getText().toString().trim();
+                final String title = etTitle.getText().toString().trim();
                 if (date.equals("")) {
                     Toast.makeText(getActivity(), "日期不能为空", Toast.LENGTH_SHORT).show();
                     break;

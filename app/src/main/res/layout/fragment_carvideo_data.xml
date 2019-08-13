@@ -126,11 +126,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="地点: *"/>
+                    android:text="地点: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -139,7 +141,7 @@
                 <EditText
                     android:id="@+id/etAddress"
                     android:hint="请填写地点"
-                    style="@style/oaEditText"/>
+                    style="@style/textWrite"/>
             </LinearLayout>
             <View style="@style/line"></View>
 
@@ -187,7 +189,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
-
+            <View style="@style/line"></View>
             <LinearLayout
                 android:visibility="gone"
                 android:layout_width="match_parent"

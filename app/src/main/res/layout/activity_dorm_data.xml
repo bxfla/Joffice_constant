@@ -182,12 +182,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="户籍所在地: *" />
+                    android:text="户籍所在地: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
 
                 <View
                     android:layout_width="1dp"
@@ -222,10 +224,8 @@
 
                 <TextView
                     android:id="@+id/tvReason"
-                    style="@style/oaEditText"
-                    android:hint="请填写申请理由"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"/>
+                    style="@style/textWrite"
+                    android:hint="请填写申请理由" />
             </LinearLayout>
 
             <View style="@style/line"></View>

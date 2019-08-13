@@ -93,9 +93,7 @@
                     android:id="@+id/tvShiXiang"
                     android:hint="请填写事故情况"
                     android:scrollbars="vertical"
-                    style="@style/textWrite"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"/>
+                    style="@style/textWrite" />
             </LinearLayout>
 
             <LinearLayout

@@ -84,12 +84,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="职务: *" />
+                    android:text="职务: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
 
                 <View
                     android:layout_width="1dp"
@@ -99,7 +101,7 @@
 
                 <EditText
                     android:id="@+id/etJob"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写用车人职务" />
             </LinearLayout>
 
@@ -156,12 +158,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="任务地点: *" />
+                    android:text="任务地点: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
 
                 <View
                     android:layout_width="1dp"
@@ -171,7 +175,7 @@
 
                 <EditText
                     android:id="@+id/etAddress"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写任务地点" />
             </LinearLayout>
 

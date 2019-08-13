@@ -242,27 +242,27 @@ public class FragmentBillData extends Fragment {
             case R.id.btnUp:
                 final String zdPerson = etZDPerson.getText().toString();
                 final String zdTime = tvZDTime.getText().toString();
-                final String department = etDepartment.getText().toString();
-                final String JKPerson = etJKPerson.getText().toString();
-                final String driver = etDriver.getText().toString();
-                final String carNo = etCarNo.getText().toString();
+                final String department = etDepartment.getText().toString().trim();
+                final String JKPerson = etJKPerson.getText().toString().trim();
+                final String driver = etDriver.getText().toString().trim();
+                final String carNo = etCarNo.getText().toString().trim();
                 SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
                 Date curDate = new Date(System.currentTimeMillis());
                 String str = formatter.format(curDate);
-                final String address = etAddress.getText().toString();
-                final String use = etUse.getText().toString();
-                final String otherPerson = etOtherPerson.getText().toString();
-                final String otherPhone = etOtherPhone.getText().toString();
-                final String reason = etReason.getText().toString();
-                final String smallMoney = etSmallMoney.getText().toString();
-                final String bigMoney = etBigMoney.getText().toString();
-                final String type = etType.getText().toString();
-                final String blame = etBlame.getText().toString();
+                final String address = etAddress.getText().toString().trim();
+                final String use = etUse.getText().toString().trim();
+                final String otherPerson = etOtherPerson.getText().toString().trim();
+                final String otherPhone = etOtherPhone.getText().toString().trim();
+                final String reason = etReason.getText().toString().trim();
+                final String smallMoney = etSmallMoney.getText().toString().trim();
+                final String bigMoney = etBigMoney.getText().toString().trim();
+                final String type = etType.getText().toString().trim();
+                final String blame = etBlame.getText().toString().trim();
 
-                final String num = etNum.getText().toString();
+                final String num = etNum.getText().toString().trim();
                 final String money = etMoney.getText().toString();
-                final String allMoneyM = etAllMoneyM.getText().toString();
-                final String allmoneyY = etAllMoneyY.getText().toString();
+                final String allMoneyM = etAllMoneyM.getText().toString().trim();
+                final String allmoneyY = etAllMoneyY.getText().toString().trim();
 
                 if (bigMoney.equals("")) {
                     Toast.makeText(getActivity(), "借款金额不能为空", Toast.LENGTH_SHORT).show();

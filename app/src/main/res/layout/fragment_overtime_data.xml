@@ -33,11 +33,13 @@
             <View style="@style/line"></View>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="申请部门: *"/>
+                    android:text="申请部门: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -46,7 +48,7 @@
                 <EditText
                     android:id="@+id/etDpartment"
                     android:hint="请填写申请部门"
-                    style="@style/oaEditText"/>
+                    style="@style/textWrite"/>
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -128,11 +130,13 @@
             <View style="@style/line"></View>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="加班地点: *"/>
+                    android:text="加班地点: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -141,7 +145,7 @@
                 <EditText
                     android:id="@+id/etAddress"
                     android:hint="请填写加班地点"
-                    style="@style/oaEditText"/>
+                    style="@style/textWrite"/>
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout

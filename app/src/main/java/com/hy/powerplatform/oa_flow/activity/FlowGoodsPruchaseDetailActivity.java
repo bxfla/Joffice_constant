@@ -151,15 +151,15 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
     @BindView(R.id.ll1)
     LinearLayout ll1;
     @BindView(R.id.etDepartment1)
-    EditText etDepartment1;
+    TextView etDepartment1;
     @BindView(R.id.etDepartment2)
-    EditText etDepartment2;
+    TextView etDepartment2;
     @BindView(R.id.etDepartment3)
-    EditText etDepartment3;
+    TextView etDepartment3;
     @BindView(R.id.etDepartment4)
-    EditText etDepartment4;
+    TextView etDepartment4;
     @BindView(R.id.etDepartment5)
-    EditText etDepartment5;
+    TextView etDepartment5;
     @BindView(R.id.tvDepartment5)
     TextView tvDepartment5;
     @BindView(R.id.llcg)

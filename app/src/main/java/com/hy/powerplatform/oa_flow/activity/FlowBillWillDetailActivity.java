@@ -756,7 +756,7 @@ public class FlowBillWillDetailActivity extends BaseActivity {
                     if (!aqreout.equals("2") && !fgreout.equals("2") && !ldspreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!aqfwyj.equals("") && !fgldyj.equals("") && !ldspyj.equals("")) {
+                    } else if (!etLeader2.getText().toString().equals("") && !fgldyj.equals("") && !aqfwyj.equals("")) {
                         comment = "";
                         personSession();
                     } else {

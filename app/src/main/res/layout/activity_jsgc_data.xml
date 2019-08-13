@@ -69,12 +69,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="需求部门: *" />
+                    android:text="需求部门: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
 
                 <View
                     android:layout_width="1dp"
@@ -84,7 +86,7 @@
 
                 <TextView
                     android:id="@+id/tvDpartment"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写需求部门"
                     />
             </LinearLayout>
@@ -110,10 +112,8 @@
 
                 <TextView
                     android:id="@+id/tvShiXiang"
-                    style="@style/oaEditText"
-                    android:hint="请填写需求事项"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"/>
+                    style="@style/textWrite"
+                    android:hint="请填写需求事项" />
             </LinearLayout>
 
 

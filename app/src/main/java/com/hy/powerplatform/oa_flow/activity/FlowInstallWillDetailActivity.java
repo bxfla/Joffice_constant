@@ -845,11 +845,11 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (comment.equals("")) {
-                    if (!bmreout.equals("2") && !fgreout.equals("2") && !jbfgreout.equals("2") && !jbreout.equals("2")
+                    if (!zjlreout.equals("2") &&!bmreout.equals("2") && !fgreout.equals("2") && !jbfgreout.equals("2") && !jbreout.equals("2")
                             && !bjapreout.equals("2") && !bjrreout.equals("2") && !bjpjreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!bjpj.equals("") && !bjr.equals("") && !bjap.equals("") && !jbbmyj.equals("")
+                    } else if (!etLeaderzjl.getText().toString().equals("")&&!bjpj.equals("") && !bjr.equals("") && !bjap.equals("") && !jbbmyj.equals("")
                             && !jbfgldyj.equals("") && !fgldyj.equals("") && !bmfzryj.equals("")) {
                         comment = "";
                         personSession();
@@ -1113,7 +1113,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                             tvLeader4.setVisibility(View.VISIBLE);
                             etLeader4.setVisibility(View.GONE);
                         }
-                        if (bjrreout.equals("2")) {
+                        if (bjpjreout.equals("2")) {
                             tvLeader5.setVisibility(View.GONE);
                             etLeader5.setVisibility(View.VISIBLE);
                             tvDate1.setVisibility(View.VISIBLE);
@@ -1155,7 +1155,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            tvLeader6.setText(word3);
+                            tvLeaderzjl.setText(word3);
                         }
                     }
 

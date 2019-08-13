@@ -284,12 +284,12 @@ public class FragmentOverTimeData extends Fragment {
                 customDatePicker1.show(tvEndTime.getText().toString());
                 break;
             case R.id.btnUp:
-                final String date = tvTime.getText().toString();
-                final String person = etPerson.getText().toString();
-                final String department = etDpartment.getText().toString();
-                final String address = etAddress.getText().toString();
-                final String task = etTask.getText().toString();
-                final String days = etDays.getText().toString();
+                final String date = tvTime.getText().toString().trim();
+                final String person = etPerson.getText().toString().trim();
+                final String department = etDpartment.getText().toString().trim();
+                final String address = etAddress.getText().toString().trim();
+                final String task = etTask.getText().toString().trim();
+                final String days = etDays.getText().toString().trim();
 
                 if (person.equals("")) {
                     Toast.makeText(getActivity(), "申请人不能为空", Toast.LENGTH_SHORT).show();

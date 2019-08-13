@@ -207,13 +207,13 @@ public class FragmentFuKuanLiuChengData extends Fragment {
 //                }
                 break;
             case R.id.btnUp:
-                final String person = etPerson.getText().toString();
-                final String time = tvTime.getText().toString();
-                final String department = etDpartment.getText().toString();
-                final String classD = etDPName.getText().toString();
-                final String bigMoney = etBigMoney.getText().toString();
-                final String smallMoney = etSmallMoney.getText().toString();
-                final String data = etYongTu.getText().toString();
+                final String person = etPerson.getText().toString().trim();
+                final String time = tvTime.getText().toString().trim();
+                final String department = etDpartment.getText().toString().trim();
+                final String classD = etDPName.getText().toString().trim();
+                final String bigMoney = etBigMoney.getText().toString().trim();
+                final String smallMoney = etSmallMoney.getText().toString().trim();
+                final String data = etYongTu.getText().toString().trim();
                 final String type = (String) spinner.getSelectedItem();
                 if (person.equals("")) {
                     Toast.makeText(getActivity(), "申请人不能为空", Toast.LENGTH_SHORT).show();
@@ -227,12 +227,12 @@ public class FragmentFuKuanLiuChengData extends Fragment {
                     Toast.makeText(getActivity(), "收款单位不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (bigMoney.equals("")) {
-                    Toast.makeText(getActivity(), "金额（大写）不能为空", Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 if (smallMoney.equals("")) {
                     Toast.makeText(getActivity(), "金额（小写）不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (bigMoney.equals("")) {
+                    Toast.makeText(getActivity(), "金额（大写）不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (data.equals("")) {

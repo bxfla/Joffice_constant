@@ -244,16 +244,16 @@ public class FragmentComplainData extends Fragment {
 //                }
                 break;
             case R.id.btnUp:
-                final String person = etPerson.getText().toString() + "";
-                final String time = tvTime.getText().toString() + "";
+                final String person = etPerson.getText().toString().trim() + "";
+                final String time = tvTime.getText().toString().trim() + "";
                 final String sex = String.valueOf(spinnerSex.getSelectedItem());
-                final String phone = etPhone.getText().toString() + "";
-                final String person1 = etPerson1.getText().toString() + "";
-                final String carNo = etCarNo.getText().toString() + "";
+                final String phone = etPhone.getText().toString().trim() + "";
+                final String person1 = etPerson1.getText().toString().trim() + "";
+                final String carNo = etCarNo.getText().toString().trim() + "";
                 final String department = String.valueOf(spinnerComp.getSelectedItem());
-                final String line = etLine.getText().toString() + "";
-                final String shouLi = etShouLi.getText().toString() + "";
-                final String data = etData.getText().toString() + "";
+                final String line = etLine.getText().toString().trim() + "";
+                final String shouLi = etShouLi.getText().toString().trim() + "";
+                final String data = etData.getText().toString().trim() + "";
                 if (person.equals("")) {
                     Toast.makeText(getActivity(), "投诉人不能为空", Toast.LENGTH_SHORT).show();
                     break;

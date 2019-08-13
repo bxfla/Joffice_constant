@@ -33,11 +33,13 @@
             <View style="@style/line"></View>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="部门: *"/>
+                    android:text="部门: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -46,7 +48,7 @@
                 <EditText
                     android:id="@+id/etDpartment"
                     android:hint="请填写所在部门"
-                    style="@style/oaEditText"/>
+                    style="@style/textWrite"/>
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -70,11 +72,13 @@
             <View style="@style/line"></View>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="收款单位: *"/>
+                    android:text="收款单位: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -83,7 +87,7 @@
                 <EditText
                     android:id="@+id/etDPName"
                     android:hint="请填写收款单位全称"
-                    style="@style/oaEditText"/>
+                    style="@style/textWrite"/>
             </LinearLayout>
 
             <View style="@style/line"></View>
@@ -191,7 +195,7 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="财务总监意见:"/>
+                    android:text="委员会主任:"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -201,7 +205,7 @@
                 <TextView
                     android:id="@+id/etLeader1"
                     style="@style/oaEditText"
-                    android:hint="财务总监意见" />
+                    android:hint="委员会主任意见" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout

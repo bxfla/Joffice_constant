@@ -339,7 +339,7 @@ public class FlowInstallDetailActivity extends BaseActivity {
                         tvLeader.setText(getJSONData(bmfzryj));
                     }
                     if (!zjlyj.equals("")) {
-                        tvLeaderzjl.setText(getJSONData(bmfzryj));
+                        tvLeaderzjl.setText(getJSONData(zjlyj));
                     }
                     if (!fgldyj.equals("")) {
                         tvLeader1.setText(getJSONData(fgldyj));

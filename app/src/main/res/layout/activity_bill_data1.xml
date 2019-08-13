@@ -156,11 +156,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="地点: *" />
+                    android:text="地点: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -168,18 +170,20 @@
                     android:background="@color/shouye" />
                 <TextView
                     android:id="@+id/tvAddress"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写地点"/>
             </LinearLayout>
             <View style="@style/line"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="借款用途: *" />
+                    android:text="借款用途: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -187,7 +191,7 @@
                     android:background="@color/shouye" />
                 <TextView
                     android:id="@+id/tvUse"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写借款用途"/>
             </LinearLayout>
             <View style="@style/line"></View>
@@ -232,11 +236,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="事故原因: *" />
+                    android:text="事故原因: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -244,7 +250,7 @@
                     android:background="@color/shouye" />
                 <TextView
                     android:id="@+id/tvReason"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写事故原因"/>
             </LinearLayout>
             <View style="@style/line"></View>
@@ -289,11 +295,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="险种: *" />
+                    android:text="险种: *"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -301,7 +309,7 @@
                     android:background="@color/shouye" />
                 <TextView
                     android:id="@+id/tvType"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写险种"/>
             </LinearLayout>
             <View style="@style/line"></View>

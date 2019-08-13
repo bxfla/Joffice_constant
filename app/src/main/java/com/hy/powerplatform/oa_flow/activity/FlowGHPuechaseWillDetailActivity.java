@@ -1005,42 +1005,77 @@ public class FlowGHPuechaseWillDetailActivity extends BaseActivity {
                         for (int i = 0; i < beanList.size(); i++) {
                             namelist.add(beanList.get(i).getDestination());
                         }
-                        MyAlertDialog.MyListAlertDialog(FlowGHPuechaseWillDetailActivity.this, namelist, new AlertDialogCallBackP() {
-                            @Override
-                            public void oneselect(final String data) {
-                                ProgressDialogUtil.startLoad(FlowGHPuechaseWillDetailActivity.this, "获取数据中");
-                                destName = data;
-                                for (int i = 0; i < beanList.size(); i++) {
-                                    if (destName.equals(beanList.get(i).getDestination())) {
-                                        signaName = beanList.get(i).getName();
-                                        destType = beanList.get(i).getDestType();
+                        String superRoleName = new SharedPreferencesHelper(FlowGHPuechaseWillDetailActivity.this, "login")
+                                .getData(FlowGHPuechaseWillDetailActivity.this, "superRoleName", "");
+                        for (int i = 0; i < namelist.size(); i++) {
+                            if (superRoleName.indexOf("部负责人") != -1 || superRoleName.indexOf("公司负责人") != -1) {
+                                if (namelist.get(i).indexOf("负责人") != -1 || namelist.get(i).indexOf("公司负责人") != -1) {
+                                    destName = namelist.get(i);
+                                }
+                            } else if (superRoleName.indexOf("分管领导") != -1) {
+                                if (namelist.get(i).indexOf("分管领导") != -1) {
+                                    destName = namelist.get(i);
+                                }
+                            } else if (superRoleName.indexOf("总经理") != -1) {
+                                if (namelist.get(i).indexOf("总经理") != -1) {
+                                    destName = namelist.get(i);
+                                }
+                            } else if (superRoleName.indexOf("财务总监") != -1) {
+                                if (namelist.get(i).indexOf("财务总监") != -1) {
+                                    destName = namelist.get(i);
+                                }
+                            } else {
+                                MyAlertDialog.MyListAlertDialog(FlowGHPuechaseWillDetailActivity.this, namelist, new AlertDialogCallBackP() {
+                                    @Override
+                                    public void oneselect(final String data) {
+                                        ProgressDialogUtil.startLoad(FlowGHPuechaseWillDetailActivity.this, "获取数据中");
+                                        destName = data;
+                                        for (int i = 0; i < beanList.size(); i++) {
+                                            if (destName.equals(beanList.get(i).getDestination())) {
+                                                signaName = beanList.get(i).getName();
+                                                destType = beanList.get(i).getDestType();
+                                            }
+                                        }
+                                        if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                                            handler.sendEmptyMessage(TAG_SIX);
+                                        } else if (destType.indexOf("end") == -1) {
+                                            handler.sendEmptyMessage(TAG_FIVE);
+                                        } else {
+                                            getLastPerson();
+                                        }
                                     }
-                                }
-                                if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
-                                    handler.sendEmptyMessage(TAG_SIX);
-                                } else if (destType.indexOf("end") == -1) {
-                                    handler.sendEmptyMessage(TAG_FIVE);
-                                } else {
-                                    getLastPerson();
-                                }
 
+                                    @Override
+                                    public void select(List<String> list) {
+
+                                    }
+
+                                    @Override
+                                    public void confirm() {
+
+                                    }
+
+                                    @Override
+                                    public void cancel() {
+
+                                    }
+                                });
                             }
-
-                            @Override
-                            public void select(List<String> list) {
-
+                        }
+                        ProgressDialogUtil.startLoad(FlowGHPuechaseWillDetailActivity.this, "获取数据中");
+                        for (int i = 0; i < beanList.size(); i++) {
+                            if (destName.equals(beanList.get(i).getDestination())) {
+                                signaName = beanList.get(i).getName();
+                                destType = beanList.get(i).getDestType();
                             }
-
-                            @Override
-                            public void confirm() {
-
-                            }
-
-                            @Override
-                            public void cancel() {
-
-                            }
-                        });
+                        }
+                        if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                            handler.sendEmptyMessage(TAG_SIX);
+                        } else if (destType.indexOf("end") == -1) {
+                            handler.sendEmptyMessage(TAG_FIVE);
+                        } else {
+                            getLastPerson();
+                        }
                     }
                 } else {
                     Toast.makeText(FlowGHPuechaseWillDetailActivity.this, "审批人为空", Toast.LENGTH_SHORT).show();
@@ -1177,7 +1212,7 @@ public class FlowGHPuechaseWillDetailActivity extends BaseActivity {
                     if (!bmreout.equals("2") && !fgreout.equals("2")&& !zxreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!fgldyj.equals("") && !bmfzryj.equals("")&& !ghzx.equals("")) {
+                    } else if (!fgldyj.equals("") && !bmfzryj.equals("")&& !etLeader2.getText().toString().equals("")) {
                         comment = "";
                         personSession();
                     } else {

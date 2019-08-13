@@ -559,27 +559,27 @@ public class ShiGuCheckActivity extends BaseActivity implements CarCodeView, Ins
         }
         // 保存文字信息
         final String turl = BASE_URL + "busmanager/saveNewAccidentBasicInformation.do";
-        final String dateText = tvTime.getText().toString();
+        final String dateText = tvTime.getText().toString().trim();
         if (dateText.equals("")) {
             Toast.makeText(this, "事故时间不能为空", Toast.LENGTH_LONG).show();
             return;
         }
-        final String line_Code = etSelectLine.getText().toString();
+        final String line_Code = etSelectLine.getText().toString().trim();
         if (line_Code.equals("")) {
             Toast.makeText(this, "线路编号不能为空", Toast.LENGTH_LONG).show();
             return;
         }
-        final String car_No = etSelectCar.getText().toString();
+        final String car_No = etSelectCar.getText().toString().trim();
         if (car_No.equals("")) {
             Toast.makeText(this, "车牌号码不能为空", Toast.LENGTH_LONG).show();
             return;
         }
-        final String driver_Name = etSelectDriver.getText().toString();
+        final String driver_Name = etSelectDriver.getText().toString().trim();
         if (driver_Name.equals("")) {
             Toast.makeText(this, "驾驶员不能为空", Toast.LENGTH_LONG).show();
             return;
         }
-        final String atAtDate = tvTime.getText().toString();
+        final String atAtDate = tvTime.getText().toString().trim();
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat simpleDateFormatTime = new SimpleDateFormat("HH:mm:ss");
         final String atTime = simpleDateFormatTime.format(date);

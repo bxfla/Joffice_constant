@@ -232,10 +232,10 @@ public class FragmentRepairData extends Fragment {
 //                }
                 break;
             case R.id.btnUp:
-                final String department = etDepartment.getText().toString();
-                final String address = etAddress.getText().toString();
-                final String date = tvDate.getText().toString();
-                final String data = etData.getText().toString();
+                final String department = etDepartment.getText().toString().trim();
+                final String address = etAddress.getText().toString().trim();
+                final String date = tvDate.getText().toString().trim();
+                final String data = etData.getText().toString().trim();
                 if (department.equals("")) {
                     Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
                     break;

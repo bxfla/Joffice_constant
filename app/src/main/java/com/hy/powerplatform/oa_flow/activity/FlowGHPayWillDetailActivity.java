@@ -656,7 +656,7 @@ public class FlowGHPayWillDetailActivity extends BaseActivity {
                     if (!bmreout.equals("2") && !fgcwreout.equals("2") && !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!zjl.equals("") && !fgcwze.equals("") && !bmfzr.equals("")) {
+                    } else if (!etLeader2.getText().toString().equals("") && !fgcwze.equals("") && !bmfzr.equals("")) {
                         comment = "";
                         personSession();
                     } else {

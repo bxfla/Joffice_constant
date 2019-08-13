@@ -1035,6 +1035,10 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
                             tvLeader4.setVisibility(View.VISIBLE);
                             etLeader4.setVisibility(View.GONE);
                         }
+                        if (xqreout.equals("1")&&xqldreout.equals("1")&&jsreout.equals("1")
+                                &&jsldreout.equals("1")&&zjlreout.equals("1")){
+                            Toast.makeText(FlowCompMessageWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

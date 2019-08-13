@@ -320,11 +320,11 @@ public class FragmentWorkPurchaseData extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum1 = (Integer.valueOf(s.toString()));
+                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney1.getText().toString().equals("")){
                         BigDecimal b1 = new BigDecimal(Double.toString(allNum1));
                         BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney1.getText().toString())));
                         String s1 =  b1.multiply(b2).doubleValue()+"";
-                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                         if (!etMoney1.getText().toString().equals("")) {
                             etAllMoney1.setText(s1);
                         } else {
@@ -353,11 +353,11 @@ public class FragmentWorkPurchaseData extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum2 = (Integer.valueOf(s.toString()));
+                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney2.getText().toString().equals("")){
                         BigDecimal b1 = new BigDecimal(Double.toString(allNum2));
                         BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney2.getText().toString())));
                         String s1 =  b1.multiply(b2).doubleValue()+"";
-                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                         if (!etMoney2.getText().toString().equals("")) {
                             etAllMoney2.setText(s1);
                         } else {
@@ -386,11 +386,11 @@ public class FragmentWorkPurchaseData extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum3 = (Integer.valueOf(s.toString()));
+                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney3.getText().toString().equals("")){
                         BigDecimal b1 = new BigDecimal(Double.toString(allNum3));
                         BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney3.getText().toString())));
                         String s1 =  b1.multiply(b2).doubleValue()+"";
-                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                         if (!etMoney3.getText().toString().equals("")) {
                             etAllMoney3.setText(s1);
                         } else {
@@ -419,11 +419,11 @@ public class FragmentWorkPurchaseData extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("") && !s.toString().equals(".")) {
                     allNum4 = (Integer.valueOf(s.toString()));
+                    tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                     if (!etMoney4.getText().toString().equals("")){
                         BigDecimal b1 = new BigDecimal(Double.toString(allNum4));
                         BigDecimal b2 = new BigDecimal(Double.toString(Double.valueOf(etMoney4.getText().toString())));
                         String s1 =  b1.multiply(b2).doubleValue()+"";
-                        tvAllNum.setText(String.valueOf(allNum1 + allNum2 + allNum3 + allNum4 + allNum5));
                         if (!etMoney4.getText().toString().equals("")) {
                             etAllMoney4.setText(s1);
                         } else {
@@ -646,9 +646,9 @@ public class FragmentWorkPurchaseData extends Fragment {
                 customDatePicker1.show(tvTime.getText().toString());
                 break;
             case R.id.btnUp:
-                final String department = etClass.getText().toString();
-                final String person = etPerson.getText().toString();
-                final String time = tvTime.getText().toString();
+                final String department = etClass.getText().toString().trim();
+                final String person = etPerson.getText().toString().trim();
+                final String time = tvTime.getText().toString().trim();
                 if (department.equals("")) {
                     Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
                     break;

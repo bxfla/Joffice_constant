@@ -130,7 +130,7 @@
 
                 <TextView
                     android:id="@+id/tvContractName"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写合同名称" />
             </LinearLayout>
 
@@ -177,7 +177,7 @@
 
                 <TextView
                     android:id="@+id/tvSituation"
-                    style="@style/oaEditText"
+                    style="@style/textWrite"
                     android:hint="请填写基本情况"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"/>

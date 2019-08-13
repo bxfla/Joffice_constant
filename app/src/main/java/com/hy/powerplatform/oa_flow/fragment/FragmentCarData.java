@@ -238,10 +238,10 @@ public class FragmentCarData extends Fragment {
                 customDatePicker2.show(tvEndTime.getText().toString());
                 break;
             case R.id.btnUp:
-                final String job = etJob.getText().toString() + "";
-                final String phone = etPhone.getText().toString() + "";
-                final String task = etTask.getText().toString() + "";
-                final String address = etAddress.getText().toString() + "";
+                final String job = etJob.getText().toString().trim() + "";
+                final String phone = etPhone.getText().toString().trim() + "";
+                final String task = etTask.getText().toString().trim() + "";
+                final String address = etAddress.getText().toString().trim()+ "";
                 final String startMile = etStartMileage.getText().toString();
                 final String endMile = etEndMileage.getText().toString();
                 final String allMile = etAllMileage.getText().toString();
