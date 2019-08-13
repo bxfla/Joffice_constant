@@ -297,17 +297,6 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
     private void setCbRbVer() {
         resultList.clear();
         bigResultList.clear();
-        if (codetemp != null) {
-            for (String s : codetemp) {
-                resultList.add(s);
-            }
-        }
-        if (bigCodetemp != null) {
-            for (String s : bigCodetemp) {
-                bigResultList.add(s);
-                bigResultList1.add(s);
-            }
-        }
         if (nametemp != null) {
             if (nametemp.length == 1) {
                 rb1.setText(nametemp[0]);
@@ -815,23 +804,46 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
                 String time = tvTime.getText().toString();
                 final String userCode = new SharedPreferencesHelper(FlowCompMessageWillDetailActivity.this,
                         "login").getData(FlowCompMessageWillDetailActivity.this, "userCode", "");
+                if (codetemp != null) {
+                    for (String s : codetemp) {
+                        resultList.add(s);
+                    }
+                }
+                if (bigCodetemp != null) {
+                    for (String s : bigCodetemp) {
+                        bigResultList.add(s);
+                        bigResultList1.add(s);
+                    }
+                }
                 if (!rb6.isChecked()) {
-                    resultList.remove(5);
+                    if (resultList.size()>=6){
+                        resultList.remove(5);
+                    }
                 }
                 if (!rb5.isChecked()) {
-                    resultList.remove(4);
+                    if (resultList.size()>=5){
+                        resultList.remove(4);
+                    }
                 }
                 if (!rb4.isChecked()) {
-                    resultList.remove(3);
+                    if (resultList.size()>=4){
+                        resultList.remove(3);
+                    }
                 }
                 if (!rb3.isChecked()) {
-                    resultList.remove(2);
+                    if (resultList.size()>=3){
+                        resultList.remove(2);
+                    }
                 }
                 if (!rb2.isChecked()) {
-                    resultList.remove(1);
+                    if (resultList.size()>=2){
+                        resultList.remove(1);
+                    }
                 }
                 if (!rb1.isChecked()) {
-                    resultList.remove(0);
+                    if (resultList.size()>=1){
+                        resultList.remove(0);
+                    }
                 }
 
                 if (!cb9.isChecked()) {

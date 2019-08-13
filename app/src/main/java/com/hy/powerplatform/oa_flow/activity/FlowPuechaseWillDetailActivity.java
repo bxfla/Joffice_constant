@@ -781,18 +781,6 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     private void setCbRbVer() {
         resultList.clear();
         bigResultList.clear();
-        if (codetemp != null) {
-            for (String s : codetemp) {
-                resultList.add(s);
-                resultList1.add(s);
-            }
-        }
-        if (bigCodetemp != null) {
-            for (String s : bigCodetemp) {
-                bigResultList.add(s);
-                bigResultList1.add(s);
-            }
-        }
         if (nametemp != null) {
             if (nametemp.length == 1) {
                 rb1.setText(nametemp[0]);
@@ -1433,6 +1421,18 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                 String other = tvOther.getText().toString();
                 final String userCode = new SharedPreferencesHelper(FlowPuechaseWillDetailActivity.this,
                         "login").getData(FlowPuechaseWillDetailActivity.this, "userCode", "");
+                if (codetemp != null) {
+                    for (String s : codetemp) {
+                        resultList.add(s);
+                        resultList1.add(s);
+                    }
+                }
+                if (bigCodetemp != null) {
+                    for (String s : bigCodetemp) {
+                        bigResultList.add(s);
+                        bigResultList1.add(s);
+                    }
+                }
                 if (!rb6.isChecked()) {
                     if (resultList.size()>=6){
                         resultList.remove(5);

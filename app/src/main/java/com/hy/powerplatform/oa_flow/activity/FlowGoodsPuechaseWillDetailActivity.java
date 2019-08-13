@@ -1,5 +1,7 @@
 package com.hy.powerplatform.oa_flow.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -252,6 +254,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
 
     String role = "";
     String url;
+    String  uId = "";
     String userCode = "";
     String userName = "";
     String upData = "";
@@ -761,18 +764,6 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
     private void setCbRbVer() {
         resultList.clear();
         bigResultList.clear();
-        if (codetemp != null) {
-            for (String s : codetemp) {
-                resultList.add(s);
-                resultList1.add(s);
-            }
-        }
-        if (bigCodetemp != null) {
-            for (String s : bigCodetemp) {
-                bigResultList.add(s);
-                bigResultList1.add(s);
-            }
-        }
         if (nametemp != null) {
             if (nametemp.length == 1) {
                 rb1.setText(nametemp[0]);
@@ -1310,6 +1301,20 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                 String allNum = tvAllNum.getText().toString();
                 final String userCode = new SharedPreferencesHelper(FlowGoodsPuechaseWillDetailActivity.this,
                         "login").getData(FlowGoodsPuechaseWillDetailActivity.this, "userCode", "");
+
+                if (codetemp != null) {
+                    for (String s : codetemp) {
+                        resultList.add(s);
+                        resultList1.add(s);
+                    }
+                }
+                if (bigCodetemp != null) {
+                    for (String s : bigCodetemp) {
+                        bigResultList.add(s);
+                        bigResultList1.add(s);
+                    }
+                }
+
                 if (!rb6.isChecked()) {
                     if (resultList.size()>=6){
                         resultList.remove(5);
@@ -1832,6 +1837,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                         bigCodetemp = leaderCode.split(",");
                     }
                     setCbRbVer();
+//                    setDialog();
                     break;
                 case TAG_EIGHT:
                     Toast.makeText(FlowGoodsPuechaseWillDetailActivity.this, "流程已到最后一步，请提交", Toast.LENGTH_SHORT).show();
@@ -1849,5 +1855,77 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
             }
         }
     };
+
+    private void setDialog() {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        final AlertDialog alertDialog3 = alertDialogBuilder.create();
+//                alertDialogBuilder.setTitle("java EE 常用框架");
+        // 参数介绍
+        // 第一个参数：弹出框的信息集合，一般为字符串集合
+        // 第二个参数：被默认选中的，一个布尔类型的数组
+        // 第三个参数：勾选事件监听
+        final boolean[] checkedItems = new boolean[bigNametemp.length + 1];
+        for (int i = 0; i < bigNametemp.length; i++) {
+            checkedItems[i] = false;
+        }
+        new AlertDialog.Builder(this)
+                .setTitle("选择审核人")//标题栏
+                .setMultiChoiceItems(bigNametemp, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        // dialog：不常使用，弹出框接口
+                        // which：勾选或取消的是第几个
+                        // isChecked：是否勾选
+                        if (isChecked) {
+                            // 选中
+                            checkedItems[which] = isChecked;
+                        } else {
+                            // 取消选中
+                            checkedItems[which] = isChecked;
+                        }
+                    }
+                }).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                //TODO 业务逻辑代码
+                for (int i = 0; i < checkedItems.length; i++) {
+                    if (checkedItems[i]) {
+                        selectList.add(bigCodetemp[i]);
+                    }
+                }
+                getListData();
+                sendData();
+                // 关闭提示框
+                alertDialog3.dismiss();
+                flowAssignld = role + "|" + uId;
+            }
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                // TODO 业务逻辑代码
+                // 关闭提示框
+                alertDialog3.dismiss();
+            }
+        }).show();
+    }
+
+    private String getListData() {
+        if (selectList.size() == 1) {
+            //uName = backlist.get(0).getActivityName();
+            uId = selectList.get(0);
+        }
+        if (selectList.size() > 1) {
+            for (int i = 0; i < selectList.size(); i++) {
+                if (i == selectList.size() - 1) {
+                    uId = uId + selectList.get(i);
+                } else {
+                    uId = uId + selectList.get(i) + ",";
+                }
+            }
+        }
+        return uId;
+    }
 
 }

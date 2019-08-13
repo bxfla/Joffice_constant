@@ -287,17 +287,6 @@ public class FlowreceiveDinnerWillDetailActivity extends BaseActivity {
     private void setCbRbVer() {
         resultList.clear();
         bigResultList.clear();
-        if (codetemp != null) {
-            for (String s : codetemp) {
-                resultList.add(s);
-            }
-        }
-        if (bigCodetemp != null) {
-            for (String s : bigCodetemp) {
-                bigResultList.add(s);
-                bigResultList1.add(s);
-            }
-        }
         if (nametemp != null) {
             if (nametemp.length == 1) {
                 rb1.setText(nametemp[0]);
@@ -772,43 +761,94 @@ public class FlowreceiveDinnerWillDetailActivity extends BaseActivity {
                 final String smallMoney = tvSmallMoney.getText().toString() + "";
                 final String userCode = new SharedPreferencesHelper(FlowreceiveDinnerWillDetailActivity.this,
                         "login").getData(FlowreceiveDinnerWillDetailActivity.this, "userCode", "");
+                if (codetemp != null) {
+                    for (String s : codetemp) {
+                        resultList.add(s);
+                    }
+                }
+                if (bigCodetemp != null) {
+                    for (String s : bigCodetemp) {
+                        bigResultList.add(s);
+                        bigResultList1.add(s);
+                    }
+                }
                 if (!rb6.isChecked()) {
-                    resultList.remove(5);
+                    if (resultList.size()>=6){
+                        resultList.remove(5);
+                    }
                 }
                 if (!rb5.isChecked()) {
-                    resultList.remove(4);
+                    if (resultList.size()>=5){
+                        resultList.remove(4);
+                    }
                 }
                 if (!rb4.isChecked()) {
-                    resultList.remove(3);
+                    if (resultList.size()>=4){
+                        resultList.remove(3);
+                    }
                 }
                 if (!rb3.isChecked()) {
-                    resultList.remove(2);
+                    if (resultList.size()>=3){
+                        resultList.remove(2);
+                    }
                 }
                 if (!rb2.isChecked()) {
-                    resultList.remove(1);
+                    if (resultList.size()>=2){
+                        resultList.remove(1);
+                    }
                 }
                 if (!rb1.isChecked()) {
-                    resultList.remove(0);
+                    if (resultList.size()>=1){
+                        resultList.remove(0);
+                    }
                 }
 
+                if (!cb9.isChecked()) {
+                    if (bigResultList.size()>=9){
+                        bigResultList.remove(8);
+                    }
+                }
+                if (!cb8.isChecked()) {
+                    if (bigResultList.size()>=8){
+                        bigResultList.remove(7);
+                    }
+                }
+                if (!cb7.isChecked()) {
+                    if (bigResultList.size()>=7){
+                        bigResultList.remove(6);
+                    }
+                }
                 if (!cb6.isChecked()) {
-                    bigResultList.remove(5);
+                    if (bigResultList.size()>=6){
+                        bigResultList.remove(5);
+                    }
                 }
                 if (!cb5.isChecked()) {
-                    bigResultList.remove(4);
+                    if (bigResultList.size()>=5){
+                        bigResultList.remove(4);
+                    }
                 }
                 if (!cb4.isChecked()) {
-                    bigResultList.remove(3);
+                    if (bigResultList.size()>=4){
+                        bigResultList.remove(3);
+                    }
                 }
                 if (!cb3.isChecked()) {
-                    bigResultList.remove(2);
+                    if (bigResultList.size()>=3){
+                        bigResultList.remove(2);
+                    }
                 }
                 if (!cb2.isChecked()) {
-                    bigResultList.remove(1);
+                    if (bigResultList.size()>=2){
+                        bigResultList.remove(1);
+                    }
                 }
                 if (!cb1.isChecked()) {
-                    bigResultList.remove(0);
+                    if (bigResultList.size()>=1){
+                        bigResultList.remove(0);
+                    }
                 }
+
 
                 String userCodes = resultList.toString();
                 userCodes = userCodes.toString().replace("[", "");
