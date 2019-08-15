@@ -95,6 +95,7 @@ public class FlowGCAddDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        header.setTvRight("追回");
         LinearLayoutManager manager  = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();

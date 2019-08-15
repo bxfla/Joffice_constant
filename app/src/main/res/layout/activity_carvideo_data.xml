@@ -281,7 +281,28 @@
                     style="@style/oaEditText"
                     android:hint="点击选择附件" />
             </LinearLayout>
+            <View style="@style/line"></View>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="被盗金额: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvSmallMoney"
+                    style="@style/oaEditText"
+                    android:hint="请填写金额（小写）" />
+            </LinearLayout>
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -305,28 +326,7 @@
                     android:hint="请填写金额（大写）" />
             </LinearLayout>
 
-            <View style="@style/line"></View>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/oaTextView"
-                    android:text="金额（小写）: *" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/shouye" />
-
-                <TextView
-                    android:id="@+id/tvSmallMoney"
-                    style="@style/oaEditText"
-                    android:hint="请填写金额（小写）" />
-            </LinearLayout>
 
             <View style="@style/line"></View>
 
@@ -554,12 +554,12 @@
                 <TextView
                     android:id="@+id/tvLeader"
                     style="@style/textWrite"
-                    android:hint="监控操作员签字" />
+                    android:hint="部门负责人签字" />
 
                 <EditText
                     android:id="@+id/etLeader"
                     style="@style/textWrite"
-                    android:hint="监控操作员签字"
+                    android:hint="部门负责人签字"
                     android:visibility="gone" />
             </LinearLayout>
 

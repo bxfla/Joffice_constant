@@ -215,7 +215,7 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="金额（小写）: *"/>
+                    android:text="被盗金额: *"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -321,7 +321,7 @@
                 <TextView
                     android:id="@+id/etLeader"
                     style="@style/oaEditText"
-                    android:hint="监控操作员签字"/>
+                    android:hint="部门负责人签字"/>
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout

@@ -146,6 +146,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     String[] bigNametemp = null;
     String[] bigCodetemp = null;
     List<String> resultList = new ArrayList<>();
+    List<String> resultList1 = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
     List<String> bigResultList1 = new ArrayList<>();
 
@@ -164,6 +165,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     String flowMessage = "";
     String runID = "";
     String upData = "";
+    String piId = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -176,6 +178,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         name = intent.getStringExtra("activityName");
         taskId = intent.getStringExtra("taskId");
+        piId = intent.getStringExtra("piId");
         getData(name, taskId);
     }
 
@@ -206,7 +209,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 //String name =URLDecoder.decode(待转值,"utf-8");
-                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId;
+                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId+"&piId="+piId;
                 DBHandler dbA = new DBHandler();
                 res = dbA.OAQingJiaWillDoDex(url);
                 if (res.equals("获取数据失败") || res.equals("")) {
@@ -802,9 +805,16 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                     }
                 }
 
-                String userCodes = resultList.toString();
-                userCodes = userCodes.toString().replace("[", "");
-                userCodes = userCodes.toString().replace("]", "");
+                String userCodes = "";
+                if (resultList.size()==0){
+                    userCodes = resultList1.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
+                }else {
+                    userCodes = resultList.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
+                }
 
                 if (bigResultList.size()==0&&bigResultList1.size()!=0){
 
@@ -944,6 +954,9 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                                 etLeader4.setVisibility(View.GONE);
                             }
                         }
+                        if (csreout.equals("1")&&jgreout.equals("1")&&flreout.equals("1")&&fgreout.equals("1")&&zjlreout.equals("1")){
+                            Toast.makeText(FlowContractSignWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -954,76 +967,108 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                     tvTime.setText(time);
                     tvSituation.setText(staction);
 
+                    String word4 = "";
                     if (zjl != null && !zjl.equals("")) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(zjl);
+                            for (int i = 0;i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")){
+                                    word4 = word4+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         if (tvLeader4.getVisibility() == View.VISIBLE) {
-                            String word3 = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(zjl);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word3 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            tvLeader4.setText(word3);
+                            tvLeader4.setText(word4);
+                        }else {
+                            etLeader4.setHint(word4);
                         }
                     }
 
+                    String word3 = "";
                     if (fgldyj != null && !fgldyj.equals("")) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(fgldyj);
+                            for (int i = 0;i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")){
+                                    word3 = word3+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         if (tvLeader3.getVisibility() == View.VISIBLE) {
-                            String word2 = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(fgldyj);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word2 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            tvLeader3.setText(word2);
+                            tvLeader3.setText(word3);
+                        }else {
+                            etLeader3.setHint(word3);
                         }
                     }
 
+                    String word2 = "";
                     if (flgwyj != null && !flgwyj.equals("")) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(flgwyj);
+                            for (int i = 0;i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")){
+                                    word2 = word2+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         if (tvLeader2.getVisibility() == View.VISIBLE) {
-                            String word1 = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(flgwyj);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word1 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            tvLeader2.setText(word1);
+                            tvLeader2.setText(word2);
+                        }else {
+                            etLeader2.setHint(word2);
                         }
                     }
 
+                    String word1 = "";
                     if (jgbmyj != null && !jgbmyj.equals("")) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(jgbmyj);
+                            for (int i = 0;i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")){
+                                    word1 = word1+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         if (tvLeader1.getVisibility() == View.VISIBLE) {
-                            String word = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(jgbmyj);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            tvLeader1.setText(word);
+                            tvLeader1.setText(word1);
+                        }else {
+                            etLeader1.setHint(word1);
                         }
                     }
 
+                    String word = "";
                     if (csbmyj != null && !csbmyj.equals("")) {
-                        if (tvLeader.getVisibility() == View.VISIBLE) {
-                            String word = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(csbmyj);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                        try {
+                            JSONArray jsonArray = new JSONArray(csbmyj);
+                            for (int i = 0;i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")){
+                                    word = word+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                }
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (tvLeader.getVisibility() == View.VISIBLE) {
                             tvLeader.setText(word);
+                        }else {
+                            etLeader.setHint(word);
                         }
                     }
-
+                    if (bean.isRevoke()){
+                        Toast.makeText(FlowContractSignWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case TAG_TWO:
                     Toast.makeText(FlowContractSignWillDetailActivity.this, "操作数据失败", Toast.LENGTH_SHORT).show();

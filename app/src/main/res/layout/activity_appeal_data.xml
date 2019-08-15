@@ -306,10 +306,41 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
+                    android:text="部门负责人:"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:background="@color/shouye"
+                    android:layout_gravity="center_vertical"/>
+                <TextView
+                    android:id="@+id/tvBM"
+                    style="@style/textWrite"
+                    android:hint="请填写部门负责人意见" />
+                <EditText
+                    android:visibility="gone"
+                    android:id="@+id/etBM"
+                    style="@style/textWrite"
+                    android:hint="请填写部门负责人意见" />
+
+            </LinearLayout>
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/oaTextView"
                     android:text="分管领导:"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
-
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:background="@color/shouye"
+                    android:layout_gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/tvLeader"
                     style="@style/textWrite"
@@ -320,11 +351,6 @@
                     style="@style/textWrite"
                     android:hint="请填写分管领导意见" />
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:background="@color/shouye"
-                    android:layout_gravity="center_vertical"/>
             </LinearLayout>
             <View style="@style/line"></View>
 

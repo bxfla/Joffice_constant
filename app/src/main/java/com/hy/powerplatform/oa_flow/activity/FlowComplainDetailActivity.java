@@ -332,7 +332,6 @@ public class FlowComplainDetailActivity extends BaseActivity {
                     String yygs = bean.getMainform().get(0).getBjap();
                     String aqfw = bean.getMainform().get(0).getAqfwbyj();
                     String fkyj = bean.getMainform().get(0).getBjpj();
-
                     xiangguanfujian = bean.getMainform().get(0).getXiangguanfujian();
                     runID = bean.getMainform().get(0).getRunId();
                     tvData1.setText(xiangguanfujian);

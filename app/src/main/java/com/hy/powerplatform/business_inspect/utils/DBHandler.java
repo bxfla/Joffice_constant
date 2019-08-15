@@ -2580,7 +2580,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
         nvs.add(new BasicNameValuePair("comments", comment));
         nvs.add(new BasicNameValuePair("mainId", mainId));
-        nvs.add(new BasicNameValuePair("formDefId", Constant.COMPMESSAGE));
+        nvs.add(new BasicNameValuePair("formDefId", Constant.PAYFLOW));
         nvs.add(new BasicNameValuePair("sqrq", time));
         nvs.add(new BasicNameValuePair("bmDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
         nvs.add(new BasicNameValuePair("bm", department));
@@ -3138,7 +3138,7 @@ public class DBHandler {
             , String money5, String allMoney1, String allMoney2, String allMoney3, String allMoney4
             , String allMoney5, String userCode, String uName, String uId, String hejisl, String hejidj,
                                String hejije, String use, String other,String iszc ,String goodsType,String zcDepName
-            , String depart1, String depart2, String depart3, String depart4) {
+            , String depart1, String depart2, String depart3, String depart4,String bz1,String bz2,String bz3,String bz4) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
@@ -3189,6 +3189,11 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("danwei3", depart3));
         nvs.add(new BasicNameValuePair("danwei4", depart4));
         nvs.add(new BasicNameValuePair("danwei5", depart4));
+
+        nvs.add(new BasicNameValuePair("beizhu1", bz1));
+        nvs.add(new BasicNameValuePair("beizhu2", bz2));
+        nvs.add(new BasicNameValuePair("beizhu3", bz3));
+        nvs.add(new BasicNameValuePair("beizhu4", bz4));
 
         nvs.add(new BasicNameValuePair("iszc", iszc ));
         nvs.add(new BasicNameValuePair("goodsType", goodsType));
@@ -3751,7 +3756,7 @@ public class DBHandler {
                                    String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
                                    String comment, String signaName, String hejisl, String hejidj, String hejije, String use
             , String jbldyj, String other,String jcbmyj,String danwei1,String danwei2,String danwei3,String danwei4,
-                                   String danwei5,String zc,String type) {
+                                   String danwei5,String zc,String type,String bz1,String bz2,String bz3,String bz4,String bz5) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -3804,6 +3809,12 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("danwei3", danwei3));
         nvs.add(new BasicNameValuePair("danwei4", danwei4));
         nvs.add(new BasicNameValuePair("danwei5", danwei5));
+
+        nvs.add(new BasicNameValuePair("beizhu1", bz1));
+        nvs.add(new BasicNameValuePair("beizhu2", bz2));
+        nvs.add(new BasicNameValuePair("beizhu3", bz3));
+        nvs.add(new BasicNameValuePair("beizhu4", bz4));
+        nvs.add(new BasicNameValuePair("beizhu5", bz5));
 
         nvs.add(new BasicNameValuePair("hejisl", hejisl));
         nvs.add(new BasicNameValuePair("hejidj", hejidj));
@@ -6343,7 +6354,7 @@ public class DBHandler {
     public String OAAppealLeader(String url, String department, String person, String time
             , String userCode, String data, String destName, String taskId, String flowAssignld
             , String mainId, String xqbmyj, String xqbmldyj, String jsbmyj, String jsbmldyj
-            , String serialNumber, String comment, String liushuihao) {
+            , String serialNumber, String comment, String liushuihao,String bmyj) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -6372,6 +6383,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("ShenQingShiJian", time));
         nvs.add(new BasicNameValuePair("QingShiNeiRong", data));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
+        nvs.add(new BasicNameValuePair("bmfzryj", bmyj));
         nvs.add(new BasicNameValuePair("fgldyj", xqbmyj));
         nvs.add(new BasicNameValuePair("jbfgldyj", xqbmldyj));
         nvs.add(new BasicNameValuePair("jbbmyj", jsbmyj));

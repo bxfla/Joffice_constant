@@ -141,6 +141,52 @@ public class MyGoodsPurchase implements Serializable {
         private String cgfgldyj;
         private String zcDepName;
 
+        private String beizhu1;
+        private String beizhu2;
+        private String beizhu3;
+        private String beizhu4;
+        private String beizhu5;
+
+        public String getBeizhu1() {
+            return beizhu1;
+        }
+
+        public void setBeizhu1(String beizhu1) {
+            this.beizhu1 = beizhu1;
+        }
+
+        public String getBeizhu2() {
+            return beizhu2;
+        }
+
+        public void setBeizhu2(String beizhu2) {
+            this.beizhu2 = beizhu2;
+        }
+
+        public String getBeizhu3() {
+            return beizhu3;
+        }
+
+        public void setBeizhu3(String beizhu3) {
+            this.beizhu3 = beizhu3;
+        }
+
+        public String getBeizhu4() {
+            return beizhu4;
+        }
+
+        public void setBeizhu4(String beizhu4) {
+            this.beizhu4 = beizhu4;
+        }
+
+        public String getBeizhu5() {
+            return beizhu5;
+        }
+
+        public void setBeizhu5(String beizhu5) {
+            this.beizhu5 = beizhu5;
+        }
+
         public String getJcbmyj() {
             return jcbmyj;
         }

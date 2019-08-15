@@ -797,6 +797,10 @@ public class FragmentGoodsPurchaseData extends Fragment {
                     Toast.makeText(getActivity(), "用途不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
+                if (etName1.getText().toString().trim().equals("")||etNum1.getText().toString().trim().equals("")||etAllMoney1.getText().toString().trim().equals("")) {
+                    Toast.makeText(getActivity(), "采购信息不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 ProgressDialogUtil.startLoad(getActivity(), "数据上传中");
                 getSenPiPersonOne();
                 break;

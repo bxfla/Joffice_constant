@@ -67,7 +67,7 @@ public class FlowSaferDetail implements Serializable {
         private String BaoXianJieKuan;
         private String Bai;
         private String ShiWan;
-        private int runId;
+        private String runId;
         private String TuanTiYiWaiXianRenShu;
         private String Yuan;
         private int mainId;
@@ -121,11 +121,11 @@ public class FlowSaferDetail implements Serializable {
             this.ShiWan = ShiWan;
         }
 
-        public int getRunId() {
+        public String getRunId() {
             return runId;
         }
 
-        public void setRunId(int runId) {
+        public void setRunId(String runId) {
             this.runId = runId;
         }
 

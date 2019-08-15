@@ -244,7 +244,6 @@ public class FlowCarVideoDetailActivity extends BaseActivity {
                     xiangguanfujian = bean.getMainform().get(0).getXiangGuanFuJian();
                     runID = bean.getMainform().get(0).getRunId();
                     tvData.setText(xiangguanfujian);
-
                     tvZhiDanRen.setText(zhiDanRen);
                     tvZhiDanRiQi.setText(zhiDanRiQi);
                     tvDpartment.setText(department);

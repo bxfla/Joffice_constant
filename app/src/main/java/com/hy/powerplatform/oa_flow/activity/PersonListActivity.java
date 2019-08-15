@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -228,13 +229,21 @@ public class PersonListActivity extends BaseActivity implements PersonListAdapte
                     ContentValues values = new ContentValues();
                     values.put(com.hy.powerplatform.database.Constant.FULL_NAME, jsonObject.getString("fullname"));
                     values.put(com.hy.powerplatform.database.Constant.ECARD, jsonObject.getString("profileId"));
-                    values.put(com.hy.powerplatform.database.Constant.PROFILEID, jsonObject.getString("eCard"));
+                    try {
+                        values.put(com.hy.powerplatform.database.Constant.PROFILEID, jsonObject.getString("eCard"));
+                    }catch(Exception e) {
+                        Log.e("XXX",jsonObject.getString("fullname"));
+                    }
                     values.put(com.hy.powerplatform.database.Constant.SEX, jsonObject.getString("sex"));
                     values.put(com.hy.powerplatform.database.Constant.USERCODE, jsonObject.getString("userCode"));
                     PersonList bean = new PersonList();
                     bean.setFullname(jsonObject.getString("fullname"));
                     bean.setProfileId(jsonObject.getString("profileId"));
-                    bean.seteCard(jsonObject.getString("eCard"));
+                    try {
+                        bean.seteCard(jsonObject.getString("eCard"));
+                    }catch(Exception e) {
+                        Log.e("XXX",jsonObject.getString("fullname"));
+                    }
                     bean.setSex(jsonObject.getString("sex"));
                     bean.setUserCode(jsonObject.getString("userCode"));
                     //汉字转换成拼音

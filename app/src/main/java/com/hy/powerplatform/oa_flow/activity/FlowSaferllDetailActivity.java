@@ -307,6 +307,7 @@ public class FlowSaferllDetailActivity extends BaseActivity {
                     String bmfzryj = bean.getMainform().get(0).getBmfzryj();
                     String fgldyj = bean.getMainform().get(0).getFgldyj();
                     String cwzjyj = bean.getMainform().get(0).getCwzjyj();
+                    runID = bean.getMainform().get(0).getRunId();
                     xiangguanfujian = bean.getMainform().get(0).getXiangGuanFuJian();
                     tvData.setText(xiangguanfujian);
                     tvLSH.setText(liuShuiHao);

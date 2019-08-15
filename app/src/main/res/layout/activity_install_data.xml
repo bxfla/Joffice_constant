@@ -405,6 +405,11 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:text="经办分管:" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
 
                 <TextView
                     android:id="@+id/tvLeader2"
@@ -417,11 +422,6 @@
                     android:hint="经办分管领导意见"
                     android:visibility="gone" />
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/shouye" />
             </LinearLayout>
 
             <View style="@style/line"></View>

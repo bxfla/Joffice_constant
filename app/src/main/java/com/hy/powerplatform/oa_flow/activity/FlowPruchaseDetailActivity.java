@@ -147,15 +147,15 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
     @BindView(R.id.tvtype)
     TextView tvtype;
     @BindView(R.id.etDepartment1)
-    EditText etDepartment1;
+    TextView etDepartment1;
     @BindView(R.id.etDepartment2)
-    EditText etDepartment2;
+    TextView etDepartment2;
     @BindView(R.id.etDepartment3)
-    EditText etDepartment3;
+    TextView etDepartment3;
     @BindView(R.id.etDepartment4)
-    EditText etDepartment4;
+    TextView etDepartment4;
     @BindView(R.id.etDepartment5)
-    EditText etDepartment5;
+    TextView etDepartment5;
     @BindView(R.id.tvDepartment5)
     TextView tvDepartment5;
     @BindView(R.id.etLeaderJG)
@@ -164,6 +164,16 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
     TextView tvLeaderJG;
     @BindView(R.id.llcg)
     LinearLayout llcg;
+    @BindView(R.id.tvBZ1)
+    TextView tvBZ1;
+    @BindView(R.id.tvBZ2)
+    TextView tvBZ2;
+    @BindView(R.id.tvBZ3)
+    TextView tvBZ3;
+    @BindView(R.id.tvBZ4)
+    TextView tvBZ4;
+    @BindView(R.id.tvBZ5)
+    TextView tvBZ5;
     private String res;
     String xiangguanfujian = "";
     String flowMessage = "";
@@ -231,9 +241,34 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.tvData, R.id.btnHistory})
+    @OnClick({R.id.tvData, R.id.btnHistory, R.id.tvBZ1, R.id.tvBZ2, R.id.tvBZ3, R.id.tvBZ4, R.id.tvBZ5})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tvBZ1:
+                if (!tvBZ1.getText().toString().equals("")){
+                    new AlertDialogEditText().showDialog1(this,tvBZ1.getText().toString());
+                }
+                break;
+            case R.id.tvBZ2:
+                if (!tvBZ2.getText().toString().equals("")){
+                    new AlertDialogEditText().showDialog1(this,tvBZ2.getText().toString());
+                }
+                break;
+            case R.id.tvBZ3:
+                if (!tvBZ3.getText().toString().equals("")){
+                    new AlertDialogEditText().showDialog1(this,tvBZ3.getText().toString());
+                }
+                break;
+            case R.id.tvBZ4:
+                if (!tvBZ4.getText().toString().equals("")){
+                    new AlertDialogEditText().showDialog1(this,tvBZ4.getText().toString());
+                }
+                break;
+            case R.id.tvBZ5:
+                if (!tvBZ5.getText().toString().equals("")){
+                    new AlertDialogEditText().showDialog1(this,tvBZ5.getText().toString());
+                }
+                break;
             case R.id.btnHistory:
                 recyclerView.setVisibility(View.VISIBLE);
                 ProgressDialogUtil.startLoad(FlowPruchaseDetailActivity.this, "获取数据中");
@@ -371,6 +406,12 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                     etDepartment3.setText(bean.getMainform().get(0).getDanwei3());
                     etDepartment4.setText(bean.getMainform().get(0).getDanwei4());
                     etDepartment5.setText(bean.getMainform().get(0).getDanwei5());
+
+                    tvBZ1.setText(bean.getMainform().get(0).getBeizhu1());
+                    tvBZ2.setText(bean.getMainform().get(0).getBeizhu2());
+                    tvBZ3.setText(bean.getMainform().get(0).getBeizhu3());
+                    tvBZ4.setText(bean.getMainform().get(0).getBeizhu4());
+                    tvBZ5.setText(bean.getMainform().get(0).getBeizhu5());
 
                     tvAllNum.setText(bean.getMainform().get(0).getHejisl());
                     tvAllMoney.setText(bean.getMainform().get(0).getHejije());

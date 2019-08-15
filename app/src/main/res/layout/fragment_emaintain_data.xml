@@ -140,12 +140,6 @@
                 <TextView
                     style="@style/oaTextView"
                     android:text="维修人员:"/>
-
-                <TextView
-                    android:id="@+id/tvLeader2"
-                    style="@style/oaEditText"
-                    android:hint="请填写维修人员意见" />
-
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -153,10 +147,16 @@
                     android:layout_gravity="center_vertical"/>
 
                 <TextView
+                    android:id="@+id/tvLeader2"
+                    style="@style/oaEditText"
+                    android:hint="请维修人员签字" />
+
+
+                <TextView
                     android:visibility="gone"
                     android:id="@+id/tvDate1"
                     style="@style/oaEditText"
-                    android:hint="请填写维修人员意见"/>
+                    android:hint="请维修人员签字"/>
             </LinearLayout>
             <View style="@style/line"></View>
 

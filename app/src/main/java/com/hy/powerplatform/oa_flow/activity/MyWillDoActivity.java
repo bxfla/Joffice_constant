@@ -52,6 +52,7 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        recyclerView.setRefreshEnable(false);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.getRecyclerView().setLayoutManager(manager);
         adapter = new MyWillDoAdapter(this, beanList);
@@ -138,225 +139,215 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
             intent = new Intent(this, FlowEMainatinWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.CARVIDEO)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.CARVIDEO)){
             intent = new Intent(this, FlowCarVideoWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.DORM)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.DORM)){
             intent = new Intent(this, FlowDormWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.GCADD)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.GCADD)){
             intent = new Intent(this, FlowGCAddWillDetailActivity.class);
             intent.putExtra("tag","1");
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.GCCHECK)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.GCCHECK)){
             intent = new Intent(this, FlowGCAddWillDetailActivity.class);
             intent.putExtra("tag","2");
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.COMPLAIN)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.COMPLAIN)){
             intent = new Intent(this, FlowComplainWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.GCQD)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.GCQD)){
             intent = new Intent(this, FlowJSGCWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.INSTALL)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.INSTALL)){
             intent = new Intent(this, FlowInstallWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.DINNER)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.DINNER)){
             intent = new Intent(this, FlowreceiveDinnerWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.CONTRACTSIGN)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.CONTRACTSIGN)){
             intent = new Intent(this, FlowContractSignWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.APPEAL)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.APPEAL)){
             intent = new Intent(this, FlowAppealWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.CARSAFE)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.CARSAFE)){
             intent = new Intent(this, FlowCarSafeWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.SAFER1)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.SAFER1)){
             intent = new Intent(this, FlowSaferWillDetailActivity.class);
             intent.putExtra("tag","1");
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.SAFER2)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.SAFER2)){
             intent = new Intent(this, FlowSaferWillDetailActivity.class);
             intent.putExtra("tag","2");
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.USERCAR)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.USERCAR)){
             intent = new Intent(this, FlowUseCarWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-
-
-
-        if (beanList.get(position).getFormDefId().equals(Constant.ENTRY)){
+        }else if(beanList.get(position).getFormDefId().equals(Constant.ENTRY)){
             intent = new Intent(this, FlowEntryWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.LEAVER)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.LEAVER)){
             intent = new Intent(this, FlowLeaveWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.CHUCAI)){
+        }else if(beanList.get(position).getFormDefId().equals(Constant.CHUCAI)){
             intent = new Intent(this, FlowChuCaiWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.DRIVERASSESS)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.DRIVERASSESS)){
             intent = new Intent(this, FlowDriverAssessWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.OVERTIME)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.OVERTIME)){
             intent = new Intent(this, FlowOverTimeWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-
-
-
-        if (beanList.get(position).getFormDefId().equals(Constant.BILL)){
+        }else if(beanList.get(position).getFormDefId().equals(Constant.BILL)){
             intent = new Intent(this, FlowBillWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.CONTRACEPAY)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.CONTRACEPAY)){
             intent = new Intent(this, FlowContracterPayWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.PAYFLOW)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.PAYFLOW)){
             intent = new Intent(this, FlowPayLiuChengWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.GHPAYFLOW)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.GHPAYFLOW)){
             intent = new Intent(this, FlowGHPayWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-
-        if (beanList.get(position).getFormDefId().equals(Constant.GHCONTRACTSINGLE)) {
+        }else if (beanList.get(position).getFormDefId().equals(Constant.GHCONTRACTSINGLE)) {
             intent = new Intent(this, FlowGHContractSignWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-
-
-        if (beanList.get(position).getFormDefId().equals(Constant.WORKPUECHASE)){
+        }else if(beanList.get(position).getFormDefId().equals(Constant.WORKPUECHASE)){
             intent = new Intent(this, FlowWorkPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("taskName", beanList.get(position).getTaskName());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.GOODSPUECHASE)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.GOODSPUECHASE)){
             intent = new Intent(this, FlowGoodsPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("taskName", beanList.get(position).getTaskName());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.PUECHASEFLOW)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.PUECHASEFLOW)){
             intent = new Intent(this, FlowPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("taskName", beanList.get(position).getTaskName());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.REPAIR)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.REPAIR)){
             intent = new Intent(this, FlowRepairWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.CCTPUECHASE)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.CCTPUECHASE)){
             intent = new Intent(this, FlowCCTPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.GHPUECHASE)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.GHPUECHASE)){
             intent = new Intent(this, FlowGHPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-
-
-
-        if (beanList.get(position).getFormDefId().equals(Constant.OUTMESSAGE)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.OUTMESSAGE)){
             intent = new Intent(this, FlowOutMessageWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-
-        if (beanList.get(position).getFormDefId().equals(Constant.HUIQIAN)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.HUIQIAN)){
             intent = new Intent(this, FlowHuiQianWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }
-        if (beanList.get(position).getFormDefId().equals(Constant.COMPMESSAGE)){
+        }else if (beanList.get(position).getFormDefId().equals(Constant.COMPMESSAGE)){
             intent = new Intent(this, FlowCompMessageWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
+        }else {
+            Toast.makeText(this, "当前流程已调整，不支持查看", Toast.LENGTH_SHORT).show();
         }
     }
 

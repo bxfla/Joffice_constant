@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
@@ -23,7 +24,7 @@ import org.json.JSONObject;
 public class AlertDialogEditText {
     public void showDialog(final Context context, final String runId, final BaseRequestBackLisenter backLisenter){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("是否要追回");
+        builder.setTitle("追回原因");
         //    通过LayoutInflater来加载一个xml的布局文件作为一个View对象
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_item, null);
         //    设置我们自己定义的布局文件作为弹出框的Content
@@ -57,6 +58,30 @@ public class AlertDialogEditText {
                 }).start();
             }
         });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
+
+
+    public void showDialog1(final Context context,String data){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("详情");
+        //    通过LayoutInflater来加载一个xml的布局文件作为一个View对象
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_item1, null);
+        //    设置我们自己定义的布局文件作为弹出框的Content
+        builder.setView(view);
+        final TextView username = (TextView) view.findViewById(R.id.textView);
+        username.setText(data);
+//        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//            }
+//        });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

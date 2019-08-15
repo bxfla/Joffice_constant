@@ -162,6 +162,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
     String[] bigNametemp = null;
     String[] bigCodetemp = null;
     List<String> resultList = new ArrayList<>();
+    List<String> resultList1 = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
     List<String> bigResultList1 = new ArrayList<>();
     String tag1;
@@ -183,6 +184,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
     String btnTTag = "N";
     String flowMessage = "";
     String runID = "";
+    String piId = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -198,7 +200,8 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
         name = intent.getStringExtra("activityName");
         taskId = intent.getStringExtra("taskId");
         tag1 = intent.getStringExtra("tag");
-        getData(name, taskId);
+        piId = intent.getStringExtra("piId");
+        getData(name, taskId,piId);
         btnUp.setVisibility(View.VISIBLE);
     }
 
@@ -230,13 +233,13 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
      * @param Name
      * @param taskId
      */
-    private void getData(final String Name, final String taskId) {
+    private void getData(final String Name, final String taskId, final String piId) {
         ProgressDialogUtil.startLoad(this, getResources().getString(R.string.get_data));
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //String name =URLDecoder.decode(待转值,"utf-8");
-                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId;
+                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId+"&piId="+piId;
                 DBHandler dbA = new DBHandler();
                 res = dbA.OAQingJiaWillDoDex(url);
                 if (res.equals("获取数据失败") || res.equals("")) {
@@ -938,9 +941,16 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                 }
 
 
-                String userCodes = resultList.toString();
-                userCodes = userCodes.toString().replace("[", "");
-                userCodes = userCodes.toString().replace("]", "");
+                String userCodes = "";
+                if (resultList.size()==0){
+                    userCodes = resultList1.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
+                }else {
+                    userCodes = resultList.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
+                }
 
                 if (bigResultList.size()==0&&bigResultList1.size()!=0){
 
@@ -1069,7 +1079,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                         if (wxryreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
                             etLeader2.setVisibility(View.VISIBLE);
-                            tvDate1.setVisibility(View.VISIBLE);
+//                            tvDate1.setVisibility(View.VISIBLE);
                         } else {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
@@ -1095,22 +1105,37 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                             tvLeader5.setVisibility(View.VISIBLE);
                             etLeader5.setVisibility(View.GONE);
                         }
+                        bxbmreout = jsonObject.getString("bmfzryj");
+                        wxbmreout = jsonObject.getString("xxjsbyj");
+                        wxryreout = jsonObject.getString("WeiXiuRenYuanQianZi");
+                        wxqkreout = jsonObject.getString("bjap");
+                        sbsyrreout = jsonObject.getString("SheBeiShiYongRenQianZi");
+                        wxfkreout = jsonObject.getString("bjpj");
+                        if (bxbmreout.equals("1")&&wxbmreout.equals("1")&&wxryreout.equals("1")
+                                &&wxqkreout.equals("1")&&sbsyrreout.equals("1")&&wxfkreout.equals("1")){
+                            Toast.makeText(FlowEMainatinWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-
+                    String word3 = "";
                     if (wxfkyj != null && !wxfkyj.equals("")) {
-                        if (tvLeader5.getVisibility() == View.VISIBLE) {
-                            String word3 = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(wxfkyj);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word3 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                        try {
+                            JSONArray jsonArray = new JSONArray(wxfkyj);
+                            for (int i = 0;i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")){
+                                    word3 = word3+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                }
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (tvLeader5.getVisibility() == View.VISIBLE) {
                             tvLeader5.setText(word3);
+                        }else {
+                            etLeader5.setHint(word3);
                         }
                     }
 
@@ -1128,17 +1153,23 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                         }
                     }
 
+                    String word2 = "";
                     if (wxqkyj != null && !wxqkyj.equals("")) {
-                        if (tvLeader3.getVisibility() == View.VISIBLE) {
-                            String word2 = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(wxqkyj);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word2 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                        try {
+                            JSONArray jsonArray = new JSONArray(wxqkyj);
+                            for (int i = 0;i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")){
+                                    word2 = word2+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\t" ;
+                                }
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (tvLeader3.getVisibility() == View.VISIBLE) {
                             tvLeader3.setText(word2);
+                        }else {
+                            etLeader3.setHint(word2);
                         }
                     }
 
@@ -1155,39 +1186,52 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                             tvLeader2.setText(wxryyj);
                             if (!data1.equals("")) {
                                 tvDate1.setText(data1);
-                                tvDate1.setVisibility(View.VISIBLE);
+//                                tvDate1.setVisibility(View.VISIBLE);
                             }
                         }
                     }
 
+                    String word1 = "";
                     if (wxbmyj != null && !wxbmyj.equals("")) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(wxbmyj);
+                            for (int i = 0;i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")){
+                                    word1 = word1+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\t" ;
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         if (tvLeader1.getVisibility() == View.VISIBLE) {
-                            String word = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(wxbmyj);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            tvLeader1.setText(word);
+                            tvLeader1.setText(word1);
+                        }else {
+                            etLeader1.setHint(word1);
                         }
                     }
-
+                    String word = "";
                     if (bxbmyj != null && !bxbmyj.equals("")) {
-                        if (tvLeader.getVisibility() == View.VISIBLE) {
-                            String word = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(bxbmyj);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                        try {
+                            JSONArray jsonArray = new JSONArray(bxbmyj);
+                            for (int i = 0;i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")){
+                                    word = word+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\t" ;
+                                }
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (tvLeader.getVisibility() == View.VISIBLE) {
                             tvLeader.setText(word);
+                        }else {
+                            etLeader.setHint(word);
                         }
                     }
-
+                    if (bean.isRevoke()){
+                        Toast.makeText(FlowEMainatinWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case TAG_TWO:
                     Toast.makeText(FlowEMainatinWillDetailActivity.this, "操作数据失败", Toast.LENGTH_SHORT).show();

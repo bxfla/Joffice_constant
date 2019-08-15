@@ -131,6 +131,10 @@ public class FlowAppealDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.tvBM)
+    TextView tvBM;
+    @BindView(R.id.etBM)
+    EditText etBM;
     private String res;
     String flowMessage = "";
 
@@ -144,7 +148,7 @@ public class FlowAppealDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         header.setTvRight("追回");
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         btnT.setVisibility(View.GONE);
         tvText.setVisibility(View.GONE);
@@ -184,7 +188,7 @@ public class FlowAppealDetailActivity extends BaseActivity {
             public void success(Object o) {
                 Message message = new Message();
                 message.what = TAG_FIVE;
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putString("msg", o.toString());
                 message.setData(bundle);
                 handler.sendMessage(message);
@@ -200,19 +204,19 @@ public class FlowAppealDetailActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.tvData,R.id.btnHistory})
+    @OnClick({R.id.tvData, R.id.btnHistory})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnHistory:
                 recyclerView.setVisibility(View.VISIBLE);
-                ProgressDialogUtil.startLoad(FlowAppealDetailActivity.this,"获取数据中");
+                ProgressDialogUtil.startLoad(FlowAppealDetailActivity.this, "获取数据中");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         //String name =URLDecoder.decode(待转值,"utf-8");
                         String url = Constant.BASE_URL2 + Constant.FLOWMESSAGE;
                         DBHandler dbA = new DBHandler();
-                        flowMessage = dbA.OAFlowMessage(url,runID);
+                        flowMessage = dbA.OAFlowMessage(url, runID);
                         if (flowMessage.equals("获取数据失败") || flowMessage.equals("")) {
                             handler.sendEmptyMessage(TAG_TWO);
                         } else {
@@ -290,10 +294,10 @@ public class FlowAppealDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowAppealDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowAppealDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
                     break;
@@ -303,6 +307,7 @@ public class FlowAppealDetailActivity extends BaseActivity {
                     final String date = bean.getMainform().get(0).getShenQingShiJian();
                     final String person = bean.getMainform().get(0).getShenQingRen();
                     final String department = bean.getMainform().get(0).getShenQingBuMen();
+                    final String bmfzryj = bean.getMainform().get(0).getBmfzryj();
                     final String fgldyj = bean.getMainform().get(0).getFgldyj();
                     final String jbfgyj = bean.getMainform().get(0).getJbfgldyj();
                     final String jbbmyj = bean.getMainform().get(0).getJbbmyj();
@@ -315,6 +320,9 @@ public class FlowAppealDetailActivity extends BaseActivity {
                     tvPerson.setText(person);
                     tvShiXiang.setText(data);
                     tvDpartment.setText(department);
+                    if (!bmfzryj.equals("")) {
+                        tvBM.setText(getJSONData(bmfzryj));
+                    }
                     if (!fgldyj.equals("")) {
                         tvLeader.setText(getJSONData(fgldyj));
                     }

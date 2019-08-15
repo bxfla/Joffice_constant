@@ -368,12 +368,12 @@
                 <TextView
                     android:id="@+id/tvLeader2"
                     style="@style/textWrite"
-                    android:hint="请填写维修人员意见"/>
+                    android:hint="请维修人员签字"/>
                 <EditText
                     android:visibility="gone"
                     android:id="@+id/etLeader2"
                     style="@style/textWrite"
-                    android:hint="请填写维修人员意见"/>
+                    android:hint="请维修人员签字"/>
                 <TextView
                     android:visibility="gone"
                     android:id="@+id/tvDate1"

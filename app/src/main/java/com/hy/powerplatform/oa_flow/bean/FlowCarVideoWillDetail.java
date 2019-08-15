@@ -31,6 +31,15 @@ public class FlowCarVideoWillDetail implements Serializable {
     private boolean isSignTask;
     private List<MainformBean> mainform;
     private List<TransBean> trans;
+    private boolean revoke;
+
+    public boolean isRevoke() {
+        return revoke;
+    }
+
+    public void setRevoke(boolean revoke) {
+        this.revoke = revoke;
+    }
 
     public boolean isSuccess() {
         return success;

@@ -273,7 +273,7 @@ public class FragmentEntryData extends Fragment {
                     break;
                 }
                 if (!PhoneSession.isPhoneNumber(phone)) {
-                    Toast.makeText(getActivity(), "手机号的事错误", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "手机号的格式错误", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (carType.equals("")) {
@@ -475,6 +475,7 @@ public class FragmentEntryData extends Fragment {
                         }
                         if (codeList.size() == 1) {
                             selectList.add(codeList.get(0));
+                            UpContractData();
                         } else {
                             MyAlertDialog.MyListAlertDialog(isShow, codeList, nameList, namelist1, getActivity(), new AlertDialogCallBackP() {
 

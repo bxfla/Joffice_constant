@@ -352,7 +352,6 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/shouye" />
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -397,6 +396,60 @@
 
                     <TextView
                         android:id="@+id/etAllMoney4"
+                        style="@style/oaEditText1"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:inputType="numberDecimal" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/shouye" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:gravity="center"
+                        android:text="备注"
+                        android:textColor="@color/black" />
+
+                    <View style="@style/line"></View>
+
+                    <EditText
+                        android:id="@+id/etBZ1"
+                        style="@style/oaEditText1"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:inputType="numberDecimal" />
+
+                    <View style="@style/line"></View>
+
+                    <EditText
+                        android:id="@+id/etBZ2"
+                        style="@style/oaEditText1"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:inputType="numberDecimal" />
+
+                    <View style="@style/line"></View>
+
+                    <EditText
+                        android:id="@+id/etBZ3"
+                        style="@style/oaEditText1"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:inputType="numberDecimal" />
+
+                    <View style="@style/line"></View>
+
+                    <EditText
+                        android:id="@+id/etBZ4"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"

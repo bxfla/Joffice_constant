@@ -28,8 +28,17 @@ public class FlowJSGCWillDetail implements Serializable {
     private String formDefId;
     private String preTaskName;
     private boolean isSignTask;
+    private boolean revoke;
     private List<MainformBean> mainform;
     private List<TransBean> trans;
+
+    public boolean isRevoke() {
+        return revoke;
+    }
+
+    public void setRevoke(boolean revoke) {
+        this.revoke = revoke;
+    }
 
     public boolean isSuccess() {
         return success;

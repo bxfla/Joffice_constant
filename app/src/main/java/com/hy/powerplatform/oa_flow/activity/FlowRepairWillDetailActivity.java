@@ -155,6 +155,7 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
     String[] bigNametemp = null;
     String[] bigCodetemp = null;
     List<String> resultList = new ArrayList<>();
+    List<String> resultList1 = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
     List<String> bigResultList1 = new ArrayList<>();
 
@@ -173,6 +174,7 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
     String btnTTag = "N";
     String flowMessage = "";
     String runID = "";
+    String piId = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -185,6 +187,7 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         name = intent.getStringExtra("activityName");
         taskId = intent.getStringExtra("taskId");
+        piId = intent.getStringExtra("piId");
         getData(name, taskId);
     }
 
@@ -215,7 +218,7 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 //String name =URLDecoder.decode(待转值,"utf-8");
-                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId;
+                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId+"&piId="+piId;
                 DBHandler dbA = new DBHandler();
                 res = dbA.OAQingJiaWillDoDex(url);
                 if (res.equals("获取数据失败") || res.equals("")) {
@@ -898,9 +901,16 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
                 }
 
 
-                String userCodes = resultList.toString();
-                userCodes = userCodes.toString().replace("[", "");
-                userCodes = userCodes.toString().replace("]", "");
+                String userCodes = "";
+                if (resultList.size()==0){
+                    userCodes = resultList1.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
+                }else {
+                    userCodes = resultList.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
+                }
 
                 if (bigResultList.size()==0&&bigResultList1.size()!=0){
 
@@ -1042,6 +1052,9 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
                                 tvYJ.setVisibility(View.VISIBLE);
                                 etYJ.setVisibility(View.GONE);
                             }
+                            if (etRout1.equals("1")&&etRout2.equals("1")&&etRout3.equals("1")&&etRout4.equals("1")&&etRout5.equals("1")){
+                                Toast.makeText(FlowRepairWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -1123,6 +1136,9 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
                                 }
                                 tvYJ.setText(word);
                             }
+                        }
+                        if (bean.isRevoke()){
+                            Toast.makeText(FlowRepairWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         ProgressDialogUtil.stopLoad();

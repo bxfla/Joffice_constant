@@ -111,6 +111,7 @@
     </FrameLayout>
 
     <FrameLayout
+        android:visibility="gone"
         android:id="@+id/flOverTime"
         style="@style/ycFrameLayout">
 

@@ -29,6 +29,16 @@ public class FlowAppealWillDetail implements Serializable {
     private String formDefId;
     private String preTaskName;
     private boolean isSignTask;
+    private boolean revoke;
+
+    public boolean isRevoke() {
+        return revoke;
+    }
+
+    public void setRevoke(boolean revoke) {
+        this.revoke = revoke;
+    }
+
     private List<MainformBean> mainform;
     private List<TransBean> trans;
 

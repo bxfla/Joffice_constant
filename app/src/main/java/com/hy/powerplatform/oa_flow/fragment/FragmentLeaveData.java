@@ -395,14 +395,53 @@ public class FragmentLeaveData extends Fragment {
                                     if (superRoleName.indexOf("部负责人") != -1 || superRoleName.indexOf("公司负责人") != -1) {
                                         if (namelist.get(i).indexOf("负责人") != -1 || namelist.get(i).indexOf("公司负责人") != -1) {
                                             userDepart = namelist.get(i);
+                                            new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
+                                                    DBHandler dbA = new DBHandler();
+                                                    res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.LEAVERDIFID, userDepart);
+                                                    if (res.equals("保存失败") || res.equals("")) {
+                                                        handler.sendEmptyMessage(TAG_TWO);
+                                                    } else {
+                                                        handler.sendEmptyMessage(TAG_FOUR);
+                                                    }
+                                                }
+                                            }).start();
                                         }
                                     } else if (superRoleName.indexOf("分管领导") != -1) {
                                         if (namelist.get(i).indexOf("分管领导") != -1) {
                                             userDepart = namelist.get(i);
+                                            new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
+                                                    DBHandler dbA = new DBHandler();
+                                                    res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.LEAVERDIFID, userDepart);
+                                                    if (res.equals("保存失败") || res.equals("")) {
+                                                        handler.sendEmptyMessage(TAG_TWO);
+                                                    } else {
+                                                        handler.sendEmptyMessage(TAG_FOUR);
+                                                    }
+                                                }
+                                            }).start();
                                         }
                                     } else if (superRoleName.indexOf("总经理") != -1) {
                                         if (namelist.get(i).indexOf("总经理") != -1) {
                                             userDepart = namelist.get(i);
+                                            new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
+                                                    DBHandler dbA = new DBHandler();
+                                                    res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.LEAVERDIFID, userDepart);
+                                                    if (res.equals("保存失败") || res.equals("")) {
+                                                        handler.sendEmptyMessage(TAG_TWO);
+                                                    } else {
+                                                        handler.sendEmptyMessage(TAG_FOUR);
+                                                    }
+                                                }
+                                            }).start();
                                         }
                                     } else {
                                         MyAlertDialog.MyListAlertDialog(getActivity(), namelist, new AlertDialogCallBackP() {
@@ -441,22 +480,9 @@ public class FragmentLeaveData extends Fragment {
 
                                             }
                                         });
+                                        break;
                                     }
                                 }
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
-                                        DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.LEAVERDIFID, userDepart);
-                                        if (res.equals("保存失败") || res.equals("")) {
-                                            handler.sendEmptyMessage(TAG_TWO);
-                                        } else {
-                                            handler.sendEmptyMessage(TAG_FOUR);
-                                        }
-                                    }
-                                }).start();
-
 //                                MyAlertDialog.MyListAlertDialog(getActivity(), namelist, new AlertDialogCallBackP() {
 //                                    @Override
 //                                    public void oneselect(final String data) {

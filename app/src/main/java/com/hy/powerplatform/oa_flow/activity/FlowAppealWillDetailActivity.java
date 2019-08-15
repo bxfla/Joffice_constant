@@ -137,7 +137,11 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    private String name, taskId, res, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, zjlyj = "";
+    @BindView(R.id.tvBM)
+    TextView tvBM;
+    @BindView(R.id.etBM)
+    EditText etBM;
+    private String name, taskId, res, bmfzryj, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, zjlyj = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
     String leaderCode = "";
@@ -145,11 +149,12 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
-    String xqreout, xqldreout, jsreout, jsldreout, csreout, jcreout, zjlreout, flowAssignld, serialNumber = "";
+    String bmreout, xqreout, xqldreout, jsreout, jsldreout, csreout, jcreout, zjlreout, flowAssignld, serialNumber = "";
 
     String[] bigNametemp = null;
     String[] bigCodetemp = null;
     List<String> resultList = new ArrayList<>();
+    List<String> resultList1 = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
     List<String> bigResultList1 = new ArrayList<>();
     String tag1;
@@ -169,6 +174,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     String btnTTag = "N";
     String runID = "";
     String upData = "";
+    String piId = "";
     String flowMessage = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
@@ -178,12 +184,13 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
         name = intent.getStringExtra("activityName");
         taskId = intent.getStringExtra("taskId");
         tag1 = intent.getStringExtra("tag");
+        piId = intent.getStringExtra("piId");
         getData(name, taskId);
         btnUp.setVisibility(View.VISIBLE);
     }
@@ -200,7 +207,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 //String name =URLDecoder.decode(待转值,"utf-8");
-                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId;
+                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId + "&piId=" + piId;
                 DBHandler dbA = new DBHandler();
                 res = dbA.OAQingJiaWillDoDex(url);
                 if (res.equals("获取数据失败") || res.equals("")) {
@@ -499,19 +506,19 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
         ProgressDialogUtil.stopLoad();
     }
 
-    @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT,R.id.btnHistory})
+    @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT, R.id.btnHistory})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnHistory:
                 recyclerView.setVisibility(View.VISIBLE);
-                ProgressDialogUtil.startLoad(FlowAppealWillDetailActivity.this,"获取数据中");
+                ProgressDialogUtil.startLoad(FlowAppealWillDetailActivity.this, "获取数据中");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         //String name =URLDecoder.decode(待转值,"utf-8");
                         String url = Constant.BASE_URL2 + Constant.FLOWMESSAGE;
                         DBHandler dbA = new DBHandler();
-                        flowMessage = dbA.OAFlowMessage(url,runID);
+                        flowMessage = dbA.OAFlowMessage(url, runID);
                         if (flowMessage.equals("获取数据失败") || flowMessage.equals("")) {
                             handler.sendEmptyMessage(TAG_TWO);
                         } else {
@@ -543,46 +550,104 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                             }
                         }).start();
                     } else {
-                        namelist.clear();
+                        String superRoleName = new SharedPreferencesHelper(FlowAppealWillDetailActivity.this, "login")
+                                .getData(FlowAppealWillDetailActivity.this, "superRoleName", "");
                         for (int i = 0; i < beanList.size(); i++) {
                             namelist.add(beanList.get(i).getDestination());
                         }
-                        MyAlertDialog.MyListAlertDialog(FlowAppealWillDetailActivity.this, namelist, new AlertDialogCallBackP() {
-                            @Override
-                            public void oneselect(final String data) {
-                                ProgressDialogUtil.startLoad(FlowAppealWillDetailActivity.this, "获取数据中");
-                                destName = data;
-                                for (int i = 0; i < beanList.size(); i++) {
-                                    if (destName.equals(beanList.get(i).getDestination())) {
-                                        signaName = beanList.get(i).getName();
-                                        destType = beanList.get(i).getDestType();
+                        for (int i = 0; i < namelist.size(); i++) {
+//                                    namelist.add(namelist.get(i));
+                            if (superRoleName.indexOf("部负责人") != -1 || superRoleName.indexOf("公司负责人") != -1) {
+                                if (namelist.get(i).indexOf("负责人") != -1 || namelist.get(i).indexOf("公司负责人") != -1) {
+                                    destName = namelist.get(i);
+                                    for (int k = 0; k < beanList.size(); k++) {
+                                        if (destName.equals(beanList.get(k).getDestination())) {
+                                            signaName = beanList.get(k).getName();
+                                            destType = beanList.get(k).getDestType();
+                                        }
+                                    }
+                                    if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                                        handler.sendEmptyMessage(TAG_SIX);
+                                    } else if (destType.indexOf("end") == -1) {
+                                        handler.sendEmptyMessage(TAG_FIVE);
+                                    } else {
+                                        getLastPerson();
                                     }
                                 }
-                                if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
-                                    handler.sendEmptyMessage(TAG_SIX);
-                                } else if (destType.indexOf("end") == -1) {
-                                    handler.sendEmptyMessage(TAG_FIVE);
-                                } else {
-                                    getLastPerson();
+                            } else if (superRoleName.indexOf("分管领导") != -1) {
+                                if (namelist.get(i).indexOf("分管领导") != -1) {
+                                    destName = namelist.get(i);
+                                    for (int k = 0; k < beanList.size(); k++) {
+                                        if (destName.equals(beanList.get(k).getDestination())) {
+                                            signaName = beanList.get(k).getName();
+                                            destType = beanList.get(k).getDestType();
+                                        }
+                                    }
+                                    if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                                        handler.sendEmptyMessage(TAG_SIX);
+                                    } else if (destType.indexOf("end") == -1) {
+                                        handler.sendEmptyMessage(TAG_FIVE);
+                                    } else {
+                                        getLastPerson();
+                                    }
                                 }
+                            } else if (superRoleName.indexOf("总经理") != -1) {
+                                if (namelist.get(i).indexOf("总经理") != -1) {
+                                    destName = namelist.get(i);
+                                    for (int k = 0; k < beanList.size(); k++) {
+                                        if (destName.equals(beanList.get(k).getDestination())) {
+                                            signaName = beanList.get(k).getName();
+                                            destType = beanList.get(k).getDestType();
+                                        }
+                                    }
+                                    if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                                        handler.sendEmptyMessage(TAG_SIX);
+                                    } else if (destType.indexOf("end") == -1) {
+                                        handler.sendEmptyMessage(TAG_FIVE);
+                                    } else {
+                                        getLastPerson();
+                                    }
+                                }
+                            } else {
+                                MyAlertDialog.MyListAlertDialog(FlowAppealWillDetailActivity.this, namelist, new AlertDialogCallBackP() {
+                                    @Override
+                                    public void oneselect(final String data) {
+                                        ProgressDialogUtil.startLoad(FlowAppealWillDetailActivity.this, "获取数据中");
+                                        destName = data;
+                                        for (int i = 0; i < beanList.size(); i++) {
+                                            if (destName.equals(beanList.get(i).getDestination())) {
+                                                signaName = beanList.get(i).getName();
+                                                destType = beanList.get(i).getDestType();
+                                            }
+                                        }
+                                        if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                                            handler.sendEmptyMessage(TAG_SIX);
+                                        } else if (destType.indexOf("end") == -1) {
+                                            handler.sendEmptyMessage(TAG_FIVE);
+                                        } else {
+                                            getLastPerson();
+                                        }
 
+                                    }
+
+                                    @Override
+                                    public void select(List<String> list) {
+
+                                    }
+
+                                    @Override
+                                    public void confirm() {
+
+                                    }
+
+                                    @Override
+                                    public void cancel() {
+
+                                    }
+                                });
+                                break;
                             }
-
-                            @Override
-                            public void select(List<String> list) {
-
-                            }
-
-                            @Override
-                            public void confirm() {
-
-                            }
-
-                            @Override
-                            public void cancel() {
-
-                            }
-                        });
+                        }
                     }
                 } else {
                     Toast.makeText(FlowAppealWillDetailActivity.this, "审批人为空", Toast.LENGTH_SHORT).show();
@@ -648,6 +713,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
             case R.id.btnUp:
                 Gson gson = new Gson();
                 FlowAppealWillDetail bean = gson.fromJson(res, FlowAppealWillDetail.class);
+                bmfzryj = bean.getMainform().get(0).getBmfzryj();
                 xqbmyj = bean.getMainform().get(0).getFgldyj();
                 xqbmldyj = bean.getMainform().get(0).getJbfgldyj();
                 jsbmyj = bean.getMainform().get(0).getJbbmyj();
@@ -661,6 +727,26 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 Date curDate = new Date(System.currentTimeMillis());
                 String str = formatter.format(curDate);
+                if (etBM.getVisibility() == View.VISIBLE) {
+                    comment = "";
+                    comment = etBM.getText().toString();
+                    try {
+                        jsonObject.put("ui", userCode);
+                        jsonObject.put("un", userName);
+                        jsonObject.put("c", str);
+                        jsonObject.put("v", etBM.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    jsonArray.put(jsonObject);
+                    if (bmfzryj.equals("")) {
+                        bmfzryj = jsonArray.toString();
+                    } else {
+                        bmfzryj = bmfzryj + "," + jsonArray.toString();
+                        bmfzryj = bmfzryj.toString().replace("],[", ",");
+                    }
+                }
+
                 if (etLeader.getVisibility() == View.VISIBLE) {
                     comment = "";
                     comment = etLeader.getText().toString();
@@ -738,11 +824,11 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (comment.equals("")) {
-                    if (!xqreout.equals("2") && !xqldreout.equals("2")
+                    if (!bmreout.equals("2") &&!xqreout.equals("2") && !xqldreout.equals("2")
                             && !jsreout.equals("2") && !jsldreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!jsbmldyj.equals("") && !jsbmyj.equals("")
+                    } else if (!bmfzryj.equals("") &&!jsbmldyj.equals("") && !jsbmyj.equals("")
                             && !xqbmldyj.equals("") && !jsbmyj.equals("")) {
                         comment = "";
                         personSession();
@@ -763,6 +849,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
             if (btnTTag.equals("N")) {
                 Gson gson = new Gson();
                 FlowAppealWillDetail bean = gson.fromJson(res, FlowAppealWillDetail.class);
+                bmfzryj = bean.getMainform().get(0).getBmfzryj();
                 xqbmyj = bean.getMainform().get(0).getFgldyj();
                 xqbmldyj = bean.getMainform().get(0).getJbfgldyj();
                 jsbmyj = bean.getMainform().get(0).getJbbmyj();
@@ -799,87 +886,94 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                 }
 
                 if (!rb6.isChecked()) {
-                    if (resultList.size()>=6){
+                    if (resultList.size() >= 6) {
                         resultList.remove(5);
                     }
                 }
                 if (!rb5.isChecked()) {
-                    if (resultList.size()>=5){
+                    if (resultList.size() >= 5) {
                         resultList.remove(4);
                     }
                 }
                 if (!rb4.isChecked()) {
-                    if (resultList.size()>=4){
+                    if (resultList.size() >= 4) {
                         resultList.remove(3);
                     }
                 }
                 if (!rb3.isChecked()) {
-                    if (resultList.size()>=3){
+                    if (resultList.size() >= 3) {
                         resultList.remove(2);
                     }
                 }
                 if (!rb2.isChecked()) {
-                    if (resultList.size()>=2){
+                    if (resultList.size() >= 2) {
                         resultList.remove(1);
                     }
                 }
                 if (!rb1.isChecked()) {
-                    if (resultList.size()>=1){
+                    if (resultList.size() >= 1) {
                         resultList.remove(0);
                     }
                 }
 
                 if (!cb9.isChecked()) {
-                    if (bigResultList.size()>=9){
+                    if (bigResultList.size() >= 9) {
                         bigResultList.remove(8);
                     }
                 }
                 if (!cb8.isChecked()) {
-                    if (bigResultList.size()>=8){
+                    if (bigResultList.size() >= 8) {
                         bigResultList.remove(7);
                     }
                 }
                 if (!cb7.isChecked()) {
-                    if (bigResultList.size()>=7){
+                    if (bigResultList.size() >= 7) {
                         bigResultList.remove(6);
                     }
                 }
                 if (!cb6.isChecked()) {
-                    if (bigResultList.size()>=6){
+                    if (bigResultList.size() >= 6) {
                         bigResultList.remove(5);
                     }
                 }
                 if (!cb5.isChecked()) {
-                    if (bigResultList.size()>=5){
+                    if (bigResultList.size() >= 5) {
                         bigResultList.remove(4);
                     }
                 }
                 if (!cb4.isChecked()) {
-                    if (bigResultList.size()>=4){
+                    if (bigResultList.size() >= 4) {
                         bigResultList.remove(3);
                     }
                 }
                 if (!cb3.isChecked()) {
-                    if (bigResultList.size()>=3){
+                    if (bigResultList.size() >= 3) {
                         bigResultList.remove(2);
                     }
                 }
                 if (!cb2.isChecked()) {
-                    if (bigResultList.size()>=2){
+                    if (bigResultList.size() >= 2) {
                         bigResultList.remove(1);
                     }
                 }
                 if (!cb1.isChecked()) {
-                    if (bigResultList.size()>=1){
+                    if (bigResultList.size() >= 1) {
                         bigResultList.remove(0);
                     }
                 }
 
-                String userCodes = resultList.toString();
-                userCodes = userCodes.toString().replace("[", "");
-                userCodes = userCodes.toString().replace("]", "");
+                String userCodes = "";
+                if (resultList.size() == 0) {
+                    userCodes = resultList1.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
+                } else {
+                    userCodes = resultList.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
+                }
 
-                if (bigResultList.size()==0&&bigResultList1.size()!=0){
+                if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
 
                     String bigUserCodes = bigResultList1.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
@@ -899,7 +993,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         flowAssignld = flowAssignld.replace(":|", "|");
                         flowAssignld = flowAssignld.replace(":", "");
                     }
-                }else {
+                } else {
 
                     String bigUserCodes = bigResultList.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
@@ -924,7 +1018,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                 DBHandler dbA = new DBHandler();
                 upData = dbA.OAAppealLeader(url, department, person, time, userCode, data,
                         destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj,
-                        serialNumber, comment, liushuihao);
+                        serialNumber, comment, liushuihao,bmfzryj);
                 if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -942,10 +1036,10 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowAppealWillDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowAppealWillDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
                     break;
@@ -967,6 +1061,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                     tvShiXiang.setText(data);
                     tvDpartment.setText(department);
 
+                    bmfzryj = bean.getMainform().get(0).getBmfzryj();
                     xqbmyj = bean.getMainform().get(0).getFgldyj();
                     xqbmldyj = bean.getMainform().get(0).getJbfgldyj();
                     jsbmyj = bean.getMainform().get(0).getJbbmyj();
@@ -984,6 +1079,14 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         xqldreout = jsonObject.getString("jbfgldyj");
                         jsreout = jsonObject.getString("jbbmyj");
                         jsldreout = jsonObject.getString("zjlyj");
+                        bmreout = jsonObject.getString("bmfzryj");
+                        if (bmreout.equals("2")) {
+                            tvBM.setVisibility(View.GONE);
+                            etBM.setVisibility(View.VISIBLE);
+                        } else {
+                            tvBM.setVisibility(View.VISIBLE);
+                            etBM.setVisibility(View.GONE);
+                        }
                         if (xqreout.equals("2")) {
                             tvLeader.setVisibility(View.GONE);
                             etLeader.setVisibility(View.VISIBLE);
@@ -1012,67 +1115,112 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                             tvLeader3.setVisibility(View.VISIBLE);
                             etLeader3.setVisibility(View.GONE);
                         }
+                        if (bmreout.equals("1") &&xqreout.equals("1") && xqldreout.equals("1") && jsreout.equals("1") && jsldreout.equals("1")) {
+                            Toast.makeText(FlowAppealWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
+                    String wordbm = "";
+                    if (bmfzryj != null && !bmfzryj.equals("")) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(bmfzryj);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    wordbm = wordbm + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (tvBM.getVisibility() == View.VISIBLE) {
+                            tvBM.setText(wordbm);
+                        } else {
+                            etBM.setHint(wordbm);
+                        }
+                    }
 
+                    String word4 = "";
                     if (jsbmldyj != null && !jsbmldyj.equals("")) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(jsbmldyj);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word4 = word4 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         if (tvLeader3.getVisibility() == View.VISIBLE) {
-                            String word2 = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(jsbmldyj);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word2 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            tvLeader3.setText(word2);
+                            tvLeader3.setText(word4);
+                        } else {
+                            etLeader3.setHint(word4);
                         }
                     }
-
+                    String word3 = "";
                     if (jsbmyj != null && !jsbmyj.equals("")) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(jsbmyj);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word3 = word3 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         if (tvLeader2.getVisibility() == View.VISIBLE) {
-                            String word1 = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(jsbmyj);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word1 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            tvLeader2.setText(word1);
+                            tvLeader2.setText(word4);
+                        } else {
+                            etLeader2.setHint(word3);
                         }
                     }
-
+                    String word2 = "";
                     if (xqbmldyj != null && !xqbmldyj.equals("")) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(xqbmldyj);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word2 = word2 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         if (tvLeader1.getVisibility() == View.VISIBLE) {
-                            String word = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(xqbmldyj);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            tvLeader1.setText(word);
+                            tvLeader1.setText(word2);
+                        } else {
+                            etLeader1.setHint(word2);
                         }
                     }
-
+                    String word1 = "";
                     if (xqbmyj != null && !xqbmyj.equals("")) {
-                        if (tvLeader.getVisibility() == View.VISIBLE) {
-                            String word = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(xqbmyj);
-                                JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                        try {
+                            JSONArray jsonArray = new JSONArray(xqbmyj);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word1 = word1 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
+                                }
                             }
-                            tvLeader.setText(word);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (tvLeader.getVisibility() == View.VISIBLE) {
+                            tvLeader.setText(word1);
+                        } else {
+                            etLeader.setHint(word1);
                         }
                     }
-
+                    if (bean.isRevoke()) {
+                        Toast.makeText(FlowAppealWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case TAG_TWO:
                     Toast.makeText(FlowAppealWillDetailActivity.this, "操作数据失败", Toast.LENGTH_SHORT).show();
