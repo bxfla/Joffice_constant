@@ -687,7 +687,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                             && !fgreout.equals("2") && !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!zjl.equals("") && !csbmyj.equals("") && !jgbmyj.equals("") && !flgwyj.equals("")
+                    } else if (!etLeader4.getText().toString().equals("") && !csbmyj.equals("") && !jgbmyj.equals("") && !flgwyj.equals("")
                             && !fgldyj.equals("")) {
                         comment = "";
                         personSession();

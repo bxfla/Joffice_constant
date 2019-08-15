@@ -269,6 +269,9 @@
                 android:text="流程审批信息"
                 android:gravity="center"
                 android:textColor="@color/whith"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
             <android.support.v7.widget.RecyclerView
                 android:visibility="gone"
                 android:id="@+id/recyclerView"

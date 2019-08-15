@@ -101,7 +101,7 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="基本情况:"
+                    android:text="基本情况:*"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
                 <View

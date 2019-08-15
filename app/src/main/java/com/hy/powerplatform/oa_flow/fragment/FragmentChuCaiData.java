@@ -126,7 +126,7 @@ public class FragmentChuCaiData extends Fragment {
         initDatePicker();
         dataList.add("飞机");
         dataList.add("火车");
-        dataList.add("汽车");
+        dataList.add("驾车");
         dataList.add("其他");
 
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, dataList);
@@ -292,7 +292,7 @@ public class FragmentChuCaiData extends Fragment {
                     Toast.makeText(getActivity(), "出差天数不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (address1.equals("") || address2.equals("") || address3.equals("")) {
+                if (address1.equals("")  || address3.equals("")) {
                     Toast.makeText(getActivity(), "地点不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -364,7 +364,7 @@ public class FragmentChuCaiData extends Fragment {
                 if (carType.equals("火车")) {
                     jtgj2 = "on";
                 }
-                if (carType.equals("汽车")) {
+                if (carType.equals("驾车")) {
                     jtgj3 = "on";
                 }
                 if (carType.equals("其他")) {

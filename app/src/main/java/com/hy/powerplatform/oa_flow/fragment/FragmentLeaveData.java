@@ -93,7 +93,7 @@ public class FragmentLeaveData extends Fragment {
     String Code;
     String tag = "";
     @BindView(R.id.tvPerson)
-    EditText tvPerson;
+    TextView tvPerson;
     private byte[] lock = new byte[0];
     // 位数，默认是8位
     private final static long w = 100000000;
@@ -157,9 +157,49 @@ public class FragmentLeaveData extends Fragment {
         adapterAP.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAM.setAdapter(adapterAP);
 
+        spinnerAM.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
+                        , tvEndTime.getText().toString(), "yyyy-MM-dd");
+                if (spinnerAM.getSelectedItem().toString().equals(spinnerPM.getSelectedItem().toString())) {
+                    etDays.setText((daynumber + 0.5)+ "");
+                } else if (spinnerAM.getSelectedItem().toString().equals("上午")
+                        && spinnerPM.getSelectedItem().equals("下午")) {
+                    etDays.setText((daynumber + 1) + "");
+                } else if (spinnerAM.getSelectedItem().toString().equals("下午")
+                        && spinnerPM.getSelectedItem().equals("上午")) {
+                    etDays.setText((daynumber ) + "");
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
         adapterAP = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listAP);
         adapterAP.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPM.setAdapter(adapterAP);
+
+        spinnerPM.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
+                        , tvEndTime.getText().toString(), "yyyy-MM-dd");
+                if (spinnerAM.getSelectedItem().toString().equals(spinnerPM.getSelectedItem().toString())) {
+                    etDays.setText((daynumber + 0.5) + "");
+                } else if (spinnerAM.getSelectedItem().toString().equals("上午")
+                        && spinnerPM.getSelectedItem().equals("下午")) {
+                    etDays.setText((daynumber + 1) + "");
+                } else if (spinnerAM.getSelectedItem().toString().equals("下午")
+                        && spinnerPM.getSelectedItem().equals("上午")) {
+                    etDays.setText((daynumber) + "");
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
 
         tvPerson.setText(new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", ""));
         userId = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
@@ -208,13 +248,13 @@ public class FragmentLeaveData extends Fragment {
                             daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
                                     , tvEndTime.getText().toString(), "yyyy-MM-dd");
                             if (spinnerAM.getSelectedItem().toString().equals(spinnerPM.getSelectedItem().toString())) {
-                                etDays.setText(daynumber + "");
+                                etDays.setText((daynumber + 0.5) + "");
                             } else if (spinnerAM.getSelectedItem().toString().equals("上午")
                                     && spinnerPM.getSelectedItem().equals("下午")) {
-                                etDays.setText((daynumber + 0.5) + "");
+                                etDays.setText((daynumber +1) + "");
                             } else if (spinnerAM.getSelectedItem().toString().equals("下午")
                                     && spinnerPM.getSelectedItem().equals("上午")) {
-                                etDays.setText((daynumber - 0.5) + "");
+                                etDays.setText((daynumber ) + "");
                             }
                         }
                     } catch (Exception exception) {
@@ -231,13 +271,13 @@ public class FragmentLeaveData extends Fragment {
                             daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
                                     , tvEndTime.getText().toString(), "yyyy-MM-dd");
                             if (spinnerAM.getSelectedItem().toString().equals(spinnerPM.getSelectedItem().toString())) {
-                                etDays.setText(daynumber + "");
+                                etDays.setText((daynumber + 0.5) + "");
                             } else if (spinnerAM.getSelectedItem().toString().equals("上午")
                                     && spinnerPM.getSelectedItem().equals("下午")) {
-                                etDays.setText((daynumber + 0.5) + "");
+                                etDays.setText((daynumber + 1) + "");
                             } else if (spinnerAM.getSelectedItem().toString().equals("下午")
                                     && spinnerPM.getSelectedItem().equals("上午")) {
-                                etDays.setText((daynumber - 0.5) + "");
+                                etDays.setText((daynumber) + "");
                             }
                         }
                     } catch (Exception exception) {

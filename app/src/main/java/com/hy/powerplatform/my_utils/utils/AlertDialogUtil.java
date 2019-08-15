@@ -33,8 +33,10 @@ public class AlertDialogUtil {
             LayoutInflater inflater = LayoutInflater.from(context);
             View view = inflater.inflate(R.layout.dialog_with_title, null, false);
             TextView tv_content = (TextView) view.findViewById(R.id.content);
+            TextView tv_title = (TextView) view.findViewById(R.id.title);
             TextView tv_yes = (TextView) view.findViewById(R.id.yes);
             TextView tv_no = (TextView) view.findViewById(R.id.no);
+            tv_title.setText("追回原因");
             tv_content.setText(description);
             tv_no.setOnClickListener(new View.OnClickListener() {
                 @Override

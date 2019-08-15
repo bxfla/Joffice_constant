@@ -18,12 +18,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hy.powerplatform.my_utils.utils.MoneyFormat;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
+import com.hy.powerplatform.my_utils.utils.MoneyFormat;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
 import com.hy.powerplatform.oa_flow.activity.PersonListActivity;
@@ -139,8 +139,12 @@ public class FragmentFuKuanLiuChengData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                BigDecimal numOfMoney = new BigDecimal(s.toString());
-                etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
+                if (!s.toString().equals("")){
+                    if (!s.toString().equals("")){
+                        BigDecimal numOfMoney = new BigDecimal(s.toString());
+                        etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
+                    }
+                }
             }
         });
 

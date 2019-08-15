@@ -453,7 +453,7 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                     if (!bmreout.equals("2") && !fgreout.equals("2") && !zjlreout.equals("2")) {
                         comments = "";
                         personSession();
-                    } else if (!zjl.equals("") && !fgfze.equals("") && !bmfzr.equals("")) {
+                    } else if (!etLeader2.getText().toString().equals("") && !fgfze.equals("") && !bmfzr.equals("")) {
                         comments = "";
                         personSession();
                     } else {

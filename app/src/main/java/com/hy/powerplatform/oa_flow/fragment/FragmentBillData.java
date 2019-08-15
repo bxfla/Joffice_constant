@@ -155,8 +155,10 @@ public class FragmentBillData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                BigDecimal numOfMoney = new BigDecimal(s.toString());
-                etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
+                if (!s.toString().equals("")){
+                    BigDecimal numOfMoney = new BigDecimal(s.toString());
+                    etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
+                }
             }
         });
         ProgressDialogUtil.startLoad(getActivity(), "获取流水号中");
@@ -263,19 +265,6 @@ public class FragmentBillData extends Fragment {
                 final String money = etMoney.getText().toString();
                 final String allMoneyM = etAllMoneyM.getText().toString().trim();
                 final String allmoneyY = etAllMoneyY.getText().toString().trim();
-
-                if (bigMoney.equals("")) {
-                    Toast.makeText(getActivity(), "借款金额不能为空", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                if (zdPerson.equals("")) {
-                    Toast.makeText(getActivity(), "制单人不能为空", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                if (department.equals("")) {
-                    Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 if (carNo.equals("")) {
                     Toast.makeText(getActivity(), "车号不能为空", Toast.LENGTH_SHORT).show();
                     break;
@@ -296,8 +285,12 @@ public class FragmentBillData extends Fragment {
                     Toast.makeText(getActivity(), "三者电话不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (smallMoney.equals("")) {
-                    Toast.makeText(getActivity(), "金额不能为空", Toast.LENGTH_SHORT).show();
+                if (reason.equals("")) {
+                    Toast.makeText(getActivity(), "事故原因不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (bigMoney.equals("")) {
+                    Toast.makeText(getActivity(), "借款金额不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (type.equals("")) {
@@ -308,10 +301,20 @@ public class FragmentBillData extends Fragment {
                     Toast.makeText(getActivity(), "事故责任不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (reason.equals("")) {
-                    Toast.makeText(getActivity(), "事故原因不能为空", Toast.LENGTH_SHORT).show();
+                if (zdPerson.equals("")) {
+                    Toast.makeText(getActivity(), "制单人不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
+                if (department.equals("")) {
+                    Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+                if (smallMoney.equals("")) {
+                    Toast.makeText(getActivity(), "金额不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
                 if (!PhoneSession.isPhoneNumber(otherPhone)) {
                     Toast.makeText(getActivity(), "手机号格式错误", Toast.LENGTH_SHORT).show();
                     break;

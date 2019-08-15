@@ -82,7 +82,7 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="请示内容:"
+                    android:text="请示内容:*"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
                 <View

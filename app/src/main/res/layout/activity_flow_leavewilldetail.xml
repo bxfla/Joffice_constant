@@ -206,7 +206,6 @@
                     android:background="@color/shouye" />
 
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/tvAM"
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
@@ -245,7 +244,6 @@
                     android:background="@color/shouye" />
 
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/tvPM"
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
@@ -543,6 +541,9 @@
                 android:text="流程审批信息"
                 android:gravity="center"
                 android:textColor="@color/whith"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
             <android.support.v7.widget.RecyclerView
                 android:visibility="gone"
                 android:id="@+id/recyclerView"

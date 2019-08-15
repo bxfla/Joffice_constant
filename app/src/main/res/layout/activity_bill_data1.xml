@@ -612,11 +612,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/shouye" />
 
                 <TextView
                     android:id="@+id/textView16"
@@ -624,7 +619,11 @@
                     android:text="安全服务:"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
-
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
                 <TextView
                     android:id="@+id/tvLeader"
                     style="@style/textWrite"

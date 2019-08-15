@@ -128,8 +128,10 @@ public class FragmentReceiveDinnerData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                BigDecimal numOfMoney = new BigDecimal(s.toString());
-                etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
+                if (!s.toString().equals("")){
+                    BigDecimal numOfMoney = new BigDecimal(s.toString());
+                    etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
+                }
             }
         });
         return view;

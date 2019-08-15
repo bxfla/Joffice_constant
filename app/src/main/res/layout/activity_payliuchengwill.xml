@@ -93,7 +93,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
@@ -418,7 +418,7 @@
                     android:id="@+id/etLeader2"
                     android:visibility="gone"
                     style="@style/textWrite"
-                    android:hint="分管领导签名" />
+                    android:hint="财务总监签名" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout

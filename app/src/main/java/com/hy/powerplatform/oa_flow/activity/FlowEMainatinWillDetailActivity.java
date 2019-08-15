@@ -1029,6 +1029,9 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                 case TAG_ONE:
                     Gson gson = new Gson();
                     FlowEMaintainWillDetail bean = gson.fromJson(res, FlowEMaintainWillDetail.class);
+                    if (bean.isRevoke()){
+                        Toast.makeText(FlowEMainatinWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
+                    }
                     taskId = bean.getTaskId();
                     final String date = bean.getMainform().get(0).getBaoXiuShiJian();
                     final String department = bean.getMainform().get(0).getBaoXiuBuMen();
@@ -1228,9 +1231,6 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                         }else {
                             etLeader.setHint(word);
                         }
-                    }
-                    if (bean.isRevoke()){
-                        Toast.makeText(FlowEMainatinWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case TAG_TWO:

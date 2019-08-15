@@ -297,7 +297,7 @@ public class FlowChuCaiDetailActivity extends BaseActivity {
                         carType = carType + "火车 ";
                     }
                     if (!jtgj3.equals("")) {
-                        carType = carType + "汽车 ";
+                        carType = carType + "驾车 ";
                     }
                     if (!jtgj4.equals("")) {
                         carType = carType + "其他 ";
