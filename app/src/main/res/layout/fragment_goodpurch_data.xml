@@ -427,7 +427,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="45dp"
-                    android:text="合计数量: *"
+                    android:text="合计: *"
                     android:gravity="center"
                     android:textColor="@color/black"/>
                 <View
@@ -466,7 +466,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="45dp"
-                    android:hint="合计数量"
+                    android:hint="合计金额"
                     android:gravity="center"
                     android:textColor="@color/black"/>
             </LinearLayout>

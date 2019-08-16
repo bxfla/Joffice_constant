@@ -12,6 +12,7 @@
         app:header_is_right_tv_visiable="true"
         app:header_title="合同付款详情">
     </com.hy.powerplatform.my_utils.myViews.Header>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -42,11 +43,12 @@
                     style="@style/oaEditText"
                     android:hint="请填写单位" />
             </LinearLayout>
+
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/oaTextView"
@@ -130,15 +132,15 @@
 
                 <TextView
                     android:id="@+id/tvContractName"
-                    android:layout_height="wrap_content"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2.5"
                     android:background="@null"
-                    android:textSize="16dp"
+                    android:gravity="center_vertical"
+                    android:hint="请填写合同名称"
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
-                    android:gravity="center_vertical"
-                    android:hint="请填写合同名称" />
+                    android:textSize="16dp" />
             </LinearLayout>
 
             <View style="@style/line"></View>
@@ -172,9 +174,9 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="基本情况:"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="基本情况:*" />
 
                 <View
                     android:layout_width="1dp"
@@ -190,16 +192,16 @@
 
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="附件:"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="附件:" />
 
                 <View
                     android:layout_width="1dp"
@@ -228,101 +230,121 @@
                 <TextView
                     android:id="@+id/textView3"
                     style="@style/oaTextView"
-                    android:text="部门领导:"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="部门领导:" />
+
+                <TextView
+                    android:id="@+id/tvLeader"
+                    style="@style/textWrite"
+                    android:hint="请填写部门领导签名" />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
-                    android:background="@color/shouye"
-                    android:layout_gravity="center_vertical"/>
-                <TextView
-                    android:id="@+id/tvLeader"
-                    style="@style/textWrite"
-                    android:hint="请填写财审部门意见"/>
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
             </LinearLayout>
+
             <View style="@style/line"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     style="@style/oaTextView"
-                    android:text="分管领导:"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="分管领导:" />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
-                    android:background="@color/shouye"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
                 <TextView
                     android:id="@+id/tvLeader1"
-                    android:hint="请填写监管部门意见"
-                    style="@style/textWrite"/>
+                    style="@style/textWrite"
+                    android:hint="请填写分管领导签名" />
             </LinearLayout>
+
             <View style="@style/line"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     style="@style/oaTextView"
-                    android:text="分管财务:"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="分管财务:" />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
-                    android:background="@color/shouye"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
                 <TextView
                     android:id="@+id/tvLeader2"
-                    android:hint="请填写法律顾问意见"
-                    style="@style/textWrite"/>
+                    style="@style/textWrite"
+                    android:hint="请填写分管财务签名" />
             </LinearLayout>
+
             <View style="@style/line"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     style="@style/oaTextView"
-                    android:text="总经理:"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="总经理:" />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
-                    android:background="@color/shouye"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
 
                 <TextView
                     android:id="@+id/tvLeader3"
                     style="@style/textWrite"
-                    android:hint="请填写分管领导意见" />
+                    android:hint="请填写总经理签名" />
             </LinearLayout>
-            <View style="@style/line"
+
+            <View
+                style="@style/line"
                 android:layout_marginBottom="45dp"></View>
 
             <Button
                 android:id="@+id/btnHistory"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:layout_marginBottom="45dp"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="45dp"
-                android:layout_marginBottom="45dp"
                 android:background="@drawable/linearlayout_colore_radius"
-                android:text="流程审批信息"
                 android:gravity="center"
-                android:textColor="@color/whith"/>
+                android:text="流程审批信息"
+                android:textColor="@color/whith" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
             <android.support.v7.widget.RecyclerView
-                android:visibility="gone"
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="match_parent"
+                android:visibility="gone"></android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
     </ScrollView>

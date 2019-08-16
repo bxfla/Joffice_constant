@@ -512,10 +512,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/oaTextView"
@@ -742,13 +742,13 @@
                 <EditText
                     android:id="@+id/etLeader"
                     style="@style/textWrite"
-                    android:hint="部门领导签名"
+                    android:hint="部门领导意见"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader"
                     style="@style/textWrite"
-                    android:hint="部门领导签名" />
+                    android:hint="部门领导意见" />
             </LinearLayout>
 
             <View style="@style/line"></View>

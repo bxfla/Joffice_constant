@@ -1190,7 +1190,7 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                     if (!bmreout.equals("2") && !fgreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!fgldyj.equals("") && !bmfzryj.equals("")) {
+                    } else if (!etLeader1.getText().toString().equals("") && !bmfzryj.equals("")) {
                         comment = "";
                         personSession();
                     } else {

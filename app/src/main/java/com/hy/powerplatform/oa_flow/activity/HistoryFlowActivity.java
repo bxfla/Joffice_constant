@@ -451,6 +451,9 @@ public class HistoryFlowActivity extends BaseActivity implements FlowHistoryList
                             bean.setSubject(jsonOnjectData.getString("subject"));
                             bean.setRunId(jsonOnjectData.getString("runId"));
                             bean.setFormDefId(jsonOnjectData.getString("formDefId"));
+                            bean.setProcessName(jsonOnjectData.getString("processName"));
+                            bean.setCreatetime(jsonOnjectData.getString("createtime"));
+                            bean.setCreator(jsonOnjectData.getString("creator"));
                             beanList.add(bean);
                         }
                         if (jsonArray.length() < 20) {

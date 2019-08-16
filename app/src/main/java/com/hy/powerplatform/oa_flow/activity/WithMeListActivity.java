@@ -316,6 +316,8 @@ public class WithMeListActivity extends BaseActivity implements WithMeListAdapte
                             bean.setRunStatus(jsonOnjectData.getString("runStatus"));
                             bean.setFormTitle(jsonOnjectData.getString("formTitle"));
                             bean.setFormDefId(jsonOnjectData.getString("formDefId"));
+                            bean.setProcessName(jsonOnjectData.getString("processName"));
+                            bean.setCreator(jsonOnjectData.getString("creator"));
                             beanList.add(bean);
                         }
                         if (jsonArray.length() < 20) {

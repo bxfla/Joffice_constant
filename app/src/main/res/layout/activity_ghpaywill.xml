@@ -392,7 +392,7 @@
                     android:id="@+id/etLeader1"
                     android:visibility="gone"
                     style="@style/textWrite"
-                    android:hint="财务总监意见" />
+                    android:hint="委员会主任意见" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout

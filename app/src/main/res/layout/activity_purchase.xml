@@ -85,7 +85,9 @@
                     style="@style/oaEditText"
                     android:layout_weight="2.5" />
             </LinearLayout>
+
             <View style="@style/line"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -106,7 +108,9 @@
                     style="@style/oaEditText"
                     android:layout_weight="2.5" />
             </LinearLayout>
+
             <View style="@style/line"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -211,6 +215,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="55dp" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
@@ -260,6 +265,7 @@
                         style="@style/oaEditText"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
+
                     <View style="@style/line"></View>
 
                     <TextView
@@ -270,12 +276,13 @@
 
 
                     <TextView
-                        android:visibility="gone"
                         android:id="@+id/tvDepartment5"
                         style="@style/oaEditText"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp" />
+                        android:layout_height="45dp"
+                        android:visibility="gone" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
@@ -468,6 +475,7 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/shouye" />
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -526,6 +534,7 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/shouye" />
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -946,6 +955,7 @@
 
 
             <View style="@style/line"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -956,6 +966,7 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:text="监管部门:" />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -973,7 +984,9 @@
                     style="@style/textWrite"
                     android:hint="监管部门意见" />
             </LinearLayout>
+
             <View style="@style/line"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1056,13 +1069,13 @@
                 <EditText
                     android:id="@+id/etLeader3"
                     style="@style/textWrite"
-                    android:hint="财务领导意见"
+                    android:hint="采购领导意见"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader3"
                     style="@style/textWrite"
-                    android:hint="财务领导意见" />
+                    android:hint="采购领导意见" />
             </LinearLayout>
 
             <View style="@style/line"></View>

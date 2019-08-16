@@ -129,7 +129,7 @@
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
-                    android:text="基本情况:" />
+                    android:text="基本情况:*" />
 
                 <View
                     android:layout_width="1dp"

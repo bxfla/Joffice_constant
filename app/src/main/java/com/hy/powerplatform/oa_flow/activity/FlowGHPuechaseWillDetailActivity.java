@@ -253,6 +253,7 @@ public class FlowGHPuechaseWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        tvLeader2.setHint("工会主席意见");
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
@@ -1548,9 +1549,9 @@ public class FlowGHPuechaseWillDetailActivity extends BaseActivity {
                         tvAllMoney5.setText(allMoney5);
 
                         String word2 = "";
-                        if (zcgkbmyj != null && !zcgkbmyj.equals("")) {
+                        if (ghzx != null && !ghzx.equals("")) {
                             try {
-                                JSONArray jsonArray = new JSONArray(zcgkbmyj);
+                                JSONArray jsonArray = new JSONArray(ghzx);
                                 for (int i = 0;i<jsonArray.length();i++){
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                                     if (!jsonObject.getString("v").toString().equals("")){
@@ -1561,7 +1562,9 @@ public class FlowGHPuechaseWillDetailActivity extends BaseActivity {
                                 e.printStackTrace();
                             }
                             if (tvLeader2.getVisibility() == View.VISIBLE) {
-                                tvLeader2.setText(word2);
+                                if (!word2.equals("")){
+                                    tvLeader2.setText(word2);
+                                }
                             }else {
                                 etLeader2.setHint(word2);
                             }

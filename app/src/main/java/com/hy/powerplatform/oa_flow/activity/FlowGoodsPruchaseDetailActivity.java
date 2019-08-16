@@ -164,6 +164,18 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
     TextView tvDepartment5;
     @BindView(R.id.llcg)
     LinearLayout llcg;
+    @BindView(R.id.tvBZ1)
+    TextView tvBZ1;
+    @BindView(R.id.tvBZ2)
+    TextView tvBZ2;
+    @BindView(R.id.tvBZ3)
+    TextView tvBZ3;
+    @BindView(R.id.tvBZ4)
+    TextView tvBZ4;
+    @BindView(R.id.tvBZ5)
+    TextView tvBZ5;
+    @BindView(R.id.ll11)
+    LinearLayout ll11;
     private String res;
     String xiangguanfujian = "";
     String flowMessage = "";
@@ -175,6 +187,7 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        ll11.setVisibility(View.GONE);
         llcg.setVisibility(View.GONE);
         header.setTvRight("追回");
         LinearLayoutManager manager = new LinearLayoutManager(this);

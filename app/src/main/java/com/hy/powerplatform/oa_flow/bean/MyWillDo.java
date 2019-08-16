@@ -9,10 +9,11 @@ import java.util.List;
 
 public class MyWillDo implements Serializable {
 
+
     /**
      * success : true
      * totalCounts : 1
-     * result : [{"taskName":"付款程序审批单_刘望--部门负责人","activityName":"部门负责人","assignee":"欧阳翰","createTime":"2019-3-6 9:21:26","executionId":"FKCXSPS_.8150054","isDue":0,"piId":"FKCXSPS_.8150054","taskId":8150076,"formDefId":10078,"state":"open","isMultipleTask":0,"candidateUsers":"","candidateRoles":""}]
+     * result : [{"taskName":"物品采购计划表","activityName":"部门负责人","assignee":"欧阳晓林","createTime":"2019-5-27 10:20:29","executionId":"WPCGJHB7.8740346","isDue":0,"piId":"WPCGJHB7.8740346","taskId":8740386,"formDefId":84,"showData":"微信公众号年审","creator":"漆明","state":"open","isMultipleTask":0,"candidateUsers":"","candidateRoles":""}]
      */
 
     private boolean success;
@@ -45,15 +46,17 @@ public class MyWillDo implements Serializable {
 
     public static class ResultBean {
         /**
-         * taskName : 付款程序审批单_刘望--部门负责人
+         * taskName : 物品采购计划表
          * activityName : 部门负责人
-         * assignee : 欧阳翰
-         * createTime : 2019-3-6 9:21:26
-         * executionId : FKCXSPS_.8150054
+         * assignee : 欧阳晓林
+         * createTime : 2019-5-27 10:20:29
+         * executionId : WPCGJHB7.8740346
          * isDue : 0
-         * piId : FKCXSPS_.8150054
-         * taskId : 8150076
-         * formDefId : 10078
+         * piId : WPCGJHB7.8740346
+         * taskId : 8740386
+         * formDefId : 84
+         * showData : 微信公众号年审
+         * creator : 漆明
          * state : open
          * isMultipleTask : 0
          * candidateUsers :
@@ -69,6 +72,8 @@ public class MyWillDo implements Serializable {
         private String piId;
         private String taskId;
         private String formDefId;
+        private String showData;
+        private String creator;
         private String state;
         private String isMultipleTask;
         private String candidateUsers;
@@ -144,6 +149,22 @@ public class MyWillDo implements Serializable {
 
         public void setFormDefId(String formDefId) {
             this.formDefId = formDefId;
+        }
+
+        public String getShowData() {
+            return showData;
+        }
+
+        public void setShowData(String showData) {
+            this.showData = showData;
+        }
+
+        public String getCreator() {
+            return creator;
+        }
+
+        public void setCreator(String creator) {
+            this.creator = creator;
         }
 
         public String getState() {

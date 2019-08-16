@@ -249,7 +249,7 @@ public class FragmentRepairData extends Fragment {
                     break;
                 }
                 if (data.equals("")) {
-                    Toast.makeText(getActivity(), "基本情况不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "具体事项不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
 //                if (departP.equals("")) {

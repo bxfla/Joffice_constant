@@ -58,7 +58,7 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="故障状况:"
+                    android:text="故障状况:*"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"/>
                 <View

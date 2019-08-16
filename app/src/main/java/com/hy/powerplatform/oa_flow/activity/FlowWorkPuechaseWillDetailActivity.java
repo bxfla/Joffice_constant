@@ -8,7 +8,6 @@ import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -285,7 +284,7 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 //String name =URLDecoder.decode(待转值,"utf-8");
-                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId+"&piId="+piId;
+                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId + "&piId=" + piId;
                 DBHandler dbA = new DBHandler();
                 res = dbA.OAQingJiaWillDoDex(url);
                 if (res.equals("获取数据失败") || res.equals("")) {
@@ -870,7 +869,7 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                     if (!bmreout.equals("2") && !fgreout.equals("2") && !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!zjl.equals("") && !fgldyj.equals("") && !bmfzryj.equals("")) {
+                    } else if (!etLeader2.getText().toString().equals("") && !fgldyj.equals("") && !bmfzryj.equals("")) {
                         comment = "";
                         personSession();
                     } else {
@@ -923,120 +922,112 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (!rb6.isChecked()) {
-                    if (resultList.size()>=6){
+                    if (resultList.size() >= 6) {
                         resultList.remove(5);
                     }
                 }
                 if (!rb5.isChecked()) {
-                    if (resultList.size()>=5){
+                    if (resultList.size() >= 5) {
                         resultList.remove(4);
                     }
                 }
                 if (!rb4.isChecked()) {
-                    if (resultList.size()>=4){
+                    if (resultList.size() >= 4) {
                         resultList.remove(3);
                     }
                 }
                 if (!rb3.isChecked()) {
-                    if (resultList.size()>=3){
+                    if (resultList.size() >= 3) {
                         resultList.remove(2);
                     }
                 }
                 if (!rb2.isChecked()) {
-                    if (resultList.size()>=2){
+                    if (resultList.size() >= 2) {
                         resultList.remove(1);
                     }
                 }
                 if (!rb1.isChecked()) {
-                    if (resultList.size()>=1){
+                    if (resultList.size() >= 1) {
                         resultList.remove(0);
                     }
                 }
                 if (!cb12.isChecked()) {
-                    if (bigResultList.size()>=12){
+                    if (bigResultList.size() >= 12) {
                         bigResultList.remove(11);
                     }
                 }
                 if (!cb11.isChecked()) {
-                    if (bigResultList.size()>=11){
+                    if (bigResultList.size() >= 11) {
                         bigResultList.remove(10);
                     }
                 }
                 if (!cb10.isChecked()) {
-                    if (bigResultList.size()>=10){
+                    if (bigResultList.size() >= 10) {
                         bigResultList.remove(9);
                     }
                 }
                 if (!cb9.isChecked()) {
-                    if (bigResultList.size()>=9){
+                    if (bigResultList.size() >= 9) {
                         bigResultList.remove(8);
                     }
                 }
                 if (!cb8.isChecked()) {
-                    if (bigResultList.size()>=8){
+                    if (bigResultList.size() >= 8) {
                         bigResultList.remove(7);
                     }
                 }
                 if (!cb7.isChecked()) {
-                    if (bigResultList.size()>=7){
+                    if (bigResultList.size() >= 7) {
                         bigResultList.remove(6);
                     }
                 }
                 if (!cb6.isChecked()) {
-                    if (bigResultList.size()>=6){
+                    if (bigResultList.size() >= 6) {
                         bigResultList.remove(5);
                     }
                 }
                 if (!cb5.isChecked()) {
-                    if (bigResultList.size()>=5){
+                    if (bigResultList.size() >= 5) {
                         bigResultList.remove(4);
                     }
                 }
                 if (!cb4.isChecked()) {
-                    if (bigResultList.size()>=4){
+                    if (bigResultList.size() >= 4) {
                         bigResultList.remove(3);
                     }
                 }
                 if (!cb3.isChecked()) {
-                    if (bigResultList.size()>=3){
+                    if (bigResultList.size() >= 3) {
                         bigResultList.remove(2);
                     }
                 }
                 if (!cb2.isChecked()) {
-                    if (bigResultList.size()>=2){
+                    if (bigResultList.size() >= 2) {
                         bigResultList.remove(1);
                     }
                 }
                 if (!cb1.isChecked()) {
-                    if (bigResultList.size()>=1){
+                    if (bigResultList.size() >= 1) {
                         bigResultList.remove(0);
                     }
                 }
 
-                Log.e("XXX", bigResultList.get(0).toString() + "--------");
-                if (bigResultList.size() == 0 || bigResultList.get(0).equals("")) {
-                    handler.sendEmptyMessage(222);
+                String userCodes = "";
+                if (resultList.size() == 0) {
+                    userCodes = resultList1.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
                 } else {
-                    String userCodes = "";
-                    if (resultList.size()==0){
-                        userCodes = resultList1.toString();
-                        userCodes = userCodes.toString().replace("[", "");
-                        userCodes = userCodes.toString().replace("]", "");
-                    }else {
-                        userCodes = resultList.toString();
-                        userCodes = userCodes.toString().replace("[", "");
-                        userCodes = userCodes.toString().replace("]", "");
-                    }
+                    userCodes = resultList.toString();
+                    userCodes = userCodes.toString().replace("[", "");
+                    userCodes = userCodes.toString().replace("]", "");
+                }
 
-                    String bigUserCodes = bigResultList.toString();
-                    if (bigResultList.size() == 1) {
-                        bigUserCodes = bigUserCodes.toString().replace(",", "");
-                        bigUserCodes = bigUserCodes.toString().replace("[", "");
-                        bigUserCodes = bigUserCodes.toString().replace("]", "");
-                    } else {
-                        bigUserCodes = bigUserCodes.toString().replace("[", "");
-                        bigUserCodes = bigUserCodes.toString().replace("]", "");
-                    }
+
+                if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
+                    String bigUserCodes = bigResultList1.toString();
+                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+                    bigUserCodes = bigUserCodes.toString().replace("]", "");
 
                     if (!bigUserCodes.equals("") && !userCodes.equals("")) {
                         flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
@@ -1052,18 +1043,37 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                         flowAssignld = flowAssignld.replace(":|", "|");
                         flowAssignld = flowAssignld.replace(":", "");
                     }
-                    String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
-                    DBHandler dbA = new DBHandler();
-                    upData = dbA.OAWorkPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
-                            , dep1, dep2, dep3, dep4, dep5, num1, num2, num3, num4, num5, money1, money2, money3, money4, money5
-                            , allMoney1, allMoney2, allMoney3, allMoney4, allMoney5, userCode, destName, taskId, flowAssignld
-                            , mainId, bmfzryj, fgldyj, zjl, serialNumber, comment, signaName, tvAllNum.getText().toString()
-                            , hejidj, tvAllMoney.getText().toString(), other, type);
-                    if (upData.equals("")) {
-                        handler.sendEmptyMessage(TAG_THERE);
+                } else {
+                    String bigUserCodes = bigResultList.toString();
+                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+
+                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
                     } else {
-                        handler.sendEmptyMessage(TAG_FOUR);
+                        flowAssignld = destName + "|" + userCodes;
+                        flowAssignld = flowAssignld.replace(" ", "");
+                        flowAssignld = flowAssignld.replace(":|", "|");
+                        flowAssignld = flowAssignld.replace(":", "");
                     }
+                }
+                String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
+                DBHandler dbA = new DBHandler();
+                upData = dbA.OAWorkPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
+                        , dep1, dep2, dep3, dep4, dep5, num1, num2, num3, num4, num5, money1, money2, money3, money4, money5
+                        , allMoney1, allMoney2, allMoney3, allMoney4, allMoney5, userCode, destName, taskId, flowAssignld
+                        , mainId, bmfzryj, fgldyj, zjl, serialNumber, comment, signaName, tvAllNum.getText().toString()
+                        , hejidj, tvAllMoney.getText().toString(), other, type);
+                if (upData.equals("")) {
+                    handler.sendEmptyMessage(TAG_THERE);
+                } else {
+                    handler.sendEmptyMessage(TAG_FOUR);
                 }
             }
         }).start();
@@ -1179,7 +1189,7 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
                         }
-                        if (bmreout.equals("1")&&fgreout.equals("1")&&zjlreout.equals("1")){
+                        if (bmreout.equals("1") && fgreout.equals("1") && zjlreout.equals("1")) {
                             Toast.makeText(FlowWorkPuechaseWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
@@ -1224,10 +1234,10 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                     if (zjl != null && !zjl.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(zjl);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word3 = word3+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word3 = word3 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1235,7 +1245,7 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader2.getVisibility() == View.VISIBLE) {
                             tvLeader2.setText(word3);
-                        }else {
+                        } else {
                             etLeader2.setHint(word3);
                         }
                     }
@@ -1243,10 +1253,10 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                     if (fgldyj != null && !fgldyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(fgldyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word2 = word2+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word2 = word2 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1254,7 +1264,7 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader1.getVisibility() == View.VISIBLE) {
                             tvLeader1.setText(word2);
-                        }else {
+                        } else {
                             etLeader1.setHint(word2);
                         }
                     }
@@ -1262,10 +1272,10 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                     if (bmfzryj != null && !bmfzryj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(bmfzryj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word1 = word1+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word1 = word1 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1273,11 +1283,11 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader.getVisibility() == View.VISIBLE) {
                             tvLeader.setText(word1);
-                        }else {
+                        } else {
                             etLeader.setHint(word1);
                         }
                     }
-                    if (bean.isRevoke()){
+                    if (bean.isRevoke()) {
                         Toast.makeText(FlowWorkPuechaseWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
                     }
                     break;

@@ -30,14 +30,16 @@ public class WithMeListAdapter extends RecyclerView.Adapter<WithMeListAdapter.Vi
 
     @Override
     public WithMeListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.adapter_flowlist,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.adapter_smart,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(WithMeListAdapter.ViewHolder holder, int position) {
-        holder.textView.setText(beanList1.get(position).getSubject());
+        holder.textTitle.setText(beanList1.get(position).getProcessName());
+        holder.textName.setText(beanList1.get(position).getCreator());
+        holder.textTime.setText(beanList1.get(position).getCreatetime());
         holder.mPosition = position;
     }
 
@@ -47,13 +49,15 @@ public class WithMeListAdapter extends RecyclerView.Adapter<WithMeListAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
+        public TextView textTitle,textName,textTime;
         View itemView;
         int mPosition;
         public ViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
-            textView = (TextView) itemView.findViewById(R.id.textView);
+            textTitle = (TextView) itemView.findViewById(R.id.tvTitle);
+            textName = (TextView) itemView.findViewById(R.id.tvName);
+            textTime = (TextView) itemView.findViewById(R.id.tvTime);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

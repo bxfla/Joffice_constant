@@ -427,7 +427,7 @@
                 <TextView
                     android:id="@+id/tvAllNum"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:layout_height="45dp"
                     android:hint="合计数量"
                     android:gravity="center"
@@ -438,7 +438,7 @@
                     android:background="@color/shouye"
                     android:layout_gravity="center_vertical"/>
                 <TextView
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="45dp"
@@ -455,7 +455,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="45dp"
-                    android:hint="合计数量"
+                    android:hint="合计金额"
                     android:gravity="center"
                     android:textColor="@color/black"/>
             </LinearLayout>

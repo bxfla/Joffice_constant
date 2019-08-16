@@ -82,7 +82,7 @@
                 <TextView
                     style="@style/oaTextView"
                     android:layout_height="45dp"
-                    android:text="事故情况:"
+                    android:text="事故情况:*"
                     android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"

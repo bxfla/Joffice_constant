@@ -391,6 +391,9 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
                             bean.setIsMultipleTask(jsonOnjectData.getString("isMultipleTask"));
                             bean.setCandidateUsers(jsonOnjectData.getString("candidateUsers"));
                             bean.setCandidateRoles(jsonOnjectData.getString("candidateRoles"));
+                            bean.setCreator(jsonOnjectData.getString("creator"));
+                            bean.setCreateTime(jsonOnjectData.getString("createTime"));
+                            bean.setTaskName(jsonOnjectData.getString("taskName"));
                             beanList.add(bean);
                         }
                         if (jsonArray.length() < 20) {

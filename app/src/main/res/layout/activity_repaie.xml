@@ -379,7 +379,7 @@
                 <EditText
                     android:id="@+id/etLeader1"
                     style="@style/textWrite"
-                    android:hint="请填写签发人"
+                    android:hint="请填写经办部门意见"
                     android:visibility="gone" />
 
                 <TextView

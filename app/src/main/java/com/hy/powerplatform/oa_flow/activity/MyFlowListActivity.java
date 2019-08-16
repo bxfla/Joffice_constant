@@ -17,7 +17,7 @@ import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
-import com.hy.powerplatform.oa_flow.adapter.FlowContractPayListAdapter;
+import com.hy.powerplatform.oa_flow.adapter.MyFlowListAdapter;
 import com.hy.powerplatform.oa_flow.bean.MyLeave;
 
 import java.util.ArrayList;
@@ -30,13 +30,13 @@ import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_THERE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
 
-public class MyFlowListActivity extends BaseActivity implements FlowContractPayListAdapter.OnGetAdapterPositionListener {
+public class MyFlowListActivity extends BaseActivity implements MyFlowListAdapter.OnGetAdapterPositionListener {
 
     @BindView(R.id.header)
     Header header;
     @BindView(R.id.recyclerView)
     CustomRefreshView recyclerView;
-    FlowContractPayListAdapter adapter;
+    MyFlowListAdapter adapter;
     List<MyLeave.ResultBean> beanList = new ArrayList<>();
     int limit = 20;
     int start = 0;
@@ -52,7 +52,7 @@ public class MyFlowListActivity extends BaseActivity implements FlowContractPayL
         recyclerView.setRefreshEnable(false);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.getRecyclerView().setLayoutManager(manager);
-        adapter = new FlowContractPayListAdapter(this, beanList);
+        adapter = new MyFlowListAdapter(this, beanList);
         adapter.sendOnGetAdapterPositionListener(this);
         recyclerView.setAdapter(adapter);
         ProgressDialogUtil.startLoad(this, "获取数据中");

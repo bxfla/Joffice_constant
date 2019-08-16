@@ -177,7 +177,7 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="基本情况*:"
+                    android:text="基本情况:*"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
 
@@ -286,7 +286,7 @@
                 <TextView
                     android:id="@+id/etLeader2"
                     style="@style/oaEditText"
-                    android:hint="分管领导签名" />
+                    android:hint="分管财务签名" />
             </LinearLayout>
 
             <View style="@style/line"></View>
