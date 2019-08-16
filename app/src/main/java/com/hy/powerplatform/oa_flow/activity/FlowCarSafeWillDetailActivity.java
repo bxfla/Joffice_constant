@@ -689,7 +689,7 @@ public class FlowCarSafeWillDetailActivity extends BaseActivity {
                     if (!bmreout.equals("2") && !fgreout.equals("2") && !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!zjl.equals("") && !bmfzryj.equals("") && !fgldyj.equals("")) {
+                    } else if (!etLeader2.getText().toString().equals("") && !bmfzryj.equals("") && !fgldyj.equals("")) {
                         comment = "";
                         personSession();
                     } else {

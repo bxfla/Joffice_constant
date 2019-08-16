@@ -12,14 +12,16 @@ public class FlowAppealWillDetail implements Serializable {
 
     /**
      * success : true
-     * taskId : 8050048
+     * taskId : 9310233
      * pkValue : mainId
-     * formRights : {'ShenQingRen':'1','XiangGuanFuJian':'1','QingShiNeiRong':'1','jbbmyj':'1','jbfgldyj':'1','ShenQingShiJian':'1','fgldyj':'2','zjlyj':'1','LiuShuiHao':'1','bmfzryj':'1','ShenQingBuMen':'1'}
-     * mainform : [{"QingShiNeiRong":"测试","ShenQingRen":"超级管理员","ShenQingBuMen":"宜春公交集团有限公司","runId":51500,"$type$":"WF_QingShiHuiBao","jbfgldyj":"","fgldyj":"","ShenQingBuMenDid":"","ShenQingShiJian":"2019-02-22","mainId":3,"ShenQingRenUId":"888888888","zjlyj":"","jbbmyj":"","XiangGuanFuJian":"","bmfzryj":"","LiuShuiHao":"No.20190222080"}]
+     * formRights : {'jbbmyj':'1','ShenQingRen':'1','ShenQingShiJian':'1','QingShiNeiRong':'1','XiangGuanFuJian':'1','zjlyj':'1','jbfgldyj':'1','bmfzryj':'1','ShenQingBuMen':'1','fgldyj':'1','LiuShuiHao':'1'}
+     * mainform : [{"sqbm":"","QingShiNeiRong":"同意","ShenQingBuMen":"宜春公交集团有限公司","ShenQingRen":"超级管理员","dszyj":"","runId":52036,"$type$":"WF_QingShiHuiBao","jbfgldyj":"","fgldyj":"","ShenQingBuMenDid":"","ShenQingShiJian":"2019-08-16","cbbmyj":"","mainId":16,"ShenQingRenUId":"153","zjlyj":"","jbbmyj":"","XiangGuanFuJian":"","bmfzryj":"","LiuShuiHao":"No.20190816125"}]
      * formDefId : 10113
      * preTaskName :
      * isSignTask : false
-     * trans : [{"destType":"task","destination":"总经理","name":"to 总经理","source":"分管领导"},{"destType":"task","destination":"发起人","name":"to 发起人","source":"分管领导"},{"destType":"task","destination":"经办分管领导","name":"to 经办分管领导","source":"分管领导"},{"destType":"task","destination":"经办部门","name":"to 经办部门","source":"分管领导"}]
+     * trans : [{"destType":"task","destination":"通知分管领导","name":"to 分管领导","source":"总经理"},{"destType":"task","destination":"董事长","name":"to 董事长","source":"总经理"}]
+     * runId : 52036
+     * revoke : false
      */
 
     private boolean success;
@@ -29,16 +31,8 @@ public class FlowAppealWillDetail implements Serializable {
     private String formDefId;
     private String preTaskName;
     private boolean isSignTask;
+    private int runId;
     private boolean revoke;
-
-    public boolean isRevoke() {
-        return revoke;
-    }
-
-    public void setRevoke(boolean revoke) {
-        this.revoke = revoke;
-    }
-
     private List<MainformBean> mainform;
     private List<TransBean> trans;
 
@@ -98,6 +92,22 @@ public class FlowAppealWillDetail implements Serializable {
         this.isSignTask = isSignTask;
     }
 
+    public int getRunId() {
+        return runId;
+    }
+
+    public void setRunId(int runId) {
+        this.runId = runId;
+    }
+
+    public boolean isRevoke() {
+        return revoke;
+    }
+
+    public void setRevoke(boolean revoke) {
+        this.revoke = revoke;
+    }
+
     public List<MainformBean> getMainform() {
         return mainform;
     }
@@ -116,33 +126,39 @@ public class FlowAppealWillDetail implements Serializable {
 
     public static class MainformBean {
         /**
-         * QingShiNeiRong : 测试
-         * ShenQingRen : 超级管理员
+         * sqbm :
+         * QingShiNeiRong : 同意
          * ShenQingBuMen : 宜春公交集团有限公司
-         * runId : 51500
+         * ShenQingRen : 超级管理员
+         * dszyj :
+         * runId : 52036
          * $type$ : WF_QingShiHuiBao
          * jbfgldyj :
          * fgldyj :
          * ShenQingBuMenDid :
-         * ShenQingShiJian : 2019-02-22
-         * mainId : 3
-         * ShenQingRenUId : 888888888
+         * ShenQingShiJian : 2019-08-16
+         * cbbmyj :
+         * mainId : 16
+         * ShenQingRenUId : 153
          * zjlyj :
          * jbbmyj :
          * XiangGuanFuJian :
          * bmfzryj :
-         * LiuShuiHao : No.20190222080
+         * LiuShuiHao : No.20190816125
          */
 
+        private String sqbm;
         private String QingShiNeiRong;
-        private String ShenQingRen;
         private String ShenQingBuMen;
+        private String ShenQingRen;
+        private String dszyj;
         private String runId;
         private String $type$;
         private String jbfgldyj;
         private String fgldyj;
         private String ShenQingBuMenDid;
         private String ShenQingShiJian;
+        private String cbbmyj;
         private int mainId;
         private String ShenQingRenUId;
         private String zjlyj;
@@ -151,12 +167,28 @@ public class FlowAppealWillDetail implements Serializable {
         private String bmfzryj;
         private String LiuShuiHao;
 
+        public String getSqbm() {
+            return sqbm;
+        }
+
+        public void setSqbm(String sqbm) {
+            this.sqbm = sqbm;
+        }
+
         public String getQingShiNeiRong() {
             return QingShiNeiRong;
         }
 
         public void setQingShiNeiRong(String QingShiNeiRong) {
             this.QingShiNeiRong = QingShiNeiRong;
+        }
+
+        public String getShenQingBuMen() {
+            return ShenQingBuMen;
+        }
+
+        public void setShenQingBuMen(String ShenQingBuMen) {
+            this.ShenQingBuMen = ShenQingBuMen;
         }
 
         public String getShenQingRen() {
@@ -167,12 +199,12 @@ public class FlowAppealWillDetail implements Serializable {
             this.ShenQingRen = ShenQingRen;
         }
 
-        public String getShenQingBuMen() {
-            return ShenQingBuMen;
+        public String getDszyj() {
+            return dszyj;
         }
 
-        public void setShenQingBuMen(String ShenQingBuMen) {
-            this.ShenQingBuMen = ShenQingBuMen;
+        public void setDszyj(String dszyj) {
+            this.dszyj = dszyj;
         }
 
         public String getRunId() {
@@ -221,6 +253,14 @@ public class FlowAppealWillDetail implements Serializable {
 
         public void setShenQingShiJian(String ShenQingShiJian) {
             this.ShenQingShiJian = ShenQingShiJian;
+        }
+
+        public String getCbbmyj() {
+            return cbbmyj;
+        }
+
+        public void setCbbmyj(String cbbmyj) {
+            this.cbbmyj = cbbmyj;
         }
 
         public int getMainId() {
@@ -283,9 +323,9 @@ public class FlowAppealWillDetail implements Serializable {
     public static class TransBean {
         /**
          * destType : task
-         * destination : 总经理
-         * name : to 总经理
-         * source : 分管领导
+         * destination : 通知分管领导
+         * name : to 分管领导
+         * source : 总经理
          */
 
         private String destType;

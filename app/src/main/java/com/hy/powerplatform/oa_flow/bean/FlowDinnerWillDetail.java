@@ -137,7 +137,7 @@ public class FlowDinnerWillDetail implements Serializable {
         private String jine;
         private String ycfydx;
         private String sqr;
-        private int runId;
+        private String runId;
         private String $type$;
         private String pcry;
         private String lkrs;
@@ -183,11 +183,11 @@ public class FlowDinnerWillDetail implements Serializable {
             this.sqr = sqr;
         }
 
-        public int getRunId() {
+        public String getRunId() {
             return runId;
         }
 
-        public void setRunId(int runId) {
+        public void setRunId(String runId) {
             this.runId = runId;
         }
 

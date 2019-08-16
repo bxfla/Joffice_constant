@@ -131,7 +131,6 @@ public class FragmentLeaveData extends Fragment {
         initDatePicker();
         listAP.add("上午");
         listAP.add("下午");
-        listAP.add("全天");
         list.add("事假");
         list.add("病假");
         list.add("产假");

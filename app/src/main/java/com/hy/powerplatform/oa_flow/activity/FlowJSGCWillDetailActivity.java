@@ -764,7 +764,7 @@ public class FlowJSGCWillDetailActivity extends BaseActivity {
                     if (!xqreout.equals("2") & !xqldreout.equals("2") & !jsreout.equals("2") & !jsldreout.equals("2") & !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!zjlyj.equals("") & !jsbmldyj.equals("") & !jsbmyj.equals("") & !xqbmldyj.equals("") & !jsbmyj.equals("")) {
+                    } else if (!etLeader4.getText().toString().equals("") & !jsbmldyj.equals("") & !jsbmyj.equals("") & !xqbmldyj.equals("") & !jsbmyj.equals("")) {
                         comment = "";
                         personSession();
                     } else {

@@ -718,7 +718,7 @@ public class FlowSaferWillDetailActivity extends BaseActivity {
                     if (!bmreout.equals("2") && !fgreout.equals("2") && !cwreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!cwldyj.equals("") && !fgldyj.equals("") && !bmfzryj.equals("")) {
+                    } else if (!etLeader2.getText().toString().equals("") && !fgldyj.equals("") && !bmfzryj.equals("")) {
                         comment = "";
                         personSession();
                     } else {

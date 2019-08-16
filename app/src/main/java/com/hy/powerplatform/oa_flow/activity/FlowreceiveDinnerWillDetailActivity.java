@@ -946,7 +946,7 @@ public class FlowreceiveDinnerWillDetailActivity extends BaseActivity {
                     final String eatBz = bean.getMainform().get(0).getYcbz();
                     final String bigMoney = bean.getMainform().get(0).getJine();
                     final String smallMoney = bean.getMainform().get(0).getXiaoxie();
-
+                    runID = bean.getMainform().get(0).getRunId();
                     xiangguanfujian = bean.getMainform().get(0).getXiangguanfujian();
                     tvData.setText(xiangguanfujian);
 

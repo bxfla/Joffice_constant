@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
@@ -34,28 +35,32 @@ public class AlertDialogEditText {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ProgressDialogUtil.startLoad(context, "提交数据中");
                 final String a = username.getText().toString().trim();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        String url = Constant.BASE_URL2 + Constant.BACKFLOW + runId+"&reason="+a;
-                        DBHandler dbA = new DBHandler();
-                        String res = dbA.FlowBack(url);
-                        String msg = null;
-                        if (res.equals("获取数据失败") || res.equals("")) {
-                            backLisenter.fail("提交数据失败");
-                        } else {
-                            try {
-                                JSONObject jsonObject = new JSONObject(res);
-                                msg = jsonObject.getString("msg");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                if (a.equals("")){
+                    Toast.makeText(context, "请填写追回原因", Toast.LENGTH_SHORT).show();
+                }else {
+                    ProgressDialogUtil.startLoad(context, "提交数据中");
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String url = Constant.BASE_URL2 + Constant.BACKFLOW + runId+"&reason="+a;
+                            DBHandler dbA = new DBHandler();
+                            String res = dbA.FlowBack(url);
+                            String msg = null;
+                            if (res.equals("获取数据失败") || res.equals("")) {
+                                backLisenter.fail("提交数据失败");
+                            } else {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(res);
+                                    msg = jsonObject.getString("msg");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                backLisenter.success(msg);
                             }
-                            backLisenter.success(msg);
                         }
-                    }
-                }).start();
+                    }).start();
+                }
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

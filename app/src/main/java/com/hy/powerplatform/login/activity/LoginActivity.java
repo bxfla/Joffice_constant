@@ -260,6 +260,14 @@ public class LoginActivity extends BaseActivity implements LoginView {
                                             sharedPreferencesHelper.saveData(LoginActivity.this, "depName", jsonObject.getString("depName"));
                                             sharedPreferencesHelper.saveData(LoginActivity.this, "depId", jsonObject.getString("depId"));
                                         }
+
+                                        JSONObject myJsonObject = jsonObject.getJSONObject("empprofile");
+                                        sharedPreferencesHelper.saveData(LoginActivity.this, "myAge", myJsonObject.getString("age"));
+                                        sharedPreferencesHelper.saveData(LoginActivity.this, "mySex", myJsonObject.getString("sex"));
+                                        sharedPreferencesHelper.saveData(LoginActivity.this, "myMobile", myJsonObject.getString("mobile"));
+                                        sharedPreferencesHelper.saveData(LoginActivity.this, "myIcCard", myJsonObject.getString("idCard"));
+                                        sharedPreferencesHelper.saveData(LoginActivity.this, "myAddress", myJsonObject.getString("address"));
+
                                         Message message = new Message();
                                         message.what = Constant.TAG_ONE;
                                         handler.sendMessage(message);

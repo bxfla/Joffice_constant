@@ -209,7 +209,7 @@ public class FragmentChuCaiData extends Fragment {
                             tvStartTime.setText(time.split(" ")[0]);
                             daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
                                     , tvEndTime.getText().toString(), "yyyy-MM-dd");
-                            etAllTime.setText(daynumber + "");
+                            etAllTime.setText(daynumber+1 + "");
                         }
                     } catch (Exception exception) {
                         exception.printStackTrace();
@@ -224,7 +224,7 @@ public class FragmentChuCaiData extends Fragment {
                             tvEndTime.setText(time.split(" ")[0]);
                             daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
                                     , tvEndTime.getText().toString(), "yyyy-MM-dd");
-                            etAllTime.setText(daynumber + "");
+                            etAllTime.setText(daynumber+1 + "");
                         }
                     } catch (Exception exception) {
                         exception.printStackTrace();

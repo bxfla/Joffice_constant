@@ -20,6 +20,7 @@ import com.hy.powerplatform.R;
 import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
+import com.hy.powerplatform.my_utils.base.MyApplication;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
 import com.hy.powerplatform.my_utils.utils.IDCardSession;
 import com.hy.powerplatform.my_utils.utils.PhoneSession;
@@ -126,7 +127,12 @@ public class FragmentDormData extends Fragment {
     List<String> listSex = new ArrayList<>();
     @BindView(R.id.tvPerson)
     TextView tvPerson;
+    @BindView(R.id.tv)
+    TextView tv;
+    @BindView(R.id.etSex)
+    EditText etSex;
     private CustomDatePickerDay customDatePicker1, customDatePicker2;
+    SharedPreferencesHelper sharedPreferencesHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -145,6 +151,20 @@ public class FragmentDormData extends Fragment {
         userId = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
         userName = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", "");
         etPerson.setText(userName);
+
+        sharedPreferencesHelper = new SharedPreferencesHelper(MyApplication.getContextObject(), "login");
+        String myAge = sharedPreferencesHelper.getData(getActivity(), "myAge", "");
+        String mySex = sharedPreferencesHelper.getData(getActivity(), "mySex", "");
+        String myMobile = sharedPreferencesHelper.getData(getActivity(), "myMobile", "");
+        String myIcCard = sharedPreferencesHelper.getData(getActivity(), "myIcCard", "");
+        String myAddress = sharedPreferencesHelper.getData(getActivity(), "myAddress", "");
+
+        etAge.setText(myAge);
+        etSex.setText(mySex);
+        etPhone.setText(myMobile);
+        etIdCard.setText(myIcCard);
+        etAddress.setText(myAddress);
+
         ProgressDialogUtil.startLoad(getActivity(), "获取流水号");
         getLIuSuiHao();
         return view;
@@ -294,7 +314,7 @@ public class FragmentDormData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -316,7 +336,7 @@ public class FragmentDormData extends Fragment {
                 }
                 final String person = etPerson.getText().toString();
                 final String time = tvTime.getText().toString();
-                final String sex = String.valueOf(spinnerSex.getSelectedItem());
+                final String sex = etSex.getText().toString();
                 final String age = etAge.getText().toString();
                 final String idCard = etIdCard.getText().toString();
                 final String phone = etPhone.getText().toString();
@@ -353,22 +373,22 @@ public class FragmentDormData extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-            if (requestCode == 1) {
-                List<String> list = data.getStringArrayListExtra("paths");
-                for (String s : list) {
-                    Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
-                    File file = new File(s);
-                    Toast.makeText(getActivity(), file.getName(), Toast.LENGTH_SHORT).show();
+        if (requestCode == 1) {
+            List<String> list = data.getStringArrayListExtra("paths");
+            for (String s : list) {
+                Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
+                File file = new File(s);
+                Toast.makeText(getActivity(), file.getName(), Toast.LENGTH_SHORT).show();
 //                    file = file+s;
-                }
             }
-            if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO){
-                if (data!=null){
-                    userCode = data.getStringExtra("userCode");
-                    userName = data.getStringExtra("userName");
-                    etPerson.setText(userName);
-                }
+        }
+        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO) {
+            if (data != null) {
+                userCode = data.getStringExtra("userCode");
+                userName = data.getStringExtra("userName");
+                etPerson.setText(userName);
             }
+        }
     }
 
     private Handler handler = new Handler() {

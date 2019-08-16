@@ -417,6 +417,7 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                 cb1.setVisibility(View.VISIBLE);
                 cb2.setVisibility(View.INVISIBLE);
                 cb3.setVisibility(View.INVISIBLE);
+                ll2.setVisibility(View.GONE);
             }
             if (bigNametemp.length == 2) {
                 cb1.setText(bigNametemp[0]);
@@ -1228,9 +1229,13 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                             role = bean1.getData().get(1).getRole();
                             userCode = bean1.getData().get(1).getUserNames();
                             userName = bean1.getData().get(1).getUserCodes();
+                            nametemp = null;
+                            codetemp = null;
                             nametemp = userName.split(",");
                             codetemp = userCode.split(",");
                         }
+                        bigNametemp = null;
+                        bigCodetemp = null;
                         leader = bean1.getData().get(0).getRole();
                         leaderCode = bean1.getData().get(0).getUserNames();
                         leaderName = bean1.getData().get(0).getUserCodes();

@@ -141,7 +141,11 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     TextView tvBM;
     @BindView(R.id.etBM)
     EditText etBM;
-    private String name, taskId, res, bmfzryj, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, zjlyj = "";
+    @BindView(R.id.tvLeader4)
+    TextView tvLeader4;
+    @BindView(R.id.etLeader4)
+    EditText etLeader4;
+    private String name, taskId, res, bmfzryj, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, zjlyj = "", dszyj = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
     String leaderCode = "";
@@ -149,7 +153,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
-    String bmreout, xqreout, xqldreout, jsreout, jsldreout, csreout, jcreout, zjlreout, flowAssignld, serialNumber = "";
+    String bmreout, xqreout, xqldreout, jsreout, jsldreout, csreout, jcreout, zjlreout, dszreout, flowAssignld, serialNumber = "";
 
     String[] bigNametemp = null;
     String[] bigCodetemp = null;
@@ -824,11 +828,11 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (comment.equals("")) {
-                    if (!bmreout.equals("2") &&!xqreout.equals("2") && !xqldreout.equals("2")
+                    if (!bmreout.equals("2") && !xqreout.equals("2") && !xqldreout.equals("2")
                             && !jsreout.equals("2") && !jsldreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!bmfzryj.equals("") &&!jsbmldyj.equals("") && !jsbmyj.equals("")
+                    } else if (!bmfzryj.equals("") && !jsbmldyj.equals("") && !jsbmyj.equals("")
                             && !xqbmldyj.equals("") && !jsbmyj.equals("")) {
                         comment = "";
                         personSession();
@@ -1018,7 +1022,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                 DBHandler dbA = new DBHandler();
                 upData = dbA.OAAppealLeader(url, department, person, time, userCode, data,
                         destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj,
-                        serialNumber, comment, liushuihao,bmfzryj);
+                        serialNumber, comment, liushuihao, bmfzryj);
                 if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -1066,6 +1070,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                     xqbmldyj = bean.getMainform().get(0).getJbfgldyj();
                     jsbmyj = bean.getMainform().get(0).getJbbmyj();
                     jsbmldyj = bean.getMainform().get(0).getZjlyj();
+                    dszreout = bean.getMainform().get(0).getDszyj();
                     mainId = String.valueOf(bean.getMainform().get(0).getMainId());
                     for (int i = 0; i < bean.getTrans().size(); i++) {
                         beanList.add(bean.getTrans().get(i));
@@ -1080,6 +1085,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         jsreout = jsonObject.getString("jbbmyj");
                         jsldreout = jsonObject.getString("zjlyj");
                         bmreout = jsonObject.getString("bmfzryj");
+                        dszreout = jsonObject.getString("bmfzryj");
                         if (bmreout.equals("2")) {
                             tvBM.setVisibility(View.GONE);
                             etBM.setVisibility(View.VISIBLE);
@@ -1115,7 +1121,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                             tvLeader3.setVisibility(View.VISIBLE);
                             etLeader3.setVisibility(View.GONE);
                         }
-                        if (bmreout.equals("1") &&xqreout.equals("1") && xqldreout.equals("1") && jsreout.equals("1") && jsldreout.equals("1")) {
+                        if (bmreout.equals("1") && xqreout.equals("1") && xqldreout.equals("1") && jsreout.equals("1") && jsldreout.equals("1")) {
                             Toast.makeText(FlowAppealWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
