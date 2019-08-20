@@ -51,6 +51,7 @@ import com.hy.powerplatform.oa_flow.bean.MyWillDo;
 import com.hy.powerplatform.phone.activity.PhoneListActivity;
 import com.hy.powerplatform.qrcode.zxing.activity.CaptureActivity;
 import com.hy.powerplatform.signin.activity.NewSignActivity;
+import com.hy.powerplatform.weekly.WeeklyListActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -292,6 +293,9 @@ public class MainActivity extends BaseActivity implements MainView {
                                     startActivity(intent);
                                 }else if (mainDataList.get(position).getModuleCode().equals("ZHQR")) {
                                     intent = new Intent(MainActivity.this, MyBackSureFlowListActivity.class);
+                                    startActivity(intent);
+                                }else if (mainDataList.get(position).getModuleCode().equals("ZB")) {
+                                    intent = new Intent(MainActivity.this, WeeklyListActivity.class);
                                     startActivity(intent);
                                 }
                             }

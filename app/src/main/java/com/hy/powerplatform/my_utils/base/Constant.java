@@ -62,6 +62,7 @@ public class Constant {
     //我的流程详情
     public static final String  FIELDETAIL = Constant.BASE_URL2+"attachFiles/";
 
+    //附件下载
     public static final String  FILEDATA = "flow/getFileProcessActivity.do";
 
     //提交数据
