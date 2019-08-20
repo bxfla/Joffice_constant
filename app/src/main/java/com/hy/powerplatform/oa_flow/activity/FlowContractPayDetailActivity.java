@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,10 +82,13 @@ public class FlowContractPayDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.llData)
+    LinearLayout llData;
     private String res;
     String flowMessage = "";
     String xiangguanfujian = "";
     String runID = "";
+    String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -130,7 +134,7 @@ public class FlowContractPayDetailActivity extends BaseActivity {
             public void success(Object o) {
                 Message message = new Message();
                 message.what = TAG_FIVE;
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putString("msg", o.toString());
                 message.setData(bundle);
                 handler.sendMessage(message);
@@ -146,19 +150,19 @@ public class FlowContractPayDetailActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.tvData,R.id.btnHistory})
+    @OnClick({R.id.tvData, R.id.btnHistory})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnHistory:
                 recyclerView.setVisibility(View.VISIBLE);
-                ProgressDialogUtil.startLoad(FlowContractPayDetailActivity.this,"获取数据中");
+                ProgressDialogUtil.startLoad(FlowContractPayDetailActivity.this, "获取数据中");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         //String name =URLDecoder.decode(待转值,"utf-8");
                         String url = Constant.BASE_URL2 + Constant.FLOWMESSAGE;
                         DBHandler dbA = new DBHandler();
-                        flowMessage = dbA.OAFlowMessage(url,runID);
+                        flowMessage = dbA.OAFlowMessage(url, runID);
                         if (flowMessage.equals("获取数据失败") || flowMessage.equals("")) {
                             handler.sendEmptyMessage(TAG_TWO);
                         } else {
@@ -179,8 +183,8 @@ public class FlowContractPayDetailActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 DBHandler dbA = new DBHandler();
-                                res = dbA.OAQingJiaMyDetail(url);
-                                if (res.equals("获取数据失败") || res.equals("")) {
+                                downloadData = dbA.OAQingJiaMyDetail(url);
+                                if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                     handler.sendEmptyMessage(TAG_TWO);
                                 } else {
                                     handler.sendEmptyMessage(TAG_NINE);
@@ -197,8 +201,8 @@ public class FlowContractPayDetailActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMyDetail(url);
-                                        if (res.equals("获取数据失败") || res.equals("")) {
+                                        downloadData = dbA.OAQingJiaMyDetail(url);
+                                        if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
                                         } else {
                                             handler.sendEmptyMessage(TAG_NINE);
@@ -236,10 +240,10 @@ public class FlowContractPayDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowContractPayDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowContractPayDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
                     break;
@@ -256,6 +260,11 @@ public class FlowContractPayDetailActivity extends BaseActivity {
                     String fgcw = bean.getMainform().get(0).getFgcwldyj();
                     String zjl = bean.getMainform().get(0).getZjlyj();
                     xiangguanfujian = bean.getMainform().get(0).getXiangguanfujian();
+                    if (xiangguanfujian.equals("")) {
+                        llData.setVisibility(View.GONE);
+                    } else {
+                        tvData.setText(xiangguanfujian);
+                    }
                     runID = bean.getMainform().get(0).getRunId();
                     tvData.setText(xiangguanfujian);
 
@@ -285,7 +294,7 @@ public class FlowContractPayDetailActivity extends BaseActivity {
                     break;
                 case TAG_NINE:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(res, File.class);
+                    File file = gson2.fromJson(downloadData, File.class);
                     String filePath = file.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);

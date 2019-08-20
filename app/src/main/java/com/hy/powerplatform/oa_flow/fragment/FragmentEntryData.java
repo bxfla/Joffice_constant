@@ -168,7 +168,7 @@ public class FragmentEntryData extends Fragment {
 
         userId = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
         userName = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", "");
-        etPerson.setText(userName);
+//        etPerson.setText(userName);
         ProgressDialogUtil.startLoad(getActivity(), "获取流水号");
         getLIuSuiHao();
         return view;

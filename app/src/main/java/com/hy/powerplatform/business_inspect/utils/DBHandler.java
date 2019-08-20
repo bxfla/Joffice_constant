@@ -5618,7 +5618,7 @@ public class DBHandler {
 
     //安装改造审批发布
     public String OAInstallUp(String turl, String userDepart, String uId, String department
-            , String date, String data, String userId, String userName, String liushuihao) {
+            , String date, String data, String userId, String userName, String liushuihao,String ys) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
@@ -5640,6 +5640,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("BanJieShiJian", date));
         nvs.add(new BasicNameValuePair("ShenBanShiXiang", data));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
+        nvs.add(new BasicNameValuePair("ys", ys));
 
         nvs.add(new BasicNameValuePair("bmfzryj", ""));
         nvs.add(new BasicNameValuePair("fgldyj", ""));
@@ -5683,7 +5684,7 @@ public class DBHandler {
             , String userCode, String destName, String taskId, String flowAssignld
             , String mainId, String bmfzryj, String fgldyj, String jbfgldyj, String jbbmyj
             , String bjap, String bjr, String bjpj, String serialNumber, String comment
-            , String liushuihao,String signaName, String zjlyj) {
+            , String liushuihao,String signaName, String zjlyj,String ys,String data1) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -5708,7 +5709,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("ShenBanBuMen", department));
         nvs.add(new BasicNameValuePair("ShenBanShiJian", date));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
-
+        nvs.add(new BasicNameValuePair("ys",ys));
         nvs.add(new BasicNameValuePair("zjlyj", zjlyj));
         nvs.add(new BasicNameValuePair("bmfzryj", bmfzryj));
         nvs.add(new BasicNameValuePair("fgldyj", fgldyj));
@@ -5716,7 +5717,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jbbmyj", jbbmyj));
         nvs.add(new BasicNameValuePair("bjap", bjap));
         nvs.add(new BasicNameValuePair("BanJieRen", bjr));
-        nvs.add(new BasicNameValuePair("BanJieShiJian", ""));
+        nvs.add(new BasicNameValuePair("BanJieShiJian", data1));
         nvs.add(new BasicNameValuePair("bjpj", bjpj));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
@@ -5755,7 +5756,7 @@ public class DBHandler {
             , String userCode, String destName, String taskId, String flowAssignld
             , String mainId, String bmfzryj, String fgldyj, String jbfgldyj, String jbbmyj
             , String bjap, String bjr, String bjpj, String serialNumber, String comment
-            , String date1, String liushuihao, String zjlyj) {
+            , String date1, String liushuihao, String zjlyj,String ys,String signName) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -5771,7 +5772,8 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
         nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
-
+        nvs.add(new BasicNameValuePair("ys",ys));
+        nvs.add(new BasicNameValuePair("signalName", signName));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("showvalue", ""));
         nvs.add(new BasicNameValuePair("formDefId", Constant.INSTALL));
@@ -5789,7 +5791,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jbbmyj", jbbmyj));
         nvs.add(new BasicNameValuePair("bjap", bjap));
         nvs.add(new BasicNameValuePair("BanJieRen", bjr));
-        nvs.add(new BasicNameValuePair("BanJieShiJian", liushuihao));
+        nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
         nvs.add(new BasicNameValuePair("bjpj", bjpj));
         nvs.add(new BasicNameValuePair("comments", comment));
         try {
@@ -6013,24 +6015,25 @@ public class DBHandler {
     public String OAEMaintainder1(String url, String department, String time, String data, String userCode
             , String destName, String taskId, String flowAssignld, String mainId, String bxbmyj
             , String wxbmyj, String wxryyj, String wxqkyj, String sbsyryj, String wxfkyj
-            , String serialNumber, String comment, String date) {
+            , String serialNumber, String comment, String date,String signaName) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
         String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
-        nvs.add(new BasicNameValuePair("defId", "20411"));
+        nvs.add(new BasicNameValuePair("defId", Constant.EMAINTAINDIFID));
         nvs.add(new BasicNameValuePair("taskId", taskId));
         nvs.add(new BasicNameValuePair("mainId", mainId));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
         nvs.add(new BasicNameValuePair("destName", destName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
+        nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
 
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("showvalue", ""));
+        nvs.add(new BasicNameValuePair("signalName", signaName));
         nvs.add(new BasicNameValuePair("formDefId", Constant.EMAINTAIN));
 
         nvs.add(new BasicNameValuePair("ShenBanBuMenDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
@@ -6083,7 +6086,7 @@ public class DBHandler {
     public String OAEMaintainder(String url, String department, String time, String data
             , String userCode, String destName, String taskId, String flowAssignld
             , String mainId, String bxbmyj, String wxbmyj, String wxryyj, String wxqkyj
-            , String sbsyryj, String wxfkyj, String serialNumber, String comment) {
+            , String sbsyryj, String wxfkyj, String serialNumber, String comment,String signaName) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -6101,6 +6104,7 @@ public class DBHandler {
 
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("showvalue", ""));
+        nvs.add(new BasicNameValuePair("signalName", signaName));
         nvs.add(new BasicNameValuePair("formDefId", Constant.EMAINTAIN));
 
         nvs.add(new BasicNameValuePair("ShenBanBuMenDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
@@ -6354,7 +6358,7 @@ public class DBHandler {
     public String OAAppealLeader(String url, String department, String person, String time
             , String userCode, String data, String destName, String taskId, String flowAssignld
             , String mainId, String xqbmyj, String xqbmldyj, String jsbmyj, String jsbmldyj
-            , String serialNumber, String comment, String liushuihao,String bmyj) {
+            , String serialNumber, String comment, String liushuihao,String bmyj,String dszyj) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -6377,7 +6381,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
 
 
-        nvs.add(new BasicNameValuePair("ShenQingBuMen", department));
+        nvs.add(new BasicNameValuePair("sqbm", department));
         nvs.add(new BasicNameValuePair("ShenQingRenUId", userCode));
         nvs.add(new BasicNameValuePair("ShenQingRen", person));
         nvs.add(new BasicNameValuePair("ShenQingShiJian", time));
@@ -6388,6 +6392,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("jbfgldyj", xqbmldyj));
         nvs.add(new BasicNameValuePair("jbbmyj", jsbmyj));
         nvs.add(new BasicNameValuePair("zjlyj", jsbmldyj));
+        nvs.add(new BasicNameValuePair("dszyj", dszyj));
         try {
             Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");

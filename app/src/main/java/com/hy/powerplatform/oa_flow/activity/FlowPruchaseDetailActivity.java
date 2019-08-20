@@ -174,10 +174,15 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
     TextView tvBZ4;
     @BindView(R.id.tvBZ5)
     TextView tvBZ5;
+    @BindView(R.id.ll11)
+    LinearLayout ll11;
+    @BindView(R.id.llData)
+    LinearLayout llData;
     private String res;
     String xiangguanfujian = "";
     String flowMessage = "";
     String runID = "";
+    String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -245,28 +250,28 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvBZ1:
-                if (!tvBZ1.getText().toString().equals("")){
-                    new AlertDialogEditText().showDialog1(this,tvBZ1.getText().toString());
+                if (!tvBZ1.getText().toString().equals("")) {
+                    new AlertDialogEditText().showDialog1(this, tvBZ1.getText().toString());
                 }
                 break;
             case R.id.tvBZ2:
-                if (!tvBZ2.getText().toString().equals("")){
-                    new AlertDialogEditText().showDialog1(this,tvBZ2.getText().toString());
+                if (!tvBZ2.getText().toString().equals("")) {
+                    new AlertDialogEditText().showDialog1(this, tvBZ2.getText().toString());
                 }
                 break;
             case R.id.tvBZ3:
-                if (!tvBZ3.getText().toString().equals("")){
-                    new AlertDialogEditText().showDialog1(this,tvBZ3.getText().toString());
+                if (!tvBZ3.getText().toString().equals("")) {
+                    new AlertDialogEditText().showDialog1(this, tvBZ3.getText().toString());
                 }
                 break;
             case R.id.tvBZ4:
-                if (!tvBZ4.getText().toString().equals("")){
-                    new AlertDialogEditText().showDialog1(this,tvBZ4.getText().toString());
+                if (!tvBZ4.getText().toString().equals("")) {
+                    new AlertDialogEditText().showDialog1(this, tvBZ4.getText().toString());
                 }
                 break;
             case R.id.tvBZ5:
-                if (!tvBZ5.getText().toString().equals("")){
-                    new AlertDialogEditText().showDialog1(this,tvBZ5.getText().toString());
+                if (!tvBZ5.getText().toString().equals("")) {
+                    new AlertDialogEditText().showDialog1(this, tvBZ5.getText().toString());
                 }
                 break;
             case R.id.btnHistory:
@@ -299,8 +304,8 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 DBHandler dbA = new DBHandler();
-                                res = dbA.OAQingJiaMyDetail(url);
-                                if (res.equals("获取数据失败") || res.equals("")) {
+                                downloadData = dbA.OAQingJiaMyDetail(url);
+                                if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                     handler.sendEmptyMessage(TAG_TWO);
                                 } else {
                                     handler.sendEmptyMessage(TAG_NINE);
@@ -317,8 +322,8 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMyDetail(url);
-                                        if (res.equals("获取数据失败") || res.equals("")) {
+                                        downloadData = dbA.OAQingJiaMyDetail(url);
+                                        if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
                                         } else {
                                             handler.sendEmptyMessage(TAG_NINE);
@@ -376,6 +381,11 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                     etName4.setText(bean.getMainform().get(0).getMingcheng4());
                     etName5.setText(bean.getMainform().get(0).getMingcheng5());
                     xiangguanfujian = bean.getMainform().get(0).getXgfj();
+                    if (xiangguanfujian.equals("")) {
+                        llData.setVisibility(View.GONE);
+                    } else {
+                        tvData.setText(xiangguanfujian);
+                    }
                     runID = bean.getMainform().get(0).getRunId();
                     String iszc = bean.getMainform().get(0).getIszc();
                     String goodsType = bean.getMainform().get(0).getGoodsType();
@@ -424,6 +434,7 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                     String cgyj = bean.getMainform().get(0).getCgfgldyj();
                     String cwzjyj = bean.getMainform().get(0).getCwzjyj();
                     String zjl = bean.getMainform().get(0).getZjlyj();
+                    String cbfgldyj = bean.getMainform().get(0).getCbfgldyj();
 
 
                     etClass.setText(department);
@@ -443,8 +454,8 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                     if (!fgfzr.equals("")) {
                         tvLeader2.setText(getJSONData(fgfzr));
                     }
-                    if (!cgyj.equals("")) {
-                        tvLeader3.setText(getJSONData(cgyj));
+                    if (!cbfgldyj.equals("")) {
+                        tvLeader3.setText(getJSONData(cbfgldyj));
                     }
                     if (!cwzjyj.equals("")) {
                         tvLeader4.setText(getJSONData(cwzjyj));
@@ -460,7 +471,7 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                     break;
                 case TAG_NINE:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(res, File.class);
+                    File file = gson2.fromJson(downloadData, File.class);
                     String filePath = file.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);

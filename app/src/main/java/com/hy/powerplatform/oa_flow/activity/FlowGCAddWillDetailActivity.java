@@ -140,6 +140,8 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.llData)
+    LinearLayout llData;
 
     private String name, taskId, res, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, csbmyj, jcbmyj, zjl = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
@@ -176,6 +178,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
     String btnTTag = "N";
     String runID = "";
     String piId = "";
+    String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -183,7 +186,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
         name = intent.getStringExtra("activityName").trim();
@@ -206,7 +209,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 //String name =URLDecoder.decode(待转值,"utf-8");
-                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId+"&piId="+piId;
+                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId + "&piId=" + piId;
                 DBHandler dbA = new DBHandler();
                 res = dbA.OAQingJiaWillDoDex(url);
                 if (res.equals("获取数据失败") || res.equals("")) {
@@ -542,8 +545,8 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 DBHandler dbA = new DBHandler();
-                                res = dbA.OAQingJiaMyDetail(url);
-                                if (res.equals("获取数据失败") || res.equals("")) {
+                                downloadData = dbA.OAQingJiaMyDetail(url);
+                                if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                     handler.sendEmptyMessage(TAG_TWO);
                                 } else {
                                     handler.sendEmptyMessage(TAG_NINE);
@@ -560,8 +563,8 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMyDetail(url);
-                                        if (res.equals("获取数据失败") || res.equals("")) {
+                                        downloadData = dbA.OAQingJiaMyDetail(url);
+                                        if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
                                         } else {
                                             handler.sendEmptyMessage(TAG_NINE);
@@ -795,74 +798,74 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (!rb6.isChecked()) {
-                    if (resultList.size()>=6){
+                    if (resultList.size() >= 6) {
                         resultList.remove(5);
                     }
                 }
                 if (!rb5.isChecked()) {
-                    if (resultList.size()>=5){
+                    if (resultList.size() >= 5) {
                         resultList.remove(4);
                     }
                 }
                 if (!rb4.isChecked()) {
-                    if (resultList.size()>=4){
+                    if (resultList.size() >= 4) {
                         resultList.remove(3);
                     }
                 }
                 if (!rb3.isChecked()) {
-                    if (resultList.size()>=3){
+                    if (resultList.size() >= 3) {
                         resultList.remove(2);
                     }
                 }
                 if (!rb2.isChecked()) {
-                    if (resultList.size()>=2){
+                    if (resultList.size() >= 2) {
                         resultList.remove(1);
                     }
                 }
                 if (!rb1.isChecked()) {
-                    if (resultList.size()>=1){
+                    if (resultList.size() >= 1) {
                         resultList.remove(0);
                     }
                 }
 
                 if (!cb6.isChecked()) {
-                    if (bigResultList.size()>=6){
+                    if (bigResultList.size() >= 6) {
                         bigResultList.remove(5);
                     }
                 }
                 if (!cb5.isChecked()) {
-                    if (bigResultList.size()>=5){
+                    if (bigResultList.size() >= 5) {
                         bigResultList.remove(4);
                     }
                 }
                 if (!cb4.isChecked()) {
-                    if (bigResultList.size()>=4){
+                    if (bigResultList.size() >= 4) {
                         bigResultList.remove(3);
                     }
                 }
                 if (!cb3.isChecked()) {
-                    if (bigResultList.size()>=3){
+                    if (bigResultList.size() >= 3) {
                         bigResultList.remove(2);
                     }
                 }
                 if (!cb2.isChecked()) {
-                    if (bigResultList.size()>=2){
+                    if (bigResultList.size() >= 2) {
                         bigResultList.remove(1);
                     }
                 }
                 if (!cb1.isChecked()) {
-                    if (bigResultList.size()>=1){
+                    if (bigResultList.size() >= 1) {
                         bigResultList.remove(0);
                     }
                 }
 
 
                 String userCodes = "";
-                if (resultList.size()==0){
+                if (resultList.size() == 0) {
                     userCodes = resultList1.toString();
                     userCodes = userCodes.toString().replace("[", "");
                     userCodes = userCodes.toString().replace("]", "");
-                }else {
+                } else {
                     userCodes = resultList.toString();
                     userCodes = userCodes.toString().replace("[", "");
                     userCodes = userCodes.toString().replace("]", "");
@@ -922,10 +925,10 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowGCAddWillDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowGCAddWillDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
                     break;
@@ -945,8 +948,12 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     jcbmyj = bean.getMainform().get(0).getJcbmyj();
                     zjl = bean.getMainform().get(0).getZjlyj();
                     xiangguanfujian = bean.getMainform().get(0).getXgfj();
+                    if (xiangguanfujian.equals("")) {
+                        llData.setVisibility(View.GONE);
+                    } else {
+                        tvData1.setText(xiangguanfujian);
+                    }
                     runID = bean.getMainform().get(0).getRunId();
-                    tvData1.setText(xiangguanfujian);
                     mainId = String.valueOf(bean.getMainform().get(0).getMainId());
                     for (int i = 0; i < bean.getTrans().size(); i++) {
                         beanList.add(bean.getTrans().get(i));
@@ -1013,8 +1020,8 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                             tvLeader6.setVisibility(View.VISIBLE);
                             etLeader6.setVisibility(View.GONE);
                         }
-                        if (xqreout.equals("1")&&xqldreout.equals("1")&&jsreout.equals("1")
-                                &&jsldreout.equals("1")&&csreout.equals("1")&&jcreout.equals("1")&&zjlreout.equals("1")){
+                        if (xqreout.equals("1") && xqldreout.equals("1") && jsreout.equals("1")
+                                && jsldreout.equals("1") && csreout.equals("1") && jcreout.equals("1") && zjlreout.equals("1")) {
                             Toast.makeText(FlowGCAddWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
@@ -1030,10 +1037,10 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     if (zjl != null && !zjl.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(zjl);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word6 = word6+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word6 = word6 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1041,7 +1048,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader6.getVisibility() == View.VISIBLE) {
                             tvLeader6.setText(word6);
-                        }else {
+                        } else {
                             etLeader6.setHint(word6);
                         }
                     }
@@ -1050,10 +1057,10 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     if (jcbmyj != null && !jcbmyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(jcbmyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word5 = word5+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word5 = word5 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1061,7 +1068,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader5.getVisibility() == View.VISIBLE) {
                             tvLeader5.setText(word5);
-                        }else {
+                        } else {
                             etLeader5.setHint(word5);
                         }
                     }
@@ -1070,10 +1077,10 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     if (csbmyj != null && !csbmyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(csbmyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word4 = word4+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word4 = word4 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1081,7 +1088,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader4.getVisibility() == View.VISIBLE) {
                             tvLeader4.setText(word4);
-                        }else {
+                        } else {
                             etLeader4.setHint(word4);
                         }
                     }
@@ -1090,10 +1097,10 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     if (jsbmldyj != null && !jsbmldyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(jsbmldyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word3 = word3+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word3 = word3 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1101,7 +1108,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader3.getVisibility() == View.VISIBLE) {
                             tvLeader3.setText(word3);
-                        }else {
+                        } else {
                             etLeader3.setHint(word3);
                         }
                     }
@@ -1110,10 +1117,10 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     if (jsbmyj != null && !jsbmyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(jsbmyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word2 = word2+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word2 = word2 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1121,7 +1128,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader2.getVisibility() == View.VISIBLE) {
                             tvLeader2.setText(word2);
-                        }else {
+                        } else {
                             etLeader2.setHint(word2);
                         }
                     }
@@ -1130,10 +1137,10 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     if (xqbmldyj != null && !xqbmldyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(xqbmldyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word1 = word1+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word1 = word1 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1141,7 +1148,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader1.getVisibility() == View.VISIBLE) {
                             tvLeader1.setText(word1);
-                        }else {
+                        } else {
                             etLeader1.setHint(word1);
                         }
                     }
@@ -1150,10 +1157,10 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     if (xqbmyj != null && !xqbmyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(xqbmyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word = word+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word = word + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1161,11 +1168,11 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader.getVisibility() == View.VISIBLE) {
                             tvLeader.setText(word);
-                        }else {
+                        } else {
                             etLeader.setHint(word);
                         }
                     }
-                    if (bean.isRevoke()){
+                    if (bean.isRevoke()) {
                         Toast.makeText(FlowGCAddWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
                     }
                     break;
@@ -1215,7 +1222,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                     break;
                 case TAG_NINE:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(res, File.class);
+                    File file = gson2.fromJson(downloadData, File.class);
                     String filePath = file.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);

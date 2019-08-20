@@ -124,30 +124,6 @@
                 </RadioGroup>
             </LinearLayout>
 
-            <LinearLayout
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/oaTextView"
-                    android:text="附件:"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/shouye" />
-
-                <TextView
-                    android:id="@+id/tvData"
-                    style="@style/textWrite"
-                    android:hint="点击选择附件" />
-            </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -541,6 +517,30 @@
                     android:hint="请填其他产品"/>
             </LinearLayout>
             <View style="@style/line"></View>
+
+            <LinearLayout
+                android:id="@+id/llData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="附件:"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvData"
+                    style="@style/textWrite"
+                    android:hint="点击选择附件" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

@@ -38,7 +38,6 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -100,6 +99,7 @@ public class FragmentLeaveData extends Fragment {
     private CustomDatePickerDay customDatePicker1;
     List<String> list = new ArrayList<String>();
     List<String> listAP = new ArrayList<String>();
+    List<String> listPM = new ArrayList<String>();
     ArrayAdapter<String> adapter;
     ArrayAdapter<String> adapterAP;
     List<String> namelist = new ArrayList<>();
@@ -128,9 +128,10 @@ public class FragmentLeaveData extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         view = inflater.inflate(R.layout.fragment_data, container, false);
         unbinder = ButterKnife.bind(this, view);
-        initDatePicker();
         listAP.add("上午");
         listAP.add("下午");
+        listPM.add("下午");
+        listPM.add("上午");
         list.add("事假");
         list.add("病假");
         list.add("产假");
@@ -176,7 +177,7 @@ public class FragmentLeaveData extends Fragment {
             }
         });
 
-        adapterAP = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listAP);
+        adapterAP = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listPM);
         adapterAP.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPM.setAdapter(adapterAP);
 
@@ -199,7 +200,7 @@ public class FragmentLeaveData extends Fragment {
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
+        initDatePicker();
         tvPerson.setText(new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", ""));
         userId = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
         return view;
@@ -224,10 +225,11 @@ public class FragmentLeaveData extends Fragment {
         String now = sdf.format(new Date());
         tvTime.setText(now.split(" ")[0]);
         tvStartTime.setText(now.split(" ")[0]);
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1); //向前走一天
-        tvEndTime.setText(sdf.format(calendar.getTime()).split(" ")[0]);
-        etDays.setText("1");
+        tvEndTime.setText(now.split(" ")[0]);
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.DAY_OF_MONTH, 1); //向前走一天
+//        tvEndTime.setText(sdf.format(calendar.getTime()).split(" ")[0]);
+        etDays.setText("0");
 
         customDatePicker1 = new CustomDatePickerDay(getActivity(), new CustomDatePickerDay.ResultHandler() {
             @Override
@@ -265,7 +267,7 @@ public class FragmentLeaveData extends Fragment {
                         dt2 = df.parse(time.split(" ")[0]);
                         if (dt1.getTime() > dt2.getTime()) {
                             Toast.makeText(getActivity(), "请选择正确的时间", Toast.LENGTH_SHORT).show();
-                        } else if (dt1.getTime() < dt2.getTime()) {
+                        } else if (dt1.getTime() <= dt2.getTime()) {
                             tvEndTime.setText(time.split(" ")[0]);
                             daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
                                     , tvEndTime.getText().toString(), "yyyy-MM-dd");

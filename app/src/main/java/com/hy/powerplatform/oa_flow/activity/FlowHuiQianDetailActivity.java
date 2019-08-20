@@ -123,11 +123,14 @@ public class FlowHuiQianDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.llData)
+    LinearLayout llData;
     private String res;
 
     String xiangguanfujian;
     String flowMessage = "";
     String runID = "";
+    String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -136,7 +139,7 @@ public class FlowHuiQianDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         header.setTvRight("追回");
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         btnT.setVisibility(View.GONE);
         tvText.setVisibility(View.GONE);
@@ -176,7 +179,7 @@ public class FlowHuiQianDetailActivity extends BaseActivity {
             public void success(Object o) {
                 Message message = new Message();
                 message.what = Constant.TAG_FIVE;
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putString("msg", o.toString());
                 message.setData(bundle);
                 handler.sendMessage(message);
@@ -192,16 +195,16 @@ public class FlowHuiQianDetailActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.tvData,R.id.btnHistory})
+    @OnClick({R.id.tvData, R.id.btnHistory})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case 111:
                 Gson gsonF = new Gson();
                 FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                for (int i = 0;i<beanF.getData().size();i++){
+                for (int i = 0; i < beanF.getData().size(); i++) {
                     flowList.add(beanF.getData().get(i));
                 }
-                adapter = new FlowMessageAdapter(FlowHuiQianDetailActivity.this,flowList);
+                adapter = new FlowMessageAdapter(FlowHuiQianDetailActivity.this, flowList);
                 recyclerView.setAdapter(adapter);
                 ProgressDialogUtil.stopLoad();
                 break;
@@ -216,8 +219,8 @@ public class FlowHuiQianDetailActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 DBHandler dbA = new DBHandler();
-                                res = dbA.OAQingJiaMyDetail(url);
-                                if (res.equals("获取数据失败") || res.equals("")) {
+                                downloadData = dbA.OAQingJiaMyDetail(url);
+                                if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                     handler.sendEmptyMessage(TAG_TWO);
                                 } else {
                                     handler.sendEmptyMessage(TAG_NINE);
@@ -234,8 +237,8 @@ public class FlowHuiQianDetailActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMyDetail(url);
-                                        if (res.equals("获取数据失败") || res.equals("")) {
+                                        downloadData = dbA.OAQingJiaMyDetail(url);
+                                        if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
                                         } else {
                                             handler.sendEmptyMessage(TAG_NINE);
@@ -273,10 +276,10 @@ public class FlowHuiQianDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowHuiQianDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowHuiQianDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
                     break;
@@ -289,6 +292,11 @@ public class FlowHuiQianDetailActivity extends BaseActivity {
                     final String wxbm = bean.getMainform().get(0).getZjlyj();
                     final String wxry = bean.getMainform().get(0).getDszyj();
                     xiangguanfujian = bean.getMainform().get(0).getXgfj();
+                    if (xiangguanfujian.equals("")) {
+                        llData.setVisibility(View.GONE);
+                    } else {
+                        tvData.setText(xiangguanfujian);
+                    }
                     runID = bean.getMainform().get(0).getRunId();
                     tvPerson.setText(person);
                     tvShiXiang.setText(data);
@@ -310,7 +318,7 @@ public class FlowHuiQianDetailActivity extends BaseActivity {
                     break;
                 case TAG_NINE:
                     Gson gson1 = new Gson();
-                    File file = gson1.fromJson(res, File.class);
+                    File file = gson1.fromJson(downloadData, File.class);
                     String filePath = file.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);

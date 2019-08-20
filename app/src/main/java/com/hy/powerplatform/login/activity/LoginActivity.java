@@ -287,6 +287,9 @@ public class LoginActivity extends BaseActivity implements LoginView {
                                 Log.i("XXX", e.toString());
                             } catch (IOException e) {
                                 Log.i("XXX", e.toString());
+                                Message message = new Message();
+                                message.what = Constant.TAG_ONE;
+                                handler1.sendMessage(message);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             } finally {
@@ -349,6 +352,15 @@ public class LoginActivity extends BaseActivity implements LoginView {
             intent = new Intent(LoginActivity.this, SecondActivity.class);
             startActivity(intent);
             finish();
+        }
+    };
+
+    private Handler handler1 = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            hideLoading();
+            Toast.makeText(LoginActivity.this, "账号异常", Toast.LENGTH_SHORT).show();
         }
     };
 

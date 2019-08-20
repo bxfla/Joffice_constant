@@ -207,6 +207,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
     String runID = "";
     String piId = "";
     int daynumber;
+    String downloadData = "";
     FlowMessageAdapter adapterM;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 

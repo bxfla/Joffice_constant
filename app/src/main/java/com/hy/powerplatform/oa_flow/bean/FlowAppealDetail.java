@@ -68,7 +68,25 @@ public class FlowAppealDetail implements Serializable {
         private String jbbmyj;
         private String XiangGuanFuJian;
         private String bmfzryj;
+        private String dszyj;
+        private String sqbm;
         private String LiuShuiHao;
+
+        public String getSqbm() {
+            return sqbm;
+        }
+
+        public void setSqbm(String sqbm) {
+            this.sqbm = sqbm;
+        }
+
+        public String getDszyj() {
+            return dszyj;
+        }
+
+        public void setDszyj(String dszyj) {
+            this.dszyj = dszyj;
+        }
 
         public String getQingShiNeiRong() {
             return QingShiNeiRong;

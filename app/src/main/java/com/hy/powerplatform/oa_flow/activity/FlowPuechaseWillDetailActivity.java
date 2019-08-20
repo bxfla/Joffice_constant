@@ -251,6 +251,8 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     TextView tvBZ4;
     @BindView(R.id.tvBZ5)
     TextView tvBZ5;
+    @BindView(R.id.llData)
+    LinearLayout llData;
     private String name, taskId, res, bmfzryj, jcbmyj, zcgkbmyj, fgldyj, cgfgyj, cwzjyj, zjl = "";
     private String mainId, signaName, destName = "", destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -296,6 +298,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     String btnTTag = "N";
     String runID = "";
     String piId = "";
+    String downloadData = "";
     double AllMoney1 = 0.0, AllMoney2 = 0.0, AllMoney3 = 0.0, AllMoney4 = 0.0, AllMoney5 = 0.0;
     int numS1 = 0, numS2 = 0, numS3 = 0, numS4 = 0, numS5 = 0;
     double moneyS1 = 0.0, moneyS2 = 0.0, moneyS3 = 0.0, moneyS4 = 0.0, moneyS5 = 0.0;
@@ -1092,28 +1095,28 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvBZ1:
-                if (!tvBZ1.getText().toString().equals("")){
-                    new AlertDialogEditText().showDialog1(this,tvBZ1.getText().toString());
+                if (!tvBZ1.getText().toString().equals("")) {
+                    new AlertDialogEditText().showDialog1(this, tvBZ1.getText().toString());
                 }
                 break;
             case R.id.tvBZ2:
-                if (!tvBZ2.getText().toString().equals("")){
-                    new AlertDialogEditText().showDialog1(this,tvBZ2.getText().toString());
+                if (!tvBZ2.getText().toString().equals("")) {
+                    new AlertDialogEditText().showDialog1(this, tvBZ2.getText().toString());
                 }
                 break;
             case R.id.tvBZ3:
-                if (!tvBZ3.getText().toString().equals("")){
-                    new AlertDialogEditText().showDialog1(this,tvBZ3.getText().toString());
+                if (!tvBZ3.getText().toString().equals("")) {
+                    new AlertDialogEditText().showDialog1(this, tvBZ3.getText().toString());
                 }
                 break;
             case R.id.tvBZ4:
-                if (!tvBZ4.getText().toString().equals("")){
-                    new AlertDialogEditText().showDialog1(this,tvBZ4.getText().toString());
+                if (!tvBZ4.getText().toString().equals("")) {
+                    new AlertDialogEditText().showDialog1(this, tvBZ4.getText().toString());
                 }
                 break;
             case R.id.tvBZ5:
-                if (!tvBZ5.getText().toString().equals("")){
-                    new AlertDialogEditText().showDialog1(this,tvBZ5.getText().toString());
+                if (!tvBZ5.getText().toString().equals("")) {
+                    new AlertDialogEditText().showDialog1(this, tvBZ5.getText().toString());
                 }
                 break;
             case R.id.btnHistory:
@@ -1213,8 +1216,8 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 DBHandler dbA = new DBHandler();
-                                res = dbA.OAQingJiaMyDetail(url);
-                                if (res.equals("获取数据失败") || res.equals("")) {
+                                downloadData = dbA.OAQingJiaMyDetail(url);
+                                if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                     handler.sendEmptyMessage(TAG_TWO);
                                 } else {
                                     handler.sendEmptyMessage(TAG_NINE);
@@ -1231,8 +1234,8 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMyDetail(url);
-                                        if (res.equals("获取数据失败") || res.equals("")) {
+                                        downloadData = dbA.OAQingJiaMyDetail(url);
+                                        if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
                                         } else {
                                             handler.sendEmptyMessage(TAG_NINE);
@@ -1613,8 +1616,8 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             bmfzryj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
                             hejidj, allMoney, use, cgfgyj, other, jcbmyj
                             , danwei1, danwei2, danwei3, danwei4, danwei5, tvzc.getText().toString(), tvtype.getText().toString()
-                            ,tvBZ1.getText().toString(),tvBZ2.getText().toString(),tvBZ3.getText().toString()
-                            ,tvBZ4.getText().toString(),tvBZ5.getText().toString());
+                            , tvBZ1.getText().toString(), tvBZ2.getText().toString(), tvBZ3.getText().toString()
+                            , tvBZ4.getText().toString(), tvBZ5.getText().toString());
                 } else {
                     upData = dbA.OAPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                             , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
@@ -1622,8 +1625,8 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             bmfzryj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
                             hejidj, allMoney, use, cgfgyj, other, jcbmyj, danwei1, danwei2, danwei3, danwei4, danwei5
                             , tvzc.getText().toString(), tvtype.getText().toString()
-                            ,tvBZ1.getText().toString(),tvBZ2.getText().toString(),tvBZ3.getText().toString()
-                            ,tvBZ4.getText().toString(),tvBZ5.getText().toString());
+                            , tvBZ1.getText().toString(), tvBZ2.getText().toString(), tvBZ3.getText().toString()
+                            , tvBZ4.getText().toString(), tvBZ5.getText().toString());
                 }
 
                 if (upData.equals("")) {
@@ -1663,6 +1666,11 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     tvzc.setText(iszc);
                     tvtype.setText(goodsType);
                     xiangguanfujian = bean.getMainform().get(0).getXgfj();
+                    if (xiangguanfujian.equals("")) {
+                        llData.setVisibility(View.GONE);
+                    } else {
+                        tvData.setText(xiangguanfujian);
+                    }
                     runID = bean.getMainform().get(0).getRunId();
                     tvData.setText(xiangguanfujian);
                     tvAllNum.setText(bean.getMainform().get(0).getHejisl());
@@ -2074,7 +2082,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     break;
                 case TAG_NINE:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(res, File.class);
+                    File file = gson2.fromJson(downloadData, File.class);
                     String filePath = file.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);

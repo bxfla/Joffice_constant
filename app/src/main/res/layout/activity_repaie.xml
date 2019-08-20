@@ -52,9 +52,9 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="地点: *"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="地点: *" />
 
                 <View
                     android:layout_width="1dp"
@@ -100,9 +100,9 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="具体事件: *"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="具体事件: *" />
 
                 <View
                     android:layout_width="1dp"
@@ -115,18 +115,19 @@
                     style="@style/textWrite" />
             </LinearLayout>
 
+            <View style="@style/line"></View>
 
             <LinearLayout
-                android:visibility="gone"
+                android:id="@+id/llData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="附件: *"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="附件: *" />
 
                 <View
                     android:layout_width="1dp"
@@ -139,12 +140,11 @@
                     style="@style/textWrite"
                     android:hint="请选择附件" />
             </LinearLayout>
-            <View style="@style/line"></View>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@color/shouye"/>
+                android:background="@color/shouye" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -335,9 +335,9 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="报修部门: *"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="报修部门: *" />
 
                 <View
                     android:layout_width="1dp"
@@ -366,9 +366,9 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="经办部门: *"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="经办部门: *" />
 
                 <View
                     android:layout_width="1dp"
@@ -391,16 +391,16 @@
             <View style="@style/line"></View>
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="维修人: *"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="维修人: *" />
 
                 <View
                     android:layout_width="1dp"
@@ -428,9 +428,9 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="维修概述: *"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="维修概述: *" />
 
                 <View
                     android:layout_width="1dp"
@@ -459,9 +459,9 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="反馈意见: *"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="反馈意见: *" />
 
                 <View
                     android:layout_width="1dp"
@@ -472,20 +472,20 @@
                 <TextView
                     android:id="@+id/tvYJ"
                     style="@style/textWrite"
-                    android:hint="请填写反馈意见"/>
+                    android:hint="请填写反馈意见" />
 
                 <EditText
                     android:id="@+id/etYJ"
                     style="@style/textWrite"
-                    android:visibility="gone"
-                    android:hint="请填写反馈意见"/>
+                    android:hint="请填写反馈意见"
+                    android:visibility="gone" />
             </LinearLayout>
 
-            <View style="@style/line"
+            <View
+                style="@style/line"
                 android:layout_marginBottom="45dp"></View>
 
-            <include
-                layout="@layout/get_person"/>
+            <include layout="@layout/get_person" />
 
             <Button
                 android:id="@+id/btnUp"
@@ -496,31 +496,34 @@
                 android:gravity="center"
                 android:text="提交"
                 android:textColor="@color/whith" />
+
             <Button
                 android:id="@+id/btnHistory"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:layout_marginBottom="45dp"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="45dp"
-                android:layout_marginBottom="45dp"
                 android:background="@drawable/linearlayout_colore_radius"
-                android:text="流程审批信息"
                 android:gravity="center"
-                android:textColor="@color/whith"/>
+                android:text="流程审批信息"
+                android:textColor="@color/whith" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="60dp" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
                 android:orientation="vertical">
+
                 <android.support.v7.widget.RecyclerView
-                    android:visibility="gone"
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="600dp">
-                </android.support.v7.widget.RecyclerView>
+                    android:layout_height="600dp"
+                    android:visibility="gone"></android.support.v7.widget.RecyclerView>
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

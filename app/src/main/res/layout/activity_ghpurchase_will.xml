@@ -511,11 +511,12 @@
                     android:hint="请填写采购用途" />
             </LinearLayout>
 
+            <View style="@style/line"></View>
             <LinearLayout
+                android:id="@+id/llData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone">
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/oaTextView"

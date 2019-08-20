@@ -10,7 +10,7 @@
         android:id="@+id/header"
         style="@style/Heander"
         app:header_is_right_tv_visiable="true"
-        app:header_title="工程量增加审批详情">
+        app:header_title="工程量审批详情">
     </com.hy.powerplatform.my_utils.myViews.Header>
 
     <ScrollView
@@ -94,8 +94,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
+            <View style="@style/line"></View>
             <LinearLayout
-                android:visibility="gone"
+                android:id="@+id/llData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

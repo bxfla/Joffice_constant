@@ -715,7 +715,7 @@
 
                 <EditText
                     style="@style/textWrite"
-                    android:hint="财务领导意见"
+                    android:hint="采购领导意见"
                     android:visibility="gone"/>
 
                 <TextView

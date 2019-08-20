@@ -92,7 +92,7 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="准驾车型*:"/>
+                    android:text="准驾车型:*"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -229,7 +229,7 @@
                 <TextView
                     android:id="@+id/tvLeader"
                     style="@style/oaEditText"
-                    android:hint="运营管理部意见">
+                    android:hint="营运管理部意见">
                 </TextView>
             </LinearLayout>
             <View style="@style/line"></View>

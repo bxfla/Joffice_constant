@@ -114,28 +114,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <TextView
-                    style="@style/oaTextView"
-                    android:text="附件:" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/shouye" />
-
-                <TextView
-                    android:id="@+id/tvData"
-                    style="@style/oaEditText"
-                    android:hint="点击选择附件" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -230,7 +208,28 @@
             </LinearLayout>
 
             <View style="@style/line"></View>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/llData"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
 
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="附件:" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvData"
+                    style="@style/oaEditText"
+                    android:hint="点击选择附件" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

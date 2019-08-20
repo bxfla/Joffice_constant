@@ -149,6 +149,8 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.llData)
+    LinearLayout llData;
     private String name, taskId, res, bxbmyj, wxbmyj, wxryyj, wxqkyj, sbsyryj, wxfkyj = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -157,6 +159,8 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
+    String comment1 = "";
+    String comment2 = "";
     String bxbmreout, wxbmreout, wxryreout, wxqkreout, sbsyrreout, wxfkreout, flowAssignld, serialNumber = "";
 
     String[] bigNametemp = null;
@@ -185,6 +189,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
     String flowMessage = "";
     String runID = "";
     String piId = "";
+    String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -193,7 +198,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
         initDatePicker();
@@ -201,7 +206,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
         taskId = intent.getStringExtra("taskId");
         tag1 = intent.getStringExtra("tag");
         piId = intent.getStringExtra("piId");
-        getData(name, taskId,piId);
+        getData(name, taskId, piId);
         btnUp.setVisibility(View.VISIBLE);
     }
 
@@ -239,7 +244,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 //String name =URLDecoder.decode(待转值,"utf-8");
-                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId+"&piId="+piId;
+                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId + "&piId=" + piId;
                 DBHandler dbA = new DBHandler();
                 res = dbA.OAQingJiaWillDoDex(url);
                 if (res.equals("获取数据失败") || res.equals("")) {
@@ -625,7 +630,6 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                 } else {
                     Toast.makeText(FlowEMainatinWillDetailActivity.this, "审批人为空", Toast.LENGTH_SHORT).show();
                 }
-                btnT.setEnabled(false);
                 break;
             case R.id.tvData:
                 List<String> dataList = new ArrayList<>();
@@ -638,8 +642,8 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 DBHandler dbA = new DBHandler();
-                                res = dbA.OAQingJiaMyDetail(url);
-                                if (res.equals("获取数据失败") || res.equals("")) {
+                                downloadData = dbA.OAQingJiaMyDetail(url);
+                                if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                     handler.sendEmptyMessage(TAG_TWO);
                                 } else {
                                     handler.sendEmptyMessage(TAG_NINE);
@@ -656,8 +660,8 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMyDetail(url);
-                                        if (res.equals("获取数据失败") || res.equals("")) {
+                                        downloadData = dbA.OAQingJiaMyDetail(url);
+                                        if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
                                         } else {
                                             handler.sendEmptyMessage(TAG_NINE);
@@ -733,8 +737,8 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (etLeader2.getVisibility() == View.VISIBLE) {
-                    comment = "";
-                    comment = etLeader2.getText().toString();
+                    comment1 = "";
+                    comment1 = etLeader2.getText().toString();
                     wxryyj = etLeader2.getText().toString();
 //            try {
 //                jsonObject.put("ui", userCode);
@@ -774,8 +778,8 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
 //                    wxqkyj = etLeader3.getText().toString();
                 }
                 if (etLeader4.getVisibility() == View.VISIBLE) {
-                    comment = "";
-                    comment = etLeader4.getText().toString();
+                    comment2 = "";
+                    comment2 = etLeader4.getText().toString();
                     sbsyryj = etLeader4.getText().toString();
                 }
                 if (etLeader5.getVisibility() == View.VISIBLE) {
@@ -797,6 +801,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                         wxfkyj = wxfkyj.toString().replace("],[", ",");
                     }
                 }
+
                 if (comment.equals("")) {
                     if (!bxbmreout.equals("2") && !wxbmreout.equals("2") && !wxryreout.equals("2") && !wxqkreout.equals("2")
                             && !sbsyrreout.equals("2") && !wxfkreout.equals("2")) {
@@ -810,7 +815,21 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                         Toast.makeText(this, "请签字", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    personSession();
+                    if (etLeader2.getVisibility() == View.VISIBLE) {
+                        if (comment1.equals("")) {
+                            Toast.makeText(this, "请签字", Toast.LENGTH_SHORT).show();
+                        } else {
+                            personSession();
+                        }
+                    } else if (etLeader4.getVisibility() == View.VISIBLE) {
+                        if (comment2.equals("")) {
+                            Toast.makeText(this, "请签字", Toast.LENGTH_SHORT).show();
+                        } else {
+                            personSession();
+                        }
+                    } else {
+                        personSession();
+                    }
                 }
                 break;
             case R.id.tvDate1:
@@ -864,95 +883,95 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                 }
 
                 if (!rb6.isChecked()) {
-                    if (resultList.size()>=6){
+                    if (resultList.size() >= 6) {
                         resultList.remove(5);
                     }
                 }
                 if (!rb5.isChecked()) {
-                    if (resultList.size()>=5){
+                    if (resultList.size() >= 5) {
                         resultList.remove(4);
                     }
                 }
                 if (!rb4.isChecked()) {
-                    if (resultList.size()>=4){
+                    if (resultList.size() >= 4) {
                         resultList.remove(3);
                     }
                 }
                 if (!rb3.isChecked()) {
-                    if (resultList.size()>=3){
+                    if (resultList.size() >= 3) {
                         resultList.remove(2);
                     }
                 }
                 if (!rb2.isChecked()) {
-                    if (resultList.size()>=2){
+                    if (resultList.size() >= 2) {
                         resultList.remove(1);
                     }
                 }
                 if (!rb1.isChecked()) {
-                    if (resultList.size()>=1){
+                    if (resultList.size() >= 1) {
                         resultList.remove(0);
                     }
                 }
 
                 if (!cb9.isChecked()) {
-                    if (bigResultList.size()>=9){
+                    if (bigResultList.size() >= 9) {
                         bigResultList.remove(8);
                     }
                 }
                 if (!cb8.isChecked()) {
-                    if (bigResultList.size()>=8){
+                    if (bigResultList.size() >= 8) {
                         bigResultList.remove(7);
                     }
                 }
                 if (!cb7.isChecked()) {
-                    if (bigResultList.size()>=7){
+                    if (bigResultList.size() >= 7) {
                         bigResultList.remove(6);
                     }
                 }
                 if (!cb6.isChecked()) {
-                    if (bigResultList.size()>=6){
+                    if (bigResultList.size() >= 6) {
                         bigResultList.remove(5);
                     }
                 }
                 if (!cb5.isChecked()) {
-                    if (bigResultList.size()>=5){
+                    if (bigResultList.size() >= 5) {
                         bigResultList.remove(4);
                     }
                 }
                 if (!cb4.isChecked()) {
-                    if (bigResultList.size()>=4){
+                    if (bigResultList.size() >= 4) {
                         bigResultList.remove(3);
                     }
                 }
                 if (!cb3.isChecked()) {
-                    if (bigResultList.size()>=3){
+                    if (bigResultList.size() >= 3) {
                         bigResultList.remove(2);
                     }
                 }
                 if (!cb2.isChecked()) {
-                    if (bigResultList.size()>=2){
+                    if (bigResultList.size() >= 2) {
                         bigResultList.remove(1);
                     }
                 }
                 if (!cb1.isChecked()) {
-                    if (bigResultList.size()>=1){
+                    if (bigResultList.size() >= 1) {
                         bigResultList.remove(0);
                     }
                 }
 
 
                 String userCodes = "";
-                if (resultList.size()==0){
+                if (resultList.size() == 0) {
                     userCodes = resultList1.toString();
                     userCodes = userCodes.toString().replace("[", "");
                     userCodes = userCodes.toString().replace("]", "");
-                }else {
+                } else {
                     userCodes = resultList.toString();
                     userCodes = userCodes.toString().replace("[", "");
                     userCodes = userCodes.toString().replace("]", "");
                 }
 
-                if (bigResultList.size()==0&&bigResultList1.size()!=0){
+                if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
 
                     String bigUserCodes = bigResultList1.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
@@ -972,7 +991,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                         flowAssignld = flowAssignld.replace(":|", "|");
                         flowAssignld = flowAssignld.replace(":", "");
                     }
-                }else {
+                } else {
                     String bigUserCodes = bigResultList.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
                     bigUserCodes = bigUserCodes.toString().replace("]", "");
@@ -997,10 +1016,10 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                 DBHandler dbA = new DBHandler();
                 if (wxryreout.equals("2") && !date.equals("")) {
                     upData = dbA.OAEMaintainder1(url, department, time, data, userCode, destName, taskId, flowAssignld, mainId,
-                            bxbmyj, wxbmyj, wxryyj, wxqkyj, sbsyryj, wxfkyj, serialNumber, comment, date);
+                            bxbmyj, wxbmyj, wxryyj, wxqkyj, sbsyryj, wxfkyj, serialNumber, comment, date, signaName);
                 } else {
                     upData = dbA.OAEMaintainder(url, department, time, data, userCode, destName, taskId, flowAssignld, mainId,
-                            bxbmyj, wxbmyj, wxryyj, wxqkyj, sbsyryj, wxfkyj, serialNumber, comment);
+                            bxbmyj, wxbmyj, wxryyj, wxqkyj, sbsyryj, wxfkyj, serialNumber, comment, signaName);
                 }
                 if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
@@ -1019,17 +1038,17 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapter = new FlowMessageAdapter(FlowEMainatinWillDetailActivity.this,flowList);
+                    adapter = new FlowMessageAdapter(FlowEMainatinWillDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_ONE:
                     Gson gson = new Gson();
                     FlowEMaintainWillDetail bean = gson.fromJson(res, FlowEMaintainWillDetail.class);
-                    if (bean.isRevoke()){
+                    if (bean.isRevoke()) {
                         Toast.makeText(FlowEMainatinWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
                     }
                     taskId = bean.getTaskId();
@@ -1037,6 +1056,11 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                     final String department = bean.getMainform().get(0).getBaoXiuBuMen();
                     final String data = bean.getMainform().get(0).getGuZhangQingKuang();
                     xiangguanfujian = bean.getMainform().get(0).getXiangGuanFuJian();
+                    if (xiangguanfujian.equals("")) {
+                        llData.setVisibility(View.GONE);
+                    } else {
+                        tvData.setText(xiangguanfujian);
+                    }
                     runID = bean.getMainform().get(0).getRunId();
                     tvTime.setText(date);
                     tvShiXiang.setText(data);
@@ -1114,8 +1138,8 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                         wxqkreout = jsonObject.getString("bjap");
                         sbsyrreout = jsonObject.getString("SheBeiShiYongRenQianZi");
                         wxfkreout = jsonObject.getString("bjpj");
-                        if (bxbmreout.equals("1")&&wxbmreout.equals("1")&&wxryreout.equals("1")
-                                &&wxqkreout.equals("1")&&sbsyrreout.equals("1")&&wxfkreout.equals("1")){
+                        if (bxbmreout.equals("1") && wxbmreout.equals("1") && wxryreout.equals("1")
+                                && wxqkreout.equals("1") && sbsyrreout.equals("1") && wxfkreout.equals("1")) {
                             Toast.makeText(FlowEMainatinWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
@@ -1126,10 +1150,10 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                     if (wxfkyj != null && !wxfkyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(wxfkyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word3 = word3+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word3 = word3 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1137,7 +1161,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader5.getVisibility() == View.VISIBLE) {
                             tvLeader5.setText(word3);
-                        }else {
+                        } else {
                             etLeader5.setHint(word3);
                         }
                     }
@@ -1160,10 +1184,10 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                     if (wxqkyj != null && !wxqkyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(wxqkyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word2 = word2+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\t" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word2 = word2 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\t";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1171,7 +1195,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader3.getVisibility() == View.VISIBLE) {
                             tvLeader3.setText(word2);
-                        }else {
+                        } else {
                             etLeader3.setHint(word2);
                         }
                     }
@@ -1198,10 +1222,10 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                     if (wxbmyj != null && !wxbmyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(wxbmyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word1 = word1+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\t" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word1 = word1 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\t";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1209,7 +1233,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader1.getVisibility() == View.VISIBLE) {
                             tvLeader1.setText(word1);
-                        }else {
+                        } else {
                             etLeader1.setHint(word1);
                         }
                     }
@@ -1217,10 +1241,10 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                     if (bxbmyj != null && !bxbmyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(bxbmyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word = word+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\t" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word = word + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\t";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1228,7 +1252,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader.getVisibility() == View.VISIBLE) {
                             tvLeader.setText(word);
-                        }else {
+                        } else {
                             etLeader.setHint(word);
                         }
                     }
@@ -1279,7 +1303,7 @@ public class FlowEMainatinWillDetailActivity extends BaseActivity {
                     break;
                 case TAG_NINE:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(res, File.class);
+                    File file = gson2.fromJson(downloadData, File.class);
                     String filePath = file.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);

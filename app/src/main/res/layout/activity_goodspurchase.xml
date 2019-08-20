@@ -591,9 +591,9 @@
                     android:hint="请填其他产品" />
             </LinearLayout>
 
-
+            <View style="@style/line"></View>
             <LinearLayout
-                android:visibility="gone"
+                android:id="@+id/llData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

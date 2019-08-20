@@ -31,7 +31,7 @@ public class AlertDialogEditText {
         //    设置我们自己定义的布局文件作为弹出框的Content
         builder.setView(view);
         final EditText username = (EditText) view.findViewById(R.id.editText);
-
+        username.setHint("最多输入50字");
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

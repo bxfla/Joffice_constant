@@ -162,6 +162,7 @@ public class FlowDriverAssessWillDetailActivity extends BaseActivity {
     String runID = "";
     String upData = "";
     String piId = "";
+    String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 

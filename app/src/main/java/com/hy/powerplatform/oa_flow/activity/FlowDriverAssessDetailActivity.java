@@ -128,6 +128,7 @@ public class FlowDriverAssessDetailActivity extends BaseActivity {
     String xiangguanfujian = "";
     String flowMessage = "";
     String runID = "";
+    String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 

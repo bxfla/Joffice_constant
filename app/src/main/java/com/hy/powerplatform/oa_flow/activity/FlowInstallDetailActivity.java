@@ -147,11 +147,16 @@ public class FlowInstallDetailActivity extends BaseActivity {
     TextView tvLeaderzjl;
     @BindView(R.id.etLeaderzjl)
     EditText etLeaderzjl;
+    @BindView(R.id.tvys)
+    TextView tvys;
+    @BindView(R.id.llData)
+    LinearLayout llData;
     private String res;
 
     String xiangguanfujian = "";
     String flowMessage = "";
     String runID = "";
+    String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -250,8 +255,8 @@ public class FlowInstallDetailActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 DBHandler dbA = new DBHandler();
-                                res = dbA.OAQingJiaMyDetail(url);
-                                if (res.equals("获取数据失败") || res.equals("")) {
+                                downloadData = dbA.OAQingJiaMyDetail(url);
+                                if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                     handler.sendEmptyMessage(TAG_TWO);
                                 } else {
                                     handler.sendEmptyMessage(TAG_NINE);
@@ -268,8 +273,8 @@ public class FlowInstallDetailActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMyDetail(url);
-                                        if (res.equals("获取数据失败") || res.equals("")) {
+                                        downloadData = dbA.OAQingJiaMyDetail(url);
+                                        if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
                                         } else {
                                             handler.sendEmptyMessage(TAG_NINE);
@@ -319,7 +324,9 @@ public class FlowInstallDetailActivity extends BaseActivity {
                     FlowInstallDetail bean = gson.fromJson(res, FlowInstallDetail.class);
                     final String department = bean.getMainform().get(0).getShenBanBuMen();
                     final String date = bean.getMainform().get(0).getShenBanShiJian();
+                    final String date1 = bean.getMainform().get(0).getBanJieShiJian();
                     final String data = bean.getMainform().get(0).getShenBanShiXiang();
+                    String ys = bean.getMainform().get(0).getYs();
                     String bmfzryj = bean.getMainform().get(0).getBmfzryj();
                     String fgldyj = bean.getMainform().get(0).getFgldyj();
                     String jbfgldyj = bean.getMainform().get(0).getJbfgldyj();
@@ -329,11 +336,18 @@ public class FlowInstallDetailActivity extends BaseActivity {
                     String bjpj = bean.getMainform().get(0).getBjpj();
                     String zjlyj = bean.getMainform().get(0).getZjlyj();
                     xiangguanfujian = bean.getMainform().get(0).getXiangguanfujian();
+                    if (xiangguanfujian.equals("")) {
+                        llData.setVisibility(View.GONE);
+                    } else {
+                        tvData.setText(xiangguanfujian);
+                    }
                     runID = bean.getMainform().get(0).getRunId();
                     tvData.setText(xiangguanfujian);
                     tvDepartment.setText(department);
                     tvDate.setText(date);
+                    tvDate1.setText(date1);
                     tvDataW.setText(data);
+                    tvys.setText(ys);
 
                     if (!bmfzryj.equals("")) {
                         tvLeader.setText(getJSONData(bmfzryj));
@@ -367,7 +381,7 @@ public class FlowInstallDetailActivity extends BaseActivity {
                     break;
                 case TAG_NINE:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(res, File.class);
+                    File file = gson2.fromJson(downloadData, File.class);
                     String filePath = file.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);

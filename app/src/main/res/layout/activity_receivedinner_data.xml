@@ -190,8 +190,10 @@
                     android:hint="请填写金额（大写）"
                     style="@style/oaEditText"/>
             </LinearLayout>
+
+            <View style="@style/line"></View>
             <LinearLayout
-                android:visibility="gone"
+                android:id="@+id/llData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

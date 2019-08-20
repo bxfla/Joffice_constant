@@ -259,28 +259,6 @@
                     android:hint="请填写处理状况" />
             </LinearLayout>
 
-
-            <LinearLayout
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/oaTextView"
-                    android:text="附件:" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/shouye" />
-
-                <TextView
-                    android:id="@+id/tvData"
-                    style="@style/oaEditText"
-                    android:hint="点击选择附件" />
-            </LinearLayout>
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -379,7 +357,27 @@
             </LinearLayout>
 
             <View style="@style/line"></View>
+            <LinearLayout
+                android:id="@+id/llData"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
 
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="附件:" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvData"
+                    style="@style/oaEditText"
+                    android:hint="点击选择附件" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

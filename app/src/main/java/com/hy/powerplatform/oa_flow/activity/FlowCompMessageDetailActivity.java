@@ -139,10 +139,13 @@ public class FlowCompMessageDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.llData)
+    LinearLayout llData;
     private String res;
     String xiangguanfujian = "";
     String runID = "";
     String flowMessage = "";
+    String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -191,7 +194,7 @@ public class FlowCompMessageDetailActivity extends BaseActivity {
             public void success(Object o) {
                 Message message = new Message();
                 message.what = TAG_FIVE;
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putString("msg", o.toString());
                 message.setData(bundle);
                 handler.sendMessage(message);
@@ -240,8 +243,8 @@ public class FlowCompMessageDetailActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 DBHandler dbA = new DBHandler();
-                                res = dbA.OAQingJiaMyDetail(url);
-                                if (res.equals("获取数据失败") || res.equals("")) {
+                                downloadData = dbA.OAQingJiaMyDetail(url);
+                                if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                     handler.sendEmptyMessage(TAG_TWO);
                                 } else {
                                     handler.sendEmptyMessage(TAG_NINE);
@@ -258,8 +261,8 @@ public class FlowCompMessageDetailActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMyDetail(url);
-                                        if (res.equals("获取数据失败") || res.equals("")) {
+                                        downloadData = dbA.OAQingJiaMyDetail(url);
+                                        if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
                                         } else {
                                             handler.sendEmptyMessage(TAG_NINE);
@@ -319,18 +322,23 @@ public class FlowCompMessageDetailActivity extends BaseActivity {
                     final String jbbmyj = bean.getMainform().get(0).getJbbmyj();
                     final String zjlyj = bean.getMainform().get(0).getZjlyj();
                     xiangguanfujian = bean.getMainform().get(0).getFj();
+                    if (xiangguanfujian.equals("")) {
+                        llData.setVisibility(View.GONE);
+                    } else {
+                        tvData.setText(xiangguanfujian);
+                    }
                     runID = bean.getMainform().get(0).getRunId();
                     tvData.setText(xiangguanfujian);
                     tvTime.setText(date);
                     tvPerson.setText(person);
                     tvTitle.setText(title);
-                    if (fbpt1.equals("on")){
+                    if (fbpt1.equals("on")) {
                         cbPT1.setChecked(true);
                     }
-                    if (fbpt2.equals("on")){
+                    if (fbpt2.equals("on")) {
                         cbPT2.setChecked(true);
                     }
-                    if (fbpt3.equals("on")){
+                    if (fbpt3.equals("on")) {
                         cbPT3.setChecked(true);
                     }
                     if (!bmfzryj.equals("")) {
@@ -356,7 +364,7 @@ public class FlowCompMessageDetailActivity extends BaseActivity {
                     break;
                 case TAG_NINE:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(res, File.class);
+                    File file = gson2.fromJson(downloadData, File.class);
                     String filePath = file.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);

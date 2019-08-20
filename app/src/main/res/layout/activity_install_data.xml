@@ -65,30 +65,6 @@
                     style="@style/oaEditText" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <TextView
-                    style="@style/oaTextView"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"
-                    android:text="附件: *" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/shouye" />
-
-                <TextView
-                    android:id="@+id/tvData"
-                    style="@style/textWrite"
-                    android:hint="请选择附件" />
-            </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -115,6 +91,53 @@
             </LinearLayout>
 
             <View style="@style/line"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="预算" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvys"
+                    style="@style/textWrite"
+                    android:hint="请填写预算金额" />
+            </LinearLayout>
+
+            <View style="@style/line"></View>
+            <LinearLayout
+                android:id="@+id/llData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="附件: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvData"
+                    style="@style/textWrite"
+                    android:hint="请选择附件" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -405,6 +428,7 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:text="经办分管:" />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"

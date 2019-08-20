@@ -135,6 +135,8 @@ public class FlowRepairDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.llData)
+    LinearLayout llData;
     private String res;
 
     String xiangguanfujian = "";
@@ -142,6 +144,7 @@ public class FlowRepairDetailActivity extends BaseActivity {
     String etLeaderW1 = "", etLeaderW2 = "", etLeaderW3 = "", etLeaderW4 = "", etLeaderW5 = "";
     String flowMessage = "";
     String runID = "";
+    String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -220,7 +223,7 @@ public class FlowRepairDetailActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.tvData, R.id.btnHistory})
+    @OnClick({R.id.tvDerper, R.id.btnHistory})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnHistory:
@@ -242,7 +245,7 @@ public class FlowRepairDetailActivity extends BaseActivity {
                 }).start();
                 btnHistory.setEnabled(false);
                 break;
-            case R.id.tvData:
+            case R.id.tvDerper:
                 List<String> dataList = new ArrayList<>();
                 if (!xiangguanfujian.equals("")) {
                     dataList = new MyStringSpilt().stringSpiltList(xiangguanfujian);
@@ -253,8 +256,8 @@ public class FlowRepairDetailActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 DBHandler dbA = new DBHandler();
-                                res = dbA.OAQingJiaMyDetail(url);
-                                if (res.equals("获取数据失败") || res.equals("")) {
+                                downloadData = dbA.OAQingJiaMyDetail(url);
+                                if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                     handler.sendEmptyMessage(TAG_TWO);
                                 } else {
                                     handler.sendEmptyMessage(TAG_NINE);
@@ -271,8 +274,8 @@ public class FlowRepairDetailActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMyDetail(url);
-                                        if (res.equals("获取数据失败") || res.equals("")) {
+                                        downloadData = dbA.OAQingJiaMyDetail(url);
+                                        if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
                                         } else {
                                             handler.sendEmptyMessage(TAG_NINE);
@@ -326,6 +329,11 @@ public class FlowRepairDetailActivity extends BaseActivity {
                     String date = bean.getMainform().get(0).getRiQi();
                     String data = bean.getMainform().get(0).getJuTiQingKuang();
                     xiangguanfujian = bean.getMainform().get(0).getXiangGuanFuJian();
+                    if (xiangguanfujian.equals("")) {
+                        llData.setVisibility(View.GONE);
+                    } else {
+                        tvData.setText(xiangguanfujian);
+                    }
                     runID = bean.getMainform().get(0).getRunId();
                     tvDerper.setText(xiangguanfujian);
                     tvDepartment.setText(department);
@@ -414,7 +422,7 @@ public class FlowRepairDetailActivity extends BaseActivity {
                     break;
                 case TAG_NINE:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(res, File.class);
+                    File file = gson2.fromJson(downloadData, File.class);
                     String filePath = file.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);

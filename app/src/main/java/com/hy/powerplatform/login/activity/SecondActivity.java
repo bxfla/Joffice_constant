@@ -56,6 +56,7 @@ public class SecondActivity extends BaseActivity {
         alertDialogUtil = new AlertDialogUtil(this);
         getVersion();
     }
+
     private void getVersion() {
         new Thread(new Runnable() {
             @Override
@@ -69,8 +70,8 @@ public class SecondActivity extends BaseActivity {
                 } else {
                     handler.sendEmptyMessage(TAG_FOUR);
                 }
-                message.what = TAG_FOUR;
-                handler.sendMessage(message);
+//                message.what = TAG_FOUR;
+//                handler.sendMessage(message);
             }
         }).start();
     }
@@ -117,7 +118,7 @@ public class SecondActivity extends BaseActivity {
     private void exit() {
         if (!isExit) {
             isExit = true;
-            alertDialogUtil.showDialog("您确定要退出程序吗", new AlertDialogCallBack() {
+            alertDialogUtil.showDialog1("您确定要退出程序吗", new AlertDialogCallBack() {
                 @Override
                 public void select(String data) {
 
@@ -175,7 +176,7 @@ public class SecondActivity extends BaseActivity {
 //                        if (!nnm.equals("2")) {
                             final String url = Constant.BASE_URL2 + "attachFiles/" + version.getData().getDownurl();
                             String data1 = version.getData().getSubstance();
-                            new AlertDialogUtil(SecondActivity.this).showDialog("检测到服务器上有新的版本，是否立即更新。\n"+data1, new AlertDialogCallBack() {
+                            new AlertDialogUtil(SecondActivity.this).showDialog2("检测到服务器上有新的版本，是否立即更新。\n"+data1, new AlertDialogCallBack() {
                                 @Override
                                 public void select(String data) {
 

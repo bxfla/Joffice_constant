@@ -401,8 +401,9 @@
                     style="@style/oaEditText"
                     android:hint="请填写本年累计"/>
             </LinearLayout>
+            <View style="@style/line"></View>
             <LinearLayout
-                android:visibility="gone"
+                android:id="@+id/llData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -682,7 +683,7 @@
                     android:visibility="gone"
                     android:id="@+id/etLeader2"
                     style="@style/textWrite"
-                    android:hint="总经理签名" />
+                    android:hint="财务总监意见" />
             </LinearLayout>
             <View
                 style="@style/line"

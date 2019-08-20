@@ -80,6 +80,15 @@ public class FlowInstallDetail implements Serializable {
         private String bmfzryj;
         private String LiuShuiHao;
         private String ShenBanBuMenYiJian;
+        private String ys;
+
+        public String getYs() {
+            return ys;
+        }
+
+        public void setYs(String ys) {
+            this.ys = ys;
+        }
 
         public String getBanJieQingKuangYuPingJia() {
             return BanJieQingKuangYuPingJia;

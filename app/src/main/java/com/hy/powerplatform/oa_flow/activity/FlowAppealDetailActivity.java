@@ -135,11 +135,18 @@ public class FlowAppealDetailActivity extends BaseActivity {
     TextView tvBM;
     @BindView(R.id.etBM)
     EditText etBM;
+    @BindView(R.id.llData)
+    LinearLayout llData;
+    @BindView(R.id.tvLeader4)
+    TextView tvLeader4;
+    @BindView(R.id.etLeader4)
+    EditText etLeader4;
     private String res;
     String flowMessage = "";
 
     String xiangguanfujian = "";
     String runID = "";
+    String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
@@ -237,8 +244,8 @@ public class FlowAppealDetailActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 DBHandler dbA = new DBHandler();
-                                res = dbA.OAQingJiaMyDetail(url);
-                                if (res.equals("获取数据失败") || res.equals("")) {
+                                downloadData = dbA.OAQingJiaMyDetail(url);
+                                if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                     handler.sendEmptyMessage(TAG_TWO);
                                 } else {
                                     handler.sendEmptyMessage(TAG_NINE);
@@ -255,8 +262,8 @@ public class FlowAppealDetailActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMyDetail(url);
-                                        if (res.equals("获取数据失败") || res.equals("")) {
+                                        downloadData = dbA.OAQingJiaMyDetail(url);
+                                        if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
                                         } else {
                                             handler.sendEmptyMessage(TAG_NINE);
@@ -306,14 +313,20 @@ public class FlowAppealDetailActivity extends BaseActivity {
                     FlowAppealDetail bean = gson.fromJson(res, FlowAppealDetail.class);
                     final String date = bean.getMainform().get(0).getShenQingShiJian();
                     final String person = bean.getMainform().get(0).getShenQingRen();
-                    final String department = bean.getMainform().get(0).getShenQingBuMen();
+                    final String department = bean.getMainform().get(0).getSqbm();
                     final String bmfzryj = bean.getMainform().get(0).getBmfzryj();
                     final String fgldyj = bean.getMainform().get(0).getFgldyj();
                     final String jbfgyj = bean.getMainform().get(0).getJbfgldyj();
                     final String jbbmyj = bean.getMainform().get(0).getJbbmyj();
                     final String zjlyj = bean.getMainform().get(0).getZjlyj();
+                    final String dszyj = bean.getMainform().get(0).getDszyj();
                     String data = bean.getMainform().get(0).getQingShiNeiRong();
                     xiangguanfujian = bean.getMainform().get(0).getXiangGuanFuJian();
+                    if (xiangguanfujian.equals("")) {
+                        llData.setVisibility(View.GONE);
+                    } else {
+                        tvData.setText(xiangguanfujian);
+                    }
                     runID = bean.getMainform().get(0).getRunId();
                     tvData.setText(xiangguanfujian);
                     tvTime.setText(date);
@@ -335,6 +348,9 @@ public class FlowAppealDetailActivity extends BaseActivity {
                     if (!zjlyj.equals("")) {
                         tvLeader3.setText(getJSONData(zjlyj));
                     }
+                    if (!dszyj.equals("")) {
+                        tvLeader4.setText(getJSONData(dszyj));
+                    }
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_TWO:
@@ -343,7 +359,7 @@ public class FlowAppealDetailActivity extends BaseActivity {
                     break;
                 case TAG_NINE:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(res, File.class);
+                    File file = gson2.fromJson(downloadData, File.class);
                     String filePath = file.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);

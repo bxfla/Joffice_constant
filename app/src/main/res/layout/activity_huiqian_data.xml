@@ -58,8 +58,9 @@
                     style="@style/textWrite" />
             </LinearLayout>
 
+            <View style="@style/line"></View>
             <LinearLayout
-                android:visibility="gone"
+                android:id="@+id/llData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -78,7 +79,6 @@
                     android:hint="点击选择附件"
                     style="@style/textWrite"/>
             </LinearLayout>
-            <View style="@style/line"></View>
 
             <TextView
                 android:layout_width="match_parent"

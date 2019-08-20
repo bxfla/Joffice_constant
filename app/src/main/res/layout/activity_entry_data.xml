@@ -96,7 +96,7 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="准驾车型*:"/>
+                    android:text="准驾车型:*"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -107,8 +107,9 @@
                     style="@style/oaEditText"/>
             </LinearLayout>
 
+            <View style="@style/line"></View>
             <LinearLayout
-                android:visibility="gone"
+                android:id="@+id/llData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

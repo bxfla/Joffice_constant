@@ -126,7 +126,7 @@ public class Constant {
     public static final String  USERCARNAME = "公务车用车派车单";
     public static final String  DINNERNAME = "接待用餐审批表";
     public static final String  COMPLAINNAME = "安全服务部投诉转办单";
-    public static final String  INSTALLNNAME = "宜春公交集团安装改造项目申办表";
+    public static final String  INSTALLNNAME = "宜春公交集团项目申办表";
     public static final String  JSGCNAME = "新建工程启动审批流程";
     public static final String  EMAINTAINNAME = "信息技术部电子设备故障维修";
     public static final String  DORMNAME = "员工宿舍申请表";

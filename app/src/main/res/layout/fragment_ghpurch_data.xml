@@ -561,7 +561,7 @@
 
                 <TextView
                     style="@style/oaTextView"
-                    android:text="财务总监意见:"
+                    android:text="委员会意见:"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
 
@@ -574,13 +574,13 @@
                 <EditText
                     android:id="@+id/etLeader1"
                     style="@style/textWrite"
-                    android:hint="财务总监意见"
+                    android:hint="委员会主席意见"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader1"
                     style="@style/textWrite"
-                    android:hint="财务总监意见" />
+                    android:hint="委员会主席意见" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout

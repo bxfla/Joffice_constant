@@ -190,7 +190,7 @@ public class FragmentChuCaiData extends Fragment {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, 1); //向前走一天
         tvEndTime.setText(sdf.format(calendar.getTime()).split(" ")[0]);
-        etAllTime.setText("1");
+        etAllTime.setText("2");
 
         customDatePicker1 = new CustomDatePickerDay(getActivity(), new CustomDatePickerDay.ResultHandler() {
             @Override
@@ -207,7 +207,7 @@ public class FragmentChuCaiData extends Fragment {
                             Toast.makeText(getActivity(), "请选择正确的时间", Toast.LENGTH_SHORT).show();
                         } else if (dt1.getTime() <= dt2.getTime()) {
                             tvStartTime.setText(time.split(" ")[0]);
-                            daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
+                            daynumber = (int) new CompareDiff().dateDiff1(tvStartTime.getText().toString()
                                     , tvEndTime.getText().toString(), "yyyy-MM-dd");
                             etAllTime.setText(daynumber+1 + "");
                         }
@@ -220,9 +220,9 @@ public class FragmentChuCaiData extends Fragment {
                         dt2 = df.parse(time.split(" ")[0]);
                         if (dt1.getTime() > dt2.getTime()) {
                             Toast.makeText(getActivity(), "请选择正确的时间", Toast.LENGTH_SHORT).show();
-                        } else if (dt1.getTime() < dt2.getTime()) {
+                        } else if (dt1.getTime() <= dt2.getTime()) {
                             tvEndTime.setText(time.split(" ")[0]);
-                            daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
+                            daynumber = (int) new CompareDiff().dateDiff1(tvStartTime.getText().toString()
                                     , tvEndTime.getText().toString(), "yyyy-MM-dd");
                             etAllTime.setText(daynumber+1 + "");
                         }

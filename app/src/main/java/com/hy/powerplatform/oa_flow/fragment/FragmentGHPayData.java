@@ -319,7 +319,7 @@ public class FragmentGHPayData extends Fragment {
                                         if (namelist.get(i).indexOf("负责人") != -1 || namelist.get(i).indexOf("公司负责人") != -1) {
                                             userDepart = namelist.get(i);
                                         }
-                                    } else if (superRoleName.indexOf("分管领导") != -1) {
+                                    } else if (superRoleName.indexOf("财务总监") != -1) {
                                         if (namelist.get(i).indexOf("分管领导") != -1) {
                                             userDepart = namelist.get(i);
                                         }

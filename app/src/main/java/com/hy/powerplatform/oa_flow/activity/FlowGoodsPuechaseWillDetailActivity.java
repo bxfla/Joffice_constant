@@ -229,6 +229,8 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
     TextView etDepartment5;
     @BindView(R.id.tvDepartment5)
     TextView tvDepartment5;
+    @BindView(R.id.llData)
+    LinearLayout llData;
     private String name, taskId, res, bmfzryj, jcbmyj, zcgkbmyj, fgldyj, cwzjyj, zjl = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -254,7 +256,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
 
     String role = "";
     String url;
-    String  uId = "";
+    String uId = "";
     String userCode = "";
     String userName = "";
     String upData = "";
@@ -268,6 +270,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
     String flowMessage = "";
     String runID = "";
     String piId = "";
+    String downloadData = "";
     FlowMessageAdapter adapter;
     double AllMoney1 = 0.0, AllMoney2 = 0.0, AllMoney3 = 0.0, AllMoney4 = 0.0, AllMoney5 = 0.0;
     int numS1 = 0, numS2 = 0, numS3 = 0, numS4 = 0, numS5 = 0;
@@ -693,7 +696,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 //String name =URLDecoder.decode(待转值,"utf-8");
-                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId+"&piId="+piId;
+                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId + "&piId=" + piId;
                 DBHandler dbA = new DBHandler();
                 res = dbA.OAQingJiaWillDoDex(url);
                 if (res.equals("获取数据失败") || res.equals("")) {
@@ -1077,8 +1080,8 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 DBHandler dbA = new DBHandler();
-                                res = dbA.OAQingJiaMyDetail(url);
-                                if (res.equals("获取数据失败") || res.equals("")) {
+                                downloadData = dbA.OAQingJiaMyDetail(url);
+                                if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                     handler.sendEmptyMessage(TAG_TWO);
                                 } else {
                                     handler.sendEmptyMessage(TAG_NINE);
@@ -1095,8 +1098,8 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMyDetail(url);
-                                        if (res.equals("获取数据失败") || res.equals("")) {
+                                        downloadData = dbA.OAQingJiaMyDetail(url);
+                                        if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
                                         } else {
                                             handler.sendEmptyMessage(TAG_NINE);
@@ -1256,7 +1259,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                         comment = "";
                         personSession();
                     } else if (!zjl.equals("") && !cwzjyj.equals("") && !fgldyj.equals("") && !zcgkbmyj.equals("")
-                            && !jcbmyj.equals("")&& !bmfzryj.equals("")) {
+                            && !jcbmyj.equals("") && !bmfzryj.equals("")) {
                         comment = "";
                         personSession();
                     } else {
@@ -1318,88 +1321,88 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                 }
 
                 if (!rb6.isChecked()) {
-                    if (resultList.size()>=6){
+                    if (resultList.size() >= 6) {
                         resultList.remove(5);
                     }
                 }
                 if (!rb5.isChecked()) {
-                    if (resultList.size()>=5){
+                    if (resultList.size() >= 5) {
                         resultList.remove(4);
                     }
                 }
                 if (!rb4.isChecked()) {
-                    if (resultList.size()>=4){
+                    if (resultList.size() >= 4) {
                         resultList.remove(3);
                     }
                 }
                 if (!rb3.isChecked()) {
-                    if (resultList.size()>=3){
+                    if (resultList.size() >= 3) {
                         resultList.remove(2);
                     }
                 }
                 if (!rb2.isChecked()) {
-                    if (resultList.size()>=2){
+                    if (resultList.size() >= 2) {
                         resultList.remove(1);
                     }
                 }
                 if (!rb1.isChecked()) {
-                    if (resultList.size()>=1){
+                    if (resultList.size() >= 1) {
                         resultList.remove(0);
                     }
                 }
 
                 if (!cb9.isChecked()) {
-                    if (bigResultList.size()>=9){
+                    if (bigResultList.size() >= 9) {
                         bigResultList.remove(8);
                     }
                 }
                 if (!cb8.isChecked()) {
-                    if (bigResultList.size()>=8){
+                    if (bigResultList.size() >= 8) {
                         bigResultList.remove(7);
                     }
                 }
                 if (!cb7.isChecked()) {
-                    if (bigResultList.size()>=7){
+                    if (bigResultList.size() >= 7) {
                         bigResultList.remove(6);
                     }
                 }
                 if (!cb6.isChecked()) {
-                    if (bigResultList.size()>=6){
+                    if (bigResultList.size() >= 6) {
                         bigResultList.remove(5);
                     }
                 }
                 if (!cb5.isChecked()) {
-                    if (bigResultList.size()>=5){
+                    if (bigResultList.size() >= 5) {
                         bigResultList.remove(4);
                     }
                 }
                 if (!cb4.isChecked()) {
-                    if (bigResultList.size()>=4){
+                    if (bigResultList.size() >= 4) {
                         bigResultList.remove(3);
                     }
                 }
                 if (!cb3.isChecked()) {
-                    if (bigResultList.size()>=3){
+                    if (bigResultList.size() >= 3) {
                         bigResultList.remove(2);
                     }
                 }
                 if (!cb2.isChecked()) {
-                    if (bigResultList.size()>=2){
+                    if (bigResultList.size() >= 2) {
                         bigResultList.remove(1);
                     }
                 }
                 if (!cb1.isChecked()) {
-                    if (bigResultList.size()>=1){
+                    if (bigResultList.size() >= 1) {
                         bigResultList.remove(0);
                     }
                 }
 
                 String userCodes = "";
-                if (resultList.size()==0){
+                if (resultList.size() == 0) {
                     userCodes = resultList1.toString();
                     userCodes = userCodes.toString().replace("[", "");
                     userCodes = userCodes.toString().replace("]", "");
-                }else {
+                } else {
                     userCodes = resultList.toString();
                     userCodes = userCodes.toString().replace("[", "");
                     userCodes = userCodes.toString().replace("]", "");
@@ -1456,14 +1459,14 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             , etMoney5.getText().toString(), tvAllMoney1.getText().toString(), tvAllMoney2.getText().toString()
                             , tvAllMoney3.getText().toString(), tvAllMoney4.getText().toString(), tvAllMoney5.getText().toString()
                             , userCode, destName, taskId, flowAssignld, mainId, bmfzryj, zcgkbmyj, fgldyj, cwzjyj, zjl
-                            , serialNumber, comment, signaName, hejisl, hejidj, hejije, use, other,jcbmyj
-                            ,danwei1,danwei2,danwei3,danwei4,danwei5,tvzc.getText().toString(),tvtype.getText().toString());
+                            , serialNumber, comment, signaName, hejisl, hejidj, hejije, use, other, jcbmyj
+                            , danwei1, danwei2, danwei3, danwei4, danwei5, tvzc.getText().toString(), tvtype.getText().toString());
                 } else {
                     upData = dbA.OAGoodsPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                             , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
                             , allMoney4, allMoney5, userCode, destName, taskId, flowAssignld, mainId,
                             bmfzryj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, hejisl,
-                            hejidj, hejije, use, other,jcbmyj,danwei1,danwei2,danwei3,danwei4,danwei5,tvzc.getText().toString(),tvtype.getText().toString());
+                            hejidj, hejije, use, other, jcbmyj, danwei1, danwei2, danwei3, danwei4, danwei5, tvzc.getText().toString(), tvtype.getText().toString());
                 }
 
                 if (upData.equals("")) {
@@ -1508,6 +1511,11 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                         String goodsType = bean.getMainform().get(0).getGoodsType();
                         aboutDep = bean.getMainform().get(0).getZcDepName();
                         xiangguanfujian = bean.getMainform().get(0).getXgfj();
+                        if (xiangguanfujian.equals("")) {
+                            llData.setVisibility(View.GONE);
+                        } else {
+                            tvData.setText(xiangguanfujian);
+                        }
                         runID = bean.getMainform().get(0).getRunId();
                         tvData.setText(xiangguanfujian);
                         tvzc.setText(iszc);
@@ -1656,8 +1664,8 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                                 tvLeaderJG.setVisibility(View.VISIBLE);
                                 etLeaderJG.setVisibility(View.GONE);
                             }
-                            if (bmreout.equals("1")&&fgreout.equals("1")&&cwreout.equals("1")
-                                    &&zcreout.equals("1")&&zjlreout.equals("1")&&jcbmreout.equals("1")){
+                            if (bmreout.equals("1") && fgreout.equals("1") && cwreout.equals("1")
+                                    && zcreout.equals("1") && zjlreout.equals("1") && jcbmreout.equals("1")) {
                                 Toast.makeText(FlowGoodsPuechaseWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -1714,10 +1722,10 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                         if (zjl != null && !zjl.equals("")) {
                             try {
                                 JSONArray jsonArray = new JSONArray(zjl);
-                                for (int i = 0;i<jsonArray.length();i++){
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    if (!jsonObject.getString("v").toString().equals("")){
-                                        word5 = word5+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                    if (!jsonObject.getString("v").toString().equals("")) {
+                                        word5 = word5 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                     }
                                 }
                             } catch (JSONException e) {
@@ -1725,7 +1733,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             }
                             if (tvLeader4.getVisibility() == View.VISIBLE) {
                                 tvLeader4.setText(word5);
-                            }else {
+                            } else {
                                 etLeader4.setHint(word5);
                             }
                         }
@@ -1734,10 +1742,10 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                         if (cwzjyj != null && !cwzjyj.equals("")) {
                             try {
                                 JSONArray jsonArray = new JSONArray(cwzjyj);
-                                for (int i = 0;i<jsonArray.length();i++){
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    if (!jsonObject.getString("v").toString().equals("")){
-                                        word14 = word14+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                    if (!jsonObject.getString("v").toString().equals("")) {
+                                        word14 = word14 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                     }
                                 }
                             } catch (JSONException e) {
@@ -1745,7 +1753,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             }
                             if (tvLeader3.getVisibility() == View.VISIBLE) {
                                 tvLeader3.setText(word14);
-                            }else {
+                            } else {
                                 etLeader3.setHint(word14);
                             }
                         }
@@ -1754,10 +1762,10 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                         if (fgldyj != null && !fgldyj.equals("")) {
                             try {
                                 JSONArray jsonArray = new JSONArray(fgldyj);
-                                for (int i = 0;i<jsonArray.length();i++){
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    if (!jsonObject.getString("v").toString().equals("")){
-                                        word13 = word13+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                    if (!jsonObject.getString("v").toString().equals("")) {
+                                        word13 = word13 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                     }
                                 }
                             } catch (JSONException e) {
@@ -1765,7 +1773,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             }
                             if (tvLeader2.getVisibility() == View.VISIBLE) {
                                 tvLeader2.setText(word13);
-                            }else {
+                            } else {
                                 etLeader2.setHint(word13);
                             }
                         }
@@ -1774,10 +1782,10 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                         if (zcgkbmyj != null && !zcgkbmyj.equals("")) {
                             try {
                                 JSONArray jsonArray = new JSONArray(zcgkbmyj);
-                                for (int i = 0;i<jsonArray.length();i++){
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    if (!jsonObject.getString("v").toString().equals("")){
-                                        word2 = word2+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                    if (!jsonObject.getString("v").toString().equals("")) {
+                                        word2 = word2 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                     }
                                 }
                             } catch (JSONException e) {
@@ -1785,7 +1793,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             }
                             if (tvLeader1.getVisibility() == View.VISIBLE) {
                                 tvLeader1.setText(word2);
-                            }else {
+                            } else {
                                 etLeader1.setHint(word2);
                             }
                         }
@@ -1794,10 +1802,10 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                         if (jcbmyj != null && !jcbmyj.equals("")) {
                             try {
                                 JSONArray jsonArray = new JSONArray(jcbmyj);
-                                for (int i = 0;i<jsonArray.length();i++){
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    if (!jsonObject.getString("v").toString().equals("")){
-                                        word = word+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                    if (!jsonObject.getString("v").toString().equals("")) {
+                                        word = word + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                     }
                                 }
                             } catch (JSONException e) {
@@ -1805,7 +1813,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             }
                             if (tvLeaderJG.getVisibility() == View.VISIBLE) {
                                 tvLeaderJG.setText(word);
-                            }else {
+                            } else {
                                 etLeaderJG.setHint(word);
                             }
                         }
@@ -1814,10 +1822,10 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                         if (bmfzryj != null && !bmfzryj.equals("")) {
                             try {
                                 JSONArray jsonArray = new JSONArray(bmfzryj);
-                                for (int i = 0;i<jsonArray.length();i++){
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    if (!jsonObject.getString("v").toString().equals("")){
-                                        word11 = word11+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                    if (!jsonObject.getString("v").toString().equals("")) {
+                                        word11 = word11 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                     }
                                 }
                             } catch (JSONException e) {
@@ -1825,11 +1833,11 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             }
                             if (tvLeader.getVisibility() == View.VISIBLE) {
                                 tvLeader.setText(word11);
-                            }else {
+                            } else {
                                 etLeader.setHint(word11);
                             }
                         }
-                        if (bean.isRevoke()){
+                        if (bean.isRevoke()) {
                             Toast.makeText(FlowGoodsPuechaseWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -1867,9 +1875,9 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             codetemp = userCode.split(",");
                         }
                         if (bean1.getData().size() > 2) {
-                            role = bean1.getData().get(1).getRole()+":"+bean1.getData().get(2).getRole();
-                            userCode = bean1.getData().get(1).getUserNames()+":"+ bean1.getData().get(2).getUserNames();
-                            userName = bean1.getData().get(1).getUserCodes()+","+bean1.getData().get(2).getUserCodes();
+                            role = bean1.getData().get(1).getRole() + ":" + bean1.getData().get(2).getRole();
+                            userCode = bean1.getData().get(1).getUserNames() + ":" + bean1.getData().get(2).getUserNames();
+                            userName = bean1.getData().get(1).getUserCodes() + "," + bean1.getData().get(2).getUserCodes();
                             nametemp = userName.split(",");
                             codetemp = userCode.split(",");
                         }
@@ -1888,7 +1896,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                     break;
                 case TAG_NINE:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(res, File.class);
+                    File file = gson2.fromJson(downloadData, File.class);
                     String filePath = file.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);

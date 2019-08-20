@@ -12,15 +12,15 @@ public class FlowAppealWillDetail implements Serializable {
 
     /**
      * success : true
-     * taskId : 9310233
+     * taskId : 9320179
      * pkValue : mainId
-     * formRights : {'jbbmyj':'1','ShenQingRen':'1','ShenQingShiJian':'1','QingShiNeiRong':'1','XiangGuanFuJian':'1','zjlyj':'1','jbfgldyj':'1','bmfzryj':'1','ShenQingBuMen':'1','fgldyj':'1','LiuShuiHao':'1'}
-     * mainform : [{"sqbm":"","QingShiNeiRong":"同意","ShenQingBuMen":"宜春公交集团有限公司","ShenQingRen":"超级管理员","dszyj":"","runId":52036,"$type$":"WF_QingShiHuiBao","jbfgldyj":"","fgldyj":"","ShenQingBuMenDid":"","ShenQingShiJian":"2019-08-16","cbbmyj":"","mainId":16,"ShenQingRenUId":"153","zjlyj":"","jbbmyj":"","XiangGuanFuJian":"","bmfzryj":"","LiuShuiHao":"No.20190816125"}]
+     * formRights : {'cbbmyj ':'1','sqbm':'1','zjlyj':'1','jbfgldyj':'1','LiuShuiHao':'1','bmfzryj':'2','XiangGuanFuJian':'1','fgldyj':'1','jbbmyj':'1','ShenQingRen':'1','QingShiNeiRong':'1','ShenQingShiJian':'1','ShenQingBuMen':'1','dszyj':'1'}
+     * mainform : [{"sqbm":"宜春公交集团有限公司","QingShiNeiRong":"需持续持续","ShenQingBuMen":"","ShenQingRen":"超级管理员","dszyj":"","runId":52039,"$type$":"WF_QingShiHuiBao","jbfgldyj":"","fgldyj":"","ShenQingBuMenDid":"","ShenQingShiJian":"2019-08-17","cbbmyj":"","mainId":17,"ShenQingRenUId":"888888888","zjlyj":"","jbbmyj":"","XiangGuanFuJian":"8801|uni-app笔记.docx\u2014\u2014（超级管理员）","bmfzryj":"","LiuShuiHao":"No.20190817001"}]
      * formDefId : 10113
      * preTaskName :
      * isSignTask : false
-     * trans : [{"destType":"task","destination":"通知分管领导","name":"to 分管领导","source":"总经理"},{"destType":"task","destination":"董事长","name":"to 董事长","source":"总经理"}]
-     * runId : 52036
+     * trans : [{"destType":"task","destination":"分管领导1","name":"to 分管领导1","source":"部门负责人"}]
+     * runId : 52039
      * revoke : false
      */
 
@@ -126,25 +126,25 @@ public class FlowAppealWillDetail implements Serializable {
 
     public static class MainformBean {
         /**
-         * sqbm :
-         * QingShiNeiRong : 同意
-         * ShenQingBuMen : 宜春公交集团有限公司
+         * sqbm : 宜春公交集团有限公司
+         * QingShiNeiRong : 需持续持续
+         * ShenQingBuMen :
          * ShenQingRen : 超级管理员
          * dszyj :
-         * runId : 52036
+         * runId : 52039
          * $type$ : WF_QingShiHuiBao
          * jbfgldyj :
          * fgldyj :
          * ShenQingBuMenDid :
-         * ShenQingShiJian : 2019-08-16
+         * ShenQingShiJian : 2019-08-17
          * cbbmyj :
-         * mainId : 16
-         * ShenQingRenUId : 153
+         * mainId : 17
+         * ShenQingRenUId : 888888888
          * zjlyj :
          * jbbmyj :
-         * XiangGuanFuJian :
+         * XiangGuanFuJian : 8801|uni-app笔记.docx——（超级管理员）
          * bmfzryj :
-         * LiuShuiHao : No.20190816125
+         * LiuShuiHao : No.20190817001
          */
 
         private String sqbm;
@@ -323,9 +323,9 @@ public class FlowAppealWillDetail implements Serializable {
     public static class TransBean {
         /**
          * destType : task
-         * destination : 通知分管领导
-         * name : to 分管领导
-         * source : 总经理
+         * destination : 分管领导1
+         * name : to 分管领导1
+         * source : 部门负责人
          */
 
         private String destType;

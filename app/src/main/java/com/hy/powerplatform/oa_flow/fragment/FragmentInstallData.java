@@ -104,6 +104,10 @@ public class FragmentInstallData extends Fragment {
     Button btnUp;
 
     String liushuihao;
+    @BindView(R.id.etys)
+    EditText etys;
+    @BindView(R.id.tvLeader7)
+    TextView tvLeader7;
     private CustomDatePickerDay customDatePicker1, customDatePicker2;
 
     @Override
@@ -117,7 +121,7 @@ public class FragmentInstallData extends Fragment {
         userName = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userName", "");
         String department = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "depName", "");
         etDepartment.setText(department);
-        ProgressDialogUtil.startLoad(getActivity(),"获取流水号");
+        ProgressDialogUtil.startLoad(getActivity(), "获取流水号");
         getLIuSuiHao();
         return view;
     }
@@ -222,7 +226,7 @@ public class FragmentInstallData extends Fragment {
         }).start();
     }
 
-    @OnClick({R.id.btnUp,R.id.tvData,R.id.tvDate,R.id.tvDate1})
+    @OnClick({R.id.btnUp, R.id.tvData, R.id.tvDate, R.id.tvDate1})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvDate:
@@ -248,6 +252,7 @@ public class FragmentInstallData extends Fragment {
                 final String department = etDepartment.getText().toString().trim();
                 final String date = tvDate.getText().toString().trim();
                 final String data = etData.getText().toString().trim();
+                final String ys = etys.getText().toString().trim();
                 if (department.equals("")) {
                     Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
                     break;
@@ -260,6 +265,10 @@ public class FragmentInstallData extends Fragment {
                     Toast.makeText(getActivity(), "基本情况不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
+                if (ys.equals("")) {
+                    Toast.makeText(getActivity(), "预算不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
                 getSenPiPersonOne();
                 break;
@@ -270,7 +279,7 @@ public class FragmentInstallData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -294,8 +303,9 @@ public class FragmentInstallData extends Fragment {
                 final String department = etDepartment.getText().toString();
                 final String date = tvDate.getText().toString();
                 final String data = etData.getText().toString();
+                final String ys = etys.getText().toString().trim();
                 String res = dbA.OAInstallUp(turl, userDepart, uId, department, date,
-                        data, userId, userName,liushuihao);
+                        data, userId, userName, liushuihao,ys);
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
