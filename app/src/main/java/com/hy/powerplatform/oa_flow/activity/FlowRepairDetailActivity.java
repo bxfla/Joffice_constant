@@ -137,6 +137,14 @@ public class FlowRepairDetailActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
     private String res;
 
     String xiangguanfujian = "";
@@ -165,6 +173,10 @@ public class FlowRepairDetailActivity extends BaseActivity {
 //        recyclerView.setHasFixedSize(true);
 //        //解决数据加载完成后, 没有停留在顶部的问题
 //        recyclerView.setFocusable(false);
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
         header.setTvRight("追回");
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);

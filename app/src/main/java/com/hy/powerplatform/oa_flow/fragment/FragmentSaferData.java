@@ -96,8 +96,6 @@ public class FragmentSaferData extends Fragment {
     TextView etBigMoney;
     @BindView(R.id.tvLeader)
     TextView tvLeader;
-    @BindView(R.id.textView7)
-    TextView textView7;
     @BindView(R.id.tvLeader1)
     TextView tvLeader1;
     @BindView(R.id.tvLeader2)
@@ -112,6 +110,12 @@ public class FragmentSaferData extends Fragment {
     TextView tvType3;
     @BindView(R.id.tvType4)
     TextView tvType4;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
     private CustomDatePickerDay customDatePicker1, customDatePicker2;
     String money;
 
@@ -122,12 +126,12 @@ public class FragmentSaferData extends Fragment {
         view = inflater.inflate(R.layout.fragment_safe_data, container, false);
         unbinder = ButterKnife.bind(this, view);
         tag = ((FlowSaferActivity) getActivity()).getTag();
-        if (tag.equals("1")){
+        if (tag.equals("1")) {
             tvType1.setVisibility(View.VISIBLE);
             tvType2.setVisibility(View.GONE);
             tvType3.setVisibility(View.VISIBLE);
             tvType4.setVisibility(View.GONE);
-        }else {
+        } else {
             tvType1.setVisibility(View.GONE);
             tvType2.setVisibility(View.VISIBLE);
             tvType3.setVisibility(View.GONE);
@@ -149,7 +153,7 @@ public class FragmentSaferData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")){
+                if (!s.toString().equals("")) {
                     BigDecimal numOfMoney = new BigDecimal(s.toString());
                     etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
                 }
@@ -158,6 +162,9 @@ public class FragmentSaferData extends Fragment {
 
         ProgressDialogUtil.startLoad(getActivity(), "获取流水号中");
         getLIuSuiHao();
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -292,7 +299,7 @@ public class FragmentSaferData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -385,9 +392,9 @@ public class FragmentSaferData extends Fragment {
                                         String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
                                         DBHandler dbA = new DBHandler();
                                         if (tag.equals("1")) {
-                                            data1 = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.SAFER1DIFID,namelist.get(0));
+                                            data1 = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.SAFER1DIFID, namelist.get(0));
                                         } else {
-                                            data1 = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.SAFER2DIFID,namelist.get(0));
+                                            data1 = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.SAFER2DIFID, namelist.get(0));
                                         }
                                         userDepart = namelist.get(0);
                                         if (data1.equals("保存失败") || data1.equals("")) {

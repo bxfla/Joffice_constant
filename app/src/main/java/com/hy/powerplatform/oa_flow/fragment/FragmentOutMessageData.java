@@ -16,6 +16,7 @@ import com.hy.powerplatform.R;
 import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
+import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
@@ -75,6 +76,20 @@ public class FragmentOutMessageData extends Fragment {
     @BindView(R.id.btnUp)
     Button btnUp;
     Unbinder unbinder;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvShenHe)
+    TextView tvShenHe;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
     private CustomDatePickerDay customDatePicker1;
     List<String> namelist = new ArrayList<>();
     List<Name.DataBean> datalist = new ArrayList<>();
@@ -100,9 +115,15 @@ public class FragmentOutMessageData extends Fragment {
         View view = inflater.inflate(R.layout.fragment_outmessage_data, container, false);
         unbinder = ButterKnife.bind(this, view);
         initDatePicker();
-        userId = new SharedPreferencesHelper(getActivity(),"login").getData(getActivity(),"userCode","");
+        userId = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
         userName = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", "");
         etNiGao.setText(userName);
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -113,9 +134,9 @@ public class FragmentOutMessageData extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + "flow/startTransProcessActivity.do";
+                String url = Constant.BASE_URL2 + "flow/startTransProcessActivity.do";
                 DBHandler dbA = new DBHandler();
-                data1 = dbA.OAQingJiaMor(url, com.hy.powerplatform.my_utils.base.Constant.OUTMESSAGEDIFID);
+                data1 = dbA.OAQingJiaMor(url, Constant.OUTMESSAGEDIFID);
                 if (data1.equals("保存失败") || data1.equals("")) {
                     handler.sendEmptyMessage(TAG_TWO);
                 } else {
@@ -132,9 +153,9 @@ public class FragmentOutMessageData extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + "flow/mobileUsersProcessActivity.do";
+                String url = Constant.BASE_URL2 + "flow/mobileUsersProcessActivity.do";
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.OUTMESSAGEDIFID, data);
+                res = dbA.OAQingJiaMorNext(url, Constant.OUTMESSAGEDIFID, data);
                 if (res.equals("保存失败") || res.equals("")) {
                     handler.sendEmptyMessage(TAG_TWO);
                 } else {
@@ -227,11 +248,11 @@ public class FragmentOutMessageData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String turl = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2+ com.hy.powerplatform.my_utils.base.Constant.UPDATAU;
+                String turl = Constant.BASE_URL2 + Constant.UPDATAU;
                 DBHandler dbA = new DBHandler();
                 String uName = "";
                 String uId = "";
@@ -262,7 +283,7 @@ public class FragmentOutMessageData extends Fragment {
                 final String xuHao = et3.getText().toString();
                 final String time = tvStartTime.getText().toString();
                 String res = dbA.OAOutMessageUp(turl, userDepart, uId, title, zhuSong, chaoBao,
-                        chaoSong, niGao, heGao,num,wenHao,riQi,xuHao,userId,userName,time);
+                        chaoSong, niGao, heGao, num, wenHao, riQi, xuHao, userId, userName, time);
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -298,9 +319,9 @@ public class FragmentOutMessageData extends Fragment {
                                 new Thread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
+                                        String url = Constant.BASE_URL2 + Constant.NOENDPERSON;
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.OUTMESSAGEDIFID, namelist.get(0));
+                                        res = dbA.OAQingJiaMorNext(url, Constant.OUTMESSAGEDIFID, namelist.get(0));
                                         userDepart = namelist.get(0);
                                         if (res.equals("保存失败") || res.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
@@ -331,14 +352,14 @@ public class FragmentOutMessageData extends Fragment {
                                 MyAlertDialog.MyListAlertDialog(getActivity(), namelist, new AlertDialogCallBackP() {
                                     @Override
                                     public void oneselect(final String data) {
-                                        ProgressDialogUtil.startLoad(getActivity(),"获取数据中");
+                                        ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
                                         new Thread(new Runnable() {
                                             @Override
                                             public void run() {
-                                                String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
+                                                String url = Constant.BASE_URL2 + Constant.NOENDPERSON;
                                                 DBHandler dbA = new DBHandler();
                                                 userDepart = data;
-                                                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.OUTMESSAGEDIFID, data);
+                                                res = dbA.OAQingJiaMorNext(url, Constant.OUTMESSAGEDIFID, data);
                                                 if (res.equals("保存失败") || res.equals("")) {
                                                     handler.sendEmptyMessage(TAG_TWO);
                                                 } else {
@@ -414,11 +435,11 @@ public class FragmentOutMessageData extends Fragment {
                                 nameList.add(s);
                             }
                         }
-                        if (codeList.size() == 1){
+                        if (codeList.size() == 1) {
                             selectList.add(codeList.get(0));
                             UpContractData();
-                        }else {
-                            MyAlertDialog.MyListAlertDialog(isShow,codeList, nameList, namelist1, getActivity(), new AlertDialogCallBackP() {
+                        } else {
+                            MyAlertDialog.MyListAlertDialog(isShow, codeList, nameList, namelist1, getActivity(), new AlertDialogCallBackP() {
 
                                 @Override
                                 public void select(List<String> data) {

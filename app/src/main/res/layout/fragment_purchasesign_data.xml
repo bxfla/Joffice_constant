@@ -564,6 +564,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:text="部门领导:" />
 
@@ -609,6 +610,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader1W"
                     style="@style/oaTextView"
                     android:text="分管领导:" />
 
@@ -678,6 +680,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader2W"
                     style="@style/oaTextView"
                     android:text="总经理:" />
 

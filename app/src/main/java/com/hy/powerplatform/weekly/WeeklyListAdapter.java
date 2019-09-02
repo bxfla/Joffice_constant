@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hy.powerplatform.R;
@@ -28,15 +29,18 @@ public class WeeklyListAdapter extends RecyclerView.Adapter<WeeklyListAdapter.Vi
 
     @Override
     public WeeklyListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.adapter_easy, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.adapter_smart, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(WeeklyListAdapter.ViewHolder holder, final int position) {
-        holder.tvData.setText(beanList.get(position).getTitleName());
-        holder.tvData.setOnClickListener(new View.OnClickListener() {
+        holder.tvName.setText(beanList.get(position).getUserName());
+        holder.tvDepart.setText(beanList.get(position).getDepName());
+        holder.tvDate.setText(beanList.get(position).getDayTime());
+        holder.tv2.setText("部门：");
+        holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 WeeklyList bean = beanList.get(position);
@@ -53,12 +57,17 @@ public class WeeklyListAdapter extends RecyclerView.Adapter<WeeklyListAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvData;
+        public TextView tvName,tvDepart,tvDate,tv2;
+        public LinearLayout ll;
         int mPosition;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvData = (TextView) itemView.findViewById(R.id.tvData);
+            tvName = (TextView) itemView.findViewById(R.id.tvName);
+            tvDepart = (TextView) itemView.findViewById(R.id.tvTitle);
+            tvDate = (TextView) itemView.findViewById(R.id.tvTime);
+            tv2 = (TextView) itemView.findViewById(R.id.tv2);
+            ll = (LinearLayout) itemView.findViewById(R.id.ll);
         }
     }
 }

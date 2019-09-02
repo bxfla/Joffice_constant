@@ -120,6 +120,16 @@ public class FragmentCarSafeData extends Fragment {
     TextView tvSafeDate4;
     @BindView(R.id.tvSafeDate5)
     TextView tvSafeDate5;
+    @BindView(R.id.tv)
+    TextView tv;
+    @BindView(R.id.tvPerson)
+    TextView tvPerson;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
     private CustomDatePickerDay customDatePicker1;
     String data1, res, liushuihao;
     String LiuShuiCode;
@@ -139,7 +149,7 @@ public class FragmentCarSafeData extends Fragment {
     List<String> namelist1 = new ArrayList<>();
     String userDepart = "";
     String isShow = "true";
-    double AllMoney = 0.0,AllMoney1 = 0.0,AllMoney2 = 0.0,AllMoney3 = 0.0,AllMoney4 = 0.0,AllMoney5 = 0.0;
+    double AllMoney = 0.0, AllMoney1 = 0.0, AllMoney2 = 0.0, AllMoney3 = 0.0, AllMoney4 = 0.0, AllMoney5 = 0.0;
     String tag = "0";
 
     @Override
@@ -166,12 +176,12 @@ public class FragmentCarSafeData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")){
+                if (!s.toString().equals("")) {
                     AllMoney1 = (Double.valueOf(s.toString()));
-                    tvAllMoney.setText(String.valueOf(AllMoney1+AllMoney2+AllMoney3+AllMoney4+AllMoney5));
-                }else {
+                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
+                } else {
                     AllMoney1 = 0.0;
-                    tvAllMoney.setText(String.valueOf(AllMoney1+AllMoney2+AllMoney3+AllMoney4+AllMoney5));
+                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
             }
         });
@@ -188,12 +198,12 @@ public class FragmentCarSafeData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")){
+                if (!s.toString().equals("")) {
                     AllMoney2 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
-                }else {
+                } else {
                     AllMoney2 = 0.0;
-                    tvAllMoney.setText(String.valueOf(AllMoney1+AllMoney2+AllMoney3+AllMoney4+AllMoney5));
+                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
             }
         });
@@ -210,12 +220,12 @@ public class FragmentCarSafeData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")){
+                if (!s.toString().equals("")) {
                     AllMoney3 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
-                }else {
+                } else {
                     AllMoney3 = 0.0;
-                    tvAllMoney.setText(String.valueOf(AllMoney1+AllMoney2+AllMoney3+AllMoney4+AllMoney5));
+                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
             }
         });
@@ -232,12 +242,12 @@ public class FragmentCarSafeData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")){
+                if (!s.toString().equals("")) {
                     AllMoney4 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
-                }else {
+                } else {
                     AllMoney4 = 0.0;
-                    tvAllMoney.setText(String.valueOf(AllMoney1+AllMoney2+AllMoney3+AllMoney4+AllMoney5));
+                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
             }
         });
@@ -254,15 +264,18 @@ public class FragmentCarSafeData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")){
+                if (!s.toString().equals("")) {
                     AllMoney5 = (Double.valueOf(s.toString()));
                     tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
-                }else {
+                } else {
                     AllMoney5 = 0.0;
-                    tvAllMoney.setText(String.valueOf(AllMoney1+AllMoney2+AllMoney3+AllMoney4+AllMoney5));
+                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
             }
         });
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -431,7 +444,7 @@ public class FragmentCarSafeData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -666,6 +679,7 @@ public class FragmentCarSafeData extends Fragment {
             }
         }
     };
+
     @OnClick(R.id.tvPerson)
     public void onViewClicked() {
         Intent intent = new Intent(getActivity(), PersonListActivity.class);
@@ -684,8 +698,8 @@ public class FragmentCarSafeData extends Fragment {
 //                    file = file+s;
             }
         }
-        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO){
-            if (data!=null){
+        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO) {
+            if (data != null) {
                 userCode = data.getStringExtra("userCode");
                 userName = data.getStringExtra("userName");
                 etPerson.setText(userName);

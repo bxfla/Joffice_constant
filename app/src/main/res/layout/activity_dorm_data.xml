@@ -423,6 +423,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
@@ -454,6 +455,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader1W"
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
@@ -485,7 +487,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/tvLeader2W"
                     style="@style/oaTextView"
                     android:text="办理入住:" />
 
@@ -609,6 +611,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader3W"
                     style="@style/oaTextView"
                     android:text="租赁费收取:" />
 
@@ -640,6 +643,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader4W"
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
@@ -671,6 +675,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader5W"
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"

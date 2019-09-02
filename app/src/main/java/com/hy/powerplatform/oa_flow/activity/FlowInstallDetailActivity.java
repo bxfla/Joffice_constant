@@ -151,6 +151,22 @@ public class FlowInstallDetailActivity extends BaseActivity {
     TextView tvys;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
+    @BindView(R.id.tvLeader6W)
+    TextView tvLeader6W;
+    @BindView(R.id.tvLeader7W)
+    TextView tvLeader7W;
     private String res;
 
     String xiangguanfujian = "";
@@ -165,6 +181,14 @@ public class FlowInstallDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader6W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader7W.setTextColor(getResources().getColor(R.color.order_stop_black));
         header.setTvRight("追回");
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);

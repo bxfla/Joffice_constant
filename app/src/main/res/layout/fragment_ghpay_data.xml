@@ -176,6 +176,7 @@
                 android:layout_height="45dp"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:text="部门领导:"/>
                 <View
@@ -194,6 +195,7 @@
                 android:layout_height="45dp"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeader1W"
                     style="@style/oaTextView"
                     android:text="委员会主任:"/>
                 <View
@@ -213,6 +215,7 @@
                 android:layout_height="45dp"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeader2W"
                     style="@style/oaTextView"
                     android:text="主席意见:"/>
                 <View

@@ -71,6 +71,22 @@ public class FragmentAppealData extends Fragment {
     TextView tvLeader3;
     @BindView(R.id.btnUp)
     Button btnUp;
+    @BindView(R.id.tvBMWrite)
+    TextView tvBMWrite;
+    @BindView(R.id.tvBM)
+    TextView tvBM;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader4)
+    TextView tvLeader4;
     private CustomDatePickerDay customDatePicker1;
     String data1, res;
     List<String> namelist = new ArrayList<>();
@@ -104,8 +120,14 @@ public class FragmentAppealData extends Fragment {
         String department = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "depName", "");
         etPerson.setText(userName);
         etDpartment.setText(department);
-        ProgressDialogUtil.startLoad(getActivity(),"获取流水号");
+        ProgressDialogUtil.startLoad(getActivity(), "获取流水号");
         getLIuSuiHao();
+        tvBMWrite.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -195,7 +217,7 @@ public class FragmentAppealData extends Fragment {
                     Toast.makeText(getActivity(), "具体事项不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                ProgressDialogUtil.startLoad(getActivity(),"数据上传中");
+                ProgressDialogUtil.startLoad(getActivity(), "数据上传中");
                 getSenPiPersonOne();
                 break;
         }
@@ -205,7 +227,7 @@ public class FragmentAppealData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -463,6 +485,7 @@ public class FragmentAppealData extends Fragment {
             }
         }
     };
+
     @OnClick(R.id.tvPerson)
     public void onViewClicked() {
         Intent intent = new Intent(getActivity(), PersonListActivity.class);
@@ -481,8 +504,8 @@ public class FragmentAppealData extends Fragment {
 //                    file = file+s;
             }
         }
-        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO){
-            if (data!=null){
+        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO) {
+            if (data != null) {
                 userCode = data.getStringExtra("userCode");
                 userName = data.getStringExtra("userName");
                 etPerson.setText(userName);

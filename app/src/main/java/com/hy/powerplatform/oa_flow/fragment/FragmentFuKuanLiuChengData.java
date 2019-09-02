@@ -90,11 +90,19 @@ public class FragmentFuKuanLiuChengData extends Fragment {
     TextView etLeader3;
     @BindView(R.id.btnUp)
     Button btnUp;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
     private CustomDatePickerDay customDatePicker1;
     List<String> namelist = new ArrayList<>();
     List<Name.DataBean> datalist = new ArrayList<>();
     List<Name.DataBean> backlist = new ArrayList<>();
-    String data1,res;
+    String data1, res;
     String userId;
     String userDepart = "";
     String role = "";
@@ -122,9 +130,9 @@ public class FragmentFuKuanLiuChengData extends Fragment {
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, dataList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        userId = new SharedPreferencesHelper(getActivity(),"login").getData(getActivity(),"userCode","");
-        userName = new SharedPreferencesHelper(getActivity(),"login").getData(getActivity(),"userName","");
-        etPerson.setText(new SharedPreferencesHelper(getActivity(),"login").getData(getActivity(),"userStatus",""));
+        userId = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
+        userName = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userName", "");
+        etPerson.setText(new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", ""));
 
         etSmallMoney.addTextChangedListener(new TextWatcher() {
             @Override
@@ -139,8 +147,8 @@ public class FragmentFuKuanLiuChengData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")){
-                    if (!s.toString().equals("")){
+                if (!s.toString().equals("")) {
+                    if (!s.toString().equals("")) {
                         BigDecimal numOfMoney = new BigDecimal(s.toString());
                         etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
                     }
@@ -148,8 +156,12 @@ public class FragmentFuKuanLiuChengData extends Fragment {
             }
         });
 
-        ProgressDialogUtil.startLoad(getActivity(),"获取数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
         getLIuSuiHao();
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -247,7 +259,7 @@ public class FragmentFuKuanLiuChengData extends Fragment {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2+"flow/startTransProcessActivity.do";
+                        String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + "flow/startTransProcessActivity.do";
                         DBHandler dbA = new DBHandler();
                         data1 = dbA.OAQingJiaMor(url, com.hy.powerplatform.my_utils.base.Constant.PAYFLOWDIFID);
                         if (data1.equals("保存失败") || data1.equals("")) {
@@ -319,7 +331,7 @@ public class FragmentFuKuanLiuChengData extends Fragment {
                                 MyAlertDialog.MyListAlertDialog(getActivity(), namelist, new AlertDialogCallBackP() {
                                     @Override
                                     public void oneselect(final String data) {
-                                        ProgressDialogUtil.startLoad(getActivity(),"获取数据中");
+                                        ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
                                         new Thread(new Runnable() {
                                             @Override
                                             public void run() {
@@ -402,13 +414,13 @@ public class FragmentFuKuanLiuChengData extends Fragment {
                                 nameList.add(s);
                             }
                         }
-                        if (codeList.size() == 1){
+                        if (codeList.size() == 1) {
                             selectList.add(codeList.get(0));
                             final String userName = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", "");
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    String turl = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2+ com.hy.powerplatform.my_utils.base.Constant.UPDATAU;
+                                    String turl = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.UPDATAU;
                                     DBHandler dbA = new DBHandler();
                                     String uId = "";
                                     if (selectList.size() == 1) {
@@ -433,9 +445,9 @@ public class FragmentFuKuanLiuChengData extends Fragment {
                                     final String smallMoney = etSmallMoney.getText().toString();
                                     final String data = etYongTu.getText().toString();
                                     final String type = (String) spinner.getSelectedItem();
-                                    ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+                                    ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
                                     String res = dbA.OAFuKuanLiuCHeng(turl, person, time, department, type, classD,
-                                            bigMoney, smallMoney, data, userName,userId,userDepart,uId,liushuihao);
+                                            bigMoney, smallMoney, data, userName, userId, userDepart, uId, liushuihao);
                                     if (res.equals("")) {
                                         handler.sendEmptyMessage(TAG_THERE);
                                     } else {
@@ -443,8 +455,8 @@ public class FragmentFuKuanLiuChengData extends Fragment {
                                     }
                                 }
                             }).start();
-                        }else {
-                            MyAlertDialog.MyListAlertDialog(isShow,codeList, nameList, namelist1, getActivity(), new AlertDialogCallBackP() {
+                        } else {
+                            MyAlertDialog.MyListAlertDialog(isShow, codeList, nameList, namelist1, getActivity(), new AlertDialogCallBackP() {
 
                                 @Override
                                 public void select(List<String> data) {
@@ -453,7 +465,7 @@ public class FragmentFuKuanLiuChengData extends Fragment {
                                     new Thread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            String turl = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2+ com.hy.powerplatform.my_utils.base.Constant.UPDATAU;
+                                            String turl = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.UPDATAU;
                                             DBHandler dbA = new DBHandler();
                                             String uId = "";
                                             if (selectList.size() == 1) {
@@ -479,7 +491,7 @@ public class FragmentFuKuanLiuChengData extends Fragment {
                                             final String data = etYongTu.getText().toString();
                                             final String type = (String) spinner.getSelectedItem();
                                             String res = dbA.OAFuKuanLiuCHeng(turl, person, time, department, type, classD,
-                                                    bigMoney, smallMoney, data, userName,userId,userDepart,uId,liushuihao);
+                                                    bigMoney, smallMoney, data, userName, userId, userDepart, uId, liushuihao);
                                             if (res.equals("")) {
                                                 handler.sendEmptyMessage(TAG_THERE);
                                             } else {
@@ -513,6 +525,7 @@ public class FragmentFuKuanLiuChengData extends Fragment {
             }
         }
     };
+
     @OnClick(R.id.tvPerson)
     public void onViewClicked() {
         Intent intent = new Intent(getActivity(), PersonListActivity.class);
@@ -531,8 +544,8 @@ public class FragmentFuKuanLiuChengData extends Fragment {
 //                    file = file+s;
             }
         }
-        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO){
-            if (data!=null){
+        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO) {
+            if (data != null) {
                 userCode = data.getStringExtra("userCode");
                 userName = data.getStringExtra("userName");
                 etPerson.setText(userName);

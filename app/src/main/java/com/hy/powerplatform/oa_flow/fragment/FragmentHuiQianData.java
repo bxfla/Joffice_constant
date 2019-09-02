@@ -64,6 +64,12 @@ public class FragmentHuiQianData extends Fragment {
     TextView tvDate1;
     @BindView(R.id.btnUp)
     Button btnUp;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
     private CustomDatePickerDay customDatePicker1;
     String data1, res;
     List<String> namelist = new ArrayList<>();
@@ -96,8 +102,11 @@ public class FragmentHuiQianData extends Fragment {
         userName = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", "");
         department = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "depName", "");
         etPerson.setText(userName);
-        ProgressDialogUtil.startLoad(getActivity(),"获取流水号");
+        ProgressDialogUtil.startLoad(getActivity(), "获取流水号");
         getLIuSuiHao();
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -174,7 +183,7 @@ public class FragmentHuiQianData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {

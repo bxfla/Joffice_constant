@@ -18,12 +18,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hy.powerplatform.my_utils.utils.MoneyFormat;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
+import com.hy.powerplatform.my_utils.utils.MoneyFormat;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
 import com.hy.powerplatform.oa_flow.activity.PersonListActivity;
@@ -98,6 +98,16 @@ public class FragmentCarVideoData extends Fragment {
     TextView tvPerson;
     @BindView(R.id.etPerson1)
     EditText etPerson1;
+    @BindView(R.id.tv)
+    TextView tv;
+    @BindView(R.id.tvData1)
+    TextView tvData1;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
     private CustomDatePickerDay customDatePicker1, customDatePicker2;
     Unbinder unbinder;
     List<String> namelist = new ArrayList<>();
@@ -149,15 +159,18 @@ public class FragmentCarVideoData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")){
+                if (!s.toString().equals("")) {
                     BigDecimal numOfMoney = new BigDecimal(s.toString());
                     etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
                 }
             }
         });
 
-        ProgressDialogUtil.startLoad(getActivity(),"获取数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
         getLIuSuiHao();
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -335,7 +348,7 @@ public class FragmentCarVideoData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -372,7 +385,7 @@ public class FragmentCarVideoData extends Fragment {
                 final String diaoQu = String.valueOf(spinnerDiaoQu.getSelectedItem()) + "";
                 String res = dbA.OACarVideoUp(turl, userDepart, uId, zhiDanRen, zhiDanDate, department,
                         person, carNo, line, time, address, xingZhi, staus, bigMonet, smallMoney, userId, userName,
-                        card, diaoQu,liushuihao);
+                        card, diaoQu, liushuihao);
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -562,7 +575,7 @@ public class FragmentCarVideoData extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data!=null){
+        if (data != null) {
             userCode = data.getStringExtra("userCode");
             userName = data.getStringExtra("userName");
             etPerson.setText(userName);

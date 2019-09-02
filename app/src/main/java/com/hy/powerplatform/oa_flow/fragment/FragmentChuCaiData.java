@@ -95,6 +95,14 @@ public class FragmentChuCaiData extends Fragment {
     TextView etDepartment;
     @BindView(R.id.tvPerson)
     TextView tvPerson;
+    @BindView(R.id.tv)
+    TextView tv;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
     private CustomDatePickerDay customDatePicker1, customDatePicker2;
 
     String data1, res;
@@ -138,6 +146,9 @@ public class FragmentChuCaiData extends Fragment {
         String department = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "depName", "");
         etDepartment.setText(department);
         etPerson.setText(userName);
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -209,7 +220,7 @@ public class FragmentChuCaiData extends Fragment {
                             tvStartTime.setText(time.split(" ")[0]);
                             daynumber = (int) new CompareDiff().dateDiff1(tvStartTime.getText().toString()
                                     , tvEndTime.getText().toString(), "yyyy-MM-dd");
-                            etAllTime.setText(daynumber+1 + "");
+                            etAllTime.setText(daynumber + 1 + "");
                         }
                     } catch (Exception exception) {
                         exception.printStackTrace();
@@ -224,7 +235,7 @@ public class FragmentChuCaiData extends Fragment {
                             tvEndTime.setText(time.split(" ")[0]);
                             daynumber = (int) new CompareDiff().dateDiff1(tvStartTime.getText().toString()
                                     , tvEndTime.getText().toString(), "yyyy-MM-dd");
-                            etAllTime.setText(daynumber+1 + "");
+                            etAllTime.setText(daynumber + 1 + "");
                         }
                     } catch (Exception exception) {
                         exception.printStackTrace();
@@ -292,7 +303,7 @@ public class FragmentChuCaiData extends Fragment {
                     Toast.makeText(getActivity(), "出差天数不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (address1.equals("")  || address3.equals("")) {
+                if (address1.equals("") || address3.equals("")) {
                     Toast.makeText(getActivity(), "地点不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -322,7 +333,7 @@ public class FragmentChuCaiData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {

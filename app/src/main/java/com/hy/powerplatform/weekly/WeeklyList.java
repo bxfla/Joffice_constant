@@ -14,6 +14,24 @@ public class WeeklyList implements Serializable {
     public String dayTime;
     public String startDate;
     public String endDate;
+    public String userName;
+    public String depName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getDepName() {
+        return depName;
+    }
+
+    public void setDepName(String depName) {
+        this.depName = depName;
+    }
 
     public String getDayTime() {
         return dayTime;

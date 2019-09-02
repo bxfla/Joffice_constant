@@ -141,7 +141,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:text="财务审计部:"
                     android:layout_height="45dp"
@@ -164,11 +164,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
+                    android:id="@+id/tvLeader1W"
                     style="@style/oaTextView"
-                    android:text="营运管理部:"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="营运管理部:" />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -214,6 +217,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeader2W"
                     style="@style/oaTextView"
                     android:text="信息技术部:"
                     android:layout_height="45dp"
@@ -237,6 +241,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeader3W"
                     style="@style/oaTextView"
                     android:text="综合管理部:"
                     android:layout_height="45dp"
@@ -258,6 +263,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeader4W"
                     style="@style/oaTextView"
                     android:text="春城通科技:"
                     android:layout_height="45dp"
@@ -280,6 +286,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeader5W"
                     style="@style/oaTextView"
                     android:text="分公司反馈:"
                     android:layout_height="45dp"
@@ -302,6 +309,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeader6W"
                     style="@style/oaTextView"
                     android:text="人力资源部:"
                     android:layout_height="45dp"

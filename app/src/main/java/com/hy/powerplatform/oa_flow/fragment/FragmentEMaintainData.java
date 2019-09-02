@@ -100,6 +100,18 @@ public class FragmentEMaintainData extends Fragment {
     ListView mListView;
     @BindView(R.id.mHorizontalScrollView)
     HorizontalScrollView mHorizontalScrollView;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
     private CustomDatePickerDay customDatePicker1;
     String data1, res;
     List<String> namelist = new ArrayList<>();
@@ -124,7 +136,6 @@ public class FragmentEMaintainData extends Fragment {
     String liushuihao = "";
 
 
-
     List<FlowMessage> dataList = new ArrayList<>();
     TestAdapter adapter;
 
@@ -139,6 +150,12 @@ public class FragmentEMaintainData extends Fragment {
         department = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "depName", "");
         etPerson.setText(userName);
         etDpartment.setText(department);
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -240,16 +257,16 @@ public class FragmentEMaintainData extends Fragment {
 
     @OnClick(R.id.btnHistory)
     public void onViewClicked() {
-        ProgressDialogUtil.startLoad(getActivity(),"获取数据中");
-        for (int i = 0;i<5;i++){
+        ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
+        for (int i = 0; i < 5; i++) {
             FlowMessage bean = new FlowMessage();
             bean.setNum("i");
-            bean.setTaskName("test"+i);
-            bean.setPerson("person"+i);
-            bean.setStartTime("startTime"+i);
-            bean.setEndTime("endTime"+i);
-            bean.setTime("time"+i);
-            bean.setAggre("aggre"+i);
+            bean.setTaskName("test" + i);
+            bean.setPerson("person" + i);
+            bean.setStartTime("startTime" + i);
+            bean.setEndTime("endTime" + i);
+            bean.setTime("time" + i);
+            bean.setAggre("aggre" + i);
             dataList.add(bean);
         }
         adapter = new TestAdapter(getActivity(), dataList);
@@ -272,7 +289,7 @@ public class FragmentEMaintainData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {

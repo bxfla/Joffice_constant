@@ -155,8 +155,6 @@ public class FlowBillWillDetailActivity extends BaseActivity {
     Button btnUp;
     @BindView(R.id.tvData)
     TextView tvData;
-    @BindView(R.id.textView16)
-    TextView textView16;
     @BindView(R.id.btnT)
     FloatingActionButton btnT;
     @BindView(R.id.tvText)

@@ -165,7 +165,7 @@ public class WeeklyListActivity extends BaseActivity {
         Calendar c = Calendar.getInstance();
         //过去七天
         c.setTime(new Date());
-        c.add(Calendar.DATE, -31);
+        c.add(Calendar.DATE, -8);
         Date d = c.getTime();
         String day = format.format(d);
         tvStartTime.setText(day);
@@ -272,6 +272,8 @@ public class WeeklyListActivity extends BaseActivity {
                             bean.setDayTime(jsonOnjectData.getString("dayTime"));
                             bean.setStartDate(jsonOnjectData.getString("startDate"));
                             bean.setEndDate(jsonOnjectData.getString("endDate"));
+                            bean.setUserName(jsonOnjectData.getString("userName"));
+                            bean.setDepName(jsonOnjectData.getString("deptName"));
                             beanList.add(bean);
                         }
                         adapter = new WeeklyListAdapter(WeeklyListActivity.this,beanList);

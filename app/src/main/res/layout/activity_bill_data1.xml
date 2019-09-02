@@ -615,7 +615,7 @@
 
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:text="安全服务:"
                     android:layout_height="45dp"
@@ -641,6 +641,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeader1W"
                     style="@style/oaTextView"
                     android:text="分管领导:"
                     android:layout_height="45dp"
@@ -666,6 +667,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeader2W"
                     style="@style/oaTextView"
                     android:text="财务总监:"
                     android:layout_height="45dp"

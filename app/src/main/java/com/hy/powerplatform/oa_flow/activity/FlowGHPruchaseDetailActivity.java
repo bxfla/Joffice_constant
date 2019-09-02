@@ -134,14 +134,18 @@ public class FlowGHPruchaseDetailActivity extends BaseActivity {
     TextView tvAllMoney;
     @BindView(R.id.tvOther)
     TextView tvOther;
-    @BindView(R.id.textView17)
-    TextView textView17;
     @BindView(R.id.btnHistory)
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
     private String res;
     String xiangguanfujian = "";
     String flowMessage = "";
@@ -154,6 +158,9 @@ public class FlowGHPruchaseDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
         header.setTvRight("追回");
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);

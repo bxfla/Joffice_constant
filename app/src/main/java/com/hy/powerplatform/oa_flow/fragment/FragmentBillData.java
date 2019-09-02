@@ -127,6 +127,12 @@ public class FragmentBillData extends Fragment {
     TextView tvPerson;
     @BindView(R.id.tvData)
     TextView tvData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
     private CustomDatePickerDay customDatePicker1;
 
     @Override
@@ -155,7 +161,7 @@ public class FragmentBillData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")){
+                if (!s.toString().equals("")) {
                     BigDecimal numOfMoney = new BigDecimal(s.toString());
                     etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
                 }
@@ -163,6 +169,9 @@ public class FragmentBillData extends Fragment {
         });
         ProgressDialogUtil.startLoad(getActivity(), "获取流水号中");
         getLIuSuiHao();
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -329,7 +338,7 @@ public class FragmentBillData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {

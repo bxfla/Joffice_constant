@@ -264,6 +264,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:text="部门领导:" />
 
@@ -287,6 +288,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader1W"
                     style="@style/oaTextView"
                     android:text="分公司接办人:" />
 
@@ -309,6 +311,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader2W"
                     style="@style/oaTextView"
                     android:text="营运公司:" />
 
@@ -354,6 +357,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader4W"
                     style="@style/oaTextView"
                     android:text="反馈投诉人:" />
 

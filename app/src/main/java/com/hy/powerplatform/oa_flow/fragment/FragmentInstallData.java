@@ -108,6 +108,20 @@ public class FragmentInstallData extends Fragment {
     EditText etys;
     @BindView(R.id.tvLeader7)
     TextView tvLeader7;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
+    @BindView(R.id.tvLeader6W)
+    TextView tvLeader6W;
     private CustomDatePickerDay customDatePicker1, customDatePicker2;
 
     @Override
@@ -123,6 +137,13 @@ public class FragmentInstallData extends Fragment {
         etDepartment.setText(department);
         ProgressDialogUtil.startLoad(getActivity(), "获取流水号");
         getLIuSuiHao();
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader6W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -305,7 +326,7 @@ public class FragmentInstallData extends Fragment {
                 final String data = etData.getText().toString();
                 final String ys = etys.getText().toString().trim();
                 String res = dbA.OAInstallUp(turl, userDepart, uId, department, date,
-                        data, userId, userName, liushuihao,ys);
+                        data, userId, userName, liushuihao, ys);
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {

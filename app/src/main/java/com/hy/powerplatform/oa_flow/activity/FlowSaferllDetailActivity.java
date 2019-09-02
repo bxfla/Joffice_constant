@@ -115,8 +115,6 @@ public class FlowSaferllDetailActivity extends BaseActivity {
     LinearLayout ll4;
     @BindView(R.id.etLeader)
     EditText etLeader;
-    @BindView(R.id.textView7)
-    TextView textView7;
     @BindView(R.id.etLeader1)
     EditText etLeader1;
     @BindView(R.id.etLeader2)
@@ -133,6 +131,12 @@ public class FlowSaferllDetailActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
     private String res;
     String flowMessage = "";
     String xiangguanfujian = "";
@@ -145,6 +149,9 @@ public class FlowSaferllDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
         header.setTvRight("追回");
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);

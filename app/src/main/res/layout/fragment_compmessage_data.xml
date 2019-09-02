@@ -151,6 +151,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:text="部门负责人:"
                     android:layout_height="45dp"
@@ -171,11 +172,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
+                    android:id="@+id/tvLeader1W"
                     style="@style/oaTextView"
-                    android:text="分管领导:"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="分管领导:" />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -193,6 +197,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeader2W"
                     style="@style/oaTextView"
                     android:text="综合管理部:"
                     android:layout_height="45dp"
@@ -214,6 +219,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeader3W"
                     style="@style/oaTextView"
                     android:text="承办部门:"
                     android:layout_height="45dp"
@@ -234,11 +240,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
+                    android:id="@+id/tvLeader4W"
                     style="@style/oaTextView"
-                    android:text="总经理:"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="总经理:" />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"

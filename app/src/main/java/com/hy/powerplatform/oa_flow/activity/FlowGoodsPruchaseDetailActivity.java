@@ -134,8 +134,6 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
     TextView tvAllMoney;
     @BindView(R.id.tvOther)
     TextView tvOther;
-    @BindView(R.id.textView17)
-    TextView textView17;
     @BindView(R.id.btnHistory)
     Button btnHistory;
     @BindView(R.id.recyclerView)
@@ -178,6 +176,18 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
     LinearLayout ll11;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
     private String res;
     String xiangguanfujian = "";
     String flowMessage = "";
@@ -192,6 +202,12 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
         ll11.setVisibility(View.GONE);
         llcg.setVisibility(View.GONE);
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
         header.setTvRight("追回");
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);

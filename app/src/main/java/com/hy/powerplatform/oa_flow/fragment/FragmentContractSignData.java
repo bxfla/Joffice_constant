@@ -71,6 +71,18 @@ public class FragmentContractSignData extends Fragment {
     TextView etZJL;
     @BindView(R.id.btnUp)
     Button btnUp;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
     private CustomDatePickerDay customDatePicker1;
 
     List<String> namelist = new ArrayList<>();
@@ -97,11 +109,17 @@ public class FragmentContractSignData extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contractsign_data, container, false);
         unbinder = ButterKnife.bind(this, view);
         initDatePicker();
-        userId = new SharedPreferencesHelper(getActivity(),"login").getData(getActivity(),"userCode","");
+        userId = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
         userName = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", "");
         String department = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "depName", "");
         etPerson.setText(userName);
         etDepartment.setText(department);
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -207,11 +225,11 @@ public class FragmentContractSignData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String turl = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2+ com.hy.powerplatform.my_utils.base.Constant.UPDATAU;
+                String turl = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.UPDATAU;
                 DBHandler dbA = new DBHandler();
                 String uId = "";
                 if (selectList.size() == 1) {
@@ -302,7 +320,7 @@ public class FragmentContractSignData extends Fragment {
                                 MyAlertDialog.MyListAlertDialog(getActivity(), namelist, new AlertDialogCallBackP() {
                                     @Override
                                     public void oneselect(final String data) {
-                                        ProgressDialogUtil.startLoad(getActivity(),"获取数据中");
+                                        ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
                                         new Thread(new Runnable() {
                                             @Override
                                             public void run() {
@@ -385,11 +403,11 @@ public class FragmentContractSignData extends Fragment {
                                 nameList.add(s);
                             }
                         }
-                        if (codeList.size() == 1){
+                        if (codeList.size() == 1) {
                             selectList.add(codeList.get(0));
                             UpContractData();
-                        }else {
-                            MyAlertDialog.MyListAlertDialog(isShow,codeList, nameList, namelist1, getActivity(), new AlertDialogCallBackP() {
+                        } else {
+                            MyAlertDialog.MyListAlertDialog(isShow, codeList, nameList, namelist1, getActivity(), new AlertDialogCallBackP() {
 
                                 @Override
                                 public void select(List<String> data) {
@@ -437,8 +455,8 @@ public class FragmentContractSignData extends Fragment {
 //                    file = file+s;
             }
         }
-        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO){
-            if (data!=null){
+        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO) {
+            if (data != null) {
                 userCode = data.getStringExtra("userCode");
                 userName = data.getStringExtra("userName");
                 etPerson.setText(userName);

@@ -54,6 +54,14 @@ public class WeekDetailActivity extends BaseActivity {
     String data;
     String dataId;
     String downloadData;
+    @BindView(R.id.tvUser)
+    TextView tvUser;
+    @BindView(R.id.tvDep)
+    TextView tvDep;
+    @BindView(R.id.llUser)
+    LinearLayout llUser;
+    @BindView(R.id.llDep)
+    LinearLayout llDep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +71,26 @@ public class WeekDetailActivity extends BaseActivity {
         WeeklyList bean = (WeeklyList) intent.getSerializableExtra("bean");
         data = bean.getFileName();
         dataId = bean.getFileId();
-        if (bean.getFileName().equals("")){
+        if (bean.getFileName().equals("")) {
             llData.setVisibility(View.GONE);
-        }else {
+        } else {
             tvData.setText(data);
         }
         tvTime.setText(bean.getDayTime());
         tvStartTime.setText(bean.getStartDate());
         tvEndTime.setText(bean.getEndDate());
+        String userName = bean.getUserName().toString();
+        if (!userName.equals("")) {
+            tvUser.setText(userName);
+        }else {
+            llUser.setVisibility(View.GONE);
+        }
+        String dep = bean.getDepName().toString();
+        if (!dep.equals("")) {
+            tvDep.setText(dep);
+        }else {
+            llDep.setVisibility(View.GONE);
+        }
         //加载url
         webView.loadDataWithBaseURL(null, bean.getContent(), "text/html", "utf-8", null);
         WebSettings webSettings = webView.getSettings();
@@ -79,7 +99,7 @@ public class WeekDetailActivity extends BaseActivity {
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         //支持屏幕缩放
         webSettings.setSupportZoom(true);
-        webSettings.setTextZoom(100);
+        webSettings.setTextZoom(200);
         webSettings.setBuiltInZoomControls(true);
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
@@ -109,7 +129,7 @@ public class WeekDetailActivity extends BaseActivity {
             dataList = new MyStringSpilt().stringSpiltList(data);
             dataIdList = new MyStringSpilt().stringSpiltList(dataId);
             if (dataList.size() == 1) {
-                String id = new MyStringSpilt().stringSpilt(dataIdList.get(0));
+                String id = dataIdList.get(0);
                 final String url = Constant.BASE_URL2 + Constant.FILEDATA + "?fileId=" + id;
                 new Thread(new Runnable() {
                     @Override
@@ -130,8 +150,8 @@ public class WeekDetailActivity extends BaseActivity {
                     @Override
                     public void oneselect(final String data1) {
                         String id = "";
-                        for (int i = 0; i< finalDataList.size(); i++){
-                            if (finalDataList.get(i).equals(data1)){
+                        for (int i = 0; i < finalDataList.size(); i++) {
+                            if (finalDataList.get(i).equals(data1)) {
                                 id = finalDataIdList.get(i);
                             }
                         }

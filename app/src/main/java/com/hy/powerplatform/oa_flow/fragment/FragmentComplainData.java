@@ -93,6 +93,14 @@ public class FragmentComplainData extends Fragment {
     Button btnUp;
     @BindView(R.id.tvPerson)
     TextView tvPerson;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
     private CustomDatePickerDay customDatePicker1;
     List<String> namelist = new ArrayList<>();
     List<Name.DataBean> datalist = new ArrayList<>();
@@ -142,9 +150,12 @@ public class FragmentComplainData extends Fragment {
         adapterAP.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerComp.setAdapter(adapterAP);
 
-        ProgressDialogUtil.startLoad(getActivity(),"获取数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
         getLIuSuiHao();
-
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -300,7 +311,7 @@ public class FragmentComplainData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -331,7 +342,7 @@ public class FragmentComplainData extends Fragment {
                 final String shouLi = etShouLi.getText().toString() + "";
                 final String data = etData.getText().toString() + "";
                 String res = dbA.OAComplainUp(turl, userDepart, uId, person, time, sex,
-                        phone, person1, carNo, department, line, shouLi, data, userId, userName,LiuShuiCode);
+                        phone, person1, carNo, department, line, shouLi, data, userId, userName, LiuShuiCode);
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -536,8 +547,8 @@ public class FragmentComplainData extends Fragment {
 //                    file = file+s;
             }
         }
-        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO){
-            if (data!=null){
+        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO) {
+            if (data != null) {
                 userCode = data.getStringExtra("userCode");
                 userName = data.getStringExtra("userName");
                 etPerson.setText(userName);

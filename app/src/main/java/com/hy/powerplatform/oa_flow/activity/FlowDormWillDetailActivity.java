@@ -158,8 +158,6 @@ public class FlowDormWillDetailActivity extends BaseActivity {
     EditText etLeader3;
     @BindView(R.id.btnUp)
     Button btnUp;
-    @BindView(R.id.textView5)
-    TextView textView5;
     @BindView(R.id.llRZ)
     LinearLayout llRZ;
     @BindView(R.id.btnT)

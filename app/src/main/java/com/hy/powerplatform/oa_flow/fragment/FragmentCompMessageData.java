@@ -80,6 +80,16 @@ public class FragmentCompMessageData extends Fragment {
     TextView tvLeader4;
     @BindView(R.id.btnUp)
     Button btnUp;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
     private CustomDatePickerDay customDatePicker1;
     String data1, res;
     List<String> namelist = new ArrayList<>();
@@ -114,6 +124,11 @@ public class FragmentCompMessageData extends Fragment {
         etPerson.setText(userName);
         ProgressDialogUtil.startLoad(getActivity(), "获取流水号");
         getLIuSuiHao();
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -208,7 +223,7 @@ public class FragmentCompMessageData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -231,18 +246,18 @@ public class FragmentCompMessageData extends Fragment {
                 final String date = tvTime.getText().toString();
                 final String person = etPerson.getText().toString();
                 final String title = etTitle.getText().toString();
-                String fbpt1 = "",fbpt2 = "",fbpt3 = "";
-                if(cb1.isChecked()){
+                String fbpt1 = "", fbpt2 = "", fbpt3 = "";
+                if (cb1.isChecked()) {
                     fbpt1 = "on";
                 }
-                if(cb2.isChecked()){
+                if (cb2.isChecked()) {
                     fbpt2 = "on";
                 }
-                if(cb3.isChecked()){
+                if (cb3.isChecked()) {
                     fbpt3 = "on";
                 }
                 String res = dbA.OACompMessageUp(turl, userDepart, uId, date, person,
-                        title, fbpt1, fbpt2 ,fbpt3, userId, userName, liushuihao);
+                        title, fbpt1, fbpt2, fbpt3, userId, userName, liushuihao);
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {

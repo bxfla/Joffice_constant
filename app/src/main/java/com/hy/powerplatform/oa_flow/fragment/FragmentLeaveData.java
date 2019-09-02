@@ -93,6 +93,12 @@ public class FragmentLeaveData extends Fragment {
     String tag = "";
     @BindView(R.id.tvPerson)
     TextView tvPerson;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
     private byte[] lock = new byte[0];
     // 位数，默认是8位
     private final static long w = 100000000;
@@ -163,13 +169,13 @@ public class FragmentLeaveData extends Fragment {
                 daynumber = (int) new CompareDiff().dateDiff(tvStartTime.getText().toString()
                         , tvEndTime.getText().toString(), "yyyy-MM-dd");
                 if (spinnerAM.getSelectedItem().toString().equals(spinnerPM.getSelectedItem().toString())) {
-                    etDays.setText((daynumber + 0.5)+ "");
+                    etDays.setText((daynumber + 0.5) + "");
                 } else if (spinnerAM.getSelectedItem().toString().equals("上午")
                         && spinnerPM.getSelectedItem().equals("下午")) {
                     etDays.setText((daynumber + 1) + "");
                 } else if (spinnerAM.getSelectedItem().toString().equals("下午")
                         && spinnerPM.getSelectedItem().equals("上午")) {
-                    etDays.setText((daynumber ) + "");
+                    etDays.setText((daynumber) + "");
                 }
             }
 
@@ -203,6 +209,9 @@ public class FragmentLeaveData extends Fragment {
         initDatePicker();
         tvPerson.setText(new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", ""));
         userId = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -252,10 +261,10 @@ public class FragmentLeaveData extends Fragment {
                                 etDays.setText((daynumber + 0.5) + "");
                             } else if (spinnerAM.getSelectedItem().toString().equals("上午")
                                     && spinnerPM.getSelectedItem().equals("下午")) {
-                                etDays.setText((daynumber +1) + "");
+                                etDays.setText((daynumber + 1) + "");
                             } else if (spinnerAM.getSelectedItem().toString().equals("下午")
                                     && spinnerPM.getSelectedItem().equals("上午")) {
-                                etDays.setText((daynumber ) + "");
+                                etDays.setText((daynumber) + "");
                             }
                         }
                     } catch (Exception exception) {
@@ -643,7 +652,7 @@ public class FragmentLeaveData extends Fragment {
                                         }
                                         uId = selectList.get(0) + "," + uId;
                                     }
-                                    ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+                                    ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
                                     String res = dbA.OAQingJia(turl, person, time, startDay, endDay, startTime,
                                             endTime, type, reason, dayNum, userName, userId, userDepart, uId);
                                     if (res.equals("")) {

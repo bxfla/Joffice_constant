@@ -645,7 +645,7 @@
                     android:background="@color/shouye" />
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
@@ -671,6 +671,7 @@
 
 
                 <TextView
+                    android:id="@+id/tvLeader1W"
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
@@ -700,6 +701,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader2W"
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
@@ -731,6 +733,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader3W"
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
@@ -763,6 +766,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader4W"
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
@@ -794,6 +798,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader5W"
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"

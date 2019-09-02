@@ -16,12 +16,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hy.powerplatform.my_utils.utils.MoneyFormat;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
+import com.hy.powerplatform.my_utils.utils.MoneyFormat;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
 import com.hy.powerplatform.oa_flow.activity.PersonListActivity;
@@ -85,6 +85,12 @@ public class FragmentReceiveDinnerData extends Fragment {
     TextView tvLeader3;
     @BindView(R.id.btnUp)
     Button btnUp;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
     private CustomDatePickerDay customDatePicker1;
     List<String> namelist = new ArrayList<>();
     List<Name.DataBean> datalist = new ArrayList<>();
@@ -110,7 +116,7 @@ public class FragmentReceiveDinnerData extends Fragment {
         View view = inflater.inflate(R.layout.fragment_receivedinner_data, container, false);
         unbinder = ButterKnife.bind(this, view);
         initDatePicker();
-        userId = new SharedPreferencesHelper(getActivity(),"login").getData(getActivity(),"userCode","");
+        userId = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
         userName = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", "");
         String department = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "depName", "");
         etPerson.setText(userName);
@@ -128,12 +134,15 @@ public class FragmentReceiveDinnerData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().equals("")){
+                if (!s.toString().equals("")) {
                     BigDecimal numOfMoney = new BigDecimal(s.toString());
                     etBigMoney.setText(MoneyFormat.toChineseCharI1(numOfMoney));
                 }
             }
         });
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -214,15 +223,15 @@ public class FragmentReceiveDinnerData extends Fragment {
 //                }
                 break;
             case R.id.btnUp:
-                final String time = tvTime.getText().toString().trim()+"";
-                final String person = etPerson.getText().toString().trim()+"";
-                final String department = etDpartment.getText().toString().trim()+"";
-                final String pcPerson = etPCPerson.getText().toString().trim()+"";
-                final String lkDepartment = etLKDepartment.getText().toString().trim()+"";
-                final String lkPerson = etLKPerson.getText().toString().trim()+"";
-                final String eatBz = etEatBZ.getText().toString().trim()+"";
-                final String bigMoney = etBigMoney.getText().toString().trim()+"";
-                final String smallMoney = etSmallMoney.getText().toString().trim()+"";
+                final String time = tvTime.getText().toString().trim() + "";
+                final String person = etPerson.getText().toString().trim() + "";
+                final String department = etDpartment.getText().toString().trim() + "";
+                final String pcPerson = etPCPerson.getText().toString().trim() + "";
+                final String lkDepartment = etLKDepartment.getText().toString().trim() + "";
+                final String lkPerson = etLKPerson.getText().toString().trim() + "";
+                final String eatBz = etEatBZ.getText().toString().trim() + "";
+                final String bigMoney = etBigMoney.getText().toString().trim() + "";
+                final String smallMoney = etSmallMoney.getText().toString().trim() + "";
                 if (department.equals("")) {
                     Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
                     break;
@@ -247,7 +256,7 @@ public class FragmentReceiveDinnerData extends Fragment {
                     Toast.makeText(getActivity(), "金额不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (smallMoney.equals("")||smallMoney.equals("")) {
+                if (smallMoney.equals("") || smallMoney.equals("")) {
                     Toast.makeText(getActivity(), "金额不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -261,11 +270,11 @@ public class FragmentReceiveDinnerData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String turl = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2+ com.hy.powerplatform.my_utils.base.Constant.UPDATAU;
+                String turl = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.UPDATAU;
                 DBHandler dbA = new DBHandler();
                 String uId = "";
                 if (selectList.size() == 1) {
@@ -281,17 +290,17 @@ public class FragmentReceiveDinnerData extends Fragment {
                     }
                     uId = selectList.get(0) + "," + uId;
                 }
-                final String time = tvTime.getText().toString()+"";
-                final String person = etPerson.getText().toString()+"";
-                final String department = etDpartment.getText().toString()+"";
-                final String pcPerson = etPCPerson.getText().toString()+"";
-                final String lkDepartment = etLKDepartment.getText().toString()+"";
-                final String lkPerson = etLKPerson.getText().toString()+"";
-                final String eatBz = etEatBZ.getText().toString()+"";
-                final String bigMoney = etBigMoney.getText().toString()+"";
-                final String smallMoney = etSmallMoney.getText().toString()+"";
+                final String time = tvTime.getText().toString() + "";
+                final String person = etPerson.getText().toString() + "";
+                final String department = etDpartment.getText().toString() + "";
+                final String pcPerson = etPCPerson.getText().toString() + "";
+                final String lkDepartment = etLKDepartment.getText().toString() + "";
+                final String lkPerson = etLKPerson.getText().toString() + "";
+                final String eatBz = etEatBZ.getText().toString() + "";
+                final String bigMoney = etBigMoney.getText().toString() + "";
+                final String smallMoney = etSmallMoney.getText().toString() + "";
                 String res = dbA.OADinnerUp(turl, userDepart, uId, time, person, department,
-                        pcPerson, lkDepartment, lkPerson,eatBz,bigMoney,smallMoney,userId,userName);
+                        pcPerson, lkDepartment, lkPerson, eatBz, bigMoney, smallMoney, userId, userName);
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -441,11 +450,11 @@ public class FragmentReceiveDinnerData extends Fragment {
                                 nameList.add(s);
                             }
                         }
-                        if (codeList.size() == 1){
+                        if (codeList.size() == 1) {
                             selectList.add(codeList.get(0));
                             UpContractData();
-                        }else {
-                            MyAlertDialog.MyListAlertDialog(isShow,codeList, nameList, namelist1, getActivity(), new AlertDialogCallBackP() {
+                        } else {
+                            MyAlertDialog.MyListAlertDialog(isShow, codeList, nameList, namelist1, getActivity(), new AlertDialogCallBackP() {
 
                                 @Override
                                 public void select(List<String> data) {
@@ -474,6 +483,7 @@ public class FragmentReceiveDinnerData extends Fragment {
             }
         }
     };
+
     @OnClick(R.id.tvPerson)
     public void onViewClicked() {
         Intent intent = new Intent(getActivity(), PersonListActivity.class);
@@ -492,8 +502,8 @@ public class FragmentReceiveDinnerData extends Fragment {
 //                    file = file+s;
             }
         }
-        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO){
-            if (data!=null){
+        if (requestCode == com.hy.powerplatform.my_utils.base.Constant.TAG_TWO) {
+            if (data != null) {
                 userCode = data.getStringExtra("userCode");
                 userName = data.getStringExtra("userName");
                 etPerson.setText(userName);

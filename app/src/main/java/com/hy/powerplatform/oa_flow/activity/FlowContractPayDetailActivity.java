@@ -76,14 +76,20 @@ public class FlowContractPayDetailActivity extends BaseActivity {
     TextView tvLeader3;
     @BindView(R.id.header)
     Header header;
-    @BindView(R.id.textView3)
-    TextView textView3;
     @BindView(R.id.btnHistory)
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
     private String res;
     String flowMessage = "";
     String xiangguanfujian = "";
@@ -96,6 +102,10 @@ public class FlowContractPayDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
         header.setTvRight("追回");
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);

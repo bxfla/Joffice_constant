@@ -105,8 +105,6 @@ public class FragmentEntryData extends Fragment {
     String liushuihao = "";
     @BindView(R.id.etCarType)
     EditText etCarType;
-    @BindView(R.id.textView4)
-    TextView textView4;
     @BindView(R.id.tvLeader3)
     TextView tvLeader3;
     @BindView(R.id.tvLeader)
@@ -121,6 +119,20 @@ public class FragmentEntryData extends Fragment {
     TextView tvLeader6;
     @BindView(R.id.tvLeader1)
     TextView tvLeader1;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
+    @BindView(R.id.tvLeader6W)
+    TextView tvLeader6W;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -171,6 +183,13 @@ public class FragmentEntryData extends Fragment {
 //        etPerson.setText(userName);
         ProgressDialogUtil.startLoad(getActivity(), "获取流水号");
         getLIuSuiHao();
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader6W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -300,7 +319,7 @@ public class FragmentEntryData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {

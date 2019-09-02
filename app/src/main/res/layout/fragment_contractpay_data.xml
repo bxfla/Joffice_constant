@@ -228,6 +228,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:text="部门领导:" />
 
@@ -251,6 +252,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader1W"
                     style="@style/oaTextView"
                     android:text="分管领导:" />
 
@@ -265,7 +267,6 @@
                     style="@style/oaEditText"
                     android:hint="分管领导签名" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -274,6 +275,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader2W"
                     style="@style/oaTextView"
                     android:text="分管财务:" />
 
@@ -297,6 +299,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader3W"
                     style="@style/oaTextView"
                     android:text="总经理:" />
 

@@ -144,6 +144,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:text="部门意见:" />
 
@@ -165,6 +166,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader1W"
                     style="@style/oaTextView"
                     android:text="财审部门意见:" />
 
@@ -188,6 +190,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader2W"
                     style="@style/oaTextView"
                     android:text="监管部门意见:" />
 
@@ -211,6 +214,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader3W"
                     style="@style/oaTextView"
                     android:text="法律顾问意见:" />
 
@@ -234,6 +238,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader4W"
                     style="@style/oaTextView"
                     android:text="分管领导意见:" />
 
@@ -257,6 +262,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader5W"
                     style="@style/oaTextView"
                     android:text="总经理意见:" />
 

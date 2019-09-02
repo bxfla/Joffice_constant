@@ -109,4 +109,30 @@ public class MyAlertDialog {
         mAlertDialog.show();
         mAlertDialog.getWindow().setContentView(view);
     }
+
+    public static void MyListAlertDialog1( final Context context,final List<String> nameList,
+                                          final AlertDialogCallBackP alertDialogCallBack){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog mAlertDialog = builder.create();
+        //在这里使用新的视图
+        View view = LayoutInflater.from(context).inflate(R.layout.alert_recycler1, null);
+        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.rc_dialog_add_sub_private_topic);
+        //初始化Adapter
+        DialogAddSubPrivateTopicRecyclerViewAdapter dialogAddSubPrivateTopicRecyclerViewAdapter = new DialogAddSubPrivateTopicRecyclerViewAdapter(nameList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(dialogAddSubPrivateTopicRecyclerViewAdapter);
+        //设置点击事件
+        dialogAddSubPrivateTopicRecyclerViewAdapter.setOnItemClickListener(new DialogAddSubPrivateTopicRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                //在这里处理点击事件
+                alertDialogCallBack.oneselect(nameList.get(position));
+                mAlertDialog.dismiss();
+            }
+        });
+        mAlertDialog.setCanceledOnTouchOutside(false);
+        mAlertDialog.show();
+        mAlertDialog.getWindow().setContentView(view);
+    }
 }

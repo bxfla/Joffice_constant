@@ -117,8 +117,6 @@ public class FlowSaferWillDetailActivity extends BaseActivity {
     TextView tvLeader;
     @BindView(R.id.etLeader)
     EditText etLeader;
-    @BindView(R.id.textView7)
-    TextView textView7;
     @BindView(R.id.tvLeader1)
     TextView tvLeader1;
     @BindView(R.id.etLeader1)

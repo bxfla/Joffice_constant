@@ -333,6 +333,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:text="需求部门:"
                     android:layout_height="45dp"
@@ -364,6 +365,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader1W"
                     style="@style/oaTextView"
                     android:text="需求部门领导:"
                     android:layout_height="45dp"
@@ -395,6 +397,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader2W"
                     style="@style/oaTextView"
                     android:text="建设部门:"
                     android:layout_height="45dp"
@@ -426,6 +429,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader3W"
                     style="@style/oaTextView"
                     android:text="建设分管领导:"
                     android:layout_height="45dp"
@@ -457,6 +461,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader4W"
                     style="@style/oaTextView"
                     android:text="总经理:"
                     android:layout_height="45dp"

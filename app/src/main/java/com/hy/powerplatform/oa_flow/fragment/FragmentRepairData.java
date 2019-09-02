@@ -78,6 +78,14 @@ public class FragmentRepairData extends Fragment {
     TextView tvLeader1;
     @BindView(R.id.btnUp)
     Button btnUp;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
     private byte[] lock = new byte[0];
     // 位数，默认是8位
     private final static long w = 100000000;
@@ -117,8 +125,12 @@ public class FragmentRepairData extends Fragment {
         etDepartment.setText(department);
         userId = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
         userName = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", "");
-        ProgressDialogUtil.startLoad(getActivity(),"获取数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
         getLIuSuiHao();
+        tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -266,11 +278,11 @@ public class FragmentRepairData extends Fragment {
      * 提交数据
      */
     private void UpContractData() {
-        ProgressDialogUtil.startLoad(getActivity(),"提交数据中");
+        ProgressDialogUtil.startLoad(getActivity(), "提交数据中");
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String turl = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2+ com.hy.powerplatform.my_utils.base.Constant.UPDATAU;
+                String turl = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.UPDATAU;
                 DBHandler dbA = new DBHandler();
                 String uName = "";
                 String uId = "";
@@ -294,7 +306,7 @@ public class FragmentRepairData extends Fragment {
                 final String data = etData.getText().toString();
                 final String departP = "";
                 String res = dbA.OARepairUp(turl, userDepart, uId, department, address, date,
-                        data, departP, userId, userName,liushuihao);
+                        data, departP, userId, userName, liushuihao);
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -454,11 +466,11 @@ public class FragmentRepairData extends Fragment {
                                 nameList.add(s);
                             }
                         }
-                        if (codeList.size() == 1){
+                        if (codeList.size() == 1) {
                             selectList.add(codeList.get(0));
                             UpContractData();
-                        }else {
-                            MyAlertDialog.MyListAlertDialog(isShow,codeList, nameList, namelist1, getActivity(), new AlertDialogCallBackP() {
+                        } else {
+                            MyAlertDialog.MyListAlertDialog(isShow, codeList, nameList, namelist1, getActivity(), new AlertDialogCallBackP() {
 
                                 @Override
                                 public void select(List<String> data) {
