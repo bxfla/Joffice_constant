@@ -147,6 +147,18 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     EditText etLeader4;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
     private String name, taskId, res, bmfzryj, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, zjlyj = "", dszyj = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -1064,6 +1076,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         } else {
                             tvBM.setVisibility(View.VISIBLE);
                             etBM.setVisibility(View.GONE);
+                            tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (xqreout.equals("2")) {
                             tvLeader.setVisibility(View.GONE);
@@ -1071,6 +1084,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader.setVisibility(View.VISIBLE);
                             etLeader.setVisibility(View.GONE);
+                            tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (xqldreout.equals("2")) {
                             tvLeader1.setVisibility(View.GONE);
@@ -1078,6 +1092,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader1.setVisibility(View.VISIBLE);
                             etLeader1.setVisibility(View.GONE);
+                            tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (jsreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
@@ -1085,6 +1100,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
+                            tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (jsldreout.equals("2")) {
                             tvLeader3.setVisibility(View.GONE);
@@ -1092,6 +1108,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader3.setVisibility(View.VISIBLE);
                             etLeader3.setVisibility(View.GONE);
+                            tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
 
                         if (dszreout.equals("2")) {
@@ -1100,6 +1117,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader4.setVisibility(View.VISIBLE);
                             etLeader4.setVisibility(View.GONE);
+                            tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (dszreout.equals("1") && bmreout.equals("1") && xqreout.equals("1") && xqldreout.equals("1") && jsreout.equals("1") && jsldreout.equals("1")) {
                             Toast.makeText(FlowAppealWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();

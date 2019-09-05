@@ -132,6 +132,12 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
     private String name, taskId, res, bxbmyj, wxbmyj, wxryyj = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -964,6 +970,7 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader.setVisibility(View.VISIBLE);
                             etLeader.setVisibility(View.GONE);
+                            tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (wxbmreout.equals("2")) {
                             tvLeader1.setVisibility(View.GONE);
@@ -971,6 +978,7 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader1.setVisibility(View.VISIBLE);
                             etLeader1.setVisibility(View.GONE);
+                            tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (wxryreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
@@ -978,6 +986,7 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
+                            tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (bxbmreout.equals("1") && wxbmreout.equals("1") && wxryreout.equals("1")) {
                             Toast.makeText(FlowHuiQianWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();

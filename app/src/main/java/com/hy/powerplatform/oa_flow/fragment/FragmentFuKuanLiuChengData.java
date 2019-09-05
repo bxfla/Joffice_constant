@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.hy.powerplatform.R;
 import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
+import com.hy.powerplatform.my_utils.myViews.MoneyTextWatcher;
+import com.hy.powerplatform.my_utils.myViews.MoneyValueFilter;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
 import com.hy.powerplatform.my_utils.utils.MoneyFormat;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
@@ -122,6 +125,10 @@ public class FragmentFuKuanLiuChengData extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shenpiliucheng_data, container, false);
         unbinder = ButterKnife.bind(this, view);
+        //TextWatcher方式
+        etSmallMoney.addTextChangedListener(new MoneyTextWatcher(etSmallMoney).setDigits(2));
+        //setFilters方式
+        etSmallMoney.setFilters(new InputFilter[]{new MoneyValueFilter().setDigits(2)});
         String department = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "depName", "");
         etDpartment.setText(department);
         initDatePicker();

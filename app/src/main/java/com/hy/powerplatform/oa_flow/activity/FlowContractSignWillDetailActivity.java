@@ -139,6 +139,18 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     EditText etBM;
     @BindView(R.id.tvBM)
     TextView tvBM;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
     private String name, taskId, res, fullnameUId, fullname, bmyj, csbmyj, jgbmyj, flgwyj, fgldyj, zjl, cbbmfzr = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -925,17 +937,19 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                     try {
                         if (formRights != null) {
                             JSONObject jsonObject = new JSONObject(formRights);
-                            csreout = jsonObject.getString("cwsjbyj");
+                            csreout = jsonObject.getString("csbmyj");
                             jgreout = jsonObject.getString("jcbmyj");
                             flreout = jsonObject.getString("flgwyj");
                             fgreout = jsonObject.getString("fgldyj");
                             zjlreout = jsonObject.getString("zjlyj");
+                            tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                             if (csreout.equals("2")) {
                                 tvLeader.setVisibility(View.GONE);
                                 etLeader.setVisibility(View.VISIBLE);
                             } else {
                                 tvLeader.setVisibility(View.VISIBLE);
                                 etLeader.setVisibility(View.GONE);
+                                tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (jgreout.equals("2")) {
                                 tvLeader1.setVisibility(View.GONE);
@@ -943,6 +957,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader1.setVisibility(View.VISIBLE);
                                 etLeader1.setVisibility(View.GONE);
+                                tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (flreout.equals("2")) {
                                 tvLeader2.setVisibility(View.GONE);
@@ -950,6 +965,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader2.setVisibility(View.VISIBLE);
                                 etLeader2.setVisibility(View.GONE);
+                                tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (fgreout.equals("2")) {
                                 tvLeader3.setVisibility(View.GONE);
@@ -957,6 +973,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader3.setVisibility(View.VISIBLE);
                                 etLeader3.setVisibility(View.GONE);
+                                tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (zjlreout.equals("2")) {
                                 tvLeader4.setVisibility(View.GONE);
@@ -964,6 +981,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader4.setVisibility(View.VISIBLE);
                                 etLeader4.setVisibility(View.GONE);
+                                tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                         }
                         if (csreout.equals("1") && jgreout.equals("1") && flreout.equals("1") && fgreout.equals("1") && zjlreout.equals("1")) {

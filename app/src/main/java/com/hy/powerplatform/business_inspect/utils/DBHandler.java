@@ -2030,7 +2030,7 @@ public class DBHandler {
         String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
         nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
-        nvs.add(new BasicNameValuePair("startFlow", "true"));
+//        nvs.add(new BasicNameValuePair("startFlow", "true"));
         nvs.add(new BasicNameValuePair("taskId", taskId));
         nvs.add(new BasicNameValuePair("signaName", signaName));
         nvs.add(new BasicNameValuePair("destName", destName));
@@ -5640,7 +5640,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("BanJieShiJian", date));
         nvs.add(new BasicNameValuePair("ShenBanShiXiang", data));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
-        nvs.add(new BasicNameValuePair("ys", ys));
+        nvs.add(new BasicNameValuePair("yusuan", ys));
 
         nvs.add(new BasicNameValuePair("bmfzryj", ""));
         nvs.add(new BasicNameValuePair("fgldyj", ""));

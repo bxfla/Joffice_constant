@@ -186,6 +186,12 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
 
 
     @Override
@@ -589,19 +595,47 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                     userCodes = userCodes.toString().replace("[", "");
                     userCodes = userCodes.toString().replace("]", "");
                 }
+                String[] nameNum = null;
+                nameNum = role.split(",");
+                String nameText = "";
+                for (int i = 0;i<nameNum.length;i++){
+                    if (i==0){
+                        nameText = nameNum[0];
+                    }else {
+                        nameText = nameText+":"+nameNum[i];
+                    }
+                }
 
+                String[] codeNum = null;
+                codeNum = userCodes.split(",");
+                String codeText = "";
+                for (int i = 0;i<nameNum.length;i++){
+                    if (i==0){
+                        codeText = codeNum[0];
+                    }else {
+                        codeText = codeText+":"+codeNum[i];
+                    }
+                }
+                String otherCodeText = "";
+                for (int i = nameNum.length;i<codeNum.length;i++){
+                    if (i==nameNum.length){
+                        otherCodeText = codeNum[nameNum.length];
+                    }else {
+                        otherCodeText = otherCodeText+","+codeNum[i];
+                    }
+                }
                 if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
-
                     String bigUserCodes = bigResultList1.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
                     bigUserCodes = bigUserCodes.toString().replace("]", "");
 
                     if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+//                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText+","+otherCodeText;
                         flowAssignld = flowAssignld.replace(" ", "");
                         flowAssignld = flowAssignld.replace(":|", "|");
                     } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes;
                         flowAssignld = flowAssignld.replace(" ", "");
                         flowAssignld = flowAssignld.replace(":|", "|");
                     } else {
@@ -616,11 +650,12 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                     bigUserCodes = bigUserCodes.toString().replace("]", "");
 
                     if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+//                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText+","+otherCodeText;
                         flowAssignld = flowAssignld.replace(" ", "");
                         flowAssignld = flowAssignld.replace(":|", "|");
                     } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes;
                         flowAssignld = flowAssignld.replace(" ", "");
                         flowAssignld = flowAssignld.replace(":|", "|");
                     } else {
@@ -910,6 +945,7 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader.setVisibility(View.VISIBLE);
                             etLeader.setVisibility(View.GONE);
+                            tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (fgreout.equals("2")) {
                             tvLeader1.setVisibility(View.GONE);
@@ -917,6 +953,7 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader1.setVisibility(View.VISIBLE);
                             etLeader1.setVisibility(View.GONE);
+                            tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (zjlreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
@@ -924,6 +961,7 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
+                            tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (bmreout.equals("1") && fgreout.equals("1") && zjlreout.equals("1")) {
                             Toast.makeText(FlowLeaveWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
@@ -1111,9 +1149,20 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                     QianZhiData bean1 = gson1.fromJson(qianzhiData, QianZhiData.class);
                     if (bean1.getData() != null) {
                         if (bean1.getData().size() > 1) {
-                            role = bean1.getData().get(1).getRole();
-                            userCode = bean1.getData().get(1).getUserNames();
-                            userName = bean1.getData().get(1).getUserCodes();
+                            userCode = "";
+                            userName = "";
+                            role = "";
+                            for (int i = 1;i<bean1.getData().size();i++){
+                                if (i == 1){
+                                    role = role+bean1.getData().get(i).getRole();
+                                    userCode = userCode+bean1.getData().get(i).getUserNames();
+                                    userName = userName+bean1.getData().get(i).getUserCodes();
+                                }else {
+                                    role = role+","+bean1.getData().get(i).getRole();
+                                    userCode = userCode+","+bean1.getData().get(i).getUserNames();
+                                    userName = userName+","+bean1.getData().get(i).getUserCodes();
+                                }
+                            }
                             nametemp = userName.split(",");
                             codetemp = userCode.split(",");
                         }

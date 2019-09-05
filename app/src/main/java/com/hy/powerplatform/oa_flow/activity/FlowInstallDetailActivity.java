@@ -350,7 +350,7 @@ public class FlowInstallDetailActivity extends BaseActivity {
                     final String date = bean.getMainform().get(0).getShenBanShiJian();
                     final String date1 = bean.getMainform().get(0).getBanJieShiJian();
                     final String data = bean.getMainform().get(0).getShenBanShiXiang();
-                    String ys = bean.getMainform().get(0).getYs();
+                    String ys = bean.getMainform().get(0).getYusuan();
                     String bmfzryj = bean.getMainform().get(0).getBmfzryj();
                     String fgldyj = bean.getMainform().get(0).getFgldyj();
                     String jbfgldyj = bean.getMainform().get(0).getJbfgldyj();

@@ -138,6 +138,14 @@ public class FlowPayLiuChengWillDetailActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
     private String name, taskId, res, fullnameUId, fullname, bmfzr, fgfze, fgcwze, zjl = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -911,6 +919,7 @@ public class FlowPayLiuChengWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader.setVisibility(View.VISIBLE);
                             etLeader.setVisibility(View.GONE);
+                            tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (fgreout.equals("2")) {
                             tvLeader1.setVisibility(View.GONE);
@@ -918,6 +927,7 @@ public class FlowPayLiuChengWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader1.setVisibility(View.VISIBLE);
                             etLeader1.setVisibility(View.GONE);
+                            tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (fgcwreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
@@ -925,6 +935,7 @@ public class FlowPayLiuChengWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
+                            tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (zjlreout.equals("2")) {
                             tvLeader3.setVisibility(View.GONE);
@@ -932,6 +943,7 @@ public class FlowPayLiuChengWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader3.setVisibility(View.VISIBLE);
                             etLeader3.setVisibility(View.GONE);
+                            tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (bmreout.equals("1") && fgreout.equals("1") && fgcwreout.equals("1") && zjlreout.equals("")) {
                             Toast.makeText(FlowPayLiuChengWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();

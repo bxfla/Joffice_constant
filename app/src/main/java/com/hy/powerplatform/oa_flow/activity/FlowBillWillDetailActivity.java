@@ -165,6 +165,12 @@ public class FlowBillWillDetailActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
     private String name, taskId, res, aqfwyj, fgldyj, ldspyj, liushuihao;
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -1053,6 +1059,7 @@ public class FlowBillWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader.setVisibility(View.VISIBLE);
                             etLeader.setVisibility(View.GONE);
+                            tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (fgreout.equals("2")) {
                             tvLeader1.setVisibility(View.GONE);
@@ -1060,6 +1067,7 @@ public class FlowBillWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader1.setVisibility(View.VISIBLE);
                             etLeader1.setVisibility(View.GONE);
+                            tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (ldspreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
@@ -1067,6 +1075,7 @@ public class FlowBillWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
+                            tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (aqreout.equals("1") && fgreout.equals("1") && ldspreout.equals("1")) {
                             Toast.makeText(FlowBillWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();

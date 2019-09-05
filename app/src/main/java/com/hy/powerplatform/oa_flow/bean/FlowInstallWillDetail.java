@@ -12,15 +12,16 @@ public class FlowInstallWillDetail implements Serializable {
 
     /**
      * success : true
-     * taskId : 9291946
+     * taskId : 9450088
      * pkValue : mainId
-     * formRights : {'zjlyj':'2','BanJieQingKuangYuPingJia':'1','ShenBanBuMenYiJian':'1','fgldyj':'1','BanJieRen':'1','BanJieShiJian':'1','xiangguanfujian':'1','BanJieJiHuaAnPai':'1','ShenBanShiJian':'1','ShenBanShiXiang':'1','bjap':'1','bjpj':'1','ShenBanBuMen':'1','bmfzryj':'1','jbfgldyj':'1','jbbmyj':'1','wczt':'1','LiuShuiHao':'1'}
-     * mainform : [{"BanJieQingKuangYuPingJia":"","runId":52183,"wczt":"","$type$":"WF_ycsgjjtazgzxmsbb","jbfgldyj":"","BanJieRen":"","fgldyj":"[{\"ui\":\"153\",\"un\":\"袁斌\",\"c\":\"2019-08-06 10:50\",\"v\":\"同意2\"}]","ShenBanBuMen":"宜春公交集团有限公司","ShenBanShiJian":"2019-08-06","xiangguanfujian":"","bjap":"","mainId":43,"ShenBanShiXiang":"测试","BanJieShiJian":"","zjlyj":"","jbbmyj":"","bjpj":"","BanJieJiHuaAnPai":"","bmfzryj":"[{\"ui\":\"1729\",\"un\":\"欧阳晓林\",\"c\":\"2019-08-06 10:50\",\"v\":\"同意\"}]","LiuShuiHao":"No.20190806023","ShenBanBuMenYiJian":""}]
+     * formRights : {'yusuan':'1','zjlyj':'1','ShenBanBuMenYiJian':'1','BanJieJiHuaAnPai':'1','jbfgldyj':'1','BanJieRen':'1','wczt':'1','BanJieShiJian':'1','LiuShuiHao':'1','bmfzryj':'2','xiangguanfujian':'1','ShenBanBuMen':'1','bjpj':'1','ShenBanShiXiang':'1','BanJieQingKuangYuPingJia':'1','fgldyj':'1','jbbmyj':'1','bjap':'1','ShenBanShiJian':'1'}
+     * mainform : [{"yusuan":"","BanJieQingKuangYuPingJia":"","runId":52168,"wczt":"","$type$":"WF_ycsgjjtazgzxmsbb","jbfgldyj":"","BanJieRen":"","fgldyj":"","ShenBanBuMen":"宜春公交集团有限公司","ShenBanShiJian":"2019-09-05","xiangguanfujian":"","bjap":"","mainId":47,"ShenBanShiXiang":"hdhd","BanJieShiJian":"2019-09-05","zjlyj":"","jbbmyj":"","bjpj":"","BanJieJiHuaAnPai":"","bmfzryj":"","LiuShuiHao":"No.20190905013","ShenBanBuMenYiJian":""}]
      * formDefId : 10087
      * preTaskName :
      * isSignTask : false
-     * trans : [{"destType":"task","destination":"经办分管领导","name":"to 经办分管领导","source":"总经理"}]
-     * runId : 52183
+     * trans : [{"destType":"task","destination":"分管领导","name":"to 申办部门分管领导","source":"部门负责人"}]
+     * runId : 52168
+     * revoke : false
      */
 
     private boolean success;
@@ -34,14 +35,6 @@ public class FlowInstallWillDetail implements Serializable {
     private boolean revoke;
     private List<MainformBean> mainform;
     private List<TransBean> trans;
-
-    public boolean isRevoke() {
-        return revoke;
-    }
-
-    public void setRevoke(boolean revoke) {
-        this.revoke = revoke;
-    }
 
     public boolean isSuccess() {
         return success;
@@ -107,6 +100,14 @@ public class FlowInstallWillDetail implements Serializable {
         this.runId = runId;
     }
 
+    public boolean isRevoke() {
+        return revoke;
+    }
+
+    public void setRevoke(boolean revoke) {
+        this.revoke = revoke;
+    }
+
     public List<MainformBean> getMainform() {
         return mainform;
     }
@@ -125,29 +126,31 @@ public class FlowInstallWillDetail implements Serializable {
 
     public static class MainformBean {
         /**
+         * yusuan :
          * BanJieQingKuangYuPingJia :
-         * runId : 52183
+         * runId : 52168
          * wczt :
          * $type$ : WF_ycsgjjtazgzxmsbb
          * jbfgldyj :
          * BanJieRen :
-         * fgldyj : [{"ui":"153","un":"袁斌","c":"2019-08-06 10:50","v":"同意2"}]
+         * fgldyj :
          * ShenBanBuMen : 宜春公交集团有限公司
-         * ShenBanShiJian : 2019-08-06
+         * ShenBanShiJian : 2019-09-05
          * xiangguanfujian :
          * bjap :
-         * mainId : 43
-         * ShenBanShiXiang : 测试
-         * BanJieShiJian :
+         * mainId : 47
+         * ShenBanShiXiang : hdhd
+         * BanJieShiJian : 2019-09-05
          * zjlyj :
          * jbbmyj :
          * bjpj :
          * BanJieJiHuaAnPai :
-         * bmfzryj : [{"ui":"1729","un":"欧阳晓林","c":"2019-08-06 10:50","v":"同意"}]
-         * LiuShuiHao : No.20190806023
+         * bmfzryj :
+         * LiuShuiHao : No.20190905013
          * ShenBanBuMenYiJian :
          */
 
+        private String yusuan;
         private String BanJieQingKuangYuPingJia;
         private String runId;
         private String wczt;
@@ -169,14 +172,13 @@ public class FlowInstallWillDetail implements Serializable {
         private String bmfzryj;
         private String LiuShuiHao;
         private String ShenBanBuMenYiJian;
-        private String ys;
 
-        public String getYs() {
-            return ys;
+        public String getYusuan() {
+            return yusuan;
         }
 
-        public void setYs(String ys) {
-            this.ys = ys;
+        public void setYusuan(String yusuan) {
+            this.yusuan = yusuan;
         }
 
         public String getBanJieQingKuangYuPingJia() {
@@ -351,9 +353,9 @@ public class FlowInstallWillDetail implements Serializable {
     public static class TransBean {
         /**
          * destType : task
-         * destination : 经办分管领导
-         * name : to 经办分管领导
-         * source : 总经理
+         * destination : 分管领导
+         * name : to 申办部门分管领导
+         * source : 部门负责人
          */
 
         private String destType;

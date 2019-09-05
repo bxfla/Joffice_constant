@@ -231,6 +231,16 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
     TextView tvDepartment5;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
     private String name, taskId, res, bmfzryj, jcbmyj, zcgkbmyj, fgldyj, cwzjyj, zjl = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -1587,6 +1597,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader.setVisibility(View.VISIBLE);
                                 etLeader.setVisibility(View.GONE);
+                                tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (zcreout.equals("2")) {
                                 tvLeader1.setVisibility(View.GONE);
@@ -1634,6 +1645,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                                 etMoney3.setVisibility(View.GONE);
                                 etMoney4.setVisibility(View.GONE);
                                 etMoney5.setVisibility(View.GONE);
+                                tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (fgreout.equals("2")) {
                                 tvLeader2.setVisibility(View.GONE);
@@ -1641,6 +1653,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader2.setVisibility(View.VISIBLE);
                                 etLeader2.setVisibility(View.GONE);
+                                tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (cwreout.equals("2")) {
                                 tvLeader3.setVisibility(View.GONE);
@@ -1648,6 +1661,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader3.setVisibility(View.VISIBLE);
                                 etLeader3.setVisibility(View.GONE);
+                                tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (zjlreout.equals("2")) {
                                 tvLeader4.setVisibility(View.GONE);
@@ -1655,6 +1669,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader4.setVisibility(View.VISIBLE);
                                 etLeader4.setVisibility(View.GONE);
+                                tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
 
                             if (jcbmreout.equals("2")) {
@@ -1663,6 +1678,7 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeaderJG.setVisibility(View.VISIBLE);
                                 etLeaderJG.setVisibility(View.GONE);
+                                tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (bmreout.equals("1") && fgreout.equals("1") && cwreout.equals("1")
                                     && zcreout.equals("1") && zjlreout.equals("1") && jcbmreout.equals("1")) {

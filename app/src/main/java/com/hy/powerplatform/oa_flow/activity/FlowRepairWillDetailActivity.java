@@ -141,6 +141,14 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
     private String name, taskId, res, fgldyj = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -1031,6 +1039,7 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader.setVisibility(View.VISIBLE);
                                 etLeader.setVisibility(View.GONE);
+                                tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (etRout2.equals("2")) {
                                 tvLeader1.setVisibility(View.GONE);
@@ -1038,6 +1047,7 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader1.setVisibility(View.VISIBLE);
                                 etLeader1.setVisibility(View.GONE);
+                                tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (etRout3.equals("2")) {
                                 tvLeader2.setVisibility(View.GONE);
@@ -1052,6 +1062,7 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader3.setVisibility(View.VISIBLE);
                                 etLeader3.setVisibility(View.GONE);
+                                tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (etRout5.equals("2")) {
                                 tvYJ.setVisibility(View.GONE);
@@ -1059,6 +1070,7 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
                             } else {
                                 tvYJ.setVisibility(View.VISIBLE);
                                 etYJ.setVisibility(View.GONE);
+                                tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (etRout1.equals("1") && etRout2.equals("1") && etRout3.equals("1") && etRout4.equals("1") && etRout5.equals("1")) {
                                 Toast.makeText(FlowRepairWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();

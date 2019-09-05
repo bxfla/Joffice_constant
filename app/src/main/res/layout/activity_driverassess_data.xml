@@ -242,6 +242,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:text="部门领导:"
                     android:layout_height="45dp"
@@ -268,7 +269,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/tvLeader1W"
                     style="@style/oaTextView"
                     android:layout_height="42dp"
                     android:layout_gravity="center_vertical"
@@ -296,7 +297,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/tvLeader2W"
                     style="@style/oaTextView"
                     android:text="人力资源:"
                     android:layout_height="45dp"

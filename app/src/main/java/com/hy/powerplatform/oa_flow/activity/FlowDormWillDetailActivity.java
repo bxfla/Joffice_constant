@@ -168,6 +168,20 @@ public class FlowDormWillDetailActivity extends BaseActivity {
     Button btnHistory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.llData)
+    LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
     private String name, taskId, res, bmfzryj, wygsyj, cwsjyj, bzyj, liushuihao;
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -213,7 +227,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         //initDatePicker();
         Intent intent = getIntent();
@@ -309,7 +323,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId+"&piId="+piId;
+                String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId + "&piId=" + piId;
                 DBHandler dbA = new DBHandler();
                 res = dbA.OAQingJiaWillDoDex(url);
                 if (res.equals("获取数据失败") || res.equals("") || res.equals("false")) {
@@ -859,11 +873,11 @@ public class FlowDormWillDetailActivity extends BaseActivity {
 //                    }
                 }
                 if (zlfsqreout.equals("2")) {
-                   if (etHome.getText().toString().equals("")){
-                       Toast.makeText(this, "房间号不能为空", Toast.LENGTH_SHORT).show();
-                       break;
-                   }
-                    if (etChuangHao.getText().toString().equals("")){
+                    if (etHome.getText().toString().equals("")) {
+                        Toast.makeText(this, "房间号不能为空", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    if (etChuangHao.getText().toString().equals("")) {
                         Toast.makeText(this, "床号不能为空", Toast.LENGTH_SHORT).show();
                         break;
                     }
@@ -952,95 +966,95 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                 }
 
                 if (!rb6.isChecked()) {
-                    if (resultList.size()>=6){
+                    if (resultList.size() >= 6) {
                         resultList.remove(5);
                     }
                 }
                 if (!rb5.isChecked()) {
-                    if (resultList.size()>=5){
+                    if (resultList.size() >= 5) {
                         resultList.remove(4);
                     }
                 }
                 if (!rb4.isChecked()) {
-                    if (resultList.size()>=4){
+                    if (resultList.size() >= 4) {
                         resultList.remove(3);
                     }
                 }
                 if (!rb3.isChecked()) {
-                    if (resultList.size()>=3){
+                    if (resultList.size() >= 3) {
                         resultList.remove(2);
                     }
                 }
                 if (!rb2.isChecked()) {
-                    if (resultList.size()>=2){
+                    if (resultList.size() >= 2) {
                         resultList.remove(1);
                     }
                 }
                 if (!rb1.isChecked()) {
-                    if (resultList.size()>=1){
+                    if (resultList.size() >= 1) {
                         resultList.remove(0);
                     }
                 }
 
                 if (!cb9.isChecked()) {
-                    if (bigResultList.size()>=9){
+                    if (bigResultList.size() >= 9) {
                         bigResultList.remove(8);
                     }
                 }
                 if (!cb8.isChecked()) {
-                    if (bigResultList.size()>=8){
+                    if (bigResultList.size() >= 8) {
                         bigResultList.remove(7);
                     }
                 }
                 if (!cb7.isChecked()) {
-                    if (bigResultList.size()>=7){
+                    if (bigResultList.size() >= 7) {
                         bigResultList.remove(6);
                     }
                 }
                 if (!cb6.isChecked()) {
-                    if (bigResultList.size()>=6){
+                    if (bigResultList.size() >= 6) {
                         bigResultList.remove(5);
                     }
                 }
                 if (!cb5.isChecked()) {
-                    if (bigResultList.size()>=5){
+                    if (bigResultList.size() >= 5) {
                         bigResultList.remove(4);
                     }
                 }
                 if (!cb4.isChecked()) {
-                    if (bigResultList.size()>=4){
+                    if (bigResultList.size() >= 4) {
                         bigResultList.remove(3);
                     }
                 }
                 if (!cb3.isChecked()) {
-                    if (bigResultList.size()>=3){
+                    if (bigResultList.size() >= 3) {
                         bigResultList.remove(2);
                     }
                 }
                 if (!cb2.isChecked()) {
-                    if (bigResultList.size()>=2){
+                    if (bigResultList.size() >= 2) {
                         bigResultList.remove(1);
                     }
                 }
                 if (!cb1.isChecked()) {
-                    if (bigResultList.size()>=1){
+                    if (bigResultList.size() >= 1) {
                         bigResultList.remove(0);
                     }
                 }
 
 
                 String userCodes = "";
-                if (resultList.size()==0){
+                if (resultList.size() == 0) {
                     userCodes = resultList1.toString();
                     userCodes = userCodes.toString().replace("[", "");
                     userCodes = userCodes.toString().replace("]", "");
-                }else {
+                } else {
                     userCodes = resultList.toString();
                     userCodes = userCodes.toString().replace("[", "");
                     userCodes = userCodes.toString().replace("]", "");
                 }
 
-                if (bigResultList.size()==0&&bigResultList1.size()!=0){
+                if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
 
                     String bigUserCodes = bigResultList1.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
@@ -1060,7 +1074,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                         flowAssignld = flowAssignld.replace(":|", "|");
                         flowAssignld = flowAssignld.replace(":", "");
                     }
-                }else {
+                } else {
                     String bigUserCodes = bigResultList.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
                     bigUserCodes = bigUserCodes.toString().replace("]", "");
@@ -1104,10 +1118,10 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
-                    for (int i = 0;i<beanF.getData().size();i++){
+                    for (int i = 0; i < beanF.getData().size(); i++) {
                         flowList.add(beanF.getData().get(i));
                     }
-                    adapterM = new FlowMessageAdapter(FlowDormWillDetailActivity.this,flowList);
+                    adapterM = new FlowMessageAdapter(FlowDormWillDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapterM);
                     ProgressDialogUtil.stopLoad();
                     break;
@@ -1175,6 +1189,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader.setVisibility(View.VISIBLE);
                             etLeader.setVisibility(View.GONE);
+                            tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (wyreout.equals("2")) {
                             tvLeader1.setVisibility(View.GONE);
@@ -1182,6 +1197,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader1.setVisibility(View.VISIBLE);
                             etLeader1.setVisibility(View.GONE);
+                            tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (blrzreout.equals("2")) {
                             llRZ.setVisibility(View.VISIBLE);
@@ -1195,6 +1211,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                             etHome.setVisibility(View.GONE);
                             etChuangHao.setVisibility(View.GONE);
                             tvChuangHao.setVisibility(View.VISIBLE);
+                            tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (cwsgreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
@@ -1202,6 +1219,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
+                            tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (zlfsqreout.equals("2")) {
                             tvMoney.setVisibility(View.GONE);
@@ -1209,6 +1227,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                         } else {
                             tvMoney.setVisibility(View.VISIBLE);
                             spinnerMoney.setVisibility(View.GONE);
+                            tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (bzreout.equals("2")) {
                             tvLeader3.setVisibility(View.GONE);
@@ -1216,9 +1235,10 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader3.setVisibility(View.VISIBLE);
                             etLeader3.setVisibility(View.GONE);
+                            tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
-                        if (bmreout.equals("1")&&wyreout.equals("1")&&blrzreout.equals("1")
-                                &&cwsgreout.equals("1")&&zlfsqreout.equals("1")&&bzreout.equals("1")){
+                        if (bmreout.equals("1") && wyreout.equals("1") && blrzreout.equals("1")
+                                && cwsgreout.equals("1") && zlfsqreout.equals("1") && bzreout.equals("1")) {
                             Toast.makeText(FlowDormWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
@@ -1228,10 +1248,10 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                     if (bzyj != null && !bzyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(bzyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word5 = word5+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word5 = word5 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1239,7 +1259,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader3.getVisibility() == View.VISIBLE) {
                             tvLeader3.setText(word5);
-                        }else {
+                        } else {
                             etLeader3.setHint(word5);
                         }
                     }
@@ -1248,10 +1268,10 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                     if (cwsjyj != null && !cwsjyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(cwsjyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word4 = word4+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word4 = word4 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1259,7 +1279,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader2.getVisibility() == View.VISIBLE) {
                             tvLeader2.setText(word4);
-                        }else {
+                        } else {
                             etLeader2.setHint(word4);
                         }
                     }
@@ -1268,10 +1288,10 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                     if (wygsyj != null && !wygsyj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(wygsyj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word3 = word3+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word3 = word3 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1279,7 +1299,7 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader1.getVisibility() == View.VISIBLE) {
                             tvLeader1.setText(word3);
-                        }else {
+                        } else {
                             etLeader1.setHint(word3);
                         }
                     }
@@ -1288,10 +1308,10 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                     if (bmfzryj != null && !bmfzryj.equals("")) {
                         try {
                             JSONArray jsonArray = new JSONArray(bmfzryj);
-                            for (int i = 0;i<jsonArray.length();i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                if (!jsonObject.getString("v").toString().equals("")){
-                                    word2 = word2+jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c")+ "\n" ;
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word2 = word2 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
                                 }
                             }
                         } catch (JSONException e) {
@@ -1299,11 +1319,11 @@ public class FlowDormWillDetailActivity extends BaseActivity {
                         }
                         if (tvLeader.getVisibility() == View.VISIBLE) {
                             tvLeader.setText(word2);
-                        }else {
+                        } else {
                             etLeader.setHint(word2);
                         }
                     }
-                    if (bean.isRevoke()){
+                    if (bean.isRevoke()) {
                         Toast.makeText(FlowDormWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
                     }
                     break;

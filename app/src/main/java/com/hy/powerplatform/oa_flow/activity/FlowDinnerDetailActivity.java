@@ -344,8 +344,8 @@ public class FlowDinnerDetailActivity extends BaseActivity {
                     tvLKDepartment.setText(lkDepartment);
                     tvLKPerson.setText(lkPerson);
                     tvEatBZ.setText(eatBz);
-                    tvBigMoney.setText(smallMoney);
-                    tvSmallMoney.setText(bigMoney);
+                    tvBigMoney.setText(bigMoney);
+                    tvSmallMoney.setText(smallMoney);
                     if (!bmfzryj.equals("")) {
                         tvLeader.setText(getJSONData(bmfzryj));
                     }

@@ -158,6 +158,22 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
     TextView tvys;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
+    @BindView(R.id.tvLeader6W)
+    TextView tvLeader6W;
+    @BindView(R.id.tvLeader7W)
+    TextView tvLeader7W;
     private String name, taskId, res, bmfzryj, fgldyj, jbfgldyj, jbbmyj, zjlyj, bjap, bjr, bjpj, liushuihao;
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -1079,7 +1095,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                     final String date = bean.getMainform().get(0).getShenBanShiJian();
                     final String data = bean.getMainform().get(0).getShenBanShiXiang();
                     final String date1 = bean.getMainform().get(0).getBanJieShiJian();
-                    final String ys = bean.getMainform().get(0).getYs();
+                    final String ys = bean.getMainform().get(0).getYusuan();
                     liushuihao = bean.getMainform().get(0).getLiuShuiHao();
                     xiangguanfujian = bean.getMainform().get(0).getXiangguanfujian();
                     if (xiangguanfujian.equals("")) {
@@ -1131,6 +1147,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader.setVisibility(View.VISIBLE);
                             etLeader.setVisibility(View.GONE);
+                            tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (fgreout.equals("2")) {
                             tvLeader1.setVisibility(View.GONE);
@@ -1138,6 +1155,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader1.setVisibility(View.VISIBLE);
                             etLeader1.setVisibility(View.GONE);
+                            tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (zjlreout.equals("2")) {
                             tvLeaderzjl.setVisibility(View.GONE);
@@ -1145,6 +1163,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeaderzjl.setVisibility(View.VISIBLE);
                             etLeaderzjl.setVisibility(View.GONE);
+                            tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (jbfgreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
@@ -1152,6 +1171,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
+                            tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (jbreout.equals("2")) {
                             tvLeader3.setVisibility(View.GONE);
@@ -1159,6 +1179,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader3.setVisibility(View.VISIBLE);
                             etLeader3.setVisibility(View.GONE);
+                            tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (bjapreout.equals("2")) {
                             tvLeader4.setVisibility(View.GONE);
@@ -1166,6 +1187,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader4.setVisibility(View.VISIBLE);
                             etLeader4.setVisibility(View.GONE);
+                            tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (bjpjreout.equals("2")) {
                             tvLeader5.setVisibility(View.GONE);
@@ -1174,6 +1196,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader5.setVisibility(View.VISIBLE);
                             etLeader5.setVisibility(View.GONE);
+                            tvLeader6W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (bjpjreout.equals("2")) {
                             tvLeader6.setVisibility(View.GONE);
@@ -1181,6 +1204,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader6.setVisibility(View.VISIBLE);
                             etLeader6.setVisibility(View.GONE);
+                            tvLeader7W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (bmreout.equals("1") && fgreout.equals("1") && jbfgreout.equals("1")
                                 && jbreout.equals("1") && bjapreout.equals("1") && bjrreout.equals("1")
@@ -1262,7 +1286,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         if (tvLeader4.getVisibility() == View.VISIBLE) {
                             tvLeader4.setText(word5);
                         } else {
-                            tvLeader4.setHint(word5);
+                            etLeader4.setHint(word5);
                         }
                     }
 
@@ -1282,7 +1306,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         if (tvLeader3.getVisibility() == View.VISIBLE) {
                             tvLeader3.setText(word4);
                         } else {
-                            tvLeader3.setHint(word4);
+                            etLeader3.setHint(word4);
                         }
                     }
 
@@ -1302,7 +1326,7 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         if (tvLeader2.getVisibility() == View.VISIBLE) {
                             tvLeader2.setText(word3);
                         } else {
-                            tvLeader2.setHint(word3);
+                            etLeader2.setHint(word3);
                         }
                     }
 

@@ -565,6 +565,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tvLeader3W"
                     style="@style/oaTextView"
                     android:text="安全服务部:" />
 
@@ -592,7 +593,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvLeader3W"
+                    android:id="@+id/tvLeader4W"
                     style="@style/oaTextView"
                     android:text="反馈投诉人:"
                     android:layout_height="45dp"

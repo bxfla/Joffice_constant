@@ -142,6 +142,20 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
+    @BindView(R.id.tvLeader6W)
+    TextView tvLeader6W;
 
     private String name, taskId, res, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, csbmyj, jcbmyj, zjl = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
@@ -977,6 +991,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader.setVisibility(View.VISIBLE);
                             etLeader.setVisibility(View.GONE);
+                            tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (xqldreout.equals("2")) {
                             tvLeader1.setVisibility(View.GONE);
@@ -984,6 +999,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader1.setVisibility(View.VISIBLE);
                             etLeader1.setVisibility(View.GONE);
+                            tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (jsreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
@@ -991,6 +1007,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
+                            tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (jsldreout.equals("2")) {
                             tvLeader3.setVisibility(View.GONE);
@@ -998,6 +1015,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader3.setVisibility(View.VISIBLE);
                             etLeader3.setVisibility(View.GONE);
+                            tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (csreout.equals("2")) {
                             tvLeader4.setVisibility(View.GONE);
@@ -1005,6 +1023,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader4.setVisibility(View.VISIBLE);
                             etLeader4.setVisibility(View.GONE);
+                            tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (jcreout.equals("2")) {
                             tvLeader5.setVisibility(View.GONE);
@@ -1012,6 +1031,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader5.setVisibility(View.VISIBLE);
                             etLeader5.setVisibility(View.GONE);
+                            tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (zjlreout.equals("2")) {
                             tvLeader6.setVisibility(View.GONE);
@@ -1019,6 +1039,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader6.setVisibility(View.VISIBLE);
                             etLeader6.setVisibility(View.GONE);
+                            tvLeader6W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (xqreout.equals("1") && xqldreout.equals("1") && jsreout.equals("1")
                                 && jsldreout.equals("1") && csreout.equals("1") && jcreout.equals("1") && zjlreout.equals("1")) {

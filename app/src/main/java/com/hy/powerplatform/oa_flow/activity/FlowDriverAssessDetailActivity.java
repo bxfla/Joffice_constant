@@ -108,12 +108,8 @@ public class FlowDriverAssessDetailActivity extends BaseActivity {
     LinearLayout ll4;
     @BindView(R.id.etLeader)
     EditText etLeader;
-    @BindView(R.id.textView11)
-    TextView textView11;
     @BindView(R.id.etLeader1)
     EditText etLeader1;
-    @BindView(R.id.textView12)
-    TextView textView12;
     @BindView(R.id.etLeader2)
     EditText etLeader2;
     @BindView(R.id.btnT)

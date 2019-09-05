@@ -147,10 +147,6 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
     RadioButton rbC2;
     @BindView(R.id.rbC3)
     RadioButton rbC3;
-    @BindView(R.id.textView13)
-    TextView textView13;
-    @BindView(R.id.textView15)
-    TextView textView15;
     @BindView(R.id.btnT)
     FloatingActionButton btnT;
     @BindView(R.id.btnHistory)
@@ -161,6 +157,20 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
     LinearLayout llData;
     @BindView(R.id.tvText)
     TextView tvText;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
+    @BindView(R.id.tvLeader2W)
+    TextView tvLeader2W;
+    @BindView(R.id.tvLeader4W)
+    TextView tvLeader4W;
+    @BindView(R.id.tvLeader3W)
+    TextView tvLeader3W;
+    @BindView(R.id.tvLeader6W)
+    TextView tvLeader6W;
+    @BindView(R.id.tvLeader5W)
+    TextView tvLeader5W;
     private String name, taskId, res, fullnameUId, fullname, cwsjbyj, yyglbyj, xxjsbyj, cctkjyxgsyj, zhglbyj, rlzyb1, jbbmyj = "";
     private String mainId, signaName, destName, destType, checkTask = "", qianzhiData = "";
     String leader = "";
@@ -1051,6 +1061,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader.setVisibility(View.VISIBLE);
                             etLeader.setVisibility(View.GONE);
+                            tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (yyreout.equals("2")) {
                             tvLeader1.setVisibility(View.GONE);
@@ -1064,6 +1075,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                             rbC1.setEnabled(false);
                             rbC2.setEnabled(false);
                             rbC3.setEnabled(false);
+                            tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (xxreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
@@ -1071,6 +1083,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
+                            tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (cctreout.equals("2")) {
                             tvLeader3.setVisibility(View.GONE);
@@ -1078,6 +1091,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader3.setVisibility(View.VISIBLE);
                             etLeader3.setVisibility(View.GONE);
+                            tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (zhreout.equals("2")) {
                             tvLeader4.setVisibility(View.GONE);
@@ -1085,6 +1099,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader4.setVisibility(View.VISIBLE);
                             etLeader4.setVisibility(View.GONE);
+                            tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (rlreout.equals("2")) {
                             tvLeader5.setVisibility(View.GONE);
@@ -1095,6 +1110,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader5.setVisibility(View.VISIBLE);
                             etLeader5.setVisibility(View.GONE);
+                            tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (jbbmreout.equals("2")) {
                             tvLeader6.setVisibility(View.GONE);
@@ -1102,6 +1118,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader6.setVisibility(View.VISIBLE);
                             etLeader6.setVisibility(View.GONE);
+                            tvLeader6W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (cwreout.equals("1") && yyreout.equals("1") && xxreout.equals("1")
                                 && cctreout.equals("1") && zhreout.equals("1") && rlreout.equals("1") && jbbmreout.equals("1")) {

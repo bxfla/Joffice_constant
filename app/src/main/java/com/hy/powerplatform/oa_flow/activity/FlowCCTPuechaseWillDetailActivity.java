@@ -210,6 +210,10 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
     EditText etMoney5;
     @BindView(R.id.llData)
     LinearLayout llData;
+    @BindView(R.id.tvLeaderW)
+    TextView tvLeaderW;
+    @BindView(R.id.tvLeader1W)
+    TextView tvLeader1W;
     private String name, taskId, res, bmfzryj, zcgkbmyj, fgldyj, cwzjyj, zjl = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -1480,6 +1484,7 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader.setVisibility(View.VISIBLE);
                                 etLeader.setVisibility(View.GONE);
+                                tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (fgreout.equals("2")) {
                                 tvLeader1.setVisibility(View.GONE);
@@ -1487,6 +1492,7 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                             } else {
                                 tvLeader1.setVisibility(View.VISIBLE);
                                 etLeader1.setVisibility(View.GONE);
+                                tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             }
                             if (bmreout.equals("1") && fgreout.equals("1")) {
                                 Toast.makeText(FlowCCTPuechaseWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();

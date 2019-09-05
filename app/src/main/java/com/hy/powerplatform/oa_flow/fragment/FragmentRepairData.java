@@ -425,7 +425,7 @@ public class FragmentRepairData extends Fragment {
                     }
                     break;
                 case TAG_TWO:
-                    Toast.makeText(getActivity(), "操作失败,请检查网络", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "操作失败", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_THERE:
