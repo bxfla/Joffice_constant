@@ -31,16 +31,16 @@
 
                 <EditText
                     android:id="@+id/etTitle"
-                    android:hint="请填写发文标题"
-                    style="@style/oaEditText" />
+                    style="@style/oaEditText"
+                    android:hint="请填写发文标题" />
             </LinearLayout>
 
-            <View style="@style/line"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/oaTextView"
@@ -58,12 +58,12 @@
                     android:hint="请填写主送人" />
             </LinearLayout>
 
-            <View style="@style/line"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/oaTextView"
@@ -127,8 +127,52 @@
                     android:hint="请填写拟稿人" />
             </LinearLayout>
 
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="印发份数: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etNum"
+                    style="@style/oaEditText"
+                    android:hint="请填写印发分数" />
+            </LinearLayout>
 
             <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="文号1: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etTextNum"
+                    style="@style/oaEditText"
+                    android:hint="请填写文号" />
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -158,6 +202,7 @@
             </LinearLayout>
 
             <View style="@style/line"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -179,6 +224,7 @@
                     style="@style/oaEditText"
                     android:hint="请填写审核人" />
             </LinearLayout>
+
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -202,13 +248,14 @@
                     style="@style/oaEditText"
                     android:hint="请填写签发人" />
             </LinearLayout>
+
             <View style="@style/line"></View>
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/oaTextView"
@@ -225,15 +272,16 @@
                     style="@style/oaEditText"
                     android:hint="请填写审核人" />
             </LinearLayout>
+
             <View
-                android:visibility="gone"
-                style="@style/line"></View>
+                style="@style/line"
+                android:visibility="gone"></View>
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/oaTextView"
@@ -250,33 +298,10 @@
                     style="@style/oaEditText"
                     android:hint="请填写签发人" />
             </LinearLayout>
+
             <View
-                android:visibility="gone"
-                style="@style/line"></View>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvLeader3W"
-                    style="@style/oaTextView"
-                    android:text="印发份数: *" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/shouye" />
-
-                <TextView
-                    android:id="@+id/etNum"
-                    style="@style/oaEditText"
-                    android:hint="请填写印发分数" />
-            </LinearLayout>
-
-            <View style="@style/line"></View>
+                style="@style/line"
+                android:visibility="gone"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -295,14 +320,16 @@
                     android:background="@color/shouye" />
 
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/tvStartTime"
-                    style="@style/oaEditText" />
+                    style="@style/oaEditText"
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/tvStartTime1"
                     style="@style/oaEditText"
-                    android:hint="请选择日期"/>
+                    android:hint="请选择日期" />
             </LinearLayout>
+
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -311,7 +338,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvLeader5W"
                     style="@style/oaTextView"
                     android:text="文号: *" />
 
@@ -324,7 +350,8 @@
                 <TextView
                     android:id="@+id/et1"
                     style="@style/oaEditText"
-                    android:background="@drawable/linearlayout" />
+                    android:background="@drawable/linearlayout"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/et2"
@@ -337,11 +364,13 @@
                     android:background="@drawable/linearlayout" />
             </LinearLayout>
 
+            <View style="@style/line"></View>
+
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/oaTextView"

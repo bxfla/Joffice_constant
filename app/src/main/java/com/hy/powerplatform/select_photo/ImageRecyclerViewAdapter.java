@@ -10,12 +10,11 @@ import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.hy.powerplatform.R;
 import com.hy.powerplatform.my_utils.base.MyApplication;
 
 import java.io.File;
 import java.util.List;
-
-import com.hy.powerplatform.R;
 
 public class ImageRecyclerViewAdapter extends RecyclerView.Adapter<ImageRecyclerViewAdapter.ViewHolder> {
 
@@ -97,7 +96,6 @@ public class ImageRecyclerViewAdapter extends RecyclerView.Adapter<ImageRecycler
                 }
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
                     mListener.onImageItemInteraction(holder.mItem);
                 }
             }

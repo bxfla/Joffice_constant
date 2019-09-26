@@ -141,6 +141,19 @@
         <item name="android:layout_marginTop">2dp</item>
     </style>
 
+    <!--自定义radiobutton-->
+    <style name="RadionButton">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:paddingTop">3dip</item>
+        <item name="android:textSize">13dip</item>
+        <item name="android:paddingBottom">6dip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/radionbutton_select</item>
+    </style>
+
     <!--自定义BUtton-->
     <style name="Button">
         <item name="android:layout_width">0dp</item>
@@ -261,8 +274,6 @@
         <item name="android:background">@null</item>
     </style>
 
-
-
     <style name="oaTextView1">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1.2</item>
@@ -343,6 +354,43 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:padding">15dp</item>
         <item name="android:src">@drawable/go</item>
+    </style>
+
+    <!--OA EditText-->
+    <style name="oaEditText2">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">2.5</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="textWrite2">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">2.5</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <!--OA TextView-->
+    <style name="oaTextView2">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1.2</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">8dp</item>
     </style>
 
 </resources>

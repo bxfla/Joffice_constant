@@ -263,7 +263,7 @@
     <color name="tv_task_nofify_no">#fac46e</color>
     <color name="tv_task_done_car">#fa6e85</color>
     <color name="tv_task_green">#17c295</color>
-    <color name="line">#E2E3E6</color>
+    <color name="line">#F1F1F1</color>
 
 
     <!-- QRCode scanner color begin -->

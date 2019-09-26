@@ -1,301 +1,380 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hy.powerplatform.TestActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.hy.powerplatform.oa_flow.fragment.FragmentCarData">
+    <com.hy.powerplatform.my_utils.myViews.Header
+        android:id="@+id/header"
+        style="@style/Heander"
+        app:header_title="接待用餐流程">
+    </com.hy.powerplatform.my_utils.myViews.Header>
 
-    <com.hy.powerplatform.my_utils.myViews.FixGridLayout
-        android:id="@+id/ll"
-        android:layout_height="300dp"
-        android:layout_width="368dp">
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="120dp"
-            android:layout_margin="10dp">
-            <LinearLayout
-                android:id="@+id/llEMaintain"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="120dp"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
-                    android:padding="8dp"
-                    android:src="@drawable/flow_item16"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="电子维修"
-                    android:textSize="15dp"
-                    android:gravity="center"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tvEMaintain"
-                style="@style/numTextView"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="120dp"
-            android:layout_margin="10dp">
-            <LinearLayout
-                android:id="@+id/llCarVideo"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_height="120dp">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
-                    android:padding="8dp"
-                    android:src="@drawable/flow_item9"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="车载视频"
-                    android:textSize="15dp"
-                    android:gravity="center"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tvCarVideo"
-                style="@style/numTextView"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="120dp"
-            android:layout_margin="10dp">
-            <LinearLayout
-                android:id="@+id/llDorm"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="120dp"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
-                    android:padding="8dp"
-                    android:src="@drawable/flow_item17"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="员工宿舍"
-                    android:textSize="15dp"
-                    android:gravity="center"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tvDorm"
-                style="@style/numTextView"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="120dp"
-            android:layout_margin="10dp">
-            <LinearLayout
-                android:id="@+id/llNewGC"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    android:src="@drawable/flow_item17" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
+                    style="@style/oaTextView2"
+                    android:text="日期: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    style="@style/oaEditText2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView2"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="部门: *" />
+
+                <EditText
+                    android:id="@+id/etDpartment"
+                    style="@style/textWrite2"
+                    android:hint="请填写所在部门" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+            </LinearLayout>
+
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView2"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="陪餐人员: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etPCPerson"
+                    style="@style/textWrite2"
+                    android:hint="请填写陪餐人员" />
+            </LinearLayout>
+
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView2"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="来客单位: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etLKDepartment"
+                    style="@style/textWrite2"
+                    android:hint="请填写来客单位" />
+            </LinearLayout>
+
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView2"
+                    android:text="来客人数: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etLKPerson"
+                    style="@style/oaEditText2"
+                    android:hint="请填写来客人数"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView2"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="用餐标准 *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etEatBZ"
+                    style="@style/textWrite2"
+                    android:hint="请填写用餐标准" />
+            </LinearLayout>
+
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView2"
+                    android:text="金额（小写）: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etSmallMoney"
+                    style="@style/oaEditText2"
+                    android:hint="请填写金额（小写）"
+                    android:inputType="number|numberDecimal" />
+            </LinearLayout>
+
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView2"
+                    android:text="金额（大写）: *" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/etBigMoney"
+                    style="@style/oaEditText2"
+                    android:hint="请填写金额（大写）" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/oaTextView2"
+                    android:text="附件:" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvData"
+                    style="@style/oaEditText2"
+                    android:hint="点击选择附件" />
+            </LinearLayout>
+
+            <View
+                style="@style/line"
+                android:layout_height="45dp" />
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="审批意见:"
+                    android:textColor="@color/black"
+                    android:textSize="17dp" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:padding="15dp"
+                    android:src="@drawable/daoshanjiao" />
+            </LinearLayout>
+
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:id="@+id/ll1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvLeaderW"
+                        style="@style/oaTextView2"
+                        android:text="部门领导:" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/shouye" />
+
+                    <TextView
+                        android:id="@+id/tvLeader"
+                        style="@style/oaEditText2"
+                        android:hint="部门领导签名" />
+                </LinearLayout>
+                <View style="@style/line"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvLeader1W"
+                        style="@style/oaTextView2"
+                        android:text="分管领导:" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/shouye" />
+
+                    <TextView
+                        android:id="@+id/tvLeader1"
+                        style="@style/oaEditText2"
+                        android:hint="分管领导签名" />
+                </LinearLayout>
+                <View style="@style/line"
+                    android:visibility="gone"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="135dp"
+                    android:background="@drawable/linearlayout1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvLeader2W"
+                        style="@style/oaTextView2"
+                        android:textColor="@color/red"
+                        android:text="总经理:" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/shouye" />
+
+                    <TextView
+                        android:id="@+id/tvLeader3"
+                        style="@style/oaEditText2"
+                        android:textColor="@color/red"
+                        android:textColorHint="@color/red"
+                        android:hint="总经理签名" />
+                </LinearLayout>
+
+                <View
+                    style="@style/line"
+                    android:visibility="gone"
+                    android:layout_marginBottom="45dp"></View>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnUp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="45dp"
+                    android:layout_margin="25dp"
+                    android:background="@drawable/linearlayout_colore_radius"
                     android:gravity="center"
-                    android:text="工程量增加"
-                    android:textSize="15dp" />
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tvNewGC"
-                style="@style/numTextView"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="120dp"
-            android:layout_margin="10dp">
-            <LinearLayout
-                android:id="@+id/llGCCheck"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    android:src="@drawable/flow_item22" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="同意"
+                    android:textColor="@color/whith" />
+                <Button
+                    android:id="@+id/btnUp1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="45dp"
+                    android:layout_margin="25dp"
+                    android:background="@drawable/linearlayout_colore_radius"
                     android:gravity="center"
-                    android:text="建设工程变更"
-                    android:textSize="15dp" />
+                    android:text="不同意"
+                    android:textColor="@color/whith" />
             </LinearLayout>
-            <TextView
-                android:id="@+id/tvGCCheck"
-                style="@style/numTextView"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="120dp"
-            android:layout_margin="10dp">
-            <LinearLayout
-                android:id="@+id/llCompliain"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="120dp"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
-                    android:padding="8dp"
-                    android:src="@drawable/flow_item16"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="投诉转办"
-                    android:textSize="15dp"
-                    android:gravity="center"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tvCompliain"
-                style="@style/numTextView"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="120dp"
-            android:layout_margin="10dp">
-            <LinearLayout
-                android:id="@+id/llJZGC"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="120dp"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
-                    android:padding="8dp"
-                    android:src="@drawable/flow_item16"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="新建工程"
-                    android:textSize="15dp"
-                    android:gravity="center"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tvJZGC"
-                style="@style/numTextView"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="120dp"
-            android:layout_margin="10dp">
-            <LinearLayout
-                android:id="@+id/llInstall"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="120dp"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
-                    android:padding="8dp"
-                    android:src="@drawable/flow_item22"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="安装改造"
-                    android:textSize="15dp"
-                    android:gravity="center"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tvInstall"
-                style="@style/numTextView"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="120dp"
-            android:layout_margin="10dp">
-            <LinearLayout
-                android:id="@+id/llReceiveDinner"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="120dp"
-                android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
 
-                <ImageView
-                    android:id="@+id/imageView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    android:src="@drawable/flow_item15" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="接待用餐"
-                    android:textSize="15dp"
-                    android:gravity="center"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tvReceiveDinner"
-                style="@style/numTextView"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="120dp"
-            android:layout_margin="10dp">
-            <LinearLayout
-                android:id="@+id/llContractSign"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
-                    android:padding="8dp"
-                    android:src="@drawable/flow_item18"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="合同签订"
-                    android:textSize="15dp"
-                    android:gravity="center"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tvContractSign"
-                style="@style/numTextView"/>
-        </FrameLayout>
-    </com.hy.powerplatform.my_utils.myViews.FixGridLayout>
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

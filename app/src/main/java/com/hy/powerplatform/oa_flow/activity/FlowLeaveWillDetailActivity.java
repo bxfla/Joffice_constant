@@ -291,6 +291,9 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                         }).start();
                     } else {
                         namelist.clear();
+                        for (int i = 0; i < beanList.size(); i++) {
+                            namelist.add(beanList.get(i).getDestination());
+                        }
                         MyAlertDialog.MyListAlertDialog(FlowLeaveWillDetailActivity.this, namelist, new AlertDialogCallBackP() {
                             @Override
                             public void oneselect(final String data) {

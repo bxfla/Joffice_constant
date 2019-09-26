@@ -331,7 +331,7 @@ public class FlowAppealDetailActivity extends BaseActivity {
                     FlowAppealDetail bean = gson.fromJson(res, FlowAppealDetail.class);
                     final String date = bean.getMainform().get(0).getShenQingShiJian();
                     final String person = bean.getMainform().get(0).getShenQingRen();
-                    final String department = bean.getMainform().get(0).getSqbm();
+                    final String department = bean.getMainform().get(0).getShenQingBuMen();
                     final String bmfzryj = bean.getMainform().get(0).getBmfzryj();
                     final String fgldyj = bean.getMainform().get(0).getFgldyj();
                     final String jbfgyj = bean.getMainform().get(0).getJbfgldyj();

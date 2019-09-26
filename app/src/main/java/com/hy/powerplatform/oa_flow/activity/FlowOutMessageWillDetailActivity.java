@@ -138,8 +138,6 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
     LinearLayout ll5;
     @BindView(R.id.etHeGao)
     EditText etHeGao;
-    @BindView(R.id.etNum)
-    EditText etNum;
     @BindView(R.id.et1)
     EditText et1;
     @BindView(R.id.et2)
@@ -166,12 +164,12 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
     TextView tvLeader1W;
     @BindView(R.id.tvLeader2W)
     TextView tvLeader2W;
-    @BindView(R.id.tvLeader3W)
-    TextView tvLeader3W;
     @BindView(R.id.tvLeader4W)
     TextView tvLeader4W;
     @BindView(R.id.tvLeader5W)
     TextView tvLeader5W;
+    @BindView(R.id.tvTextNum)
+    TextView tvTextNum;
     private String name, taskId, res, fullnameUId, fullname, fgldyj, zjl = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -771,10 +769,6 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                     comment = etHeGao.getText().toString();
                     heGao = etHeGao.getText().toString();
                 }
-                if (etNum.getVisibility() == View.VISIBLE) {
-                    comment = etNum.getText().toString();
-                    num = etNum.getText().toString();
-                }
                 if (et1.getVisibility() == View.VISIBLE) {
                     comment = et1.getText().toString();
                     wenHao = et1.getText().toString();
@@ -1073,7 +1067,7 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                             tvStartTime.setVisibility(View.VISIBLE);
                             tvStartTime1.setVisibility(View.GONE);
                         }
-                        tv1.setText(wenHao);
+                        tvTextNum.setText(wenHao);
                         tv2.setText(xuHao);
                         if (date != null && !date.equals("")) {
                             tv3.setText(date);
@@ -1099,24 +1093,21 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
 
                         if (fwwhreout.equals("2")) {
                             tv1.setVisibility(View.GONE);
-                            et1.setVisibility(View.VISIBLE);
+                            et1.setVisibility(View.GONE);
                         } else {
-                            tv1.setVisibility(View.VISIBLE);
+                            tv1.setVisibility(View.GONE);
                             et1.setVisibility(View.GONE);
                             tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
 
                         if (yffsreout.equals("2")) {
                             tvNum.setVisibility(View.GONE);
-                            etNum.setVisibility(View.VISIBLE);
                             et3.setVisibility(View.VISIBLE);
                             tvStartTime.setVisibility(View.VISIBLE);
                             tvStartTime1.setVisibility(View.GONE);
                             initDatePicker();
                         } else {
                             tvNum.setVisibility(View.VISIBLE);
-                            etNum.setVisibility(View.GONE);
-                            tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
                             tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
 

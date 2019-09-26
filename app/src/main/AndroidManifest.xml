@@ -244,7 +244,8 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".login.activity.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name=".news.activity.NewsActivity"
             android:screenOrientation="portrait" />
@@ -601,7 +602,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".TestActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".oa_flow.activity.FlowGCAddWillDetailActivity"
             android:screenOrientation="portrait" />
@@ -864,7 +866,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".login.activity.SecondActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name=".oa_flow.activity.MyBackFlowListActivity"
             android:screenOrientation="portrait" />

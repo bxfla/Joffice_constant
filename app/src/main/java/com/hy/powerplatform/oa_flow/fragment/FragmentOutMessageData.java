@@ -64,7 +64,7 @@ public class FragmentOutMessageData extends Fragment {
     @BindView(R.id.etQianFa)
     EditText etQianFa;
     @BindView(R.id.etNum)
-    TextView etNum;
+    EditText etNum;
     @BindView(R.id.tvStartTime)
     TextView tvStartTime;
     @BindView(R.id.et1)
@@ -84,12 +84,14 @@ public class FragmentOutMessageData extends Fragment {
     TextView tvShenHe;
     @BindView(R.id.tvLeader2W)
     TextView tvLeader2W;
-    @BindView(R.id.tvLeader3W)
-    TextView tvLeader3W;
     @BindView(R.id.tvLeader4W)
     TextView tvLeader4W;
-    @BindView(R.id.tvLeader5W)
-    TextView tvLeader5W;
+    @BindView(R.id.etTextNum)
+    EditText etTextNum;
+    @BindView(R.id.tvQianFa)
+    TextView tvQianFa;
+    @BindView(R.id.tvStartTime1)
+    TextView tvStartTime1;
     private CustomDatePickerDay customDatePicker1;
     List<String> namelist = new ArrayList<>();
     List<Name.DataBean> datalist = new ArrayList<>();
@@ -110,8 +112,7 @@ public class FragmentOutMessageData extends Fragment {
     String isShow = "true";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_outmessage_data, container, false);
         unbinder = ButterKnife.bind(this, view);
         initDatePicker();
@@ -121,9 +122,7 @@ public class FragmentOutMessageData extends Fragment {
         tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
-        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
-        tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 
@@ -214,6 +213,7 @@ public class FragmentOutMessageData extends Fragment {
                 final String niGao = etNiGao.getText().toString().trim();
                 final String heGao = etHeGao.getText().toString().trim();
                 final String num = etNum.getText().toString().trim();
+                final String textNum = etTextNum.getText().toString().trim();
 
                 final String wenHao = et1.getText().toString();
                 final String riQi = et2.getText().toString();
@@ -222,20 +222,28 @@ public class FragmentOutMessageData extends Fragment {
                     Toast.makeText(getActivity(), "标题不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (zhuSong.equals("")) {
-                    Toast.makeText(getActivity(), "主送人不能为空", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                if (chaoBao.equals("")) {
-                    Toast.makeText(getActivity(), "抄报人不能为空", Toast.LENGTH_SHORT).show();
-                    break;
-                }
+//                if (zhuSong.equals("")) {
+//                    Toast.makeText(getActivity(), "主送人不能为空", Toast.LENGTH_SHORT).show();
+//                    break;
+//                }
+//                if (chaoBao.equals("")) {
+//                    Toast.makeText(getActivity(), "抄报人不能为空", Toast.LENGTH_SHORT).show();
+//                    break;
+//                }
                 if (chaoSong.equals("")) {
                     Toast.makeText(getActivity(), "抄送人不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (niGao.equals("")) {
                     Toast.makeText(getActivity(), "拟稿人不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (num.equals("")) {
+                    Toast.makeText(getActivity(), "印刷份数不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (textNum.equals("")) {
+                    Toast.makeText(getActivity(), "文号1不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 ProgressDialogUtil.startLoad(getActivity(), "数据上传中");
@@ -278,7 +286,7 @@ public class FragmentOutMessageData extends Fragment {
                 final String heGao = etHeGao.getText().toString();
                 final String num = etNum.getText().toString();
 
-                final String wenHao = et1.getText().toString();
+                final String wenHao = etTextNum.getText().toString();
                 final String riQi = et2.getText().toString();
                 final String xuHao = et3.getText().toString();
                 final String time = tvStartTime.getText().toString();

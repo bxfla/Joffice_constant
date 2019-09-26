@@ -301,9 +301,7 @@ public class MyBackSureFlowListActivity extends BaseActivity implements FlowCont
         new AlertDialogUtil(MyBackSureFlowListActivity.this).showDialog(beanList.get(position).getRevokeReason(), new AlertDialogCallBack() {
             @Override
             public void select(String data) {
-
             }
-
             @Override
             public void confirm() {
                 final String runId = beanList.get(position).getId();

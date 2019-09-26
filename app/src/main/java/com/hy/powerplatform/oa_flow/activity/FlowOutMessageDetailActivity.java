@@ -91,12 +91,12 @@ public class FlowOutMessageDetailActivity extends BaseActivity {
     TextView tvLeader1W;
     @BindView(R.id.tvLeader2W)
     TextView tvLeader2W;
-    @BindView(R.id.tvLeader3W)
-    TextView tvLeader3W;
     @BindView(R.id.tvLeader4W)
     TextView tvLeader4W;
     @BindView(R.id.tvLeader5W)
     TextView tvLeader5W;
+    @BindView(R.id.tvTextNum)
+    TextView tvTextNum;
     private String res;
     String xiangguanfujian = "";
     String flowMessage = "";
@@ -112,7 +112,6 @@ public class FlowOutMessageDetailActivity extends BaseActivity {
         tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
-        tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
         header.setTvRight("追回");
@@ -299,7 +298,7 @@ public class FlowOutMessageDetailActivity extends BaseActivity {
                     tvNiGao.setText(niGao);
                     tvHeGao.setText(heGao);
                     tvNum.setText(num);
-                    tv1.setText(wenHao);
+                    tvTextNum.setText(wenHao);
                     tv2.setText(xuHao);
                     tv3.setText(riQi);
                     tvStartTime.setText(date);

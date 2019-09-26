@@ -14,76 +14,46 @@
         android:layout_height="45dp"
         android:background="@color/color_bg_selected"
         android:orientation="horizontal">
+
         <com.hy.powerplatform.my_utils.myViews.Header
             android:id="@+id/header"
-            android:layout_height="match_parent"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_weight="1"
             app:header_is_right_tv_visiable="true"
-            app:header_title="@string/logo_small_text">
-        </com.hy.powerplatform.my_utils.myViews.Header>
-        <!--<TextView-->
-            <!--android:id="@+id/tvAddress"-->
-            <!--android:layout_width="60dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="@color/color_bg_selected"-->
-            <!--android:gravity="center"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:textSize="18sp"/>-->
+            app:header_title="@string/logo_small_text"></com.hy.powerplatform.my_utils.myViews.Header>
     </LinearLayout>
 
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_weight="1"
+            android:id="@+id/frame_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <ImageView
-                android:visibility="gone"
-                android:id="@+id/mIvBanner"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/banner" />
-            <!--功能列表分割线-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="15dp"
-                android:background="@color/white"
-                android:orientation="horizontal">
+            android:layout_height="match_parent"/>
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="14dp"
-                    android:background="@color/color_bg_selected"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"/>
+            <RadioButton
+                android:id="@+id/rb1"
+                style="@style/RadionButton"
+                android:checked="true"
+                android:drawableTop="@drawable/btn_01_bg"
+                android:text="首页" />
 
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="4dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/function_list"
-                    android:textSize="14dp"
-                    android:textColor="@color/black"/>
-            </LinearLayout>
-            <View
-                style="@style/line"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_margin="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-    </ScrollView>
+            <RadioButton
+                android:id="@+id/rb2"
+                style="@style/RadionButton"
+                android:drawableTop="@drawable/btn_02_bg"
+                android:text="个人中心" />
+        </RadioGroup>
+    </LinearLayout>
 </LinearLayout>

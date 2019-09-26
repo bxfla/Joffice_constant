@@ -349,7 +349,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             hideLoading();
-            intent = new Intent(LoginActivity.this, SecondActivity.class);
+            intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
