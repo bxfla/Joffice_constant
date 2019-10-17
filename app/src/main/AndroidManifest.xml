@@ -789,6 +789,15 @@
             android:name=".oa_flow.activity.ListActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".oa_flow.activity.ListActivity1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".oa_flow.activity.ListActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".oa_flow.activity.ListActivity3"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".oa_flow.activity.XingZengActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -805,7 +814,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".oa_flow.activity.MyWillDoActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
         <activity
             android:name=".oa_flow.activity.FlowCCTTPurchaseActivity"
             android:screenOrientation="portrait"

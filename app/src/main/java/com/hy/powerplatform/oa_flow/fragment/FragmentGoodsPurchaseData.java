@@ -187,6 +187,14 @@ public class FragmentGoodsPurchaseData extends Fragment {
     TextView tvLeader3W;
     @BindView(R.id.tvLeader4W)
     TextView tvLeader4W;
+    @BindView(R.id.tv)
+    TextView tv;
+    @BindView(R.id.etLeaderJG)
+    EditText etLeaderJG;
+    @BindView(R.id.tvLeaderJG)
+    TextView tvLeaderJG;
+    @BindView(R.id.ll1)
+    LinearLayout ll1;
     private CustomDatePickerDay customDatePicker1;
 
     String userId = "";
@@ -703,6 +711,18 @@ public class FragmentGoodsPurchaseData extends Fragment {
         ArrayAdapter adapterZC = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listZC);
         adapterZC.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerzc.setAdapter(adapterZC);
+        spinnerzc.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                if (arg2 == 1) {
+                    ll1.setVisibility(View.GONE);
+                }else {
+                    ll1.setVisibility(View.VISIBLE);
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
 
         listType.add("");
         listType.add("办公家具");

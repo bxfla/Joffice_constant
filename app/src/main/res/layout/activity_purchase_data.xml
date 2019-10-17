@@ -638,18 +638,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/shouye" />
-
                 <TextView
                     android:id="@+id/tvLeaderW"
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:text="部门领导:" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
 
                 <EditText
                     android:id="@+id/etLeader"
@@ -663,6 +662,36 @@
                     android:hint="部门领导意见" />
             </LinearLayout>
             <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="采购供应部:" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etLeaderGYB"
+                    style="@style/textWrite"
+                    android:hint="采购供应部意见"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvLeaderGYB"
+                    style="@style/textWrite"
+                    android:hint="采购供应部意见" />
+            </LinearLayout>
+            <View style="@style/line"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -696,6 +725,7 @@
             <View style="@style/line"></View>
 
             <LinearLayout
+                android:id="@+id/ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -825,13 +855,12 @@
             <LinearLayout
                 android:id="@+id/ll1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
                 <TextView
-                    style="@style/oaTextView"
-                    android:layout_height="45dp"
+                    style="@style/oaTextView2"
                     android:layout_gravity="center_vertical"
                     android:text="总经理:" />
 
@@ -843,13 +872,13 @@
 
                 <EditText
                     android:id="@+id/etLeader5"
-                    style="@style/textWrite"
+                    style="@style/textWrite2"
                     android:hint="总经理意见"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader5"
-                    style="@style/textWrite"
+                    style="@style/textWrite2"
                     android:hint="总经理意见" />
             </LinearLayout>
 

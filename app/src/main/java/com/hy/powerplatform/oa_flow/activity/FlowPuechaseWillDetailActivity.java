@@ -267,7 +267,15 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     TextView tvLeader5W;
     @BindView(R.id.tvLeader6W)
     TextView tvLeader6W;
-    private String name, taskId, res, bmfzryj, jcbmyj, zcgkbmyj, fgldyj, cgfgyj, cwzjyj, zjl = "";
+    @BindView(R.id.ll)
+    LinearLayout ll;
+    @BindView(R.id.etLeaderGYB)
+    EditText etLeaderGYB;
+    @BindView(R.id.tvLeaderGYB)
+    TextView tvLeaderGYB;
+    @BindView(R.id.tvGYB)
+    TextView tvGYB;
+    private String name, taskId, res, bmfzryj, gybmyj, jcbmyj, zcgkbmyj, fgldyj, cgfgyj, cwzjyj, zjl = "";
     private String mainId, signaName, destName = "", destType, checkTask, qianzhiData = "";
     String leader = "";
     String leaderCode = "";
@@ -275,7 +283,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
-    String bmreout = "", zcreout = "", fgreout = "", jcreout = "", cwfgreout = "", cwreout = "", zjlreout = "", flowAssignld, serialNumber = "";
+    String bmreout = "", gybmreout = "", zcreout = "", fgreout = "", jcreout = "", cwfgreout = "", cwreout = "", zjlreout = "", flowAssignld, serialNumber = "";
     String hejidj, hejije, hejisl = "";
     String[] bigNametemp = null;
     String[] bigCodetemp = null;
@@ -318,12 +326,26 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     double moneyS1 = 0.0, moneyS2 = 0.0, moneyS3 = 0.0, moneyS4 = 0.0, moneyS5 = 0.0;
 
     FlowMessageAdapter adapter;
+    Gson gson = new Gson();
+    FlowPuechase bean;
+    JSONArray jsonArray;
+    JSONObject jsonObject;
+    SimpleDateFormat formatter;
+    Date curDate;
+    String str;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        jsonArray = new JSONArray();
+        jsonObject = new JSONObject();
+        formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        curDate = new Date(System.currentTimeMillis());
+        str = formatter.format(curDate);
+
+        btnUp.setVisibility(View.VISIBLE);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
@@ -1105,7 +1127,8 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
         ProgressDialogUtil.stopLoad();
     }
 
-    @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT, R.id.btnHistory, R.id.tvBZ1, R.id.tvBZ2, R.id.tvBZ3, R.id.tvBZ4, R.id.tvBZ5})
+    @OnClick({R.id.btnUp, R.id.tvData, R.id.btnT, R.id.btnHistory, R.id.tvBZ1, R.id.tvBZ2
+            , R.id.tvBZ3, R.id.tvBZ4, R.id.tvBZ5})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvBZ1:
@@ -1277,9 +1300,10 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.btnUp:
-                Gson gson = new Gson();
-                FlowPuechase bean = gson.fromJson(res, FlowPuechase.class);
+                gson = new Gson();
+                bean = gson.fromJson(res, FlowPuechase.class);
                 bmfzryj = bean.getMainform().get(0).getBmfzryj();
+                gybmyj = bean.getMainform().get(0).getCggybyj();
                 zcgkbmyj = bean.getMainform().get(0).getZcgkbmyj();
                 fgldyj = bean.getMainform().get(0).getFgldyj();
                 cgfgyj = bean.getMainform().get(0).getCbfgldyj();
@@ -1290,11 +1314,11 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                         "login").getData(FlowPuechaseWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowPuechaseWillDetailActivity.this,
                         "login").getData(FlowPuechaseWillDetailActivity.this, "userId", "");
-                JSONArray jsonArray = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date curDate = new Date(System.currentTimeMillis());
-                String str = formatter.format(curDate);
+                jsonArray = new JSONArray();
+                jsonObject = new JSONObject();
+                formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                curDate = new Date(System.currentTimeMillis());
+                str = formatter.format(curDate);
                 if (etLeader.getVisibility() == View.VISIBLE) {
                     comment = etLeader.getText().toString();
                     try {
@@ -1311,6 +1335,25 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     } else {
                         bmfzryj = bmfzryj + "," + jsonArray.toString();
                         bmfzryj = bmfzryj.toString().replace("],[", ",");
+                    }
+                }
+
+                if (etLeaderGYB.getVisibility() == View.VISIBLE) {
+                    comment = etLeaderGYB.getText().toString();
+                    try {
+                        jsonObject.put("ui", userCode);
+                        jsonObject.put("un", userName);
+                        jsonObject.put("c", str);
+                        jsonObject.put("v", etLeaderGYB.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    jsonArray.put(jsonObject);
+                    if (gybmyj.equals("")) {
+                        gybmyj = jsonArray.toString();
+                    } else {
+                        gybmyj = gybmyj + "," + jsonArray.toString();
+                        gybmyj = gybmyj.toString().replace("],[", ",");
                     }
                 }
 
@@ -1379,6 +1422,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    jsonArray = new JSONArray();
                     jsonArray.put(jsonObject);
                     if (cgfgyj.equals("")) {
                         cgfgyj = jsonArray.toString();
@@ -1424,12 +1468,12 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (comment.equals("")) {
-                    if (!bmreout.equals("2") && !jcbmyj.equals("2") && !zcreout.equals("2") && !fgreout.equals("2")
+                    if (!bmreout.equals("2")&& !gybmreout.equals("2") && !jcbmyj.equals("2") && !zcreout.equals("2") && !fgreout.equals("2")
                             && !cwreout.equals("2") && !cwfgreout.equals("2") && !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!zjl.equals("") && !cwzjyj.equals("") && !cgfgyj.equals("") && !fgldyj.equals("") && !zcgkbmyj.equals("")
-                            && !jcreout.equals("") && !bmfzryj.equals("")) {
+                    } else if (!etLeader5.getText().toString().equals("") && !cwzjyj.equals("") && !cgfgyj.equals("") && !fgldyj.equals("") && !zcgkbmyj.equals("")
+                            && !jcreout.equals("") && !gybmyj.equals("") && !bmfzryj.equals("")) {
                         comment = "";
                         personSession();
                     } else {
@@ -1450,6 +1494,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                 Gson gson = new Gson();
                 FlowPuechase bean = gson.fromJson(res, FlowPuechase.class);
                 bmfzryj = bean.getMainform().get(0).getBmfzryj();
+                gybmyj = bean.getMainform().get(0).getCggybyj();
                 zcgkbmyj = bean.getMainform().get(0).getZcgkbmyj();
                 fgldyj = bean.getMainform().get(0).getFgldyj();
                 cgfgyj = bean.getMainform().get(0).getCbfgldyj();
@@ -1627,7 +1672,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             , etMoney5.getText().toString(), tvAllMoney1.getText().toString(), tvAllMoney2.getText().toString()
                             , tvAllMoney3.getText().toString(), tvAllMoney4.getText().toString(), tvAllMoney5.getText().toString()
                             , userCode, destName, taskId, flowAssignld, mainId,
-                            bmfzryj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
+                            bmfzryj,gybmyj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
                             hejidj, allMoney, use, cgfgyj, other, jcbmyj
                             , danwei1, danwei2, danwei3, danwei4, danwei5, tvzc.getText().toString(), tvtype.getText().toString()
                             , tvBZ1.getText().toString(), tvBZ2.getText().toString(), tvBZ3.getText().toString()
@@ -1636,7 +1681,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     upData = dbA.OAPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                             , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
                             , allMoney4, allMoney5, userCode, destName, taskId, flowAssignld, mainId,
-                            bmfzryj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
+                            bmfzryj,gybmyj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
                             hejidj, allMoney, use, cgfgyj, other, jcbmyj, danwei1, danwei2, danwei3, danwei4, danwei5
                             , tvzc.getText().toString(), tvtype.getText().toString()
                             , tvBZ1.getText().toString(), tvBZ2.getText().toString(), tvBZ3.getText().toString()
@@ -1676,6 +1721,9 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     String time = bean.getMainform().get(0).getSqrq();
                     String use = bean.getMainform().get(0).getYt();
                     String iszc = bean.getMainform().get(0).getIszc();
+                    if (iszc.equals("非资产类")) {
+                        ll.setVisibility(View.GONE);
+                    }
                     String goodsType = bean.getMainform().get(0).getGoodsType();
                     tvzc.setText(iszc);
                     tvtype.setText(goodsType);
@@ -1737,6 +1785,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     hejije = bean.getMainform().get(0).getHejije();
 
                     bmfzryj = bean.getMainform().get(0).getBmfzryj();
+                    gybmyj = bean.getMainform().get(0).getCggybyj();
                     jcbmyj = bean.getMainform().get(0).getJcbmyj();
                     zcgkbmyj = bean.getMainform().get(0).getZcgkbmyj();
                     fgldyj = bean.getMainform().get(0).getFgldyj();
@@ -1756,6 +1805,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     try {
                         JSONObject jsonObject = new JSONObject(formRights);
                         bmreout = jsonObject.getString("bmfzryj");
+                        gybmreout = jsonObject.getString("cggybyj");
                         zcreout = jsonObject.getString("zcgkbmyj");
                         fgreout = jsonObject.getString("fgldyj");
                         cwfgreout = jsonObject.getString("cbfgldyj");
@@ -1769,6 +1819,14 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             tvLeader.setVisibility(View.VISIBLE);
                             etLeader.setVisibility(View.GONE);
                             tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+                        }
+                        if (gybmreout.equals("2")) {
+                            tvLeaderGYB.setVisibility(View.GONE);
+                            etLeaderGYB.setVisibility(View.VISIBLE);
+                        } else {
+                            tvLeaderGYB.setVisibility(View.VISIBLE);
+                            etLeaderGYB.setVisibility(View.GONE);
+                            tvGYB.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (jcreout.equals("2")) {
                             tvLeaderJG.setVisibility(View.GONE);
@@ -1858,7 +1916,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             etLeader5.setVisibility(View.GONE);
                             tvLeader6W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
-                        if (bmreout.equals("1") && zcreout.equals("1") && fgreout.equals("1") && cwfgreout.equals("1") && cwreout.equals("1") && zjlreout.equals("1") && jcreout.equals("1")) {
+                        if (bmreout.equals("1") && gybmreout.equals("1") && zcreout.equals("1") && fgreout.equals("1") && cwfgreout.equals("1") && cwreout.equals("1") && zjlreout.equals("1") && jcreout.equals("1")) {
                             Toast.makeText(FlowPuechaseWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
@@ -2024,6 +2082,26 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             tvLeaderJG.setText(word1);
                         } else {
                             etLeaderJG.setHint(word1);
+                        }
+                    }
+
+                    String wordgyb = "";
+                    if (gybmyj != null && !gybmyj.equals("")) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(gybmyj);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    wordgyb = wordgyb + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (tvLeaderGYB.getVisibility() == View.VISIBLE) {
+                            tvLeaderGYB.setText(wordgyb);
+                        } else {
+                            etLeaderGYB.setHint(wordgyb);
                         }
                     }
 

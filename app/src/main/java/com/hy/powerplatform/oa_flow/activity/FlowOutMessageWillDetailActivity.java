@@ -136,8 +136,8 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
     CheckBox cb9;
     @BindView(R.id.ll5)
     LinearLayout ll5;
-    @BindView(R.id.etHeGao)
-    EditText etHeGao;
+    @BindView(R.id.tvHeGao1)
+    TextView etHeGao;
     @BindView(R.id.et1)
     EditText et1;
     @BindView(R.id.et2)
@@ -782,14 +782,28 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                     date1 = et3.getText().toString();
                 }
                 if (comment.equals("")) {
+                    if (et2.getVisibility()==View.VISIBLE) {
+                        if (et2.getText().toString().equals("")) {
+                            Toast.makeText(this, "请填写文号", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                    }
+                    if (et3.getVisibility()==View.VISIBLE){
+                        if (et3.getText().toString().equals("")){
+                            Toast.makeText(this, "请填写文号", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                    }
+
                     if (!("2").equals(fgreout) && !("2").equals(zjlreout)) {
                         comment = "";
                         personSession();
-                    } else if (!zjl.equals("") && !fgldyj.equals("")) {
+                    } else if (!etLeader1.getText().toString().equals("") && !fgldyj.equals("")) {
                         comment = "";
                         personSession();
                     } else {
                         Toast.makeText(this, "请签字", Toast.LENGTH_SHORT).show();
+                        break;
                     }
                 } else {
                     personSession();
@@ -1031,7 +1045,7 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                     tvData.setText(xiangguanfujian);
                     heGao = bean.getMainform().get(0).getHeGaoRen();
                     num = bean.getMainform().get(0).getYinFaFenShu();
-                    time = bean.getMainform().get(0).getYinFaFenShu();
+//                    time = bean.getMainform().get(0).getYinFaFenShu();
                     xuHao = bean.getMainform().get(0).getFaWenXuHao();
                     date = bean.getMainform().get(0).getWenHaoRiQi();
                     date1 = bean.getMainform().get(0).getYinFaRiQi();
@@ -1101,7 +1115,6 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                         }
 
                         if (yffsreout.equals("2")) {
-                            tvNum.setVisibility(View.GONE);
                             et3.setVisibility(View.VISIBLE);
                             tvStartTime.setVisibility(View.VISIBLE);
                             tvStartTime1.setVisibility(View.GONE);

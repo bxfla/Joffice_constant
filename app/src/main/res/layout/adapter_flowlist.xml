@@ -22,15 +22,12 @@
             android:layout_weight="1" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/tvNum"
-            android:text="..."
             android:gravity="center"
             android:layout_gravity="center_vertical"
             android:textColor="@color/wheat"
-            android:layout_height="17dp"
-            android:layout_width="17dp"
-            android:background="@drawable/ic_have_message"/>
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content" />
         <!--style="@style/numTextView"-->
 
         <ImageView

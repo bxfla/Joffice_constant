@@ -39,11 +39,11 @@ import com.hy.powerplatform.news.activity.NoticeActivity;
 import com.hy.powerplatform.oa_flow.activity.HistoryListActivity;
 import com.hy.powerplatform.oa_flow.activity.InboxActivity;
 import com.hy.powerplatform.oa_flow.activity.ListActivity;
+import com.hy.powerplatform.oa_flow.activity.ListActivity1;
+import com.hy.powerplatform.oa_flow.activity.ListActivity2;
+import com.hy.powerplatform.oa_flow.activity.ListActivity3;
 import com.hy.powerplatform.oa_flow.activity.MyBackFlowListActivity;
 import com.hy.powerplatform.oa_flow.activity.MyBackSureFlowListActivity;
-import com.hy.powerplatform.oa_flow.activity.MyFlowListActivity;
-import com.hy.powerplatform.oa_flow.activity.MyWillDoActivity;
-import com.hy.powerplatform.oa_flow.activity.WithMeListActivity;
 import com.hy.powerplatform.oa_flow.bean.MyWillDo;
 import com.hy.powerplatform.phone.activity.PhoneListActivity;
 import com.hy.powerplatform.qrcode.zxing.activity.CaptureActivity;
@@ -275,16 +275,16 @@ public class Fragment01 extends Fragment {
                                     intent = new Intent(getActivity(), ListActivity.class);
                                     startActivity(intent);
                                 }else if (mainDataList.get(position).getModuleCode().equals("DBLC")) {
-                                    intent = new Intent(getActivity(), MyWillDoActivity.class);
+                                    intent = new Intent(getActivity(), ListActivity1.class);
                                     startActivity(intent);
                                 }else if (mainDataList.get(position).getModuleCode().equals("GSLC")) {
                                     intent = new Intent(getActivity(), HistoryListActivity.class);
                                     startActivity(intent);
                                 }else if (mainDataList.get(position).getModuleCode().equals("BMLC")) {
-                                    intent = new Intent(getActivity(), WithMeListActivity.class);
+                                    intent = new Intent(getActivity(), ListActivity2.class);
                                     startActivity(intent);
                                 }else if (mainDataList.get(position).getModuleCode().equals("YBLC")) {
-                                    intent = new Intent(getActivity(), MyFlowListActivity.class);
+                                    intent = new Intent(getActivity(), ListActivity3.class);
                                     startActivity(intent);
                                 }else if (mainDataList.get(position).getModuleCode().equals("SYS")) {
                                     startQrCode();

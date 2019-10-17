@@ -176,6 +176,15 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
     String piId = "";
     String downloadData = "";
     FlowMessageAdapter adapter;
+
+    Gson gson = new Gson();
+    FlowHuiQianWillDetail bean;
+    JSONArray jsonArray;
+    JSONObject jsonObject;
+    SimpleDateFormat formatter;
+    Date curDate;
+    String str;
+
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
 
@@ -183,6 +192,13 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        jsonArray = new JSONArray();
+        jsonObject = new JSONObject();
+        formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        curDate = new Date(System.currentTimeMillis());
+        str = formatter.format(curDate);
+
+        btnUp.setVisibility(View.VISIBLE);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
@@ -191,7 +207,6 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
         tag1 = intent.getStringExtra("tag");
         piId = intent.getStringExtra("piId");
         getData(name, taskId);
-        btnUp.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -651,8 +666,8 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.btnUp:
-                Gson gson = new Gson();
-                FlowHuiQianWillDetail bean = gson.fromJson(res, FlowHuiQianWillDetail.class);
+                gson = new Gson();
+                bean = gson.fromJson(res, FlowHuiQianWillDetail.class);
                 bxbmyj = bean.getMainform().get(0).getJbfgldyj();
                 wxbmyj = bean.getMainform().get(0).getZjlyj();
                 wxryyj = bean.getMainform().get(0).getDszyj();
@@ -660,11 +675,11 @@ public class FlowHuiQianWillDetailActivity extends BaseActivity {
                         "login").getData(FlowHuiQianWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowHuiQianWillDetailActivity.this,
                         "login").getData(FlowHuiQianWillDetailActivity.this, "userCode", "");
-                JSONArray jsonArray = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date curDate = new Date(System.currentTimeMillis());
-                String str = formatter.format(curDate);
+                jsonArray = new JSONArray();
+                jsonObject = new JSONObject();
+                formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                curDate = new Date(System.currentTimeMillis());
+                str = formatter.format(curDate);
                 if (etLeader.getVisibility() == View.VISIBLE) {
                     comment = etLeader.getText().toString();
                     try {

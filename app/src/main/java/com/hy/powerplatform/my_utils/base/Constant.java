@@ -53,7 +53,7 @@ public class Constant {
     //历史列表
     public static final String  HISTORYLIST = "flow/historyProcessRun.do?start=";
     //我的代办列表
-    public static final String  MYWILLDOLIST = "flow/listTask.do?start=";
+    public static final String  MYWILLDOLIST = "flow/mobileTypeListTask.do?start=";
     //与我相关列表
     public static final String  WithMeLIST = "flow/relevantListTask.do?start=";
     //获取版本号
@@ -83,6 +83,8 @@ public class Constant {
     public static final String  WILLDOLIST = "flow/mobileListTask.do?start=";
     //获取代办详情
     public static final String  DETAILWILL = "htmobile/moblieGetTask.do?activityName=";
+    //获取代办数量
+    public static final String  DETAILWILLNUM = "flow/mobileCountListTask.do";
     // 请求第一个处理人  之后不再让别人处理
     public static final String  LASTPERSON = "flow/checkTask.do";
     // 最后不是end的下一级审核人
@@ -116,7 +118,7 @@ public class Constant {
     public static final String  ENTRYNAMENAME = "驾驶员入职流程表";
     public static final String  OUTMESSAGENAME = "宜春公交集团发文";
     public static final String  CARNAME = "公务车用车派车单";
-    public static final String  REPAIRNAME = "报修项目登记表new";
+    public static final String  REPAIRNAME = "报修项目登记表";
     public static final String  CHUCAINAME = "出差申请审批表";
     public static final String  GCADDNAME = "建设工程量增加审批单";
     public static final String  GCCHECKNAME = "建设工程变更审批单";

@@ -178,6 +178,14 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     List<FlowContractSign.TransBean> beanList = new ArrayList<>();
     List<String> selectList = new ArrayList<>();
 
+    Gson gson = new Gson();
+    FlowContractSign bean;
+    JSONArray jsonArray;
+    JSONObject jsonObject;
+    SimpleDateFormat formatter;
+    Date curDate;
+    String str;
+
     String xiangguanfujian = "";
     String btnTTag = "N";
     String flowMessage = "";
@@ -192,6 +200,15 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        ButterKnife.bind(this);
+        jsonArray = new JSONArray();
+        jsonObject = new JSONObject();
+        formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        curDate = new Date(System.currentTimeMillis());
+        str = formatter.format(curDate);
+
+        btnUp.setVisibility(View.VISIBLE);
+
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
@@ -595,8 +612,8 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.btnUp:
-                Gson gson = new Gson();
-                FlowContractSign bean = gson.fromJson(res, FlowContractSign.class);
+                gson = new Gson();
+                bean = gson.fromJson(res, FlowContractSign.class);
                 csbmyj = bean.getMainform().get(0).getCwsjbyj();
                 jgbmyj = bean.getMainform().get(0).getJcbmyj();
                 flgwyj = bean.getMainform().get(0).getFlgwyj();
@@ -606,11 +623,11 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                         "login").getData(FlowContractSignWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowContractSignWillDetailActivity.this,
                         "login").getData(FlowContractSignWillDetailActivity.this, "userId", "");
-                JSONArray jsonArray = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date curDate = new Date(System.currentTimeMillis());
-                String str = formatter.format(curDate);
+                jsonArray = new JSONArray();
+                jsonObject = new JSONObject();
+                formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                curDate = new Date(System.currentTimeMillis());
+                str = formatter.format(curDate);
                 if (etLeader.getVisibility() == View.VISIBLE) {
                     comment = etLeader.getText().toString();
                     try {

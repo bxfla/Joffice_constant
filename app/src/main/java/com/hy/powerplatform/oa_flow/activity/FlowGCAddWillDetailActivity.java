@@ -194,12 +194,28 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
     String piId = "";
     String downloadData = "";
     FlowMessageAdapter adapter;
+
+    Gson gson = new Gson();
+    FlowGCAddwillDetail bean;
+    JSONArray jsonArray;
+    JSONObject jsonObject;
+    SimpleDateFormat formatter;
+    Date curDate;
+    String str;
+
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        jsonArray = new JSONArray();
+        jsonObject = new JSONObject();
+        formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        curDate = new Date(System.currentTimeMillis());
+        str = formatter.format(curDate);
+
+        btnUp.setVisibility(View.VISIBLE);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
@@ -208,7 +224,6 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
         tag1 = intent.getStringExtra("tag");
         piId = intent.getStringExtra("piId");
         getData(name, taskId);
-        btnUp.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -606,8 +621,8 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.btnUp:
-                Gson gson = new Gson();
-                FlowGCAddwillDetail bean = gson.fromJson(res, FlowGCAddwillDetail.class);
+                gson = new Gson();
+                bean = gson.fromJson(res, FlowGCAddwillDetail.class);
                 xqbmyj = bean.getMainform().get(0).getBmfzryj();
                 xqbmldyj = bean.getMainform().get(0).getFgldyj();
                 jsbmyj = bean.getMainform().get(0).getJjbzbyj();
@@ -619,11 +634,11 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         "login").getData(FlowGCAddWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowGCAddWillDetailActivity.this,
                         "login").getData(FlowGCAddWillDetailActivity.this, "userCode", "");
-                JSONArray jsonArray = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date curDate = new Date(System.currentTimeMillis());
-                String str = formatter.format(curDate);
+                jsonArray = new JSONArray();
+                jsonObject = new JSONObject();
+                formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                curDate = new Date(System.currentTimeMillis());
+                str = formatter.format(curDate);
                 if (etLeader.getVisibility() == View.VISIBLE) {
                     comment = etLeader.getText().toString();
                     try {

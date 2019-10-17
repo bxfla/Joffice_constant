@@ -63,8 +63,6 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
     Header header;
     @BindView(R.id.btnOK)
     Button btnOK;
-    @BindView(R.id.btnNO)
-    Button btnNO;
     @BindView(R.id.etCode)
     TextView etCode;
     @BindView(R.id.tvPerson)
@@ -193,11 +191,26 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
     @BindView(R.id.tvLeader2W)
     TextView tvLeader2W;
 
+    Gson gson = new Gson();
+    QingJiaWillDoDetail bean;
+    JSONArray jsonArray;
+    JSONObject jsonObject;
+    SimpleDateFormat formatter;
+    Date curDate;
+    String str;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        jsonArray = new JSONArray();
+        jsonObject = new JSONObject();
+        formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        curDate = new Date(System.currentTimeMillis());
+        str = formatter.format(curDate);
+
+        btnOK.setVisibility(View.VISIBLE);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
@@ -246,7 +259,7 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
         }).start();
     }
 
-    @OnClick({R.id.btnOK, R.id.btnNO, R.id.tvData, R.id.btnT, R.id.btnHistory})
+    @OnClick({R.id.btnOK, R.id.tvData, R.id.btnT, R.id.btnHistory})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnHistory:
@@ -393,8 +406,8 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.btnOK:
-                Gson gson = new Gson();
-                QingJiaWillDoDetail bean = gson.fromJson(res, QingJiaWillDoDetail.class);
+                gson = new Gson();
+                bean = gson.fromJson(res, QingJiaWillDoDetail.class);
                 bmfzr = bean.getMainform().get(0).getBmfzryj();
                 fgfze = bean.getMainform().get(0).getFgldyj();
                 zjl = bean.getMainform().get(0).getZjlyj();
@@ -402,11 +415,11 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                         "login").getData(FlowLeaveWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowLeaveWillDetailActivity.this,
                         "login").getData(FlowLeaveWillDetailActivity.this, "userCode", "");
-                JSONArray jsonArray = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date curDate = new Date(System.currentTimeMillis());
-                String str = formatter.format(curDate);
+                jsonArray = new JSONArray();
+                jsonObject = new JSONObject();
+                formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                curDate = new Date(System.currentTimeMillis());
+                str = formatter.format(curDate);
                 if (etLeader.getVisibility() == View.VISIBLE) {
                     comments = etLeader.getText().toString();
                     try {
@@ -474,8 +487,6 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                 } else {
                     personSession();
                 }
-                break;
-            case R.id.btnNO:
                 break;
         }
     }
@@ -601,30 +612,30 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                 String[] nameNum = null;
                 nameNum = role.split(",");
                 String nameText = "";
-                for (int i = 0;i<nameNum.length;i++){
-                    if (i==0){
+                for (int i = 0; i < nameNum.length; i++) {
+                    if (i == 0) {
                         nameText = nameNum[0];
-                    }else {
-                        nameText = nameText+":"+nameNum[i];
+                    } else {
+                        nameText = nameText + ":" + nameNum[i];
                     }
                 }
 
                 String[] codeNum = null;
                 codeNum = userCodes.split(",");
                 String codeText = "";
-                for (int i = 0;i<nameNum.length;i++){
-                    if (i==0){
+                for (int i = 0; i < nameNum.length; i++) {
+                    if (i == 0) {
                         codeText = codeNum[0];
-                    }else {
-                        codeText = codeText+":"+codeNum[i];
+                    } else {
+                        codeText = codeText + ":" + codeNum[i];
                     }
                 }
                 String otherCodeText = "";
-                for (int i = nameNum.length;i<codeNum.length;i++){
-                    if (i==nameNum.length){
+                for (int i = nameNum.length; i < codeNum.length; i++) {
+                    if (i == nameNum.length) {
                         otherCodeText = codeNum[nameNum.length];
-                    }else {
-                        otherCodeText = otherCodeText+","+codeNum[i];
+                    } else {
+                        otherCodeText = otherCodeText + "," + codeNum[i];
                     }
                 }
                 if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
@@ -634,7 +645,7 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
 
                     if (!bigUserCodes.equals("") && !userCodes.equals("")) {
 //                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText+","+otherCodeText;
+                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText + "," + otherCodeText;
                         flowAssignld = flowAssignld.replace(" ", "");
                         flowAssignld = flowAssignld.replace(":|", "|");
                     } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
@@ -654,7 +665,7 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
 
                     if (!bigUserCodes.equals("") && !userCodes.equals("")) {
 //                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText+","+otherCodeText;
+                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText + "," + otherCodeText;
                         flowAssignld = flowAssignld.replace(" ", "");
                         flowAssignld = flowAssignld.replace(":|", "|");
                     } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
@@ -1155,15 +1166,15 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                             userCode = "";
                             userName = "";
                             role = "";
-                            for (int i = 1;i<bean1.getData().size();i++){
-                                if (i == 1){
-                                    role = role+bean1.getData().get(i).getRole();
-                                    userCode = userCode+bean1.getData().get(i).getUserNames();
-                                    userName = userName+bean1.getData().get(i).getUserCodes();
-                                }else {
-                                    role = role+","+bean1.getData().get(i).getRole();
-                                    userCode = userCode+","+bean1.getData().get(i).getUserNames();
-                                    userName = userName+","+bean1.getData().get(i).getUserCodes();
+                            for (int i = 1; i < bean1.getData().size(); i++) {
+                                if (i == 1) {
+                                    role = role + bean1.getData().get(i).getRole();
+                                    userCode = userCode + bean1.getData().get(i).getUserNames();
+                                    userName = userName + bean1.getData().get(i).getUserCodes();
+                                } else {
+                                    role = role + "," + bean1.getData().get(i).getRole();
+                                    userCode = userCode + "," + bean1.getData().get(i).getUserNames();
+                                    userName = userName + "," + bean1.getData().get(i).getUserCodes();
                                 }
                             }
                             nametemp = userName.split(",");

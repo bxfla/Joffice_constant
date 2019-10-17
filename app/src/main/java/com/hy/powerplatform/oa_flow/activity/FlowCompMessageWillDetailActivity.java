@@ -195,6 +195,14 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
     String flowMessage = "";
     String downloadData = "";
     FlowMessageAdapter adapter;
+
+    Gson gson = new Gson();
+    FlowCompMessageWill bean;
+    JSONArray jsonArray;
+    JSONObject jsonObject;
+    SimpleDateFormat formatter;
+    Date curDate;
+    String str;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
 
@@ -202,6 +210,13 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        jsonArray = new JSONArray();
+        jsonObject = new JSONObject();
+        formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        curDate = new Date(System.currentTimeMillis());
+        str = formatter.format(curDate);
+
+        btnUp.setVisibility(View.VISIBLE);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
@@ -210,7 +225,6 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
         tag1 = intent.getStringExtra("tag");
         piId = intent.getStringExtra("piId");
         getData(name, taskId);
-        btnUp.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -670,8 +684,8 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.btnUp:
-                Gson gson = new Gson();
-                FlowCompMessageWill bean = gson.fromJson(res, FlowCompMessageWill.class);
+                gson = new Gson();
+                bean = gson.fromJson(res, FlowCompMessageWill.class);
                 xqbmyj = bean.getMainform().get(0).getBmfzryj();
                 xqbmldyj = bean.getMainform().get(0).getFgldyj();
                 jsbmyj = bean.getMainform().get(0).getZhglbyj();
@@ -681,11 +695,11 @@ public class FlowCompMessageWillDetailActivity extends BaseActivity {
                         "login").getData(FlowCompMessageWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowCompMessageWillDetailActivity.this,
                         "login").getData(FlowCompMessageWillDetailActivity.this, "userCode", "");
-                JSONArray jsonArray = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date curDate = new Date(System.currentTimeMillis());
-                String str = formatter.format(curDate);
+                jsonArray = new JSONArray();
+                jsonObject = new JSONObject();
+                formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                curDate = new Date(System.currentTimeMillis());
+                str = formatter.format(curDate);
                 if (etLeader.getVisibility() == View.VISIBLE) {
                     comment = etLeader.getText().toString();
                     try {

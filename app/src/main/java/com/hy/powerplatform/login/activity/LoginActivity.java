@@ -97,7 +97,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     private void exit() {
         if (!isExit) {
             isExit = true;
-            alertDialogUtil.showDialog("您确定要退出程序吗", new AlertDialogCallBack() {
+            alertDialogUtil.showDialog1("您确定要退出程序吗", new AlertDialogCallBack() {
                 @Override
                 public void select(String data) {
 
@@ -249,6 +249,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
                                         sharedPreferencesHelper.saveData(LoginActivity.this, "userStatus", jsonObject.getString("username"));
                                         sharedPreferencesHelper.saveData(LoginActivity.this, "userId", jsonObject.getString("userId"));
                                         sharedPreferencesHelper.saveData(LoginActivity.this, "rolues", jsonObject.getString("rolues"));
+                                        sharedPreferencesHelper.saveData(LoginActivity.this, "roleName", jsonObject.getString("roleName"));
                                         String superRoleName = jsonObject.getString("superRoleName");
                                         if (jsonObject.getString("superRoleName") != null) {
                                             sharedPreferencesHelper.saveData(LoginActivity.this, "superRoleName", jsonObject.getString("superRoleName"));
@@ -307,39 +308,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
                         }
                     }).start();
                 }
-//                    Util.getDataByHttpUrlConnection(url, new HttpURLConnectionCallBackListener() {
-//                        @Override
-//                        public void onSuccess(String s) {
-//                            try {
-//                                JSONObject jsonObject = new JSONObject(s);
-//                                if (jsonObject.get("success").equals(true)){
-//                                    sharedPreferencesHelper.saveData(LoginActivity.this, "userName", userName1);
-//                                    sharedPreferencesHelper.saveData(LoginActivity.this, "userPwd", userPassword1);
-//                                    sharedPreferencesHelper.saveData(LoginActivity.this, "userCode", jsonObject.getString("userId"));
-//                                    sharedPreferencesHelper.saveData(LoginActivity.this, "userStatus", jsonObject.getString("username"));
-//                                    Message message = new Message();
-//                                    message.what = Constant.TAG_ONE;
-//                                    handler.sendMessage(message);
-//                                } else {
-//                                    Looper.prepare();
-//                                    Toast.makeText(LoginActivity.this, jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
-//                                    hideLoading();
-//                                    Looper.loop();
-//                                }
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFaile(Exception e) {
-////                            Looper.prepare();
-////                            Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
-////                            hideLoading();
-////                            Looper.loop();
-//                        }
-//                    });
-                //loginPresenter.getLoginPresenterData(userName1, userPassword1);
                 break;
         }
     }

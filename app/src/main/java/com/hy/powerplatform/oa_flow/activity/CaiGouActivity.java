@@ -35,10 +35,6 @@ public class CaiGouActivity extends BaseActivity {
 
     @BindView(R.id.header)
     Header header;
-    @BindView(R.id.llRepair)
-    LinearLayout llRepair;
-    @BindView(R.id.tvRepair)
-    TextView tvRepair;
     @BindView(R.id.llPurchase)
     LinearLayout llPurchase;
     @BindView(R.id.tvPurchase)
@@ -55,8 +51,6 @@ public class CaiGouActivity extends BaseActivity {
     List<MyNum.ResultBean> beanList = new ArrayList<>();
     @BindView(R.id.inNoContent)
     LinearLayout llNoContent;
-    @BindView(R.id.flRepair)
-    FrameLayout flRepair;
     @BindView(R.id.flPurchase)
     FrameLayout flPurchase;
     @BindView(R.id.flGoodsPurchase)
@@ -126,9 +120,6 @@ public class CaiGouActivity extends BaseActivity {
                     && !dataList.contains(Constant.GHPUECHASENAME)) {
                 llNoContent.setVisibility(View.VISIBLE);
             } else {
-                if (!dataList.contains(Constant.REPAIRNAME)) {
-                    flRepair.setVisibility(View.GONE);
-                }
                 if (!dataList.contains(Constant.PUECHASEFLOWNAME)) {
                     flPurchase.setVisibility(View.GONE);
                 }
@@ -172,14 +163,10 @@ public class CaiGouActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.llRepair, R.id.llPurchase, R.id.llGoodsPurchase, R.id.llWorkPurchase
+    @OnClick({R.id.llPurchase, R.id.llGoodsPurchase, R.id.llWorkPurchase
             , R.id.llflCCTPurchase, R.id.llGHPurchase})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.llRepair:
-                intent = new Intent(this, FlowRepairActivity.class);
-                startActivity(intent);
-                break;
             case R.id.llPurchase:
                 intent = new Intent(this, FlowPurchaseActivity.class);
                 startActivity(intent);
@@ -214,8 +201,6 @@ public class CaiGouActivity extends BaseActivity {
             tvPurchase.setText("");
             tvWorkPurchase.setVisibility(View.GONE);
             tvWorkPurchase.setText("");
-            tvRepair.setVisibility(View.GONE);
-            tvRepair.setText("");
             String data = String.valueOf(msg.getData().get("data"));
             MyNum bean = new Gson().fromJson(data, MyNum.class);
             if (!bean.isSuccess()) {
@@ -237,10 +222,6 @@ public class CaiGouActivity extends BaseActivity {
                         if (beanList.get(i).getFormDefId().equals(Constant.WORKPUECHASE)) {
                             tvWorkPurchase.setVisibility(View.VISIBLE);
                             tvWorkPurchase.setText(beanList.get(i).getSl());
-                        }
-                        if (beanList.get(i).getFormDefId().equals(Constant.REPAIR)) {
-                            tvRepair.setVisibility(View.VISIBLE);
-                            tvRepair.setText(beanList.get(i).getSl());
                         }
                         if (beanList.get(i).getFormDefId().equals(Constant.CCTPUECHASE)) {
                             tvCCTPurchase.setVisibility(View.VISIBLE);

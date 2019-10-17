@@ -9,10 +9,9 @@ import java.util.List;
 
 public class MyGoodsPurchase implements Serializable {
 
-
     /**
      * success : true
-     * mainform : [{"jcbmyj":"","jbldyj":"","mingcheng1":"测试","mingcheng3":"","mingcheng2":"","mingcheng4":"","mingcheng5":"","bm":"宜春公交集团有限公司","iszc":"非资产类","QiTa":"其他","zcgkbmyj":"","jine2":"","cwzjyj":"","jine3":"","jine4":"","jbfgldyj":"","jine5":"","jine1":"1.0","hejisl":"1","danwei1":"","cbfgldyj":"","danwei2":"","danwei3":"","danwei4":"","bmfzryj":"","LiuShuiHao":"","danwei5":"","shuliang3":"","shuliang4":"","shuliang1":"1","xgfj":"","shuliang2":"","shuliang5":"","runId":52241,"hejidj":"","mainId":58,"sqrq":"2019-08-08","goodsType":"办公家具","hejije":"1.0","sqr":"超级管理员","danjia5":"","$type$":"WF_WuPinCaiGouJiHuaBiao000YuanYiShangBiao","danjia4":"","danjia3":"","danjia2":"","fgldyj":"","danjia1":"1","yt":"用途","zjlyj":"","cgfgldyj":"","zcDepName":"综合管理部"}]
+     * mainform : [{"jcbmyj":"","jbldyj":"","mingcheng1":"测试","mingcheng3":"","mingcheng2":"测试","mingcheng4":"","mingcheng5":"","bm":"宜春公交集团有限公司","iszc":"资产类","QiTa":"","zcgkbmyj":"","jine2":"1.0","jine3":"","cwzjyj":"","jine4":"","jbfgldyj":"","jine5":"","jine1":"1.0","hejisl":"2","danwei1":"1","cbfgldyj":"","beizhu4":"","beizhu3":"","beizhu2":"测试","beizhu1":"测试","danwei2":"1","danwei3":"","danwei4":"","bmfzryj":"[{\"ui\":\"9354\",\"un\":\"欧阳晓林\",\"c\":\"2019-10-16 10:03\",\"v\":\"测试\"}]","beizhu5":"","LiuShuiHao":"No.20191016012","danwei5":"","shuliang3":"","shuliang4":"","shuliang1":"1","xgfj":"","shuliang2":"1","shuliang5":"","runId":52156,"hejidj":"","mainId":66,"sqrq":"2019-10-16","goodsType":"办公家具","cggybyj":"[{\"ui\":\"9407\",\"un\":\"李洪平（代）\",\"c\":\"2019-10-16 10:20\",\"v\":\"撒大声地\"}]","hejije":"2","sqr":"超级管理员","$type$":"WF_WuPinCaiGouJiHuaBiao000YuanYiShangBiao","danjia5":"","danjia4":"","danjia3":"","danjia2":"1","fgldyj":"","danjia1":"1","yt":"测试","zjlyj":"","cgfgldyj":"","zcDepName":""}]
      */
 
     private boolean success;
@@ -40,53 +39,59 @@ public class MyGoodsPurchase implements Serializable {
          * jbldyj :
          * mingcheng1 : 测试
          * mingcheng3 :
-         * mingcheng2 :
+         * mingcheng2 : 测试
          * mingcheng4 :
          * mingcheng5 :
          * bm : 宜春公交集团有限公司
-         * iszc : 非资产类
-         * QiTa : 其他
+         * iszc : 资产类
+         * QiTa :
          * zcgkbmyj :
-         * jine2 :
-         * cwzjyj :
+         * jine2 : 1.0
          * jine3 :
+         * cwzjyj :
          * jine4 :
          * jbfgldyj :
          * jine5 :
          * jine1 : 1.0
-         * hejisl : 1
-         * danwei1 :
+         * hejisl : 2
+         * danwei1 : 1
          * cbfgldyj :
-         * danwei2 :
+         * beizhu4 :
+         * beizhu3 :
+         * beizhu2 : 测试
+         * beizhu1 : 测试
+         * danwei2 : 1
          * danwei3 :
          * danwei4 :
-         * bmfzryj :
-         * LiuShuiHao :
+         * bmfzryj : [{"ui":"9354","un":"欧阳晓林","c":"2019-10-16 10:03","v":"测试"}]
+         * beizhu5 :
+         * LiuShuiHao : No.20191016012
          * danwei5 :
          * shuliang3 :
          * shuliang4 :
          * shuliang1 : 1
          * xgfj :
-         * shuliang2 :
+         * shuliang2 : 1
          * shuliang5 :
-         * runId : 52241
+         * runId : 52156
          * hejidj :
-         * mainId : 58
-         * sqrq : 2019-08-08
+         * mainId : 66
+         * sqrq : 2019-10-16
          * goodsType : 办公家具
-         * hejije : 1.0
+         * cggybyj : [{"ui":"9407","un":"李洪平（代）","c":"2019-10-16 10:20","v":"撒大声地"}]
+         * hejije : 2
          * sqr : 超级管理员
-         * danjia5 :
          * $type$ : WF_WuPinCaiGouJiHuaBiao000YuanYiShangBiao
+         * danjia5 :
          * danjia4 :
          * danjia3 :
-         * danjia2 :
+         * danjia2 : 1
          * fgldyj :
          * danjia1 : 1
-         * yt : 用途
+         * yt : 测试
          * zjlyj :
          * cgfgldyj :
-         * zcDepName : 综合管理部
+         * zcDepName :
          */
 
         private String jcbmyj;
@@ -101,8 +106,8 @@ public class MyGoodsPurchase implements Serializable {
         private String QiTa;
         private String zcgkbmyj;
         private String jine2;
-        private String cwzjyj;
         private String jine3;
+        private String cwzjyj;
         private String jine4;
         private String jbfgldyj;
         private String jine5;
@@ -110,10 +115,15 @@ public class MyGoodsPurchase implements Serializable {
         private String hejisl;
         private String danwei1;
         private String cbfgldyj;
+        private String beizhu4;
+        private String beizhu3;
+        private String beizhu2;
+        private String beizhu1;
         private String danwei2;
         private String danwei3;
         private String danwei4;
         private String bmfzryj;
+        private String beizhu5;
         private String LiuShuiHao;
         private String danwei5;
         private String shuliang3;
@@ -127,10 +137,11 @@ public class MyGoodsPurchase implements Serializable {
         private int mainId;
         private String sqrq;
         private String goodsType;
+        private String cggybyj;
         private String hejije;
         private String sqr;
-        private String danjia5;
         private String $type$;
+        private String danjia5;
         private String danjia4;
         private String danjia3;
         private String danjia2;
@@ -140,52 +151,6 @@ public class MyGoodsPurchase implements Serializable {
         private String zjlyj;
         private String cgfgldyj;
         private String zcDepName;
-
-        private String beizhu1;
-        private String beizhu2;
-        private String beizhu3;
-        private String beizhu4;
-        private String beizhu5;
-
-        public String getBeizhu1() {
-            return beizhu1;
-        }
-
-        public void setBeizhu1(String beizhu1) {
-            this.beizhu1 = beizhu1;
-        }
-
-        public String getBeizhu2() {
-            return beizhu2;
-        }
-
-        public void setBeizhu2(String beizhu2) {
-            this.beizhu2 = beizhu2;
-        }
-
-        public String getBeizhu3() {
-            return beizhu3;
-        }
-
-        public void setBeizhu3(String beizhu3) {
-            this.beizhu3 = beizhu3;
-        }
-
-        public String getBeizhu4() {
-            return beizhu4;
-        }
-
-        public void setBeizhu4(String beizhu4) {
-            this.beizhu4 = beizhu4;
-        }
-
-        public String getBeizhu5() {
-            return beizhu5;
-        }
-
-        public void setBeizhu5(String beizhu5) {
-            this.beizhu5 = beizhu5;
-        }
 
         public String getJcbmyj() {
             return jcbmyj;
@@ -283,20 +248,20 @@ public class MyGoodsPurchase implements Serializable {
             this.jine2 = jine2;
         }
 
-        public String getCwzjyj() {
-            return cwzjyj;
-        }
-
-        public void setCwzjyj(String cwzjyj) {
-            this.cwzjyj = cwzjyj;
-        }
-
         public String getJine3() {
             return jine3;
         }
 
         public void setJine3(String jine3) {
             this.jine3 = jine3;
+        }
+
+        public String getCwzjyj() {
+            return cwzjyj;
+        }
+
+        public void setCwzjyj(String cwzjyj) {
+            this.cwzjyj = cwzjyj;
         }
 
         public String getJine4() {
@@ -355,6 +320,38 @@ public class MyGoodsPurchase implements Serializable {
             this.cbfgldyj = cbfgldyj;
         }
 
+        public String getBeizhu4() {
+            return beizhu4;
+        }
+
+        public void setBeizhu4(String beizhu4) {
+            this.beizhu4 = beizhu4;
+        }
+
+        public String getBeizhu3() {
+            return beizhu3;
+        }
+
+        public void setBeizhu3(String beizhu3) {
+            this.beizhu3 = beizhu3;
+        }
+
+        public String getBeizhu2() {
+            return beizhu2;
+        }
+
+        public void setBeizhu2(String beizhu2) {
+            this.beizhu2 = beizhu2;
+        }
+
+        public String getBeizhu1() {
+            return beizhu1;
+        }
+
+        public void setBeizhu1(String beizhu1) {
+            this.beizhu1 = beizhu1;
+        }
+
         public String getDanwei2() {
             return danwei2;
         }
@@ -385,6 +382,14 @@ public class MyGoodsPurchase implements Serializable {
 
         public void setBmfzryj(String bmfzryj) {
             this.bmfzryj = bmfzryj;
+        }
+
+        public String getBeizhu5() {
+            return beizhu5;
+        }
+
+        public void setBeizhu5(String beizhu5) {
+            this.beizhu5 = beizhu5;
         }
 
         public String getLiuShuiHao() {
@@ -491,6 +496,14 @@ public class MyGoodsPurchase implements Serializable {
             this.goodsType = goodsType;
         }
 
+        public String getCggybyj() {
+            return cggybyj;
+        }
+
+        public void setCggybyj(String cggybyj) {
+            this.cggybyj = cggybyj;
+        }
+
         public String getHejije() {
             return hejije;
         }
@@ -507,20 +520,20 @@ public class MyGoodsPurchase implements Serializable {
             this.sqr = sqr;
         }
 
-        public String getDanjia5() {
-            return danjia5;
-        }
-
-        public void setDanjia5(String danjia5) {
-            this.danjia5 = danjia5;
-        }
-
         public String get$type$() {
             return $type$;
         }
 
         public void set$type$(String $type$) {
             this.$type$ = $type$;
+        }
+
+        public String getDanjia5() {
+            return danjia5;
+        }
+
+        public void setDanjia5(String danjia5) {
+            this.danjia5 = danjia5;
         }
 
         public String getDanjia4() {

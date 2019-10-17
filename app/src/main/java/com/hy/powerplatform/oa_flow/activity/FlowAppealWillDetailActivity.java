@@ -189,6 +189,14 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     List<FlowAppealWillDetail.TransBean> beanList = new ArrayList<>();
     List<String> selectList = new ArrayList<>();
 
+    Gson gson = new Gson();
+    FlowAppealWillDetail bean;
+    JSONArray jsonArray;
+    JSONObject jsonObject;
+    SimpleDateFormat formatter;
+    Date curDate;
+    String str;
+
     String xiangguanfujian = "";
     String btnTTag = "N";
     String runID = "";
@@ -203,6 +211,14 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        jsonArray = new JSONArray();
+        jsonObject = new JSONObject();
+        formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        curDate = new Date(System.currentTimeMillis());
+        str = formatter.format(curDate);
+
+        String superRoleName = new SharedPreferencesHelper(this, "login").getData(this, "roleName", "");
+        btnUp.setVisibility(View.VISIBLE);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
@@ -211,7 +227,6 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
         tag1 = intent.getStringExtra("tag");
         piId = intent.getStringExtra("piId");
         getData(name, taskId);
-        btnUp.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -673,8 +688,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.btnUp:
-                Gson gson = new Gson();
-                FlowAppealWillDetail bean = gson.fromJson(res, FlowAppealWillDetail.class);
+                bean = gson.fromJson(res, FlowAppealWillDetail.class);
                 bmfzryj = bean.getMainform().get(0).getBmfzryj();
                 xqbmyj = bean.getMainform().get(0).getFgldyj();
                 xqbmldyj = bean.getMainform().get(0).getJbfgldyj();
@@ -684,11 +698,11 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         "login").getData(FlowAppealWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowAppealWillDetailActivity.this,
                         "login").getData(FlowAppealWillDetailActivity.this, "userCode", "");
-                JSONArray jsonArray = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date curDate = new Date(System.currentTimeMillis());
-                String str = formatter.format(curDate);
+                jsonArray = new JSONArray();
+                jsonObject = new JSONObject();
+                formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                curDate = new Date(System.currentTimeMillis());
+                str = formatter.format(curDate);
                 if (etBM.getVisibility() == View.VISIBLE) {
                     comment = "";
                     comment = etBM.getText().toString();
@@ -1108,7 +1122,6 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader3.setVisibility(View.VISIBLE);
                             etLeader3.setVisibility(View.GONE);
-                            tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
 
                         if (dszreout.equals("2")) {
@@ -1117,7 +1130,6 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader4.setVisibility(View.VISIBLE);
                             etLeader4.setVisibility(View.GONE);
-                            tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (dszreout.equals("1") && bmreout.equals("1") && xqreout.equals("1") && xqldreout.equals("1") && jsreout.equals("1") && jsldreout.equals("1")) {
                             Toast.makeText(FlowAppealWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
@@ -1303,4 +1315,5 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
             }
         }
     };
+
 }

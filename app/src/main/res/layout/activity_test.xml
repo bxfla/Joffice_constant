@@ -319,7 +319,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="135dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/linearlayout1"
                     android:orientation="horizontal">
 

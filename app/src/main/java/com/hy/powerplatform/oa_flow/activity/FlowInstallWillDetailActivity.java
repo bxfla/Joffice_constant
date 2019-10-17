@@ -210,6 +210,15 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
     String piId = "";
     String downloadData = "";
     FlowMessageAdapter adapter;
+
+    Gson gson = new Gson();
+    FlowInstallWillDetail bean;
+    JSONArray jsonArray;
+    JSONObject jsonObject;
+    SimpleDateFormat formatter;
+    Date curDate;
+    String str;
+
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
 
@@ -217,6 +226,13 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        jsonArray = new JSONArray();
+        jsonObject = new JSONObject();
+        formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        curDate = new Date(System.currentTimeMillis());
+        str = formatter.format(curDate);
+
+        btnUp.setVisibility(View.VISIBLE);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         initDatePicker();
@@ -705,8 +721,8 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.btnUp:
-                Gson gson = new Gson();
-                FlowInstallWillDetail bean = gson.fromJson(res, FlowInstallWillDetail.class);
+                gson = new Gson();
+                bean = gson.fromJson(res, FlowInstallWillDetail.class);
                 bmfzryj = bean.getMainform().get(0).getBmfzryj();
                 fgldyj = bean.getMainform().get(0).getFgldyj();
                 jbfgldyj = bean.getMainform().get(0).getJbfgldyj();
@@ -718,11 +734,11 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         "login").getData(FlowInstallWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowInstallWillDetailActivity.this,
                         "login").getData(FlowInstallWillDetailActivity.this, "userCode", "");
-                JSONArray jsonArray = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date curDate = new Date(System.currentTimeMillis());
-                String str = formatter.format(curDate);
+                jsonArray = new JSONArray();
+                jsonObject = new JSONObject();
+                formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                curDate = new Date(System.currentTimeMillis());
+                str = formatter.format(curDate);
                 if (etLeader.getVisibility() == View.VISIBLE) {
                     comment = etLeader.getText().toString();
                     try {
@@ -857,11 +873,11 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (comment.equals("")) {
-                    if (!zjlreout.equals("2") && !bmreout.equals("2") && !fgreout.equals("2") && !jbfgreout.equals("2") && !jbreout.equals("2")
+                    if (!zjlreout.equals("2") &&!bmreout.equals("2") && !fgreout.equals("2") && !jbfgreout.equals("2") && !jbreout.equals("2")
                             && !bjapreout.equals("2") && !bjrreout.equals("2") && !bjpjreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!etLeaderzjl.getText().toString().equals("") && !bjpj.equals("") && !bjr.equals("") && !bjap.equals("") && !jbbmyj.equals("")
+                    } else if (!etLeaderzjl.getText().equals("") &&!bjpj.equals("") && !bjr.equals("") && !bjap.equals("") && !jbbmyj.equals("")
                             && !jbfgldyj.equals("") && !fgldyj.equals("") && !bmfzryj.equals("")) {
                         comment = "";
                         personSession();
@@ -1163,7 +1179,6 @@ public class FlowInstallWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeaderzjl.setVisibility(View.VISIBLE);
                             etLeaderzjl.setVisibility(View.GONE);
-                            tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (jbfgreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);

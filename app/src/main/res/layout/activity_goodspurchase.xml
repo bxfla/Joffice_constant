@@ -864,6 +864,7 @@
             <View style="@style/line"></View>
 
             <LinearLayout
+                android:id="@+id/ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -961,13 +962,12 @@
             <LinearLayout
                 android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/oaTextView"
+                    style="@style/oaTextView2"
                     android:text="总经理:"
-                    android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
 
                 <View
@@ -978,13 +978,13 @@
 
                 <EditText
                     android:id="@+id/etLeader4"
-                    style="@style/textWrite"
+                    style="@style/textWrite2"
                     android:hint="总经理签名"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader4"
-                    style="@style/textWrite"
+                    style="@style/textWrite2"
                     android:hint="总经理签名" />
             </LinearLayout>
 

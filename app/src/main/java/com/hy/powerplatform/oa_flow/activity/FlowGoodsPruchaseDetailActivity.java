@@ -188,6 +188,8 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
     TextView tvLeader4W;
     @BindView(R.id.tvLeader5W)
     TextView tvLeader5W;
+    @BindView(R.id.ll)
+    LinearLayout ll;
     private String res;
     String xiangguanfujian = "";
     String flowMessage = "";
@@ -380,6 +382,9 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
                     }
                     runID = bean.getMainform().get(0).getRunId();
                     tvData.setText(xiangguanfujian);
+                    if (iszc.equals("非资产类")){
+                        ll.setVisibility(View.GONE);
+                    }
                     tvzc.setText(iszc);
                     tvtype.setText(goodsType);
                     etName1.setText(bean.getMainform().get(0).getMingcheng1());

@@ -188,6 +188,12 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
     TextView tvLeader4W;
     @BindView(R.id.tvLeader5W)
     TextView tvLeader5W;
+    @BindView(R.id.ll)
+    LinearLayout ll;
+    @BindView(R.id.etLeaderGYB)
+    EditText etLeaderGYB;
+    @BindView(R.id.tvLeaderGYB)
+    TextView tvLeaderGYB;
     private String res;
     String xiangguanfujian = "";
     String flowMessage = "";
@@ -406,6 +412,9 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                     String iszc = bean.getMainform().get(0).getIszc();
                     String goodsType = bean.getMainform().get(0).getGoodsType();
                     tvData.setText(xiangguanfujian);
+                    if (iszc.equals("非资产类")) {
+                        ll.setVisibility(View.GONE);
+                    }
                     tvzc.setText(iszc);
                     tvtype.setText(goodsType);
 
@@ -444,6 +453,7 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                     tvOther.setText(bean.getMainform().get(0).getQiTa());
 
                     String bmfzr = bean.getMainform().get(0).getBmfzryj();
+                    String cgbmyj = bean.getMainform().get(0).getCggybyj();
                     String jcbmyj = bean.getMainform().get(0).getJcbmyj();
                     String zcgkbmyj = bean.getMainform().get(0).getZcgkbmyj();
                     String fgfzr = bean.getMainform().get(0).getFgldyj();
@@ -460,6 +470,9 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
                     etApplication.setText(yt);
                     if (!bmfzr.equals("")) {
                         tvLeader.setText(getJSONData(bmfzr));
+                    }
+                    if (!cgbmyj.equals("")) {
+                        tvLeaderGYB.setText(getJSONData(cgbmyj));
                     }
                     if (!jcbmyj.equals("")) {
                         tvLeaderJG.setText(getJSONData(jcbmyj));

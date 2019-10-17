@@ -241,6 +241,8 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
     TextView tvLeader3W;
     @BindView(R.id.tvLeader4W)
     TextView tvLeader4W;
+    @BindView(R.id.ll)
+    LinearLayout ll;
     private String name, taskId, res, bmfzryj, jcbmyj, zcgkbmyj, fgldyj, cwzjyj, zjl = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -1528,6 +1530,9 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                         }
                         runID = bean.getMainform().get(0).getRunId();
                         tvData.setText(xiangguanfujian);
+                        if (iszc.equals("非资产类")) {
+                            ll.setVisibility(View.GONE);
+                        }
                         tvzc.setText(iszc);
                         tvtype.setText(goodsType);
                         name1 = bean.getMainform().get(0).getMingcheng1();

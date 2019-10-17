@@ -41,6 +41,12 @@ public class FirstActivity extends AppCompatActivity {
 //        sharedPreferencesHelper.saveData(this, "Socket", "8080");
 //        sharedPreferencesHelper.saveData(this, "Found", "joffice");
 //        sharedPreferencesHelper.saveData(this, "Address", "宜春");
+
+        //川川
+//        sharedPreferencesHelper.saveData(this, "Ip", "192.168.2.123");
+//        sharedPreferencesHelper.saveData(this, "Socket", "8080");
+//        sharedPreferencesHelper.saveData(this, "Found", "joffice");
+//        sharedPreferencesHelper.saveData(this, "Address", "宜春");
         new StatusBarUtils().setWindowStatusBarColor(FirstActivity.this, R.color.white);
         new Handler().postDelayed(new Runnable() {
             public void run() {

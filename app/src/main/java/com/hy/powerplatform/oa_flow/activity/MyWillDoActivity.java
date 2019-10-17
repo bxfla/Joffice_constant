@@ -6,7 +6,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.refreshview.CustomRefreshView;
@@ -16,6 +18,7 @@ import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
+import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
 import com.hy.powerplatform.oa_flow.adapter.MyWillDoAdapter;
 import com.hy.powerplatform.oa_flow.bean.MyWillDo;
 
@@ -23,11 +26,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_THERE;
@@ -45,13 +54,31 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
     int start = 0;
     String res = "";
     String tag = "";
-    @BindView(R.id.liContent1)
-    LinearLayout llNoContent;
+    String tagType = "";
+    @BindView(R.id.tvStartTime)
+    TextView tvStartTime;
+    @BindView(R.id.line1)
+    View line1;
+    @BindView(R.id.tvEndTime)
+    TextView tvEndTime;
+    @BindView(R.id.ll)
+    LinearLayout ll;
+    @BindView(R.id.etTitle)
+    EditText etTitle;
+    @BindView(R.id.tvStartTime1)
+    TextView tvStartTime1;
+    @BindView(R.id.tvEndTime1)
+    TextView tvEndTime1;
+
+    private CustomDatePickerDay customDatePicker1, customDatePicker2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        initDatePicker();
+        Intent intent = getIntent();
+        tagType = intent.getStringExtra("type");
         recyclerView.setRefreshEnable(false);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.getRecyclerView().setLayoutManager(manager);
@@ -59,7 +86,8 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
         adapter.sendOnGetAdapterPositionListener(this);
         recyclerView.setAdapter(adapter);
         ProgressDialogUtil.startLoad(this, "获取数据中");
-        getData(start, limit);
+        getData(start, limit, tvStartTime1.getText().toString()
+                , tvEndTime1.getText().toString(), etTitle.getText().toString());
         setClient();
     }
 
@@ -69,7 +97,8 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
         beanList.clear();
         adapter.notifyDataSetChanged();
         ProgressDialogUtil.startLoad(this, "获取数据中");
-        getData(0, 20);
+        getData(0, 20, tvStartTime1.getText().toString()
+                , tvEndTime1.getText().toString(), etTitle.getText().toString());
         setClient();
     }
 
@@ -79,11 +108,13 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
      * @param start
      * @param limit
      */
-    private void getData(final int start, final int limit) {
+    private void getData(final int start, final int limit, final String startTine, final String endTime, final String title) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = Constant.BASE_URL2 + Constant.MYWILLDOLIST + start + "&limit=" + limit;
+                String url = Constant.BASE_URL2 + Constant.MYWILLDOLIST + start + "&limit=" + limit
+                        + "&proTypeId=" + tagType + "&Q_createtime_D_GE="
+                        + startTine+ "&Q_createtime_D_LE=" + endTime + "&Q_subject_S_LK=" + title;
                 DBHandler dbA = new DBHandler();
                 res = dbA.OAQingJiaWillDo(url);
                 if (res.equals("获取数据失败") || res.equals("")) {
@@ -105,14 +136,16 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
                 beanList.clear();
                 start = 0;
                 limit = 20;
-                getData(start, limit);
+                getData(start, limit, tvStartTime.getText().toString()
+                        , tvEndTime.getText().toString(), etTitle.getText().toString());
             }
 
             @Override
             public void onLoadMore() {
                 start = limit;
                 limit += 20;
-                getData(start, limit);
+                getData(start, limit, tvStartTime.getText().toString()
+                        , tvEndTime.getText().toString(), etTitle.getText().toString());
             }
         });
     }
@@ -129,224 +162,227 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
 
     @Override
     protected void rightClient() {
-
+        beanList.clear();
+        ProgressDialogUtil.startLoad(this, "获取数据中");
+        getData(0, 20, tvStartTime1.getText().toString()
+                , tvEndTime1.getText().toString(), etTitle.getText().toString());
     }
 
     @Override
     public void getAdapterPosition(int position) {
         Intent intent = null;
-        if (beanList.get(position).getFormDefId().equals(Constant.EMAINTAIN)){
+        if (beanList.get(position).getFormDefId().equals(Constant.EMAINTAIN)) {
             intent = new Intent(this, FlowEMainatinWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.CARVIDEO)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.CARVIDEO)) {
             intent = new Intent(this, FlowCarVideoWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.DORM)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.DORM)) {
             intent = new Intent(this, FlowDormWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.GCADD)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.GCADD)) {
             intent = new Intent(this, FlowGCAddWillDetailActivity.class);
-            intent.putExtra("tag","1");
+            intent.putExtra("tag", "1");
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.GCCHECK)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.GCCHECK)) {
             intent = new Intent(this, FlowGCAddWillDetailActivity.class);
-            intent.putExtra("tag","2");
+            intent.putExtra("tag", "2");
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.COMPLAIN)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.COMPLAIN)) {
             intent = new Intent(this, FlowComplainWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.GCQD)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.GCQD)) {
             intent = new Intent(this, FlowJSGCWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.INSTALL)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.INSTALL)) {
             intent = new Intent(this, FlowInstallWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.DINNER)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.DINNER)) {
             intent = new Intent(this, FlowreceiveDinnerWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.CONTRACTSIGN)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.CONTRACTSIGN)) {
             intent = new Intent(this, FlowContractSignWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.APPEAL)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.APPEAL)) {
             intent = new Intent(this, FlowAppealWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.CARSAFE)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.CARSAFE)) {
             intent = new Intent(this, FlowCarSafeWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.SAFER1)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.SAFER1)) {
             intent = new Intent(this, FlowSaferWillDetailActivity.class);
-            intent.putExtra("tag","1");
+            intent.putExtra("tag", "1");
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.SAFER2)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.SAFER2)) {
             intent = new Intent(this, FlowSaferWillDetailActivity.class);
-            intent.putExtra("tag","2");
+            intent.putExtra("tag", "2");
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.USERCAR)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.USERCAR)) {
             intent = new Intent(this, FlowUseCarWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if(beanList.get(position).getFormDefId().equals(Constant.ENTRY)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.ENTRY)) {
             intent = new Intent(this, FlowEntryWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.LEAVER)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.LEAVER)) {
             intent = new Intent(this, FlowLeaveWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if(beanList.get(position).getFormDefId().equals(Constant.CHUCAI)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.CHUCAI)) {
             intent = new Intent(this, FlowChuCaiWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.DRIVERASSESS)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.DRIVERASSESS)) {
             intent = new Intent(this, FlowDriverAssessWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.OVERTIME)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.OVERTIME)) {
             intent = new Intent(this, FlowOverTimeWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if(beanList.get(position).getFormDefId().equals(Constant.BILL)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.BILL)) {
             intent = new Intent(this, FlowBillWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.CONTRACEPAY)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.CONTRACEPAY)) {
             intent = new Intent(this, FlowContracterPayWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.PAYFLOW)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.PAYFLOW)) {
             intent = new Intent(this, FlowPayLiuChengWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.GHPAYFLOW)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.GHPAYFLOW)) {
             intent = new Intent(this, FlowGHPayWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.GHCONTRACTSINGLE)) {
+        } else if (beanList.get(position).getFormDefId().equals(Constant.GHCONTRACTSINGLE)) {
             intent = new Intent(this, FlowGHContractSignWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if(beanList.get(position).getFormDefId().equals(Constant.WORKPUECHASE)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.WORKPUECHASE)) {
             intent = new Intent(this, FlowWorkPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("taskName", beanList.get(position).getTaskName());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.GOODSPUECHASE)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.GOODSPUECHASE)) {
             intent = new Intent(this, FlowGoodsPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("taskName", beanList.get(position).getTaskName());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.PUECHASEFLOW)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.PUECHASEFLOW)) {
             intent = new Intent(this, FlowPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("taskName", beanList.get(position).getTaskName());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.REPAIR)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.REPAIR)) {
             intent = new Intent(this, FlowRepairWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.CCTPUECHASE)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.CCTPUECHASE)) {
             intent = new Intent(this, FlowCCTPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.GHPUECHASE)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.GHPUECHASE)) {
             intent = new Intent(this, FlowGHPuechaseWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.OUTMESSAGE)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.OUTMESSAGE)) {
             intent = new Intent(this, FlowOutMessageWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.HUIQIAN)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.HUIQIAN)) {
             intent = new Intent(this, FlowHuiQianWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else if (beanList.get(position).getFormDefId().equals(Constant.COMPMESSAGE)){
+        } else if (beanList.get(position).getFormDefId().equals(Constant.COMPMESSAGE)) {
             intent = new Intent(this, FlowCompMessageWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());
             startActivity(intent);
-        }else {
+        } else {
             Toast.makeText(this, "当前流程已调整，不支持查看", Toast.LENGTH_SHORT).show();
         }
     }
@@ -363,9 +399,9 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
                         JSONArray jsonArray = jsonObject.getJSONArray("result");
                         if (jsonArray.length() == 0 && beanList.size() == 0) {
                             if (recyclerView != null) {
-                                recyclerView.setVisibility(View.GONE);
-                                llNoContent.setVisibility(View.VISIBLE);
+                                Toast.makeText(MyWillDoActivity.this, "暂无该时间段内数据.", Toast.LENGTH_SHORT).show();
                             }
+                            adapter.notifyDataSetChanged();
                             ProgressDialogUtil.stopLoad();
                             break;
                         } else if (jsonArray.length() == 0 && beanList.size() != 0) {
@@ -373,6 +409,7 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
                                 recyclerView.complete();
                                 recyclerView.onNoMore();
                             }
+//                            adapter.notifyDataSetChanged();
                         }
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonOnjectData = jsonArray.getJSONObject(i);
@@ -439,4 +476,106 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
             }
         }
     };
+
+    /**
+     * 选择时间
+     */
+    private void initDatePicker() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        //过去七天
+        c.setTime(new Date());
+        c.add(Calendar.DATE, -30);
+        Date d = c.getTime();
+        String day = format.format(d);
+        tvStartTime.setText(day);
+        System.out.println("过去七天：" + day);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        String now = sdf.format(new Date());
+        tvEndTime.setText(now.split(" ")[0]);
+
+        customDatePicker1 = new CustomDatePickerDay(this, new CustomDatePickerDay.ResultHandler() {
+            @Override
+            public void handle(String time) { // 回调接口，获得选中的时间
+                if (sendHttpContent(time.split(" ")[0])) {
+                    tvStartTime.setText(time.split(" ")[0]);
+                    tvStartTime1.setText(time.split(" ")[0]);
+                } else {
+                    Toast.makeText(MyWillDoActivity.this, "请选择正确时间", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        customDatePicker1.showSpecificTime(false); // 不显示时和分
+        customDatePicker1.setIsLoop(false); // 不允许循环滚动
+
+        customDatePicker2 = new CustomDatePickerDay(this, new CustomDatePickerDay.ResultHandler() {
+            @Override
+            public void handle(String time) { // 回调接口，获得选中的时间
+                if (sendHttpContent1(time.split(" ")[0])) {
+                    tvEndTime.setText(time.split(" ")[0]);
+                    tvEndTime1.setText(time.split(" ")[0]);
+                } else {
+                    Toast.makeText(MyWillDoActivity.this, "请选择正确时间", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        customDatePicker2.showSpecificTime(false); // 显示时和分
+        customDatePicker2.setIsLoop(false); // 允许循环滚动
+    }
+
+    private boolean sendHttpContent(String startTime1) {
+        Date startTime = null, endTime = null;
+        if (tvStartTime.getText().toString().isEmpty() || tvStartTime.getText().toString().isEmpty()) {
+            Toast.makeText(this, "起止时间不能为空", Toast.LENGTH_SHORT).show();
+        } else {
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                startTime = sdf1.parse(startTime1);
+                endTime = sdf1.parse(tvEndTime.getText().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        double s1 = startTime.getTime();
+        double s2 = endTime.getTime();
+        if (startTime.getTime() > endTime.getTime()) {
+            return false;
+//            Toast.makeText(this, "请选择正确时间", Toast.LENGTH_SHORT).show();
+        }
+        return true;
+    }
+
+    private boolean sendHttpContent1(String endTime1) {
+        Date startTime = null, endTime = null;
+        if (tvStartTime.getText().toString().isEmpty() || tvStartTime.getText().toString().isEmpty()) {
+            Toast.makeText(this, "起止时间不能为空", Toast.LENGTH_SHORT).show();
+        } else {
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                startTime = sdf1.parse(tvStartTime.getText().toString());
+                endTime = sdf1.parse(endTime1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        double s1 = startTime.getTime();
+        double s2 = endTime.getTime();
+        if (startTime.getTime() > endTime.getTime()) {
+            return false;
+//            Toast.makeText(this, "请选择正确时间", Toast.LENGTH_SHORT).show();
+        }
+        return true;
+    }
+
+    @OnClick({R.id.tvStartTime1, R.id.tvEndTime1})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tvStartTime1:
+                customDatePicker1.show(tvStartTime.getText().toString());
+                break;
+            case R.id.tvEndTime1:
+                customDatePicker2.show(tvEndTime.getText().toString());
+                break;
+        }
+    }
 }

@@ -12,15 +12,16 @@ public class FlowPuechase implements Serializable {
 
     /**
      * success : true
-     * taskId : 9380333
+     * taskId : 9640186
      * pkValue : mainId
-     * formRights : {'bm':'1','mingcheng4':'1','danwei2':'1','jbfgldyj':'1','LiuShuiHao':'1','fgldyj':'1','cbfgldyj':'1','shuliang1':'1','jine4':'1','zcgkbmyj':'1','danwei5':'1','hejisl':'1','danwei1':'1','jcbmyj':'1','danwei4':'1','danjia2':'1','danjia1':'1','bmfzryj':'2','danjia4':'1','sqr':'1','mingcheng1':'1','jine2':'1','jine1':'1','cwzjyj':'1','goodsType':'1','danjia3':'1','yt':'1','jbldyj':'1','cgfgldyj':'1','shuliang2':'1','shuliang4':'1','shuliang3':'1','danjia5':'1','iszc':'1','mingcheng3':'1','shuliang5':'1','mingcheng2':'1','jine5':'1','zjlyj':'1','danwei3':'1','QiTa':'1','jine3':'1','hejije':'1','mingcheng5':'1','hejidj':'1','xgfj':'1','sqrq':'1'}
-     * mainform : [{"jcbmyj":"","jbldyj":"","mingcheng1":"测试","mingcheng3":"","mingcheng2":"","mingcheng4":"","mingcheng5":"","bm":"宜春公交集团有限公司","iszc":"非资产类","QiTa":"其他","zcgkbmyj":"","jine2":"","cwzjyj":"","jine3":"","jine4":"","jbfgldyj":"","jine5":"","jine1":"1.0","hejisl":"1","danwei1":"个","cbfgldyj":"","danwei2":"个","danwei3":"","danwei4":"","bmfzryj":"","LiuShuiHao":"","danwei5":"","shuliang3":"","shuliang4":"","shuliang1":"1","xgfj":"","shuliang2":"","shuliang5":"","runId":52251,"hejidj":"","mainId":60,"sqrq":"2019-08-08","goodsType":"办公家具","hejije":"1.0","sqr":"超级管理员","danjia5":"","$type$":"WF_WuPinCaiGouJiHuaBiao000YuanYiShangBiao","danjia4":"","danjia3":"","danjia2":"","fgldyj":"","danjia1":"1","yt":"测试","zjlyj":"","cgfgldyj":"","zcDepName":"综合管理部"}]
+     * formRights : {'danwei4':'1','hejisl':'1','jine3':'1','beizhu4':'1','jbldyj':'1','danwei2':'1','jbfgldyj':'1','shuliang5':'1','cwzjyj':'1','danjia5':'1','sqrq':'1','bm':'1','hejidj':'1','bmfzryj':'1','mingcheng1':'1','beizhu2':'1','shuliang3':'1','sqr':'1','zcgkbmyj':'2','QiTa':'1','mingcheng4':'1','mingcheng3':'1','hejije':'1','danwei1':'1','shuliang2':'1','danjia2':'1','zjlyj':'1','yt':'1','xgfj':'1','goodsType':'1','LiuShuiHao':'1','mingcheng2':'1','fgldyj':'1','shuliang1':'1','danwei5':'1','mingcheng5':'1','jcbmyj':'1','jine2':'1','cbfgldyj':'1','jine4':'1','danjia1':'1','danjia4':'1','beizhu5':'1','beizhu1':'1','danjia3':'1','iszc':'1','jine1':'1','cggybyj':'1','cgfgldyj':'1','shuliang4':'1','jine5':'1','danwei3':'1','beizhu3':'1'}
+     * mainform : [{"jcbmyj":"","jbldyj":"","mingcheng1":"测试","mingcheng3":"","mingcheng2":"测试","mingcheng4":"","mingcheng5":"","bm":"宜春公交集团有限公司","iszc":"资产类","QiTa":"","zcgkbmyj":"","jine2":"1.0","jine3":"","cwzjyj":"","jine4":"","jbfgldyj":"","jine5":"","jine1":"1.0","hejisl":"2","danwei1":"1","cbfgldyj":"","beizhu4":"","beizhu3":"","beizhu2":"测试","beizhu1":"测试","danwei2":"1","danwei3":"","danwei4":"","bmfzryj":"[{\"ui\":\"9354\",\"un\":\"欧阳晓林\",\"c\":\"2019-10-16 10:03\",\"v\":\"测试\"}]","beizhu5":"","LiuShuiHao":"No.20191016012","danwei5":"","shuliang3":"","shuliang4":"","shuliang1":"1","xgfj":"","shuliang2":"1","shuliang5":"","runId":52156,"hejidj":"","mainId":66,"sqrq":"2019-10-16","goodsType":"办公家具","cggybyj":"[{\"ui\":\"9407\",\"un\":\"李洪平（代）\",\"c\":\"2019-10-16 10:20\",\"v\":\"撒大声地\"}]","hejije":"2","sqr":"超级管理员","$type$":"WF_WuPinCaiGouJiHuaBiao000YuanYiShangBiao","danjia5":"","danjia4":"","danjia3":"","danjia2":"1","fgldyj":"","danjia1":"1","yt":"测试","zjlyj":"","cgfgldyj":"","zcDepName":""}]
      * formDefId : 10103
      * preTaskName :
      * isSignTask : false
-     * trans : [{"destType":"task","destination":"采购供应部确认","name":"to 采购供应部","source":"部门负责人"}]
-     * runId : 52251
+     * trans : [{"destType":"task","destination":"分管领导","name":"to 分管领导","source":"资产归口部门"}]
+     * runId : 52156
+     * revoke : false
      */
 
     private boolean success;
@@ -29,19 +30,11 @@ public class FlowPuechase implements Serializable {
     private String formRights;
     private String formDefId;
     private String preTaskName;
-    private boolean revoke;
     private boolean isSignTask;
     private int runId;
+    private boolean revoke;
     private List<MainformBean> mainform;
     private List<TransBean> trans;
-
-    public boolean isRevoke() {
-        return revoke;
-    }
-
-    public void setRevoke(boolean revoke) {
-        this.revoke = revoke;
-    }
 
     public boolean isSuccess() {
         return success;
@@ -107,6 +100,14 @@ public class FlowPuechase implements Serializable {
         this.runId = runId;
     }
 
+    public boolean isRevoke() {
+        return revoke;
+    }
+
+    public void setRevoke(boolean revoke) {
+        this.revoke = revoke;
+    }
+
     public List<MainformBean> getMainform() {
         return mainform;
     }
@@ -129,53 +130,59 @@ public class FlowPuechase implements Serializable {
          * jbldyj :
          * mingcheng1 : 测试
          * mingcheng3 :
-         * mingcheng2 :
+         * mingcheng2 : 测试
          * mingcheng4 :
          * mingcheng5 :
          * bm : 宜春公交集团有限公司
-         * iszc : 非资产类
-         * QiTa : 其他
+         * iszc : 资产类
+         * QiTa :
          * zcgkbmyj :
-         * jine2 :
-         * cwzjyj :
+         * jine2 : 1.0
          * jine3 :
+         * cwzjyj :
          * jine4 :
          * jbfgldyj :
          * jine5 :
          * jine1 : 1.0
-         * hejisl : 1
-         * danwei1 : 个
+         * hejisl : 2
+         * danwei1 : 1
          * cbfgldyj :
-         * danwei2 : 个
+         * beizhu4 :
+         * beizhu3 :
+         * beizhu2 : 测试
+         * beizhu1 : 测试
+         * danwei2 : 1
          * danwei3 :
          * danwei4 :
-         * bmfzryj :
-         * LiuShuiHao :
+         * bmfzryj : [{"ui":"9354","un":"欧阳晓林","c":"2019-10-16 10:03","v":"测试"}]
+         * beizhu5 :
+         * LiuShuiHao : No.20191016012
          * danwei5 :
          * shuliang3 :
          * shuliang4 :
          * shuliang1 : 1
          * xgfj :
-         * shuliang2 :
+         * shuliang2 : 1
          * shuliang5 :
-         * runId : 52251
+         * runId : 52156
          * hejidj :
-         * mainId : 60
-         * sqrq : 2019-08-08
+         * mainId : 66
+         * sqrq : 2019-10-16
          * goodsType : 办公家具
-         * hejije : 1.0
+         * cggybyj : [{"ui":"9407","un":"李洪平（代）","c":"2019-10-16 10:20","v":"撒大声地"}]
+         * hejije : 2
          * sqr : 超级管理员
-         * danjia5 :
          * $type$ : WF_WuPinCaiGouJiHuaBiao000YuanYiShangBiao
+         * danjia5 :
          * danjia4 :
          * danjia3 :
-         * danjia2 :
+         * danjia2 : 1
          * fgldyj :
          * danjia1 : 1
          * yt : 测试
          * zjlyj :
          * cgfgldyj :
-         * zcDepName : 综合管理部
+         * zcDepName :
          */
 
         private String jcbmyj;
@@ -190,8 +197,8 @@ public class FlowPuechase implements Serializable {
         private String QiTa;
         private String zcgkbmyj;
         private String jine2;
-        private String cwzjyj;
         private String jine3;
+        private String cwzjyj;
         private String jine4;
         private String jbfgldyj;
         private String jine5;
@@ -199,10 +206,15 @@ public class FlowPuechase implements Serializable {
         private String hejisl;
         private String danwei1;
         private String cbfgldyj;
+        private String beizhu4;
+        private String beizhu3;
+        private String beizhu2;
+        private String beizhu1;
         private String danwei2;
         private String danwei3;
         private String danwei4;
         private String bmfzryj;
+        private String beizhu5;
         private String LiuShuiHao;
         private String danwei5;
         private String shuliang3;
@@ -216,10 +228,11 @@ public class FlowPuechase implements Serializable {
         private int mainId;
         private String sqrq;
         private String goodsType;
+        private String cggybyj;
         private String hejije;
         private String sqr;
-        private String danjia5;
         private String $type$;
+        private String danjia5;
         private String danjia4;
         private String danjia3;
         private String danjia2;
@@ -229,52 +242,6 @@ public class FlowPuechase implements Serializable {
         private String zjlyj;
         private String cgfgldyj;
         private String zcDepName;
-
-        private String beizhu1;
-        private String beizhu2;
-        private String beizhu3;
-        private String beizhu4;
-        private String beizhu5;
-
-        public String getBeizhu1() {
-            return beizhu1;
-        }
-
-        public void setBeizhu1(String beizhu1) {
-            this.beizhu1 = beizhu1;
-        }
-
-        public String getBeizhu2() {
-            return beizhu2;
-        }
-
-        public void setBeizhu2(String beizhu2) {
-            this.beizhu2 = beizhu2;
-        }
-
-        public String getBeizhu3() {
-            return beizhu3;
-        }
-
-        public void setBeizhu3(String beizhu3) {
-            this.beizhu3 = beizhu3;
-        }
-
-        public String getBeizhu4() {
-            return beizhu4;
-        }
-
-        public void setBeizhu4(String beizhu4) {
-            this.beizhu4 = beizhu4;
-        }
-
-        public String getBeizhu5() {
-            return beizhu5;
-        }
-
-        public void setBeizhu5(String beizhu5) {
-            this.beizhu5 = beizhu5;
-        }
 
         public String getJcbmyj() {
             return jcbmyj;
@@ -372,20 +339,20 @@ public class FlowPuechase implements Serializable {
             this.jine2 = jine2;
         }
 
-        public String getCwzjyj() {
-            return cwzjyj;
-        }
-
-        public void setCwzjyj(String cwzjyj) {
-            this.cwzjyj = cwzjyj;
-        }
-
         public String getJine3() {
             return jine3;
         }
 
         public void setJine3(String jine3) {
             this.jine3 = jine3;
+        }
+
+        public String getCwzjyj() {
+            return cwzjyj;
+        }
+
+        public void setCwzjyj(String cwzjyj) {
+            this.cwzjyj = cwzjyj;
         }
 
         public String getJine4() {
@@ -444,6 +411,38 @@ public class FlowPuechase implements Serializable {
             this.cbfgldyj = cbfgldyj;
         }
 
+        public String getBeizhu4() {
+            return beizhu4;
+        }
+
+        public void setBeizhu4(String beizhu4) {
+            this.beizhu4 = beizhu4;
+        }
+
+        public String getBeizhu3() {
+            return beizhu3;
+        }
+
+        public void setBeizhu3(String beizhu3) {
+            this.beizhu3 = beizhu3;
+        }
+
+        public String getBeizhu2() {
+            return beizhu2;
+        }
+
+        public void setBeizhu2(String beizhu2) {
+            this.beizhu2 = beizhu2;
+        }
+
+        public String getBeizhu1() {
+            return beizhu1;
+        }
+
+        public void setBeizhu1(String beizhu1) {
+            this.beizhu1 = beizhu1;
+        }
+
         public String getDanwei2() {
             return danwei2;
         }
@@ -474,6 +473,14 @@ public class FlowPuechase implements Serializable {
 
         public void setBmfzryj(String bmfzryj) {
             this.bmfzryj = bmfzryj;
+        }
+
+        public String getBeizhu5() {
+            return beizhu5;
+        }
+
+        public void setBeizhu5(String beizhu5) {
+            this.beizhu5 = beizhu5;
         }
 
         public String getLiuShuiHao() {
@@ -580,6 +587,14 @@ public class FlowPuechase implements Serializable {
             this.goodsType = goodsType;
         }
 
+        public String getCggybyj() {
+            return cggybyj;
+        }
+
+        public void setCggybyj(String cggybyj) {
+            this.cggybyj = cggybyj;
+        }
+
         public String getHejije() {
             return hejije;
         }
@@ -596,20 +611,20 @@ public class FlowPuechase implements Serializable {
             this.sqr = sqr;
         }
 
-        public String getDanjia5() {
-            return danjia5;
-        }
-
-        public void setDanjia5(String danjia5) {
-            this.danjia5 = danjia5;
-        }
-
         public String get$type$() {
             return $type$;
         }
 
         public void set$type$(String $type$) {
             this.$type$ = $type$;
+        }
+
+        public String getDanjia5() {
+            return danjia5;
+        }
+
+        public void setDanjia5(String danjia5) {
+            this.danjia5 = danjia5;
         }
 
         public String getDanjia4() {
@@ -688,9 +703,9 @@ public class FlowPuechase implements Serializable {
     public static class TransBean {
         /**
          * destType : task
-         * destination : 采购供应部确认
-         * name : to 采购供应部
-         * source : 部门负责人
+         * destination : 分管领导
+         * name : to 分管领导
+         * source : 资产归口部门
          */
 
         private String destType;

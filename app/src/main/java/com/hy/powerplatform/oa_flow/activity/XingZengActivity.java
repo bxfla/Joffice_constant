@@ -32,6 +32,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.hy.powerplatform.R.id.flRepair;
+
 public class XingZengActivity extends BaseActivity {
 
     @BindView(R.id.header)
@@ -149,6 +151,12 @@ public class XingZengActivity extends BaseActivity {
     FrameLayout flGHSingle;
     @BindView(R.id.tvCompMessage)
     TextView tvCompMessage;
+    @BindView(R.id.llRepair)
+    LinearLayout llRepair;
+    @BindView(R.id.llCompMessage)
+    LinearLayout llCompMessage;
+    @BindView(R.id.ycFrameLayout)
+    FrameLayout ycFrameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,6 +218,9 @@ public class XingZengActivity extends BaseActivity {
                     && !dataList.contains(Constant.COMPMESSAGENAME)) {
                 llNoContent.setVisibility(View.VISIBLE);
             } else {
+                if (!dataList.contains(Constant.REPAIRNAME)) {
+                    llRepair.setVisibility(View.GONE);
+                }
                 if (!dataList.contains(Constant.EMAINTAINNAME)) {
                     flEMaintain.setVisibility(View.GONE);
                 }
@@ -294,9 +305,13 @@ public class XingZengActivity extends BaseActivity {
     @OnClick({R.id.llEMaintain, R.id.llCarVideo, R.id.llDorm, R.id.llNewGC, R.id.llGCCheck
             , R.id.llCompliain, R.id.llJZGC, R.id.llInstall, R.id.llReceiveDinner
             , R.id.llContractSign, R.id.llAppeal, R.id.llCarSafe, R.id.llSaferS, R.id.llSaferY
-            , R.id.llCar, R.id.llHuiQian, R.id.llGHSingle,R.id.llCompMessage})
+            , R.id.llCar, R.id.llHuiQian, R.id.llGHSingle, R.id.llCompMessage,R.id.llRepair})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.llRepair:
+                intent = new Intent(this, FlowRepairActivity.class);
+                startActivity(intent);
+                break;
             case R.id.llEMaintain:
                 intent = new Intent(this, FlowEMainTainActivity.class);
                 startActivity(intent);
@@ -501,4 +516,5 @@ public class XingZengActivity extends BaseActivity {
             }
         }
     };
+
 }

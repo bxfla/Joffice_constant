@@ -428,13 +428,12 @@
             <LinearLayout
                 android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/oaTextView"
+                    style="@style/oaTextView2"
                     android:text="总经理:"
-                    android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
 
                 <View
@@ -445,12 +444,12 @@
 
                 <TextView
                     android:id="@+id/tvLeader3"
-                    style="@style/textWrite"
+                    style="@style/textWrite2"
                     android:hint="总经理签名" />
                 <EditText
                     android:id="@+id/etLeader3"
                     android:visibility="gone"
-                    style="@style/textWrite"
+                    style="@style/textWrite2"
                     android:hint="总经理签名" />
             </LinearLayout>
             <View

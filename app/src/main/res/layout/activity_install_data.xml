@@ -401,6 +401,7 @@
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
+                    android:textColor="@color/red"
                     android:text="总经理:" />
 
                 <View
@@ -412,12 +413,14 @@
                 <TextView
                     android:id="@+id/tvLeaderzjl"
                     style="@style/textWrite"
+                    android:textColorHint="@color/red"
                     android:hint="总经理意见" />
 
                 <EditText
                     android:id="@+id/etLeaderzjl"
                     style="@style/textWrite"
                     android:hint="总经理意见"
+                    android:textColorHint="@color/red"
                     android:visibility="gone" />
             </LinearLayout>
 

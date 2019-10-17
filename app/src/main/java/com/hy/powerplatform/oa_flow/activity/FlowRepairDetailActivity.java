@@ -363,7 +363,7 @@ public class FlowRepairDetailActivity extends BaseActivity {
                             try {
                                 JSONArray jsonArray = new JSONArray(etLeaderW1);
                                 JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word3 = jsonObject.getString("v");
+                                word3 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -377,7 +377,7 @@ public class FlowRepairDetailActivity extends BaseActivity {
                             try {
                                 JSONArray jsonArray = new JSONArray(etLeaderW2);
                                 JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word2 = jsonObject.getString("v");
+                                word2 = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -405,7 +405,7 @@ public class FlowRepairDetailActivity extends BaseActivity {
                             try {
                                 JSONArray jsonArray = new JSONArray(etLeaderW4);
                                 JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word = jsonObject.getString("v");
+                                word = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -419,7 +419,7 @@ public class FlowRepairDetailActivity extends BaseActivity {
                             try {
                                 JSONArray jsonArray = new JSONArray(etLeaderW5);
                                 JSONObject jsonObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                                word = jsonObject.getString("v");
+                                word = jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

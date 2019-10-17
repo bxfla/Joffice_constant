@@ -249,12 +249,26 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
     String piId = "";
     String downloadData = "";
     FlowMessageAdapter adapter;
+    Gson gson = new Gson();
+    FlowWorkPuchase bean;
+    JSONArray jsonArray;
+    JSONObject jsonObject;
+    SimpleDateFormat formatter;
+    Date curDate;
+    String str;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        jsonArray = new JSONArray();
+        jsonObject = new JSONObject();
+        formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        curDate = new Date(System.currentTimeMillis());
+        str = formatter.format(curDate);
+
+        btnUp.setVisibility(View.VISIBLE);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
@@ -806,8 +820,8 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.btnUp:
-                Gson gson = new Gson();
-                FlowWorkPuchase bean = gson.fromJson(res, FlowWorkPuchase.class);
+                gson = new Gson();
+                bean = gson.fromJson(res, FlowWorkPuchase.class);
                 bmfzryj = bean.getMainform().get(0).getBmfzryj();
                 fgldyj = bean.getMainform().get(0).getFgldyj();
                 zjl = bean.getMainform().get(0).getZjlyj();
@@ -815,11 +829,11 @@ public class FlowWorkPuechaseWillDetailActivity extends BaseActivity {
                         "login").getData(FlowWorkPuechaseWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowWorkPuechaseWillDetailActivity.this,
                         "login").getData(FlowWorkPuechaseWillDetailActivity.this, "userId", "");
-                JSONArray jsonArray = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date curDate = new Date(System.currentTimeMillis());
-                String str = formatter.format(curDate);
+                jsonArray = new JSONArray();
+                jsonObject = new JSONObject();
+                formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                curDate = new Date(System.currentTimeMillis());
+                str = formatter.format(curDate);
                 if (etLeader.getVisibility() == View.VISIBLE) {
                     comment = etLeader.getText().toString();
                     try {

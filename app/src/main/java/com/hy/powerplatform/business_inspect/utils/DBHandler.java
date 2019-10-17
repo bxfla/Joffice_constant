@@ -1829,6 +1829,88 @@ public class DBHandler {
         return "获取数据失败";
     }
 
+    //获取代办数量
+    public String OAWillDoNum(String turl) {
+        HttpURLConnection connection = null;
+        BufferedReader reader = null;
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+        try {
+            URL url = new URL(turl);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(20000);
+            connection.setReadTimeout(20000);
+            connection.addRequestProperty("Cookie", Session);
+            //此时获取的是字节流
+            InputStream in = connection.getInputStream();
+            //对获取到的输入流进行读取
+            reader = new BufferedReader(new InputStreamReader(in)); //将字节流转化成字符流
+            StringBuffer sb = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            reader.close();
+            Log.i("sb=", sb.toString());
+            JSONObject json_ = new JSONObject(sb.toString());
+            if (json_ != null) {
+                String msg = json_.get("success").toString();
+                if (msg.equals("true")) {
+                    return json_ + "";
+                } else {
+                    return msg;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+//
+//
+//        HttpClient httpClient = new DefaultHttpClient();
+//        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+//        HttpPost httpRequst = new HttpPost(turl);
+//        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+//        httpRequst.setHeader("Cookie", Session);
+//        try {
+//            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
+//            httpRequst.setEntity(uefEntity);
+//            HttpResponse res = httpClient.execute(httpRequst);
+//            HttpEntity entity = res.getEntity();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+//            StringBuffer sb = new StringBuffer();
+//            String line = null;
+//            while ((line = reader.readLine()) != null) {
+//                sb.append(line + "\n");
+//            }
+//            reader.close();
+//            Log.i("sb=", sb.toString());
+//            JSONObject json_ = new JSONObject(sb.toString());
+//            if (json_ != null) {
+//                String msg = json_.get("success").toString();
+//                if (msg.equals("true")) {
+//                    return json_ + "";
+//                } else {
+//                    return msg;
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//            e.printStackTrace();
+//        }
+        return "获取数据失败";
+    }
+
     //提交数据前获取下一步接收人步骤
     public String OAQingJiaFornt1(String turl, String tag, String name) {
         HttpClient httpClient = new DefaultHttpClient();
@@ -3753,7 +3835,7 @@ public class DBHandler {
                                    String money2, String money3, String money4, String money5, String allMoney1,
                                    String allMoney2, String allMoney3, String allMoney4, String allMoney5, String userCode,
                                    String destName, String taskId, String flowAssignld, String mainId, String bmfzryj,
-                                   String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
+                                   String gybmyj,String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
                                    String comment, String signaName, String hejisl, String hejidj, String hejije, String use
             , String jbldyj, String other,String jcbmyj,String danwei1,String danwei2,String danwei3,String danwei4,
                                    String danwei5,String zc,String type,String bz1,String bz2,String bz3,String bz4,String bz5) {
@@ -3825,6 +3907,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("yt", use));
         nvs.add(new BasicNameValuePair("bmfzryj", bmfzryj));
         nvs.add(new BasicNameValuePair("jcbmyj", jcbmyj));
+        nvs.add(new BasicNameValuePair("cggybyj", gybmyj));
         nvs.add(new BasicNameValuePair("zcgkbmyj", zcgkbmyj));
         nvs.add(new BasicNameValuePair("fgldyj", fgldyj));
         nvs.add(new BasicNameValuePair("cbfgldyj", jbldyj));

@@ -101,8 +101,7 @@ public class ListActivity extends BaseActivity {
                 roluesList.remove(4);
                 numList.remove(4);
             }
-            if (!dataList.contains(Constant.REPAIRNAME)
-                    && !dataList.contains(Constant.PUECHASEFLOWNAME)
+            if (!dataList.contains(Constant.PUECHASEFLOWNAME)
                     && !dataList.contains(Constant.GOODSPUECHASENAME)
                     && !dataList.contains(Constant.WORKPUECHASENAME)
                     && !dataList.contains(Constant.CCTPUECHASENAME)
@@ -126,6 +125,7 @@ public class ListActivity extends BaseActivity {
                 numList.remove(1);
             }
             if (!dataList.contains(Constant.EMAINTAINNAME)
+                    &&!dataList.contains(Constant.REPAIRNAME)
                     && !dataList.contains(Constant.CARVIDEONAME)
                     && !dataList.contains(Constant.DORMNAME)
                     && !dataList.contains(Constant.GCADDNAME)
@@ -176,7 +176,7 @@ public class ListActivity extends BaseActivity {
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.activity_list;
+        return R.layout.activity_list1;
     }
 
     @Override

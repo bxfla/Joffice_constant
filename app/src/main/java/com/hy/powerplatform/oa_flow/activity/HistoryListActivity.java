@@ -51,7 +51,7 @@ public class HistoryListActivity extends BaseActivity {
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.activity_list;
+        return R.layout.activity_list1;
     }
 
     @Override

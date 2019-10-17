@@ -179,12 +179,27 @@ public class FlowContracterPayWillDetailActivity extends BaseActivity {
     String piId = "";
     String downloadData = "";
     FlowMessageAdapter adapter;
+
+    Gson gson = new Gson();
+    FlowContracterPayWillDetail bean;
+    JSONArray jsonArray;
+    JSONObject jsonObject;
+    SimpleDateFormat formatter;
+    Date curDate;
+    String str;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        jsonArray = new JSONArray();
+        jsonObject = new JSONObject();
+        formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        curDate = new Date(System.currentTimeMillis());
+        str = formatter.format(curDate);
+        btnNO.setVisibility(View.VISIBLE);
+
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
@@ -589,8 +604,8 @@ public class FlowContracterPayWillDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.btnNO:
-                Gson gson = new Gson();
-                FlowContracterPayWillDetail bean = gson.fromJson(res, FlowContracterPayWillDetail.class);
+                gson = new Gson();
+                bean = gson.fromJson(res, FlowContracterPayWillDetail.class);
                 bmfzr = bean.getMainform().get(0).getBmfzryj();
                 fgfze = bean.getMainform().get(0).getFgldyj();
                 zjl = bean.getMainform().get(0).getZjlyj();
@@ -599,11 +614,11 @@ public class FlowContracterPayWillDetailActivity extends BaseActivity {
                         "login").getData(FlowContracterPayWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowContracterPayWillDetailActivity.this,
                         "login").getData(FlowContracterPayWillDetailActivity.this, "userCode", "");
-                JSONArray jsonArray = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date curDate = new Date(System.currentTimeMillis());
-                String str = formatter.format(curDate);
+                jsonArray = new JSONArray();
+                jsonObject = new JSONObject();
+                formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                curDate = new Date(System.currentTimeMillis());
+                str = formatter.format(curDate);
                 if (etLeader.getVisibility() == View.VISIBLE) {
                     comment = etLeader.getText().toString();
                     try {
@@ -689,6 +704,7 @@ public class FlowContracterPayWillDetailActivity extends BaseActivity {
                 } else {
                     personSession();
                 }
+                break;
         }
     }
 

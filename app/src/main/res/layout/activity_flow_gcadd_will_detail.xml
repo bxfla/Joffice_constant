@@ -421,13 +421,12 @@
             <View style="@style/line"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/tvLeader6W"
-                    style="@style/oaTextView"
+                    style="@style/oaTextView2"
                     android:text="总经理意见:"
-                    android:layout_height="45dp"
                     android:layout_gravity="center_vertical"/>
                 <View
                     android:layout_width="1dp"
@@ -437,17 +436,18 @@
                 <TextView
                     android:id="@+id/tvLeader6"
                     android:hint="总经理签名"
-                    style="@style/textWrite"/>
+                    style="@style/textWrite2"/>
                 <EditText
                     android:id="@+id/etLeader6"
                     android:visibility="gone"
                     android:hint="总经理签名"
-                    style="@style/textWrite"/>
+                    style="@style/textWrite2"/>
             </LinearLayout>
             <View style="@style/line"
                 android:layout_marginBottom="45dp"></View>
 
             <include layout="@layout/get_person"></include>
+
             <Button
                 android:visibility="gone"
                 android:id="@+id/btnUp"

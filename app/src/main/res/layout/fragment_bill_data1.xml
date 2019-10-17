@@ -326,7 +326,7 @@
                     android:id="@+id/etBlame"
                     style="@style/textWrite"
                     android:maxLength="50"
-                    android:hint="请填写事故责任(最多50字)"/>
+                    android:hint="请填写事故责任"/>
             </LinearLayout>
             <View style="@style/line"></View>
 

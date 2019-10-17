@@ -185,6 +185,14 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
     String piId = "";
     String downloadData;
     FlowMessageAdapter adapter;
+
+    Gson gson = new Gson();
+    FlowChuCai bean;
+    JSONArray jsonArray;
+    JSONObject jsonObject;
+    SimpleDateFormat formatter;
+    Date curDate;
+    String str;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
 
@@ -192,6 +200,14 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+
+        jsonArray = new JSONArray();
+        jsonObject = new JSONObject();
+        formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        curDate = new Date(System.currentTimeMillis());
+        str = formatter.format(curDate);
+        btnUp.setVisibility(View.VISIBLE);
+
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         Intent intent = getIntent();
@@ -593,8 +609,8 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.btnUp:
-                Gson gson = new Gson();
-                FlowChuCai bean = gson.fromJson(res, FlowChuCai.class);
+                gson = new Gson();
+                bean = gson.fromJson(res, FlowChuCai.class);
                 bmfzr = bean.getMainform().get(0).getBmfzryj();
                 fgfze = bean.getMainform().get(0).getFgldyj();
                 zjl = bean.getMainform().get(0).getZjlyj();
@@ -602,11 +618,11 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                         "login").getData(FlowChuCaiWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowChuCaiWillDetailActivity.this,
                         "login").getData(FlowChuCaiWillDetailActivity.this, "userCode", "");
-                JSONArray jsonArray = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date curDate = new Date(System.currentTimeMillis());
-                String str = formatter.format(curDate);
+                jsonArray = new JSONArray();
+                jsonObject = new JSONObject();
+                formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                curDate = new Date(System.currentTimeMillis());
+                str = formatter.format(curDate);
                 if (etLeader.getVisibility() == View.VISIBLE) {
                     comment = "";
                     comment = etLeader.getText().toString();
@@ -807,30 +823,30 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                 String[] nameNum = null;
                 nameNum = role.split(",");
                 String nameText = "";
-                for (int i = 0;i<nameNum.length;i++){
-                    if (i==0){
+                for (int i = 0; i < nameNum.length; i++) {
+                    if (i == 0) {
                         nameText = nameNum[0];
-                    }else {
-                        nameText = nameText+":"+nameNum[i];
+                    } else {
+                        nameText = nameText + ":" + nameNum[i];
                     }
                 }
 
                 String[] codeNum = null;
                 codeNum = userCodes.split(",");
                 String codeText = "";
-                for (int i = 0;i<nameNum.length;i++){
-                    if (i==0){
+                for (int i = 0; i < nameNum.length; i++) {
+                    if (i == 0) {
                         codeText = codeNum[0];
-                    }else {
-                        codeText = codeText+":"+codeNum[i];
+                    } else {
+                        codeText = codeText + ":" + codeNum[i];
                     }
                 }
                 String otherCodeText = "";
-                for (int i = nameNum.length;i<codeNum.length;i++){
-                    if (i==nameNum.length){
+                for (int i = nameNum.length; i < codeNum.length; i++) {
+                    if (i == nameNum.length) {
                         otherCodeText = codeNum[nameNum.length];
-                    }else {
-                        otherCodeText = otherCodeText+","+codeNum[i];
+                    } else {
+                        otherCodeText = otherCodeText + "," + codeNum[i];
                     }
                 }
                 if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
@@ -840,7 +856,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
 
                     if (!bigUserCodes.equals("") && !userCodes.equals("")) {
 //                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText+","+otherCodeText;
+                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText + "," + otherCodeText;
                         flowAssignld = flowAssignld.replace(" ", "");
                         flowAssignld = flowAssignld.replace(":|", "|");
                     } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
@@ -860,7 +876,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
 
                     if (!bigUserCodes.equals("") && !userCodes.equals("")) {
 //                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText+","+otherCodeText;
+                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText + "," + otherCodeText;
                         flowAssignld = flowAssignld.replace(" ", "");
                         flowAssignld = flowAssignld.replace(":|", "|");
                     } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
