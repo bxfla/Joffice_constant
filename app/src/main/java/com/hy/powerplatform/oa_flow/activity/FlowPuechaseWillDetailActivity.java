@@ -1,5 +1,6 @@
 package com.hy.powerplatform.oa_flow.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -322,7 +324,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     String piId = "";
     String downloadData = "";
     double AllMoney1 = 0.0, AllMoney2 = 0.0, AllMoney3 = 0.0, AllMoney4 = 0.0, AllMoney5 = 0.0;
-    int numS1 = 0, numS2 = 0, numS3 = 0, numS4 = 0, numS5 = 0;
+    Double numS1 = 0.0, numS2 = 0.0, numS3 = 0.0, numS4 = 0.0, numS5 = 0.0;
     double moneyS1 = 0.0, moneyS2 = 0.0, moneyS3 = 0.0, moneyS4 = 0.0, moneyS5 = 0.0;
 
     FlowMessageAdapter adapter;
@@ -334,6 +336,8 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     Date curDate;
     String str;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
+    private String executionId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -353,6 +357,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
         taskId = intent.getStringExtra("taskId");
         String taskName = intent.getStringExtra("taskName");
         piId = intent.getStringExtra("piId");
+        executionId = intent.getStringExtra("executionId");
         header.setTvTitle(taskName);
         tvAllMoney1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -369,10 +374,10 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     AllMoney1 = (Double.valueOf(s.toString()));
-                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
+//                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 } else {
                     AllMoney1 = 0.0;
-                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
+//                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
             }
         });
@@ -391,10 +396,10 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     AllMoney2 = (Double.valueOf(s.toString()));
-                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
+//                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 } else {
                     AllMoney2 = 0.0;
-                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
+//                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
             }
         });
@@ -413,10 +418,10 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     AllMoney3 = (Double.valueOf(s.toString()));
-                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
+//                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 } else {
                     AllMoney3 = 0.0;
-                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
+//                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
             }
         });
@@ -435,10 +440,10 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     AllMoney4 = (Double.valueOf(s.toString()));
-                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
+//                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 } else {
                     AllMoney4 = 0.0;
-                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
+//                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
             }
         });
@@ -457,10 +462,10 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
                     AllMoney5 = (Double.valueOf(s.toString()));
-                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
+//                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 } else {
                     AllMoney5 = 0.0;
-                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
+//                    tvAllMoney.setText(String.valueOf(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5));
                 }
             }
         });
@@ -479,7 +484,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
-                    numS1 = (Integer.valueOf(s.toString()));
+                    numS1 = (Double.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     if (!etMoney1.getText().toString().equals("")) {
                         tvAllMoney1.setText(String.valueOf(Double.valueOf(etMoney1.getText().toString()) * numS1));
@@ -487,7 +492,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                         tvAllMoney1.setText(String.valueOf(0 * numS1));
                     }
                 } else {
-                    numS1 = 0;
+                    numS1 = 0.0;
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     tvAllMoney1.setText(String.valueOf(0 * moneyS1));
                 }
@@ -507,7 +512,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
-                    numS2 = (Integer.valueOf(s.toString()));
+                    numS2 = (Double.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     if (!etMoney2.getText().toString().equals("")) {
                         tvAllMoney2.setText(String.valueOf(Double.valueOf(etMoney2.getText().toString()) * numS2));
@@ -515,7 +520,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                         tvAllMoney2.setText(String.valueOf(0 * numS2));
                     }
                 } else {
-                    numS2 = 0;
+                    numS2 = 0.0;
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     tvAllMoney2.setText(String.valueOf(0 * moneyS2));
                 }
@@ -535,7 +540,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
-                    numS3 = (Integer.valueOf(s.toString()));
+                    numS3 = (Double.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     if (!etMoney3.getText().toString().equals("")) {
                         tvAllMoney3.setText(String.valueOf(Double.valueOf(etMoney3.getText().toString()) * numS3));
@@ -543,7 +548,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                         tvAllMoney3.setText(String.valueOf(0 * numS3));
                     }
                 } else {
-                    numS3 = 0;
+                    numS3 = 0.0;
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     tvAllMoney3.setText(String.valueOf(0 * moneyS3));
                 }
@@ -563,7 +568,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
-                    numS4 = (Integer.valueOf(s.toString()));
+                    numS4 = (Double.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     if (!etMoney4.getText().toString().equals("")) {
                         tvAllMoney4.setText(String.valueOf(Double.valueOf(etMoney4.getText().toString()) * numS4));
@@ -571,7 +576,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                         tvAllMoney4.setText(String.valueOf(0 * numS4));
                     }
                 } else {
-                    numS4 = 0;
+                    numS4 = 0.0;
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     tvAllMoney4.setText(String.valueOf(0 * moneyS4));
                 }
@@ -591,7 +596,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
-                    numS5 = (Integer.valueOf(s.toString()));
+                    numS5 = (Double.valueOf(s.toString()));
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     if (!etMoney5.getText().toString().equals("")) {
                         tvAllMoney5.setText(String.valueOf(Double.valueOf(etMoney5.getText().toString()) * numS5));
@@ -599,7 +604,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                         tvAllMoney5.setText(String.valueOf(0 * numS5));
                     }
                 } else {
-                    numS5 = 0;
+                    numS5 = 0.0;
                     tvAllNum.setText(String.valueOf(numS1 + numS2 + numS3 + numS4 + numS5));
                     tvAllMoney5.setText(String.valueOf(0 * moneyS5));
                 }
@@ -746,7 +751,45 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
+        final AlertDialog dialog = new AlertDialog.Builder(this).create();
+        dialog.setView(LayoutInflater.from(this).inflate(R.layout.dialog_with_edittext, null));
+        dialog.show();
+        dialog.getWindow().setContentView(R.layout.dialog_with_edittext);
+        final EditText etContent = (EditText) dialog.findViewById(R.id.etContent);
+        TextView tv_yes = (TextView) dialog.findViewById(R.id.yes);
+        TextView tv_no = (TextView) dialog.findViewById(R.id.no);
+        tv_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                final String str = etContent.getText().toString();
+                if (str.equals("")) {
+                    Toast.makeText(FlowPuechaseWillDetailActivity.this, getResources().getString(R.string.nullify_reason), Toast.LENGTH_SHORT).show();
+                } else {
+                    dialog.dismiss();
+                    ProgressDialogUtil.startLoad(FlowPuechaseWillDetailActivity.this, getResources().getString(R.string.get_data));
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DBHandler dbHandler = new DBHandler();
+                            String url = Constant.BASE_URL2 + Constant.NULLIFY;
+                            boolean nullifyData = dbHandler.OAFlowNullify(url, taskId, str, executionId);
+                            if (nullifyData) {
+                                handler.sendEmptyMessage(333);
+                            } else {
+                                handler.sendEmptyMessage(444);
+                            }
+                        }
+                    }).start();
+                }
+            }
+        });
+        tv_no.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View arg0) {
+                dialog.dismiss();
+            }
+        });
     }
 
     /**
@@ -1702,6 +1745,15 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
+                case 333:
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowPuechaseWillDetailActivity.this,getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
+                    finish();
+                    break;
+                case 444:
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowPuechaseWillDetailActivity.this,getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
+                    break;
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);

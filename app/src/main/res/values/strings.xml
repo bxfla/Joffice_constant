@@ -252,6 +252,9 @@
     <string name="gongsi_dx">先进典型</string>
     <string name="gongsi_xl">优秀线路</string>
 
+    <string name="c_success">操作成功</string>
+    <string name="c_false">操作失败</string>
+
 
     <!--新闻公告-->
     <string name="news_notice">新闻公告</string>
@@ -265,6 +268,8 @@
     <string name="flow_list">申请列表</string>
     <string name="flow_willdo">待办流程</string>
     <string name="send_flow">发起审批</string>
+    <string name="nullify">作废</string>
+    <string name="nullify_reason">作废原因</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

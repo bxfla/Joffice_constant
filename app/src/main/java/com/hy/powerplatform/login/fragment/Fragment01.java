@@ -28,10 +28,8 @@ import com.hy.powerplatform.car_maintain.activity.MainTainActivity1;
 import com.hy.powerplatform.login.activity.MyPersonalActivity;
 import com.hy.powerplatform.login.adapter.MainDataAdapter;
 import com.hy.powerplatform.login.bean.MainData;
-import com.hy.powerplatform.my_utils.base.BaseRequestBackTLisenter;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.MyApplication;
-import com.hy.powerplatform.my_utils.base.MyHttpURLConnection;
 import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.news.activity.NewsActivity;
@@ -54,11 +52,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_FIVE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
@@ -93,6 +97,7 @@ public class Fragment01 extends Fragment {
     SharedPreferencesHelper sharedPreferencesHelper;
     String userName;
     String superRoleName;
+    String data = "";
     View view;
 
     @Override
@@ -136,30 +141,52 @@ public class Fragment01 extends Fragment {
         final String Url = BASE_URL + "system/getStatusModuleManagement.do" + "?userName=" + userName;
         final Message message = new Message();
         ProgressDialogUtil.startLoad(getActivity(),"获取数据中");
-        new Thread(new Runnable() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(Url)
+                .get()//默认就是GET请求，可以不写
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
             @Override
-            public void run() {
-                MyHttpURLConnection.getData(Url, new BaseRequestBackTLisenter() {
-                    @Override
-                    public void success(Object o) {
-                        message.what = TAG_ONE;
-                        message.obj = o;
-                        handler.sendMessage(message);
-                    }
-
-                    @Override
-                    public void fail(String msg) {
-                        message.what = TAG_TWO;
-                        handler.sendMessage(message);
-                    }
-
-                    @Override
-                    public void failF(String msg) {
-
-                    }
-                });
+            public void onFailure(Call call, IOException e) {
+                message.what = TAG_TWO;
+                handler.sendMessage(message);
             }
-        }).start();
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                message.what = TAG_ONE;
+                message.obj = response.body().toString();
+//                Log.d("XXX", "onResponse: " + response.body().string());
+                data = response.body().string();
+                handler.sendMessage(message);
+            }
+        });
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                MyHttpURLConnection.getData(Url, new BaseRequestBackTLisenter() {
+//                    @Override
+//                    public void success(Object o) {
+//                        message.what = TAG_ONE;
+//                        message.obj = o;
+//                        handler.sendMessage(message);
+//                    }
+//
+//                    @Override
+//                    public void fail(String msg) {
+//                        message.what = TAG_TWO;
+//                        handler.sendMessage(message);
+//                    }
+//
+//                    @Override
+//                    public void failF(String msg) {
+//
+//                    }
+//                });
+//            }
+//        }).start();
         return view;
     }
 
@@ -191,7 +218,7 @@ public class Fragment01 extends Fragment {
             switch (msg.what) {
                 case TAG_ONE:
                     mainDataList.clear();
-                    String data = msg.obj.toString();
+//                    String data = msg.obj.toString();
                     bean = new Gson().fromJson(data, MainData.class);
                     for (int i = 0; i < bean.getData().size(); i++) {
                         if (bean.getData().get(i).getModuleName().equals("公司流程")){

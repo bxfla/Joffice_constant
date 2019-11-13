@@ -148,6 +148,16 @@ public class ListActivity1 extends BaseActivity {
             switch (msg.what) {
                 case TAG_ONE:
                     beanList.clear();
+                    tvNum1.setText("");
+                    tvNum2.setText("");
+                    tvNum3.setText("");
+                    tvNum4.setText("");
+                    tvNum5.setText("");
+                    tvNum1.setVisibility(View.GONE);
+                    tvNum2.setVisibility(View.GONE);
+                    tvNum3.setVisibility(View.GONE);
+                    tvNum4.setVisibility(View.GONE);
+                    tvNum5.setVisibility(View.GONE);
                     Gson gson = new Gson();
                     WillDoNum bean = gson.fromJson(datanum, WillDoNum.class);
                     for (int i = 0; i < bean.getResult().size(); i++) {

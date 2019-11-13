@@ -20,7 +20,6 @@ import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
-import com.hy.powerplatform.oa_flow.activity.PersonListActivity;
 import com.hy.powerplatform.oa_flow.bean.Name;
 import com.leon.lfilepickerlibrary.LFilePicker;
 import com.leon.lfilepickerlibrary.utils.Constant;
@@ -51,8 +50,6 @@ public class FragmentContractSignData extends Fragment {
     Unbinder unbinder;
     @BindView(R.id.etDepartment)
     TextView etDepartment;
-    @BindView(R.id.etPerson)
-    TextView etPerson;
     @BindView(R.id.etContractName)
     TextView etContractName;
     @BindView(R.id.tvTime)
@@ -111,7 +108,6 @@ public class FragmentContractSignData extends Fragment {
         userId = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
         userName = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", "");
         String department = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "depName", "");
-        etPerson.setText(userName);
         etDepartment.setText(department);
         tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
@@ -190,16 +186,11 @@ public class FragmentContractSignData extends Fragment {
                 break;
             case R.id.btnUp:
                 final String department = etDepartment.getText().toString().trim();
-                final String person = etPerson.getText().toString().trim();
                 final String name = etContractName.getText().toString().trim();
                 final String time = tvTime.getText().toString().trim();
                 final String situation = etSituation.getText().toString().trim();
                 if (department.equals("")) {
                     Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                if (person.equals("")) {
-                    Toast.makeText(getActivity(), "部门负责人不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (name.equals("")) {
@@ -246,12 +237,11 @@ public class FragmentContractSignData extends Fragment {
                     uId = selectList.get(0) + "," + uId;
                 }
                 final String department = etDepartment.getText().toString();
-                final String person = etPerson.getText().toString();
                 final String name = etContractName.getText().toString();
                 final String time = tvTime.getText().toString();
                 final String situation = etSituation.getText().toString();
                 String res = dbA.OAContractSignUp(turl, userDepart, uId, name, department, userId,
-                        person, time, situation);
+                        "", time, situation);
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -436,11 +426,6 @@ public class FragmentContractSignData extends Fragment {
         }
     };
 
-    @OnClick(R.id.tvPerson)
-    public void onViewClicked() {
-        Intent intent = new Intent(getActivity(), PersonListActivity.class);
-        startActivityForResult(intent, com.hy.powerplatform.my_utils.base.Constant.TAG_TWO);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -458,7 +443,6 @@ public class FragmentContractSignData extends Fragment {
             if (data != null) {
                 userCode = data.getStringExtra("userCode");
                 userName = data.getStringExtra("userName");
-                etPerson.setText(userName);
             }
         }
     }

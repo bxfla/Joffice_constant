@@ -98,6 +98,8 @@ public class FlowContractSignDetailActivity extends BaseActivity {
     TextView tvLeader4W;
     @BindView(R.id.tvLeader5W)
     TextView tvLeader5W;
+    @BindView(R.id.tvLeader0)
+    TextView tvLeader0;
     private String res;
     String flowMessage = "";
     String xiangguanfujian = "";
@@ -280,6 +282,7 @@ public class FlowContractSignDetailActivity extends BaseActivity {
                     String flgwyj = bean.getMainform().get(0).getFlgwyj();
                     String fgldyj = bean.getMainform().get(0).getFgldyj();
                     String zjlyj = bean.getMainform().get(0).getZjlyj();
+                    String cbbmfzr = bean.getMainform().get(0).getCbbmfzr();
                     xiangguanfujian = bean.getMainform().get(0).getXiangguanfujian();
                     if (xiangguanfujian.equals("")) {
                         llData.setVisibility(View.GONE);
@@ -292,6 +295,9 @@ public class FlowContractSignDetailActivity extends BaseActivity {
                     tvContractName.setText(name);
                     tvTime.setText(time);
                     tvSituation.setText(staction);
+                    if (!cbbmfzr.equals("")) {
+                        tvLeader0.setText(cbbmfzr);
+                    }
                     if (!csbmyj.equals("")) {
                         tvLeader.setText(getJSONData(csbmyj));
                     }

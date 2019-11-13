@@ -2778,7 +2778,7 @@ public class DBHandler {
     public String OAContractSignLeader(String url, String department, String person, String name,
                                        String time, String situation, String userCode, String destName, String taskId,
                                        String flowAssignld, String mainId, String csbmyj, String jgbmyj, String flgwyj,
-                                       String fgldyj, String zjl, String serialNumber, String comment, String signaName) {
+                                       String fgldyj, String zjl, String serialNumber, String comment, String signaName,String cbPerson) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -2799,7 +2799,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("cbbmDid", "500"));
         nvs.add(new BasicNameValuePair("cbbm", department));
         nvs.add(new BasicNameValuePair("cbbmfzrUId", userCode));
-        nvs.add(new BasicNameValuePair("cbbmfzr", person));
+        nvs.add(new BasicNameValuePair("cbbmfzr", cbPerson));
         nvs.add(new BasicNameValuePair("htmc", name));
         nvs.add(new BasicNameValuePair("spsj", time));
         nvs.add(new BasicNameValuePair("jbqk", situation));
@@ -7364,6 +7364,50 @@ public class DBHandler {
             e.printStackTrace();
         }
         return "保存失败";
+    }
+
+    //待办作废
+    public Boolean OAFlowNullify(String turl, String taskId, String mycomments, String executionId ) {
+        HttpClient httpClient = new DefaultHttpClient();
+        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+        HttpPost httpRequst = new HttpPost(turl);
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+        httpRequst.setHeader("Cookie", Session);
+        nvs.add(new BasicNameValuePair("taskId", taskId));
+        nvs.add(new BasicNameValuePair("mycomments", mycomments));
+        nvs.add(new BasicNameValuePair("executionId", executionId));
+        Log.i("sb1=", turl);
+        Log.i("sb1=", taskId);
+        Log.i("sb1=", mycomments);
+        Log.i("sb1=", executionId);
+        try {
+            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
+            httpRequst.setEntity(uefEntity);
+            HttpResponse res = httpClient.execute(httpRequst);
+            HttpEntity entity = res.getEntity();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+            StringBuffer sb = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            reader.close();
+            Log.i("sb1=", sb.toString());
+            JSONObject json_ = new JSONObject(sb.toString());
+            if (json_ != null) {
+                String data = json_ + "";
+                String msg = json_.get("success").toString();
+                if (msg.equals("true")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

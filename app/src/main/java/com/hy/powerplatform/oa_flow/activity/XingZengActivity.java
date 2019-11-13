@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -31,8 +32,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static com.hy.powerplatform.R.id.flRepair;
 
 public class XingZengActivity extends BaseActivity {
 
@@ -431,6 +430,7 @@ public class XingZengActivity extends BaseActivity {
             tvGHSingle.setVisibility(View.GONE);
             tvGHSingle.setText("");
             String data = String.valueOf(msg.getData().get("data"));
+            Log.e("XXX",data);
             MyNum bean = new Gson().fromJson(data, MyNum.class);
             if (!bean.isSuccess()) {
                 Toast.makeText(XingZengActivity.this, "获取我的待办数据失败", Toast.LENGTH_SHORT).show();

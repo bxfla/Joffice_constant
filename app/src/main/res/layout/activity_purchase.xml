@@ -8,6 +8,8 @@
     <com.hy.powerplatform.my_utils.myViews.Header
         android:id="@+id/header"
         style="@style/Heander"
+        app:header_is_right_tv_visiable="true"
+        app:header_title_right="@string/nullify"
         app:header_title="物质采购审批">
     </com.hy.powerplatform.my_utils.myViews.Header>
 
@@ -134,6 +136,7 @@
             </LinearLayout>
 
             <View style="@style/line"></View>
+
             <LinearLayout
                 android:id="@+id/llData"
                 android:layout_width="match_parent"
@@ -954,6 +957,7 @@
                     style="@style/textWrite"
                     android:hint="部门领导意见" />
             </LinearLayout>
+
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -967,6 +971,7 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:text="采购供应部:" />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -984,6 +989,7 @@
                     style="@style/textWrite"
                     android:hint="采购供应部意见" />
             </LinearLayout>
+
             <View style="@style/line"></View>
 
             <LinearLayout

@@ -11,6 +11,8 @@
     <com.hy.powerplatform.my_utils.myViews.Header
         android:id="@+id/header"
         style="@style/Heander"
+        app:header_is_right_tv_visiable="true"
+        app:header_title_right="@string/nullify"
         app:header_title="工程待办详情">
     </com.hy.powerplatform.my_utils.myViews.Header>
     <ScrollView

@@ -37,10 +37,6 @@
 
             <View style="@style/line"></View>
 
-            <include layout="@layout/select_person" />
-
-            <View style="@style/line"></View>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -158,6 +154,28 @@
                 <TextView
                     style="@style/oaEditText"
                     android:hint="请填写部门负责人意见" />
+            </LinearLayout>
+
+            <View style="@style/line"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="承办部门负责人:"
+                    android:textColor="@color/order_stop_black"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    style="@style/oaEditText"
+                    android:hint="请填写承办部门负责人" />
             </LinearLayout>
 
             <View style="@style/line"></View>

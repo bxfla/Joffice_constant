@@ -1,5 +1,6 @@
 package com.hy.powerplatform.oa_flow.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -203,6 +205,8 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
 
+    private String executionId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -213,6 +217,7 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
         name = intent.getStringExtra("activityName");
         taskId = intent.getStringExtra("taskId");
         piId = intent.getStringExtra("piId");
+        executionId = intent.getStringExtra("executionId");
         getData(name, taskId);
     }
 
@@ -228,7 +233,45 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
+        final AlertDialog dialog = new AlertDialog.Builder(this).create();
+        dialog.setView(LayoutInflater.from(this).inflate(R.layout.dialog_with_edittext, null));
+        dialog.show();
+        dialog.getWindow().setContentView(R.layout.dialog_with_edittext);
+        final EditText etContent = (EditText) dialog.findViewById(R.id.etContent);
+        TextView tv_yes = (TextView) dialog.findViewById(R.id.yes);
+        TextView tv_no = (TextView) dialog.findViewById(R.id.no);
+        tv_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                final String str = etContent.getText().toString();
+                if (str.equals("")) {
+                    Toast.makeText(FlowComplainWillDetailActivity.this, getResources().getString(R.string.nullify_reason), Toast.LENGTH_SHORT).show();
+                } else {
+                    dialog.dismiss();
+                    ProgressDialogUtil.startLoad(FlowComplainWillDetailActivity.this, getResources().getString(R.string.get_data));
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DBHandler dbHandler = new DBHandler();
+                            String url = Constant.BASE_URL2 + Constant.NULLIFY;
+                            boolean nullifyData = dbHandler.OAFlowNullify(url, taskId, str, executionId);
+                            if (nullifyData) {
+                                handler.sendEmptyMessage(333);
+                            } else {
+                                handler.sendEmptyMessage(444);
+                            }
+                        }
+                    }).start();
+                }
+            }
+        });
+        tv_no.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View arg0) {
+                dialog.dismiss();
+            }
+        });
     }
 
     /**
@@ -1008,6 +1051,15 @@ public class FlowComplainWillDetailActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
+                case 333:
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowComplainWillDetailActivity.this,getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
+                    finish();
+                    break;
+                case 444:
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowComplainWillDetailActivity.this,getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
+                    break;
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);

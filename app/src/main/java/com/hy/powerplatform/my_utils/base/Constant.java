@@ -103,6 +103,8 @@ public class Constant {
     public static final String  BACKFLOWSURELIST = "flow/listRevokeFlowDetail.do";
     // 获取确认
     public static final String  BACKFLOWSURE = "flow/checkRevokeFlowDetail.do";
+    // 流程作废
+    public static final String  NULLIFY = "flow/discardProcessRun.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";

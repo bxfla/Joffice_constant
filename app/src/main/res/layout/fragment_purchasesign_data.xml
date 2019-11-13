@@ -245,7 +245,7 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number" />
+                        android:inputType="number|numberDecimal" />
 
                     <View style="@style/line"></View>
 
@@ -254,7 +254,7 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number" />
+                        android:inputType="number|numberDecimal" />
 
                     <View style="@style/line"></View>
 
@@ -263,7 +263,7 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number" />
+                        android:inputType="number|numberDecimal" />
 
                     <View style="@style/line"></View>
 
@@ -272,14 +272,14 @@
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number" />
+                        android:inputType="number|numberDecimal" />
                     <View style="@style/line"></View>
                     <EditText
                         android:id="@+id/etNum5"
                         style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:inputType="number" />
+                        android:inputType="number|numberDecimal" />
                 </LinearLayout>
 
                 <View

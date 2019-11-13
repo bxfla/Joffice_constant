@@ -1,5 +1,6 @@
 package com.hy.powerplatform.oa_flow.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -159,7 +161,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     TextView tvLeader4W;
     @BindView(R.id.tvLeader5W)
     TextView tvLeader5W;
-    private String name, taskId, res, bmfzryj, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, zjlyj = "", dszyj = "";
+    private String name, taskId, executionId, res, bmfzryj, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj, zjlyj = "", dszyj = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
     String leaderCode = "";
@@ -205,7 +207,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     String flowMessage = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
-
+// app:header_title_right="@string/nullify"
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,6 +228,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
         taskId = intent.getStringExtra("taskId");
         tag1 = intent.getStringExtra("tag");
         piId = intent.getStringExtra("piId");
+        executionId = intent.getStringExtra("executionId");
         getData(name, taskId);
     }
 
@@ -265,7 +268,45 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
+        final AlertDialog dialog = new AlertDialog.Builder(this).create();
+        dialog.setView(LayoutInflater.from(this).inflate(R.layout.dialog_with_edittext, null));
+        dialog.show();
+        dialog.getWindow().setContentView(R.layout.dialog_with_edittext);
+        final EditText etContent = (EditText) dialog.findViewById(R.id.etContent);
+        TextView tv_yes = (TextView) dialog.findViewById(R.id.yes);
+        TextView tv_no = (TextView) dialog.findViewById(R.id.no);
+        tv_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                final String str = etContent.getText().toString();
+                if (str.equals("")) {
+                    Toast.makeText(FlowAppealWillDetailActivity.this, getResources().getString(R.string.nullify_reason), Toast.LENGTH_SHORT).show();
+                } else {
+                    dialog.dismiss();
+                    ProgressDialogUtil.startLoad(FlowAppealWillDetailActivity.this, getResources().getString(R.string.get_data));
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DBHandler dbHandler = new DBHandler();
+                            String url = Constant.BASE_URL2 + Constant.NULLIFY;
+                            boolean nullifyData = dbHandler.OAFlowNullify(url, taskId, str, executionId);
+                            if (nullifyData) {
+                                handler.sendEmptyMessage(333);
+                            } else {
+                                handler.sendEmptyMessage(444);
+                            }
+                        }
+                    }).start();
+                }
+            }
+        });
+        tv_no.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View arg0) {
+                dialog.dismiss();
+            }
+        });
     }
 
     /**
@@ -1031,6 +1072,15 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
+                case 333:
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowAppealWillDetailActivity.this,getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
+                    finish();
+                    break;
+                case 444:
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowAppealWillDetailActivity.this,getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
+                    break;
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);

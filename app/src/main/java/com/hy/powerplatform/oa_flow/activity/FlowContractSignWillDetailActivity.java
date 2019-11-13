@@ -1,5 +1,6 @@
 package com.hy.powerplatform.oa_flow.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -61,8 +63,6 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     Header header;
     @BindView(R.id.tvDepartment)
     TextView tvDepartment;
-    @BindView(R.id.tvPerson)
-    TextView tvPerson;
     @BindView(R.id.tvContractName)
     TextView tvContractName;
     @BindView(R.id.tvTime)
@@ -151,6 +151,10 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     TextView tvLeader4W;
     @BindView(R.id.tvLeader5W)
     TextView tvLeader5W;
+    @BindView(R.id.tvLeaderCB)
+    TextView tvLeaderCB;
+    @BindView(R.id.tvLeaderCBW)
+    TextView tvLeaderCBW;
     private String name, taskId, res, fullnameUId, fullname, bmyj, csbmyj, jgbmyj, flgwyj, fgldyj, zjl, cbbmfzr = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -159,7 +163,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
-    String bmreout = "", csreout = "", jgreout = "", flreout = "", fgreout = "", zjlreout = "", flowAssignld, serialNumber = "";
+    String bmreout = "", csreout = "", jgreout = "", flreout = "", fgreout = "", zjlreout = "", flowAssignld, cbbmreout, serialNumber = "";
 
     String[] bigNametemp = null;
     String[] bigCodetemp = null;
@@ -195,12 +199,14 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
+    String CBPerson;
+    private String executionId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        ButterKnife.bind(this);
+        CBPerson = new SharedPreferencesHelper(this, "login").getData(this, "userStatus", "");
         jsonArray = new JSONArray();
         jsonObject = new JSONObject();
         formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -215,6 +221,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
         name = intent.getStringExtra("activityName");
         taskId = intent.getStringExtra("taskId");
         piId = intent.getStringExtra("piId");
+        executionId = intent.getStringExtra("executionId");
         getData(name, taskId);
     }
 
@@ -230,7 +237,45 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
+        final AlertDialog dialog = new AlertDialog.Builder(this).create();
+        dialog.setView(LayoutInflater.from(this).inflate(R.layout.dialog_with_edittext, null));
+        dialog.show();
+        dialog.getWindow().setContentView(R.layout.dialog_with_edittext);
+        final EditText etContent = (EditText) dialog.findViewById(R.id.etContent);
+        TextView tv_yes = (TextView) dialog.findViewById(R.id.yes);
+        TextView tv_no = (TextView) dialog.findViewById(R.id.no);
+        tv_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                final String str = etContent.getText().toString();
+                if (str.equals("")) {
+                    Toast.makeText(FlowContractSignWillDetailActivity.this, getResources().getString(R.string.nullify_reason), Toast.LENGTH_SHORT).show();
+                } else {
+                    dialog.dismiss();
+                    ProgressDialogUtil.startLoad(FlowContractSignWillDetailActivity.this, getResources().getString(R.string.get_data));
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DBHandler dbHandler = new DBHandler();
+                            String url = Constant.BASE_URL2 + Constant.NULLIFY;
+                            boolean nullifyData = dbHandler.OAFlowNullify(url, taskId, str, executionId);
+                            if (nullifyData) {
+                                handler.sendEmptyMessage(333);
+                            } else {
+                                handler.sendEmptyMessage(444);
+                            }
+                        }
+                    }).start();
+                }
+            }
+        });
+        tv_no.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View arg0) {
+                dialog.dismiss();
+            }
+        });
     }
 
     /**
@@ -762,7 +807,6 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
             @Override
             public void run() {
                 String department = tvDepartment.getText().toString();
-                String person = tvPerson.getText().toString();
                 String name = tvContractName.getText().toString();
                 String time = tvTime.getText().toString();
                 String situation = tvSituation.getText().toString();
@@ -893,11 +937,17 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                     }
                 }
 
+                if (cbbmreout.equals("1")){
+                    cbbmfzr = tvLeaderCBW.getText().toString();
+                }else {
+                    cbbmfzr = CBPerson;
+                }
+
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
-                upData = dbA.OAContractSignLeader(url, department, person, name, time, situation, userCode,
+                upData = dbA.OAContractSignLeader(url, department, "", name, time, situation, userCode,
                         destName, taskId, flowAssignld, mainId, csbmyj, jgbmyj, flgwyj, fgldyj, zjl,
-                        serialNumber, comment, signaName);
+                        serialNumber, comment, signaName,cbbmfzr);
                 if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -912,6 +962,15 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
+                case 333:
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowContractSignWillDetailActivity.this, getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
+                    finish();
+                    break;
+                case 444:
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowContractSignWillDetailActivity.this, getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
+                    break;
                 case 111:
                     Gson gsonF = new Gson();
                     FlowMessage1 beanF = gsonF.fromJson(flowMessage, FlowMessage1.class);
@@ -932,6 +991,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                     String time = bean.getMainform().get(0).getSpsj();
                     String staction = bean.getMainform().get(0).getJbqk();
 //                    bmjlyj = bean.getMainform().get(0).getBM();
+                    cbbmfzr = bean.getMainform().get(0).getCbbmfzr();
                     csbmyj = bean.getMainform().get(0).getCwsjbyj();
                     jgbmyj = bean.getMainform().get(0).getJcbmyj();
                     flgwyj = bean.getMainform().get(0).getFlgwyj();
@@ -959,7 +1019,17 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                             flreout = jsonObject.getString("flgwyj");
                             fgreout = jsonObject.getString("fgldyj");
                             zjlreout = jsonObject.getString("zjlyj");
+                            cbbmreout = jsonObject.getString("cbbmfzr");
                             tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
+
+                            if (cbbmreout.equals("2")) {
+                                tvLeaderCBW.setText(CBPerson);
+                            } else {
+                                tvLeaderCBW.setText(cbbmfzr);
+                                tvLeaderCBW.setVisibility(View.VISIBLE);
+                                tvLeaderCB.setTextColor(getResources().getColor(R.color.order_stop_black));
+                            }
+
                             if (csreout.equals("2")) {
                                 tvLeader.setVisibility(View.GONE);
                                 etLeader.setVisibility(View.VISIBLE);
@@ -1009,7 +1079,6 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                     }
 
                     tvDepartment.setText(department);
-                    tvPerson.setText(person);
                     tvContractName.setText(name);
                     tvTime.setText(time);
                     tvSituation.setText(staction);
@@ -1113,6 +1182,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                             etLeader.setHint(word);
                         }
                     }
+
                     if (bean.isRevoke()) {
                         Toast.makeText(FlowContractSignWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
                     }
