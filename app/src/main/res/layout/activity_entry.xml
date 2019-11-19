@@ -42,7 +42,6 @@
                     style="@style/oaEditText"
                     android:hint="请填写入职人姓名" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -65,7 +64,6 @@
                     style="@style/oaEditText"
                     android:hint="请填写联系电话" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -88,7 +86,6 @@
                     style="@style/oaEditText"
                     android:hint="请填写身份证号" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -110,7 +107,6 @@
                     android:id="@+id/tvSex"
                     style="@style/oaEditText" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -132,7 +128,6 @@
                     android:id="@+id/tvCarType"
                     style="@style/oaEditText" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -159,7 +154,6 @@
                     android:hint="点击选择附件" />
             </LinearLayout>
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -183,7 +177,6 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:visibility="gone" />
 
                     <CheckBox
@@ -191,7 +184,6 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:visibility="gone" />
 
                     <CheckBox
@@ -199,7 +191,6 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:visibility="gone" />
                 </LinearLayout>
 
@@ -216,7 +207,6 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:visibility="gone" />
 
                     <CheckBox
@@ -224,7 +214,6 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:visibility="gone" />
 
                     <CheckBox
@@ -232,7 +221,6 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:visibility="gone" />
                 </LinearLayout>
             </LinearLayout>
@@ -257,7 +245,6 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:visibility="gone" />
 
                     <CheckBox
@@ -265,7 +252,6 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:visibility="gone" />
 
                     <CheckBox
@@ -273,7 +259,6 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:visibility="gone" />
                 </LinearLayout>
 
@@ -290,7 +275,6 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:visibility="gone" />
 
                     <CheckBox
@@ -298,7 +282,6 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:visibility="gone" />
 
                     <CheckBox
@@ -306,7 +289,6 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:visibility="gone" />
                 </LinearLayout>
             </LinearLayout>

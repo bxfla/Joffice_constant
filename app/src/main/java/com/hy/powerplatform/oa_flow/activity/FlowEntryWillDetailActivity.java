@@ -190,6 +190,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
     List<String> resultList1 = new ArrayList<>();
     List<String> bigResultList = new ArrayList<>();
     List<String> bigResultList1 = new ArrayList<>();
+    List<String> bigResultList2 = new ArrayList<>();
     ArrayAdapter<String> carAdapter;
     ArrayAdapter<String> rlAdapter;
     List<String> carList = new ArrayList<String>();
@@ -354,7 +355,6 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
         }).start();
     }
 
-    //
     private void getNextPerson() {
         new Thread(new Runnable() {
             @Override
@@ -933,31 +933,43 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     if (bigResultList.size() >= 6) {
                         bigResultList.remove(5);
                     }
+                }else {
+                    bigResultList2.add(bigResultList.get(5));
                 }
                 if (!cb5.isChecked()) {
                     if (bigResultList.size() >= 5) {
                         bigResultList.remove(4);
                     }
+                }else {
+                    bigResultList2.add(bigResultList.get(4));
                 }
                 if (!cb4.isChecked()) {
                     if (bigResultList.size() >= 4) {
                         bigResultList.remove(3);
                     }
+                }else {
+                    bigResultList2.add(bigResultList.get(3));
                 }
                 if (!cb3.isChecked()) {
                     if (bigResultList.size() >= 3) {
                         bigResultList.remove(2);
                     }
+                }else {
+                    bigResultList2.add(bigResultList.get(2));
                 }
                 if (!cb2.isChecked()) {
                     if (bigResultList.size() >= 2) {
                         bigResultList.remove(1);
                     }
+                }else {
+                    bigResultList2.add(bigResultList.get(1));
                 }
                 if (!cb1.isChecked()) {
                     if (bigResultList.size() >= 1) {
                         bigResultList.remove(0);
                     }
+                }else {
+                    bigResultList2.add(bigResultList.get(0));
                 }
 
 
@@ -972,7 +984,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     userCodes = userCodes.toString().replace("]", "");
                 }
 
-                if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
+                if (bigResultList2.size() == 0 && bigResultList1.size() != 0) {
 
                     String bigUserCodes = bigResultList1.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
@@ -993,7 +1005,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         flowAssignld = flowAssignld.replace(":", "");
                     }
                 } else {
-                    String bigUserCodes = bigResultList.toString();
+                    String bigUserCodes = bigResultList2.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
                     bigUserCodes = bigUserCodes.toString().replace("]", "");
 
@@ -1396,7 +1408,4 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
         }
     };
 
-    @OnClick(R.id.btnHistory)
-    public void onViewClicked() {
-    }
 }
