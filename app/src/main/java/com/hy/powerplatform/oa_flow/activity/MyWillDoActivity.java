@@ -13,9 +13,10 @@ import android.widget.Toast;
 
 import com.example.refreshview.CustomRefreshView;
 import com.hy.powerplatform.R;
-import com.hy.powerplatform.business_inspect.utils.DBHandler;
+import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
+import com.hy.powerplatform.my_utils.base.MyApplication;
 import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
@@ -26,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +39,11 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_THERE;
@@ -115,13 +122,28 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
                 String url = Constant.BASE_URL2 + Constant.MYWILLDOLIST + start + "&limit=" + limit
                         + "&proTypeId=" + tagType + "&Q_createtime_D_GE="
                         + startTine+ "&Q_createtime_D_LE=" + endTime + "&Q_subject_S_LK=" + title;
-                DBHandler dbA = new DBHandler();
-                res = dbA.OAQingJiaWillDo(url);
-                if (res.equals("获取数据失败") || res.equals("")) {
-                    handler.sendEmptyMessage(TAG_TWO);
-                } else {
-                    handler.sendEmptyMessage(TAG_ONE);
-                }
+//                DBHandler dbA = new DBHandler();
+//                res = dbA.OAQingJiaWillDo(url);
+                OkHttpClient okHttpClient = new OkHttpClient();
+                String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+                final Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("Cookie",Session)
+                        .get()//默认就是GET请求，可以不写
+                        .build();
+                Call call = okHttpClient.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        handler.sendEmptyMessage(TAG_TWO);
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        res = response.body().string();
+                        handler.sendEmptyMessage(TAG_ONE);
+                    }
+                });
             }
         }).start();
     }
@@ -420,7 +442,6 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
             Toast.makeText(this, "当前流程已调整，不支持查看", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     Handler handler = new Handler() {
         @Override

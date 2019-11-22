@@ -1793,39 +1793,7 @@ public class DBHandler {
                 connection.disconnect();
             }
         }
-//
-//
-//        HttpClient httpClient = new DefaultHttpClient();
-//        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
-//        HttpPost httpRequst = new HttpPost(turl);
-//        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
-//        httpRequst.setHeader("Cookie", Session);
-//        try {
-//            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
-//            httpRequst.setEntity(uefEntity);
-//            HttpResponse res = httpClient.execute(httpRequst);
-//            HttpEntity entity = res.getEntity();
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
-//            StringBuffer sb = new StringBuffer();
-//            String line = null;
-//            while ((line = reader.readLine()) != null) {
-//                sb.append(line + "\n");
-//            }
-//            reader.close();
-//            Log.i("sb=", sb.toString());
-//            JSONObject json_ = new JSONObject(sb.toString());
-//            if (json_ != null) {
-//                String msg = json_.get("success").toString();
-//                if (msg.equals("true")) {
-//                    return json_ + "";
-//                } else {
-//                    return msg;
-//                }
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e);
-//            e.printStackTrace();
-//        }
+
         return "获取数据失败";
     }
 

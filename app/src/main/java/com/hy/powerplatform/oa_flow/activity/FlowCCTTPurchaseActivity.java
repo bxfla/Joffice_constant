@@ -46,7 +46,7 @@ public class FlowCCTTPurchaseActivity extends BaseActivity implements RadioGroup
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        header.setTvTitle("春城通物品采购审批");
+        header.setTvTitle("子公司物品采购计划表");
         fragment01 = new FragmentCCTPurchaseData();
         fragment02 = new FragmentCCTPurchaseList();
         fragment011 = new FragmentTestList();

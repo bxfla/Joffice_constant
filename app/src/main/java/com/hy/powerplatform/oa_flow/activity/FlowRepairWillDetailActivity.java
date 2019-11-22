@@ -25,6 +25,7 @@ import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
+import com.hy.powerplatform.my_utils.base.MyApplication;
 import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
@@ -39,6 +40,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,6 +49,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_EIGHT;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_FIVE;
@@ -272,13 +279,28 @@ public class FlowRepairWillDetailActivity extends BaseActivity {
             public void run() {
                 //String name =URLDecoder.decode(待转值,"utf-8");
                 String url = Constant.BASE_URL2 + Constant.DETAILWILL + Name + "&taskId=" + taskId + "&piId=" + piId;
-                DBHandler dbA = new DBHandler();
-                res = dbA.OAQingJiaWillDoDex(url);
-                if (res.equals("获取数据失败") || res.equals("")) {
-                    handler.sendEmptyMessage(TAG_TWO);
-                } else {
-                    handler.sendEmptyMessage(TAG_ONE);
-                }
+                //                DBHandler dbA = new DBHandler();
+//                res = dbA.OAQingJiaWillDoDex(url);
+                OkHttpClient okHttpClient = new OkHttpClient();
+                String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+                final Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("Cookie",Session)
+                        .get()//默认就是GET请求，可以不写
+                        .build();
+                Call call = okHttpClient.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        handler.sendEmptyMessage(TAG_TWO);
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        res = response.body().string();
+                        handler.sendEmptyMessage(TAG_ONE);
+                    }
+                });
             }
         }).start();
     }

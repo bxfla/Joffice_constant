@@ -151,7 +151,7 @@
 
             <TextView
                 style="@style/ycTextView"
-                android:text="春城通采购" />
+                android:text="子公司物品采购计划表" />
             <TextView
                 android:id="@+id/tvCCTPurchase"
                 style="@style/numTextView" />
