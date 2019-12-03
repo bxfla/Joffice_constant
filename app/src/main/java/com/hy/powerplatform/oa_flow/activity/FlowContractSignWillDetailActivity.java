@@ -162,6 +162,8 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
     TextView tvLeaderCB;
     @BindView(R.id.tvLeaderCBW)
     TextView tvLeaderCBW;
+    @BindView(R.id.tvMoney)
+    TextView tvMoney;
     private String name, taskId, res, fullnameUId, fullname, bmyj, csbmyj, jgbmyj, flgwyj, fgldyj, zjl, cbbmfzr = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -304,7 +306,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                 String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
                 final Request request = new Request.Builder()
                         .url(url)
-                        .addHeader("Cookie",Session)
+                        .addHeader("Cookie", Session)
                         .get()//默认就是GET请求，可以不写
                         .build();
                 Call call = okHttpClient.newCall(request);
@@ -831,6 +833,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                 String department = tvDepartment.getText().toString();
                 String name = tvContractName.getText().toString();
                 String time = tvTime.getText().toString();
+                String money = tvMoney.getText().toString();
                 String situation = tvSituation.getText().toString();
                 final String userCode = new SharedPreferencesHelper(FlowContractSignWillDetailActivity.this,
                         "login").getData(FlowContractSignWillDetailActivity.this, "userCode", "");
@@ -959,9 +962,9 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                     }
                 }
 
-                if (cbbmreout.equals("1")){
+                if (cbbmreout.equals("1")) {
                     cbbmfzr = tvLeaderCBW.getText().toString();
-                }else {
+                } else {
                     cbbmfzr = CBPerson;
                 }
 
@@ -969,7 +972,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                 DBHandler dbA = new DBHandler();
                 upData = dbA.OAContractSignLeader(url, department, "", name, time, situation, userCode,
                         destName, taskId, flowAssignld, mainId, csbmyj, jgbmyj, flgwyj, fgldyj, zjl,
-                        serialNumber, comment, signaName,cbbmfzr);
+                        serialNumber, comment, signaName, cbbmfzr,money);
                 if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -1012,6 +1015,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                     String name = bean.getMainform().get(0).getHtmc();
                     String time = bean.getMainform().get(0).getSpsj();
                     String staction = bean.getMainform().get(0).getJbqk();
+                    String money = bean.getMainform().get(0).getJe();
 //                    bmjlyj = bean.getMainform().get(0).getBM();
                     cbbmfzr = bean.getMainform().get(0).getCbbmfzr();
                     csbmyj = bean.getMainform().get(0).getCwsjbyj();
@@ -1104,6 +1108,7 @@ public class FlowContractSignWillDetailActivity extends BaseActivity {
                     tvContractName.setText(name);
                     tvTime.setText(time);
                     tvSituation.setText(staction);
+                    tvMoney.setText(money);
 
                     String word4 = "";
                     if (zjl != null && !zjl.equals("")) {

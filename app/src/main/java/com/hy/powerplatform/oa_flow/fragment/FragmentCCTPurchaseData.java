@@ -819,7 +819,7 @@ public class FragmentCCTPurchaseData extends Fragment {
             public void run() {
                 String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + "flow/mobileUsersProcessActivity.do";
                 DBHandler dbA = new DBHandler();
-                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.GOODSPUECHASEDIFID, data);
+                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.CCTPUECHASEDIFID, data);
                 if (res.equals("保存失败") || res.equals("")) {
                     handler.sendEmptyMessage(TAG_TWO);
                 } else {
@@ -1057,7 +1057,7 @@ public class FragmentCCTPurchaseData extends Fragment {
                                                 DBHandler dbA = new DBHandler();
                                                 userDepart = "";
                                                 userDepart = data;
-                                                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.GOODSPUECHASEDIFID, data);
+                                                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.CCTPUECHASEDIFID, data);
                                                 if (res.equals("保存失败") || res.equals("")) {
                                                     handler.sendEmptyMessage(TAG_TWO);
                                                 } else {

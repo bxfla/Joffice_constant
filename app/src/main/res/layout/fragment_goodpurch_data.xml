@@ -185,7 +185,8 @@
 
                     <EditText
                         android:id="@+id/etDepartment1"
-                        style="@style/oaEditText"
+                        style="@style/oaEditText1"
+                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
 
@@ -193,7 +194,7 @@
 
                     <EditText
                         android:id="@+id/etDepartment2"
-                        style="@style/oaEditText"
+                        style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
 
@@ -201,7 +202,7 @@
 
                     <EditText
                         android:id="@+id/etDepartment3"
-                        style="@style/oaEditText"
+                        style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
 
@@ -209,14 +210,14 @@
 
                     <EditText
                         android:id="@+id/etDepartment4"
-                        style="@style/oaEditText"
+                        style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
                     <View style="@style/line"></View>
 
                     <EditText
                         android:id="@+id/etDepartment5"
-                        style="@style/oaEditText"
+                        style="@style/oaEditText1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
 

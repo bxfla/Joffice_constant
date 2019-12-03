@@ -12,6 +12,7 @@ import com.hy.powerplatform.AndroidForJs;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.myViews.Header;
+import com.hy.powerplatform.oa_flow.bean.contantdata;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +55,8 @@ public class MainXiangMuActivity extends BaseActivity {
 //        });
 //        String tpl = getFromAssets("file:///android_asset/muiH/view/first-page.html");
 //        webView.loadDataWithBaseURL(null, tpl, "text/html", "utf-8", null);
-        webView.loadUrl("http://58.17.74.135:6770/muiH/view/repair-project.html");
+       // webView.loadUrl("http://58.17.74.135:6770/muiH/view/repair-project.html");
+        webView.loadUrl(contantdata.url+"/muiH/view/repair-project.html");
         webView.addJavascriptInterface(new AndroidForJs(this),"AndroidView");
     }
     @Override

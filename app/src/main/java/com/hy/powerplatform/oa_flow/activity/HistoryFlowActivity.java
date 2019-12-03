@@ -233,6 +233,11 @@ public class HistoryFlowActivity extends BaseActivity implements FlowHistoryList
             intent = new Intent(this, FlowEMaintainDetailActivity.class);
             intent.putExtra("bean", beanList.get(position).getRunId());
         }
+        if (beanList.get(position).getFormDefId().equals(Constant.ZGSFLOW)) {
+            intent = new Intent(this, FlowZGSPayDetailActivity.class);
+            intent.putExtra("bean", beanList.get(position).getRunId());
+            startActivity(intent);
+        }
         if (beanList.get(position).getFormDefId().equals(Constant.CARVIDEO)) {
             intent = new Intent(this, FlowCarVideoDetailActivity.class);
             intent.putExtra("bean", beanList.get(position).getRunId());

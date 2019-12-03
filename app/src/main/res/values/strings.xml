@@ -7,6 +7,7 @@
     <string name="loading">加载中</string>
     <string name="get_data_fail">获取数据失败</string>
     <string name="get_data">获取数据中</string>
+    <string name="up_data">提交数据中</string>
     <string name="first_download">请先下载试题</string>
     <string name="pelease_select">请选择</string>
     <string name="download_old">试题已下载</string>

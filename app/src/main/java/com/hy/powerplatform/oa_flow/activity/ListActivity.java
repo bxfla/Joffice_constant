@@ -105,7 +105,8 @@ public class ListActivity extends BaseActivity {
                     && !dataList.contains(Constant.GOODSPUECHASENAME)
                     && !dataList.contains(Constant.WORKPUECHASENAME)
                     && !dataList.contains(Constant.CCTPUECHASENAME)
-                    && !dataList.contains(Constant.GHPUECHASENAME)) {
+                    && !dataList.contains(Constant.GHPUECHASENAME)
+                    && !dataList.contains(Constant.ZGSPAYNAME)) {
                 roluesList.remove(3);
                 numList.remove(3);
             }
@@ -125,7 +126,6 @@ public class ListActivity extends BaseActivity {
                 numList.remove(1);
             }
             if (!dataList.contains(Constant.EMAINTAINNAME)
-                    &&!dataList.contains(Constant.REPAIRNAME)
                     && !dataList.contains(Constant.CARVIDEONAME)
                     && !dataList.contains(Constant.DORMNAME)
                     && !dataList.contains(Constant.GCADDNAME)
@@ -142,7 +142,8 @@ public class ListActivity extends BaseActivity {
                     && !dataList.contains(Constant.USERCARNAME)
                     && !dataList.contains(Constant.HUIQIANNAME)
                     && !dataList.contains(Constant.GHCONTRACTSIGNNAME)
-                    && !dataList.contains(Constant.COMPMESSAGENAME)) {
+                    && !dataList.contains(Constant.COMPMESSAGENAME)
+                    &&!dataList.contains(Constant.REPAIRNAME)) {
                 roluesList.remove(0);
                 numList.remove(0);
             }

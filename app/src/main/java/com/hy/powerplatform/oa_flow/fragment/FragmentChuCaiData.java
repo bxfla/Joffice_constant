@@ -132,8 +132,8 @@ public class FragmentChuCaiData extends Fragment {
         View view = inflater.inflate(R.layout.fragment_chucai_data, container, false);
         unbinder = ButterKnife.bind(this, view);
         initDatePicker();
-        dataList.add("飞机");
         dataList.add("火车");
+        dataList.add("飞机");
         dataList.add("驾车");
         dataList.add("其他");
 
@@ -369,10 +369,10 @@ public class FragmentChuCaiData extends Fragment {
                 final String zjMoney = etZJMoney.getText().toString();
                 String department = etDepartment.getText().toString();
                 String jtgj1 = "", jtgj2 = "", jtgj3 = "", jtgj4 = "";
-                if (carType.equals("飞机")) {
+                if (carType.equals("火车")) {
                     jtgj1 = "on";
                 }
-                if (carType.equals("火车")) {
+                if (carType.equals("飞机")) {
                     jtgj2 = "on";
                 }
                 if (carType.equals("驾车")) {

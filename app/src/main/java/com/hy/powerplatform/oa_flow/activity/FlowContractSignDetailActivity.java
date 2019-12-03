@@ -100,6 +100,8 @@ public class FlowContractSignDetailActivity extends BaseActivity {
     TextView tvLeader5W;
     @BindView(R.id.tvLeader0)
     TextView tvLeader0;
+    @BindView(R.id.tvMoney)
+    TextView tvMoney;
     private String res;
     String flowMessage = "";
     String xiangguanfujian = "";
@@ -283,6 +285,7 @@ public class FlowContractSignDetailActivity extends BaseActivity {
                     String fgldyj = bean.getMainform().get(0).getFgldyj();
                     String zjlyj = bean.getMainform().get(0).getZjlyj();
                     String cbbmfzr = bean.getMainform().get(0).getCbbmfzr();
+                    String money = bean.getMainform().get(0).getJe();
                     xiangguanfujian = bean.getMainform().get(0).getXiangguanfujian();
                     if (xiangguanfujian.equals("")) {
                         llData.setVisibility(View.GONE);
@@ -294,6 +297,7 @@ public class FlowContractSignDetailActivity extends BaseActivity {
                     tvClass.setText("宜春公交集团有限公司");
                     tvContractName.setText(name);
                     tvTime.setText(time);
+                    tvMoney.setText(money);
                     tvSituation.setText(staction);
                     if (!cbbmfzr.equals("")) {
                         tvLeader0.setText(cbbmfzr);

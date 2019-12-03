@@ -168,7 +168,11 @@ public class MyFlowListActivity extends BaseActivity implements MyFlowListAdapte
             intent = new Intent(this, FlowEMaintainDetailActivity.class);
             intent.putExtra("bean", beanList.get(position).getRunId());
             startActivity(intent);
-        } else if (beanList.get(position).getFormDefId().equals(Constant.CARVIDEO)) {
+        } else if (beanList.get(position).getFormDefId().equals(Constant.ZGSFLOW)) {
+            intent = new Intent(this, FlowZGSPayDetailActivity.class);
+            intent.putExtra("bean", beanList.get(position).getRunId());
+            startActivity(intent);
+        }else if (beanList.get(position).getFormDefId().equals(Constant.CARVIDEO)) {
             intent = new Intent(this, FlowCarVideoDetailActivity.class);
             intent.putExtra("bean", beanList.get(position).getRunId());
             startActivity(intent);

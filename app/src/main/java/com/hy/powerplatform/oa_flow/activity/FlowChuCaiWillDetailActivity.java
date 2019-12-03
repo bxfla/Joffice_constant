@@ -31,7 +31,6 @@ import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.oa_flow.adapter.FlowMessageAdapter;
 import com.hy.powerplatform.oa_flow.bean.File;
-import com.hy.powerplatform.oa_flow.bean.FlowCarVideoWillDetail;
 import com.hy.powerplatform.oa_flow.bean.FlowChuCai;
 import com.hy.powerplatform.oa_flow.bean.FlowContractPerson;
 import com.hy.powerplatform.oa_flow.bean.FlowMessage1;
@@ -159,7 +158,13 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
     TextView tvLeader1W;
     @BindView(R.id.tvLeader2W)
     TextView tvLeader2W;
-    private String name, taskId, res, bmfzr, fgfze, zjl = "";
+    @BindView(R.id.tvLeaderCWZJ)
+    TextView tvLeaderCWZJ;
+    @BindView(R.id.etLeaderCWZJ)
+    EditText etLeaderCWZJ;
+    @BindView(R.id.tvLeaderTCWZJ)
+    TextView tvLeaderTCWZJ;
+    private String name, taskId, res, bmfzr, fgfze, cwzjyj, zjl = "";
     private String mainId, signaName, destName, destType, checkTask, qianzhiData = "";
     String leader = "";
     String leaderCode = "";
@@ -167,7 +172,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
-    String bmreout, fgreout, zjlreout, flowAssignld, chuCaiCode = "";
+    String bmreout, fgreout,cwzjreout, zjlreout, flowAssignld, chuCaiCode = "";
     String jygj01 = "", jygj02 = "", jygj03 = "", jygj04 = "";
     String jygj1, jygj2, jygj3, jygj4 = "";
     String[] bigNametemp = null;
@@ -299,7 +304,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                 String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
                 final Request request = new Request.Builder()
                         .url(url)
-                        .addHeader("Cookie",Session)
+                        .addHeader("Cookie", Session)
                         .get()//默认就是GET请求，可以不写
                         .build();
                 Call call = okHttpClient.newCall(request);
@@ -677,6 +682,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                 bean = gson.fromJson(res, FlowChuCai.class);
                 bmfzr = bean.getMainform().get(0).getBmfzryj();
                 fgfze = bean.getMainform().get(0).getFgldyj();
+                cwzjyj = bean.getMainform().get(0).getCwzjyj();
                 zjl = bean.getMainform().get(0).getZjlyj();
                 userName = new SharedPreferencesHelper(FlowChuCaiWillDetailActivity.this,
                         "login").getData(FlowChuCaiWillDetailActivity.this, "userStatus", "");
@@ -725,6 +731,25 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                         fgfze = fgfze.toString().replace("],[", ",");
                     }
                 }
+                if (etLeaderCWZJ.getVisibility() == View.VISIBLE) {
+                    comment = "";
+                    comment = etLeaderCWZJ.getText().toString();
+                    try {
+                        jsonObject.put("ui", userCode);
+                        jsonObject.put("un", userName);
+                        jsonObject.put("c", str);
+                        jsonObject.put("v", etLeaderCWZJ.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    jsonArray.put(jsonObject);
+                    if (cwzjyj.equals("")) {
+                        cwzjyj = jsonArray.toString();
+                    } else {
+                        cwzjyj = cwzjyj + "," + jsonArray.toString();
+                        cwzjyj = cwzjyj.toString().replace("],[", ",");
+                    }
+                }
                 if (etLeader2.getVisibility() == View.VISIBLE) {
                     comment = "";
                     comment = etLeader2.getText().toString();
@@ -745,10 +770,10 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (comment.equals("")) {
-                    if (!bmreout.equals("2") && !fgreout.equals("2") && !zjlreout.equals("2")) {
+                    if (!bmreout.equals("2") && !fgreout.equals("2") && !cwzjreout.equals("2") && !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
-                    } else if (!etLeader2.getText().toString().equals("") && !fgfze.equals("") && !bmfzr.equals("")) {
+                    } else if (!etLeader2.getText().toString().equals("") && !cwzjyj.equals("") && !fgfze.equals("") && !bmfzr.equals("")) {
                         comment = "";
                         personSession();
                     } else {
@@ -767,10 +792,11 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
         } else {
             if (btnTTag.equals("N")) {
                 Gson gson = new Gson();
-                FlowCarVideoWillDetail bean = gson.fromJson(res, FlowCarVideoWillDetail.class);
+                FlowChuCai bean = gson.fromJson(res, FlowChuCai.class);
                 bmfzr = bean.getMainform().get(0).getBmfzryj();
-                fgfze = bean.getMainform().get(0).getXxjsbyj();
-                zjl = bean.getMainform().get(0).getJkczyyj();
+                fgfze = bean.getMainform().get(0).getFgldyj();
+                cwzjyj = bean.getMainform().get(0).getCwzjyj();
+                zjl = bean.getMainform().get(0).getZjlyj();
                 Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
             } else {
                 sendData();
@@ -960,7 +986,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                 upData = dbA.OAChuCaiLeader(url, time, person, startTime, endTine, days, addres1,
                         addres2, addres3, car, reason, yjMoney, zjMoney, userCode, destName, taskId,
                         flowAssignld, mainId, bmfzr, fgfze, zjl, comment, signaName, userName, jygj1,
-                        jygj2, jygj3, jygj4, chuCaiCode);
+                        jygj2, jygj3, jygj4, chuCaiCode,cwzjyj);
                 if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -977,12 +1003,12 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
             switch (msg.what) {
                 case 333:
                     ProgressDialogUtil.stopLoad();
-                    Toast.makeText(FlowChuCaiWillDetailActivity.this,getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowChuCaiWillDetailActivity.this, getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
                     finish();
                     break;
                 case 444:
                     ProgressDialogUtil.stopLoad();
-                    Toast.makeText(FlowChuCaiWillDetailActivity.this,getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowChuCaiWillDetailActivity.this, getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
                     break;
                 case 111:
                     Gson gsonF = new Gson();
@@ -1017,6 +1043,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                     String zjMoney = bean.getMainform().get(0).getZjxj();
                     bmfzr = bean.getMainform().get(0).getBmfzryj();
                     fgfze = bean.getMainform().get(0).getFgldyj();
+                    cwzjyj = bean.getMainform().get(0).getCwzjyj();
                     zjl = bean.getMainform().get(0).getZjlyj();
                     xiangguanfujian = bean.getMainform().get(0).getXiangguanfujian();
                     if (xiangguanfujian.equals("")) {
@@ -1037,6 +1064,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                         JSONObject jsonObject = new JSONObject(formRights);
                         bmreout = jsonObject.getString("bmfzryj");
                         fgreout = jsonObject.getString("fgldyj");
+                        cwzjreout = jsonObject.getString("cwzjyj");
                         zjlreout = jsonObject.getString("zjlyj");
                         if (bmreout.equals("2")) {
                             tvLeader.setVisibility(View.GONE);
@@ -1054,6 +1082,14 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                             etLeader1.setVisibility(View.GONE);
                             tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
+                        if (cwzjreout.equals("2")) {
+                            tvLeaderTCWZJ.setVisibility(View.GONE);
+                            etLeaderCWZJ.setVisibility(View.VISIBLE);
+                        } else {
+                            tvLeaderTCWZJ.setVisibility(View.VISIBLE);
+                            etLeaderCWZJ.setVisibility(View.GONE);
+                            tvLeaderCWZJ.setTextColor(getResources().getColor(R.color.order_stop_black));
+                        }
                         if (zjlreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
                             etLeader2.setVisibility(View.VISIBLE);
@@ -1062,7 +1098,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                             etLeader2.setVisibility(View.GONE);
                             tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
-                        if (bmreout.equals("1") && fgreout.equals("1") && zjlreout.equals("1")) {
+                        if (bmreout.equals("1") && fgreout.equals("1") && cwzjreout.equals("1") && zjlreout.equals("1")) {
                             Toast.makeText(FlowChuCaiWillDetailActivity.this, "您对当前流程只有读取权限", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
@@ -1082,10 +1118,10 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                     tvZJMoney.setText(zjMoney);
                     tvDepartment.setText(department);
                     if (jygj1.equals("on")) {
-                        jygj01 = "飞机";
+                        jygj01 = "火车";
                     }
                     if (jygj2.equals("on")) {
-                        jygj02 = "火车";
+                        jygj02 = "飞机";
                     }
                     if (jygj3.equals("on")) {
                         jygj03 = "驾车";
@@ -1112,6 +1148,26 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                             tvLeader2.setText(word3);
                         } else {
                             etLeader2.setHint(word3);
+                        }
+                    }
+
+                    String word4 = "";
+                    if (cwzjyj != null && !cwzjyj.equals("")) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(cwzjyj);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (!jsonObject.getString("v").toString().equals("")) {
+                                    word4 = word4 + jsonObject.getString("v") + "\u3000" + jsonObject.getString("un") + ":" + jsonObject.getString("c") + "\n";
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (tvLeaderTCWZJ.getVisibility() == View.VISIBLE) {
+                            tvLeaderTCWZJ.setText(word4);
+                        } else {
+                            etLeaderCWZJ.setHint(word4);
                         }
                     }
 

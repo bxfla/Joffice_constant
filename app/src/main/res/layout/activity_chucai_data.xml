@@ -41,7 +41,6 @@
                     android:id="@+id/tvTime"
                     style="@style/oaEditText" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -64,7 +63,6 @@
                     style="@style/oaEditText"
                     android:hint="请填写申报部门" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -108,7 +106,6 @@
                     android:id="@+id/tvStartTime"
                     style="@style/oaEditText" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -130,7 +127,6 @@
                     android:id="@+id/tvEndTime"
                     style="@style/oaEditText" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -153,7 +149,6 @@
                     style="@style/oaEditText"
                     android:hint="请填写出差天数" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -236,7 +231,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -263,7 +257,6 @@
                     android:textColor="@color/black"
                     android:textSize="15dp" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -288,7 +281,6 @@
                     style="@style/textWrite"
                     android:hint="请填写出差事由" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -311,7 +303,6 @@
                     style="@style/oaEditText"
                     android:hint="请填写预计费用" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -361,7 +352,6 @@
                     android:layout_weight="2.5"/>
             </LinearLayout>
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -390,7 +380,6 @@
                     style="@style/textWrite"
                     android:hint="部门领导签名" />
             </LinearLayout>
-
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -416,7 +405,30 @@
                     style="@style/textWrite"
                     android:hint="分管领导签名" />
             </LinearLayout>
+            <View style="@style/line"></View>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:text="财务总监:"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvLeaderCWZJ"
+                    style="@style/textWrite"
+                    android:hint="财务总监签名" />
+            </LinearLayout>
             <View style="@style/line"></View>
 
             <LinearLayout
@@ -441,7 +453,6 @@
                     style="@style/textWrite2"
                     android:hint="总经理签名" />
             </LinearLayout>
-
             <View
                 style="@style/line"
                 android:layout_marginBottom="45dp"></View>

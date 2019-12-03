@@ -12,14 +12,16 @@ public class FlowContractSign implements Serializable {
 
     /**
      * success : true
-     * taskId : 8060128
-     * pkValue : mainId
-     * formRights : {'csbmyj':'1','cwsjbyj':'2','jcbmyj':'1','fgldyj':'1','htmc':'1','cbbm':'1','cbbmfzr':'1','zjlyj':'1','xiangguanfujian':'1','spsj':'1','jbqk':'1','jgbmyj':'1','flgwyj':'1'}
-     * mainform : [{"jcbmyj":"","jgbmyj":"","runId":51509,"$type$":"WF_htqdspd","fgldyj":"","flgwyj":"","htmc":"测试","cbbm":"宜春公交集团有限公司","jbqk":"情况","xiangguanfujian":"","mainId":111,"csbmyj":"","cwsjbyj":"","zjlyj":"","cbbmfzr":"张敏","spsj":"2019-02-25"}]
+     * taskId : 9710962
+     * pkValue : 189
+     * formRights : {'je':'1','htmc':'1','cbbm':'1','jbqk':'1','jgbmyj':'1','flgwyj':'1','xiangguanfujian':'1','spsj':'1','csbmyj':'1','fgldyj':'1','cwsjbyj':'1','zjlyj':'1','cbbmfzr':'2','jcbmyj':'1'}
+     * mainform : [{"jcbmyj":"","jgbmyj":"","runId":52246,"$type$":"WF_htqdspd","fgldyj":"","flgwyj":"","je":80,"htmc":"明","cbbm":"宜春公交集团有限公司","jbqk":"渍渍渍","xiangguanfujian":"","mainId":189,"csbmyj":"","cwsjbyj":"","zjlyj":"","cbbmfzr":"","spsj":"2019-11-22"}]
      * formDefId : 66
      * preTaskName :
      * isSignTask : false
-     * trans : [{"destType":"task","destination":"监管部门","name":"to 监管部门","source":"财务审计部"}]
+     * trans : [{"destType":"task","destination":"财务审计部","name":"to 财务审计部","source":"部门负责人"}]
+     * runId : 52246
+     * revoke : false
      */
 
     private boolean success;
@@ -29,17 +31,10 @@ public class FlowContractSign implements Serializable {
     private String formDefId;
     private String preTaskName;
     private boolean isSignTask;
+    private int runId;
     private boolean revoke;
     private List<MainformBean> mainform;
     private List<TransBean> trans;
-
-    public boolean isRevoke() {
-        return revoke;
-    }
-
-    public void setRevoke(boolean revoke) {
-        this.revoke = revoke;
-    }
 
     public boolean isSuccess() {
         return success;
@@ -97,6 +92,22 @@ public class FlowContractSign implements Serializable {
         this.isSignTask = isSignTask;
     }
 
+    public int getRunId() {
+        return runId;
+    }
+
+    public void setRunId(int runId) {
+        this.runId = runId;
+    }
+
+    public boolean isRevoke() {
+        return revoke;
+    }
+
+    public void setRevoke(boolean revoke) {
+        this.revoke = revoke;
+    }
+
     public List<MainformBean> getMainform() {
         return mainform;
     }
@@ -117,20 +128,21 @@ public class FlowContractSign implements Serializable {
         /**
          * jcbmyj :
          * jgbmyj :
-         * runId : 51509
+         * runId : 52246
          * $type$ : WF_htqdspd
          * fgldyj :
          * flgwyj :
-         * htmc : 测试
+         * je : 80
+         * htmc : 明
          * cbbm : 宜春公交集团有限公司
-         * jbqk : 情况
+         * jbqk : 渍渍渍
          * xiangguanfujian :
-         * mainId : 111
+         * mainId : 189
          * csbmyj :
          * cwsjbyj :
          * zjlyj :
-         * cbbmfzr : 张敏
-         * spsj : 2019-02-25
+         * cbbmfzr :
+         * spsj : 2019-11-22
          */
 
         private String jcbmyj;
@@ -139,6 +151,7 @@ public class FlowContractSign implements Serializable {
         private String $type$;
         private String fgldyj;
         private String flgwyj;
+        private String je;
         private String htmc;
         private String cbbm;
         private String jbqk;
@@ -196,6 +209,14 @@ public class FlowContractSign implements Serializable {
 
         public void setFlgwyj(String flgwyj) {
             this.flgwyj = flgwyj;
+        }
+
+        public String getJe() {
+            return je;
+        }
+
+        public void setJe(String je) {
+            this.je = je;
         }
 
         public String getHtmc() {
@@ -282,9 +303,9 @@ public class FlowContractSign implements Serializable {
     public static class TransBean {
         /**
          * destType : task
-         * destination : 监管部门
-         * name : to 监管部门
-         * source : 财务审计部
+         * destination : 财务审计部
+         * name : to 财务审计部
+         * source : 部门负责人
          */
 
         private String destType;

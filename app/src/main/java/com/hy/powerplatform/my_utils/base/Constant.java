@@ -105,6 +105,11 @@ public class Constant {
     public static final String  BACKFLOWSURE = "flow/checkRevokeFlowDetail.do";
     // 流程作废
     public static final String  NULLIFY = "flow/discardProcessRun.do";
+    // 督办列表
+    public static final String  DBLIST = "task/myTaskListSuperWorkTask.do";
+    // 督办确认编辑
+    public static final String  DBQRBJ = "task/saveSuperWorkTask.do";
+
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";
@@ -113,8 +118,9 @@ public class Constant {
     public static final String  GHCONTRACTSIGNNAME = "工会合同签订审批单";
     public static final String  GOODSPUECHASENAME = "物品采购计划表";
     public static final String  WORKPUECHASENAME = "办公用品采购申请单";
-    public static final String  CCTPUECHASENAME = "春城通科技有限公司采购申请单";
+    public static final String  CCTPUECHASENAME = "子公司物品采购计划表";
     public static final String  GHPUECHASENAME = "工会物品采购计划表";
+    public static final String  ZGSPAYNAME = "子公司付款流程";
     public static final String  GHPAYFLOWNAME = "工会付款程序审批单";
     public static final String  PUECHASEFLOWNAME = "物品采购计划表3000元以上";
     public static final String  ENTRYNAMENAME = "驾驶员入职流程表";
@@ -135,13 +141,14 @@ public class Constant {
     public static final String  JSGCNAME = "新建工程启动审批流程";
     public static final String  EMAINTAINNAME = "信息技术部电子设备故障维修";
     public static final String  DORMNAME = "员工宿舍申请表";
-    public static final String  APPEALNAME = "请示上报流程";
+    public static final String  APPEALNAME = "公司请示上报流程";
     public static final String  BILLNAME = "交通事故费用借款审批单";
     public static final String  SAFERNAMES = "保险费借款单商业险";
     public static final String  SAFERNAMEY = "保险费借款单意外险";
     public static final String  HUIQIANNAME = "会签流程";
     public static final String  COMPMESSAGENAME = "公司信息发布审批单";
 
+//    formdifid
     public static final String  LEAVER = "83";
     public static final String  PAYFLOW = "10078";
     public static final String  CONTRACEPAY = "85";
@@ -150,6 +157,7 @@ public class Constant {
     public static final String  CCTPUECHASE = "10100";
     public static final String  GHPUECHASE = "10127";
     public static final String  GHPAYFLOW = "10128";
+    public static final String  ZGSFLOW = "10132";//10133
     public static final String  GHCONTRACTSINGLE = "10129";
     public static final String  PUECHASEFLOW = "10103";
     public static final String  ENTRY = "10117";
@@ -170,7 +178,7 @@ public class Constant {
     public static final String  GCQD = "10107";
     public static final String  EMAINTAIN = "10111";
     public static final String  DORM = "10104";
-    public static final String  APPEAL = "10113";
+    public static final String  APPEAL = "10134";//10113
     public static final String  BILL = "10098";
     public static final String  SAFER1 = "10084";
     public static final String  SAFER2 = "10083";
@@ -178,7 +186,7 @@ public class Constant {
     public static final String  COMPMESSAGE = "10110";
     public static final String  GHSINGLE = "10129";
 
-
+//defid
     public static final String  LEAVERDIFID = "10135";
     public static final String  PAYFLOWDIFID = "10151";
     public static final String  CONTRACEPAYDIFID = "10093";
@@ -188,6 +196,7 @@ public class Constant {
     public static final String  CCTPUECHASEDIFID = "20274";
     public static final String  GHPUECHASEDIFID = "20459";
     public static final String  GHPAYFLOWDIFID = "20460";
+    public static final String  ZGSFLOWDIFID = "20504";//20513
     public static final String  PUECHASEFLOWDIFID = "20271";
     public static final String  ENTRYDIFID = "10105";
     public static final String  OUTMESSAGEDIFID = "20200";
@@ -207,7 +216,7 @@ public class Constant {
     public static final String  GCQDDIFID = "20233";
     public static final String  EMAINTAINDIFID = "20411";
     public static final String  DORMDIFID = "20308";
-    public static final String  APPEALDIFID = "20321";
+    public static final String  APPEALDIFID = "20520";//20528
     public static final String  BILLDIFID = "20226";
     public static final String  SAFER1DIFID = "20224";
     public static final String  SAFER2DIFID = "20225";

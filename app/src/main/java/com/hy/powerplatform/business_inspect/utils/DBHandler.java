@@ -2304,6 +2304,70 @@ public class DBHandler {
         return "保存失败";
     }
 
+    //工会付款流程申请
+    public String OAZGSPay(String turl, String person, String time, String department,
+                          String type, String classD, String bigMoney, String smallMoney,
+                          String data, String userName, String userId, String uName,
+                          String uId, String liushuihao) {
+        HttpClient httpClient = new DefaultHttpClient();
+        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+        HttpPost httpRequst = new HttpPost(turl);
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+        httpRequst.setHeader("Cookie", Session);
+        nvs.add(new BasicNameValuePair("useTemplate", "false"));
+        nvs.add(new BasicNameValuePair("defId", Constant.ZGSFLOWDIFID));
+        nvs.add(new BasicNameValuePair("skdwqc", classD));
+        nvs.add(new BasicNameValuePair("startFlow", "true"));
+        nvs.add(new BasicNameValuePair("destName", uName));
+        nvs.add(new BasicNameValuePair("sendMsg", "true"));
+        nvs.add(new BasicNameValuePair("sendMail", "true"));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
+        nvs.add(new BasicNameValuePair("flowVars", "{}"));
+        nvs.add(new BasicNameValuePair("formDefId", Constant.ZGSFLOW));
+        nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
+
+        nvs.add(new BasicNameValuePair("YS", type));
+        nvs.add(new BasicNameValuePair("sqrq", time));
+        nvs.add(new BasicNameValuePair("bmDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
+        nvs.add(new BasicNameValuePair("bm", department));
+        nvs.add(new BasicNameValuePair("sqrUId", userId));
+        nvs.add(new BasicNameValuePair("sqr", userName));
+        nvs.add(new BasicNameValuePair("jine", bigMoney));
+        nvs.add(new BasicNameValuePair("xiaoxie", smallMoney));
+        nvs.add(new BasicNameValuePair("fkyt", data));
+        nvs.add(new BasicNameValuePair("bmfzryj", ""));
+        nvs.add(new BasicNameValuePair("fgldyj", ""));
+        nvs.add(new BasicNameValuePair("cwzjyj", ""));
+        nvs.add(new BasicNameValuePair("zjlyj", ""));
+        try {
+            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
+            httpRequst.setEntity(uefEntity);
+            HttpResponse res = httpClient.execute(httpRequst);
+            HttpEntity entity = res.getEntity();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+            StringBuffer sb = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            reader.close();
+            Log.i("sb=", sb.toString());
+            JSONObject json_ = new JSONObject(sb.toString());
+            if (json_ != null) {
+                String msg = json_.get("success").toString();
+                if (msg.equals("true")) {
+                    return "";
+                } else {
+                    return msg;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+        return "保存失败";
+    }
+
     //合同付款生成表单提交
     public String OAContractPayUp(String turl, String uName, String uId, String liuShuiNo, String department
             , String userId, String jsb, String name, String time, String situation) {
@@ -2365,7 +2429,7 @@ public class DBHandler {
 
     //合同签订生成表单提交
     public String OAContractSignUp(String turl, String uName, String uId, String name, String department
-            , String userId, String person, String time, String situation) {
+            , String userId, String person, String time, String situation,String money) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
@@ -2393,6 +2457,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("flgwyj", ""));
         nvs.add(new BasicNameValuePair("fgldyj", ""));
         nvs.add(new BasicNameValuePair("zjlyj", ""));
+        nvs.add(new BasicNameValuePair("je", money));
         try {
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
@@ -2742,11 +2807,78 @@ public class DBHandler {
         return "保存失败";
     }
 
+    //子公司付款流程待办签字提交
+    public String OAZGSPayLeader(String url, String time, String person, String department,
+                                String classY, String moneyB, String moneyS, String userCode,
+                                String destName, String signaName, String taskId, String flowAssignld,
+                                String mainId, String bmfzr, String zjl, String fgcwze,
+                                String serialNumber, String comment, String use) {
+        HttpClient httpClient = new DefaultHttpClient();
+        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+        HttpPost httpRequst = new HttpPost(url);
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+        httpRequst.setHeader("Cookie", Session);
+        nvs.add(new BasicNameValuePair("useTemplate", "false"));
+        nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
+        nvs.add(new BasicNameValuePair("taskId", taskId));
+        nvs.add(new BasicNameValuePair("signalName", signaName));
+        nvs.add(new BasicNameValuePair("destName", destName));
+        nvs.add(new BasicNameValuePair("sendMsg", "true"));
+        nvs.add(new BasicNameValuePair("sendMail", "true"));
+        nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
+        nvs.add(new BasicNameValuePair("comments", comment));
+        nvs.add(new BasicNameValuePair("mainId", mainId));
+        nvs.add(new BasicNameValuePair("formDefId", Constant.ZGSFLOW));
+        nvs.add(new BasicNameValuePair("sqrq", time));
+        nvs.add(new BasicNameValuePair("bmDid", new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "depId", "")));
+        nvs.add(new BasicNameValuePair("bm", department));
+        nvs.add(new BasicNameValuePair("sqrUId", userCode));
+        nvs.add(new BasicNameValuePair("sqr", person));
+        nvs.add(new BasicNameValuePair("skdwqc", classY));
+        nvs.add(new BasicNameValuePair("jine", moneyB));
+        nvs.add(new BasicNameValuePair("xiaoxie", moneyS));
+        nvs.add(new BasicNameValuePair("fkyt", use));
+        nvs.add(new BasicNameValuePair("bmfzryj", bmfzr));
+        nvs.add(new BasicNameValuePair("ghzx", zjl));
+        nvs.add(new BasicNameValuePair("fgldyj", fgcwze));
+
+        try {
+            Log.e("XXXXH", nvs.toString());
+            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
+            httpRequst.setEntity(uefEntity);
+            HttpResponse res = httpClient.execute(httpRequst);
+            HttpEntity entity = res.getEntity();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+            StringBuffer sb = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            reader.close();
+            Log.i("sb=", sb.toString());
+            JSONObject json_ = new JSONObject(sb.toString());
+            if (json_ != null) {
+                String msg = json_.get("success").toString();
+                if (msg.equals("true")) {
+                    return "";
+                } else {
+                    String s = json_.getString("message");
+                    return s;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+        return "保存失败";
+    }
+
     //合同签订流程待办签字提交
     public String OAContractSignLeader(String url, String department, String person, String name,
                                        String time, String situation, String userCode, String destName, String taskId,
                                        String flowAssignld, String mainId, String csbmyj, String jgbmyj, String flgwyj,
-                                       String fgldyj, String zjl, String serialNumber, String comment, String signaName,String cbPerson) {
+                                       String fgldyj, String zjl, String serialNumber, String comment
+                                    , String signaName,String cbPerson,String money) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -2776,6 +2908,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("flgwyj", flgwyj));
         nvs.add(new BasicNameValuePair("fgldyj", fgldyj));
         nvs.add(new BasicNameValuePair("zjlyj", zjl));
+        nvs.add(new BasicNameValuePair("je", money));
         try {
             Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
@@ -4320,7 +4453,8 @@ public class DBHandler {
             , String days, String addres1, String addres2, String addres3, String car, String reason
             , String yjMoney, String zjMoney, String userCode, String destName, String taskId
             , String flowAssignld, String mainId, String bmfzr, String fgfze, String zjl, String comment
-            , String signName, String userName, String jygj1, String jygj2, String jygj3, String jygj4, String chuCaiCode) {
+            , String signName, String userName, String jygj1, String jygj2, String jygj3, String jygj4
+            , String chuCaiCode,String cwzjyj) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -4362,6 +4496,7 @@ public class DBHandler {
 
         nvs.add(new BasicNameValuePair("bmfzryj", bmfzr));
         nvs.add(new BasicNameValuePair("fgldyj", fgfze));
+        nvs.add(new BasicNameValuePair("cwzjyj", cwzjyj));
         nvs.add(new BasicNameValuePair("zjlyj", zjl));
         try {
             Log.e("XXXXH", nvs.toString());
@@ -6366,11 +6501,11 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("formDefId", Constant.APPEAL));
 //        nvs.add(new BasicNameValuePair("XuQiuBuMenDid", "378"));
-        nvs.add(new BasicNameValuePair("ShenQingBuMen", department));
+        nvs.add(new BasicNameValuePair("sqbm", department));
         nvs.add(new BasicNameValuePair("ShenQingRenUId", userId));
         nvs.add(new BasicNameValuePair("ShenQingRen", userName));
         nvs.add(new BasicNameValuePair("ShenQingShiJian", date));
-        nvs.add(new BasicNameValuePair("QingShiNeiRong", data));
+        nvs.add(new BasicNameValuePair("qingshishangbaoneirong", data));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
         nvs.add(new BasicNameValuePair("fgldyj", ""));
         nvs.add(new BasicNameValuePair("jbfgldyj", ""));
@@ -6409,19 +6544,20 @@ public class DBHandler {
     public String OAAppealLeader(String url, String department, String person, String time
             , String userCode, String data, String destName, String taskId, String flowAssignld
             , String mainId, String xqbmyj, String xqbmldyj, String jsbmyj, String jsbmldyj
-            , String serialNumber, String comment, String liushuihao,String bmyj,String dszyj) {
+            , String serialNumber, String comment, String liushuihao,String bmyj,String dszyj,String signaName) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
         String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         httpRequst.setHeader("Cookie", Session);
-        nvs.add(new BasicNameValuePair("useTemplate", "false"));
-        nvs.add(new BasicNameValuePair("defId", "20321"));
-        nvs.add(new BasicNameValuePair("startFlow", "true"));
+//        nvs.add(new BasicNameValuePair("useTemplate", "false"));
+//        nvs.add(new BasicNameValuePair("defId", "20321"));
+//        nvs.add(new BasicNameValuePair("startFlow", "true"));
         nvs.add(new BasicNameValuePair("destName", destName));
+        nvs.add(new BasicNameValuePair("signalName", signaName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
         nvs.add(new BasicNameValuePair("sendMail", "true"));
-        nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
+        nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
 
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("showvalue", ""));
@@ -6436,16 +6572,18 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("ShenQingRenUId", userCode));
         nvs.add(new BasicNameValuePair("ShenQingRen", person));
         nvs.add(new BasicNameValuePair("ShenQingShiJian", time));
-        nvs.add(new BasicNameValuePair("QingShiNeiRong", data));
+        nvs.add(new BasicNameValuePair("qingshishangbaoneirong", data));
         nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
         nvs.add(new BasicNameValuePair("bmfzryj", bmyj));
         nvs.add(new BasicNameValuePair("fgldyj", xqbmyj));
         nvs.add(new BasicNameValuePair("jbfgldyj", xqbmldyj));
-        nvs.add(new BasicNameValuePair("jbbmyj", jsbmyj));
+        nvs.add(new BasicNameValuePair("bjap", jsbmyj));
+        nvs.add(new BasicNameValuePair("jbbmyj", xqbmldyj));
         nvs.add(new BasicNameValuePair("zjlyj", jsbmldyj));
         nvs.add(new BasicNameValuePair("dszyj", dszyj));
+        nvs.add(new BasicNameValuePair("sqbmDid", "512"));
         try {
-            Log.e("XXXXH", nvs.toString());
+            Log.e("XXXXH", "========"+nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
             httpRequst.setEntity(uefEntity);
             HttpResponse res = httpClient.execute(httpRequst);
@@ -6461,11 +6599,17 @@ public class DBHandler {
             JSONObject json_ = new JSONObject(sb.toString());
             if (json_ != null) {
                 String msg = json_.get("success").toString();
-                if (msg.equals("true")) {
+                if(msg.equals("true")){
                     return "";
-                } else {
-                    String s = json_.getString("message");
-                    return s;
+                }else{
+
+                    if (json_.has("message")){
+                        String s = json_.getString("message");
+                        return s;
+                    }else{
+                        return "保存失败";
+                    }
+
                 }
             }
         } catch (Exception e) {

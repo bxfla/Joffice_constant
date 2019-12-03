@@ -15,6 +15,25 @@
       app:header_title="检查人">
   </com.hy.powerplatform.my_utils.myViews.Header>
 
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="45dp"
+      android:layout_margin="2dp"
+      android:background="@drawable/linearlayout_radius">
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="40dp"
+        android:background="@null"/>
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/shousuo"
+        android:layout_gravity="center_vertical"/>
+  </FrameLayout>
+  <View style="@style/HourLine"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

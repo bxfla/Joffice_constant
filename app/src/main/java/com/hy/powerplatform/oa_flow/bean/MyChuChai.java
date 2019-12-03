@@ -11,7 +11,7 @@ public class MyChuChai implements Serializable {
 
     /**
      * success : true
-     * mainform : [{"sbbmDid":"378","zjxj":"200","mudidi":"北京","runId":51365,"chuchairenyuan":"欧阳晓林","mainId":10010,"jiezhiriqi":"2019-02-13","yjfy":"100","keshuru":"","sbbm":"宜春公交集团有限公司","jtgj2":"","tujing":"日本","jtgj1":"on","yqh":"","jtgj4":"","jtgj3":"","$type$":"WF_chuchaishenqingshenpi","ccsy":"测试事由","ccdd":"济南","fgldyj":"","ccrq":"2019-02-12","sqsj":"2019-02-12","ccts":"2","xiangguanfujian":"","chuchairenyuanUId":"1729","zjlyj":"","bmfzryj":""}]
+     * mainform : [{"sbbmDid":"500","zjxj":"333","mudidi":"fj","runId":52289,"chuchairenyuan":"超级管理员","mainId":10024,"jiezhiriqi":"2019-12-04","yjfy":"222","keshuru":"","sbbm":"宜春公交集团有限公司","jtgj2":"","tujing":"ffh","jtgj1":"on","yqh":"","jtgj4":"","jtgj3":"","cwzjyj":"","$type$":"WF_chuchaishenqingshenpi","ccsy":"测试","ccdd":"hf","fgldyj":"","ccrq":"2019-12-03","sqsj":"2019-12-03","ccts":"2","xiangguanfujian":"","chuchairenyuanUId":"888888888","zjlyj":"","bmfzryj":"[{\"ui\":\"1729\",\"un\":\"欧阳晓林\",\"c\":\"2019-12-03 11:30\",\"v\":\"同意\"}]"}]
      */
 
     private boolean success;
@@ -35,33 +35,34 @@ public class MyChuChai implements Serializable {
 
     public static class MainformBean {
         /**
-         * sbbmDid : 378
-         * zjxj : 200
-         * mudidi : 北京
-         * runId : 51365
-         * chuchairenyuan : 欧阳晓林
-         * mainId : 10010
-         * jiezhiriqi : 2019-02-13
-         * yjfy : 100
+         * sbbmDid : 500
+         * zjxj : 333
+         * mudidi : fj
+         * runId : 52289
+         * chuchairenyuan : 超级管理员
+         * mainId : 10024
+         * jiezhiriqi : 2019-12-04
+         * yjfy : 222
          * keshuru :
          * sbbm : 宜春公交集团有限公司
          * jtgj2 :
-         * tujing : 日本
+         * tujing : ffh
          * jtgj1 : on
          * yqh :
          * jtgj4 :
          * jtgj3 :
+         * cwzjyj :
          * $type$ : WF_chuchaishenqingshenpi
-         * ccsy : 测试事由
-         * ccdd : 济南
+         * ccsy : 测试
+         * ccdd : hf
          * fgldyj :
-         * ccrq : 2019-02-12
-         * sqsj : 2019-02-12
+         * ccrq : 2019-12-03
+         * sqsj : 2019-12-03
          * ccts : 2
          * xiangguanfujian :
-         * chuchairenyuanUId : 1729
+         * chuchairenyuanUId : 888888888
          * zjlyj :
-         * bmfzryj :
+         * bmfzryj : [{"ui":"1729","un":"欧阳晓林","c":"2019-12-03 11:30","v":"同意"}]
          */
 
         private String sbbmDid;
@@ -80,6 +81,7 @@ public class MyChuChai implements Serializable {
         private String yqh;
         private String jtgj4;
         private String jtgj3;
+        private String cwzjyj;
         private String $type$;
         private String ccsy;
         private String ccdd;
@@ -218,6 +220,14 @@ public class MyChuChai implements Serializable {
 
         public void setJtgj3(String jtgj3) {
             this.jtgj3 = jtgj3;
+        }
+
+        public String getCwzjyj() {
+            return cwzjyj;
+        }
+
+        public void setCwzjyj(String cwzjyj) {
+            this.cwzjyj = cwzjyj;
         }
 
         public String get$type$() {

@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -396,6 +398,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
         if (nametemp != null) {
             if (nametemp.length == 1) {
                 rb1.setText(nametemp[0]);
+                rb1.setChecked(true);
                 ll3.setVisibility(View.VISIBLE);
                 rb1.setVisibility(View.VISIBLE);
                 rb2.setVisibility(View.INVISIBLE);
@@ -468,6 +471,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
 
         if (bigNametemp != null) {
             if (bigNametemp.length == 1) {
+                cb1.setChecked(true);
                 cb1.setText(bigNametemp[0]);
                 ll1.setVisibility(View.VISIBLE);
                 cb1.setVisibility(View.VISIBLE);
@@ -755,8 +759,9 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                 bmfzryj = bean.getMainform().get(0).getBmfzryj();
                 xqbmyj = bean.getMainform().get(0).getFgldyj();
                 xqbmldyj = bean.getMainform().get(0).getJbfgldyj();
-                jsbmyj = bean.getMainform().get(0).getJbbmyj();
+                jsbmyj = bean.getMainform().get(0).getBjap();
                 jsbmldyj = bean.getMainform().get(0).getZjlyj();
+                dszyj = bean.getMainform().get(0).getDszyj();
                 userName = new SharedPreferencesHelper(FlowAppealWillDetailActivity.this,
                         "login").getData(FlowAppealWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowAppealWillDetailActivity.this,
@@ -903,6 +908,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
     }
 
     private void personSession() {
+        Log.e("soso","这里走了吗22");
         if (bigResultList.size() != 0) {
             sendData();
         } else {
@@ -912,7 +918,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                 bmfzryj = bean.getMainform().get(0).getBmfzryj();
                 xqbmyj = bean.getMainform().get(0).getFgldyj();
                 xqbmldyj = bean.getMainform().get(0).getJbfgldyj();
-                jsbmyj = bean.getMainform().get(0).getJbbmyj();
+                jsbmyj = bean.getMainform().get(0).getBjap();
                 jsbmldyj = bean.getMainform().get(0).getZjlyj();
                 dszyj = bean.getMainform().get(0).getDszyj();
                 Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
@@ -927,6 +933,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                Log.e("soso","这里走了吗");
                 String department = tvDpartment.getText().toString();
                 String person = tvPerson.getText().toString();
                 String time = tvTime.getText().toString();
@@ -1035,27 +1042,11 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                 }
 
                 if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
-
-                    String bigUserCodes = bigResultList1.toString();
-                    bigUserCodes = bigUserCodes.toString().replace("[", "");
-                    bigUserCodes = bigUserCodes.toString().replace("]", "");
-
-                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else {
-                        flowAssignld = destName + "|" + userCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                        flowAssignld = flowAssignld.replace(":", "");
-                    }
+                    Looper.prepare();
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowAppealWillDetailActivity.this, "请选择审批人", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
                 } else {
-
                     String bigUserCodes = bigResultList.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
                     bigUserCodes = bigUserCodes.toString().replace("]", "");
@@ -1079,7 +1070,8 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                 DBHandler dbA = new DBHandler();
                 upData = dbA.OAAppealLeader(url, department, person, time, userCode, data,
                         destName, taskId, flowAssignld, mainId, xqbmyj, xqbmldyj, jsbmyj, jsbmldyj,
-                        serialNumber, comment, liushuihao, bmfzryj, dszyj);
+                        serialNumber, comment, liushuihao, bmfzryj, dszyj,signaName);
+                Log.e("soso","这里走了吗"+upData);
                 if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -1119,8 +1111,8 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                     taskId = bean.getTaskId();
                     final String date = bean.getMainform().get(0).getShenQingShiJian();
                     final String person = bean.getMainform().get(0).getShenQingRen();
-                    final String department = bean.getMainform().get(0).getShenQingBuMen();
-                    final String data = bean.getMainform().get(0).getQingShiNeiRong().toString();
+                    final String department = bean.getMainform().get(0).getSqbm();
+                    final String data = bean.getMainform().get(0).getQingshishangbaoneirong().toString();
                     liushuihao = bean.getMainform().get(0).getLiuShuiHao();
                     xiangguanfujian = bean.getMainform().get(0).getXiangGuanFuJian().toString();
                     runID = bean.getMainform().get(0).getRunId();
@@ -1138,7 +1130,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                     bmfzryj = bean.getMainform().get(0).getBmfzryj();
                     xqbmyj = bean.getMainform().get(0).getFgldyj();
                     xqbmldyj = bean.getMainform().get(0).getJbfgldyj();
-                    jsbmyj = bean.getMainform().get(0).getJbbmyj();
+                    jsbmyj = bean.getMainform().get(0).getBjap();
                     jsbmldyj = bean.getMainform().get(0).getZjlyj();
                     dszyj = bean.getMainform().get(0).getDszyj();
                     mainId = String.valueOf(bean.getMainform().get(0).getMainId());
@@ -1152,7 +1144,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                         JSONObject jsonObject = new JSONObject(formRights);
                         xqreout = jsonObject.getString("fgldyj");
                         xqldreout = jsonObject.getString("jbfgldyj");
-                        jsreout = jsonObject.getString("jbbmyj");
+                        jsreout = jsonObject.getString("bjap");
                         jsldreout = jsonObject.getString("zjlyj");
                         bmreout = jsonObject.getString("bmfzryj");
                         dszreout = jsonObject.getString("dszyj");
@@ -1263,7 +1255,7 @@ public class FlowAppealWillDetailActivity extends BaseActivity {
                             e.printStackTrace();
                         }
                         if (tvLeader2.getVisibility() == View.VISIBLE) {
-                            tvLeader2.setText(word4);
+                            tvLeader2.setText(word3);
                         } else {
                             etLeader2.setHint(word3);
                         }

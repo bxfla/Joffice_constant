@@ -392,4 +392,11 @@
         <item name="android:paddingLeft">8dp</item>
     </style>
 
+    <!--自定义横向分割线-->
+    <style name="HourLine">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/shouye</item>
+    </style>
+
 </resources>

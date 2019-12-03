@@ -12,7 +12,7 @@ public class FlowContractSignDetail implements Serializable {
 
     /**
      * success : true
-     * mainform : [{"jcbmyj":"","jgbmyj":"","runId":51510,"$type$":"WF_htqdspd","fgldyj":"[{\"ui\":\"9387\",\"un\":\"唐根六\",\"c\":\"2019-02-25 11:43\",\"v\":\"同意\"}]","flgwyj":"[{\"ui\":\"9507\",\"un\":\"熊辉林\",\"c\":\"2019-02-25 11:42\",\"v\":\"同意\"}]","htmc":"测试","cbbm":"宜春公交集团有限公司","jbqk":"测试事由","xiangguanfujian":"","mainId":112,"csbmyj":"","cwsjbyj":"","zjlyj":"[{\"ui\":\"9387\",\"un\":\"唐根六\",\"c\":\"2019-02-25 11:44\",\"v\":\"同意\"}]","cbbmfzr":"张敏","spsj":"2019-02-25"}]
+     * mainform : [{"jcbmyj":"","jgbmyj":"","runId":52246,"$type$":"WF_htqdspd","fgldyj":"","flgwyj":"","je":80,"htmc":"明","cbbm":"宜春公交集团有限公司","jbqk":"渍渍渍","xiangguanfujian":"","mainId":189,"csbmyj":"","cwsjbyj":"","zjlyj":"","cbbmfzr":"","spsj":"2019-11-22"}]
      */
 
     private boolean success;
@@ -38,20 +38,21 @@ public class FlowContractSignDetail implements Serializable {
         /**
          * jcbmyj :
          * jgbmyj :
-         * runId : 51510
+         * runId : 52246
          * $type$ : WF_htqdspd
-         * fgldyj : [{"ui":"9387","un":"唐根六","c":"2019-02-25 11:43","v":"同意"}]
-         * flgwyj : [{"ui":"9507","un":"熊辉林","c":"2019-02-25 11:42","v":"同意"}]
-         * htmc : 测试
+         * fgldyj :
+         * flgwyj :
+         * je : 80
+         * htmc : 明
          * cbbm : 宜春公交集团有限公司
-         * jbqk : 测试事由
+         * jbqk : 渍渍渍
          * xiangguanfujian :
-         * mainId : 112
+         * mainId : 189
          * csbmyj :
          * cwsjbyj :
-         * zjlyj : [{"ui":"9387","un":"唐根六","c":"2019-02-25 11:44","v":"同意"}]
-         * cbbmfzr : 张敏
-         * spsj : 2019-02-25
+         * zjlyj :
+         * cbbmfzr :
+         * spsj : 2019-11-22
          */
 
         private String jcbmyj;
@@ -60,6 +61,7 @@ public class FlowContractSignDetail implements Serializable {
         private String $type$;
         private String fgldyj;
         private String flgwyj;
+        private String je;
         private String htmc;
         private String cbbm;
         private String jbqk;
@@ -117,6 +119,14 @@ public class FlowContractSignDetail implements Serializable {
 
         public void setFlgwyj(String flgwyj) {
             this.flgwyj = flgwyj;
+        }
+
+        public String getJe() {
+            return je;
+        }
+
+        public void setJe(String je) {
+            this.je = je;
         }
 
         public String getHtmc() {

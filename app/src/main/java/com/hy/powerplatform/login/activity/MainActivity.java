@@ -79,23 +79,24 @@ public class MainActivity extends BaseActivity  implements RadioGroup.OnCheckedC
     private void exit() {
         if (!isExit) {
             isExit = true;
-            alertDialogUtil.showDialog1("您确定要退出程序吗", new AlertDialogCallBack() {
-
-                @Override
-                public void select(String data) {
-
-                }
-
-                @Override
-                public void confirm() {
-                    finish();
-                }
-
-                @Override
-                public void cancel() {
-
-                }
-            });
+//            alertDialogUtil.showDialog1("您确定要退出程序吗", new AlertDialogCallBack() {
+//
+//                @Override
+//                public void select(String data) {
+//
+//                }
+//
+//                @Override
+//                public void confirm() {
+//                    finish();
+//                }
+//
+//                @Override
+//                public void cancel() {
+//
+//                }
+//            });
+            Toast.makeText(this, "再点一次退出程序", Toast.LENGTH_SHORT).show();
             mHandler.sendEmptyMessageDelayed(0, 2000);
         } else {
             finish();

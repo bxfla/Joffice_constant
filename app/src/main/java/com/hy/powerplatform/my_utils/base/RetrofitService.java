@@ -224,8 +224,9 @@ public interface RetrofitService {
     /**
      * 获取检查人
      * @return
+     * ?depId=385&iswork=1
      */
-    @GET("hrm/profileListEmpProfile.do?depId=385&iswork=1")
+    @GET("hrm/profileListEmpProfile.do")
     Observable<CheckPerson> getCheckPerson ();
 
     /**

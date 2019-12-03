@@ -22,13 +22,14 @@ public class MainDataAdapter extends RecyclerView.Adapter<MainDataAdapter.ViewHo
     public OnGetAdapterPositionListener onGetAdapterPositionListener;
     List<MainData.DataBean> beanList = new ArrayList<>();
     List<Integer> imageList = new ArrayList<>();
-    String tag;
+    String tag,num;
     Context context;
-    public MainDataAdapter(Context context, List<MainData.DataBean> mainDataList,List<Integer> imageList,String tag) {
+    public MainDataAdapter(Context context, List<MainData.DataBean> mainDataList,List<Integer> imageList,String tag,String num) {
         this.context = context;
         this.beanList = mainDataList;
         this.imageList = imageList;
         this.tag = tag;
+        this.num = num;
     }
 
     @Override
@@ -42,8 +43,9 @@ public class MainDataAdapter extends RecyclerView.Adapter<MainDataAdapter.ViewHo
     public void onBindViewHolder(MainDataAdapter.ViewHolder holder, int position) {
         holder.textView.setText(beanList.get(position).getModuleName());
         holder.imageView.setImageResource(imageList.get(position));
-        if (beanList.get(position).getModuleName().equals("我的待办")&&tag.equals("Y")){
+        if (beanList.get(position).getModuleName().equals("待办流程")&&num!=null&&!num.equals("")&&Integer.valueOf(num)!=0){
             holder.tvRolese.setVisibility(View.VISIBLE);
+            holder.tvRolese.setText(num);
         }
         holder.mPosition = position;
     }
@@ -62,7 +64,7 @@ public class MainDataAdapter extends RecyclerView.Adapter<MainDataAdapter.ViewHo
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             textView = (TextView) itemView.findViewById(R.id.textView);
-            tvRolese = (TextView) itemView.findViewById(R.id.tvLeave);
+            tvRolese = (TextView) itemView.findViewById(R.id.tvRolese);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

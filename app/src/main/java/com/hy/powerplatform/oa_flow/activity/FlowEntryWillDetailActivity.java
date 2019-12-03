@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -331,7 +332,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        res = response.body().string();
+                        tagData = response.body().string();
                         handler.sendEmptyMessage(TAG_ONE);
                     }
                 });
@@ -402,6 +403,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
         if (nametemp != null) {
             if (nametemp.length == 1) {
                 rb1.setText(nametemp[0]);
+                rb1.setChecked(true);
                 ll3.setVisibility(View.VISIBLE);
                 rb1.setVisibility(View.VISIBLE);
                 rb2.setVisibility(View.INVISIBLE);
@@ -474,6 +476,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
 
         if (bigNametemp != null) {
             if (bigNametemp.length == 1) {
+                cb1.setChecked(true);
                 cb1.setText(bigNametemp[0]);
                 ll1.setVisibility(View.VISIBLE);
                 cb1.setVisibility(View.VISIBLE);
@@ -1007,25 +1010,29 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                 }
 
                 if (bigResultList2.size() == 0 && bigResultList1.size() != 0) {
-
-                    String bigUserCodes = bigResultList1.toString();
-                    bigUserCodes = bigUserCodes.toString().replace("[", "");
-                    bigUserCodes = bigUserCodes.toString().replace("]", "");
-
-                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else {
-                        flowAssignld = destName + "|" + userCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                        flowAssignld = flowAssignld.replace(":", "");
-                    }
+                    Looper.prepare();
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowEntryWillDetailActivity.this, "请选择审批人", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+//                    break;
+//                    String bigUserCodes = bigResultList1.toString();
+//                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+//                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+//
+//                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+//                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+//                        flowAssignld = flowAssignld.replace(" ", "");
+//                        flowAssignld = flowAssignld.replace(":|", "|");
+//                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+//                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+//                        flowAssignld = flowAssignld.replace(" ", "");
+//                        flowAssignld = flowAssignld.replace(":|", "|");
+//                    } else {
+//                        flowAssignld = destName + "|" + userCodes;
+//                        flowAssignld = flowAssignld.replace(" ", "");
+//                        flowAssignld = flowAssignld.replace(":|", "|");
+//                        flowAssignld = flowAssignld.replace(":", "");
+//                    }
                 } else {
                     String bigUserCodes = bigResultList2.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
@@ -1045,18 +1052,17 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         flowAssignld = flowAssignld.replace(":|", "|");
                         flowAssignld = flowAssignld.replace(":", "");
                     }
-                }
-
-                String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
-                DBHandler dbA = new DBHandler();
-                upData = dbA.OAEntryLeader(url, person, phone, idCard, sex, zjce1, zjce2, zjce3,
-                        rlzy1, rlzy2, rlzy3, userCode, destName, taskId, flowAssignld, mainId,
-                        cwsjbyj, yyglbyj, xxjsbyj, cctkjyxgsyj, zhglbyj, rlzyb1, comment, signaName,
-                        jbbmyj, fgs);
-                if (upData.equals("")) {
-                    handler.sendEmptyMessage(TAG_THERE);
-                } else {
-                    handler.sendEmptyMessage(TAG_FOUR);
+                    String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
+                    DBHandler dbA = new DBHandler();
+                    upData = dbA.OAEntryLeader(url, person, phone, idCard, sex, zjce1, zjce2, zjce3,
+                            rlzy1, rlzy2, rlzy3, userCode, destName, taskId, flowAssignld, mainId,
+                            cwsjbyj, yyglbyj, xxjsbyj, cctkjyxgsyj, zhglbyj, rlzyb1, comment, signaName,
+                            jbbmyj, fgs);
+                    if (upData.equals("")) {
+                        handler.sendEmptyMessage(TAG_THERE);
+                    } else {
+                        handler.sendEmptyMessage(TAG_FOUR);
+                    }
                 }
             }
         }).start();

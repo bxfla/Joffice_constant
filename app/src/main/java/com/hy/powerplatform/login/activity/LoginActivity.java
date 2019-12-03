@@ -23,7 +23,6 @@ import com.hy.powerplatform.login.bean.Login;
 import com.hy.powerplatform.login.presenter.LoginPresenter;
 import com.hy.powerplatform.login.presenter.loginpresenterimpl.LoginPresenterImpl;
 import com.hy.powerplatform.login.view.LoginView;
-import com.hy.powerplatform.my_utils.base.AlertDialogCallBack;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.MyApplication;
@@ -97,22 +96,23 @@ public class LoginActivity extends BaseActivity implements LoginView {
     private void exit() {
         if (!isExit) {
             isExit = true;
-            alertDialogUtil.showDialog1("您确定要退出程序吗", new AlertDialogCallBack() {
-                @Override
-                public void select(String data) {
-
-                }
-
-                @Override
-                public void confirm() {
-                    finish();
-                }
-
-                @Override
-                public void cancel() {
-
-                }
-            });
+//            alertDialogUtil.showDialog1("您确定要退出程序吗", new AlertDialogCallBack() {
+//                @Override
+//                public void select(String data) {
+//
+//                }
+//
+//                @Override
+//                public void confirm() {
+//                    finish();
+//                }
+//
+//                @Override
+//                public void cancel() {
+//
+//                }
+//            });
+            Toast.makeText(this, "再点一次退出程序", Toast.LENGTH_SHORT).show();
             mHandler.sendEmptyMessageDelayed(0, 2000);
         } else {
             finish();

@@ -67,12 +67,16 @@ public class CaiWuActivity extends BaseActivity {
     TextView tvGHPay;
     @BindView(R.id.llGHPay)
     LinearLayout llGHPay;
-    @BindView(R.id.flGHPay)
-    FrameLayout flGHPay;
+//    @BindView(R.id.flGHPay)
+//    FrameLayout flGHPay;
     @BindView(R.id.llGHSingle)
     LinearLayout llGHSingle;
     @BindView(R.id.flGHSingle)
     FrameLayout flGHSingle;
+    @BindView(R.id.llzgs)
+    LinearLayout llzgs;
+    @BindView(R.id.flZgs)
+    FrameLayout flZgs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,8 +133,16 @@ public class CaiWuActivity extends BaseActivity {
                 if (!dataList.contains(Constant.CONTRACEPAYNAME)) {
                     flContractPay.setVisibility(View.GONE);
                 }
-                if (!dataList.contains(Constant.GHPAYFLOWNAME)) {
-                    flGHPay.setVisibility(View.GONE);
+//                if (!dataList.contains(Constant.GHPAYFLOWNAME)) {
+//                    flGHPay.setVisibility(View.GONE);
+//                }
+                for (int i = 0; i < dataList.size(); i++) {
+                    if (!dataList.get(i).equals(Constant.ZGSPAYNAME)) {
+                        flZgs.setVisibility(View.GONE);
+                    } else {
+                        flZgs.setVisibility(View.VISIBLE);
+                        break;
+                    }
                 }
                 if (!dataList.contains(Constant.GHCONTRACTSIGNNAME)) {
                     flGHSingle.setVisibility(View.GONE);
@@ -163,9 +175,13 @@ public class CaiWuActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.llBill, R.id.llFuKuanLiuCheng, R.id.llContractPay, R.id.llGHPay, R.id.llGHSingle})
+    @OnClick({R.id.llBill, R.id.llFuKuanLiuCheng, R.id.llContractPay, R.id.llGHPay, R.id.llGHSingle, R.id.llzgs})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.llzgs:
+                intent = new Intent(this, FlowZgsActivity.class);
+                startActivity(intent);
+                break;
             case R.id.llBill:
                 intent = new Intent(this, FlowBillActivity.class);
                 startActivity(intent);

@@ -98,6 +98,8 @@ public class FlowChuCaiDetailActivity extends BaseActivity {
     TextView tvLeader1W;
     @BindView(R.id.tvLeader2W)
     TextView tvLeader2W;
+    @BindView(R.id.tvLeaderCWZJ)
+    TextView tvLeaderCWZJ;
     private String res;
     String flowMessage = "";
     String xiangguanfujian = "";
@@ -286,6 +288,7 @@ public class FlowChuCaiDetailActivity extends BaseActivity {
                     final String zjMoney = bean.getMainform().get(0).getZjxj();
                     String bmfzryj = bean.getMainform().get(0).getBmfzryj();
                     String fgldyj = bean.getMainform().get(0).getFgldyj();
+                    String cwzjyi = bean.getMainform().get(0).getCwzjyj();
                     String zjlyj = bean.getMainform().get(0).getZjlyj();
                     xiangguanfujian = bean.getMainform().get(0).getXiangguanfujian();
                     if (xiangguanfujian.equals("")) {
@@ -309,10 +312,10 @@ public class FlowChuCaiDetailActivity extends BaseActivity {
                     tvDepartment.setText(department);
                     String carType = "";
                     if (!jtgj1.equals("")) {
-                        carType = carType + "飞机 ";
+                        carType = carType + "火车 ";
                     }
                     if (!jtgj2.equals("")) {
-                        carType = carType + "火车 ";
+                        carType = carType + "飞机 ";
                     }
                     if (!jtgj3.equals("")) {
                         carType = carType + "驾车 ";
@@ -326,6 +329,9 @@ public class FlowChuCaiDetailActivity extends BaseActivity {
                     }
                     if (!fgldyj.equals("")) {
                         tvLeader1.setText(getJSONData(fgldyj));
+                    }
+                    if (!cwzjyi.equals("")) {
+                        tvLeaderCWZJ.setText(getJSONData(cwzjyi));
                     }
                     if (!zjlyj.equals("")) {
                         tvLeader2.setText(getJSONData(zjlyj));

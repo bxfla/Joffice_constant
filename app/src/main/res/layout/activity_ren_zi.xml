@@ -101,11 +101,14 @@
                 android:src="@drawable/flow_item3" />
 
             <TextView
-                style="@style/ycTextView"
-                android:text="入职流程"/>
-            <TextView
                 android:id="@+id/tvEntry"
                 style="@style/numTextView" />
+
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/ycTextView"
+                android:text="入职流程" />
+
             <ImageView style="@style/ycGO"/>
         </LinearLayout>
     </FrameLayout>

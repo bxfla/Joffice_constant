@@ -331,14 +331,14 @@ public class FlowAppealDetailActivity extends BaseActivity {
                     FlowAppealDetail bean = gson.fromJson(res, FlowAppealDetail.class);
                     final String date = bean.getMainform().get(0).getShenQingShiJian();
                     final String person = bean.getMainform().get(0).getShenQingRen();
-                    final String department = bean.getMainform().get(0).getShenQingBuMen();
+                    final String department = bean.getMainform().get(0).getSqbm();
                     final String bmfzryj = bean.getMainform().get(0).getBmfzryj();
                     final String fgldyj = bean.getMainform().get(0).getFgldyj();
                     final String jbfgyj = bean.getMainform().get(0).getJbfgldyj();
-                    final String jbbmyj = bean.getMainform().get(0).getJbbmyj();
+                    final String jbbmyj = bean.getMainform().get(0).getBjap();
                     final String zjlyj = bean.getMainform().get(0).getZjlyj();
                     final String dszyj = bean.getMainform().get(0).getDszyj();
-                    String data = bean.getMainform().get(0).getQingShiNeiRong();
+                    String data = bean.getMainform().get(0).getQingshishangbaoneirong();
                     xiangguanfujian = bean.getMainform().get(0).getXiangGuanFuJian();
                     if (xiangguanfujian.equals("")) {
                         llData.setVisibility(View.GONE);

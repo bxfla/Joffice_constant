@@ -25,6 +25,7 @@ import com.hy.powerplatform.business_inspect.activity.InspectYeWuActivity;
 import com.hy.powerplatform.business_inspect.activity.ShiGuActivity;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.car_maintain.activity.MainTainActivity1;
+import com.hy.powerplatform.duban.activity.DBActivity;
 import com.hy.powerplatform.login.activity.MyPersonalActivity;
 import com.hy.powerplatform.login.adapter.MainDataAdapter;
 import com.hy.powerplatform.login.bean.MainData;
@@ -211,6 +212,12 @@ public class Fragment01 extends Fragment {
         }).start();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData(start, limit);
+    }
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -247,11 +254,19 @@ public class Fragment01 extends Fragment {
                     try {
                         JSONObject jsonObject = new JSONObject(res);
                         JSONArray jsonArray = jsonObject.getJSONArray("result");
+                        String num = "";
                         if (jsonArray.length()!=0){
                             tag = "Y";
+                            num = jsonObject.getString("totalCounts");
+                        }
+                        for (int i = 0;i<jsonArray.length();i++){
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            if (jsonObject1.getString("taskName").contains("会签")){
+                                num = String.valueOf(Integer.valueOf(num)-1);
+                            }
                         }
                         ProgressDialogUtil.stopLoad();
-                        mainDataAdapter = new MainDataAdapter(getActivity(), mainDataList, imageList,tag);
+                        mainDataAdapter = new MainDataAdapter(getActivity(), mainDataList, imageList,tag,num);
                         recyclerView.setAdapter(mainDataAdapter);
                         mainDataAdapter.sendOnGetAdapterPositionListener(new MainDataAdapter.OnGetAdapterPositionListener() {
                             @Override
@@ -326,6 +341,9 @@ public class Fragment01 extends Fragment {
                                     startActivity(intent);
                                 }else if (mainDataList.get(position).getModuleCode().equals("ZB")) {
                                     intent = new Intent(getActivity(), WeeklyListActivity.class);
+                                    startActivity(intent);
+                                }else if (mainDataList.get(position).getModuleCode().equals("DB")) {
+                                    intent = new Intent(getActivity(), DBActivity.class);
                                     startActivity(intent);
                                 }
                             }

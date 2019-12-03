@@ -150,12 +150,12 @@ public class XingZengActivity extends BaseActivity {
     FrameLayout flGHSingle;
     @BindView(R.id.tvCompMessage)
     TextView tvCompMessage;
-    @BindView(R.id.llRepair)
-    LinearLayout llRepair;
     @BindView(R.id.llCompMessage)
     LinearLayout llCompMessage;
     @BindView(R.id.ycFrameLayout)
     FrameLayout ycFrameLayout;
+    @BindView(R.id.llRepair)
+    LinearLayout llRepair;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,12 +214,10 @@ public class XingZengActivity extends BaseActivity {
                     && !dataList.contains(Constant.USERCARNAME)
                     && !dataList.contains(Constant.HUIQIANNAME)
                     && !dataList.contains(Constant.GHCONTRACTSIGNNAME)
-                    && !dataList.contains(Constant.COMPMESSAGENAME)) {
+                    && !dataList.contains(Constant.COMPMESSAGENAME)
+                    && !dataList.contains(Constant.REPAIRNAME)) {
                 llNoContent.setVisibility(View.VISIBLE);
             } else {
-                if (!dataList.contains(Constant.REPAIRNAME)) {
-                    llRepair.setVisibility(View.GONE);
-                }
                 if (!dataList.contains(Constant.EMAINTAINNAME)) {
                     flEMaintain.setVisibility(View.GONE);
                 }
@@ -272,6 +270,9 @@ public class XingZengActivity extends BaseActivity {
                 }
                 if (!dataList.contains(Constant.GHCONTRACTSIGNNAME)) {
                     flGHSingle.setVisibility(View.GONE);
+                }
+                if (!dataList.contains(Constant.REPAIRNAME)) {
+                    llRepair.setVisibility(View.GONE);
                 }
 //                getData();
             }
@@ -430,7 +431,7 @@ public class XingZengActivity extends BaseActivity {
             tvGHSingle.setVisibility(View.GONE);
             tvGHSingle.setText("");
             String data = String.valueOf(msg.getData().get("data"));
-            Log.e("XXX",data);
+            Log.e("XXX", data);
             MyNum bean = new Gson().fromJson(data, MyNum.class);
             if (!bean.isSuccess()) {
                 Toast.makeText(XingZengActivity.this, "获取我的待办数据失败", Toast.LENGTH_SHORT).show();

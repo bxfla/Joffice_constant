@@ -204,7 +204,7 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
             intent = new Intent(this, FlowCarVideoWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
-            intent.putExtra("piId", beanList.get(position).getPiId());
+                intent.putExtra("piId", beanList.get(position).getPiId());
             intent.putExtra("executionId", beanList.get(position).getExecutionId());
             startActivity(intent);
         } else if (beanList.get(position).getFormDefId().equals(Constant.DORM)) {
@@ -306,7 +306,8 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
             intent = new Intent(this, FlowEntryWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
-            intent.putExtra("piId  ", beanList.get(position).getPiId());
+            String s = beanList.get(position).getPiId();
+            intent.putExtra("piId", beanList.get(position).getPiId());
             intent.putExtra("executionId", beanList.get(position).getExecutionId());
             startActivity(intent);
         } else if (beanList.get(position).getFormDefId().equals(Constant.LEAVER)) {
@@ -433,6 +434,13 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
             startActivity(intent);
         } else if (beanList.get(position).getFormDefId().equals(Constant.COMPMESSAGE)) {
             intent = new Intent(this, FlowCompMessageWillDetailActivity.class);
+            intent.putExtra("activityName", beanList.get(position).getActivityName());
+            intent.putExtra("taskId", beanList.get(position).getTaskId());
+            intent.putExtra("piId  ", beanList.get(position).getPiId());
+            intent.putExtra("executionId", beanList.get(position).getExecutionId());
+            startActivity(intent);
+        }else if (beanList.get(position).getFormDefId().equals(Constant.ZGSFLOW)) {
+            intent = new Intent(this, FlowZGSPayWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());
             intent.putExtra("taskId", beanList.get(position).getTaskId());
             intent.putExtra("piId  ", beanList.get(position).getPiId());

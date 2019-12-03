@@ -244,8 +244,7 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".login.activity.MainActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".news.activity.NewsActivity"
             android:screenOrientation="portrait" />
@@ -345,6 +344,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".business_inspect.newactivity.CheckPersonActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".business_inspect.newactivity.CheckPersonActivity1"
             android:screenOrientation="portrait" />
         <activity
             android:name=".business_inspect.newactivity.CheckOnePersonActivity"
@@ -602,8 +604,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".TestActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".oa_flow.activity.FlowGCAddWillDetailActivity"
             android:screenOrientation="portrait" />
@@ -815,7 +816,7 @@
         <activity
             android:name=".oa_flow.activity.MyWillDoActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".oa_flow.activity.FlowCCTTPurchaseActivity"
             android:screenOrientation="portrait"
@@ -876,8 +877,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".login.activity.SecondActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".oa_flow.activity.MyBackFlowListActivity"
             android:screenOrientation="portrait" />
@@ -885,7 +885,14 @@
             android:name=".oa_flow.activity.MyBackSureFlowListActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".weekly.WeeklyListActivity" />
-        <activity android:name=".weekly.WeekDetailActivity"></activity>
+        <activity android:name=".weekly.WeekDetailActivity" />
+        <activity android:name=".oa_flow.activity.FlowZgsActivity" />
+        <activity android:name=".oa_flow.activity.FlowZGSPayDetailActivity" />
+        <activity android:name=".oa_flow.activity.FlowZGSPayWillDetailActivity" />
+        <activity android:name=".duban.activity.DBUpActivity" />
+        <activity android:name=".duban.activity.DBListActivity" />
+        <activity android:name=".duban.activity.DBActivity" />
+        <activity android:name=".duban.activity.DBDetailActivity"></activity>
     </application>
 
 </manifest>

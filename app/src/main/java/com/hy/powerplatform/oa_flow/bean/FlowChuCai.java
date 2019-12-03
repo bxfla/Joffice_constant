@@ -168,8 +168,17 @@ public class FlowChuCai implements Serializable {
         private String ccts;
         private String xiangguanfujian;
         private String chuchairenyuanUId;
+        private String cwzjyj;
         private String zjlyj;
         private String bmfzryj;
+
+        public String getCwzjyj() {
+            return cwzjyj;
+        }
+
+        public void setCwzjyj(String cwzjyj) {
+            this.cwzjyj = cwzjyj;
+        }
 
         public String getSbbmDid() {
             return sbbmDid;

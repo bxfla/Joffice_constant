@@ -9,9 +9,10 @@ import java.util.List;
 
 public class FlowAppealDetail implements Serializable {
 
+
     /**
      * success : true
-     * mainform : [{"QingShiNeiRong":"测试","ShenQingRen":"超级管理员","ShenQingBuMen":"宜春公交集团有限公司","runId":51500,"$type$":"WF_QingShiHuiBao","jbfgldyj":"","fgldyj":"","ShenQingBuMenDid":"","ShenQingShiJian":"2019-02-22","mainId":3,"ShenQingRenUId":"888888888","zjlyj":"","jbbmyj":"","XiangGuanFuJian":"","bmfzryj":"","LiuShuiHao":"No.20190222080"}]
+     * mainform : [{"sqbm":"宜春公交集团有限公司","ShenQingRen":"超级管理员","dszyj":"","runId":52203,"jbfgldyj":"","$type$":"WF_QingShiShangBaoNew","fgldyj":"","ShenQingBuMenDid":"","ShenQingShiJian":"2019-11-28","qingshishangbaoneirong":"测试","bjap":"","mainId":3,"ShenQingRenUId":"888888888","zjlyj":"","XiangGuanFuJian":"","bmfzryj":"","LiuShuiHao":"No.20191128097"}]
      */
 
     private boolean success;
@@ -35,41 +36,41 @@ public class FlowAppealDetail implements Serializable {
 
     public static class MainformBean {
         /**
-         * QingShiNeiRong : 测试
+         * sqbm : 宜春公交集团有限公司
          * ShenQingRen : 超级管理员
-         * ShenQingBuMen : 宜春公交集团有限公司
-         * runId : 51500
-         * $type$ : WF_QingShiHuiBao
+         * dszyj :
+         * runId : 52203
          * jbfgldyj :
+         * $type$ : WF_QingShiShangBaoNew
          * fgldyj :
          * ShenQingBuMenDid :
-         * ShenQingShiJian : 2019-02-22
+         * ShenQingShiJian : 2019-11-28
+         * qingshishangbaoneirong : 测试
+         * bjap :
          * mainId : 3
          * ShenQingRenUId : 888888888
          * zjlyj :
-         * jbbmyj :
          * XiangGuanFuJian :
          * bmfzryj :
-         * LiuShuiHao : No.20190222080
+         * LiuShuiHao : No.20191128097
          */
 
-        private String QingShiNeiRong;
+        private String sqbm;
         private String ShenQingRen;
-        private String ShenQingBuMen;
+        private String dszyj;
         private String runId;
-        private String $type$;
         private String jbfgldyj;
+        private String $type$;
         private String fgldyj;
         private String ShenQingBuMenDid;
         private String ShenQingShiJian;
+        private String qingshishangbaoneirong;
+        private String bjap;
         private int mainId;
         private String ShenQingRenUId;
         private String zjlyj;
-        private String jbbmyj;
         private String XiangGuanFuJian;
         private String bmfzryj;
-        private String dszyj;
-        private String sqbm;
         private String LiuShuiHao;
 
         public String getSqbm() {
@@ -80,22 +81,6 @@ public class FlowAppealDetail implements Serializable {
             this.sqbm = sqbm;
         }
 
-        public String getDszyj() {
-            return dszyj;
-        }
-
-        public void setDszyj(String dszyj) {
-            this.dszyj = dszyj;
-        }
-
-        public String getQingShiNeiRong() {
-            return QingShiNeiRong;
-        }
-
-        public void setQingShiNeiRong(String QingShiNeiRong) {
-            this.QingShiNeiRong = QingShiNeiRong;
-        }
-
         public String getShenQingRen() {
             return ShenQingRen;
         }
@@ -104,12 +89,12 @@ public class FlowAppealDetail implements Serializable {
             this.ShenQingRen = ShenQingRen;
         }
 
-        public String getShenQingBuMen() {
-            return ShenQingBuMen;
+        public String getDszyj() {
+            return dszyj;
         }
 
-        public void setShenQingBuMen(String ShenQingBuMen) {
-            this.ShenQingBuMen = ShenQingBuMen;
+        public void setDszyj(String dszyj) {
+            this.dszyj = dszyj;
         }
 
         public String getRunId() {
@@ -120,20 +105,20 @@ public class FlowAppealDetail implements Serializable {
             this.runId = runId;
         }
 
-        public String get$type$() {
-            return $type$;
-        }
-
-        public void set$type$(String $type$) {
-            this.$type$ = $type$;
-        }
-
         public String getJbfgldyj() {
             return jbfgldyj;
         }
 
         public void setJbfgldyj(String jbfgldyj) {
             this.jbfgldyj = jbfgldyj;
+        }
+
+        public String get$type$() {
+            return $type$;
+        }
+
+        public void set$type$(String $type$) {
+            this.$type$ = $type$;
         }
 
         public String getFgldyj() {
@@ -160,6 +145,22 @@ public class FlowAppealDetail implements Serializable {
             this.ShenQingShiJian = ShenQingShiJian;
         }
 
+        public String getQingshishangbaoneirong() {
+            return qingshishangbaoneirong;
+        }
+
+        public void setQingshishangbaoneirong(String qingshishangbaoneirong) {
+            this.qingshishangbaoneirong = qingshishangbaoneirong;
+        }
+
+        public String getBjap() {
+            return bjap;
+        }
+
+        public void setBjap(String bjap) {
+            this.bjap = bjap;
+        }
+
         public int getMainId() {
             return mainId;
         }
@@ -182,14 +183,6 @@ public class FlowAppealDetail implements Serializable {
 
         public void setZjlyj(String zjlyj) {
             this.zjlyj = zjlyj;
-        }
-
-        public String getJbbmyj() {
-            return jbbmyj;
-        }
-
-        public void setJbbmyj(String jbbmyj) {
-            this.jbbmyj = jbbmyj;
         }
 
         public String getXiangGuanFuJian() {

@@ -112,8 +112,7 @@ public class CaiGouActivity extends BaseActivity {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 dataList.add(jsonObject.getString("name"));
             }
-            if (!dataList.contains(Constant.REPAIRNAME)
-                    && !dataList.contains(Constant.PUECHASEFLOWNAME)
+            if (!dataList.contains(Constant.PUECHASEFLOWNAME)
                     && !dataList.contains(Constant.GOODSPUECHASENAME)
                     && !dataList.contains(Constant.WORKPUECHASENAME)
                     && !dataList.contains(Constant.CCTPUECHASENAME)

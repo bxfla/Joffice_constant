@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,6 +81,8 @@ public class FragmentContractSignData extends Fragment {
     TextView tvLeader4W;
     @BindView(R.id.tvLeader5W)
     TextView tvLeader5W;
+    @BindView(R.id.tvMoney)
+    EditText tvMoney;
     private CustomDatePickerDay customDatePicker1;
 
     List<String> namelist = new ArrayList<>();
@@ -188,6 +191,7 @@ public class FragmentContractSignData extends Fragment {
                 final String department = etDepartment.getText().toString().trim();
                 final String name = etContractName.getText().toString().trim();
                 final String time = tvTime.getText().toString().trim();
+                final String money = tvMoney.getText().toString().trim();
                 final String situation = etSituation.getText().toString().trim();
                 if (department.equals("")) {
                     Toast.makeText(getActivity(), "部门不能为空", Toast.LENGTH_SHORT).show();
@@ -199,6 +203,10 @@ public class FragmentContractSignData extends Fragment {
                 }
                 if (time.equals("")) {
                     Toast.makeText(getActivity(), "填单日期不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (money.equals("")) {
+                    Toast.makeText(getActivity(), "金额不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (situation.equals("")) {
@@ -239,9 +247,10 @@ public class FragmentContractSignData extends Fragment {
                 final String department = etDepartment.getText().toString();
                 final String name = etContractName.getText().toString();
                 final String time = tvTime.getText().toString();
+                final String money = tvMoney.getText().toString();
                 final String situation = etSituation.getText().toString();
                 String res = dbA.OAContractSignUp(turl, userDepart, uId, name, department, userId,
-                        "", time, situation);
+                        "", time, situation,money);
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {

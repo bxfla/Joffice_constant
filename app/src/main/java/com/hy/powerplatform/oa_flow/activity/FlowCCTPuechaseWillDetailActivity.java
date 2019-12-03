@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -1410,25 +1411,29 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                 }
 
                 if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
-
-                    String bigUserCodes = bigResultList1.toString();
-                    bigUserCodes = bigUserCodes.toString().replace("[", "");
-                    bigUserCodes = bigUserCodes.toString().replace("]", "");
-
-                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else {
-                        flowAssignld = destName + "|" + userCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                        flowAssignld = flowAssignld.replace(":", "");
-                    }
+//
+//                    String bigUserCodes = bigResultList1.toString();
+//                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+//                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+//
+//                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+//                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+//                        flowAssignld = flowAssignld.replace(" ", "");
+//                        flowAssignld = flowAssignld.replace(":|", "|");
+//                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+//                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
+//                        flowAssignld = flowAssignld.replace(" ", "");
+//                        flowAssignld = flowAssignld.replace(":|", "|");
+//                    } else {
+//                        flowAssignld = destName + "|" + userCodes;
+//                        flowAssignld = flowAssignld.replace(" ", "");
+//                        flowAssignld = flowAssignld.replace(":|", "|");
+//                        flowAssignld = flowAssignld.replace(":", "");
+//                    }
+                    Looper.prepare();
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowCCTPuechaseWillDetailActivity.this, "请选择审批人", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
                 } else {
                     String bigUserCodes = bigResultList.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
@@ -1449,7 +1454,6 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                         flowAssignld = flowAssignld.replace(":", "");
                     }
                 }
-
                 String url = Constant.BASE_URL2 + Constant.EXAMINEDATA;
                 DBHandler dbA = new DBHandler();
                 upData = dbA.OACCTPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5

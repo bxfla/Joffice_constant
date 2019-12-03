@@ -651,22 +651,6 @@ public class FragmentPurchaseData extends Fragment {
 
         listZC.add("资产类");
         listZC.add("非资产类");
-        ArrayAdapter adapterZC = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listZC);
-        adapterZC.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerzc.setAdapter(adapterZC);
-        spinnerzc.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                if (arg2 == 1) {
-                    ll.setVisibility(View.GONE);
-                } else {
-                    ll.setVisibility(View.VISIBLE);
-                }
-            }
-
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
-
         listType.add("");
         listType.add("办公家具");
         listType.add("电子设备");
@@ -676,6 +660,34 @@ public class FragmentPurchaseData extends Fragment {
         listType.add("材料配件");
         listType.add("投币机、零钞兑换机");
         listType.add("消防、安防设备");
+        ArrayAdapter adapterZC = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listZC);
+        adapterZC.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerzc.setAdapter(adapterZC);
+        spinnerzc.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                if (arg2 == 1) {
+                    ll.setVisibility(View.GONE);
+                    listType.clear();
+                    listType.add("");
+                } else {
+                    ll.setVisibility(View.VISIBLE);
+                    listType.clear();
+                    listType.add("");
+                    listType.add("办公家具");
+                    listType.add("电子设备");
+                    listType.add("交通设备");
+                    listType.add("房屋及建筑物");
+                    listType.add("修理设备");
+                    listType.add("材料配件");
+                    listType.add("投币机、零钞兑换机");
+                    listType.add("消防、安防设备");
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
         ArrayAdapter adapterType = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listType);
         adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnertype.setAdapter(adapterType);
@@ -816,9 +828,11 @@ public class FragmentPurchaseData extends Fragment {
                     Toast.makeText(getActivity(), "填单日期不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (type.equals("")) {
-                    Toast.makeText(getActivity(), "请选择物品类型", Toast.LENGTH_SHORT).show();
-                    break;
+                if (spinnerzc.getSelectedItem().toString().equals("资产类")){
+                    if (spinnertype.getSelectedItem().toString().equals("")) {
+                        Toast.makeText(getActivity(), "物品类型不能为空", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
                 }
                 if (etName1.getText().toString().trim().equals("") || etNum1.getText().toString().trim().equals("") || etAllMoney1.getText().toString().trim().equals("")) {
                     Toast.makeText(getActivity(), "采购信息不能为空", Toast.LENGTH_SHORT).show();
@@ -916,12 +930,19 @@ public class FragmentPurchaseData extends Fragment {
                 allMoney2 = etAllMoney2.getText().toString() + "";
                 allMoney3 = etAllMoney3.getText().toString() + "";
                 allMoney4 = etAllMoney4.getText().toString() + "";
+
+                String type = "";
+                if (spinnertype.getSelectedItem()==null){
+                    type = "";
+                }else {
+                    type = spinnertype.getSelectedItem().toString();
+                }
                 final String userCode = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
                 res = dbA.OAPurchaseUp(turl, department, person, time, name1, name2, name3, name4, name5
                         , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
                         , allMoney4, allMoney5, userCode, userDepart, uId, tvAllNum.getText().toString(), String.valueOf(hejidj),
                         tvAllMoney.getText().toString(), use, other, spinnerzc.getSelectedItem().toString()
-                        , spinnertype.getSelectedItem().toString(), aboutDep, department1, department2
+                        , type, aboutDep, department1, department2
                         , department3, department4, etBZ1.getText().toString(), etBZ2.getText().toString()
                         , etBZ3.getText().toString(), etBZ4.getText().toString());
                 if (res.equals("")) {
