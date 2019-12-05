@@ -136,6 +136,13 @@ public class DBListActivity extends BaseActivity {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        beanList.clear();
+        getData();
+    }
+
+    @Override
     protected int provideContentViewId() {
         return R.layout.activity_dblist;
     }
@@ -176,7 +183,7 @@ public class DBListActivity extends BaseActivity {
         }else if (spinnerZT.getSelectedItem().toString().trim().equals("已撤回")){
             zt = "6";
         }else if (spinnerZT.getSelectedItem().toString().trim().equals("暂停执行")){
-            zt = "6";
+            zt = "7";
         }
         map.put("Q_taskStatus_N_EQ", zt);
         httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {

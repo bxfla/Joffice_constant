@@ -1127,7 +1127,7 @@ public class FlowGCAddWillDetailActivity extends BaseActivity {
                         } else {
                             tvLeader6.setVisibility(View.VISIBLE);
                             etLeader6.setVisibility(View.GONE);
-                            tvLeader6W.setTextColor(getResources().getColor(R.color.order_stop_black));
+//                            tvLeader6W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (xqreout.equals("1") && xqldreout.equals("1") && jsreout.equals("1")
                                 && jsldreout.equals("1") && csreout.equals("1") && jcreout.equals("1") && zjlreout.equals("1")) {

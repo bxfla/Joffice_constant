@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.business_inspect.bean.CheckPerson;
@@ -25,6 +28,8 @@ public class CheckOnePersonActivity extends BaseActivity implements CheckPersonV
 
     @BindView(R.id.header)
     Header header;
+    @BindView(R.id.etSearch)
+    EditText etSearch;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     CheckOnePersonAdapter adapter;
@@ -34,6 +39,7 @@ public class CheckOnePersonActivity extends BaseActivity implements CheckPersonV
     private List<String> selectDatas = new ArrayList<>();
     CheckPersonPresenter checkPersonPresenter;
     List<CheckPerson.DataBean> checkList = new ArrayList<>();
+    List<CheckPerson.DataBean> checkList1 = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,35 @@ public class CheckOnePersonActivity extends BaseActivity implements CheckPersonV
         ButterKnife.bind(this);
         checkPersonPresenter = new CheckPersonPresenterimpl(this,this);
         checkPersonPresenter.getCheckPersonPresenterData();
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                checkList1.clear();
+                if (s!=null){
+                    String text = s.toString();
+                    for (int i = 0;i<checkList.size();i++){
+                        if (checkList.get(i).getFullname().contains(text)){
+                            checkList1.add(checkList.get(i));
+                        }
+                    }
+                }
+                adapter = new CheckOnePersonAdapter(CheckOnePersonActivity.this, checkList1);
+                LinearLayoutManager manager = new LinearLayoutManager(CheckOnePersonActivity.this);
+                recyclerView.setLayoutManager(manager);
+                recyclerView.setAdapter(adapter);
+                adapter.setOnItemLitener(CheckOnePersonActivity.this);
+            }
+        });
     }
 
     @Override
@@ -84,12 +119,22 @@ public class CheckOnePersonActivity extends BaseActivity implements CheckPersonV
 
     @Override
     public void onItemClick( int position) {
-        name = checkList.get(position).getName();
-        profileId = checkList.get(position).getUserCode();
-        Intent i = new Intent();
-        i.putExtra("name", name);
-        i.putExtra("profileId", profileId);
-        setResult(Constant.TAG_SIX, i);
-        finish();
+        if (checkList1.size()==0){
+            name = checkList.get(position).getFullname();
+            profileId = checkList.get(position).getUserCode();
+            Intent i = new Intent();
+            i.putExtra("name", name);
+            i.putExtra("profileId", profileId);
+            setResult(Constant.TAG_SIX, i);
+            finish();
+        }else {
+            name = checkList1.get(position).getFullname();
+            profileId = checkList1.get(position).getUserCode();
+            Intent i = new Intent();
+            i.putExtra("name", name);
+            i.putExtra("profileId", profileId);
+            setResult(Constant.TAG_SIX, i);
+            finish();
+        }
     }
 }

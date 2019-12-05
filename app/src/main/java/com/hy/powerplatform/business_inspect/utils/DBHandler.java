@@ -1383,8 +1383,8 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("useTemplate", "false"));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
         nvs.add(new BasicNameValuePair("destName", uName));
-        nvs.add(new BasicNameValuePair("sendMsg", "false"));
-        nvs.add(new BasicNameValuePair("sendMail", "false"));
+        nvs.add(new BasicNameValuePair("sendMsg", "true"));
+        nvs.add(new BasicNameValuePair("sendMail", "true"));
         nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));
         nvs.add(new BasicNameValuePair("defId", Constant.LEAVERDIFID));
@@ -4061,8 +4061,8 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("taskId", taskId));
         nvs.add(new BasicNameValuePair("signalName", signaName));
         nvs.add(new BasicNameValuePair("destName", destName));
-        nvs.add(new BasicNameValuePair("sendMsg", "false"));
-        nvs.add(new BasicNameValuePair("sendMail", "false"));
+        nvs.add(new BasicNameValuePair("sendMsg", "true"));
+        nvs.add(new BasicNameValuePair("sendMail", "true"));
         nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
         nvs.add(new BasicNameValuePair("comments", comment));
         nvs.add(new BasicNameValuePair("mainId", mainId));
@@ -4131,8 +4131,8 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("defId", Constant.ENTRYDIFID));
         nvs.add(new BasicNameValuePair("destName", uName));
         nvs.add(new BasicNameValuePair("startFlow", "true"));
-        nvs.add(new BasicNameValuePair("sendMsg", "false"));
-        nvs.add(new BasicNameValuePair("sendMail", "false"));
+        nvs.add(new BasicNameValuePair("sendMsg", "true"));
+        nvs.add(new BasicNameValuePair("sendMail", "true"));
         nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
         nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
         nvs.add(new BasicNameValuePair("flowVars", "{}"));

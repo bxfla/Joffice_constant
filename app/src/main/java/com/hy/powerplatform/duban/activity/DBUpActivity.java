@@ -24,10 +24,13 @@ import com.hy.powerplatform.business_inspect.presenter.CheckPersonPresenter;
 import com.hy.powerplatform.business_inspect.presenter.carcodepresenterimpl.CheckPersonPresenterimpl;
 import com.hy.powerplatform.business_inspect.view.CheckPersonView;
 import com.hy.powerplatform.duban.bean.DBUp;
+import com.hy.powerplatform.duban.bean.DBUp1;
+import com.hy.powerplatform.my_utils.base.AlertDialogCallBack;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.OkHttpUtil;
 import com.hy.powerplatform.my_utils.myViews.Header;
+import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
 
@@ -75,22 +78,27 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
     Button btn;
 
     String data = "";
+    String WorkId = "";
     String userName = "",userCode = "";
     String ZXName = "",ZXCode = "";
     String lxrName = "",lxrCode = "";
     private OkHttpUtil httpUtil;
+    AlertDialogUtil alertDialogUtil;
     List<String> listType = new ArrayList<String>();
     CheckPersonPresenter checkPersonPresenter;
     SharedPreferencesHelper sharedPreferencesHelper;
     private List<Person> morenDatas = new ArrayList<>();
     List<CheckPerson.DataBean> checkList = new ArrayList<>();
     String path_url = Constant.BASE_URL1 + Constant.DBQRBJ;
+    String path_url1 = Constant.BASE_URL1 + Constant.DBQRTJ;
+    String path_url2 = Constant.BASE_URL1 + Constant.DBQRFB;
     private CustomDatePickerDay customDatePicker1, customDatePicker2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        alertDialogUtil = new AlertDialogUtil(this);
         listType.add("公司任务");
         listType.add("部门任务");
         ArrayAdapter adapterType = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listType);
@@ -232,16 +240,16 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                     break;
                 }
                 HashMap<String, String> map = new HashMap();
-                map.put("taskType", spinnerType.getSelectedItem().toString().trim());
-                map.put("taskName", etRW.getText().toString().trim());
-                map.put("planFinishTime", tvJHWCSJ.toString());
-                map.put("taskContext", etContent.getText().toString().trim());
-                map.put("supervisorIds", userCode);
-                map.put("supervisorNames", userName);
-                map.put("operatorIds", ZXCode);
-                map.put("operatorNames", ZXName);
-                map.put("contactsName", lxrName);
-                map.put("contactsId", lxrCode);
+                map.put("superWorkTask.taskType", spinnerType.getSelectedItem().toString().trim());
+                map.put("superWorkTask.taskName", etRW.getText().toString().trim());
+                map.put("superWorkTask.planFinishTime", tvJHWCSJ.toString());
+                map.put("superWorkTask.taskContext", etContent.getText().toString().trim());
+                map.put("superWorkTask.supervisorIds", userCode);
+                map.put("superWorkTask.supervisorNames", userName);
+                map.put("superWorkTask.operatorIds", ZXCode);
+                map.put("superWorkTask.operatorNames", ZXName);
+                map.put("superWorkTask.contactsName", lxrName);
+                map.put("superWorkTask.contactsId", lxrCode);
                 ProgressDialogUtil.startLoad(this, getResources().getString(R.string.up_data));
                 httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
                     @Override
@@ -257,7 +265,7 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
 
                     @Override
                     public void onResponse(Response response) throws IOException {
-//                Log.i("main", "response:" + response.body().string());
+//                      Log.i("main", "response:" + response.body().string());
                         data = response.body().string();
                         Message message = new Message();
                         Bundle b = new Bundle();
@@ -309,11 +317,122 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                     Bundle b1 = msg.getData();
                     String data = b1.getString("data");
                     Gson gsonF = new Gson();
-                    DBUp bean = gsonF.fromJson(data, DBUp.class);
+                    final DBUp bean = gsonF.fromJson(data, DBUp.class);
+                    WorkId = bean.getWorkId();
                     if (bean.isSuccess()){
                         Toast.makeText(DBUpActivity.this, "确认编辑成功", Toast.LENGTH_SHORT).show();
+                        alertDialogUtil.showDialog1("您确定要提交数据吗", new AlertDialogCallBack() {
+                            @Override
+                            public void select(String data) {
+
+                            }
+
+                            @Override
+                            public void confirm() {
+                                HashMap<String, String> map = new HashMap();
+                                map.put("workId", WorkId);
+                                map.put("superWorkTask.workId", bean.getWorkId());
+                                map.put("superWorkTask.taskType", spinnerType.getSelectedItem().toString().trim());
+                                map.put("superWorkTask.taskName", etRW.getText().toString().trim());
+                                map.put("superWorkTask.planFinishTime", tvJHWCSJ.toString());
+                                map.put("superWorkTask.taskContext", etContent.getText().toString().trim());
+                                map.put("superWorkTask.supervisorIds", userCode);
+                                map.put("superWorkTask.supervisorNames", userName);
+                                map.put("superWorkTask.operatorIds", ZXCode);
+                                map.put("superWorkTask.operatorNames", ZXName);
+                                map.put("superWorkTask.contactsName", lxrName);
+                                map.put("superWorkTask.contactsId", lxrCode);
+                                httpUtil.postForm(path_url1, map, new OkHttpUtil.ResultCallback() {
+                                    @Override
+                                    public void onError(Request request, Exception e) {
+                                        Message message = new Message();
+                                        Bundle b = new Bundle();
+                                        b.putString("error", e.toString());
+                                        message.setData(b);
+                                        message.what = Constant.TAG_ONE;
+                                        handler.sendMessage(message);
+                                    }
+
+                                    @Override
+                                    public void onResponse(Response response) throws IOException {
+                                        String dataTJ = response.body().string();
+                                        Message message = new Message();
+                                        Bundle b = new Bundle();
+                                        b.putString("dataTJ", dataTJ);
+                                        message.setData(b);
+                                        message.what = Constant.TAG_THERE;
+                                        handler.sendMessage(message);
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void cancel() {
+                                ProgressDialogUtil.stopLoad();
+                                finish();
+                            }
+                        });
                     }
-                    ProgressDialogUtil.stopLoad();
+                    break;
+                case Constant.TAG_THERE:
+                    Bundle b2 = msg.getData();
+                    String data2 = b2.getString("dataTJ");
+                    Gson gsonT = new Gson();
+                    DBUp1 bean1 = gsonT.fromJson(data2, DBUp1.class);
+                    if (bean1.isSuccess()){
+                        Toast.makeText(DBUpActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+                        alertDialogUtil.showDialog1("您确定要发布数据吗", new AlertDialogCallBack() {
+                            @Override
+                            public void select(String data) {
+
+                            }
+
+                            @Override
+                            public void confirm() {
+                                HashMap<String, String> map = new HashMap();
+                                map.put("ids", WorkId);
+                                httpUtil.postForm(path_url2, map, new OkHttpUtil.ResultCallback() {
+                                    @Override
+                                    public void onError(Request request, Exception e) {
+                                        Message message = new Message();
+                                        Bundle b = new Bundle();
+                                        b.putString("error", e.toString());
+                                        message.setData(b);
+                                        message.what = Constant.TAG_ONE;
+                                        handler.sendMessage(message);
+                                    }
+
+                                    @Override
+                                    public void onResponse(Response response) throws IOException {
+                                        String dataFB = response.body().string();
+                                        Message message = new Message();
+                                        Bundle b = new Bundle();
+                                        b.putString("dataFB", dataFB);
+                                        message.setData(b);
+                                        message.what = Constant.TAG_FOUR;
+                                        handler.sendMessage(message);
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void cancel() {
+                                ProgressDialogUtil.stopLoad();
+                                finish();
+                            }
+                        });
+                    }
+                    break;
+                case Constant.TAG_FOUR:
+                    Bundle b3 = msg.getData();
+                    String data3 = b3.getString("dataFB");
+                    Gson gsonFB = new Gson();
+                    DBUp1 bean2 = gsonFB.fromJson(data3, DBUp1.class);
+                    if (bean2.isSuccess()){
+                        ProgressDialogUtil.stopLoad();
+                        Toast.makeText(DBUpActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+                    }
+                    finish();
                     break;
             }
         }

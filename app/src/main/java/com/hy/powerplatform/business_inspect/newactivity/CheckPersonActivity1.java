@@ -76,6 +76,7 @@ public class CheckPersonActivity1 extends BaseActivity implements CheckPersonVie
                 LinearLayoutManager manager = new LinearLayoutManager(CheckPersonActivity1.this);
                 recyclerView.setLayoutManager(manager);
                 recyclerView.setAdapter(adapter);
+                adapter.setOnItemLitener(CheckPersonActivity1.this);
             }
         });
     }
@@ -125,15 +126,29 @@ public class CheckPersonActivity1 extends BaseActivity implements CheckPersonVie
     @Override
     public void onItemClick(int position) {
         Person person = new Person();
-        if (datas.contains(checkList.get(position).getFullname())) {
+        if (checkList1.size()==0){
+            if (datas.contains(checkList.get(position).getFullname())) {
 //            datas.remove(checkList.get(position).getFullname());
-            person.setUserName(checkList.get(position).getFullname());
-            person.setUserCode(checkList.get(position).getProfileId());
-            datas.remove(person);
-        } else {
-            person.setUserName(checkList.get(position).getFullname());
-            person.setUserCode(checkList.get(position).getProfileId());
-            datas.add(person);
+                person.setUserName(checkList.get(position).getFullname());
+                person.setUserCode(checkList.get(position).getProfileId());
+                datas.remove(person);
+            } else {
+                person.setUserName(checkList.get(position).getFullname());
+                person.setUserCode(checkList.get(position).getProfileId());
+                datas.add(person);
+            }
+        }else {
+            if (datas.contains(checkList1.get(position).getFullname())) {
+//            datas.remove(checkList.get(position).getFullname());
+                person.setUserName(checkList1.get(position).getFullname());
+                person.setUserCode(checkList1.get(position).getProfileId());
+                datas.remove(person);
+            } else {
+                person.setUserName(checkList1.get(position).getFullname());
+                person.setUserCode(checkList1.get(position).getProfileId());
+                datas.add(person);
+            }
         }
+
     }
 }

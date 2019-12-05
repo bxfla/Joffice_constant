@@ -77,6 +77,7 @@ public class CheckPersonActivity extends BaseActivity implements CheckPersonView
                 LinearLayoutManager manager = new LinearLayoutManager(CheckPersonActivity.this);
                 recyclerView.setLayoutManager(manager);
                 recyclerView.setAdapter(adapter);
+                adapter.setOnItemLitener(CheckPersonActivity.this);
             }
         });
     }

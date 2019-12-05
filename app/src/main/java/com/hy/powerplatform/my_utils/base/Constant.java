@@ -109,7 +109,28 @@ public class Constant {
     public static final String  DBLIST = "task/myTaskListSuperWorkTask.do";
     // 督办确认编辑
     public static final String  DBQRBJ = "task/saveSuperWorkTask.do";
-
+    // 督办确认提交
+    public static final String  DBQRTJ = "task/submitSuperWorkTask.do";
+    // 督办确认发布
+    public static final String  DBQRFB = "task/multiPublishSuperWorkTask.do";
+    // 督办删除
+    public static final String  DBDEL = "task/multiDelSuperWorkTask.do";
+    // 督办执行
+    public static final String  DBZXLIST = "task/myListSuperTaskOper.do";
+    // 督办变换状态
+    public static final String  DBCHANGETYPE = "task/updateStatusSuperTaskOper.do";
+    // 督办处理
+    public static final String  DBCHULI = "task/submitSuperTaskOper.do";
+    // 督办修改
+    public static final String  DBXG = "task/updateTwoSuperTaskOper.do";
+    // 督办催办
+    public static final String  DBCB = "task/urgeExecutorSuperWorkTask.do";
+    // 督办退回
+    public static final String  DBBACK = "task/updateStatusSuperTaskOper.do";
+    // 督办查看是否已经添加日程
+    public static final String  DBTJRCO = "task/listCalendarPlan.do";
+    // 督办添加日程
+    public static final String  DBTJRC = "task/magSaveCalendarPlan.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";

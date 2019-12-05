@@ -44,7 +44,7 @@ public class CheckOnePersonAdapter extends RecyclerView.Adapter<CheckOnePersonAd
 
     @Override
     public void onBindViewHolder(final CheckOnePersonAdapter.ViewHolder holder, final int position) {
-        holder.tvName.setText(beanList.get(position).getName());
+        holder.tvName.setText(beanList.get(position).getFullname());
         holder.position = position;
         holder.tvName.setOnClickListener(new View.OnClickListener() {
             @Override

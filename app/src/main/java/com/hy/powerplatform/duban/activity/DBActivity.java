@@ -22,6 +22,8 @@ public class DBActivity extends BaseActivity {
     @BindView(R.id.rb2)
     RadioButton rb2;
     Intent intent;
+    @BindView(R.id.rb3)
+    RadioButton rb3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +46,19 @@ public class DBActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rb1, R.id.rb2})
+    @OnClick({R.id.rb1, R.id.rb2, R.id.rb3})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rb1:
-                intent = new Intent(this,DBUpActivity.class);
+                intent = new Intent(this, DBUpActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rb2:
-                intent = new Intent(this,DBListActivity.class);
+                intent = new Intent(this, DBListActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rb3:
+                intent = new Intent(this, DBZXListActivity.class);
                 startActivity(intent);
                 break;
         }

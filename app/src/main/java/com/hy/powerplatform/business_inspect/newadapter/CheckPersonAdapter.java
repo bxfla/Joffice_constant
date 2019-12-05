@@ -2,6 +2,7 @@ package com.hy.powerplatform.business_inspect.newadapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,10 +46,11 @@ public class CheckPersonAdapter extends RecyclerView.Adapter<CheckPersonAdapter.
     @Override
     public void onBindViewHolder(final CheckPersonAdapter.ViewHolder holder, final int position) {
         holder.tvName.setText(beanList.get(position).getFullname());
-        holder.position = position;
+        holder.position1 = position;
         holder.tvName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("XXXXX",position+"--");
                 callBackPosition.onItemClick(position);
             }
         });
@@ -61,7 +63,7 @@ public class CheckPersonAdapter extends RecyclerView.Adapter<CheckPersonAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private CheckBox tvName;
-        int position;
+        int position1;
         View itemView;
 
         public ViewHolder(View itemView) {
