@@ -351,7 +351,7 @@
         <activity
             android:name=".business_inspect.newactivity.CheckOnePersonActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".business_inspect.newactivity.HealthCheckPersonActivity"
             android:screenOrientation="portrait" />
@@ -895,10 +895,15 @@
         <activity android:name=".duban.activity.DBActivity" />
         <activity android:name=".duban.activity.DBDetailActivity" />
         <activity android:name=".duban.activity.DBZXListActivity" />
-        <activity android:name=".duban.activity.DBZXDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".duban.activity.DBTJRCActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+        <activity
+            android:name=".duban.activity.DBZXDetailActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".duban.activity.DBTJRCActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".duban.activity.DBGuanLiActivity"/>
+        <activity android:name=".duban.activity.DBDetailGLActivity" />
+        <activity android:name=".duban.activity.DBUpActivity1" />
     </application>
 
 </manifest>

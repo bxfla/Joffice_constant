@@ -131,6 +131,12 @@ public class Constant {
     public static final String  DBTJRCO = "task/listCalendarPlan.do";
     // 督办添加日程
     public static final String  DBTJRC = "task/magSaveCalendarPlan.do";
+    // 管理督办列表
+    public static final String  DBGLLIST = "task/mySuperListSuperWorkTask.do";
+    // 督办冻结
+    public static final String  DBDJ = "task/frozenSuperWorkTask.do";
+    // 督办启用
+    public static final String  DBQY = "task/enableSuperWorkTask.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";
