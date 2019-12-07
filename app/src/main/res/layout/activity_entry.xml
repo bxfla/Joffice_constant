@@ -394,7 +394,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
@@ -413,12 +413,14 @@
                 <TextView
                     android:id="@+id/tvLeader2"
                     style="@style/textWrite"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2.5"
                     android:hint="信息技术部意见" />
 
                 <EditText
                     android:id="@+id/etLeader2"
                     style="@style/textWrite"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2.5"
                     android:hint="登记工号信息"
                     android:visibility="gone" />

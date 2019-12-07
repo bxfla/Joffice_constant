@@ -901,9 +901,11 @@
         <activity
             android:name=".duban.activity.DBTJRCActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".duban.activity.DBGuanLiActivity"/>
+        <activity android:name=".duban.activity.DBGuanLiActivity" />
         <activity android:name=".duban.activity.DBDetailGLActivity" />
         <activity android:name=".duban.activity.DBUpActivity1" />
+        <activity android:name=".duban.activity.DBChaKanActivity" />
+        <activity android:name=".duban.activity.DBChaKanCKActivity"/>
     </application>
 
 </manifest>

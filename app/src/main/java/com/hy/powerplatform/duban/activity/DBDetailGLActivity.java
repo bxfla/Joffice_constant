@@ -61,7 +61,13 @@ public class DBDetailGLActivity extends BaseActivity {
     String data = "";
     String workId = "";
     String status = "";
+    String taskName = "";
     String userName = "";
+    String createName = "";
+    String operatorId = "";
+    String contactsName = "";
+    String approveTime = "";
+    String supervisorNames = "";
     Bundle b1;
     Gson gsonF;
     DBUp1 bean;
@@ -88,6 +94,12 @@ public class DBDetailGLActivity extends BaseActivity {
         tvLXR.setText(detaBean.getApproverName());
         tvFJ.setText(detaBean.getFileNames() + "");
         workId = String.valueOf(detaBean.getWorkId());
+        contactsName = detaBean.getContactsName();
+        createName = detaBean.getCreaterName();
+        operatorId = detaBean.getOperatorIds();
+        approveTime = detaBean.getApproveTime();
+        taskName = detaBean.getTaskName();
+        supervisorNames = detaBean.getSupervisorNames();
 
         httpUtil = OkHttpUtil.getInstance(this);
         sharedPreferencesHelper = new SharedPreferencesHelper(this,"login");
@@ -124,6 +136,7 @@ public class DBDetailGLActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnCK:
+                onChaKan();
                 break;
             case R.id.btnDJ:
                 onDongJie();
@@ -134,6 +147,21 @@ public class DBDetailGLActivity extends BaseActivity {
             case R.id.tvFJ:
                 break;
         }
+    }
+
+    /**
+     * 查看
+     */
+    private void onChaKan() {
+        Intent intent = new Intent(this,DBChaKanActivity.class);
+        intent.putExtra("workId",workId);
+        intent.putExtra("taskName",taskName);
+        intent.putExtra("approveTime",approveTime);
+        intent.putExtra("createName",createName);
+        intent.putExtra("operatorId",operatorId);
+        intent.putExtra("supervisorNames",supervisorNames);
+        intent.putExtra("contactsName",contactsName);
+        startActivity(intent);
     }
 
     /**

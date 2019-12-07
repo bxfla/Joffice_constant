@@ -5,10 +5,14 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBack;
+import com.hy.powerplatform.my_utils.base.AlertDialogCallBackDB;
 import com.hy.powerplatform.my_utils.base.ItemCallBack;
 import com.hy.powerplatform.my_utils.base.ItemMoreCallBack;
 import com.hy.powerplatform.oa_flow.bean.Name;
@@ -123,43 +127,61 @@ public class AlertDialogUtil {
         }
     }
 
-//    public void showProgressBarDialog( final AlertDialogProgressBarCallBack alertDialogCallBack) {
-//        if (dialog == null || !dialog.isShowing()) {
-//            dialog = new AlertDialog.Builder(context).create();
+    public void showDialog3(String tag,String description, final AlertDialogCallBackDB alertDialogCallBack) {
+        if (dialog == null || !dialog.isShowing()) {
+            dialog = new AlertDialog.Builder(context).create();
 //            dialog.setCancelable(false);
-//            dialog.setCanceledOnTouchOutside(true);
-//            dialog.show();
-//            LayoutInflater inflater = LayoutInflater.from(context);
-//            View view = inflater.inflate(R.layout.diolag_with_progressbar, null, false);
-//            HorizontalProgressBarWithNumber progressBar = (HorizontalProgressBarWithNumber) view.findViewById(R.id.progressBar);
-//            TextView tv_size = (TextView) view.findViewById(R.id.size);
-//            TextView tv_speed = (TextView) view.findViewById(R.id.speed);
-//            Button btn_start = (Button) view.findViewById(R.id.start);
-//            Button btn_stop = (Button) view.findViewById(R.id.stop);
-//            Button btn_cancel = (Button) view.findViewById(R.id.cancel);
-//            btn_start.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    alertDialogCallBack.onStart();
-//                }
-//            });
-//
-//            btn_stop.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    alertDialogCallBack.onStop();
-//                }
-//            });
-//            btn_cancel.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    dialog.dismiss();
-//                    alertDialogCallBack.onCancle();
-//                }
-//            });
-//            dialog.getWindow().setContentView(view);
-//        }
-//    }
+//            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+            Window window = dialog.getWindow();
+            window.setContentView(R.layout.dialog_with_title1);
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            LayoutInflater inflater = LayoutInflater.from(context);
+            View view = inflater.inflate(R.layout.dialog_with_title1, null, false);
+            final EditText tv_content = (EditText) view.findViewById(R.id.content);
+            TextView tv_title = (TextView) view.findViewById(R.id.title);
+            TextView tv1 = (TextView) view.findViewById(R.id.tv1);
+            TextView tv2 = (TextView) view.findViewById(R.id.tv2);
+            TextView tv3 = (TextView) view.findViewById(R.id.tv3);
+            TextView tv4 = (TextView) view.findViewById(R.id.tv4);
+            if (tag.equals("1")){
+                tv3.setVisibility(View.GONE);
+            }else if (tag.equals("2")){
+                tv2.setVisibility(View.GONE);
+            }
+            tv_title.setText("批注");
+            tv1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    alertDialogCallBack.select1(tv_content.getText().toString());
+                }
+            });
+
+            tv2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    alertDialogCallBack.select2(tv_content.getText().toString());
+                }
+            });
+            tv3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    alertDialogCallBack.select3(tv_content.getText().toString());
+                }
+            });
+            tv4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    alertDialogCallBack.select4(tv_content.getText().toString());
+                }
+            });
+            dialog.getWindow().setContentView(view);
+        }
+    }
 
     public void showSmallDialog(String description) {
         if (dialog == null || !dialog.isShowing()) {

@@ -71,6 +71,9 @@ public class Constant {
     //获取代办数量
     public static final String  NUMDAIBAN = "flow/mobileGetNoticeTask.do";
 
+    //入职春城通科技选择路径
+    public static final String  RZCCT = "system/getUserByDepAppUser.do";
+
     //我的流程
     public static final String  MYLIST = "flow/myProcessRun.do?start=";
 
@@ -137,6 +140,22 @@ public class Constant {
     public static final String  DBDJ = "task/frozenSuperWorkTask.do";
     // 督办启用
     public static final String  DBQY = "task/enableSuperWorkTask.do";
+    // 督办查看
+    public static final String  DBCKLIST = "task/list2SuperTaskOper.do";
+    // 督办查看详情
+    public static final String  DBCKXQ = "task/getSuperTaskOper.do";
+    // 督办查看催办
+    public static final String  DBCKCB = "task/urgeSupervisorSuperWorkTask.do";
+    // 督办查看修改
+    public static final String  DBCKXG = "task/agreeRs2SuperTaskOper.do";
+    // 督办查看审核状态
+    public static final String  DBCKSHZT = "task/authControlUserSuperTaskOper.do";
+    // 督办查看审核状态确认
+    public static final String  DBCKSHZTQR = "task/confirmSuperTaskOper.do";
+    // 督办查看审核状态否定
+    public static final String  DBCKSHZTFD = "task/negativeSuperTaskOper.do";
+    // 督办查看审核状态驳回返回
+    public static final String  DBCKSHZTBH = "task/rejectSuperTaskOper.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";

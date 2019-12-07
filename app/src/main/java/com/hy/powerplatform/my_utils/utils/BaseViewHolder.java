@@ -6,7 +6,9 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -54,6 +56,31 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     public BaseViewHolder setText(int viewId, String text) {
         TextView tv = getView(viewId);
         tv.setText(text);
+        return this;
+    }
+
+    /**
+     * 给TextView设置
+     */
+    public BaseViewHolder setVisitiom(int viewId) {
+        TextView tv = getView(viewId);
+        tv.setVisibility(View.GONE);
+        return this;
+    }
+    /**
+     * 给Button设置
+     */
+    public BaseViewHolder setVisitiomBtn(int viewId) {
+        Button tv = getView(viewId);
+        tv.setVisibility(View.VISIBLE);
+        return this;
+    }
+    /**
+     * 给Linearlayout设置
+     */
+    public BaseViewHolder setVisitiomLL(int viewId) {
+        LinearLayout tv = getView(viewId);
+        tv.setVisibility(View.GONE);
         return this;
     }
 

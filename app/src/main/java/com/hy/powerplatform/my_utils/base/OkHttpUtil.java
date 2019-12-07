@@ -57,8 +57,10 @@ public class OkHttpUtil {
      * @param callback
      */
     public void getAsynHttp(String url, final ResultCallback callback){
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
         Request request = new Request.Builder()
                 .url(url)
+                .addHeader("Cookie",Session)
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override

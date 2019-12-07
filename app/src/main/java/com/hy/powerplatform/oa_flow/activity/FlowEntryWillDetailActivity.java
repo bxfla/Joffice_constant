@@ -29,6 +29,7 @@ import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.MyApplication;
+import com.hy.powerplatform.my_utils.base.OkHttpUtil;
 import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
@@ -37,6 +38,7 @@ import com.hy.powerplatform.oa_flow.bean.File;
 import com.hy.powerplatform.oa_flow.bean.FlowContractPerson;
 import com.hy.powerplatform.oa_flow.bean.FlowEntry;
 import com.hy.powerplatform.oa_flow.bean.FlowMessage1;
+import com.hy.powerplatform.oa_flow.bean.RZCCTKJ;
 import com.hy.powerplatform.oa_flow.util.MyStringSpilt;
 
 import org.json.JSONArray;
@@ -47,6 +49,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -189,6 +192,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
+    String selectName;
     String cwreout, yyreout, xxreout, cctreout, zhreout, rlreout, jbbmreout, flowAssignld, serialNumber = "";
     String zjce1, zjce2, zjce3 = "";
     String tagData = "";
@@ -224,7 +228,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
     String downloadData = "";
     FlowMessageAdapter adapter;
     List<FlowMessage1.DataBean> flowList = new ArrayList<>();
-
+    private OkHttpUtil httpUtil;
     private String executionId;
 
     @Override
@@ -245,6 +249,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
         carList.add("B2");
         carList.add("C1");
         carList.add("C2");
+        httpUtil = OkHttpUtil.getInstance(this);
         getData(name, taskId);
     }
 
@@ -495,6 +500,13 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                 cb1.setText(bigNametemp[0]);
                 cb2.setText(bigNametemp[1]);
                 cb3.setText(bigNametemp[2]);
+                if (bigNametemp[0].equals(selectName)){
+                    cb1.setChecked(true);
+                }else if (bigNametemp[1].equals(selectName)){
+                    cb2.setChecked(true);
+                }else if (bigNametemp[2].equals(selectName)){
+                    cb3.setChecked(true);
+                }
                 ll1.setVisibility(View.VISIBLE);
                 cb1.setVisibility(View.VISIBLE);
                 cb2.setVisibility(View.VISIBLE);
@@ -1180,6 +1192,38 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         if (cctreout.equals("2")) {
                             tvLeader3.setVisibility(View.GONE);
                             etLeader3.setVisibility(View.VISIBLE);
+                            String path_url = Constant.BASE_URL1 + Constant.RZCCT;
+                            ProgressDialogUtil.startLoad(FlowEntryWillDetailActivity.this, getResources().getString(R.string.get_data));
+                            HashMap<String, String> map = new HashMap();
+                            if (rbC1.isChecked()){
+                                map.put("depName", rbC1.getText().toString());
+                            }else if (rbC2.isChecked()){
+                                map.put("depName", rbC2.getText().toString());
+                            }else if (rbC3.isChecked()){
+                                map.put("depName", rbC3.getText().toString());
+                            }
+                            httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
+                                @Override
+                                public void onError(Request request, Exception e) {
+                                    Message message = new Message();
+                                    Bundle b = new Bundle();
+                                    b.putString("error", e.toString());
+                                    message.setData(b);
+                                    message.what = 555;
+                                    handler.sendMessage(message);
+                                }
+
+                                @Override
+                                public void onResponse(Response response) throws IOException {
+                                    String data = response.body().string();
+                                    Message message = new Message();
+                                    Bundle b = new Bundle();
+                                    b.putString("data", data);
+                                    message.setData(b);
+                                    message.what = 666;
+                                    handler.sendMessage(message);
+                                }
+                            });
                         } else {
                             tvLeader3.setVisibility(View.VISIBLE);
                             etLeader3.setVisibility(View.GONE);
@@ -1431,6 +1475,22 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));
                     startActivity(intent);
+                    break;
+                case 555:
+                    Bundle b = msg.getData();
+                    String error = b.getString("error");
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowEntryWillDetailActivity.this, error, Toast.LENGTH_SHORT).show();
+                    break;
+                case 666:
+                    Bundle b1 = msg.getData();
+                    String data = b1.getString("data");
+                    Gson gsonCCT = new Gson();
+                    final RZCCTKJ beanCCT = gsonCCT.fromJson(data, RZCCTKJ.class);
+                    if (beanCCT.isSuccess()){
+                        selectName = beanCCT.getUsername();
+                    }
+                    ProgressDialogUtil.stopLoad();
                     break;
             }
         }
