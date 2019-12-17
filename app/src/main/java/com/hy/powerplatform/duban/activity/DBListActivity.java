@@ -166,16 +166,69 @@ public class DBListActivity extends BaseActivity {
     }
 
     public void getData(final int start, final int limit) {
+//        path_url = Constant.BASE_URL1 + Constant.DBLIST+"?start="+start+"&limit="+limit;
+//        ProgressDialogUtil.startLoad(this, getResources().getString(R.string.get_data));
+//        map.clear();
+//        map.put("Q_createTime_D_GE", tvStartTime.getText().toString().trim());
+//        map.put("Q_createTime_D_LE", tvEndTime.getText().toString().trim());
+//        map.put("Q_taskType_S_EQ", spinnerType.getSelectedItem().toString());
+//        map.put("Q_taskName_S_LK", etName.getText().toString().trim());
+//        map.put("Q_supervisorNames_S_LK", etDBPerson.getText().toString().trim());
+//        map.put("Q_operatorNames_S_LK", etZXPerson.getText().toString().trim());
+//        map.put("Q_planFinishTime_D_EQ", tvOverTime.getText().toString().trim());
+//
+//        String zt = "";
+//        if (spinnerZT.getSelectedItem().toString().trim().equals("已编辑未提交")){
+//            zt = "1";
+//        }else if (spinnerZT.getSelectedItem().toString().trim().equals("已提交未发布")){
+//            zt = "2";
+//        }else if (spinnerZT.getSelectedItem().toString().trim().equals("已发布待执行")){
+//            zt = "3";
+//        }else if (spinnerZT.getSelectedItem().toString().trim().equals("已提交待确认")){
+//            zt = "4";
+//        }else if (spinnerZT.getSelectedItem().toString().trim().equals("执行完成")){
+//            zt = "5";
+//        }else if (spinnerZT.getSelectedItem().toString().trim().equals("已撤回")){
+//            zt = "6";
+//        }else if (spinnerZT.getSelectedItem().toString().trim().equals("暂停执行")){
+//            zt = "7";
+//        }
+//        map.put("Q_taskStatus_N_EQ", zt);
+//        httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
+//            @Override
+//            public void onError(Request request, Exception e) {
+////                Log.i("main", "response:" + e.toString());
+//                Message message = new Message();
+//                Bundle b = new Bundle();
+//                b.putString("error", e.toString());
+//                message.setData(b);
+//                message.what = Constant.TAG_ONE;
+//                handler.sendMessage(message);
+//            }
+//
+//            @Override
+//            public void onResponse(Response response) throws IOException {
+////                Log.i("main", "response:" + response.body().string());
+//                data = response.body().string();
+//                Message message = new Message();
+//                Bundle b = new Bundle();
+//                b.putString("data", data);
+//                message.setData(b);
+//                message.what = Constant.TAG_TWO;
+//                handler.sendMessage(message);
+//            }
+//        });
+
         path_url = Constant.BASE_URL1 + Constant.DBLIST+"?start="+start+"&limit="+limit;
         ProgressDialogUtil.startLoad(this, getResources().getString(R.string.get_data));
         map.clear();
-        map.put("Q_createTime_D_GE", tvStartTime.getText().toString().trim());
-        map.put("Q_createTime_D_LE", tvEndTime.getText().toString().trim());
-        map.put("Q_taskType_S_EQ", spinnerType.getSelectedItem().toString());
-        map.put("Q_taskName_S_LK", etName.getText().toString().trim());
-        map.put("Q_supervisorNames_S_LK", etDBPerson.getText().toString().trim());
-        map.put("Q_operatorNames_S_LK", etZXPerson.getText().toString().trim());
-        map.put("Q_planFinishTime_D_EQ", tvOverTime.getText().toString().trim());
+        map.put("startTime", tvStartTime.getText().toString().trim());
+        map.put("endTime", tvEndTime.getText().toString().trim());
+        map.put("taskType", spinnerType.getSelectedItem().toString());
+        map.put("taskName", etName.getText().toString().trim());
+        map.put("supervisorNames", etDBPerson.getText().toString().trim());
+        map.put("operatorNames", etZXPerson.getText().toString().trim());
+        map.put("planFinishTime", tvOverTime.getText().toString().trim());
 
         String zt = "";
         if (spinnerZT.getSelectedItem().toString().trim().equals("已编辑未提交")){
@@ -193,7 +246,7 @@ public class DBListActivity extends BaseActivity {
         }else if (spinnerZT.getSelectedItem().toString().trim().equals("暂停执行")){
             zt = "7";
         }
-        map.put("Q_taskStatus_N_EQ", zt);
+        map.put("taskStatus", zt);
         httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -404,6 +457,8 @@ public class DBListActivity extends BaseActivity {
                                 baseAdapter.notifyDataSetChanged();
                             }
                         }
+                        baseAdapter.notifyDataSetChanged();
+                    }else {
                         baseAdapter.notifyDataSetChanged();
                     }
                     tvOverTime.setText("");

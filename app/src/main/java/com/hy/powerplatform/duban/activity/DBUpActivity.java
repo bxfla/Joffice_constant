@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,13 +19,12 @@ import com.hy.powerplatform.R;
 import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.business_inspect.bean.CheckPerson;
 import com.hy.powerplatform.business_inspect.bean.Person;
-import com.hy.powerplatform.business_inspect.newactivity.CheckPersonActivity;
-import com.hy.powerplatform.business_inspect.newactivity.CheckPersonActivity1;
 import com.hy.powerplatform.business_inspect.presenter.CheckPersonPresenter;
 import com.hy.powerplatform.business_inspect.presenter.carcodepresenterimpl.CheckPersonPresenterimpl;
 import com.hy.powerplatform.business_inspect.view.CheckPersonView;
 import com.hy.powerplatform.duban.bean.DBUp;
 import com.hy.powerplatform.duban.bean.DBUp1;
+import com.hy.powerplatform.duban.bean.DBZheluPerson;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBack;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
@@ -33,6 +33,7 @@ import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
+import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerMin;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -76,12 +77,14 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
     TextView tvFJ;
     @BindView(R.id.btn)
     Button btn;
+    @BindView(R.id.spinnerPerson)
+    Spinner spinnerPerson;
 
     String data = "";
     String WorkId = "";
-    String userName = "",userCode = "";
-    String ZXName = "",ZXCode = "";
-    String lxrName = "",lxrCode = "";
+    String userName = "", userCode = "";
+    String ZXName = "", ZXCode = "";
+    String lxrName = "", lxrCode = "";
     private OkHttpUtil httpUtil;
     AlertDialogUtil alertDialogUtil;
     List<String> listType = new ArrayList<String>();
@@ -89,10 +92,14 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
     SharedPreferencesHelper sharedPreferencesHelper;
     private List<Person> morenDatas = new ArrayList<>();
     List<CheckPerson.DataBean> checkList = new ArrayList<>();
+    List<String> dbZHPerListName = new ArrayList<>();
+    List<String> dbZHPerListId = new ArrayList<>();
     String path_url = Constant.BASE_URL1 + Constant.DBQRBJ;
     String path_url1 = Constant.BASE_URL1 + Constant.DBQRTJ;
     String path_url2 = Constant.BASE_URL1 + Constant.DBQRFB;
-    private CustomDatePickerDay customDatePicker1, customDatePicker2;
+    String path_url3 = Constant.BASE_URL1 + Constant.DBZHGLBRY;
+    private CustomDatePickerMin customDatePicker1;
+    private CustomDatePickerDay customDatePicker2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +113,7 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
         spinnerType.setAdapter(adapterType);
 
         sharedPreferencesHelper = new SharedPreferencesHelper(this, "login");
-        lxrName = sharedPreferencesHelper.getData(DBUpActivity.this, "roleName", "");
+        lxrName = sharedPreferencesHelper.getData(DBUpActivity.this, "userStatus", "");
         lxrCode = sharedPreferencesHelper.getData(DBUpActivity.this, "userCode", "");
         tvLXR.setText(lxrName);
         initDatePicker();
@@ -115,6 +122,19 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
         checkPersonPresenter = new CheckPersonPresenterimpl(this, this);
         checkPersonPresenter.getCheckPersonPresenterData();
         sharedPreferencesHelper = new SharedPreferencesHelper(this, "login");
+
+        spinnerPerson.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                lxrName = dbZHPerListName.get(position);
+                lxrCode = dbZHPerListId.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -136,7 +156,7 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
      * 选择时间
      */
     private void initDatePicker() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Calendar c = Calendar.getInstance();
         //过去七天
         c.setTime(new Date());
@@ -148,13 +168,13 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
         String now = sdf.format(new Date());
         tvFBSJ.setText(now.split(" ")[0]);
 
-        customDatePicker1 = new CustomDatePickerDay(this, new CustomDatePickerDay.ResultHandler() {
+        customDatePicker1 = new CustomDatePickerMin(this, new CustomDatePickerMin.ResultHandler() {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
-                tvJHWCSJ.setText(time.split(" ")[0]);
+                tvJHWCSJ.setText(time);
             }
         }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-        customDatePicker1.showSpecificTime(false); // 不显示时和分
+        customDatePicker1.showSpecificTime(true); // 不显示时和分
         customDatePicker1.setIsLoop(false); // 不允许循环滚动
 
         customDatePicker2 = new CustomDatePickerDay(this, new CustomDatePickerDay.ResultHandler() {
@@ -181,12 +201,14 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                 morenDatas.add(person);
             }
         }
-        String roleName1 = sharedPreferencesHelper.getData(this, "roleName", "");
+        String roleName1 = sharedPreferencesHelper.getData(this, "userStatus", "");
         String userCode1 = sharedPreferencesHelper.getData(this, "userCode", "");
         Person person = new Person();
         person.setUserCode(userCode1);
         person.setUserName(roleName1);
-        morenDatas.add(person);
+        if (!roleName1.equals("晏慧锋")){
+            morenDatas.add(person);
+        }
         if (morenDatas.size() != 0) {
             for (int i = 0; i < morenDatas.size(); i++) {
                 if (i != morenDatas.size() - 1) {
@@ -199,6 +221,42 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
             }
         }
         tvDBR.setText(userName);
+
+        if (lxrName.equals("晏慧锋")) {
+            getDBZongHeGuanLi();
+        }
+    }
+
+    /**
+     * 综合管理部获取联系人
+     */
+    private void getDBZongHeGuanLi() {
+        final HashMap<String, String> map = new HashMap();
+        map.put("username", lxrName);
+        httpUtil.postForm(path_url3, map, new OkHttpUtil.ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+//                Log.i("main", "response:" + e.toString());
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("error", e.toString());
+                message.setData(b);
+                message.what = Constant.TAG_ONE;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+//                Log.i("main", "response:" + response.body().string());
+                data = response.body().string();
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("data", data);
+                message.setData(b);
+                message.what = Constant.TAG_FIVE;
+                handler.sendMessage(message);
+            }
+        });
     }
 
     @OnClick({R.id.tvJHWCSJ, R.id.tvDBR, R.id.tvZXR, R.id.tvFBSJ, R.id.btn})
@@ -208,41 +266,41 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                 customDatePicker1.show(tvJHWCSJ.getText().toString());
                 break;
             case R.id.tvDBR:
-                Intent intent = new Intent(this,CheckPersonActivity.class);
+                Intent intent = new Intent(this, DBCheckPersonActivity.class);
                 startActivityForResult(intent, TAG_FIVE);
                 break;
             case R.id.tvZXR:
-                Intent intent1 = new Intent(this,CheckPersonActivity1.class);
+                Intent intent1 = new Intent(this, DBCheckPersonActivity1.class);
                 startActivityForResult(intent1, TAG_SIX);
                 break;
             case R.id.tvFBSJ:
                 customDatePicker1.show(tvFBSJ.getText().toString());
                 break;
             case R.id.btn:
-                if (etRW.getText().toString().equals("")){
+                if (etRW.getText().toString().equals("")) {
                     Toast.makeText(this, "督办任务不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (etContent.getText().toString().equals("")){
+                if (etContent.getText().toString().equals("")) {
                     Toast.makeText(this, "督办内容不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (tvDBR.getText().toString().equals("")){
+                if (tvDBR.getText().toString().equals("")) {
                     Toast.makeText(this, "督办任务不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (tvZXR.getText().toString().equals("")){
+                if (tvZXR.getText().toString().equals("")) {
                     Toast.makeText(this, "执行人不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (tvLXR.getText().toString().equals("")){
+                if (tvLXR.getText().toString().equals("")) {
                     Toast.makeText(this, "联系人不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 HashMap<String, String> map = new HashMap();
                 map.put("superWorkTask.taskType", spinnerType.getSelectedItem().toString().trim());
                 map.put("superWorkTask.taskName", etRW.getText().toString().trim());
-                map.put("superWorkTask.planFinishTime", tvJHWCSJ.toString());
+                map.put("superWorkTask.planFinishTime", tvJHWCSJ.getText().toString().toString() + ":00");
                 map.put("superWorkTask.taskContext", etContent.getText().toString().trim());
                 map.put("superWorkTask.supervisorIds", userCode);
                 map.put("superWorkTask.supervisorNames", userName);
@@ -250,6 +308,8 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                 map.put("superWorkTask.operatorNames", ZXName);
                 map.put("superWorkTask.contactsName", lxrName);
                 map.put("superWorkTask.contactsId", lxrCode);
+                map.put("superWorkTask.contactsId", lxrCode);
+                map.put("superWorkTask.workId", WorkId);
                 ProgressDialogUtil.startLoad(this, getResources().getString(R.string.up_data));
                 httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
                     @Override
@@ -288,7 +348,7 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                     userName = data.getStringExtra("name");
                     userCode = data.getStringExtra("userCode");
                     tvDBR.setText(userName);
-                    Log.e("userName",userName);
+                    Log.e("userName", userName);
                 }
                 break;
             case Constant.TAG_SIX:
@@ -296,7 +356,7 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                     ZXName = data.getStringExtra("name");
                     ZXCode = data.getStringExtra("userCode");
                     tvZXR.setText(ZXName);
-                    Log.e("ZXName",ZXName);
+                    Log.e("ZXName", ZXName);
                 }
                 break;
         }
@@ -319,7 +379,7 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                     Gson gsonF = new Gson();
                     final DBUp bean = gsonF.fromJson(data, DBUp.class);
                     WorkId = bean.getWorkId();
-                    if (bean.isSuccess()){
+                    if (bean.isSuccess()) {
                         Toast.makeText(DBUpActivity.this, "确认编辑成功", Toast.LENGTH_SHORT).show();
                         alertDialogUtil.showDialog1("您确定要提交数据吗", new AlertDialogCallBack() {
                             @Override
@@ -379,7 +439,7 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                     String data2 = b2.getString("dataTJ");
                     Gson gsonT = new Gson();
                     DBUp1 bean1 = gsonT.fromJson(data2, DBUp1.class);
-                    if (bean1.isSuccess()){
+                    if (bean1.isSuccess()) {
                         Toast.makeText(DBUpActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
                         alertDialogUtil.showDialog1("您确定要发布数据吗", new AlertDialogCallBack() {
                             @Override
@@ -428,11 +488,33 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                     String data3 = b3.getString("dataFB");
                     Gson gsonFB = new Gson();
                     DBUp1 bean2 = gsonFB.fromJson(data3, DBUp1.class);
-                    if (bean2.isSuccess()){
+                    if (bean2.isSuccess()) {
                         ProgressDialogUtil.stopLoad();
                         Toast.makeText(DBUpActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
                     }
                     finish();
+                    break;
+                case Constant.TAG_FIVE:
+                    Bundle b4 = msg.getData();
+                    String data4 = b4.getString("data");
+                    Gson gsonZHPer = new Gson();
+                    DBZheluPerson beanZHPer = gsonZHPer.fromJson(data4, DBZheluPerson.class);
+                    if (beanZHPer.getTotalCounts() != 0) {
+                        dbZHPerListName.add("晏慧锋");
+                        dbZHPerListId.add("41071");
+                        for (int i = 0; i < beanZHPer.getResult().size(); i++) {
+                            dbZHPerListName.add(beanZHPer.getResult().get(i).getFullname());
+                            dbZHPerListId.add(beanZHPer.getResult().get(i).getUserId());
+                        }
+                        ArrayAdapter adapterType = new ArrayAdapter<String>(DBUpActivity.this, android.R.layout.simple_spinner_item, dbZHPerListName);
+                        adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinnerPerson.setAdapter(adapterType);
+                        spinnerPerson.setVisibility(View.VISIBLE);
+                        tvLXR.setVisibility(View.GONE);
+                    } else {
+                        Toast.makeText(DBUpActivity.this, "获取联系人失败", Toast.LENGTH_SHORT).show();
+                    }
+                    ProgressDialogUtil.stopLoad();
                     break;
             }
         }

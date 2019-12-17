@@ -114,8 +114,12 @@ public class Constant {
     public static final String  DBQRBJ = "task/saveSuperWorkTask.do";
     // 督办确认提交
     public static final String  DBQRTJ = "task/submitSuperWorkTask.do";
+    // 督办确认综合管理部人员
+    public static final String  DBZHGLBRY = "system/subordinateSubordinate.do";
     // 督办确认发布
     public static final String  DBQRFB = "task/multiPublishSuperWorkTask.do";
+    // 督办详情附件
+    public static final String  DBXQFJ = "task/getSuperWorkTask.do";
     // 督办删除
     public static final String  DBDEL = "task/multiDelSuperWorkTask.do";
     // 督办执行
@@ -156,6 +160,8 @@ public class Constant {
     public static final String  DBCKSHZTFD = "task/negativeSuperTaskOper.do";
     // 督办查看审核状态驳回返回
     public static final String  DBCKSHZTBH = "task/rejectSuperTaskOper.do";
+    // 督办检查人
+    public static final String  DBPERSON = "system/dialogAppUser.do?curDep=true";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";

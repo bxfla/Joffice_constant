@@ -202,7 +202,6 @@
             <View style="@style/line"></View>
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -224,6 +223,7 @@
                     android:padding="5dp"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
+            <View style="@style/line"></View>
 
             <LinearLayout
                 android:id="@+id/llTitle"

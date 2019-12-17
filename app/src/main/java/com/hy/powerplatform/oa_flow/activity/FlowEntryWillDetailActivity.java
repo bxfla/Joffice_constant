@@ -606,7 +606,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         }).start();
                     } else {
                         namelist.clear();
-                        for (int i = 0; i < beanList.size(); i++) {
+                        for (int i =  beanList.size()-1; i >=0; i--) {
                             namelist.add(beanList.get(i).getDestination());
                         }
                         MyAlertDialog.MyListAlertDialog(FlowEntryWillDetailActivity.this, namelist, new AlertDialogCallBackP() {

@@ -346,6 +346,13 @@
             android:name=".business_inspect.newactivity.CheckPersonActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".duban.activity.DBCheckPersonActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".duban.activity.DBCheckPersonActivity1"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity
             android:name=".business_inspect.newactivity.CheckPersonActivity1"
             android:screenOrientation="portrait" />
         <activity

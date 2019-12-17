@@ -319,6 +319,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
             hideLoading();
             intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
+//            intent = new Intent(LoginActivity.this, DBActivity.class);
+//            startActivity(intent);
             finish();
         }
     };

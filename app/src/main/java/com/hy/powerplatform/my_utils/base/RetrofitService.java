@@ -27,6 +27,7 @@ import com.hy.powerplatform.car_maintain.bean.LingLiaoItem;
 import com.hy.powerplatform.car_maintain.bean.MainTainList;
 import com.hy.powerplatform.car_maintain.bean.WeiXiuChang;
 import com.hy.powerplatform.car_maintain.bean.zhibianhao;
+import com.hy.powerplatform.duban.bean.DBCheckPerson;
 import com.hy.powerplatform.login.bean.Login;
 import com.hy.powerplatform.login.bean.MainData;
 import com.hy.powerplatform.login.bean.News;
@@ -228,6 +229,12 @@ public interface RetrofitService {
      */
     @GET("hrm/profileListEmpProfile.do")
     Observable<CheckPerson> getCheckPerson ();
+
+    /**
+     * 获取督办检查人
+     */
+    @GET("system/dialogAppUser.do?curDep=true")
+    Observable<DBCheckPerson> getDBCheckPerson ();
 
     /**
      * 技术获取检查人

@@ -1,6 +1,7 @@
 package com.hy.powerplatform.duban.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,28 +14,38 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.hy.powerplatform.R;
+import com.hy.powerplatform.business_inspect.utils.DBHandler;
+import com.hy.powerplatform.duban.bean.DBFile;
 import com.hy.powerplatform.duban.bean.DBTJRCO;
 import com.hy.powerplatform.duban.bean.DBUp1;
 import com.hy.powerplatform.duban.bean.DBXG;
 import com.hy.powerplatform.duban.bean.DBZXList;
+import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.OkHttpUtil;
 import com.hy.powerplatform.my_utils.myViews.Header;
+import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
 import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
+import com.hy.powerplatform.oa_flow.bean.File;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_EIGHT;
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_SEVEN;
 
 public class DBZXDetailActivity extends BaseActivity {
 
@@ -80,11 +91,18 @@ public class DBZXDetailActivity extends BaseActivity {
     Button btnXG;
     @BindView(R.id.btnCB)
     Button btnCB;
+    @BindView(R.id.btnTJRC)
+    Button btnTJRC;
+    @BindView(R.id.btnBack)
+    Button btnBack;
 
+    DBFile beanfj = null;
+    String fileName = "";
     String data = "";
     String operId = "";
     String contactsId = "";
     String num = "";
+    String downloadData = "";
     String operStation = "";
     String upDateType = "";
     String workId = "";
@@ -93,13 +111,11 @@ public class DBZXDetailActivity extends BaseActivity {
     Gson gsonF = new Gson();
     DBUp1 bean = new DBUp1();
     DBXG bean2 = new DBXG();
-    @BindView(R.id.btnTJRC)
-    Button btnTJRC;
-    @BindView(R.id.btnBack)
-    Button btnBack;
     private OkHttpUtil httpUtil;
     AlertDialogUtil alertDialogUtil;
     HashMap<String, String> map = new HashMap();
+    List<DBFile.DataBean.SuperWorkTaskFilesBean> dataList = new ArrayList<>();
+    List<String> dataListName = new ArrayList<>();
     String path_url = Constant.BASE_URL1 + Constant.DBDEL;
     String path_url1 = Constant.BASE_URL1 + Constant.DBCHANGETYPE;
     String path_url2 = Constant.BASE_URL1 + Constant.DBCHULI;
@@ -107,6 +123,7 @@ public class DBZXDetailActivity extends BaseActivity {
     String path_url4 = Constant.BASE_URL1 + Constant.DBCB;
     String path_url5 = Constant.BASE_URL1 + Constant.DBBACK;
     String path_url6 = Constant.BASE_URL1 + Constant.DBTJRCO;
+    String path_urlfj = Constant.BASE_URL1 + Constant.DBXQFJ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,6 +183,41 @@ public class DBZXDetailActivity extends BaseActivity {
         if (operStation.equals("5") && !upDateType.equals("1") && !num.equals("1") && date.getTime() > date2.getTime()) {
             btnXG.setVisibility(View.VISIBLE);
         }
+
+        getFile();
+    }
+
+    /**
+     * 查看附件
+     */
+    private void getFile() {
+        HashMap<String, String> mapbj = new HashMap();
+        mapbj.put("workId", workId);
+        ProgressDialogUtil.startLoad(this, getResources().getString(R.string.up_data));
+        httpUtil.postForm(path_urlfj, mapbj, new OkHttpUtil.ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+//                Log.i("main", "response:" + e.toString());
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("error", e.toString());
+                message.setData(b);
+                message.what = Constant.TAG_ONE;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+//                      Log.i("main", "response:" + response.body().string());
+                data = response.body().string();
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("data", data);
+                message.setData(b);
+                message.what = Constant.TAG_NINE;
+                handler.sendMessage(message);
+            }
+        });
     }
 
     /**
@@ -275,7 +327,7 @@ public class DBZXDetailActivity extends BaseActivity {
                 Bundle b = new Bundle();
                 b.putString("data", data);
                 message.setData(b);
-                message.what = Constant.TAG_EIGHT;
+                message.what = TAG_EIGHT;
                 handler.sendMessage(message);
             }
         });
@@ -376,10 +428,72 @@ public class DBZXDetailActivity extends BaseActivity {
                 Bundle b = new Bundle();
                 b.putString("data", data);
                 message.setData(b);
-                message.what = Constant.TAG_SEVEN;
+                message.what = TAG_SEVEN;
                 handler.sendMessage(message);
             }
         });
+    }
+
+    /**
+     * 查看附件
+     */
+    private void onLookFile() {
+        if (beanfj.getData().getSuperWorkTaskFiles()!=null&&beanfj.getData().getSuperWorkTaskFiles().size() == 1) {
+            String id = beanfj.getData().getSuperWorkTaskFiles().get(0).getFileId();
+            final String url = Constant.BASE_URL2 + Constant.FILEDATA + "?fileId=" + id;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    DBHandler dbA = new DBHandler();
+                    downloadData = dbA.OAQingJiaMyDetail(url);
+                    if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
+                        handler.sendEmptyMessage(111);
+                    } else {
+                        handler.sendEmptyMessage(222);
+                    }
+                }
+            }).start();
+        } else if (beanfj.getData().getSuperWorkTaskFiles()!=null&&beanfj.getData().getSuperWorkTaskFiles().size() > 1) {
+            MyAlertDialog.MyListAlertDialog(this, dataListName, new AlertDialogCallBackP() {
+                @Override
+                public void oneselect(final String data1) {
+                    String id = "";
+                    for (int i = 0;i<dataList.size();i++){
+                        if (dataList.get(i).getFileName().equals(data1)){
+                            id = dataList.get(i).getFileId();
+                        }
+                    }
+                    final String url = Constant.BASE_URL2 + Constant.FILEDATA + "?fileId=" + id;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DBHandler dbA = new DBHandler();
+                            downloadData = dbA.OAQingJiaMyDetail(url);
+                            if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
+                                handler.sendEmptyMessage(111);
+                            } else {
+                                handler.sendEmptyMessage(222);
+                            }
+                        }
+                    }).start();
+                }
+
+                @Override
+                public void select(List<String> list) {
+
+                }
+
+                @Override
+                public void confirm() {
+
+                }
+
+                @Override
+                public void cancel() {
+
+                }
+            });
+        }
     }
 
     @Override
@@ -425,6 +539,7 @@ public class DBZXDetailActivity extends BaseActivity {
                 setTuiHui();
                 break;
             case R.id.tvFJ:
+                onLookFile();
                 break;
             case R.id.btn:
                 map.clear();
@@ -509,7 +624,7 @@ public class DBZXDetailActivity extends BaseActivity {
                     gsonF = new Gson();
                     bean2 = gsonF.fromJson(data, DBXG.class);
                     if (bean2.isSuccess()) {
-                        Toast.makeText(DBZXDetailActivity.this, "处理成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DBZXDetailActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(DBZXDetailActivity.this, bean2.getMsg(), Toast.LENGTH_SHORT).show();
                     }
@@ -529,7 +644,7 @@ public class DBZXDetailActivity extends BaseActivity {
                     ProgressDialogUtil.stopLoad();
                     finish();
                     break;
-                case Constant.TAG_SEVEN:
+                case TAG_SEVEN:
                     b1 = msg.getData();
                     data = b1.getString("data");
                     gsonF = new Gson();
@@ -540,7 +655,7 @@ public class DBZXDetailActivity extends BaseActivity {
                     ProgressDialogUtil.stopLoad();
                     finish();
                     break;
-                case Constant.TAG_EIGHT:
+                case TAG_EIGHT:
                     b1 = msg.getData();
                     data = b1.getString("data");
                     gsonF = new Gson();
@@ -557,6 +672,38 @@ public class DBZXDetailActivity extends BaseActivity {
                         }
                     }
                     ProgressDialogUtil.stopLoad();
+                    break;
+                case Constant.TAG_NINE:
+                    Bundle bundlefj = msg.getData();
+                    String datafj = bundlefj.getString("data");
+                    Gson gsonfj = new Gson();
+                    beanfj = gsonfj.fromJson(datafj, DBFile.class);
+                    if (beanfj.isSuccess()){
+                        for (int i = 0;i<beanfj.getData().getSuperWorkTaskFiles().size();i++){
+                            if (fileName.equals("")){
+                                fileName = beanfj.getData().getSuperWorkTaskFiles().get(i).getFileName();
+                            }else {
+                                fileName = fileName+"\n"+beanfj.getData().getSuperWorkTaskFiles().get(i).getFileName();
+                            }
+                            dataList.add(beanfj.getData().getSuperWorkTaskFiles().get(i));
+                            dataListName.add(beanfj.getData().getSuperWorkTaskFiles().get(i).getFileName());
+                        }
+                    }
+                    tvFJ.setText(fileName);
+                    ProgressDialogUtil.stopLoad();
+                    break;
+                case 111:
+                    Toast.makeText(DBZXDetailActivity.this, "操作数据失败", Toast.LENGTH_SHORT).show();
+                    ProgressDialogUtil.stopLoad();
+                    break;
+                case 222:
+                    Gson gson2 = new Gson();
+                    File file = gson2.fromJson(downloadData, File.class);
+                    String filePath = file.getData().getFilePath();
+                    String url = Constant.FIELDETAIL + filePath;
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                    startActivity(intent);
                     break;
             }
         }

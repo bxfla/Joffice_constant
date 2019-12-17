@@ -76,7 +76,7 @@ public class DBList implements Serializable {
         private Object version;
         private Object orgId;
         private Object orgPath;
-        private int workId;
+        private String workId;
         private String taskType;
         private String taskName;
         private String taskContext;
@@ -96,8 +96,8 @@ public class DBList implements Serializable {
         private String createrName;
         private String approverName;
         private Object statusName;
-        private Object contactsName;
-        private Object contactsId;
+        private String contactsName;
+        private String contactsId;
         private List<?> superWorkTaskFiles;
 
         public Object getVersion() {
@@ -124,11 +124,11 @@ public class DBList implements Serializable {
             this.orgPath = orgPath;
         }
 
-        public int getWorkId() {
+        public String getWorkId() {
             return workId;
         }
 
-        public void setWorkId(int workId) {
+        public void setWorkId(String workId) {
             this.workId = workId;
         }
 
@@ -284,19 +284,19 @@ public class DBList implements Serializable {
             this.statusName = statusName;
         }
 
-        public Object getContactsName() {
+        public String getContactsName() {
             return contactsName;
         }
 
-        public void setContactsName(Object contactsName) {
+        public void setContactsName(String contactsName) {
             this.contactsName = contactsName;
         }
 
-        public Object getContactsId() {
+        public String getContactsId() {
             return contactsId;
         }
 
-        public void setContactsId(Object contactsId) {
+        public void setContactsId(String contactsId) {
             this.contactsId = contactsId;
         }
 

@@ -199,8 +199,14 @@
         <TextView
             android:id="@+id/tvLXR"
             style="@style/oaEditText"
-            android:hint="请选择联系人"/>
+            android:hint="请选择联系人" />
+
+        <Spinner
+            android:id="@+id/spinnerPerson"
+            style="@style/oaEditText"
+            android:visibility="gone" />
     </LinearLayout>
+
     <View style="@style/line"></View>
 
     <LinearLayout

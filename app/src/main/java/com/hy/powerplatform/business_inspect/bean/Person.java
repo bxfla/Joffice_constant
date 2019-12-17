@@ -25,4 +25,5 @@ public class Person implements Serializable {
     public void setUserCode(String userCode) {
         this.userCode = userCode;
     }
+
 }
