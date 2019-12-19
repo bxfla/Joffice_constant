@@ -459,6 +459,8 @@ public class DBListActivity extends BaseActivity {
                         }
                         baseAdapter.notifyDataSetChanged();
                     }else {
+                        recyclerView.complete();
+                        recyclerView.onNoMore();
                         baseAdapter.notifyDataSetChanged();
                     }
                     tvOverTime.setText("");

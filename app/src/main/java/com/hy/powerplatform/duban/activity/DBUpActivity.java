@@ -80,6 +80,7 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
     @BindView(R.id.spinnerPerson)
     Spinner spinnerPerson;
 
+    String rights, userStatus,userId;
     String data = "";
     String WorkId = "";
     String userName = "", userCode = "";
@@ -101,10 +102,19 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
     private CustomDatePickerMin customDatePicker1;
     private CustomDatePickerDay customDatePicker2;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        rights = new SharedPreferencesHelper(this, "login").getData(this, "rights", "");
+        userId = new SharedPreferencesHelper(this, "login").getData(this, "userId", "");
+        userStatus = new SharedPreferencesHelper(this, "login").getData(this, "userStatus", "");
+        if (!userStatus.equals("超级管理员")) {
+            if (!rights.contains("_addSuper")) {
+                btn.setVisibility(View.GONE);
+            }
+        }
         alertDialogUtil = new AlertDialogUtil(this);
         listType.add("公司任务");
         listType.add("部门任务");
@@ -114,13 +124,46 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
 
         sharedPreferencesHelper = new SharedPreferencesHelper(this, "login");
         lxrName = sharedPreferencesHelper.getData(DBUpActivity.this, "userStatus", "");
-        lxrCode = sharedPreferencesHelper.getData(DBUpActivity.this, "userCode", "");
+        lxrCode = sharedPreferencesHelper.getData(DBUpActivity.this, "userId", "");
         tvLXR.setText(lxrName);
         initDatePicker();
 
         httpUtil = OkHttpUtil.getInstance(this);
         checkPersonPresenter = new CheckPersonPresenterimpl(this, this);
-        checkPersonPresenter.getCheckPersonPresenterData();
+//        checkPersonPresenter.getCheckPersonPresenterData();
+        Person person = new Person();
+        person.setUserCode("9386");
+        person.setUserName("王少云");
+        morenDatas.add(person);
+
+        Person person1 = new Person();
+        person1.setUserCode("9387");
+        person1.setUserName("唐根六");
+        morenDatas.add(person1);
+
+        Person person3 = new Person();
+        person3.setUserCode("9398");
+        person3.setUserName("晏慧锋");
+        morenDatas.add(person3);
+        if (!userStatus.equals("王少云")&&!userStatus.equals("唐根六")&&!userStatus.equals("晏慧锋")){
+            Person person4 = new Person();
+            person4.setUserCode(userId);
+            person4.setUserName(userStatus);
+            morenDatas.add(person3);
+        }
+        if (morenDatas.size() != 0) {
+            for (int i = 0; i < morenDatas.size(); i++) {
+                if (i != morenDatas.size() - 1) {
+                    userName = userName + morenDatas.get(i).getUserName() + ",";
+                    userCode = userCode + morenDatas.get(i).getUserCode() + ",";
+                } else {
+                    userName = userName + morenDatas.get(i).getUserName();
+                    userCode = userCode + morenDatas.get(i).getUserCode();
+                }
+            }
+        }
+        tvDBR.setText(userName);
+        getDBZongHeGuanLi();
         sharedPreferencesHelper = new SharedPreferencesHelper(this, "login");
 
         spinnerPerson.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -201,14 +244,14 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                 morenDatas.add(person);
             }
         }
-        String roleName1 = sharedPreferencesHelper.getData(this, "userStatus", "");
-        String userCode1 = sharedPreferencesHelper.getData(this, "userCode", "");
-        Person person = new Person();
-        person.setUserCode(userCode1);
-        person.setUserName(roleName1);
-        if (!roleName1.equals("晏慧锋")){
-            morenDatas.add(person);
-        }
+//        String roleName1 = sharedPreferencesHelper.getData(this, "userStatus", "");
+//        String userCode1 = sharedPreferencesHelper.getData(this, "userCode", "");
+//        Person person = new Person();
+//        person.setUserCode(userCode1);
+//        person.setUserName(roleName1);
+//        if (!roleName1.equals("晏慧锋")) {
+//            morenDatas.add(person);
+//        }
         if (morenDatas.size() != 0) {
             for (int i = 0; i < morenDatas.size(); i++) {
                 if (i != morenDatas.size() - 1) {
@@ -222,9 +265,9 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
         }
         tvDBR.setText(userName);
 
-        if (lxrName.equals("晏慧锋")) {
+//        if (lxrName.equals("晏慧锋")) {
             getDBZongHeGuanLi();
-        }
+//        }
     }
 
     /**
@@ -286,7 +329,7 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                     break;
                 }
                 if (tvDBR.getText().toString().equals("")) {
-                    Toast.makeText(this, "督办任务不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "督办人不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 if (tvZXR.getText().toString().equals("")) {
@@ -307,7 +350,6 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                 map.put("superWorkTask.operatorIds", ZXCode);
                 map.put("superWorkTask.operatorNames", ZXName);
                 map.put("superWorkTask.contactsName", lxrName);
-                map.put("superWorkTask.contactsId", lxrCode);
                 map.put("superWorkTask.contactsId", lxrCode);
                 map.put("superWorkTask.workId", WorkId);
                 ProgressDialogUtil.startLoad(this, getResources().getString(R.string.up_data));
@@ -380,58 +422,60 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                     final DBUp bean = gsonF.fromJson(data, DBUp.class);
                     WorkId = bean.getWorkId();
                     if (bean.isSuccess()) {
-                        Toast.makeText(DBUpActivity.this, "确认编辑成功", Toast.LENGTH_SHORT).show();
-                        alertDialogUtil.showDialog1("您确定要提交数据吗", new AlertDialogCallBack() {
-                            @Override
-                            public void select(String data) {
+                        if (userStatus.equals("超级管理员") || rights.contains("_submitSuper")) {
+                            Toast.makeText(DBUpActivity.this, "确认编辑成功", Toast.LENGTH_SHORT).show();
+                            alertDialogUtil.showDialog1("您确定要提交数据吗", new AlertDialogCallBack() {
+                                @Override
+                                public void select(String data) {
 
-                            }
+                                }
 
-                            @Override
-                            public void confirm() {
-                                HashMap<String, String> map = new HashMap();
-                                map.put("workId", WorkId);
-                                map.put("superWorkTask.workId", bean.getWorkId());
-                                map.put("superWorkTask.taskType", spinnerType.getSelectedItem().toString().trim());
-                                map.put("superWorkTask.taskName", etRW.getText().toString().trim());
-                                map.put("superWorkTask.planFinishTime", tvJHWCSJ.toString());
-                                map.put("superWorkTask.taskContext", etContent.getText().toString().trim());
-                                map.put("superWorkTask.supervisorIds", userCode);
-                                map.put("superWorkTask.supervisorNames", userName);
-                                map.put("superWorkTask.operatorIds", ZXCode);
-                                map.put("superWorkTask.operatorNames", ZXName);
-                                map.put("superWorkTask.contactsName", lxrName);
-                                map.put("superWorkTask.contactsId", lxrCode);
-                                httpUtil.postForm(path_url1, map, new OkHttpUtil.ResultCallback() {
-                                    @Override
-                                    public void onError(Request request, Exception e) {
-                                        Message message = new Message();
-                                        Bundle b = new Bundle();
-                                        b.putString("error", e.toString());
-                                        message.setData(b);
-                                        message.what = Constant.TAG_ONE;
-                                        handler.sendMessage(message);
-                                    }
+                                @Override
+                                public void confirm() {
+                                    HashMap<String, String> map = new HashMap();
+                                    map.put("workId", WorkId);
+                                    map.put("superWorkTask.workId", bean.getWorkId());
+                                    map.put("superWorkTask.taskType", spinnerType.getSelectedItem().toString().trim());
+                                    map.put("superWorkTask.taskName", etRW.getText().toString().trim());
+                                    map.put("superWorkTask.planFinishTime", tvJHWCSJ.toString());
+                                    map.put("superWorkTask.taskContext", etContent.getText().toString().trim());
+                                    map.put("superWorkTask.supervisorIds", userCode);
+                                    map.put("superWorkTask.supervisorNames", userName);
+                                    map.put("superWorkTask.operatorIds", ZXCode);
+                                    map.put("superWorkTask.operatorNames", ZXName);
+                                    map.put("superWorkTask.contactsName", lxrName);
+                                    map.put("superWorkTask.contactsId", lxrCode);
+                                    httpUtil.postForm(path_url1, map, new OkHttpUtil.ResultCallback() {
+                                        @Override
+                                        public void onError(Request request, Exception e) {
+                                            Message message = new Message();
+                                            Bundle b = new Bundle();
+                                            b.putString("error", e.toString());
+                                            message.setData(b);
+                                            message.what = Constant.TAG_ONE;
+                                            handler.sendMessage(message);
+                                        }
 
-                                    @Override
-                                    public void onResponse(Response response) throws IOException {
-                                        String dataTJ = response.body().string();
-                                        Message message = new Message();
-                                        Bundle b = new Bundle();
-                                        b.putString("dataTJ", dataTJ);
-                                        message.setData(b);
-                                        message.what = Constant.TAG_THERE;
-                                        handler.sendMessage(message);
-                                    }
-                                });
-                            }
+                                        @Override
+                                        public void onResponse(Response response) throws IOException {
+                                            String dataTJ = response.body().string();
+                                            Message message = new Message();
+                                            Bundle b = new Bundle();
+                                            b.putString("dataTJ", dataTJ);
+                                            message.setData(b);
+                                            message.what = Constant.TAG_THERE;
+                                            handler.sendMessage(message);
+                                        }
+                                    });
+                                }
 
-                            @Override
-                            public void cancel() {
-                                ProgressDialogUtil.stopLoad();
-                                finish();
-                            }
-                        });
+                                @Override
+                                public void cancel() {
+                                    ProgressDialogUtil.stopLoad();
+                                    finish();
+                                }
+                            });
+                        }
                     }
                     break;
                 case Constant.TAG_THERE:
@@ -440,47 +484,49 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                     Gson gsonT = new Gson();
                     DBUp1 bean1 = gsonT.fromJson(data2, DBUp1.class);
                     if (bean1.isSuccess()) {
-                        Toast.makeText(DBUpActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
-                        alertDialogUtil.showDialog1("您确定要发布数据吗", new AlertDialogCallBack() {
-                            @Override
-                            public void select(String data) {
+                        if (userStatus.equals("超级管理员") || rights.contains("_publishSuper")) {
+                            Toast.makeText(DBUpActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+                            alertDialogUtil.showDialog1("您确定要发布数据吗", new AlertDialogCallBack() {
+                                @Override
+                                public void select(String data) {
 
-                            }
+                                }
 
-                            @Override
-                            public void confirm() {
-                                HashMap<String, String> map = new HashMap();
-                                map.put("ids", WorkId);
-                                httpUtil.postForm(path_url2, map, new OkHttpUtil.ResultCallback() {
-                                    @Override
-                                    public void onError(Request request, Exception e) {
-                                        Message message = new Message();
-                                        Bundle b = new Bundle();
-                                        b.putString("error", e.toString());
-                                        message.setData(b);
-                                        message.what = Constant.TAG_ONE;
-                                        handler.sendMessage(message);
-                                    }
+                                @Override
+                                public void confirm() {
+                                    HashMap<String, String> map = new HashMap();
+                                    map.put("ids", WorkId);
+                                    httpUtil.postForm(path_url2, map, new OkHttpUtil.ResultCallback() {
+                                        @Override
+                                        public void onError(Request request, Exception e) {
+                                            Message message = new Message();
+                                            Bundle b = new Bundle();
+                                            b.putString("error", e.toString());
+                                            message.setData(b);
+                                            message.what = Constant.TAG_ONE;
+                                            handler.sendMessage(message);
+                                        }
 
-                                    @Override
-                                    public void onResponse(Response response) throws IOException {
-                                        String dataFB = response.body().string();
-                                        Message message = new Message();
-                                        Bundle b = new Bundle();
-                                        b.putString("dataFB", dataFB);
-                                        message.setData(b);
-                                        message.what = Constant.TAG_FOUR;
-                                        handler.sendMessage(message);
-                                    }
-                                });
-                            }
+                                        @Override
+                                        public void onResponse(Response response) throws IOException {
+                                            String dataFB = response.body().string();
+                                            Message message = new Message();
+                                            Bundle b = new Bundle();
+                                            b.putString("dataFB", dataFB);
+                                            message.setData(b);
+                                            message.what = Constant.TAG_FOUR;
+                                            handler.sendMessage(message);
+                                        }
+                                    });
+                                }
 
-                            @Override
-                            public void cancel() {
-                                ProgressDialogUtil.stopLoad();
-                                finish();
-                            }
-                        });
+                                @Override
+                                public void cancel() {
+                                    ProgressDialogUtil.stopLoad();
+                                    finish();
+                                }
+                            });
+                        }
                     }
                     break;
                 case Constant.TAG_FOUR:
@@ -500,8 +546,8 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                     Gson gsonZHPer = new Gson();
                     DBZheluPerson beanZHPer = gsonZHPer.fromJson(data4, DBZheluPerson.class);
                     if (beanZHPer.getTotalCounts() != 0) {
-                        dbZHPerListName.add("晏慧锋");
-                        dbZHPerListId.add("41071");
+                        dbZHPerListName.add(userStatus);
+                        dbZHPerListId.add(userId);
                         for (int i = 0; i < beanZHPer.getResult().size(); i++) {
                             dbZHPerListName.add(beanZHPer.getResult().get(i).getFullname());
                             dbZHPerListId.add(beanZHPer.getResult().get(i).getUserId());
@@ -511,8 +557,6 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                         spinnerPerson.setAdapter(adapterType);
                         spinnerPerson.setVisibility(View.VISIBLE);
                         tvLXR.setVisibility(View.GONE);
-                    } else {
-                        Toast.makeText(DBUpActivity.this, "获取联系人失败", Toast.LENGTH_SHORT).show();
                     }
                     ProgressDialogUtil.stopLoad();
                     break;

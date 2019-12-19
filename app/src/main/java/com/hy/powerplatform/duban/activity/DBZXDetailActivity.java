@@ -96,6 +96,7 @@ public class DBZXDetailActivity extends BaseActivity {
     @BindView(R.id.btnBack)
     Button btnBack;
 
+    String operTime;
     DBFile beanfj = null;
     String fileName = "";
     String data = "";
@@ -134,6 +135,7 @@ public class DBZXDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         DBZXList.ResultBean bean = (DBZXList.ResultBean) intent.getSerializableExtra("bean");
         status = String.valueOf(bean.getTaskStatus());
+        operTime = bean.getOperTime();
         tvType.setText(bean.getTaskType());
         tvRW.setText(bean.getTaskName());
         tvJHWCSJ.setText(bean.getPlanFinishTime() + "");
@@ -180,7 +182,7 @@ public class DBZXDetailActivity extends BaseActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if (operStation.equals("5") && !upDateType.equals("1") && !num.equals("1") && date.getTime() > date2.getTime()) {
+        if (operStation.equals("5") && !upDateType.equals("1") && !num.equals("1") && date.getTime() <= date2.getTime()) {
             btnXG.setVisibility(View.VISIBLE);
         }
 
@@ -338,7 +340,7 @@ public class DBZXDetailActivity extends BaseActivity {
      */
     private void setCuiBan() {
         map.clear();
-        map.put("planFinishTime", tvJHWCSJ.getText().toString());
+        map.put("operTime", operTime);
         map.put("taskName", tvRW.getText().toString());
         map.put("contactsId", contactsId);
         map.put("operId", operId);
@@ -624,7 +626,7 @@ public class DBZXDetailActivity extends BaseActivity {
                     gsonF = new Gson();
                     bean2 = gsonF.fromJson(data, DBXG.class);
                     if (bean2.isSuccess()) {
-                        Toast.makeText(DBZXDetailActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DBZXDetailActivity.this, "操作成功", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(DBZXDetailActivity.this, bean2.getMsg(), Toast.LENGTH_SHORT).show();
                     }

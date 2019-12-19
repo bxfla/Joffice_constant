@@ -109,7 +109,7 @@ public class DBDetailGLActivity extends BaseActivity {
         tvDBR.setText(detaBean.getSupervisorNames());
         tvZXR.setText(detaBean.getOperatorNames());
         tvFBSJ.setText(detaBean.getApproveTime());
-        tvLXR.setText(detaBean.getApproverName());
+        tvLXR.setText(detaBean.getContactsName());
         tvFJ.setText(detaBean.getFileNames() + "");
         workId = String.valueOf(detaBean.getWorkId());
         contactsName = detaBean.getContactsName();

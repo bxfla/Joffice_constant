@@ -88,12 +88,39 @@ public class DBZXListActivity extends BaseActivity {
         initDatePicker();
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.getRecyclerView().setLayoutManager(manager);
-        baseAdapter = new BaseRecyclerAdapter<DBZXList.ResultBean>(this, R.layout.adapter_dblist_item, beanList) {
+        baseAdapter = new BaseRecyclerAdapter<DBZXList.ResultBean>(this, R.layout.adapter_dbzxlist_item, beanList) {
             @Override
             public void convert(BaseViewHolder holder, final DBZXList.ResultBean resultBean) {
                 holder.setText(R.id.tvTaskName, resultBean.getTaskName());
                 holder.setText(R.id.tvContent, resultBean.getTaskContext());
                 holder.setText(R.id.tvTime, resultBean.getCreateTime());
+                String pizhu = resultBean.getAnnotation();
+                if (pizhu==null||pizhu.equals("")){
+                    holder.setGoneLL(R.id.llPZ);
+                }else {
+                    holder.setText(R.id.tvPiZhu, resultBean.getAnnotation());
+                }
+                if (resultBean.getOperStatus()==1){
+                    holder.setText(R.id.tvStaue, "未查看");
+                }else if (resultBean.getOperStatus()==2){
+                    holder.setText(R.id.tvStaue, "已查看");
+                }else if (resultBean.getOperStatus()==3){
+                    holder.setText(R.id.tvStaue, "已接收");
+                }else if (resultBean.getOperStatus()==4){
+                    holder.setText(R.id.tvStaue, "已退回");
+                }else if (resultBean.getOperStatus()==5){
+                    holder.setText(R.id.tvStaue, "已提交");
+                }else if (resultBean.getOperStatus()==6){
+                    holder.setText(R.id.tvStaue, "已撤回");
+                }else if (resultBean.getOperStatus()==7){
+                    holder.setText(R.id.tvStaue, "已完成");
+                }else if (resultBean.getOperStatus()==8){
+                    holder.setText(R.id.tvStaue, "已冻结");
+                }else if (resultBean.getOperStatus()==9){
+                    holder.setText(R.id.tvStaue, "逾期完成");
+                }else if (resultBean.getOperStatus()==10){
+                    holder.setText(R.id.tvStaue, "未完成");
+                }
                 holder.setOnClickListener(R.id.ll, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -257,7 +284,12 @@ public class DBZXListActivity extends BaseActivity {
         }else if (spinnerType.getSelectedItem().toString().trim().equals("未完成")){
             zt = "10";
         }
-        map.put("Q_operStatus_N_EQ", zt);
+        if (zt.equals("")){
+            map.put("Q_operStatus_N_EQ", "1,2,3");
+        }else {
+            map.put("Q_operStatus_N_EQ", zt);
+        }
+        map.put("searchAll", "false");
         httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -358,6 +390,8 @@ public class DBZXListActivity extends BaseActivity {
                         }
                         baseAdapter.notifyDataSetChanged();
                     }else {
+                        recyclerView.complete();
+                        recyclerView.onNoMore();
                         baseAdapter.notifyDataSetChanged();
                     }
                     ProgressDialogUtil.stopLoad();

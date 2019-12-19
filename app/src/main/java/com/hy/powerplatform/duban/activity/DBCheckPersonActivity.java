@@ -148,17 +148,17 @@ public class DBCheckPersonActivity extends BaseActivity implements DBCheckPerson
 //            }
 //        }
         Person person1 = new Person();
-        person1.setUserCode("41058");
+        person1.setUserCode("9386");
         person1.setUserName("王少云");
         morenDatas.add(person1);
 
         Person person2 = new Person();
-        person2.setUserCode("40351");
+        person2.setUserCode("9387");
         person2.setUserName("唐根六");
         morenDatas.add(person2);
 
         Person person3 = new Person();
-        person3.setUserCode("41071");
+        person3.setUserCode("9398");
         person3.setUserName("晏慧锋");
         morenDatas.add(person3);
 

@@ -118,7 +118,7 @@ public class DBChaKanCKActivity extends BaseActivity {
                         if (bean.getData().getOperStatus()==1){
                             tvZT.setText("未查看");
                         }else if (bean.getData().getOperStatus()==2){
-                            tvZT.setText("以查看");
+                            tvZT.setText("已查看");
                         }else if (bean.getData().getOperStatus()==3){
                             tvZT.setText("已接收");
                         }else if (bean.getData().getOperStatus()==4){

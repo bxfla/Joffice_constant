@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -818,7 +819,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                 String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
                 final Request request = new Request.Builder()
                         .url(url)
-                        .addHeader("Cookie",Session)
+                        .addHeader("Cookie", Session)
                         .get()//默认就是GET请求，可以不写
                         .build();
                 Call call = okHttpClient.newCall(request);
@@ -1533,7 +1534,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (comment.equals("")) {
-                    if (!bmreout.equals("2")&& !gybmreout.equals("2") && !jcbmyj.equals("2") && !zcreout.equals("2") && !fgreout.equals("2")
+                    if (!bmreout.equals("2") && !gybmreout.equals("2") && !jcbmyj.equals("2") && !zcreout.equals("2") && !fgreout.equals("2")
                             && !cwreout.equals("2") && !cwfgreout.equals("2") && !zjlreout.equals("2")) {
                         comment = "";
                         personSession();
@@ -1555,21 +1556,46 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
         if (bigResultList.size() != 0) {
             sendData();
         } else {
-            if (btnTTag.equals("N")) {
-                Gson gson = new Gson();
-                FlowPuechase bean = gson.fromJson(res, FlowPuechase.class);
-                bmfzryj = bean.getMainform().get(0).getBmfzryj();
-                gybmyj = bean.getMainform().get(0).getCggybyj();
-                zcgkbmyj = bean.getMainform().get(0).getZcgkbmyj();
-                fgldyj = bean.getMainform().get(0).getFgldyj();
-                cgfgyj = bean.getMainform().get(0).getCbfgldyj();
-                cwzjyj = bean.getMainform().get(0).getCwzjyj();
-                zjl = bean.getMainform().get(0).getZjlyj();
-                Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
+            if (btnT.getVisibility() == View.VISIBLE) {
+                if (btnTTag.equals("N")) {
+                    Gson gson = new Gson();
+                    FlowPuechase bean = gson.fromJson(res, FlowPuechase.class);
+                    bmfzryj = bean.getMainform().get(0).getBmfzryj();
+                    gybmyj = bean.getMainform().get(0).getCggybyj();
+                    zcgkbmyj = bean.getMainform().get(0).getZcgkbmyj();
+                    fgldyj = bean.getMainform().get(0).getFgldyj();
+                    cgfgyj = bean.getMainform().get(0).getCbfgldyj();
+                    cwzjyj = bean.getMainform().get(0).getCwzjyj();
+                    zjl = bean.getMainform().get(0).getZjlyj();
+                    Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendData();
+                }
             } else {
                 sendData();
             }
         }
+    }
+
+    public void getAppRovePerson() {
+        ProgressDialogUtil.startLoad(FlowPuechaseWillDetailActivity.this, "获取数据中");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DBHandler dbA = new DBHandler();
+                destType = beanList.get(0).getDestType();
+                if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                    handler.sendEmptyMessage(TAG_SIX);
+                } else if (destType.indexOf("end") == -1) {
+                    handler.sendEmptyMessage(TAG_FIVE);
+                } else {
+                    getLastPerson();
+                }
+                signaName = beanList.get(0).getName();
+                destName = beanList.get(0).getDestination();
+            }
+        }).start();
+        ProgressDialogUtil.stopLoad();
     }
 
     private void sendData() {
@@ -1687,25 +1713,10 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                 }
 
                 if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
-
-                    String bigUserCodes = bigResultList1.toString();
-                    bigUserCodes = bigUserCodes.toString().replace("[", "");
-                    bigUserCodes = bigUserCodes.toString().replace("]", "");
-
-                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else {
-                        flowAssignld = destName + "|" + userCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                        flowAssignld = flowAssignld.replace(":", "");
-                    }
+                    Looper.prepare();
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowPuechaseWillDetailActivity.this, "请选择审批人", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
                 } else {
                     String bigUserCodes = bigResultList.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
@@ -1737,7 +1748,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             , etMoney5.getText().toString(), tvAllMoney1.getText().toString(), tvAllMoney2.getText().toString()
                             , tvAllMoney3.getText().toString(), tvAllMoney4.getText().toString(), tvAllMoney5.getText().toString()
                             , userCode, destName, taskId, flowAssignld, mainId,
-                            bmfzryj,gybmyj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
+                            bmfzryj, gybmyj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
                             hejidj, allMoney, use, cgfgyj, other, jcbmyj
                             , danwei1, danwei2, danwei3, danwei4, danwei5, tvzc.getText().toString(), tvtype.getText().toString()
                             , tvBZ1.getText().toString(), tvBZ2.getText().toString(), tvBZ3.getText().toString()
@@ -1746,7 +1757,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     upData = dbA.OAPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                             , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
                             , allMoney4, allMoney5, userCode, destName, taskId, flowAssignld, mainId,
-                            bmfzryj,gybmyj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
+                            bmfzryj, gybmyj, zcgkbmyj, fgldyj, cwzjyj, zjl, serialNumber, comment, signaName, allNum,
                             hejidj, allMoney, use, cgfgyj, other, jcbmyj, danwei1, danwei2, danwei3, danwei4, danwei5
                             , tvzc.getText().toString(), tvtype.getText().toString()
                             , tvBZ1.getText().toString(), tvBZ2.getText().toString(), tvBZ3.getText().toString()
@@ -1769,12 +1780,12 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
             switch (msg.what) {
                 case 333:
                     ProgressDialogUtil.stopLoad();
-                    Toast.makeText(FlowPuechaseWillDetailActivity.this,getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowPuechaseWillDetailActivity.this, getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
                     finish();
                     break;
                 case 444:
                     ProgressDialogUtil.stopLoad();
-                    Toast.makeText(FlowPuechaseWillDetailActivity.this,getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowPuechaseWillDetailActivity.this, getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
                     break;
                 case 111:
                     Gson gsonF = new Gson();
@@ -1873,7 +1884,6 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
 //                    signaName = bean.getTrans().get(0).getName();
 //                    destName = bean.getTrans().get(0).getDestination();
 //                    destType = bean.getTrans().get(0).getDestType();
-                    ProgressDialogUtil.stopLoad();
 
                     String formRights = bean.getFormRights();
                     try {
@@ -2200,6 +2210,13 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     }
                     if (bean.isRevoke()) {
                         Toast.makeText(FlowPuechaseWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
+                    }
+                    ProgressDialogUtil.stopLoad();
+                    if (beanList.size() == 1) {
+                        btnT.setVisibility(View.GONE);
+                        tvText.setVisibility(View.GONE);
+                        ProgressDialogUtil.startLoad(FlowPuechaseWillDetailActivity.this, "获取审核人");
+                        getAppRovePerson();
                     }
                     break;
                 case TAG_TWO:

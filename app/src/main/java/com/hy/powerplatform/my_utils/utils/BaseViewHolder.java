@@ -111,6 +111,15 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
+    /**
+     * 给TextView设置隐藏控件方法
+     */
+    public BaseViewHolder setGoneLL(int viewId) {
+        LinearLayout rb = getView(viewId);
+        rb.setVisibility(View.GONE);
+        return this;
+    }
+
 
     /**
      * 给Radionbutton设置cgeck方法

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -172,7 +173,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
     boolean assigned;
     String tag = "noEnd";
     String comment = "";
-    String bmreout, fgreout,cwzjreout, zjlreout, flowAssignld, chuCaiCode = "";
+    String bmreout, fgreout, cwzjreout, zjlreout, flowAssignld, chuCaiCode = "";
     String jygj01 = "", jygj02 = "", jygj03 = "", jygj04 = "";
     String jygj1, jygj2, jygj3, jygj4 = "";
     String[] bigNametemp = null;
@@ -790,18 +791,42 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
         if (bigResultList.size() != 0) {
             sendData();
         } else {
-            if (btnTTag.equals("N")) {
-                Gson gson = new Gson();
-                FlowChuCai bean = gson.fromJson(res, FlowChuCai.class);
-                bmfzr = bean.getMainform().get(0).getBmfzryj();
-                fgfze = bean.getMainform().get(0).getFgldyj();
-                cwzjyj = bean.getMainform().get(0).getCwzjyj();
-                zjl = bean.getMainform().get(0).getZjlyj();
-                Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
+            if (btnT.getVisibility() == View.VISIBLE) {
+                if (btnTTag.equals("N")) {
+                    Gson gson = new Gson();
+                    FlowChuCai bean = gson.fromJson(res, FlowChuCai.class);
+                    bmfzr = bean.getMainform().get(0).getBmfzryj();
+                    fgfze = bean.getMainform().get(0).getFgldyj();
+                    cwzjyj = bean.getMainform().get(0).getCwzjyj();
+                    zjl = bean.getMainform().get(0).getZjlyj();
+                    Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendData();
+                }
             } else {
                 sendData();
             }
         }
+    }
+
+    public void getAppRovePerson() {
+        ProgressDialogUtil.startLoad(FlowChuCaiWillDetailActivity.this, "获取数据中");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                destType = beanList.get(0).getDestType();
+                if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                    handler.sendEmptyMessage(TAG_SIX);
+                } else if (destType.indexOf("end") == -1) {
+                    handler.sendEmptyMessage(TAG_FIVE);
+                } else {
+                    getLastPerson();
+                }
+                signaName = beanList.get(0).getName();
+                destName = beanList.get(0).getDestination();
+            }
+        }).start();
+        ProgressDialogUtil.stopLoad();
     }
 
     private void sendData() {
@@ -940,25 +965,29 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
-                    String bigUserCodes = bigResultList1.toString();
-                    bigUserCodes = bigUserCodes.toString().replace("[", "");
-                    bigUserCodes = bigUserCodes.toString().replace("]", "");
-
-                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-//                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText + "," + otherCodeText;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else {
-                        flowAssignld = destName + "|" + userCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                        flowAssignld = flowAssignld.replace(":", "");
-                    }
+//                    String bigUserCodes = bigResultList1.toString();
+//                    bigUserCodes = bigUserCodes.toString().replace("[", "");
+//                    bigUserCodes = bigUserCodes.toString().replace("]", "");
+//
+//                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
+////                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
+//                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText + "," + otherCodeText;
+//                        flowAssignld = flowAssignld.replace(" ", "");
+//                        flowAssignld = flowAssignld.replace(":|", "|");
+//                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
+//                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes;
+//                        flowAssignld = flowAssignld.replace(" ", "");
+//                        flowAssignld = flowAssignld.replace(":|", "|");
+//                    } else {
+//                        flowAssignld = destName + "|" + userCodes;
+//                        flowAssignld = flowAssignld.replace(" ", "");
+//                        flowAssignld = flowAssignld.replace(":|", "|");
+//                        flowAssignld = flowAssignld.replace(":", "");
+//                    }
+                    Looper.prepare();
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowChuCaiWillDetailActivity.this, "请选择审批人", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
                 } else {
                     String bigUserCodes = bigResultList.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
@@ -986,7 +1015,7 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                 upData = dbA.OAChuCaiLeader(url, time, person, startTime, endTine, days, addres1,
                         addres2, addres3, car, reason, yjMoney, zjMoney, userCode, destName, taskId,
                         flowAssignld, mainId, bmfzr, fgfze, zjl, comment, signaName, userName, jygj1,
-                        jygj2, jygj3, jygj4, chuCaiCode,cwzjyj);
+                        jygj2, jygj3, jygj4, chuCaiCode, cwzjyj);
                 if (upData.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {
@@ -1057,7 +1086,6 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                     for (int i = 0; i < bean.getTrans().size(); i++) {
                         beanList.add(bean.getTrans().get(i));
                     }
-                    ProgressDialogUtil.stopLoad();
 
                     String formRights = bean.getFormRights();
                     try {
@@ -1212,6 +1240,13 @@ public class FlowChuCaiWillDetailActivity extends BaseActivity {
                     }
                     if (bean.isRevoke()) {
                         Toast.makeText(FlowChuCaiWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
+                    }
+                    ProgressDialogUtil.stopLoad();
+                    if (beanList.size() == 1) {
+                        btnT.setVisibility(View.GONE);
+                        tvText.setVisibility(View.GONE);
+                        ProgressDialogUtil.startLoad(FlowChuCaiWillDetailActivity.this, "获取审核人");
+                        getAppRovePerson();
                     }
                     break;
                 case TAG_TWO:

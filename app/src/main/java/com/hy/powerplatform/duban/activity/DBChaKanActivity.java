@@ -107,7 +107,7 @@ public class DBChaKanActivity extends BaseActivity {
                 if (resultBean.getOperStatus()==1){
                     holder.setText(R.id.tvType, "未查看");
                 }else if (resultBean.getOperStatus()==2){
-                    holder.setText(R.id.tvType, "以查看");
+                    holder.setText(R.id.tvType, "已查看");
                 }else if (resultBean.getOperStatus()==3){
                     holder.setText(R.id.tvType, "已接收");
                 }else if (resultBean.getOperStatus()==4){
@@ -160,13 +160,14 @@ public class DBChaKanActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         operId = String.valueOf(resultBean.getOperId());
-                        onCuiBan(operatorId,approveTime,taskName,String.valueOf(resultBean.getOperId()));
+                        onCuiBan(String.valueOf(resultBean.getOperator()),approveTime,taskName,String.valueOf(resultBean.getOperId()));
                     }
                 });
                 holder.setOnClickListener(R.id.btnSH, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         operId = String.valueOf(resultBean.getOperId());
+                        submitTitle = resultBean.getSubmitTitle();
                         onShengHe();
                     }
                 });
@@ -357,7 +358,7 @@ public class DBChaKanActivity extends BaseActivity {
      */
     private void onTuiHui(String annotation) {
         ProgressDialogUtil.startLoad(this, getResources().getString(R.string.get_data));
-        map.clear();
+        final HashMap<String, String> map = new HashMap();
         map.put("operId", operId);
         map.put("ident", "1");
         map.put("annotation", annotation);
@@ -516,7 +517,7 @@ public class DBChaKanActivity extends BaseActivity {
                     DBXG bean4 = gsonF.fromJson(data4, DBXG.class);
                     if (bean4.isSuccess()) {
                         ProgressDialogUtil.stopLoad();
-                        Toast.makeText(DBChaKanActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DBChaKanActivity.this, "操作成功", Toast.LENGTH_SHORT).show();
                     }else {
                         ProgressDialogUtil.stopLoad();
                         Toast.makeText(DBChaKanActivity.this, bean4.getMsg(), Toast.LENGTH_SHORT).show();

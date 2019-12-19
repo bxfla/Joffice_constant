@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.hy.powerplatform.R;
-import com.hy.powerplatform.business_inspect.newactivity.CheckOnePersonActivity;
 import com.hy.powerplatform.duban.bean.DBUp1;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
@@ -199,7 +198,7 @@ public class DBTJRCActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvFPR:
-                Intent intent = new Intent(this, CheckOnePersonActivity.class);
+                Intent intent = new Intent(this, DBCheckPersonActivity1.class);
                 startActivityForResult(intent, TAG_ONE);
                 break;
             case R.id.tvStartTime:
@@ -289,7 +288,7 @@ public class DBTJRCActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case TAG_ONE:
-                if (resultCode == Constant.TAG_SIX) {
+                if (resultCode == Constant.TAG_SEVEN) {
                     userName = data.getStringExtra("name");
                     profileId = data.getStringExtra("profileId");
                     tvFPR.setText(userName);

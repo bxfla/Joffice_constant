@@ -733,7 +733,7 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                 String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
                 final Request request = new Request.Builder()
                         .url(url)
-                        .addHeader("Cookie",Session)
+                        .addHeader("Cookie", Session)
                         .get()//默认就是GET请求，可以不写
                         .build();
                 Call call = okHttpClient.newCall(request);
@@ -1281,19 +1281,44 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
         if (bigResultList.size() != 0) {
             sendData();
         } else {
-            if (btnTTag.equals("N")) {
-                Gson gson = new Gson();
-                FlowGoodsPuechase bean = gson.fromJson(res, FlowGoodsPuechase.class);
-                bmfzryj = bean.getMainform().get(0).getBmfzryj();
-                zcgkbmyj = bean.getMainform().get(0).getZcgkbmyj();
-                fgldyj = bean.getMainform().get(0).getFgldyj();
-                cwzjyj = bean.getMainform().get(0).getCwzjyj();
-                zjl = bean.getMainform().get(0).getZjlyj();
-                Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
+            if (btnT.getVisibility() == View.VISIBLE) {
+                if (btnTTag.equals("N")) {
+                    Gson gson = new Gson();
+                    FlowGoodsPuechase bean = gson.fromJson(res, FlowGoodsPuechase.class);
+                    bmfzryj = bean.getMainform().get(0).getBmfzryj();
+                    zcgkbmyj = bean.getMainform().get(0).getZcgkbmyj();
+                    fgldyj = bean.getMainform().get(0).getFgldyj();
+                    cwzjyj = bean.getMainform().get(0).getCwzjyj();
+                    zjl = bean.getMainform().get(0).getZjlyj();
+                    Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendData();
+                }
             } else {
                 sendData();
             }
         }
+    }
+
+    public void getAppRovePerson() {
+        ProgressDialogUtil.startLoad(FlowCCTPuechaseWillDetailActivity.this, "获取数据中");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DBHandler dbA = new DBHandler();
+                destType = beanList.get(0).getDestType();
+                if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                    handler.sendEmptyMessage(TAG_SIX);
+                } else if (destType.indexOf("end") == -1) {
+                    handler.sendEmptyMessage(TAG_FIVE);
+                } else {
+                    getLastPerson();
+                }
+                signaName = beanList.get(0).getName();
+                destName = beanList.get(0).getDestination();
+            }
+        }).start();
+        ProgressDialogUtil.stopLoad();
     }
 
     private void sendData() {
@@ -1477,12 +1502,12 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
             switch (msg.what) {
                 case 333:
                     ProgressDialogUtil.stopLoad();
-                    Toast.makeText(FlowCCTPuechaseWillDetailActivity.this,getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowCCTPuechaseWillDetailActivity.this, getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
                     finish();
                     break;
                 case 444:
                     ProgressDialogUtil.stopLoad();
-                    Toast.makeText(FlowCCTPuechaseWillDetailActivity.this,getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowCCTPuechaseWillDetailActivity.this, getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
                     break;
                 case 111:
                     Gson gsonF = new Gson();
@@ -1550,8 +1575,6 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                         for (int i = 0; i < bean.getTrans().size(); i++) {
                             beanList.add(bean.getTrans().get(i));
                         }
-                        ProgressDialogUtil.stopLoad();
-
                         String formRights = bean.getFormRights();
                         try {
                             JSONObject jsonObject = new JSONObject(formRights);
@@ -1662,8 +1685,14 @@ public class FlowCCTPuechaseWillDetailActivity extends BaseActivity {
                         if (bean.isRevoke()) {
                             Toast.makeText(FlowCCTPuechaseWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
                         }
+                        ProgressDialogUtil.stopLoad();
+                        if (beanList.size() == 1) {
+                            btnT.setVisibility(View.GONE);
+                            tvText.setVisibility(View.GONE);
+                            ProgressDialogUtil.startLoad(FlowCCTPuechaseWillDetailActivity.this, "获取审核人");
+                            getAppRovePerson();
+                        }
                     }
-
                     break;
                 case TAG_TWO:
                     Toast.makeText(FlowCCTPuechaseWillDetailActivity.this, "操作数据失败", Toast.LENGTH_SHORT).show();

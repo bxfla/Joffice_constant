@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -303,7 +304,7 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                 String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
                 final Request request = new Request.Builder()
                         .url(url)
-                        .addHeader("Cookie",Session)
+                        .addHeader("Cookie", Session)
                         .get()//默认就是GET请求，可以不写
                         .build();
                 Call call = okHttpClient.newCall(request);
@@ -559,17 +560,42 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
         if (bigResultList.size() != 0) {
             sendData();
         } else {
-            if (btnTTag.equals("N")) {
-                Gson gson = new Gson();
-                FlowCarVideoWillDetail bean = gson.fromJson(res, FlowCarVideoWillDetail.class);
-                bmfzr = bean.getMainform().get(0).getBmfzryj();
-                fgfze = bean.getMainform().get(0).getXxjsbyj();
-                zjl = bean.getMainform().get(0).getJkczyyj();
-                Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
+            if (btnT.getVisibility() == View.VISIBLE) {
+                if (btnTTag.equals("N")) {
+                    Gson gson = new Gson();
+                    FlowCarVideoWillDetail bean = gson.fromJson(res, FlowCarVideoWillDetail.class);
+                    bmfzr = bean.getMainform().get(0).getBmfzryj();
+                    fgfze = bean.getMainform().get(0).getXxjsbyj();
+                    zjl = bean.getMainform().get(0).getJkczyyj();
+                    Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendData();
+                }
             } else {
                 sendData();
             }
         }
+    }
+
+    public void getAppRovePerson() {
+        ProgressDialogUtil.startLoad(FlowLeaveWillDetailActivity.this, "获取数据中");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DBHandler dbA = new DBHandler();
+                destType = beanList.get(0).getDestType();
+                if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                    handler.sendEmptyMessage(TAG_SIX);
+                } else if (destType.indexOf("end") == -1) {
+                    handler.sendEmptyMessage(TAG_FIVE);
+                } else {
+                    getLastPerson();
+                }
+                signaName = beanList.get(0).getName();
+                destName = beanList.get(0).getDestination();
+            }
+        }).start();
+        ProgressDialogUtil.stopLoad();
     }
 
     private void sendData() {
@@ -703,25 +729,10 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                     }
                 }
                 if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
-                    String bigUserCodes = bigResultList1.toString();
-                    bigUserCodes = bigUserCodes.toString().replace("[", "");
-                    bigUserCodes = bigUserCodes.toString().replace("]", "");
-
-                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-//                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes + ":" + codeText + "," + otherCodeText;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                        flowAssignld = leader + ":" + nameText + "|" + bigUserCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else {
-                        flowAssignld = destName + "|" + userCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                        flowAssignld = flowAssignld.replace(":", "");
-                    }
+                    Looper.prepare();
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowLeaveWillDetailActivity.this, "请选择审批人", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
                 } else {
                     String bigUserCodes = bigResultList.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
@@ -970,12 +981,12 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
             switch (msg.what) {
                 case 333:
                     ProgressDialogUtil.stopLoad();
-                    Toast.makeText(FlowLeaveWillDetailActivity.this,getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowLeaveWillDetailActivity.this, getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
                     finish();
                     break;
                 case 444:
                     ProgressDialogUtil.stopLoad();
-                    Toast.makeText(FlowLeaveWillDetailActivity.this,getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowLeaveWillDetailActivity.this, getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
                     break;
                 case 111:
                     Gson gsonF = new Gson();
@@ -1018,8 +1029,6 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                     for (int i = 0; i < bean.getTrans().size(); i++) {
                         beanList.add(bean.getTrans().get(i));
                     }
-                    ProgressDialogUtil.stopLoad();
-
                     String formRights = bean.getFormRights();
                     try {
                         JSONObject jsonObject = new JSONObject(formRights);
@@ -1127,6 +1136,13 @@ public class FlowLeaveWillDetailActivity extends BaseActivity {
                     }
                     if (bean.isRevoke()) {
                         Toast.makeText(FlowLeaveWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
+                    }
+                    ProgressDialogUtil.stopLoad();
+                    if (beanList.size() == 1) {
+                        btnT.setVisibility(View.GONE);
+                        tvText.setVisibility(View.GONE);
+                        ProgressDialogUtil.startLoad(FlowLeaveWillDetailActivity.this, "获取审核人");
+                        getAppRovePerson();
                     }
                     break;
                 case TAG_TWO:

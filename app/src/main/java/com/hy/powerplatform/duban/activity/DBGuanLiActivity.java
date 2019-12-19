@@ -231,6 +231,7 @@ public class DBGuanLiActivity extends BaseActivity {
         map.put("Q_supervisorNames_S_LK", etDBPerson.getText().toString().trim());
         map.put("Q_operatorNames_S_LK", etZXPerson.getText().toString().trim());
         map.put("Q_planFinishTime_D_EQ", tvOverTime.getText().toString().trim());
+        map.put("searchAll", "false");
 
         String zt = "";
         if (spinnerZT.getSelectedItem().toString().trim().equals("已编辑未提交")){
@@ -404,6 +405,9 @@ public class DBGuanLiActivity extends BaseActivity {
                             }
                         }
                         baseAdapter.notifyDataSetChanged();
+                    }else {
+                        recyclerView.complete();
+                        recyclerView.onNoMore();
                     }
                     tvOverTime.setText("");
                     llTiaoJian1.setVisibility(View.GONE);

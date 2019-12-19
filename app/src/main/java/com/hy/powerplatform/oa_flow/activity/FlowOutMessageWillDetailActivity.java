@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -334,7 +335,7 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                 String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
                 final Request request = new Request.Builder()
                         .url(url)
-                        .addHeader("Cookie",Session)
+                        .addHeader("Cookie", Session)
                         .get()//默认就是GET请求，可以不写
                         .build();
                 Call call = okHttpClient.newCall(request);
@@ -774,7 +775,7 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                 break;
             case R.id.btnUp:
                 Gson gson = new Gson();
-                FlowOutMessage bean = gson.fromJson(tagData, FlowOutMessage.class);
+                FlowOutMessage bean = gson.fromJson(res, FlowOutMessage.class);
                 heGao = bean.getMainform().get(0).getHeGaoRen();
                 num = bean.getMainform().get(0).getYinFaFenShu();
                 time = bean.getMainform().get(0).getYinFaFenShu();
@@ -846,14 +847,14 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                     date1 = et3.getText().toString();
                 }
                 if (comment.equals("")) {
-                    if (et2.getVisibility()==View.VISIBLE) {
+                    if (et2.getVisibility() == View.VISIBLE) {
                         if (et2.getText().toString().equals("")) {
                             Toast.makeText(this, "请填写文号", Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }
-                    if (et3.getVisibility()==View.VISIBLE){
-                        if (et3.getText().toString().equals("")){
+                    if (et3.getVisibility() == View.VISIBLE) {
+                        if (et3.getText().toString().equals("")) {
                             Toast.makeText(this, "请填写文号", Toast.LENGTH_SHORT).show();
                             break;
                         }
@@ -880,31 +881,56 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
         if (bigResultList.size() != 0) {
             sendData();
         } else {
-            if (btnTTag.equals("N")) {
-                Gson gson = new Gson();
-                FlowOutMessage bean = gson.fromJson(tagData, FlowOutMessage.class);
+            if (btnT.getVisibility() == View.VISIBLE) {
+                if (btnTTag.equals("N")) {
+                    Gson gson = new Gson();
+                    FlowOutMessage bean = gson.fromJson(tagData, FlowOutMessage.class);
 //                taskId = bean.getTaskId();
-                String title = bean.getMainform().get(0).getFaWenBiaoTi();
-                String zhuSong = bean.getMainform().get(0).getZhuSongRen();
-                String chaoBao = bean.getMainform().get(0).getChaoBaoRen();
-                String chaoSong = bean.getMainform().get(0).getChaoSongRen();
-                String niGao = bean.getMainform().get(0).getNiGaoRen();
-                xiangguanfujian = bean.getMainform().get(0).getFaWenFuJian();
-                tvData.setText(xiangguanfujian);
-                heGao = bean.getMainform().get(0).getHeGaoRen();
-                num = bean.getMainform().get(0).getYinFaFenShu();
-                time = bean.getMainform().get(0).getYinFaFenShu();
-                xuHao = bean.getMainform().get(0).getFaWenXuHao();
-                date = bean.getMainform().get(0).getWenHaoRiQi();
-                date1 = bean.getMainform().get(0).getYinFaRiQi();
-                wenHao = bean.getMainform().get(0).getFaWenWenHao();
-                fgldyj = bean.getMainform().get(0).getFgldyj();
-                zjl = bean.getMainform().get(0).getZjlyj();
-                Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
+                    String title = bean.getMainform().get(0).getFaWenBiaoTi();
+                    String zhuSong = bean.getMainform().get(0).getZhuSongRen();
+                    String chaoBao = bean.getMainform().get(0).getChaoBaoRen();
+                    String chaoSong = bean.getMainform().get(0).getChaoSongRen();
+                    String niGao = bean.getMainform().get(0).getNiGaoRen();
+                    xiangguanfujian = bean.getMainform().get(0).getFaWenFuJian();
+                    tvData.setText(xiangguanfujian);
+                    heGao = bean.getMainform().get(0).getHeGaoRen();
+                    num = bean.getMainform().get(0).getYinFaFenShu();
+                    time = bean.getMainform().get(0).getYinFaFenShu();
+                    xuHao = bean.getMainform().get(0).getFaWenXuHao();
+                    date = bean.getMainform().get(0).getWenHaoRiQi();
+                    date1 = bean.getMainform().get(0).getYinFaRiQi();
+                    wenHao = bean.getMainform().get(0).getFaWenWenHao();
+                    fgldyj = bean.getMainform().get(0).getFgldyj();
+                    zjl = bean.getMainform().get(0).getZjlyj();
+                    Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendData();
+                }
             } else {
                 sendData();
             }
         }
+    }
+
+    public void getAppRovePerson() {
+        ProgressDialogUtil.startLoad(FlowOutMessageWillDetailActivity.this, "获取数据中");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DBHandler dbA = new DBHandler();
+                destType = beanList.get(0).getDestType();
+                if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                    handler.sendEmptyMessage(TAG_SIX);
+                } else if (destType.indexOf("end") == -1) {
+                    handler.sendEmptyMessage(TAG_FIVE);
+                } else {
+                    getLastPerson();
+                }
+                signaName = beanList.get(0).getName();
+                destName = beanList.get(0).getDestination();
+            }
+        }).start();
+        ProgressDialogUtil.stopLoad();
     }
 
     private void sendData() {
@@ -1021,25 +1047,10 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                 }
 
                 if (bigResultList.size() == 0 && bigResultList1.size() != 0) {
-
-                    String bigUserCodes = bigResultList1.toString();
-                    bigUserCodes = bigUserCodes.toString().replace("[", "");
-                    bigUserCodes = bigUserCodes.toString().replace("]", "");
-
-                    if (!bigUserCodes.equals("") && !userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes + ":" + userCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else if (!bigUserCodes.equals("") && userCodes.equals("")) {
-                        flowAssignld = leader + ":" + role + "|" + bigUserCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                    } else {
-                        flowAssignld = destName + "|" + userCodes;
-                        flowAssignld = flowAssignld.replace(" ", "");
-                        flowAssignld = flowAssignld.replace(":|", "|");
-                        flowAssignld = flowAssignld.replace(":", "");
-                    }
+                    Looper.prepare();
+                    ProgressDialogUtil.stopLoad();
+                    Toast.makeText(FlowOutMessageWillDetailActivity.this, "请选择审批人", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
                 } else {
                     String bigUserCodes = bigResultList.toString();
                     bigUserCodes = bigUserCodes.toString().replace("[", "");
@@ -1082,12 +1093,12 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
             switch (msg.what) {
                 case 333:
                     ProgressDialogUtil.stopLoad();
-                    Toast.makeText(FlowOutMessageWillDetailActivity.this,getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowOutMessageWillDetailActivity.this, getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
                     finish();
                     break;
                 case 444:
                     ProgressDialogUtil.stopLoad();
-                    Toast.makeText(FlowOutMessageWillDetailActivity.this,getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowOutMessageWillDetailActivity.this, getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
                     break;
                 case 111:
                     Gson gsonF = new Gson();
@@ -1101,7 +1112,7 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                     break;
                 case TAG_ONE:
                     Gson gson = new Gson();
-                    FlowOutMessage bean = gson.fromJson(tagData, FlowOutMessage.class);
+                    FlowOutMessage bean = gson.fromJson(res, FlowOutMessage.class);
                     taskId = bean.getTaskId();
                     String title = bean.getMainform().get(0).getFaWenBiaoTi();
                     String zhuSong = bean.getMainform().get(0).getZhuSongRen();
@@ -1129,8 +1140,6 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                     for (int i = 0; i < bean.getTrans().size(); i++) {
                         beanList.add(bean.getTrans().get(i));
                     }
-                    ProgressDialogUtil.stopLoad();
-
                     String formRights = bean.getFormRights();
                     try {
                         JSONObject jsonObject = new JSONObject(formRights);
@@ -1301,6 +1310,13 @@ public class FlowOutMessageWillDetailActivity extends BaseActivity {
                     }
                     if (bean.isRevoke()) {
                         Toast.makeText(FlowOutMessageWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
+                    }
+                    ProgressDialogUtil.stopLoad();
+                    if (beanList.size() == 1) {
+                        btnT.setVisibility(View.GONE);
+                        tvText.setVisibility(View.GONE);
+                        ProgressDialogUtil.startLoad(FlowOutMessageWillDetailActivity.this, "获取审核人");
+                        getAppRovePerson();
                     }
                     break;
                 case TAG_TWO:

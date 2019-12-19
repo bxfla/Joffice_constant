@@ -249,6 +249,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
                                         sharedPreferencesHelper.saveData(LoginActivity.this, "userStatus", jsonObject.getString("username"));
                                         sharedPreferencesHelper.saveData(LoginActivity.this, "userId", jsonObject.getString("userId"));
                                         sharedPreferencesHelper.saveData(LoginActivity.this, "rolues", jsonObject.getString("rolues"));
+                                        sharedPreferencesHelper.saveData(LoginActivity.this, "rights", jsonObject.getString("rights"));
                                         sharedPreferencesHelper.saveData(LoginActivity.this, "roleName", jsonObject.getString("roleName"));
                                         String superRoleName = jsonObject.getString("superRoleName");
                                         if (jsonObject.getString("superRoleName") != null) {

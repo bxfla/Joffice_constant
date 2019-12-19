@@ -25,8 +25,6 @@ import com.hy.powerplatform.business_inspect.presenter.carcodepresenterimpl.Chec
 import com.hy.powerplatform.business_inspect.view.CheckPersonView;
 import com.hy.powerplatform.duban.bean.DBGuanLi;
 import com.hy.powerplatform.duban.bean.DBUp;
-import com.hy.powerplatform.duban.bean.DBUp1;
-import com.hy.powerplatform.my_utils.base.AlertDialogCallBack;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.OkHttpUtil;
@@ -82,6 +80,7 @@ public class DBUpActivity1 extends BaseActivity implements CheckPersonView {
 
     String data = "";
     String WorkId = "";
+    String rights, userStatus;
     String userName = "", userCode = "";
     String ZXName = "", ZXCode = "";
     String lxrName = "", lxrCode = "";
@@ -92,15 +91,17 @@ public class DBUpActivity1 extends BaseActivity implements CheckPersonView {
     SharedPreferencesHelper sharedPreferencesHelper;
     private List<Person> morenDatas = new ArrayList<>();
     List<CheckPerson.DataBean> checkList = new ArrayList<>();
-    String path_url = Constant.BASE_URL1 + Constant.DBQRBJ;
-    String path_url1 = Constant.BASE_URL1 + Constant.DBQRTJ;
-    String path_url2 = Constant.BASE_URL1 + Constant.DBQRFB;
+//    String path_url = Constant.BASE_URL1 + Constant.DBQRBJ;
+//    String path_url1 = Constant.BASE_URL1 + Constant.DBQRTJ;
+    String path_url2 = Constant.BASE_URL1 + Constant.DBQRFB+"?ident=0";
     private CustomDatePickerDay customDatePicker1, customDatePicker2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        rights = new SharedPreferencesHelper(this, "login").getData(this, "rights", "");
+        userStatus = new SharedPreferencesHelper(this, "login").getData(this, "userStatus", "");
         Intent intent = getIntent();
         DBGuanLi.ResultBean detaBean = (DBGuanLi.ResultBean) intent.getSerializableExtra("bean");
         alertDialogUtil = new AlertDialogUtil(this);
@@ -112,13 +113,38 @@ public class DBUpActivity1 extends BaseActivity implements CheckPersonView {
 
         sharedPreferencesHelper = new SharedPreferencesHelper(this, "login");
         lxrName = sharedPreferencesHelper.getData(DBUpActivity1.this, "roleName", "");
-        lxrCode = sharedPreferencesHelper.getData(DBUpActivity1.this, "userCode", "");
+        lxrCode = sharedPreferencesHelper.getData(DBUpActivity1.this, "userId", "");
         tvLXR.setText(lxrName);
         initDatePicker();
 
         httpUtil = OkHttpUtil.getInstance(this);
         checkPersonPresenter = new CheckPersonPresenterimpl(this, this);
-        checkPersonPresenter.getCheckPersonPresenterData();
+        Person person = new Person();
+        person.setUserCode("9386");
+        person.setUserName("王少云");
+        morenDatas.add(person);
+
+        Person person1 = new Person();
+        person1.setUserCode("9387");
+        person1.setUserName("唐根六");
+        morenDatas.add(person1);
+
+        Person person3 = new Person();
+        person3.setUserCode("9398");
+        person3.setUserName("晏慧锋");
+        morenDatas.add(person3);
+        if (morenDatas.size() != 0) {
+            for (int i = 0; i < morenDatas.size(); i++) {
+                if (i != morenDatas.size() - 1) {
+                    userName = userName + morenDatas.get(i).getUserName() + ",";
+                    userCode = userCode + morenDatas.get(i).getUserCode() + ",";
+                } else {
+                    userName = userName + morenDatas.get(i).getUserName();
+                    userCode = userCode + morenDatas.get(i).getUserCode();
+                }
+            }
+        }
+        tvDBR.setText(userName);
         sharedPreferencesHelper = new SharedPreferencesHelper(this, "login");
 
         tvType.setText(detaBean.getTaskType());
@@ -131,6 +157,9 @@ public class DBUpActivity1 extends BaseActivity implements CheckPersonView {
         tvZXR.setText(detaBean.getOperatorNames());
         tvFBSJ.setText(detaBean.getCreateTime());
         tvLXR.setText(detaBean.getContactsName());
+        WorkId = String.valueOf(detaBean.getWorkId());
+        ZXCode = detaBean.getOperatorIds();
+        ZXName = detaBean.getOperatorNames();
     }
 
     @Override
@@ -271,8 +300,10 @@ public class DBUpActivity1 extends BaseActivity implements CheckPersonView {
                 map.put("superWorkTask.operatorNames", ZXName);
                 map.put("superWorkTask.contactsName", lxrName);
                 map.put("superWorkTask.contactsId", lxrCode);
+                map.put("superWorkTask.taskStatus", "1");
+                map.put("superWorkTask.workId", WorkId);
                 ProgressDialogUtil.startLoad(this, getResources().getString(R.string.up_data));
-                httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
+                httpUtil.postForm(path_url2, map, new OkHttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 //                Log.i("main", "response:" + e.toString());
@@ -341,120 +372,122 @@ public class DBUpActivity1 extends BaseActivity implements CheckPersonView {
                     final DBUp bean = gsonF.fromJson(data, DBUp.class);
                     WorkId = bean.getWorkId();
                     if (bean.isSuccess()) {
-                        Toast.makeText(DBUpActivity1.this, "确认编辑成功", Toast.LENGTH_SHORT).show();
-                        alertDialogUtil.showDialog1("您确定要提交数据吗", new AlertDialogCallBack() {
-                            @Override
-                            public void select(String data) {
-
-                            }
-
-                            @Override
-                            public void confirm() {
-                                HashMap<String, String> map = new HashMap();
-                                map.put("workId", WorkId);
-                                map.put("superWorkTask.workId", bean.getWorkId());
-                                map.put("superWorkTask.taskType", spinnerType.getSelectedItem().toString().trim());
-                                map.put("superWorkTask.taskName", etRW.getText().toString().trim());
-                                map.put("superWorkTask.planFinishTime", tvJHWCSJ.toString());
-                                map.put("superWorkTask.taskContext", etContent.getText().toString().trim());
-                                map.put("superWorkTask.supervisorIds", userCode);
-                                map.put("superWorkTask.supervisorNames", userName);
-                                map.put("superWorkTask.operatorIds", ZXCode);
-                                map.put("superWorkTask.operatorNames", ZXName);
-                                map.put("superWorkTask.contactsName", lxrName);
-                                map.put("superWorkTask.contactsId", lxrCode);
-                                httpUtil.postForm(path_url1, map, new OkHttpUtil.ResultCallback() {
-                                    @Override
-                                    public void onError(Request request, Exception e) {
-                                        Message message = new Message();
-                                        Bundle b = new Bundle();
-                                        b.putString("error", e.toString());
-                                        message.setData(b);
-                                        message.what = Constant.TAG_ONE;
-                                        handler.sendMessage(message);
-                                    }
-
-                                    @Override
-                                    public void onResponse(Response response) throws IOException {
-                                        String dataTJ = response.body().string();
-                                        Message message = new Message();
-                                        Bundle b = new Bundle();
-                                        b.putString("dataTJ", dataTJ);
-                                        message.setData(b);
-                                        message.what = Constant.TAG_THERE;
-                                        handler.sendMessage(message);
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void cancel() {
-                                ProgressDialogUtil.stopLoad();
-                                finish();
-                            }
-                        });
-                    }
-                    break;
-                case Constant.TAG_THERE:
-                    Bundle b2 = msg.getData();
-                    String data2 = b2.getString("dataTJ");
-                    Gson gsonT = new Gson();
-                    DBUp1 bean1 = gsonT.fromJson(data2, DBUp1.class);
-                    if (bean1.isSuccess()) {
-                        Toast.makeText(DBUpActivity1.this, "提交成功", Toast.LENGTH_SHORT).show();
-                        alertDialogUtil.showDialog1("您确定要发布数据吗", new AlertDialogCallBack() {
-                            @Override
-                            public void select(String data) {
-
-                            }
-
-                            @Override
-                            public void confirm() {
-                                HashMap<String, String> map = new HashMap();
-                                map.put("ids", WorkId);
-                                httpUtil.postForm(path_url2, map, new OkHttpUtil.ResultCallback() {
-                                    @Override
-                                    public void onError(Request request, Exception e) {
-                                        Message message = new Message();
-                                        Bundle b = new Bundle();
-                                        b.putString("error", e.toString());
-                                        message.setData(b);
-                                        message.what = Constant.TAG_ONE;
-                                        handler.sendMessage(message);
-                                    }
-
-                                    @Override
-                                    public void onResponse(Response response) throws IOException {
-                                        String dataFB = response.body().string();
-                                        Message message = new Message();
-                                        Bundle b = new Bundle();
-                                        b.putString("dataFB", dataFB);
-                                        message.setData(b);
-                                        message.what = Constant.TAG_FOUR;
-                                        handler.sendMessage(message);
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void cancel() {
-                                ProgressDialogUtil.stopLoad();
-                                finish();
-                            }
-                        });
-                    }
-                    break;
-                case Constant.TAG_FOUR:
-                    Bundle b3 = msg.getData();
-                    String data3 = b3.getString("dataFB");
-                    Gson gsonFB = new Gson();
-                    DBUp1 bean2 = gsonFB.fromJson(data3, DBUp1.class);
-                    if (bean2.isSuccess()) {
                         ProgressDialogUtil.stopLoad();
-                        Toast.makeText(DBUpActivity1.this, "提交成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DBUpActivity1.this, "确认发布成功", Toast.LENGTH_SHORT).show();
+                        finish();
+//                        alertDialogUtil.showDialog1("您确定要提交数据吗", new AlertDialogCallBack() {
+//                            @Override
+//                            public void select(String data) {
+//
+//                            }
+//
+//                            @Override
+//                            public void confirm() {
+//                                HashMap<String, String> map = new HashMap();
+//                                map.put("workId", WorkId);
+//                                map.put("superWorkTask.workId", bean.getWorkId());
+//                                map.put("superWorkTask.taskType", spinnerType.getSelectedItem().toString().trim());
+//                                map.put("superWorkTask.taskName", etRW.getText().toString().trim());
+//                                map.put("superWorkTask.planFinishTime", tvJHWCSJ.toString());
+//                                map.put("superWorkTask.taskContext", etContent.getText().toString().trim());
+//                                map.put("superWorkTask.supervisorIds", userCode);
+//                                map.put("superWorkTask.supervisorNames", userName);
+//                                map.put("superWorkTask.operatorIds", ZXCode);
+//                                map.put("superWorkTask.operatorNames", ZXName);
+//                                map.put("superWorkTask.contactsName", lxrName);
+//                                map.put("superWorkTask.contactsId", lxrCode);
+//                                httpUtil.postForm(path_url1, map, new OkHttpUtil.ResultCallback() {
+//                                    @Override
+//                                    public void onError(Request request, Exception e) {
+//                                        Message message = new Message();
+//                                        Bundle b = new Bundle();
+//                                        b.putString("error", e.toString());
+//                                        message.setData(b);
+//                                        message.what = Constant.TAG_ONE;
+//                                        handler.sendMessage(message);
+//                                    }
+//
+//                                    @Override
+//                                    public void onResponse(Response response) throws IOException {
+//                                        String dataTJ = response.body().string();
+//                                        Message message = new Message();
+//                                        Bundle b = new Bundle();
+//                                        b.putString("dataTJ", dataTJ);
+//                                        message.setData(b);
+//                                        message.what = Constant.TAG_THERE;
+//                                        handler.sendMessage(message);
+//                                    }
+//                                });
+//                            }
+//
+//                            @Override
+//                            public void cancel() {
+//                                ProgressDialogUtil.stopLoad();
+//                                finish();
+//                            }
+//                        });
                     }
-                    finish();
                     break;
+//                case Constant.TAG_THERE:
+//                    Bundle b2 = msg.getData();
+//                    String data2 = b2.getString("dataTJ");
+//                    Gson gsonT = new Gson();
+//                    DBUp1 bean1 = gsonT.fromJson(data2, DBUp1.class);
+//                    if (bean1.isSuccess()) {
+//                        Toast.makeText(DBUpActivity1.this, "提交成功", Toast.LENGTH_SHORT).show();
+//                        alertDialogUtil.showDialog1("您确定要发布数据吗", new AlertDialogCallBack() {
+//                            @Override
+//                            public void select(String data) {
+//
+//                            }
+//
+//                            @Override
+//                            public void confirm() {
+//                                HashMap<String, String> map = new HashMap();
+//                                map.put("ids", WorkId);
+//                                httpUtil.postForm(path_url2, map, new OkHttpUtil.ResultCallback() {
+//                                    @Override
+//                                    public void onError(Request request, Exception e) {
+//                                        Message message = new Message();
+//                                        Bundle b = new Bundle();
+//                                        b.putString("error", e.toString());
+//                                        message.setData(b);
+//                                        message.what = Constant.TAG_ONE;
+//                                        handler.sendMessage(message);
+//                                    }
+//
+//                                    @Override
+//                                    public void onResponse(Response response) throws IOException {
+//                                        String dataFB = response.body().string();
+//                                        Message message = new Message();
+//                                        Bundle b = new Bundle();
+//                                        b.putString("dataFB", dataFB);
+//                                        message.setData(b);
+//                                        message.what = Constant.TAG_FOUR;
+//                                        handler.sendMessage(message);
+//                                    }
+//                                });
+//                            }
+//
+//                            @Override
+//                            public void cancel() {
+//                                ProgressDialogUtil.stopLoad();
+//                                finish();
+//                            }
+//                        });
+//                    }
+//                    break;
+//                case Constant.TAG_FOUR:
+//                    Bundle b3 = msg.getData();
+//                    String data3 = b3.getString("dataFB");
+//                    Gson gsonFB = new Gson();
+//                    DBUp1 bean2 = gsonFB.fromJson(data3, DBUp1.class);
+//                    if (bean2.isSuccess()) {
+//                        ProgressDialogUtil.stopLoad();
+//                        Toast.makeText(DBUpActivity1.this, "提交成功", Toast.LENGTH_SHORT).show();
+//                    }
+//                    finish();
+//                    break;
             }
         }
     };

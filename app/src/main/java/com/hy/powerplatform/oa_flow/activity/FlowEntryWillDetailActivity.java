@@ -325,7 +325,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                 String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
                 final Request request = new Request.Builder()
                         .url(url)
-                        .addHeader("Cookie",Session)
+                        .addHeader("Cookie", Session)
                         .get()//默认就是GET请求，可以不写
                         .build();
                 Call call = okHttpClient.newCall(request);
@@ -500,11 +500,11 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                 cb1.setText(bigNametemp[0]);
                 cb2.setText(bigNametemp[1]);
                 cb3.setText(bigNametemp[2]);
-                if (bigNametemp[0].equals(selectName)){
+                if (bigNametemp[0].equals(selectName)) {
                     cb1.setChecked(true);
-                }else if (bigNametemp[1].equals(selectName)){
+                } else if (bigNametemp[1].equals(selectName)) {
                     cb2.setChecked(true);
-                }else if (bigNametemp[2].equals(selectName)){
+                } else if (bigNametemp[2].equals(selectName)) {
                     cb3.setChecked(true);
                 }
                 ll1.setVisibility(View.VISIBLE);
@@ -606,7 +606,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         }).start();
                     } else {
                         namelist.clear();
-                        for (int i =  beanList.size()-1; i >=0; i--) {
+                        for (int i = beanList.size() - 1; i >= 0; i--) {
                             namelist.add(beanList.get(i).getDestination());
                         }
                         MyAlertDialog.MyListAlertDialog(FlowEntryWillDetailActivity.this, namelist, new AlertDialogCallBackP() {
@@ -886,21 +886,46 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
         if (bigResultList.size() != 0) {
             sendData();
         } else {
-            if (btnTTag.equals("N")) {
-                Gson gson = new Gson();
-                FlowEntry bean = gson.fromJson(tagData, FlowEntry.class);
-                cwsjbyj = bean.getMainform().get(0).getCwsjbyj();
-                yyglbyj = bean.getMainform().get(0).getYyglbyj();
-                xxjsbyj = bean.getMainform().get(0).getXxjsbyj();
-                cctkjyxgsyj = bean.getMainform().get(0).getCctkjyxgsyj();
-                zhglbyj = bean.getMainform().get(0).getZhglbyj();
-                rlzyb1 = bean.getMainform().get(0).getRlzybyj();
-                jbbmyj = bean.getMainform().get(0).getJbbmyj();
-                Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
+            if (btnT.getVisibility() == View.VISIBLE) {
+                if (btnTTag.equals("N")) {
+                    Gson gson = new Gson();
+                    FlowEntry bean = gson.fromJson(tagData, FlowEntry.class);
+                    cwsjbyj = bean.getMainform().get(0).getCwsjbyj();
+                    yyglbyj = bean.getMainform().get(0).getYyglbyj();
+                    xxjsbyj = bean.getMainform().get(0).getXxjsbyj();
+                    cctkjyxgsyj = bean.getMainform().get(0).getCctkjyxgsyj();
+                    zhglbyj = bean.getMainform().get(0).getZhglbyj();
+                    rlzyb1 = bean.getMainform().get(0).getRlzybyj();
+                    jbbmyj = bean.getMainform().get(0).getJbbmyj();
+                    Toast.makeText(this, "请点击加号选择路径", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendData();
+                }
             } else {
                 sendData();
             }
         }
+    }
+
+    public void getAppRovePerson() {
+        ProgressDialogUtil.startLoad(FlowEntryWillDetailActivity.this, "获取数据中");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DBHandler dbA = new DBHandler();
+                destType = beanList.get(0).getDestType();
+                if (destType.equals("decision") || destType.equals("fork") || destType.equals("join")) {
+                    handler.sendEmptyMessage(TAG_SIX);
+                } else if (destType.indexOf("end") == -1) {
+                    handler.sendEmptyMessage(TAG_FIVE);
+                } else {
+                    getLastPerson();
+                }
+                signaName = beanList.get(0).getName();
+                destName = beanList.get(0).getDestination();
+            }
+        }).start();
+        ProgressDialogUtil.stopLoad();
     }
 
     private void sendData() {
@@ -970,42 +995,42 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     if (bigResultList.size() >= 6) {
                         bigResultList.remove(5);
                     }
-                }else {
+                } else {
                     bigResultList2.add(bigResultList.get(5));
                 }
                 if (!cb5.isChecked()) {
                     if (bigResultList.size() >= 5) {
                         bigResultList.remove(4);
                     }
-                }else {
+                } else {
                     bigResultList2.add(bigResultList.get(4));
                 }
                 if (!cb4.isChecked()) {
                     if (bigResultList.size() >= 4) {
                         bigResultList.remove(3);
                     }
-                }else {
+                } else {
                     bigResultList2.add(bigResultList.get(3));
                 }
                 if (!cb3.isChecked()) {
                     if (bigResultList.size() >= 3) {
                         bigResultList.remove(2);
                     }
-                }else {
+                } else {
                     bigResultList2.add(bigResultList.get(2));
                 }
                 if (!cb2.isChecked()) {
                     if (bigResultList.size() >= 2) {
                         bigResultList.remove(1);
                     }
-                }else {
+                } else {
                     bigResultList2.add(bigResultList.get(1));
                 }
                 if (!cb1.isChecked()) {
                     if (bigResultList.size() >= 1) {
                         bigResultList.remove(0);
                     }
-                }else {
+                } else {
                     bigResultList2.add(bigResultList.get(0));
                 }
 
@@ -1087,12 +1112,12 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
             switch (msg.what) {
                 case 333:
                     ProgressDialogUtil.stopLoad();
-                    Toast.makeText(FlowEntryWillDetailActivity.this,getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowEntryWillDetailActivity.this, getResources().getString(R.string.c_success), Toast.LENGTH_SHORT).show();
                     finish();
                     break;
                 case 444:
                     ProgressDialogUtil.stopLoad();
-                    Toast.makeText(FlowEntryWillDetailActivity.this,getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlowEntryWillDetailActivity.this, getResources().getString(R.string.c_false), Toast.LENGTH_SHORT).show();
                     break;
                 case 111:
                     Gson gsonF = new Gson();
@@ -1147,8 +1172,6 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     for (int i = 0; i < bean.getTrans().size(); i++) {
                         beanList.add(bean.getTrans().get(i));
                     }
-                    ProgressDialogUtil.stopLoad();
-
                     String formRights = bean.getFormRights();
                     try {
                         JSONObject jsonObject = new JSONObject(formRights);
@@ -1195,11 +1218,11 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                             String path_url = Constant.BASE_URL1 + Constant.RZCCT;
                             ProgressDialogUtil.startLoad(FlowEntryWillDetailActivity.this, getResources().getString(R.string.get_data));
                             HashMap<String, String> map = new HashMap();
-                            if (rbC1.isChecked()){
+                            if (rbC1.isChecked()) {
                                 map.put("depName", rbC1.getText().toString());
-                            }else if (rbC2.isChecked()){
+                            } else if (rbC2.isChecked()) {
                                 map.put("depName", rbC2.getText().toString());
-                            }else if (rbC3.isChecked()){
+                            } else if (rbC3.isChecked()) {
                                 map.put("depName", rbC3.getText().toString());
                             }
                             httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
@@ -1422,6 +1445,13 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     if (bean.isRevoke()) {
                         Toast.makeText(FlowEntryWillDetailActivity.this, "当前流程已被追回", Toast.LENGTH_SHORT).show();
                     }
+                    ProgressDialogUtil.stopLoad();
+                    if (beanList.size() == 1) {
+                        btnT.setVisibility(View.GONE);
+                        tvText.setVisibility(View.GONE);
+                        ProgressDialogUtil.startLoad(FlowEntryWillDetailActivity.this, "获取审核人");
+                        getAppRovePerson();
+                    }
                     break;
                 case TAG_TWO:
                     Toast.makeText(FlowEntryWillDetailActivity.this, "操作数据失败", Toast.LENGTH_SHORT).show();
@@ -1487,7 +1517,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     String data = b1.getString("data");
                     Gson gsonCCT = new Gson();
                     final RZCCTKJ beanCCT = gsonCCT.fromJson(data, RZCCTKJ.class);
-                    if (beanCCT.isSuccess()){
+                    if (beanCCT.isSuccess()) {
                         selectName = beanCCT.getUsername();
                     }
                     ProgressDialogUtil.stopLoad();

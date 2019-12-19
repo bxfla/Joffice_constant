@@ -221,6 +221,7 @@
                     android:id="@+id/tvFJ"
                     style="@style/oaEditText"
                     android:padding="5dp"
+                    android:textColor="@color/cornflowerblue"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <View style="@style/line"></View>
