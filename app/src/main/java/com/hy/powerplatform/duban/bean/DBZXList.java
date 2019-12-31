@@ -84,7 +84,7 @@ public class DBZXList implements Serializable {
         private String createrName;
         private String operTime;
         private String creater;
-        private Object updateType;
+        private String updateType;
         private String taskName;
         private String contactsName;
         private String annotation;
@@ -101,7 +101,7 @@ public class DBZXList implements Serializable {
         private int approver;
         private int operator;
         private String supervisorIds;
-        private Object num;
+        private String num;
         private int taskStatus;
         private String operatorName;
         private String taskContext;
@@ -164,11 +164,11 @@ public class DBZXList implements Serializable {
             this.creater = creater;
         }
 
-        public Object getUpdateType() {
+        public String getUpdateType() {
             return updateType;
         }
 
-        public void setUpdateType(Object updateType) {
+        public void setUpdateType(String updateType) {
             this.updateType = updateType;
         }
 
@@ -300,11 +300,11 @@ public class DBZXList implements Serializable {
             this.supervisorIds = supervisorIds;
         }
 
-        public Object getNum() {
+        public String getNum() {
             return num;
         }
 
-        public void setNum(Object num) {
+        public void setNum(String num) {
             this.num = num;
         }
 

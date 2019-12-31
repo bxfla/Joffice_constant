@@ -97,9 +97,9 @@ public class GetDataThread {
             @Override
             public void run() {
                 for (int i = 0; i < inspectLine.getData().size(); i++) {
-                    String depID = inspectLine.getData().get(i).getDepartment().getDepId();
+                    String depID = inspectLine.getData().get(i).getDepId();
                     String lineCode = inspectLine.getData().get(i).getLineCode();
-                    String depName = inspectLine.getData().get(i).getDepartment().getDepName();
+                    String depName = inspectLine.getData().get(i).getDepName();
 //                    InspectLine.DataBean inspectLine = new InspectLine.DataBean(lineName,lineCode);
                     listInspectLine.add(inspectLine.getData().get(i));
                     ContentValues values = new ContentValues();

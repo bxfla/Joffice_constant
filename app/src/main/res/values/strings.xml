@@ -275,4 +275,28 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="fragment_rb1">协同办公</string>
+    <string name="fragment_rb2">人力资源</string>
+    <string name="fragment_rb3">营运管理</string>
+    <string name="fragment_rb4">维修管理</string>
+    <string name="fragment_rb5">物资管理</string>
+    <string name="fragment_rb6">服务管理</string>
+    <string name="fragment_rb7">统计分析</string>
+    <string name="fragment_rb8">综合查询</string>
+
+    <string name="oaflow_rb1">公告查询</string>
+    <string name="oaflow_rb2">会议管理</string>
+    <string name="oaflow_rb3">流程审批</string>
+    <string name="oaflow_rb4">通讯录</string>
+
+    <string name="oaflow_metting_rb1">待开会议</string>
+    <string name="oaflow_metting_rb2">会议审核</string>
+
+    <string name="oaflow_human_rb1">应聘人员</string>
+    <string name="oaflow_human_rb2">实习驾驶员</string>
+    <string name="oaflow_human_rb3">正式员工</string>
+
+    <string name="oaflow_operation_rb1">车辆档案</string>
+    <string name="oaflow_operation_rb2">线路查询</string>
+
 </resources>

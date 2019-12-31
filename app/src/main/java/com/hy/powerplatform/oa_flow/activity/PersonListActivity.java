@@ -149,9 +149,11 @@ public class PersonListActivity extends BaseActivity implements PersonListAdapte
         lvContact.setAdapter(adapter);
         adapter.setOnClientMyTextView(new PersonAdapter1.CallBackPosition() {
             @Override
-            public void myTextViewClient(String name, String profileId,String userCode, String sex) {
+            public void myTextViewClient(String name, String profileId,String userCode, String sex, String eCode) {
                 Intent intent = new Intent();
                 intent.putExtra("userName", name);
+                intent.putExtra("eCode", eCode);
+                intent.putExtra("profileId", profileId);
                 intent.putExtra("userCode", userCode);//将计算的值回传回去
                 setResult(Constant.TAG_TWO, intent);
                 finish(); //结束当前的activity的生命周期
@@ -290,11 +292,12 @@ public class PersonListActivity extends BaseActivity implements PersonListAdapte
     };
 
     @Override
-    public void getAdapterPosition(String userName, String userCode) {
+    public void getAdapterPosition(String userName, String userCode,String profileId) {
         Intent intent = new Intent();
         // 获取用户计算后的结果
         intent.putExtra("userName", userName);
         intent.putExtra("userCode", userCode);//将计算的值回传回去
+        intent.putExtra("profileId", profileId);
         setResult(Constant.TAG_TWO, intent);
         finish(); //结束当前的activity的生命周期
     }

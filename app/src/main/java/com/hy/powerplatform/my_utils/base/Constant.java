@@ -116,6 +116,8 @@ public class Constant {
     public static final String  DBQRTJ = "task/submitSuperWorkTask.do";
     // 督办确认综合管理部人员
     public static final String  DBZHGLBRY = "system/subordinateSubordinate.do";
+    // 督办发布选好执行人后关联督办人
+    public static final String  DBFBABOUTPER = "system/findDinate2Subordinate.do";
     // 督办确认发布
     public static final String  DBQRFB = "task/multiPublishSuperWorkTask.do";
     // 督办详情附件
@@ -162,6 +164,20 @@ public class Constant {
     public static final String  DBCKSHZTBH = "task/rejectSuperTaskOper.do";
     // 督办检查人
     public static final String  DBPERSON = "system/dialogAppUser.do?curDep=true";
+    // 获取应聘人信息
+    public static final String  YINGPIN = "hrm/listResume.do";
+    // 获取实习人信息
+    public static final String  SHIXI = "hrm/getDriverPracticeFileListEmpProfile.do";
+    // 获取正式员工信息
+    public static final String  ZENGSHI = "hrm/conList1EmpProfile.do";
+    // 车型
+    public static final String  CARTYPE = "admin/getDataStoreCar.do";
+    // 车辆档案
+    public static final String  CARDANGAN = "admin/custListCar.do";
+    // 获取部门
+    public static final String  DEPARTMENT = "system/getTreeNewOrganization.do";
+    // 线路查询
+    public static final String  LINESEARCH = "system/getLinesByDepLineInfo.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";

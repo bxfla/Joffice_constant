@@ -504,7 +504,7 @@ public class DBChaKanActivity extends BaseActivity {
                     DBXG bean2 = gsonFB.fromJson(data3, DBXG.class);
                     if (bean2.isSuccess()) {
                         ProgressDialogUtil.stopLoad();
-                        Toast.makeText(DBChaKanActivity.this, "催办成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DBChaKanActivity.this, bean2.getMsg(), Toast.LENGTH_SHORT).show();
                     }else {
                         ProgressDialogUtil.stopLoad();
                         Toast.makeText(DBChaKanActivity.this, bean2.getMsg(), Toast.LENGTH_SHORT).show();

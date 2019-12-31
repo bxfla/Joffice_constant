@@ -144,8 +144,14 @@ public class DBZXDetailActivity extends BaseActivity {
         tvZXR.setText(bean.getOperatorNames());
         tvFBSJ.setText(bean.getApproveTime());
         tvLXR.setText(bean.getApproverName());
-        upDateType = bean.getUpdateType() + "";
-        num = String.valueOf(bean.getNum() + "");
+        upDateType = bean.getUpdateType();
+        num = bean.getNum();
+        if (upDateType==null){
+            upDateType = "";
+        }
+        if (num==null){
+            num = "";
+        }
         contactsId = bean.getContactsId();
         operStation = String.valueOf(bean.getOperStatus());
 //        tvFJ.setText(bean.getFileNames() + "");
@@ -175,14 +181,19 @@ public class DBZXDetailActivity extends BaseActivity {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("y-M-d");
         //获取当前时间
-        Date date = new Date(System.currentTimeMillis());
+        Date date = new Date();// 获取当前时间
         Date date2 = null;
+        Date currentDate = null;
+        String currentTime = null;
         try {
             date2 = dateFormat.parse(tvJHWCSJ.getText().toString());//结束时间
+            currentTime = dateFormat.format(new Date());//结束时间
+            SimpleDateFormat format=new SimpleDateFormat("y-M-d");
+            currentDate = format.parse(currentTime);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if (operStation.equals("5") && !upDateType.equals("1") && !num.equals("1") && date.getTime() <= date2.getTime()) {
+        if (operStation.equals("5") && !upDateType.equals("1") && !num.equals("1") && currentDate.getTime() <= date2.getTime()) {
             btnXG.setVisibility(View.VISIBLE);
         }
 
@@ -639,7 +650,7 @@ public class DBZXDetailActivity extends BaseActivity {
                     gsonF = new Gson();
                     bean2 = gsonF.fromJson(data, DBXG.class);
                     if (bean2.isSuccess()) {
-                        Toast.makeText(DBZXDetailActivity.this, "催办成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DBZXDetailActivity.this, bean2.getMsg(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(DBZXDetailActivity.this, bean2.getMsg(), Toast.LENGTH_SHORT).show();
                     }

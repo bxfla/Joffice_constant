@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -94,7 +96,7 @@ public class SelectOneCarActivity extends BaseActivity implements SelectOneCarAd
         cursor = DbManager.queryBySQL(db, sqlR, null);
         listCarCode = DbManager.cursorToClassCar(cursor);
         if (listCarCode.size() != 0) {
-            if (line.equals("")) {
+            if (line == null || line.equals("")) {
                 LinearLayoutManager manager = new LinearLayoutManager(MyApplication.getContextObject());
                 recyclerView.setLayoutManager(manager);
                 adapter = new SelectOneCarAdapter(SelectOneCarActivity.this, listCarCode);
@@ -116,6 +118,37 @@ public class SelectOneCarActivity extends BaseActivity implements SelectOneCarAd
         } else {
             carCodePresenter.getCarCodePresenterData();
         }
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String tag = editText.getText().toString();
+                listCarCode = new ArrayList<>();
+                String sql = "select * from carcode where name like '%" + tag + "%'";
+                cursor = DbManager.queryBySQL(db, sql, null);
+                listCarCode = DbManager.cursorToClassCar(cursor);
+                if (listCarCode.size() != 0) {
+                    adapter = new SelectOneCarAdapter(SelectOneCarActivity.this, listCarCode);
+                    recyclerView.setAdapter(adapter);
+                    adapter.setOnClientMyTextView(SelectOneCarActivity.this);
+                    adapter.notifyDataSetChanged();
+                    recyclerView.setVisibility(View.VISIBLE);
+                    llimageView.setVisibility(View.GONE);
+                } else {
+                    recyclerView.setVisibility(View.GONE);
+                    llimageView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     @Override

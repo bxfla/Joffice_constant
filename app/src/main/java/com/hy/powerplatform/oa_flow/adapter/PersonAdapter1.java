@@ -23,7 +23,7 @@ public class PersonAdapter1 extends BaseAdapter implements SectionIndexer {
      * 自定义回调接口
      */
     public interface CallBackPosition {
-        public void  myTextViewClient(String name, String profileId, String userCode, String sex);
+        public void  myTextViewClient(String name, String profileId, String userCode, String sex,String eCode);
     }
 
     public void setOnClientMyTextView(CallBackPosition callBackPosition){
@@ -84,7 +84,7 @@ public class PersonAdapter1 extends BaseAdapter implements SectionIndexer {
             @Override
             public void onClick(View v) {
                 callBackPosition.myTextViewClient(list.get(position).getFullname(),list.get(position).getProfileId(),
-                        list.get(position).getUserCode(),list.get(position).getSex());
+                        list.get(position).getUserCode(),list.get(position).getSex(),list.get(position).geteCard());
 //                Intent i=new Intent();
 //                i.putExtra("bian", beanList.get(position).carName);
 //                MyApplication.getContextObject().setResult(4,i);

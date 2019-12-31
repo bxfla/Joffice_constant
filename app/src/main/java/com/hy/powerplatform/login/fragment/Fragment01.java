@@ -1,406 +1,273 @@
 package com.hy.powerplatform.login.fragment;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.hy.powerplatform.R;
-import com.hy.powerplatform.SharedPreferencesHelper;
-import com.hy.powerplatform.business_inspect.activity.InspectYeWuActivity;
-import com.hy.powerplatform.business_inspect.activity.ShiGuActivity;
-import com.hy.powerplatform.business_inspect.utils.DBHandler;
-import com.hy.powerplatform.car_maintain.activity.MainTainActivity1;
-import com.hy.powerplatform.duban.activity.DBActivity;
-import com.hy.powerplatform.login.activity.MyPersonalActivity;
-import com.hy.powerplatform.login.adapter.MainDataAdapter;
-import com.hy.powerplatform.login.bean.MainData;
-import com.hy.powerplatform.my_utils.base.Constant;
-import com.hy.powerplatform.my_utils.base.MyApplication;
-import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
-import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
-import com.hy.powerplatform.news.activity.NewsActivity;
-import com.hy.powerplatform.news.activity.NoticeActivity;
-import com.hy.powerplatform.oa_flow.activity.HistoryListActivity;
-import com.hy.powerplatform.oa_flow.activity.InboxActivity;
-import com.hy.powerplatform.oa_flow.activity.ListActivity;
-import com.hy.powerplatform.oa_flow.activity.ListActivity1;
-import com.hy.powerplatform.oa_flow.activity.ListActivity2;
-import com.hy.powerplatform.oa_flow.activity.ListActivity3;
-import com.hy.powerplatform.oa_flow.activity.MyBackFlowListActivity;
-import com.hy.powerplatform.oa_flow.activity.MyBackSureFlowListActivity;
-import com.hy.powerplatform.oa_flow.bean.MyWillDo;
-import com.hy.powerplatform.phone.activity.PhoneListActivity;
-import com.hy.powerplatform.qrcode.zxing.activity.CaptureActivity;
-import com.hy.powerplatform.signin.activity.NewSignActivity;
-import com.hy.powerplatform.weekly.WeeklyListActivity;
+import com.hy.powerplatform.duban.bean.ItemBean;
+import com.hy.powerplatform.human.HuManListActivity;
+import com.hy.powerplatform.login.bean.LoginPerson;
+import com.hy.powerplatform.my_utils.utils.BaseRecyclerAdapter;
+import com.hy.powerplatform.my_utils.utils.BaseRecyclerAdapterPosition;
+import com.hy.powerplatform.my_utils.utils.BaseViewHolder;
+import com.hy.powerplatform.my_utils.utils.BaseViewHolderPosition;
+import com.hy.powerplatform.oa_flow.OAFlowListActivity;
+import com.hy.powerplatform.operation.OperationListActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-import static com.hy.powerplatform.my_utils.base.Constant.TAG_FIVE;
-import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
-import static com.hy.powerplatform.my_utils.base.Constant.TAG_THERE;
-import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
+import butterknife.Unbinder;
 
 /**
  * Created by Administrator on 2019/9/25.
  */
 
 public class Fragment01 extends Fragment {
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+    View view;
     @BindView(R.id.mIvBanner)
     ImageView mIvBanner;
-    List<MainData.DataBean> mainDataList = new ArrayList<>();
-    List<Integer> imageList = new ArrayList<>();
-    AlertDialogUtil alertDialogUtil;
-    MainDataAdapter mainDataAdapter;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+    @BindView(R.id.recyclerViewLogin)
+    RecyclerView recyclerViewLogin;
+    @BindView(R.id.tv1)
+    TextView tv1;
+    @BindView(R.id.tv2)
+    TextView tv2;
+    @BindView(R.id.tv3)
+    TextView tv3;
+    @BindView(R.id.tv4)
+    TextView tv4;
+    @BindView(R.id.mBarChart)
+    BarChart mBarChart;
+
+    //保存数据的实体（下面定义了两组数据集合）
+    public ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
+    //数据的集合（每组数据都需要一个数据集合存放数据实体和该组的样式）
+    public BarDataSet dataset;
+    public BarDataSet dataset1;
+    //表格下方的文字
+    public ArrayList<String> labels = new ArrayList<String>();
+
+    Unbinder unbinder;
     Intent intent;
-
-    String versiondata = "";
-    String versionName;
-    int versionCode;
-
-    MainData bean;
-    int limit = 20;
-    int start = 0;
-    String res = "";
-    String tag = "N";
-    List<MyWillDo.ResultBean> beanList = new ArrayList<>();
-    SharedPreferencesHelper sharedPreferencesHelper;
-    String userName;
-    String superRoleName;
-    String data = "";
-    View view;
+    BaseRecyclerAdapter mAdapter;
+    BaseRecyclerAdapterPosition mAdapterLogin;
+    List<ItemBean> itemList = new ArrayList<>();
+    List<LoginPerson> loginPersonList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment01, container, false);
-        ButterKnife.bind(this, view);
-        userName = sharedPreferencesHelper.getData(getActivity(), "userName", "");
-        superRoleName = sharedPreferencesHelper.getData(getActivity(), "superRoleName", "");
-        PackageManager pm = getActivity().getPackageManager();
-        PackageInfo pi = null;
-        try {
-            pi = pm.getPackageInfo(getActivity().getPackageName(), 0);
-            versionName = pi.versionName;
-            versionCode = pi.versionCode;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        SharedPreferencesHelper helper = new SharedPreferencesHelper(getActivity(), "login");
-        String address = helper.getData(getActivity(), "Address", "");
-        alertDialogUtil = new AlertDialogUtil(getActivity());
-        imageList.add(R.drawable.signin);
-        imageList.add(R.drawable.sign_in);
-        imageList.add(R.drawable.my_information);
-        imageList.add(R.drawable.technological_process);
-        imageList.add(R.drawable.business_inspection);
-        imageList.add(R.drawable.data_analysis);
-        imageList.add(R.drawable.staff_work);
-        imageList.add(R.drawable.phonelist);
-        imageList.add(R.drawable.mycenter);
-        imageList.add(R.drawable.mycenter);
-        imageList.add(R.drawable.mycenter);
-        imageList.add(R.drawable.mycenter);
-        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        SharedPreferencesHelper sharedPreferencesHelper = new SharedPreferencesHelper(getActivity(), "login");
-        String userName = sharedPreferencesHelper.getData(getActivity(), "userName", "");
-        String found = sharedPreferencesHelper.getData(MyApplication.getContextObject(), "Found", "");
-        String BASE_URL = "http://" + sharedPreferencesHelper.getData(MyApplication.getContextObject(), "Ip", "")
-                + ":" + sharedPreferencesHelper.getData(MyApplication.getContextObject(), "Socket", "") + "/" + found + "/";
-        final String Url = BASE_URL + "system/getStatusModuleManagement.do" + "?userName=" + userName;
-        final Message message = new Message();
-        ProgressDialogUtil.startLoad(getActivity(),"获取数据中");
-        OkHttpClient okHttpClient = new OkHttpClient();
-        final Request request = new Request.Builder()
-                .url(Url)
-                .get()//默认就是GET请求，可以不写
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        unbinder = ButterKnife.bind(this, view);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        recyclerViewLogin.setLayoutManager(manager);
+        //添加模块
+        addItem();
+        setItemAdapter();
+
+        LoginPerson loginPerson = new LoginPerson();
+        loginPerson.setUserName("李勇");
+        loginPerson.setLoginNum(5 + "");
+        loginPersonList.add(loginPerson);
+
+        LoginPerson loginPerson1 = new LoginPerson();
+        loginPerson1.setUserName("张苏");
+        loginPerson1.setLoginNum(4 + "");
+        loginPersonList.add(loginPerson1);
+
+        LoginPerson loginPerson2 = new LoginPerson();
+        loginPerson2.setUserName("李明");
+        loginPerson2.setLoginNum(4 + "");
+        loginPersonList.add(loginPerson2);
+
+        LoginPerson loginPerson3 = new LoginPerson();
+        loginPerson3.setUserName("孙有才");
+        loginPerson3.setLoginNum(3 + "");
+        loginPersonList.add(loginPerson3);
+
+        LoginPerson loginPerson4 = new LoginPerson();
+        loginPerson4.setUserName("刘山");
+        loginPerson4.setLoginNum(1 + "");
+        loginPersonList.add(loginPerson4);
+//        for (int i = 0; i < 5; i++) {
+//            LoginPerson loginPerson = new LoginPerson();
+//            loginPerson.setUserName("袁斌" + i + 1);
+//            loginPerson.setLoginNum(i + 1 + "");
+//            loginPersonList.add(loginPerson);
+//        }
+
+        mAdapterLogin = new BaseRecyclerAdapterPosition<LoginPerson>(getActivity(), R.layout.adapter_loginperson, loginPersonList) {
             @Override
-            public void onFailure(Call call, IOException e) {
-                message.what = TAG_TWO;
-                handler.sendMessage(message);
+            public void convert(BaseViewHolderPosition holder, final LoginPerson itemBean, int position) {
+                holder.setText(R.id.tvNum, 1 + "");
+                holder.setText(R.id.tvUserName, itemBean.getUserName());
+                holder.setText(R.id.tvLoginNum, itemBean.getLoginNum());
+                if (position % 2 != 0) {
+                    holder.setColor(R.id.ll);
+                }
+            }
+        };
+        recyclerViewLogin.setAdapter(mAdapterLogin);
+        mAdapterLogin.notifyDataSetChanged();
+
+        tv1.setText("123");
+        tv2.setText("456");
+        tv3.setText("789");
+        tv4.setText("21324");
+
+        entries.add(new BarEntry(335f, 0));
+        entries.add(new BarEntry(110f, 1));
+
+        labels.add("运行中");
+        labels.add("已结束");
+
+
+        dataset = new BarDataSet(entries, "流程统计");
+        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+        dataSets.add(dataset);
+        BarData data = new BarData(labels,dataset);
+        mBarChart.setData(data);
+        //设置单个点击事件
+        mBarChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry entry, int i, Highlight highlight) {
+                Toast.makeText(getActivity(),entry.getVal()+"",Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                message.what = TAG_ONE;
-                message.obj = response.body().toString();
-//                Log.d("XXX", "onResponse: " + response.body().string());
-                data = response.body().string();
-                handler.sendMessage(message);
+            public void onNothingSelected() {
+
             }
         });
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                MyHttpURLConnection.getData(Url, new BaseRequestBackTLisenter() {
-//                    @Override
-//                    public void success(Object o) {
-//                        message.what = TAG_ONE;
-//                        message.obj = o;
-//                        handler.sendMessage(message);
-//                    }
-//
-//                    @Override
-//                    public void fail(String msg) {
-//                        message.what = TAG_TWO;
-//                        handler.sendMessage(message);
-//                    }
-//
-//                    @Override
-//                    public void failF(String msg) {
-//
-//                    }
-//                });
-//            }
-//        }).start();
+        //设置显示动画效果
+        mBarChart.animateY(2000);
+        //设置图标右下放显示文字
+        mBarChart.setDescription("MPandroidChart Test");
         return view;
     }
 
-    /**
-     * 获取数据
-     * @param start
-     * @param limit
-     */
-    private void getData(final int start, final int limit) {
-        new Thread(new Runnable() {
+    private void addItem() {
+        ItemBean bean1 = new ItemBean();
+        int drawableId1 = getResources().getIdentifier("fragment_rb1", "drawable", getActivity().getPackageName());
+        bean1.setAddress(drawableId1);
+        bean1.setName(getResources().getString(R.string.fragment_rb1));
+        itemList.add(bean1);
+
+        ItemBean bean2 = new ItemBean();
+        int drawableId2 = getResources().getIdentifier("fragment_rb2", "drawable", getActivity().getPackageName());
+        bean2.setAddress(drawableId2);
+        bean2.setName(getResources().getString(R.string.fragment_rb2));
+        itemList.add(bean2);
+
+        ItemBean bean3 = new ItemBean();
+        int drawableId3 = getResources().getIdentifier("fragment_rb3", "drawable", getActivity().getPackageName());
+        bean3.setAddress(drawableId3);
+        bean3.setName(getResources().getString(R.string.fragment_rb3));
+        itemList.add(bean3);
+
+        ItemBean bean4 = new ItemBean();
+        int drawableId4 = getResources().getIdentifier("fragment_rb4", "drawable", getActivity().getPackageName());
+        bean4.setAddress(drawableId4);
+        bean4.setName(getResources().getString(R.string.fragment_rb4));
+        itemList.add(bean4);
+
+        ItemBean bean5 = new ItemBean();
+        int drawableId5 = getResources().getIdentifier("fragment_rb5", "drawable", getActivity().getPackageName());
+        bean5.setAddress(drawableId5);
+        bean5.setName(getResources().getString(R.string.fragment_rb5));
+        itemList.add(bean5);
+
+        ItemBean bean6 = new ItemBean();
+        int drawableId6 = getResources().getIdentifier("fragment_rb6", "drawable", getActivity().getPackageName());
+        bean6.setAddress(drawableId6);
+        bean6.setName(getResources().getString(R.string.fragment_rb6));
+        itemList.add(bean6);
+
+        ItemBean bean7 = new ItemBean();
+        int drawableId7 = getResources().getIdentifier("fragment_rb7", "drawable", getActivity().getPackageName());
+        bean7.setAddress(drawableId7);
+        bean7.setName(getResources().getString(R.string.fragment_rb7));
+        itemList.add(bean7);
+
+        ItemBean bean8 = new ItemBean();
+        int drawableId8 = getResources().getIdentifier("fragment_rb8", "drawable", getActivity().getPackageName());
+        bean8.setAddress(drawableId8);
+        bean8.setName(getResources().getString(R.string.fragment_rb8));
+        itemList.add(bean8);
+    }
+
+    private void setItemAdapter() {
+        GridLayoutManager manager = new GridLayoutManager(getActivity(), 4);
+        recyclerView.setLayoutManager(manager);
+        mAdapter = new BaseRecyclerAdapter<ItemBean>(getActivity(), R.layout.adapter_itembean, itemList) {
             @Override
-            public void run() {
-                String url = Constant.BASE_URL2 + Constant.MYWILLDOLIST + start + "&limit=" + limit;
-                DBHandler dbA = new DBHandler();
-                res = dbA.OAQingJiaWillDo(url);
-                if (res.equals("获取数据失败") || res.equals("")) {
-                    handler.sendEmptyMessage(TAG_TWO);
-                } else {
-                    handler.sendEmptyMessage(TAG_FIVE);
-                }
+            public void convert(BaseViewHolder holder, final ItemBean itemBean) {
+                holder.setText(R.id.textView, itemBean.getName());
+                holder.setImageResource(R.id.imageView, itemBean.getAddress());
+                holder.setOnClickListener(R.id.linearLayout, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb1))) {
+                            intent = new Intent(getActivity(), OAFlowListActivity.class);
+                            startActivity(intent);
+                        } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb2))) {
+                            intent = new Intent(getActivity(), HuManListActivity.class);
+                            startActivity(intent);
+                        } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb3))) {
+                            intent = new Intent(getActivity(), OperationListActivity.class);
+                            startActivity(intent);
+                        } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb4))) {
+//                            intent = new Intent(getActivity(), RepairListActivity.class);
+//                            startActivity(intent);
+                        } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb5))) {
+//                            intent = new Intent(getActivity(), MaterialListActivity.class);
+//                            startActivity(intent);
+                        } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb6))) {
+//                            intent = new Intent(getActivity(), SaferListActivity.class);
+//                            startActivity(intent);
+                        } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb7))) {
+//                            intent = new Intent(getActivity(), StatistListActivity.class);
+//                            startActivity(intent);
+                        } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb8))) {
+//                            intent = new Intent(getActivity(), ComperListActivity.class);
+//                            startActivity(intent);
+                        }
+                    }
+                });
             }
-        }).start();
+        };
+        recyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        getData(start, limit);
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
-
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case TAG_ONE:
-                    mainDataList.clear();
-//                    String data = msg.obj.toString();
-                    bean = new Gson().fromJson(data, MainData.class);
-                    for (int i = 0; i < bean.getData().size(); i++) {
-                        if (bean.getData().get(i).getModuleName().equals("公司流程")){
-                            if (superRoleName.equals("分管领导")||superRoleName.equals("总经理")
-                                    ||superRoleName.equals("副总经理")||superRoleName.equals("董事长")){
-                                mainDataList.add(bean.getData().get(i));
-                            }
-                        }else if (bean.getData().get(i).getModuleName().equals("部门流程")){
-                            if (superRoleName.equals("分管领导")||superRoleName.equals("总经理")
-                                    ||superRoleName.equals("副总经理")||superRoleName.equals("董事长")){
-//                                mainDataList.add(bean.getData().get(i))
-                            }else {
-                                mainDataList.add(bean.getData().get(i));
-                            }
-                        }else {
-                            mainDataList.add(bean.getData().get(i));
-                        }
-                    }
-                    getData(start, limit);
-                    break;
-                case TAG_TWO:
-                    Toast.makeText(getActivity(), "请求数据失败", Toast.LENGTH_SHORT).show();
-                    ProgressDialogUtil.stopLoad();
-                    break;
-                case TAG_FIVE:
-                    try {
-                        JSONObject jsonObject = new JSONObject(res);
-                        JSONArray jsonArray = jsonObject.getJSONArray("result");
-                        String num = "";
-                        if (jsonArray.length()!=0){
-                            tag = "Y";
-                            num = jsonObject.getString("totalCounts");
-                        }
-                        for (int i = 0;i<jsonArray.length();i++){
-                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                            if (jsonObject1.getString("taskName").contains("会签")){
-                                num = String.valueOf(Integer.valueOf(num)-1);
-                            }
-                        }
-                        ProgressDialogUtil.stopLoad();
-                        mainDataAdapter = new MainDataAdapter(getActivity(), mainDataList, imageList,tag,num);
-                        recyclerView.setAdapter(mainDataAdapter);
-                        mainDataAdapter.sendOnGetAdapterPositionListener(new MainDataAdapter.OnGetAdapterPositionListener() {
-                            @Override
-                            public void getAdapterPosition(int position) {
-                                String tag = mainDataList.get(position).getModuleCode();
-                                if (mainDataList.get(position).getModuleCode().equals("SGGL")) {
-                                    intent = new Intent(getActivity(), ShiGuActivity.class);
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("QD")) {
-                                    intent = new Intent(getActivity(), NewSignActivity.class);
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("GG")) {
-                                    intent = new Intent(getActivity(), NoticeActivity.class);
-                                    intent.putExtra("heard", getResources().getString(R.string.notice));
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("XW")) {
-                                    intent = new Intent(getActivity(), NewsActivity.class);
-                                    intent.putExtra("heard", getResources().getString(R.string.news));
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("WSJC")) {
-                                    intent = new Intent(getActivity(), InspectYeWuActivity.class);
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("GRZX")) {
-                                    intent = new Intent(getActivity(), MyPersonalActivity.class);
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("TXL")) {
-                                    intent = new Intent(getActivity(), PhoneListActivity.class);
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("ZGJNKH")) {
-                                    intent = new Intent(getActivity(), com.hy.powerplatform.business_inspect.newactivity.InspectAllActivity.class);
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("YFSFJKH")) {
-                                    intent = new Intent(getActivity(), com.hy.powerplatform.business_inspect.newactivity.InspectStarteActivity.class);
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("FWWSJZ")) {
-                                    intent = new Intent(getActivity(), com.hy.powerplatform.business_inspect.newactivity.InspectHealthActivity.class);
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("AQZXJC")) {
-                                    intent = new Intent(getActivity(), com.hy.powerplatform.business_inspect.newactivity.InspectSufferActivity.class);
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("JSZKJC")) {
-                                    intent = new Intent(getActivity(), com.hy.powerplatform.business_inspect.newactivity.InspectKillActivity.class);
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("JLWX")) {
-                                    intent = new Intent(getActivity(), MainTainActivity1.class);
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("FQSQ")) {
-                                    intent = new Intent(getActivity(), ListActivity.class);
-                                    startActivity(intent);
-                                }else if (mainDataList.get(position).getModuleCode().equals("DBLC")) {
-                                    intent = new Intent(getActivity(), ListActivity1.class);
-                                    startActivity(intent);
-                                }else if (mainDataList.get(position).getModuleCode().equals("GSLC")) {
-                                    intent = new Intent(getActivity(), HistoryListActivity.class);
-                                    startActivity(intent);
-                                }else if (mainDataList.get(position).getModuleCode().equals("BMLC")) {
-                                    intent = new Intent(getActivity(), ListActivity2.class);
-                                    startActivity(intent);
-                                }else if (mainDataList.get(position).getModuleCode().equals("YBLC")) {
-                                    intent = new Intent(getActivity(), ListActivity3.class);
-                                    startActivity(intent);
-                                }else if (mainDataList.get(position).getModuleCode().equals("SYS")) {
-                                    startQrCode();
-                                }else if (mainDataList.get(position).getModuleCode().equals("SJX")) {
-                                    intent = new Intent(getActivity(), InboxActivity.class);
-                                    startActivity(intent);
-                                } else if (mainDataList.get(position).getModuleCode().equals("LCZH")) {
-                                    intent = new Intent(getActivity(), MyBackFlowListActivity.class);
-                                    startActivity(intent);
-                                }else if (mainDataList.get(position).getModuleCode().equals("ZHQR")) {
-                                    intent = new Intent(getActivity(), MyBackSureFlowListActivity.class);
-                                    startActivity(intent);
-                                }else if (mainDataList.get(position).getModuleCode().equals("ZB")) {
-                                    intent = new Intent(getActivity(), WeeklyListActivity.class);
-                                    startActivity(intent);
-                                }else if (mainDataList.get(position).getModuleCode().equals("DB")) {
-                                    intent = new Intent(getActivity(), DBActivity.class);
-                                    startActivity(intent);
-                                }
-                            }
-                        });
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        handler.sendEmptyMessage(TAG_THERE);
-                    }
-                    break;
-            }
-        }
-    };
-
-    // 开始扫码
-    private void startQrCode() {
-        // 申请相机权限
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            // 申请权限
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, Constant.REQ_PERM_CAMERA);
-            return;
-        }
-        // 申请文件读写权限（部分朋友遇到相册选图需要读写权限的情况，这里一并写一下）
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            // 申请权限
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Constant.REQ_PERM_EXTERNAL_STORAGE);
-            return;
-        }
-        // 二维码扫码
-        Intent intent = new Intent(getActivity(), CaptureActivity.class);
-        startActivityForResult(intent, Constant.REQ_QR_CODE);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case Constant.REQ_PERM_CAMERA:
-                // 摄像头权限申请
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // 获得授权
-                    startQrCode();
-                } else {
-                    // 被禁止授权
-                    Toast.makeText(getActivity(), "请至权限中心打开本应用的相机访问权限", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case Constant.REQ_PERM_EXTERNAL_STORAGE:
-                // 文件读写权限申请
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // 获得授权
-                    startQrCode();
-                } else {
-                    // 被禁止授权
-                    Toast.makeText(getActivity(), "请至权限中心打开本应用的文件读写权限", Toast.LENGTH_LONG).show();
-                }
-                break;
-        }
-    }
-
 }

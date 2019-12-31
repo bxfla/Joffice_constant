@@ -22,6 +22,7 @@ import com.hy.powerplatform.business_inspect.bean.Person;
 import com.hy.powerplatform.business_inspect.presenter.CheckPersonPresenter;
 import com.hy.powerplatform.business_inspect.presenter.carcodepresenterimpl.CheckPersonPresenterimpl;
 import com.hy.powerplatform.business_inspect.view.CheckPersonView;
+import com.hy.powerplatform.duban.bean.AboutPerson;
 import com.hy.powerplatform.duban.bean.DBUp;
 import com.hy.powerplatform.duban.bean.DBUp1;
 import com.hy.powerplatform.duban.bean.DBZheluPerson;
@@ -83,6 +84,7 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
     String rights, userStatus,userId;
     String data = "";
     String WorkId = "";
+    String aboutPerson = "";
     String userName = "", userCode = "";
     String ZXName = "", ZXCode = "";
     String lxrName = "", lxrCode = "";
@@ -99,6 +101,7 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
     String path_url1 = Constant.BASE_URL1 + Constant.DBQRTJ;
     String path_url2 = Constant.BASE_URL1 + Constant.DBQRFB;
     String path_url3 = Constant.BASE_URL1 + Constant.DBZHGLBRY;
+    String path_url4 = Constant.BASE_URL1 + Constant.DBFBABOUTPER;
     private CustomDatePickerMin customDatePicker1;
     private CustomDatePickerDay customDatePicker2;
 
@@ -149,7 +152,7 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
             Person person4 = new Person();
             person4.setUserCode(userId);
             person4.setUserName(userStatus);
-            morenDatas.add(person3);
+            morenDatas.add(person4);
         }
         if (morenDatas.size() != 0) {
             for (int i = 0; i < morenDatas.size(); i++) {
@@ -398,6 +401,34 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                     ZXName = data.getStringExtra("name");
                     ZXCode = data.getStringExtra("userCode");
                     tvZXR.setText(ZXName);
+                    final HashMap<String, String> map = new HashMap();
+                    map.put("userId", ZXCode);
+                    map.put("demId", "1");
+                    map.put("relative", "1");
+                    httpUtil.postForm(path_url4, map, new OkHttpUtil.ResultCallback() {
+                        @Override
+                        public void onError(Request request, Exception e) {
+//                Log.i("main", "response:" + e.toString());
+                            Message message = new Message();
+                            Bundle b = new Bundle();
+                            b.putString("error", e.toString());
+                            message.setData(b);
+                            message.what = Constant.TAG_ONE;
+                            handler.sendMessage(message);
+                        }
+
+                        @Override
+                        public void onResponse(Response response) throws IOException {
+//                Log.i("main", "response:" + response.body().string());
+                            aboutPerson = response.body().string();
+                            Message message = new Message();
+                            Bundle b = new Bundle();
+                            b.putString("data", aboutPerson);
+                            message.setData(b);
+                            message.what = Constant.TAG_SIX;
+                            handler.sendMessage(message);
+                        }
+                    });
                     Log.e("ZXName", ZXName);
                 }
                 break;
@@ -559,6 +590,24 @@ public class DBUpActivity extends BaseActivity implements CheckPersonView {
                         tvLXR.setVisibility(View.GONE);
                     }
                     ProgressDialogUtil.stopLoad();
+                    break;
+                case Constant.TAG_SIX:
+                    Bundle b5 = msg.getData();
+                    String data5 = b5.getString("data");
+                    Gson gson5 = new Gson();
+                    AboutPerson bean5 = gson5.fromJson(data5, AboutPerson.class);
+                    if (bean5.isSuccess()) {
+                        ProgressDialogUtil.stopLoad();
+                        userCode = bean5.getUserId();
+                        userName = bean5.getFullname();
+                        if (!userCode.contains(userId)){
+                            userCode = userCode+","+userId;
+                            userName = userName+","+userStatus;
+                        }
+                        tvDBR.setText(userName);
+                    }else {
+                        ProgressDialogUtil.stopLoad();
+                    }
                     break;
             }
         }

@@ -136,7 +136,8 @@ public interface RetrofitService {
      * 获取线路
      * @return
      */
-    @GET("system/getLineStoreAllLineInfo.do")
+//    @GET("system/getLineStoreAllLineInfo.do")
+    @GET("system/getLineStoreLineInfo.do")
     Observable<InspectLine> inspectLine ();
 
     /**

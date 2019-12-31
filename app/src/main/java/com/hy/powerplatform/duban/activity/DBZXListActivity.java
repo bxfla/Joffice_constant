@@ -284,11 +284,11 @@ public class DBZXListActivity extends BaseActivity {
         }else if (spinnerType.getSelectedItem().toString().trim().equals("未完成")){
             zt = "10";
         }
-        if (zt.equals("")){
-            map.put("Q_operStatus_N_EQ", "1,2,3");
-        }else {
+//        if (zt.equals("")){
+//            map.put("Q_operStatus_N_EQ", "1,2,3");
+//        }else {
             map.put("Q_operStatus_N_EQ", zt);
-        }
+//        }
         map.put("searchAll", "false");
         httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
             @Override
