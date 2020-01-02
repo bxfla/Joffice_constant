@@ -927,7 +927,19 @@
         <activity android:name=".operation.activity.CarTypeActivity" />
         <activity android:name=".operation.activity.CarDANDetailActivity" />
         <activity android:name=".operation.activity.LineSearchListActivity" />
-        <activity android:name=".operation.activity.LineSearchDetailActivity"></activity>
+        <activity android:name=".operation.activity.LineSearchDetailActivity" />
+        <activity android:name=".oa_flow.notice.NoticeListActivity" />
+        <activity android:name=".oa_flow.notice.NoticeDetailActivity" />
+        <activity android:name=".oa_flow.metting.MettingListActivity" />
+        <activity android:name=".oa_flow.metting.activity.MyWillOpenListActivity" />
+        <activity android:name=".oa_flow.metting.activity.MyWillOpenDetailActivity"/>
+        <activity android:name=".oa_flow.metting.activity.MyOverOpenListActivity" />
+        <activity android:name=".oa_flow.metting.activity.MyOverOpenDetailActivity"/>
+        <activity android:name=".oa_flow.metting.activity.WillOpenListActivity" />
+        <activity android:name=".oa_flow.metting.activity.WillOpenDetailActivity"/>
+        <activity android:name=".oa_flow.metting.activity.OverOpenListActivity" />
+        <activity android:name=".oa_flow.metting.activity.OverOpenDetailActivity"/>
+        <activity android:name=".oa_flow.metting.activity.JiYaoListActivity"/>
     </application>
 
 </manifest>

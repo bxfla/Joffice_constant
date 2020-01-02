@@ -204,7 +204,7 @@ public class AlertDialogUtil {
         }
     }
 
-    public void showPictureSmallDialog(String description, final AlertDialogCallBack alertDialogCallBack) {
+    public void showPictureSmallDialog(String title,String description, final AlertDialogCallBack alertDialogCallBack) {
         if (dialog == null || !dialog.isShowing()) {
             dialog = new AlertDialog.Builder(context).create();
             dialog.setCancelable(false);
@@ -214,6 +214,8 @@ public class AlertDialogUtil {
             View view = inflater.inflate(R.layout.dialog_with_one_title, null, false);
             TextView tv_content = (TextView) view.findViewById(R.id.content);
             TextView tv_yes = (TextView) view.findViewById(R.id.yes);
+            TextView tv_title = (TextView) view.findViewById(R.id.title);
+            tv_title.setText(title);
             tv_content.setText(description);
             tv_yes.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -14,6 +14,7 @@ import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
 import com.hy.powerplatform.my_utils.utils.BaseRecyclerAdapter;
 import com.hy.powerplatform.my_utils.utils.BaseViewHolder;
 import com.hy.powerplatform.oa_flow.metting.MettingListActivity;
+import com.hy.powerplatform.oa_flow.notice.NoticeListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +97,8 @@ public class OAFlowListActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         if (itemBean.getName().equals(getResources().getString(R.string.oaflow_rb1))){
+                            intent = new Intent(OAFlowListActivity.this, NoticeListActivity.class);
+                            startActivity(intent);
                         }else if (itemBean.getName().equals(getResources().getString(R.string.oaflow_rb2))){
                             intent = new Intent(OAFlowListActivity.this, MettingListActivity.class);
                             startActivity(intent);

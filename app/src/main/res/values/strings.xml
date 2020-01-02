@@ -289,8 +289,11 @@
     <string name="oaflow_rb3">流程审批</string>
     <string name="oaflow_rb4">通讯录</string>
 
-    <string name="oaflow_metting_rb1">待开会议</string>
-    <string name="oaflow_metting_rb2">会议审核</string>
+    <string name="oaflow_metting_rb1">待我参加</string>
+    <string name="oaflow_metting_rb2">我已参加</string>
+    <string name="oaflow_metting_rb3">待开会议</string>
+    <string name="oaflow_metting_rb4">已开会议</string>
+    <string name="oaflow_metting_rb5">会议纪要</string>
 
     <string name="oaflow_human_rb1">应聘人员</string>
     <string name="oaflow_human_rb2">实习驾驶员</string>

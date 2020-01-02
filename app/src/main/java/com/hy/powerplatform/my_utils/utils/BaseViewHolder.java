@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.hy.powerplatform.my_utils.myViews.RichTextView;
+
 /**
  * Created by Administrator on 2019/4/12.
  * 通用adapter的viewholder
@@ -84,14 +86,14 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-//    /**
-//     * 给TextView设置setText方法
-//     */
-//    public BaseViewHolder setText1(int viewId, String text) {
-//        RichTextView tv = getView(viewId);
-//        tv.setHtml(text, 500);
-//        return this;
-//    }
+    /**
+     * 给TextView设置setText方法
+     */
+    public BaseViewHolder setText1(int viewId, String text) {
+        RichTextView tv = getView(viewId);
+        tv.setHtml(text, 500);
+        return this;
+    }
 
     /**
      * 给ImageView设置setImageResource方法

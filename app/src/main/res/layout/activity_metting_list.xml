@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.hy.powerplatform.oaflow.activity.metting.MettingListActivity">
+    android:orientation="vertical">
 
-    <com.hy.powerplatform.http.views.Header
+    <com.hy.powerplatform.my_utils.myViews.Header
         android:id="@+id/header"
         style="@style/Heander"
         app:header_title="@string/oaflow_rb2">
-    </com.hy.powerplatform.http.views.Header>
+    </com.hy.powerplatform.my_utils.myViews.Header>
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -29,6 +28,36 @@
             style="@style/RadionButton"
             android:drawableTop="@drawable/oaflow_metting_rb2"
             android:text="@string/oaflow_metting_rb2" />
+
+        <RadioButton
+            android:id="@+id/rb3"
+            style="@style/RadionButton"
+            android:drawableTop="@drawable/oaflow_metting_rb3"
+            android:text="@string/oaflow_metting_rb3" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rb4"
+            style="@style/RadionButton"
+            android:drawableTop="@drawable/oaflow_metting_rb4"
+            android:text="@string/oaflow_metting_rb4" />
+
+        <RadioButton
+            android:id="@+id/rb5"
+            style="@style/RadionButton"
+            android:drawableTop="@drawable/oaflow_metting_rb5"
+            android:text="@string/oaflow_metting_rb5" />
+
+        <RadioButton
+            style="@style/RadionButton"
+            android:visibility="invisible"
+            android:drawableTop="@drawable/oaflow_metting_rb3"
+            android:text="@string/oaflow_metting_rb3" />
     </RadioGroup>
 
 </LinearLayout>

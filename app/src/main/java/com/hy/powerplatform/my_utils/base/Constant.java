@@ -178,6 +178,16 @@ public class Constant {
     public static final String  DEPARTMENT = "system/getTreeNewOrganization.do";
     // 线路查询
     public static final String  LINESEARCH = "system/getLinesByDepLineInfo.do";
+    // 公告
+    public static final String  NOTICE = "info/listNews.do";
+    // 我的待开会议
+    public static final String  MYWILLOPEN = "admin/myJoinConference.do";
+    // 我的已开会议
+    public static final String  MYOVEROPEN = "admin/myJoinedConference.do";
+    // 待开会议
+    public static final String  WILLOPEN = "admin/waitOpenConference.do";
+    // 会议纪要
+    public static final String  JIYAO = "admin/listConfSummary.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";
