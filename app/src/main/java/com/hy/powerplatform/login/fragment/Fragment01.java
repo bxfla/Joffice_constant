@@ -32,6 +32,7 @@ import com.hy.powerplatform.my_utils.utils.BaseViewHolder;
 import com.hy.powerplatform.my_utils.utils.BaseViewHolderPosition;
 import com.hy.powerplatform.oa_flow.OAFlowListActivity;
 import com.hy.powerplatform.operation.OperationListActivity;
+import com.hy.powerplatform.safer.SaferListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -248,8 +249,8 @@ public class Fragment01 extends Fragment {
 //                            intent = new Intent(getActivity(), MaterialListActivity.class);
 //                            startActivity(intent);
                         } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb6))) {
-//                            intent = new Intent(getActivity(), SaferListActivity.class);
-//                            startActivity(intent);
+                            intent = new Intent(getActivity(), SaferListActivity.class);
+                            startActivity(intent);
                         } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb7))) {
 //                            intent = new Intent(getActivity(), StatistListActivity.class);
 //                            startActivity(intent);

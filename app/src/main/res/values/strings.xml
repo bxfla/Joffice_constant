@@ -302,4 +302,7 @@
     <string name="oaflow_operation_rb1">车辆档案</string>
     <string name="oaflow_operation_rb2">线路查询</string>
 
+    <string name="oaflow_safer_rb1">违章查询</string>
+    <string name="oaflow_safer_rb2">事故档案</string>
+
 </resources>
