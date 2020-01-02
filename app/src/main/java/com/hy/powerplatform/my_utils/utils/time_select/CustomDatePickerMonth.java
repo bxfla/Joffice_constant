@@ -22,7 +22,7 @@ import java.util.Locale;
 /**
  * Created by liuwan on 2016/9/28.
  */
-public class CustomDatePickerDay {
+public class CustomDatePickerMonth {
 
     /**
      * 定义结果回调接口
@@ -60,9 +60,9 @@ public class CustomDatePickerDay {
     private int startYear, startMonth, startDay, startHour, startMinute, endYear, endMonth, endDay, endHour, endMinute;
     private boolean spanYear, spanMon, spanDay, spanHour, spanMin;
     private Calendar selectedCalender, startCalendar, endCalendar;
-    private TextView tv_cancle, tv_select, hour_text, minute_text;
+    private TextView tv_cancle, tv_select, hour_text, minute_text,tvDays;
 
-    public CustomDatePickerDay(Context context, ResultHandler resultHandler, String startDate, String endDate) {
+    public CustomDatePickerMonth(Context context, ResultHandler resultHandler, String startDate, String endDate) {
         if (isValidDate(startDate, "yyyy-MM-dd HH:mm") && isValidDate(endDate, "yyyy-MM-dd HH:mm")) {
             canAccess = true;
             this.context = context;
@@ -109,6 +109,7 @@ public class CustomDatePickerDay {
         tv_select = (TextView) datePickerDialog.findViewById(R.id.tv_select);
         hour_text = (TextView) datePickerDialog.findViewById(R.id.hour_text);
         minute_text = (TextView) datePickerDialog.findViewById(R.id.minute_text);
+        tvDays = (TextView) datePickerDialog.findViewById(R.id.tvDays);
 
         tv_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -481,7 +482,7 @@ public class CustomDatePickerDay {
 
     public void show(String time) {
         if (canAccess) {
-            if (isValidDate(time, "yyyy-MM-dd")) {
+            if (isValidDate(time, "yyyy-MM")) {
                 if (startCalendar.getTime().getTime() < endCalendar.getTime().getTime()) {
                     canAccess = true;
                     initParameter();
@@ -524,6 +525,7 @@ public class CustomDatePickerDay {
         if (canAccess) {
             if (show) {
                 disScrollUnit();
+                tvDays.setVisibility(View.VISIBLE);
                 day_pv.setVisibility(View.VISIBLE);
                 hour_pv.setVisibility(View.VISIBLE);
                 hour_text.setVisibility(View.VISIBLE);
@@ -531,6 +533,7 @@ public class CustomDatePickerDay {
                 minute_text.setVisibility(View.VISIBLE);
             } else {
                 disScrollUnit(SCROLL_TYPE.HOUR, SCROLL_TYPE.MINUTE);
+                tvDays.setVisibility(View.GONE);
                 day_pv.setVisibility(View.GONE);
                 hour_pv.setVisibility(View.GONE);
                 hour_text.setVisibility(View.GONE);
@@ -599,10 +602,10 @@ public class CustomDatePickerDay {
                     day.add(formatTimeUnit(i));
                 }
             }
-            day_pv.setData(day);
-            day_pv.setSelected(dateStr[2]);
-            selectedCalender.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateStr[2]));
-            executeAnimator(day_pv);
+//            day_pv.setData(day);
+//            day_pv.setSelected(dateStr[2]);
+//            selectedCalender.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateStr[2]));
+//            executeAnimator(day_pv);
 
             if (str.length == 2) {
                 String[] timeStr = str[1].split(":");

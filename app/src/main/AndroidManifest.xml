@@ -944,7 +944,9 @@
         <activity android:name=".safer.activity.WeiZhangListActivity" />
         <activity android:name=".safer.activity.WeiZhangDetailActivity" />
         <activity android:name=".safer.activity.ShiGuListActivity" />
-        <activity android:name=".safer.activity.ShiGuDetailActivity"></activity>
+        <activity android:name=".safer.activity.ShiGuDetailActivity" />
+        <activity android:name=".comper.ComperListActivity" />
+        <activity android:name=".comper.activity.ShengChanYYListActivity"></activity>
     </application>
 
 </manifest>

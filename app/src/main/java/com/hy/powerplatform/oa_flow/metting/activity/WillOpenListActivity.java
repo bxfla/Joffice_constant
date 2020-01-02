@@ -80,7 +80,7 @@ public class WillOpenListActivity extends BaseActivity {
         recyclerView.setAdapter(baseAdapter);
 
         getData(start, limit);
-//        setClient();
+        setClient();
     }
 
     private void getData(final int start, final int limit) {
@@ -111,6 +111,28 @@ public class WillOpenListActivity extends BaseActivity {
                 message.setData(b);
                 message.what = TAG_TWO;
                 handler.sendMessage(message);
+            }
+        });
+    }
+
+    /**
+     * 滑动监听
+     */
+    private void setClient() {
+        recyclerView.setOnLoadListener(new CustomRefreshView.OnLoadListener() {
+            @Override
+            public void onRefresh() {
+                beanList.clear();
+                start = 0;
+                limit = 20;
+                getData(start, limit);
+            }
+
+            @Override
+            public void onLoadMore() {
+                start = limit;
+                limit += 20;
+                getData(start, limit);
             }
         });
     }

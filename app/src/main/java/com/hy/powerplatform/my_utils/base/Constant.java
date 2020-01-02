@@ -192,6 +192,8 @@ public class Constant {
     public static final String  WEIZHANG = "busmanager/listViolationRecord.do";
     // 事故档案
     public static final String  SHIGUDANGAN = "busmanager/listAccidentBasicInformation.do";
+    // 生产营运
+    public static final String  SHENGCHANYY = "starkh/operationIndexReportImportYYData.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";

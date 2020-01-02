@@ -305,4 +305,7 @@
     <string name="oaflow_safer_rb1">违章查询</string>
     <string name="oaflow_safer_rb2">事故档案</string>
 
+    <string name="oaflow_comper_rb1">生产营运</string>
+    <string name="oaflow_comper_rb2">营运指标</string>
+
 </resources>

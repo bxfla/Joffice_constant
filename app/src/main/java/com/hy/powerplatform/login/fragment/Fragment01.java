@@ -23,6 +23,7 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.hy.powerplatform.R;
+import com.hy.powerplatform.comper.ComperListActivity;
 import com.hy.powerplatform.duban.bean.ItemBean;
 import com.hy.powerplatform.human.HuManListActivity;
 import com.hy.powerplatform.login.bean.LoginPerson;
@@ -255,8 +256,8 @@ public class Fragment01 extends Fragment {
 //                            intent = new Intent(getActivity(), StatistListActivity.class);
 //                            startActivity(intent);
                         } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb8))) {
-//                            intent = new Intent(getActivity(), ComperListActivity.class);
-//                            startActivity(intent);
+                            intent = new Intent(getActivity(), ComperListActivity.class);
+                            startActivity(intent);
                         }
                     }
                 });
