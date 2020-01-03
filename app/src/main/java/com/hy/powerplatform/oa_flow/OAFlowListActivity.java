@@ -15,6 +15,7 @@ import com.hy.powerplatform.my_utils.utils.BaseRecyclerAdapter;
 import com.hy.powerplatform.my_utils.utils.BaseViewHolder;
 import com.hy.powerplatform.oa_flow.metting.MettingListActivity;
 import com.hy.powerplatform.oa_flow.notice.NoticeListActivity;
+import com.hy.powerplatform.oa_flow.phone.PhoneActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,8 @@ public class OAFlowListActivity extends BaseActivity {
                             intent = new Intent(OAFlowListActivity.this, OAListActivity.class);
                             startActivity(intent);
                         }else if (itemBean.getName().equals(getResources().getString(R.string.oaflow_rb4))){
+                            intent = new Intent(OAFlowListActivity.this, PhoneActivity.class);
+                            startActivity(intent);
                         }
                     }
                 });

@@ -196,6 +196,10 @@ public class Constant {
     public static final String  SHENGCHANYY = "starkh/operationIndexReportImportYYData.do";
     // 营运指标
     public static final String  YINGYUNZHIBIAO = "starkh/operationAnalysisImportYYData.do";
+    // 通讯录
+    public static final String  PHONE = "system/getDepUsersAppUser.do";
+    // 通讯录部门
+    public static final String  PHONEDEP = "system/getDepStoreOrganization.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";

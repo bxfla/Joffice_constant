@@ -307,5 +307,6 @@
 
     <string name="oaflow_comper_rb1">生产营运</string>
     <string name="oaflow_comper_rb2">营运指标</string>
+    <string name="department">部门</string>
 
 </resources>
