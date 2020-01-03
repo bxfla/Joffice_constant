@@ -949,7 +949,8 @@
         <activity android:name=".comper.activity.ShengChanYYListActivity" />
         <activity android:name=".comper.activity.YingYunZBActivity" />
         <activity android:name=".oa_flow.phone.PhoneActivity" />
-        <activity android:name=".oa_flow.phone.PhoneDepartmentActivity"></activity>
+        <activity android:name=".oa_flow.phone.PhoneDepartmentActivity" />
+        <activity android:name=".login.activity.LoginPersonMoreActivity"></activity>
     </application>
 
 </manifest>

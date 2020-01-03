@@ -200,6 +200,10 @@ public class Constant {
     public static final String  PHONE = "system/getDepUsersAppUser.do";
     // 通讯录部门
     public static final String  PHONEDEP = "system/getDepStoreOrganization.do";
+    // 登录次数
+    public static final String  LOGINPERSON = "system/listLoginAnalysisAppUser.do";
+    // 获取首页营运数据
+    public static final String  YINGYUNDATA = "starkh/dataSynthesisAnalysisImportYYData.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";
