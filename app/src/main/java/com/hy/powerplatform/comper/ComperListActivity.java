@@ -7,6 +7,7 @@ import android.widget.RadioButton;
 
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.comper.activity.ShengChanYYListActivity;
+import com.hy.powerplatform.comper.activity.YingYunZBActivity;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
@@ -23,7 +24,7 @@ public class ComperListActivity extends BaseActivity {
     RadioButton rb1;
     @BindView(R.id.rb2)
     RadioButton rb2;
-
+    Intent intent;
     AlertDialogUtil alertDialogUtil;
 
     @Override
@@ -52,12 +53,12 @@ public class ComperListActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rb1:
-                Intent intent = new Intent(this, ShengChanYYListActivity.class);
+                intent = new Intent(this, ShengChanYYListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rb2:
-//                Intent intent = new Intent(this,YingYunZBActivity.class);
-//                startActivity(intent);
+                intent = new Intent(this,YingYunZBActivity.class);
+                startActivity(intent);
                 break;
         }
     }
