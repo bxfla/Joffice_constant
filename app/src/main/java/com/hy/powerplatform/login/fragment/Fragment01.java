@@ -31,6 +31,7 @@ import com.hy.powerplatform.duban.bean.ItemBean;
 import com.hy.powerplatform.human.HuManListActivity;
 import com.hy.powerplatform.login.activity.LoginPersonMoreActivity;
 import com.hy.powerplatform.login.bean.LoginPerson;
+import com.hy.powerplatform.login.bean.OAFlowNum;
 import com.hy.powerplatform.login.bean.YingYunData;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.OkHttpUtil;
@@ -63,6 +64,7 @@ import butterknife.Unbinder;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_FOUR;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_THERE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
@@ -86,11 +88,10 @@ public class Fragment01 extends Fragment {
     @BindView(R.id.recyclerViewYY)
     RecyclerView recyclerViewYY;
 
+    //数据的集合
+    public BarDataSet dataset;
     //保存数据的实体（下面定义了两组数据集合）
     public ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
-    //数据的集合（每组数据都需要一个数据集合存放数据实体和该组的样式）
-    public BarDataSet dataset;
-    public BarDataSet dataset1;
     //表格下方的文字
     public ArrayList<String> labels = new ArrayList<String>();
 
@@ -101,6 +102,7 @@ public class Fragment01 extends Fragment {
     BaseRecyclerAdapter baseAdapterYY;
     BaseRecyclerAdapterPosition mAdapterLogin;
     List<ItemBean> itemList = new ArrayList<>();
+    ArrayList<IBarDataSet> dataSets = new ArrayList<>();
     final HashMap<String, String> map = new HashMap();
     List<YingYunData> yingyunList = new ArrayList<>();
     List<LoginPerson.ResultBean> loginPersonList = new ArrayList<>();
@@ -138,19 +140,6 @@ public class Fragment01 extends Fragment {
             }
         };
         recyclerViewYY.setAdapter(baseAdapterYY);
-
-        entries.add(new BarEntry(335f, 0));
-        entries.add(new BarEntry(110f, 1));
-
-        labels.add("运行中");
-        labels.add("已结束");
-
-        dataset = new BarDataSet(entries, "流程统计");
-        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
-        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
-        dataSets.add(dataset);
-        BarData data = new BarData(labels, dataset);
-        mBarChart.setData(data);
         //设置单个点击事件
         mBarChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
@@ -166,12 +155,43 @@ public class Fragment01 extends Fragment {
         //设置显示动画效果
         mBarChart.animateY(2000);
         mBarChart.setMaxVisibleValueCount(60);
-        //设置图标右下放显示文字
-        mBarChart.setDescription("MPandroidChart Test");
 
         httpUtil = OkHttpUtil.getInstance(getActivity());
         getLoginPerson();
+        getOAFlowNum();
         return view;
+    }
+
+    /**
+     * 获取流程情况
+     */
+    private void getOAFlowNum() {
+        ProgressDialogUtil.startLoad(getActivity(), getResources().getString(R.string.get_data));
+        final String path_url = Constant.BASE_URL2 + Constant.OAFLOWNUM;
+        httpUtil.getAsynHttp(path_url, new OkHttpUtil.ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+//                Log.i("main", "response:" + e.toString());
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("error", e.toString());
+                message.setData(b);
+                message.what = TAG_ONE;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+//                Log.i("main", "response:" + response.body().string());
+                String data = response.body().string();
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("data", data);
+                message.setData(b);
+                message.what = TAG_FOUR;
+                handler.sendMessage(message);
+            }
+        });
     }
 
     /**
@@ -390,6 +410,22 @@ public class Fragment01 extends Fragment {
                     }
                     baseAdapterYY.notifyDataSetChanged();
                     ProgressDialogUtil.stopLoad();
+                    break;
+                case TAG_FOUR:
+                    Bundle b3 = msg.getData();
+                    String data3 = b3.getString("data");
+                    OAFlowNum bean3 = new Gson().fromJson(data3, OAFlowNum.class);
+                    if (bean3.getTotalCounts() != 0) {
+                        for (int i = 0; i < bean3.getResult().size(); i++) {
+                            entries.add(new BarEntry(Float.parseFloat(bean3.getResult().get(i).getNum()), i));
+                            labels.add(bean3.getResult().get(i).getName());
+                            dataset = new BarDataSet(entries, "流程统计图");
+                            dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                            dataSets.add(dataset);
+                        }
+                    }
+                    BarData dataNum = new BarData(labels, dataset);
+                    mBarChart.setData(dataNum);
                     break;
             }
         }
