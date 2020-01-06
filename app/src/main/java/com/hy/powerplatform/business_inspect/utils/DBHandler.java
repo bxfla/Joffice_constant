@@ -3321,7 +3321,8 @@ public class DBHandler {
             , String money5, String allMoney1, String allMoney2, String allMoney3, String allMoney4
             , String allMoney5, String userCode, String uName, String uId, String hejisl, String hejidj,
                                String hejije, String use, String other,String iszc ,String goodsType,String zcDepName
-            , String depart1, String depart2, String depart3, String depart4,String bz1,String bz2,String bz3,String bz4) {
+            , String depart1, String depart2, String depart3, String depart4,String bz1,String bz2,String bz3,String bz4
+            ,String otherMoney,String otherMemo) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(turl);
@@ -3385,6 +3386,8 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("hejidj", ""));
         nvs.add(new BasicNameValuePair("hejije", hejije));
         nvs.add(new BasicNameValuePair("yt", use));
+        nvs.add(new BasicNameValuePair("jine6", otherMoney));
+        nvs.add(new BasicNameValuePair("beizhu6", otherMemo));
 
         nvs.add(new BasicNameValuePair("bmfzryj", ""));
         nvs.add(new BasicNameValuePair("jcbmyj", ""));
@@ -3939,7 +3942,8 @@ public class DBHandler {
                                    String gybmyj,String zcgkbmyj, String fgldyj, String cwzjyj, String zjl, String serialNumber,
                                    String comment, String signaName, String hejisl, String hejidj, String hejije, String use
             , String jbldyj, String other,String jcbmyj,String danwei1,String danwei2,String danwei3,String danwei4,
-                                   String danwei5,String zc,String type,String bz1,String bz2,String bz3,String bz4,String bz5) {
+                                   String danwei5,String zc,String type,String bz1,String bz2,String bz3,String bz4,String bz5
+            ,String otherMoney,String otherMemo) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -4006,6 +4010,8 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("iszc ", zc));
         nvs.add(new BasicNameValuePair("goodsType", type));
         nvs.add(new BasicNameValuePair("yt", use));
+        nvs.add(new BasicNameValuePair("jine6", otherMoney));
+        nvs.add(new BasicNameValuePair("beizhu6", otherMemo));
         nvs.add(new BasicNameValuePair("bmfzryj", bmfzryj));
         nvs.add(new BasicNameValuePair("jcbmyj", jcbmyj));
         nvs.add(new BasicNameValuePair("cggybyj", gybmyj));

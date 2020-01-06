@@ -950,7 +950,17 @@
         <activity android:name=".comper.activity.YingYunZBActivity" />
         <activity android:name=".oa_flow.phone.PhoneActivity" />
         <activity android:name=".oa_flow.phone.PhoneDepartmentActivity" />
-        <activity android:name=".login.activity.LoginPersonMoreActivity"></activity>
+        <activity android:name=".login.activity.LoginPersonMoreActivity" />
+        <activity android:name=".statist.StatistListActivity" />
+        <activity android:name=".statist.activity.PersonTongJiActivity" />
+        <activity android:name=".statist.activity.MileYearActivity"/>
+        <activity android:name=".statist.activity.CostComparisonActivity"/>
+        <activity android:name=".statist.activity.HuiZongActivity"/>
+        <activity android:name=".statist.activity.CLXHTongJiActivity"/>
+        <activity android:name=".statist.activity.YueDuYCBCActivity"/>
+        <activity android:name=".statist.activity.YueDuWGCSActivity"/>
+        <activity android:name=".statist.activity.YingYunShouRuActivity"/>
+        <activity android:name=".statist.activity.PersonChangeActivity"/>
     </application>
 
 </manifest>

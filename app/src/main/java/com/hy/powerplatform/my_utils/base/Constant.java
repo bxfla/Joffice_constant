@@ -205,6 +205,27 @@ public class Constant {
     // 获取首页营运数据
     public static final String  YINGYUNDATA = "starkh/dataSynthesisAnalysisImportYYData.do";
 
+    // 统计分析（一级菜单）
+    //人员统计分析
+    public static final String  PERSONTJ = "hrm/postCountListEmpProfile.do";
+
+    //年度每月里程
+    public static final String  YEARMILE = "busmanager/getMile_bigDataDriverMileDetail.do";
+    //百公里营收成本对比
+    public static final String  COSTCOMPARISON = "starkh/revenueCostAnalysisImportYYData.do";
+    //月度燃油燃气和充电金额汇总占比
+    public static final String  HUIZONG = "starkh/elecAndFuelCountImportYYData.do";
+    //月度材料消耗类型统计
+    public static final String  CLXHTJ = "starkh/materialOutgoingAmountImportYYData.do";
+    //月度异常班次
+    public static final String  YUEDUYCBC = "starkh/getCountTypeAbnormalShiftsRecord.do";
+    //月度违规次数
+    public static final String  YUEDUWGCS = "starkh/getViolationsCountDriverViolation.do";
+    //营运收入类型分析
+    public static final String  YINGYUNSHOURU = "starkh/revenueTypeDataImportYYData.do";
+    //人员变动统计分析
+    public static final String  PERSONCHANGE = "hrm/getEmpDepChangeBar_bigDataEmpProfile.do";
+
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";
     public static final String  CONTRACEPAYNAME = "合同付款审批单";

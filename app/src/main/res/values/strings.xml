@@ -309,4 +309,16 @@
     <string name="oaflow_comper_rb2">营运指标</string>
     <string name="department">部门</string>
 
+    <string name="oaflow_statist_rb1">人员统计</string>
+    <string name="oaflow_statist_rb2">人员变动</string>
+    <string name="oaflow_statist_rb3">年度里程</string>
+    <string name="oaflow_statist_rb4">成本对比</string>
+    <string name="oaflow_statist_rb5">汇总占比</string>
+    <string name="oaflow_statist_rb6">材料消耗</string>
+    <string name="oaflow_statist_rb7">人员变动</string>
+    <string name="oaflow_statist_rb8">人员汇总</string>
+    <string name="oaflow_statist_rb9">月度异常</string>
+    <string name="oaflow_statist_rb10">月度违规</string>
+    <string name="oaflow_statist_rb11">营运收入</string>
+
 </resources>

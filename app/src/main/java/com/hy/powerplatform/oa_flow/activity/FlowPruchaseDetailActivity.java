@@ -132,8 +132,6 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
     TextView tvAllNum;
     @BindView(R.id.tvAllMoney)
     TextView tvAllMoney;
-    @BindView(R.id.tvOther)
-    TextView tvOther;
     @BindView(R.id.btnHistory)
     Button btnHistory;
     @BindView(R.id.recyclerView)
@@ -194,6 +192,12 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
     EditText etLeaderGYB;
     @BindView(R.id.tvLeaderGYB)
     TextView tvLeaderGYB;
+    @BindView(R.id.tvOtherName)
+    TextView tvOtherName;
+    @BindView(R.id.tvOtherMoney)
+    TextView tvOtherMoney;
+    @BindView(R.id.tvOtherMemo)
+    TextView tvOtherMemo;
     private String res;
     String xiangguanfujian = "";
     String flowMessage = "";
@@ -450,7 +454,9 @@ public class FlowPruchaseDetailActivity extends BaseActivity {
 
                     tvAllNum.setText(bean.getMainform().get(0).getHejisl());
                     tvAllMoney.setText(bean.getMainform().get(0).getHejije());
-                    tvOther.setText(bean.getMainform().get(0).getQiTa());
+                    tvOtherName.setText(bean.getMainform().get(0).getQiTa());
+                    tvOtherMoney.setText(bean.getMainform().get(0).getJine6());
+                    tvOtherMemo.setText(bean.getMainform().get(0).getBeizhu6());
 
                     String bmfzr = bean.getMainform().get(0).getBmfzryj();
                     String cgbmyj = bean.getMainform().get(0).getCggybyj();

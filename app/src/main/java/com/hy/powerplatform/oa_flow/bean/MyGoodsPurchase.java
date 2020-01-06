@@ -151,6 +151,24 @@ public class MyGoodsPurchase implements Serializable {
         private String zjlyj;
         private String cgfgldyj;
         private String zcDepName;
+        private String jine6;
+        private String beizhu6;
+
+        public String getJine6() {
+            return jine6;
+        }
+
+        public void setJine6(String jine6) {
+            this.jine6 = jine6;
+        }
+
+        public String getBeizhu6() {
+            return beizhu6;
+        }
+
+        public void setBeizhu6(String beizhu6) {
+            this.beizhu6 = beizhu6;
+        }
 
         public String getJcbmyj() {
             return jcbmyj;

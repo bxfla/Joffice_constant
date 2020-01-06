@@ -521,7 +521,7 @@
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
-                    android:text="其他: " />
+                    android:text="其他名称: " />
 
                 <View
                     android:layout_width="1dp"
@@ -530,10 +530,58 @@
                     android:background="@color/shouye" />
 
                 <EditText
-                    android:id="@+id/etOther"
+                    android:id="@+id/etOtherName"
                     style="@style/textWrite"
                     android:layout_weight="2.5"
                     android:hint="请填其他产品" />
+            </LinearLayout>
+            <View style="@style/line"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="其他金额: " />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etOtherMoney"
+                    style="@style/textWrite"
+                    android:layout_weight="2.5"
+                    android:hint="请填其他金额" />
+            </LinearLayout>
+            <View style="@style/line"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="其他备注: " />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <EditText
+                    android:id="@+id/etOtherMemo"
+                    style="@style/textWrite"
+                    android:layout_weight="2.5"
+                    android:hint="请填其他备注" />
             </LinearLayout>
             <View style="@style/line"></View>
 

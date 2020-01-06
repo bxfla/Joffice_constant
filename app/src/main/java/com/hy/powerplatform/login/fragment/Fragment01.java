@@ -42,6 +42,7 @@ import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.oa_flow.OAFlowListActivity;
 import com.hy.powerplatform.operation.OperationListActivity;
 import com.hy.powerplatform.safer.SaferListActivity;
+import com.hy.powerplatform.statist.StatistListActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -263,13 +264,13 @@ public class Fragment01 extends Fragment {
         int drawableId4 = getResources().getIdentifier("fragment_rb4", "drawable", getActivity().getPackageName());
         bean4.setAddress(drawableId4);
         bean4.setName(getResources().getString(R.string.fragment_rb4));
-        itemList.add(bean4);
+//        itemList.add(bean4);
 
         ItemBean bean5 = new ItemBean();
         int drawableId5 = getResources().getIdentifier("fragment_rb5", "drawable", getActivity().getPackageName());
         bean5.setAddress(drawableId5);
         bean5.setName(getResources().getString(R.string.fragment_rb5));
-        itemList.add(bean5);
+//        itemList.add(bean5);
 
         ItemBean bean6 = new ItemBean();
         int drawableId6 = getResources().getIdentifier("fragment_rb6", "drawable", getActivity().getPackageName());
@@ -320,8 +321,8 @@ public class Fragment01 extends Fragment {
                             intent = new Intent(getActivity(), SaferListActivity.class);
                             startActivity(intent);
                         } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb7))) {
-//                            intent = new Intent(getActivity(), StatistListActivity.class);
-//                            startActivity(intent);
+                            intent = new Intent(getActivity(), StatistListActivity.class);
+                            startActivity(intent);
                         } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb8))) {
                             intent = new Intent(getActivity(), ComperListActivity.class);
                             startActivity(intent);

@@ -563,6 +563,76 @@
                     style="@style/oaTextView"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
+                    android:text="其他名称: " />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvOtherName"
+                    style="@style/textWrite"
+                    android:layout_weight="2.5" />
+            </LinearLayout>
+            <View style="@style/line"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="其他金额: " />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvOtherMoney"
+                    style="@style/textWrite"
+                    android:layout_weight="2.5" />
+            </LinearLayout>
+            <View style="@style/line"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="其他备注: " />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/shouye" />
+
+                <TextView
+                    android:id="@+id/tvOtherMemo"
+                    style="@style/textWrite"
+                    android:layout_weight="2.5" />
+            </LinearLayout>
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/oaTextView"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
                     android:text="用途: *" />
 
                 <View
@@ -578,31 +648,6 @@
             </LinearLayout>
             <View style="@style/line"></View>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/oaTextView"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center_vertical"
-                    android:text="其他: " />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/shouye" />
-
-                <TextView
-                    android:id="@+id/tvOther"
-                    style="@style/textWrite"
-                    android:layout_weight="2.5"
-                    android:hint="请填其他产品" />
-            </LinearLayout>
-
-            <View style="@style/line"></View>
             <LinearLayout
                 android:id="@+id/llData"
                 android:layout_width="match_parent"

@@ -201,8 +201,6 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     TextView tvAllNum;
     @BindView(R.id.tvAllMoney)
     TextView tvAllMoney;
-    @BindView(R.id.tvOther)
-    TextView tvOther;
     @BindView(R.id.btnT)
     FloatingActionButton btnT;
     @BindView(R.id.tvText)
@@ -285,6 +283,12 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
     TextView tvLeaderGYB;
     @BindView(R.id.tvGYB)
     TextView tvGYB;
+    @BindView(R.id.tvOtherName)
+    TextView tvOtherName;
+    @BindView(R.id.tvOtherMoney)
+    TextView tvOtherMoney;
+    @BindView(R.id.tvOtherMemo)
+    TextView tvOtherMemo;
     private String name, taskId, res, bmfzryj, gybmyj, jcbmyj, zcgkbmyj, fgldyj, cgfgyj, cwzjyj, zjl = "";
     private String mainId, signaName, destName = "", destType, checkTask, qianzhiData = "";
     String leader = "";
@@ -1609,7 +1613,9 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                 String use = tvApplication.getText().toString();
                 String allNum = tvAllNum.getText().toString();
                 String allMoney = tvAllMoney.getText().toString();
-                String other = tvOther.getText().toString();
+                String other = tvOtherName.getText().toString();
+                String otherMoney = tvOtherMoney.getText().toString();
+                String otherMemo = tvOtherMemo.getText().toString();
                 final String userCode = new SharedPreferencesHelper(FlowPuechaseWillDetailActivity.this,
                         "login").getData(FlowPuechaseWillDetailActivity.this, "userCode", "");
                 if (codetemp != null) {
@@ -1752,7 +1758,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             hejidj, allMoney, use, cgfgyj, other, jcbmyj
                             , danwei1, danwei2, danwei3, danwei4, danwei5, tvzc.getText().toString(), tvtype.getText().toString()
                             , tvBZ1.getText().toString(), tvBZ2.getText().toString(), tvBZ3.getText().toString()
-                            , tvBZ4.getText().toString(), tvBZ5.getText().toString());
+                            , tvBZ4.getText().toString(), tvBZ5.getText().toString(),otherMoney,otherMemo);
                 } else {
                     upData = dbA.OAPurchaseLeader(url, department, person, name, time, name1, name2, name3, name4, name5
                             , num1, num2, num3, num4, num5, money1, money2, money3, money4, money5, allMoney1, allMoney2, allMoney3
@@ -1761,7 +1767,7 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                             hejidj, allMoney, use, cgfgyj, other, jcbmyj, danwei1, danwei2, danwei3, danwei4, danwei5
                             , tvzc.getText().toString(), tvtype.getText().toString()
                             , tvBZ1.getText().toString(), tvBZ2.getText().toString(), tvBZ3.getText().toString()
-                            , tvBZ4.getText().toString(), tvBZ5.getText().toString());
+                            , tvBZ4.getText().toString(), tvBZ5.getText().toString(),otherMoney,otherMemo);
                 }
 
                 if (upData.equals("")) {
@@ -1822,7 +1828,9 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                     tvData.setText(xiangguanfujian);
                     tvAllNum.setText(bean.getMainform().get(0).getHejisl());
                     tvAllMoney.setText(bean.getMainform().get(0).getHejije());
-                    tvOther.setText(bean.getMainform().get(0).getQiTa());
+                    tvOtherName.setText(bean.getMainform().get(0).getQiTa());
+                    tvOtherMoney.setText(bean.getMainform().get(0).getJine6());
+                    tvOtherMemo.setText(bean.getMainform().get(0).getBeizhu6());
                     name1 = bean.getMainform().get(0).getMingcheng1();
                     name2 = bean.getMainform().get(0).getMingcheng2();
                     name3 = bean.getMainform().get(0).getMingcheng3();

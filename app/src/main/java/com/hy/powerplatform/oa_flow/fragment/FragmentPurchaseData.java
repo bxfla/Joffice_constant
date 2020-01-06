@@ -116,8 +116,6 @@ public class FragmentPurchaseData extends Fragment {
     TextView tvAllNum;
     @BindView(R.id.tvAllMoney)
     TextView tvAllMoney;
-    @BindView(R.id.etOther)
-    EditText etOther;
     @BindView(R.id.spinnerzc)
     Spinner spinnerzc;
     @BindView(R.id.spinnertype)
@@ -172,6 +170,12 @@ public class FragmentPurchaseData extends Fragment {
     LinearLayout ll;
     @BindView(R.id.tvLeaderGYB)
     TextView tvLeaderGYB;
+    @BindView(R.id.etOtherName)
+    EditText etOtherName;
+    @BindView(R.id.etOtherMoney)
+    EditText etOtherMoney;
+    @BindView(R.id.etOtherMemo)
+    EditText etOtherMemo;
 
     private CustomDatePickerDay customDatePicker1;
     List<String> dataList = new ArrayList<>();
@@ -828,7 +832,7 @@ public class FragmentPurchaseData extends Fragment {
                     Toast.makeText(getActivity(), "填单日期不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if (spinnerzc.getSelectedItem().toString().equals("资产类")){
+                if (spinnerzc.getSelectedItem().toString().equals("资产类")) {
                     if (spinnertype.getSelectedItem().toString().equals("")) {
                         Toast.makeText(getActivity(), "物品类型不能为空", Toast.LENGTH_SHORT).show();
                         break;
@@ -880,7 +884,7 @@ public class FragmentPurchaseData extends Fragment {
                 String use = etUse.getText().toString();
                 String allNum = tvAllNum.getText().toString();
                 String allMoney = tvAllMoney.getText().toString();
-                String other = etOther.getText().toString();
+                String other = etOtherName.getText().toString();
                 if (num1 != null && !equals("")) {
                     hejisl += Integer.parseInt(num1);
                 }
@@ -932,9 +936,9 @@ public class FragmentPurchaseData extends Fragment {
                 allMoney4 = etAllMoney4.getText().toString() + "";
 
                 String type = "";
-                if (spinnertype.getSelectedItem()==null){
+                if (spinnertype.getSelectedItem() == null) {
                     type = "";
-                }else {
+                } else {
                     type = spinnertype.getSelectedItem().toString();
                 }
                 final String userCode = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userCode", "");
@@ -944,7 +948,7 @@ public class FragmentPurchaseData extends Fragment {
                         tvAllMoney.getText().toString(), use, other, spinnerzc.getSelectedItem().toString()
                         , type, aboutDep, department1, department2
                         , department3, department4, etBZ1.getText().toString(), etBZ2.getText().toString()
-                        , etBZ3.getText().toString(), etBZ4.getText().toString());
+                        , etBZ3.getText().toString(), etBZ4.getText().toString(),etOtherMoney.getText().toString(),etOtherMemo.getText().toString());
                 if (res.equals("")) {
                     handler.sendEmptyMessage(TAG_THERE);
                 } else {

@@ -22,7 +22,7 @@ import java.util.Locale;
 /**
  * Created by liuwan on 2016/9/28.
  */
-public class CustomDatePickerMonth {
+public class CustomDatePickerYear {
 
     /**
      * 定义结果回调接口
@@ -60,9 +60,9 @@ public class CustomDatePickerMonth {
     private int startYear, startMonth, startDay, startHour, startMinute, endYear, endMonth, endDay, endHour, endMinute;
     private boolean spanYear, spanMon, spanDay, spanHour, spanMin;
     private Calendar selectedCalender, startCalendar, endCalendar;
-    private TextView tv_cancle, tv_select, hour_text, minute_text,tvDays,tvMonth;
+    private TextView tv_cancle, tv_select, hour_text, minute_text,tvDays,tvMonth,tvYear;
 
-    public CustomDatePickerMonth(Context context, ResultHandler resultHandler, String startDate, String endDate) {
+    public CustomDatePickerYear(Context context, ResultHandler resultHandler, String startDate, String endDate) {
         if (isValidDate(startDate, "yyyy-MM-dd HH:mm") && isValidDate(endDate, "yyyy-MM-dd HH:mm")) {
             canAccess = true;
             this.context = context;
@@ -111,6 +111,7 @@ public class CustomDatePickerMonth {
         minute_text = (TextView) datePickerDialog.findViewById(R.id.minute_text);
         tvDays = (TextView) datePickerDialog.findViewById(R.id.tvDays);
         tvMonth = (TextView) datePickerDialog.findViewById(R.id.tvMonth);
+        tvYear = (TextView) datePickerDialog.findViewById(R.id.tvYear);
 
         tv_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -483,24 +484,7 @@ public class CustomDatePickerMonth {
 
     public void show(String time) {
         if (canAccess) {
-            if (isValidDate(time, "yyyy-MM")) {
-                if (startCalendar.getTime().getTime() < endCalendar.getTime().getTime()) {
-                    canAccess = true;
-                    initParameter();
-                    initTimer();
-                    addListener();
-                    setSelectedTime(time);
-                    datePickerDialog.show();
-                }
-            } else {
-                canAccess = false;
-            }
-        }
-    }
-
-    public void show1(String time) {
-        if (canAccess) {
-            if (isValidDate(time, "yyyyMM")) {
+            if (isValidDate(time, "yyyy")) {
                 if (startCalendar.getTime().getTime() < endCalendar.getTime().getTime()) {
                     canAccess = true;
                     initParameter();
@@ -568,6 +552,7 @@ public class CustomDatePickerMonth {
         if (canAccess) {
             if (show) {
                 disScrollUnit();
+                tvYear.setVisibility(View.VISIBLE);
                 tvMonth.setVisibility(View.VISIBLE);
                 month_pv.setVisibility(View.VISIBLE);
                 tvDays.setVisibility(View.VISIBLE);
@@ -579,6 +564,7 @@ public class CustomDatePickerMonth {
                 minute_text.setVisibility(View.VISIBLE);
             } else {
                 disScrollUnit(SCROLL_TYPE.HOUR, SCROLL_TYPE.MINUTE);
+                tvYear.setVisibility(View.GONE);
                 tvMonth.setVisibility(View.GONE);
                 month_pv.setVisibility(View.GONE);
                 tvDays.setVisibility(View.GONE);
@@ -631,8 +617,6 @@ public class CustomDatePickerMonth {
                 }
             }
             month_pv.setData(month);
-            month_pv.setSelected(dateStr[1]);
-            selectedCalender.set(Calendar.MONTH, Integer.parseInt(dateStr[1]) - 1);
             executeAnimator(month_pv);
 
             day.clear();
