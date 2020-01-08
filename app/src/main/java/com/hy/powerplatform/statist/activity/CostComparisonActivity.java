@@ -13,9 +13,13 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
@@ -32,6 +36,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,9 +80,10 @@ public class CostComparisonActivity extends BaseActivity {
     BaseRecyclerAdapterPosition mAdapter;
     private CustomDatePickerYear customDatePicker1;
     final HashMap<String, String> map = new HashMap();
-    public ArrayList<String> xList = new ArrayList<String>();
-    public ArrayList<Entry> yList = new ArrayList<Entry>();
-    public ArrayList<LineDataSet> lineDataSets = new ArrayList<LineDataSet>();
+    public List<String> xList = new ArrayList<String>();
+    public List<Entry> yList = new ArrayList<Entry>();
+    public List<Entry> yList1 = new ArrayList<Entry>();
+    public List<ILineDataSet> lineDataSets = new ArrayList<ILineDataSet>();
     List<CostComparison> beanList = new ArrayList<>();
 
     @Override
@@ -120,6 +126,7 @@ public class CostComparisonActivity extends BaseActivity {
     protected void rightClient() {
         xList.clear();
         yList.clear();
+        yList1.clear();
         beanList.clear();
         getData();
     }
@@ -194,16 +201,30 @@ public class CostComparisonActivity extends BaseActivity {
         }
         for (int i = 0; i < beanList.size(); i++) {//y轴的数据
             float result = Float.parseFloat(beanList.get(i).getSr());
+            float result1 = Float.parseFloat(beanList.get(i).getCb());
             yList.add(new Entry(result, i));
+            yList1.add(new Entry(result1, i));
         }
-        LineDataSet lineDataSet = new LineDataSet(yList, getResources().getString(R.string.oaflow_statist_rb4));//y轴数据集合
+        LineDataSet lineDataSet = new LineDataSet(yList, getResources().getString(R.string.oaflow_statist_rb41));//y轴数据集合
         lineDataSet.setLineWidth(1f);//线宽
         lineDataSet.setCircleSize(Color.BLUE);//圆形颜色
         lineDataSet.setCircleSize(2f);//现实圆形大小
         lineDataSet.setColor(Color.RED);//现实颜色
+        lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
         lineDataSet.setHighLightColor(Color.BLACK);//高度线的颜色
+
+        LineDataSet lineDataSet1 = new LineDataSet(yList1, getResources().getString(R.string.oaflow_statist_rb42));//y轴数据集合
+        lineDataSet1.setLineWidth(1f);//线宽
+        lineDataSet1.setCircleSize(Color.BLUE);//圆形颜色
+        lineDataSet1.setCircleSize(2f);//现实圆形大小
+        lineDataSet1.setColor(Color.GREEN);//现实颜色
+        lineDataSet1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        lineDataSet1.setHighLightColor(Color.BLACK);//高度线的颜色
         lineDataSets.add(lineDataSet);
-        lineData = new LineData(xList, lineDataSet);
+        lineDataSets.add(lineDataSet1);
+
+        lineData = new LineData(xList, lineDataSets);
+        lineData.setValueFormatter(new CustomerValueFormatter());
         return lineData;
     }
 
@@ -222,6 +243,8 @@ public class CostComparisonActivity extends BaseActivity {
         legend.setFormSize(10f);//字体
         legend.setTextColor(Color.BLUE);//设置颜色
         spreadLineChart.animateX(2000);//X轴的动画
+        //刷新
+        spreadLineChart.invalidate();
     }
 
     Handler handler = new Handler() {
@@ -266,4 +289,18 @@ public class CostComparisonActivity extends BaseActivity {
             }
         }
     };
+
+    public class CustomerValueFormatter implements ValueFormatter {
+        private DecimalFormat mFormat;
+
+        public CustomerValueFormatter() {
+            //此处是显示数据的方式，显示整型或者小数后面小数位数自己随意确定
+            mFormat = new DecimalFormat("0.00");
+        }
+
+        @Override
+        public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+            return mFormat.format(value);//数据前或者后可根据自己想要显示的方式添加
+        }
+    }
 }

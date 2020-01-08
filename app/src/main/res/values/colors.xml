@@ -273,4 +273,22 @@
     <color name="result_point_color">#C0FFFF00</color>
     <color name="laser_color">#0F0</color>
     <color name="corner_color">#00FF00</color>
+
+
+    <color name="pinchar1">#c12e34</color>
+    <color name="pinchar2">#4B0082</color>
+    <color name="pinchar3">#005eaa</color>
+    <color name="pinchar4">#339ca8</color>
+    <color name="pinchar5">#cda819</color>
+    <color name="pinchar6">#32a487</color>
+    <color name="pinchar7">#DC143C</color>
+    <color name="pinchar8">#008000</color>
+    <color name="pinchar9">#2b821d</color>
+    <color name="pinchar10">#808000</color>
+    <color name="pinchar11">#FFD700</color>
+    <color name="pinchar12">#FF6347</color>
+    <color name="pinchar13">#FFDAB9</color>
+    <color name="pinchar14">#e6b600</color>
+    <color name="pinchar15">#FFD700</color>
+    <color name="pinchar16">#6A5ACD</color>
 </resources>

@@ -69,6 +69,15 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         tv.setVisibility(View.GONE);
         return this;
     }
+
+    /**
+     * 给TextView设置
+     */
+    public BaseViewHolder setVisitiomV(int viewId) {
+        TextView tv = getView(viewId);
+        tv.setVisibility(View.VISIBLE);
+        return this;
+    }
     /**
      * 给Button设置
      */

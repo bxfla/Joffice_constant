@@ -1,6 +1,5 @@
 package com.hy.powerplatform.statist.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,11 +10,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.gson.Gson;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
@@ -29,6 +34,7 @@ import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerYear;
 import com.hy.powerplatform.statist.bean.MileYear;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +60,7 @@ public class MileYearActivity extends BaseActivity {
     @BindView(R.id.llNoContent)
     LinearLayout llNoContent;
     @BindView(R.id.spread_line_chart)
-    LineChart spreadLineChart;
+    BarChart mBarChart;
     @BindView(R.id.tvName)
     TextView tvName;
     @BindView(R.id.tvValue)
@@ -63,14 +69,17 @@ public class MileYearActivity extends BaseActivity {
     RecyclerView recyclerView;
 
     private OkHttpUtil httpUtil;
-    public LineData lineData = null;
     BaseRecyclerAdapterPosition mAdapter;
     private CustomDatePickerYear customDatePicker1;
     final HashMap<String, String> map = new HashMap();
-    public ArrayList<String> xList = new ArrayList<String>();
-    public ArrayList<Entry> yList = new ArrayList<Entry>();
-    public ArrayList<LineDataSet> lineDataSets = new ArrayList<LineDataSet>();
     List<MileYear.ResultBean> beanList = new ArrayList<>();
+    //数据的集合
+    public BarDataSet dataset;
+    //保存数据的实体（下面定义了两组数据集合）
+    public ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
+    //表格下方的文字
+    public ArrayList<String> labels = new ArrayList<String>();
+    ArrayList<IBarDataSet> dataSets = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,14 +103,28 @@ public class MileYearActivity extends BaseActivity {
         };
         recyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
+        //设置单个点击事件
+        mBarChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry entry, int i, Highlight highlight) {
+                Toast.makeText(MileYearActivity.this, entry.getVal() + "", Toast.LENGTH_LONG).show();
+            }
 
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+        //设置显示动画效果
+        mBarChart.animateY(2000);
+        mBarChart.setMaxVisibleValueCount(60);
         getData();
 
     }
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.activity_person_tong_ji;
+        return R.layout.activity_tongji_zhu;
     }
 
     @Override
@@ -111,8 +134,8 @@ public class MileYearActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        xList.clear();
-        yList.clear();
+        entries.clear();
+        labels.clear();
         beanList.clear();
         getData();
     }
@@ -177,46 +200,6 @@ public class MileYearActivity extends BaseActivity {
         customDatePicker1.show(tvDate.getText().toString());
     }
 
-    /**
-     * 初始化数据
-     * count 表示坐标点个数，range表示等下y值生成的范围
-     */
-    public LineData getLineData() {
-        for (int i = 0; i < beanList.size(); i++) {  //X轴显示的数据
-            xList.add("");
-        }
-        for (int i = 0; i < beanList.size(); i++) {//y轴的数据
-            float result = Float.parseFloat(beanList.get(i).getFactMile());
-            yList.add(new Entry(result, i));
-        }
-        LineDataSet lineDataSet = new LineDataSet(yList, getResources().getString(R.string.oaflow_statist_rb3));//y轴数据集合
-        lineDataSet.setLineWidth(1f);//线宽
-        lineDataSet.setCircleSize(Color.BLUE);//圆形颜色
-        lineDataSet.setCircleSize(2f);//现实圆形大小
-        lineDataSet.setColor(Color.RED);//现实颜色
-        lineDataSet.setHighLightColor(Color.BLACK);//高度线的颜色
-        lineDataSets.add(lineDataSet);
-        lineData = new LineData(xList, lineDataSet);
-        return lineData;
-    }
-
-    /**
-     * 设置样式
-     */
-    public void showChart() {
-        spreadLineChart.setDrawBorders(false);//是否添加边框
-        spreadLineChart.setDescription("");//数据描述
-        spreadLineChart.setNoDataTextDescription("");//没数据显示
-        spreadLineChart.setDrawGridBackground(true);//是否显示表格颜色
-        spreadLineChart.setBackgroundColor(Color.WHITE);//背景颜色
-        spreadLineChart.setData(lineData);//设置数据
-        Legend legend = spreadLineChart.getLegend();//设置比例图片标示，就是那一组Y的value
-        legend.setForm(Legend.LegendForm.SQUARE);//样式
-        legend.setFormSize(10f);//字体
-        legend.setTextColor(Color.BLUE);//设置颜色
-        spreadLineChart.animateX(2000);//X轴的动画
-    }
-
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -236,17 +219,44 @@ public class MileYearActivity extends BaseActivity {
                         llNoContent.setVisibility(View.GONE);
                         for (int i = 0; i < bean.getResult().size(); i++) {
                             beanList.add(bean.getResult().get(i));
+                            float value = Float.parseFloat(bean.getResult().get(i).getFactMile());
+                            entries.add(new BarEntry(value, i));
+                            labels.add(bean.getResult().get(i).getMonthRq());
+                            dataset = new BarDataSet(entries, getResources().getString(R.string.oaflow_statist_rb3));
+                            dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                            dataSets.add(dataset);
                         }
+                        BarData dataNum = new BarData(labels, dataset);
+                        dataNum.setValueFormatter(new CustomerValueFormatter());
+                        mBarChart.setData(dataNum);
+                        //通知BarData更新
+                        mBarChart.getBarData().notifyDataChanged();
+                        //通知BarChart更新
+                        mBarChart.notifyDataSetChanged();
+                        //使图表更新生效
+                        mBarChart.invalidate();
                     } else {
                         recyclerView.setVisibility(View.GONE);
                         llNoContent.setVisibility(View.VISIBLE);
                     }
                     mAdapter.notifyDataSetChanged();
                     ProgressDialogUtil.stopLoad();
-                    getLineData();
-                    showChart();
                     break;
             }
         }
     };
+
+    public class CustomerValueFormatter implements ValueFormatter {
+        private DecimalFormat mFormat;
+
+        public CustomerValueFormatter() {
+            //此处是显示数据的方式，显示整型或者小数后面小数位数自己随意确定
+            mFormat = new DecimalFormat("0.00");
+        }
+
+        @Override
+        public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+            return mFormat.format(value);//数据前或者后可根据自己想要显示的方式添加
+        }
+    }
 }

@@ -6,16 +6,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
@@ -32,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +58,7 @@ public class YingYunShouRuActivity extends BaseActivity {
     @BindView(R.id.header)
     Header header;
     @BindView(R.id.spread_line_chart)
-    LineChart spreadLineChart;
+    PieChart spreadLineChart;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.tvDate)
@@ -62,20 +66,39 @@ public class YingYunShouRuActivity extends BaseActivity {
     @BindView(R.id.llNoContent)
     LinearLayout llNoContent;
 
+    PieDataSet pieDataSet;
     private OkHttpUtil httpUtil;
-    public LineData lineData = null;
     BaseRecyclerAdapterPosition mAdapter;
     private CustomDatePickerMonth customDatePicker1;
     final HashMap<String, String> map = new HashMap();
-    public ArrayList<String> xList = new ArrayList<String>();
-    public ArrayList<Entry> yList = new ArrayList<Entry>();
-    public ArrayList<LineDataSet> lineDataSets = new ArrayList<LineDataSet>();
     List<YingYunShouRu> beanList = new ArrayList<>();
+    //并内显示文字
+    ArrayList<String> xValues = new ArrayList<String>();
+    //yVals用来表示封装每个饼块的实际数据
+    ArrayList<Entry> yValues = new ArrayList<Entry>();
+    //颜色集合
+    ArrayList<Integer> colors = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        colors.add(Color.rgb(193,46,52));
+        colors.add(Color.rgb(75,0,130));
+        colors.add(Color.rgb(0,94,170));
+        colors.add(Color.rgb(51,156,168));
+        colors.add(Color.rgb(205,168,25));
+        colors.add(Color.rgb(50,164,135));
+        colors.add(Color.rgb(220,20,60));
+        colors.add(Color.rgb(0,128,0));
+        colors.add(Color.rgb(43,130,29));
+        colors.add(Color.rgb(128,128,0));
+        colors.add(Color.rgb(255,215,0));
+        colors.add(Color.rgb(255,99,71));
+        colors.add(Color.rgb(255,218,185));
+        colors.add(Color.rgb(230,182,0));
+        colors.add(Color.rgb(255,215,0));
+        colors.add(Color.rgb(106,90,205));
         initDatePicker();
         header.setTvTitle(getResources().getString(R.string.oaflow_statist_rb11));
         httpUtil = OkHttpUtil.getInstance(this);
@@ -93,8 +116,50 @@ public class YingYunShouRuActivity extends BaseActivity {
         };
         recyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
-
         getData();
+    }
+
+    private void showChart(PieChart pieChart, PieData pieData) {
+        pieChart.setHoleColorTransparent(true);
+        pieChart.setHoleRadius(56f);  //半径
+        pieChart.setTransparentCircleRadius(60f); // 半透明圈
+        //pieChart.setHoleRadius(0)  //实心圆
+//        pieChart.setDescription("测试饼状图");
+        // mChart.setDrawYValues(true);
+        pieChart.setDrawCenterText(true);  //饼状图中间可以添加文字
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setRotationAngle(90); // 初始旋转角度
+        // draws the corresponding description value into the slice
+        // mChart.setDrawXValues(true);
+        // enable rotation of the chart by touch
+        pieChart.setRotationEnabled(true); // 可以手动旋转
+        // display percentage values
+        pieChart.setUsePercentValues(true);  //显示成百分比
+        // mChart.setUnit(" €");
+        // mChart.setDrawUnitsInChart(true);
+
+        // add a selection listener
+//      mChart.setOnChartValueSelectedListener(this);
+        // mChart.setTouchEnabled(false);
+
+//      mChart.setOnAnimationListener(this);
+        //饼状图中间的文字
+        pieChart.setCenterText(getResources().getString(R.string.oaflow_statist_rb11));
+        //设置数据
+        pieChart.setData(pieData);
+        // undo all highlights
+//      pieChart.highlightValues(null);
+//      pieChart.invalidate();
+        Legend mLegend = pieChart.getLegend();  //设置比例图
+        //色卡显示位置
+        mLegend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+//      mLegend.setForm(LegendForm.LINE);  //设置比例图的形状，默认是方形
+        mLegend.setWordWrapEnabled(true);
+        mLegend.setXEntrySpace(7f);
+        mLegend.setYEntrySpace(5f);
+
+        pieChart.animateXY(1000, 1000);  //设置动画
+        // mChart.spin(2000, 0, 360);
     }
 
     /**
@@ -133,7 +198,7 @@ public class YingYunShouRuActivity extends BaseActivity {
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.activity_person_tong_ji;
+        return R.layout.activity_tongji_bing;
     }
 
     @Override
@@ -143,8 +208,8 @@ public class YingYunShouRuActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        xList.clear();
-        yList.clear();
+        xValues.clear();
+        yValues.clear();
         beanList.clear();
         getData();
     }
@@ -168,46 +233,6 @@ public class YingYunShouRuActivity extends BaseActivity {
         customDatePicker1.showSpecificTime(false); // 不显示时和分
         customDatePicker1.setIsLoop(false); // 不允许循环滚动
         customDatePicker1.showSpecificDay(false); // 不允许循环滚动
-    }
-
-    /**
-     * 初始化数据
-     * count 表示坐标点个数，range表示等下y值生成的范围
-     */
-    public LineData getLineData() {
-        for (int i = 0; i < beanList.size(); i++) {  //X轴显示的数据
-            xList.add("");
-        }
-        for (int i = 0; i < beanList.size(); i++) {//y轴的数据
-            float result = Float.parseFloat(String.valueOf(beanList.get(i).getTotal()));
-            yList.add(new Entry(result, i));
-        }
-        LineDataSet lineDataSet = new LineDataSet(yList, getResources().getString(R.string.oaflow_statist_rb6));//y轴数据集合
-        lineDataSet.setLineWidth(1f);//线宽
-        lineDataSet.setCircleSize(Color.BLUE);//圆形颜色
-        lineDataSet.setCircleSize(2f);//现实圆形大小
-        lineDataSet.setColor(Color.RED);//现实颜色
-        lineDataSet.setHighLightColor(Color.BLACK);//高度线的颜色
-        lineDataSets.add(lineDataSet);
-        lineData = new LineData(xList, lineDataSet);
-        return lineData;
-    }
-
-    /**
-     * 设置样式
-     */
-    public void showChart() {
-        spreadLineChart.setDrawBorders(false);//是否添加边框
-        spreadLineChart.setDescription("");//数据描述
-        spreadLineChart.setNoDataTextDescription("");//没数据显示
-        spreadLineChart.setDrawGridBackground(true);//是否显示表格颜色
-        spreadLineChart.setBackgroundColor(Color.WHITE);//背景颜色
-        spreadLineChart.setData(lineData);//设置数据
-        Legend legend = spreadLineChart.getLegend();//设置比例图片标示，就是那一组Y的value
-        legend.setForm(Legend.LegendForm.SQUARE);//样式
-        legend.setFormSize(10f);//字体
-        legend.setTextColor(Color.BLUE);//设置颜色
-        spreadLineChart.animateX(2000);//X轴的动画
     }
 
     @OnClick(R.id.tvDate)
@@ -236,7 +261,20 @@ public class YingYunShouRuActivity extends BaseActivity {
                             bean.setProject(jsonObject.getString("project"));
                             bean.setTotal(Double.parseDouble(jsonObject.getString("total")));
                             beanList.add(bean);
+                            xValues.add(jsonObject.getString("project"));
+                            yValues.add(new Entry(Float.valueOf(jsonObject.getString("total")), i));
                         }
+                        //y轴的集合
+                        pieDataSet = new PieDataSet(yValues, ""/*显示在比例图上*/);
+                        //设置个饼状图之间的距离
+                        pieDataSet.setSliceSpace(0f);
+                        pieDataSet.setColors(colors);
+                        DisplayMetrics metrics = getResources().getDisplayMetrics();
+                        float px = 5 * (metrics.densityDpi / 160f);
+                        pieDataSet.setSelectionShift(px); // 选中态多出的长度
+                        PieData pieData = new PieData(xValues, pieDataSet);
+                        pieData.setValueFormatter(new CustomerValueFormatter());
+                        showChart(spreadLineChart, pieData);
                         if (beanList.size() == 0) {
                             recyclerView.setVisibility(View.GONE);
                             llNoContent.setVisibility(View.VISIBLE);
@@ -246,8 +284,6 @@ public class YingYunShouRuActivity extends BaseActivity {
                             llNoContent.setVisibility(View.GONE);
                             mAdapter.notifyDataSetChanged();
                             ProgressDialogUtil.stopLoad();
-                            getLineData();
-                            showChart();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -256,4 +292,17 @@ public class YingYunShouRuActivity extends BaseActivity {
             }
         }
     };
+    public class CustomerValueFormatter implements ValueFormatter {
+        private DecimalFormat mFormat;
+
+        public CustomerValueFormatter() {
+            //此处是显示数据的方式，显示整型或者小数后面小数位数自己随意确定
+            mFormat = new DecimalFormat("0.00");
+        }
+
+        @Override
+        public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+            return mFormat.format(value);//数据前或者后可根据自己想要显示的方式添加
+        }
+    }
 }

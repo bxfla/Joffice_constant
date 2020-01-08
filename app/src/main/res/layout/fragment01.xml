@@ -110,14 +110,28 @@
                 android:layout_height="430dp">
             </android.support.v7.widget.RecyclerView>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="20dp"
-                android:gravity="center_vertical"
-                android:text="指标显示"
-                android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:text="指标显示"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/color_bg_selected"
+                    android:textSize="16dp" />
+            </LinearLayout>
 
             <View style="@style/HourLine"/>
             <android.support.v7.widget.RecyclerView

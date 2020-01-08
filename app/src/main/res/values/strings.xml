@@ -280,7 +280,7 @@
     <string name="fragment_rb3">营运管理</string>
     <string name="fragment_rb4">维修管理</string>
     <string name="fragment_rb5">物资管理</string>
-    <string name="fragment_rb6">服务管理</string>
+    <string name="fragment_rb6">安全管理</string>
     <string name="fragment_rb7">统计分析</string>
     <string name="fragment_rb8">综合查询</string>
 
@@ -312,13 +312,15 @@
     <string name="oaflow_statist_rb1">人员统计</string>
     <string name="oaflow_statist_rb2">人员变动</string>
     <string name="oaflow_statist_rb3">年度里程</string>
-    <string name="oaflow_statist_rb4">成本对比</string>
-    <string name="oaflow_statist_rb5">汇总占比</string>
-    <string name="oaflow_statist_rb6">材料消耗</string>
+    <string name="oaflow_statist_rb4">成本营收</string>
+    <string name="oaflow_statist_rb41">百公里营入</string>
+    <string name="oaflow_statist_rb42">百公里成本</string>
+    <string name="oaflow_statist_rb5">能源比例</string>
+    <string name="oaflow_statist_rb6">材料出库</string>
     <string name="oaflow_statist_rb7">人员变动</string>
     <string name="oaflow_statist_rb8">人员汇总</string>
-    <string name="oaflow_statist_rb9">月度异常</string>
-    <string name="oaflow_statist_rb10">月度违规</string>
-    <string name="oaflow_statist_rb11">营运收入</string>
+    <string name="oaflow_statist_rb9">异常班次</string>
+    <string name="oaflow_statist_rb10">违规记录</string>
+    <string name="oaflow_statist_rb11">收入类型</string>
 
 </resources>

@@ -74,7 +74,7 @@ public class OAListActivity extends BaseActivity {
     int versionCode;
 
     MainData bean;
-    int limit = 20;
+    int limit = 200;
     int start = 0;
     String res = "";
     String tag = "N";
@@ -117,6 +117,11 @@ public class OAListActivity extends BaseActivity {
         imageList.add(R.drawable.mycenter);
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         SharedPreferencesHelper sharedPreferencesHelper = new SharedPreferencesHelper(this, "login");
         String userName = sharedPreferencesHelper.getData(this, "userName", "");
         String found = sharedPreferencesHelper.getData(MyApplication.getContextObject(), "Found", "");

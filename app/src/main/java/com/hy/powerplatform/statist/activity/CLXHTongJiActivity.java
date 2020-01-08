@@ -1,6 +1,5 @@
 package com.hy.powerplatform.statist.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,11 +10,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
@@ -32,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,7 +51,6 @@ import butterknife.OnClick;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.hy.powerplatform.R.id.tvName;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
 
@@ -54,28 +59,37 @@ public class CLXHTongJiActivity extends BaseActivity {
     @BindView(R.id.header)
     Header header;
     @BindView(R.id.spread_line_chart)
-    LineChart spreadLineChart;
+    BarChart mBarChart;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.tvDate)
     TextView tvDate;
     @BindView(R.id.llNoContent)
     LinearLayout llNoContent;
+    @BindView(R.id.tvName)
+    TextView tvName;
+    @BindView(R.id.tvValue)
+    TextView tvValue;
 
     private OkHttpUtil httpUtil;
-    public LineData lineData = null;
     BaseRecyclerAdapterPosition mAdapter;
     private CustomDatePickerMonth customDatePicker1;
     final HashMap<String, String> map = new HashMap();
-    public ArrayList<String> xList = new ArrayList<String>();
-    public ArrayList<Entry> yList = new ArrayList<Entry>();
-    public ArrayList<LineDataSet> lineDataSets = new ArrayList<LineDataSet>();
     List<CLXHTongJi> beanList = new ArrayList<>();
+    //数据的集合
+    public BarDataSet dataset;
+    //保存数据的实体（下面定义了两组数据集合）
+    public ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
+    //表格下方的文字
+    public ArrayList<String> labels = new ArrayList<String>();
+    ArrayList<IBarDataSet> dataSets = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        tvName.setText("类型");
+        tvValue.setText("金额");
         initDatePicker();
         header.setTvTitle(getResources().getString(R.string.oaflow_statist_rb6));
         httpUtil = OkHttpUtil.getInstance(this);
@@ -84,7 +98,7 @@ public class CLXHTongJiActivity extends BaseActivity {
         mAdapter = new BaseRecyclerAdapterPosition<CLXHTongJi>(this, R.layout.adapter_data_item, beanList) {
             @Override
             public void convert(BaseViewHolderPosition holder, final CLXHTongJi itemBean, int position) {
-                holder.setText(tvName, itemBean.getTypeName());
+                holder.setText(R.id.tvName, itemBean.getTypeName());
                 holder.setText(R.id.tvData, String.valueOf(itemBean.getJe()));
                 if (position % 2 != 0) {
                     holder.setColor(R.id.ll);
@@ -94,6 +108,22 @@ public class CLXHTongJiActivity extends BaseActivity {
         recyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
 
+        mBarChart.getXAxis().setDrawLabels(false);
+        //设置单个点击事件
+        mBarChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry entry, int i, Highlight highlight) {
+                Toast.makeText(CLXHTongJiActivity.this, entry.getVal() + "", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+        //设置显示动画效果
+        mBarChart.animateY(2000);
+        mBarChart.setMaxVisibleValueCount(60);
         getData();
     }
 
@@ -133,7 +163,7 @@ public class CLXHTongJiActivity extends BaseActivity {
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.activity_person_tong_ji;
+        return R.layout.activity_tongji_zhu;
     }
 
     @Override
@@ -143,8 +173,8 @@ public class CLXHTongJiActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        xList.clear();
-        yList.clear();
+        entries.clear();
+        labels.clear();
         beanList.clear();
         getData();
     }
@@ -170,46 +200,6 @@ public class CLXHTongJiActivity extends BaseActivity {
         customDatePicker1.showSpecificDay(false); // 不允许循环滚动
     }
 
-    /**
-     * 初始化数据
-     * count 表示坐标点个数，range表示等下y值生成的范围
-     */
-    public LineData getLineData() {
-        for (int i = 0; i < beanList.size(); i++) {  //X轴显示的数据
-            xList.add("");
-        }
-        for (int i = 0; i < beanList.size(); i++) {//y轴的数据
-            float result = Float.parseFloat(String.valueOf(beanList.get(i).getJe()));
-            yList.add(new Entry(result, i));
-        }
-        LineDataSet lineDataSet = new LineDataSet(yList, getResources().getString(R.string.oaflow_statist_rb6));//y轴数据集合
-        lineDataSet.setLineWidth(1f);//线宽
-        lineDataSet.setCircleSize(Color.BLUE);//圆形颜色
-        lineDataSet.setCircleSize(2f);//现实圆形大小
-        lineDataSet.setColor(Color.RED);//现实颜色
-        lineDataSet.setHighLightColor(Color.BLACK);//高度线的颜色
-        lineDataSets.add(lineDataSet);
-        lineData = new LineData(xList, lineDataSet);
-        return lineData;
-    }
-
-    /**
-     * 设置样式
-     */
-    public void showChart() {
-        spreadLineChart.setDrawBorders(false);//是否添加边框
-        spreadLineChart.setDescription("");//数据描述
-        spreadLineChart.setNoDataTextDescription("");//没数据显示
-        spreadLineChart.setDrawGridBackground(true);//是否显示表格颜色
-        spreadLineChart.setBackgroundColor(Color.WHITE);//背景颜色
-        spreadLineChart.setData(lineData);//设置数据
-        Legend legend = spreadLineChart.getLegend();//设置比例图片标示，就是那一组Y的value
-        legend.setForm(Legend.LegendForm.SQUARE);//样式
-        legend.setFormSize(10f);//字体
-        legend.setTextColor(Color.BLUE);//设置颜色
-        spreadLineChart.animateX(2000);//X轴的动画
-    }
-
     @OnClick(R.id.tvDate)
     public void onViewClicked() {
         customDatePicker1.show(tvDate.getText().toString());
@@ -230,24 +220,38 @@ public class CLXHTongJiActivity extends BaseActivity {
                     String data = b1.getString("data");
                     try {
                         JSONArray jsonArray = new JSONArray(data);
-                        for (int i = 0;i<jsonArray.length();i++){
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             CLXHTongJi bean = new CLXHTongJi();
                             bean.setTypeName(jsonObject.getString("typeName"));
                             bean.setJe(Double.parseDouble(jsonObject.getString("je")));
                             beanList.add(bean);
+
+                            float value = Float.parseFloat((jsonObject.getString("je")));
+                            entries.add(new BarEntry(value, i));
+                            labels.add(jsonObject.getString("typeName"));
+                            dataset = new BarDataSet(entries, getResources().getString(R.string.oaflow_statist_rb6));
+                            dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                            dataSets.add(dataset);
                         }
                         if (beanList.size() == 0) {
                             recyclerView.setVisibility(View.GONE);
                             llNoContent.setVisibility(View.VISIBLE);
                             ProgressDialogUtil.stopLoad();
                         } else {
+                            BarData dataNum = new BarData(labels, dataset);
+                            dataNum.setValueFormatter(new CustomerValueFormatter());
+                            mBarChart.setData(dataNum);
+                            //通知BarData更新
+                            mBarChart.getBarData().notifyDataChanged();
+                            //通知BarChart更新
+                            mBarChart.notifyDataSetChanged();
+                            //使图表更新生效
+                            mBarChart.invalidate();
                             recyclerView.setVisibility(View.VISIBLE);
                             llNoContent.setVisibility(View.GONE);
                             mAdapter.notifyDataSetChanged();
                             ProgressDialogUtil.stopLoad();
-                            getLineData();
-                            showChart();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -256,4 +260,18 @@ public class CLXHTongJiActivity extends BaseActivity {
             }
         }
     };
+
+    public class CustomerValueFormatter implements ValueFormatter {
+        private DecimalFormat mFormat;
+
+        public CustomerValueFormatter() {
+            //此处是显示数据的方式，显示整型或者小数后面小数位数自己随意确定
+            mFormat = new DecimalFormat("0.0");
+        }
+
+        @Override
+        public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+            return mFormat.format(value);//数据前或者后可根据自己想要显示的方式添加
+        }
+    }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.utils.BaseRecyclerAdapter;
 import com.hy.powerplatform.my_utils.utils.BaseViewHolder;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
+import com.hy.powerplatform.oa_flow.activity.PersonListActivity;
 import com.hy.powerplatform.oa_flow.phone.bean.Phone;
 
 import java.io.IOException;
@@ -31,6 +33,7 @@ import butterknife.OnClick;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_FOUR;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_THERE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
@@ -46,9 +49,11 @@ public class PhoneActivity extends BaseActivity {
 
     int limit = 20;
     int start = 0;
+    @BindView(R.id.tvName)
+    TextView tvName;
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapter baseAdapter;
-    String departName = "", departId = "";
+    String departName = "", departId = "", userName = "", userId = "", profileId = "";
     final HashMap<String, String> map = new HashMap();
     List<Phone.ResultBean> beanList = new ArrayList<>();
 
@@ -63,10 +68,10 @@ public class PhoneActivity extends BaseActivity {
             public void convert(BaseViewHolder holder, final Phone.ResultBean resultBean) {
                 holder.setText(R.id.tv1, "账号");
                 holder.setText(R.id.tvName, resultBean.getUsername());
-                holder.setText(R.id.tv2, "姓名");
-                holder.setText(R.id.tvPhone, resultBean.getFullname());
-                holder.setText(R.id.tv2, "主部门");
-                holder.setText(R.id.tvIdCard, resultBean.getDepNames());
+                holder.setText(R.id.tv2, "部门");
+                holder.setText(R.id.tvPhone, resultBean.getDepNames());
+                holder.setText(R.id.tv3, "职位");
+                holder.setText(R.id.tvIdCard, resultBean.getRoleNames());
             }
         };
         recyclerView.setAdapter(baseAdapter);
@@ -98,6 +103,7 @@ public class PhoneActivity extends BaseActivity {
         final String path_url = Constant.BASE_URL2 + Constant.PHONE + "?start=" + start + "&limit=" + limit;
         map.clear();
         map.put("depId", departId);
+        map.put("Q_username_S_LK", tvName.getText().toString());
         httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -124,10 +130,18 @@ public class PhoneActivity extends BaseActivity {
         });
     }
 
-    @OnClick(R.id.tvDepartment)
-    public void onViewClicked() {
-        Intent intent = new Intent(this,PhoneDepartmentActivity.class);
-        startActivityForResult(intent,TAG_THERE);
+    @OnClick({R.id.tvDepartment, R.id.tvName})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tvDepartment:
+                Intent intent = new Intent(this, PhoneDepartmentActivity.class);
+                startActivityForResult(intent, TAG_THERE);
+                break;
+            case R.id.tvName:
+                Intent intent1 = new Intent(this, PersonListActivity.class);
+                startActivityForResult(intent1, Constant.TAG_FOUR);
+                break;
+        }
     }
 
     /**
@@ -155,13 +169,18 @@ public class PhoneActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
+        switch (requestCode) {
             case TAG_THERE:
                 if (resultCode == Constant.TAG_THERE) {
                     departName = data.getStringExtra("name");
                     departId = data.getStringExtra("id");
                     tvDepartment.setText(departName);
                 }
+                break;
+            case TAG_FOUR:
+                profileId = data.getStringExtra("profileId");
+                userName = data.getStringExtra("userName");
+                tvName.setText(userName);
                 break;
         }
     }

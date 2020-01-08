@@ -1,6 +1,5 @@
 package com.hy.powerplatform.statist.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,11 +10,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.gson.Gson;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
@@ -29,6 +34,7 @@ import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerMonth;
 import com.hy.powerplatform.statist.bean.PersonChange;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,7 +49,6 @@ import butterknife.OnClick;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.hy.powerplatform.R.id.tvName;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
 
@@ -52,37 +57,46 @@ public class PersonChangeActivity extends BaseActivity {
     @BindView(R.id.header)
     Header header;
     @BindView(R.id.spread_line_chart)
-    LineChart spreadLineChart;
+    BarChart mBarChart;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.tvDate)
     TextView tvDate;
     @BindView(R.id.llNoContent)
     LinearLayout llNoContent;
+    @BindView(R.id.tvName)
+    TextView tvName;
+    @BindView(R.id.tvValue)
+    TextView tvValue;
 
     private OkHttpUtil httpUtil;
-    public LineData lineData = null;
     BaseRecyclerAdapterPosition mAdapter;
     private CustomDatePickerMonth customDatePicker1;
     final HashMap<String, String> map = new HashMap();
-    public ArrayList<String> xList = new ArrayList<String>();
-    public ArrayList<Entry> yList = new ArrayList<Entry>();
-    public ArrayList<LineDataSet> lineDataSets = new ArrayList<LineDataSet>();
     List<PersonChange.ResultBean> beanList = new ArrayList<>();
+    //数据的集合
+    public BarDataSet dataset;
+    //保存数据的实体（下面定义了两组数据集合）
+    public ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
+    //表格下方的文字
+    public ArrayList<String> labels = new ArrayList<String>();
+    ArrayList<IBarDataSet> dataSets = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        tvName.setText("类型");
+        tvValue.setText("人数");
         initDatePicker();
-        header.setTvTitle(getResources().getString(R.string.oaflow_statist_rb6));
+        header.setTvTitle(getResources().getString(R.string.oaflow_statist_rb2));
         httpUtil = OkHttpUtil.getInstance(this);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         mAdapter = new BaseRecyclerAdapterPosition<PersonChange.ResultBean>(this, R.layout.adapter_data_item, beanList) {
             @Override
             public void convert(BaseViewHolderPosition holder, final PersonChange.ResultBean itemBean, int position) {
-                holder.setText(tvName, itemBean.getProject());
+                holder.setText(R.id.tvName, itemBean.getProject());
                 holder.setText(R.id.tvData, String.valueOf(itemBean.getTotal()));
                 if (position % 2 != 0) {
                     holder.setColor(R.id.ll);
@@ -91,7 +105,21 @@ public class PersonChangeActivity extends BaseActivity {
         };
         recyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
+        //设置单个点击事件
+        mBarChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry entry, int i, Highlight highlight) {
+                Toast.makeText(PersonChangeActivity.this, entry.getVal() + "", Toast.LENGTH_LONG).show();
+            }
 
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+        //设置显示动画效果
+        mBarChart.animateY(2000);
+        mBarChart.setMaxVisibleValueCount(60);
         getData();
     }
 
@@ -103,11 +131,11 @@ public class PersonChangeActivity extends BaseActivity {
         final String path_url = Constant.BASE_URL2 + Constant.PERSONCHANGE;
         map.clear();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date startDate = getSupportBeginDayofMonth(tvDate.getText().toString().split("-")[0],tvDate.getText().toString().split("-")[1]);
+        Date startDate = getSupportBeginDayofMonth(tvDate.getText().toString().split("-")[0], tvDate.getText().toString().split("-")[1]);
         String dateString = formatter.format(startDate);
-        Date endDate = getSupportEndDayofMonth(tvDate.getText().toString().split("-")[0],tvDate.getText().toString().split("-")[1]);
+        Date endDate = getSupportEndDayofMonth(tvDate.getText().toString().split("-")[0], tvDate.getText().toString().split("-")[1]);
         String dateString1 = formatter.format(endDate);
-        map.put("sj", dateString+","+dateString1);
+        map.put("sj", dateString + "," + dateString1);
         httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -136,7 +164,7 @@ public class PersonChangeActivity extends BaseActivity {
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.activity_person_tong_ji;
+        return R.layout.activity_tongji_zhu;
     }
 
     @Override
@@ -146,8 +174,8 @@ public class PersonChangeActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        xList.clear();
-        yList.clear();
+        entries.clear();
+        labels.clear();
         beanList.clear();
         getData();
     }
@@ -173,46 +201,6 @@ public class PersonChangeActivity extends BaseActivity {
         customDatePicker1.showSpecificDay(false); // 不允许循环滚动
     }
 
-    /**
-     * 初始化数据
-     * count 表示坐标点个数，range表示等下y值生成的范围
-     */
-    public LineData getLineData() {
-        for (int i = 0; i < beanList.size(); i++) {  //X轴显示的数据
-            xList.add("");
-        }
-        for (int i = 0; i < beanList.size(); i++) {//y轴的数据
-            float result = Float.parseFloat(String.valueOf(beanList.get(i).getTotal()));
-            yList.add(new Entry(result, i));
-        }
-        LineDataSet lineDataSet = new LineDataSet(yList, getResources().getString(R.string.oaflow_statist_rb6));//y轴数据集合
-        lineDataSet.setLineWidth(1f);//线宽
-        lineDataSet.setCircleSize(Color.BLUE);//圆形颜色
-        lineDataSet.setCircleSize(2f);//现实圆形大小
-        lineDataSet.setColor(Color.RED);//现实颜色
-        lineDataSet.setHighLightColor(Color.BLACK);//高度线的颜色
-        lineDataSets.add(lineDataSet);
-        lineData = new LineData(xList, lineDataSet);
-        return lineData;
-    }
-
-    /**
-     * 设置样式
-     */
-    public void showChart() {
-        spreadLineChart.setDrawBorders(false);//是否添加边框
-        spreadLineChart.setDescription("");//数据描述
-        spreadLineChart.setNoDataTextDescription("");//没数据显示
-        spreadLineChart.setDrawGridBackground(true);//是否显示表格颜色
-        spreadLineChart.setBackgroundColor(Color.WHITE);//背景颜色
-        spreadLineChart.setData(lineData);//设置数据
-        Legend legend = spreadLineChart.getLegend();//设置比例图片标示，就是那一组Y的value
-        legend.setForm(Legend.LegendForm.SQUARE);//样式
-        legend.setFormSize(10f);//字体
-        legend.setTextColor(Color.BLUE);//设置颜色
-        spreadLineChart.animateX(2000);//X轴的动画
-    }
-
     @OnClick(R.id.tvDate)
     public void onViewClicked() {
         customDatePicker1.show(tvDate.getText().toString());
@@ -220,12 +208,13 @@ public class PersonChangeActivity extends BaseActivity {
 
     /**
      * 根据提供的年月日获取该月份的第一天
-     * @Description: (这里用一句话描述这个方法的作用)
-     * @Author: gyz
-     * @Since: 2017-1-9下午2:26:57
+     *
      * @param year
      * @param monthOfYear
      * @return
+     * @Description: (这里用一句话描述这个方法的作用)
+     * @Author: gyz
+     * @Since: 2017-1-9下午2:26:57
      */
     public static Date getSupportBeginDayofMonth(String year, String monthOfYear) {
         Calendar cal = Calendar.getInstance();
@@ -247,12 +236,13 @@ public class PersonChangeActivity extends BaseActivity {
 
     /**
      * 根据提供的年月获取该月份的最后一天
-     * @Description: (这里用一句话描述这个方法的作用)
-     * @Author: gyz
-     * @Since: 2017-1-9下午2:29:38
+     *
      * @param year
      * @param monthOfYear
      * @return
+     * @Description: (这里用一句话描述这个方法的作用)
+     * @Author: gyz
+     * @Since: 2017-1-9下午2:29:38
      */
     public static Date getSupportEndDayofMonth(String year, String monthOfYear) {
         Calendar cal = Calendar.getInstance();
@@ -291,17 +281,44 @@ public class PersonChangeActivity extends BaseActivity {
                         llNoContent.setVisibility(View.GONE);
                         for (int i = 0; i < bean.getResult().size(); i++) {
                             beanList.add(bean.getResult().get(i));
+                            float value = Float.parseFloat(bean.getResult().get(i).getTotal());
+                            entries.add(new BarEntry(value, i));
+                            labels.add(bean.getResult().get(i).getProject());
+                            dataset = new BarDataSet(entries, getResources().getString(R.string.oaflow_statist_rb2));
+                            dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                            dataSets.add(dataset);
                         }
+                        BarData dataNum = new BarData(labels, dataset);
+                        dataNum.setValueFormatter(new CustomerValueFormatter());
+                        mBarChart.setData(dataNum);
+                        //通知BarData更新
+                        mBarChart.getBarData().notifyDataChanged();
+                        //通知BarChart更新
+                        mBarChart.notifyDataSetChanged();
+                        //使图表更新生效
+                        mBarChart.invalidate();
                     } else {
                         recyclerView.setVisibility(View.GONE);
                         llNoContent.setVisibility(View.VISIBLE);
                     }
                     mAdapter.notifyDataSetChanged();
                     ProgressDialogUtil.stopLoad();
-                    getLineData();
-                    showChart();
                     break;
             }
         }
     };
+
+    public class CustomerValueFormatter implements ValueFormatter {
+        private DecimalFormat mFormat;
+
+        public CustomerValueFormatter() {
+            //此处是显示数据的方式，显示整型或者小数后面小数位数自己随意确定
+            mFormat = new DecimalFormat("0");
+        }
+
+        @Override
+        public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+            return mFormat.format(value);//数据前或者后可根据自己想要显示的方式添加
+        }
+    }
 }

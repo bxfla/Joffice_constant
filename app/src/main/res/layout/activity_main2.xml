@@ -22,7 +22,8 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             app:header_is_right_tv_visiable="true"
-            app:header_title="@string/logo_small_text"></com.hy.powerplatform.my_utils.myViews.Header>
+            app:header_title="@string/logo_small_text">
+        </com.hy.powerplatform.my_utils.myViews.Header>
     </LinearLayout>
 
     <LinearLayout
@@ -30,11 +31,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_weight="1"
-            android:id="@+id/frame_layout"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"
+            android:layout_weight="1" />
         <RadioGroup
             android:id="@+id/radio_group"
             android:layout_width="match_parent"

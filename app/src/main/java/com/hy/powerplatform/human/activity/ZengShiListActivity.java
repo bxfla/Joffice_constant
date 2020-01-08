@@ -65,9 +65,10 @@ public class ZengShiListActivity extends BaseActivity {
             @Override
             public void convert(BaseViewHolder holder, final ZengShiList.ResultBean resultBean) {
                 holder.setText(R.id.tvName, resultBean.getFullname());
-                holder.setText(R.id.tv2, "档案号");
-                holder.setText(R.id.tvPhone, resultBean.getProfileNo());
-                holder.setText(R.id.tvIdCard, resultBean.getIdCard());
+                holder.setText(R.id.tv2, "部门");
+                holder.setText(R.id.tvPhone, resultBean.getDepName());
+                holder.setText(R.id.tv3, "岗位");
+                holder.setText(R.id.tvIdCard, resultBean.getPosition());
                 holder.setOnClickListener(R.id.ll, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

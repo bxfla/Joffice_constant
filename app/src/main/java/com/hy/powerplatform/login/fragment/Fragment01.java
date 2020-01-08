@@ -40,7 +40,9 @@ import com.hy.powerplatform.my_utils.utils.BaseRecyclerAdapterPosition;
 import com.hy.powerplatform.my_utils.utils.BaseViewHolder;
 import com.hy.powerplatform.my_utils.utils.BaseViewHolderPosition;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
+import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerMonth;
 import com.hy.powerplatform.oa_flow.OAFlowListActivity;
+import com.hy.powerplatform.oa_flow.bean.WillDoNum;
 import com.hy.powerplatform.operation.OperationListActivity;
 import com.hy.powerplatform.safer.SaferListActivity;
 import com.hy.powerplatform.statist.StatistListActivity;
@@ -64,8 +66,10 @@ import butterknife.Unbinder;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_FIVE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_FOUR;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_SIX;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_THERE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
 
@@ -87,6 +91,8 @@ public class Fragment01 extends Fragment {
     TextView tvLoginMore;
     @BindView(R.id.recyclerViewYY)
     RecyclerView recyclerViewYY;
+    @BindView(R.id.tvDate)
+    TextView tvDate;
 
     //数据的集合
     public BarDataSet dataset;
@@ -96,30 +102,34 @@ public class Fragment01 extends Fragment {
     public ArrayList<String> labels = new ArrayList<String>();
 
     Unbinder unbinder;
+    int num =0;
     Intent intent;
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapter mAdapter;
     BaseRecyclerAdapter baseAdapterYY;
+    private CustomDatePickerMonth customDatePicker1;
     BaseRecyclerAdapterPosition mAdapterLogin;
     List<ItemBean> itemList = new ArrayList<>();
     ArrayList<IBarDataSet> dataSets = new ArrayList<>();
     final HashMap<String, String> map = new HashMap();
     List<YingYunData> yingyunList = new ArrayList<>();
     List<LoginPerson.ResultBean> loginPersonList = new ArrayList<>();
+    List<WillDoNum.ResultBean> willDoList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment01, container, false);
         unbinder = ButterKnife.bind(this, view);
+        initDatePicker();
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerViewLogin.setLayoutManager(manager);
         //设置布局的方式
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),3);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         recyclerViewYY.setLayoutManager(layoutManager);
-        //添加模块
-        addItem();
-        setItemAdapter();
+//        //添加模块
+//        addItem();
+//        setItemAdapter();
         mAdapterLogin = new BaseRecyclerAdapterPosition<LoginPerson.ResultBean>(getActivity(), R.layout.adapter_loginperson, loginPersonList) {
             @Override
             public void convert(BaseViewHolderPosition holder, final LoginPerson.ResultBean itemBean, int position) {
@@ -158,15 +168,74 @@ public class Fragment01 extends Fragment {
 
         httpUtil = OkHttpUtil.getInstance(getActivity());
         getLoginPerson();
-        getOAFlowNum();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getNum();
+    }
+
+    /**
+     * 获取代办数量
+     */
+    private void getNum() {
+        num = 0;
+        itemList.clear();
+        final String path_url = Constant.BASE_URL2 + Constant.MYWILLDOLIST + 0 + "&limit=" + 200;
+        httpUtil.getAsynHttp(path_url, new OkHttpUtil.ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+//                Log.i("main", "response:" + e.toString());
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("error", e.toString());
+                message.setData(b);
+                message.what = TAG_SIX;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+//                Log.i("main", "response:" + response.body().string());
+                String data = response.body().string();
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("data", data);
+                message.setData(b);
+                message.what = TAG_FIVE;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
+    /**
+     * 选择时间
+     */
+    private void initDatePicker() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM", Locale.CHINA);
+        String now = sdf.format(new Date());
+        tvDate.setText(now);
+
+        customDatePicker1 = new CustomDatePickerMonth(getActivity(), new CustomDatePickerMonth.ResultHandler() {
+            @Override
+            public void handle(String time) { // 回调接口，获得选中的时间
+                String date = time.split(" ")[0];
+                String date1 = date.split("-")[0] + "-" + date.split("-")[1];
+                tvDate.setText(date1);
+                getYYData();
+            }
+        }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        customDatePicker1.showSpecificTime(false); // 不显示时和分
+        customDatePicker1.setIsLoop(false); // 不允许循环滚动
+        customDatePicker1.showSpecificDay(false); // 不允许循环滚动
     }
 
     /**
      * 获取流程情况
      */
     private void getOAFlowNum() {
-        ProgressDialogUtil.startLoad(getActivity(), getResources().getString(R.string.get_data));
         final String path_url = Constant.BASE_URL2 + Constant.OAFLOWNUM;
         httpUtil.getAsynHttp(path_url, new OkHttpUtil.ResultCallback() {
             @Override
@@ -234,7 +303,7 @@ public class Fragment01 extends Fragment {
         String now = sdf.format(new Date());
         final String path_url = Constant.BASE_URL2 + Constant.YINGYUNDATA;
         map.clear();
-        map.put("month",now);
+        map.put("month", tvDate.getText().toString());
         httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -314,9 +383,13 @@ public class Fragment01 extends Fragment {
     private void setItemAdapter() {
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 4);
         recyclerView.setLayoutManager(manager);
-        mAdapter = new BaseRecyclerAdapter<ItemBean>(getActivity(), R.layout.adapter_itembean, itemList) {
+        mAdapter = new BaseRecyclerAdapter<ItemBean>(getActivity(), R.layout.adapter_maindata, itemList) {
             @Override
             public void convert(BaseViewHolder holder, final ItemBean itemBean) {
+                if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb1)) &&Integer.valueOf(num)!=0){
+                    holder.setVisitiomV(R.id.tvRolese);
+                    holder.setText(R.id.tvRolese, String.valueOf(num));
+                }
                 holder.setText(R.id.textView, itemBean.getName());
                 holder.setImageResource(R.id.imageView, itemBean.getAddress());
                 holder.setOnClickListener(R.id.linearLayout, new View.OnClickListener() {
@@ -355,10 +428,17 @@ public class Fragment01 extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
-    @OnClick(R.id.tvLoginMore)
-    public void onViewClicked() {
-        intent = new Intent(getActivity(), LoginPersonMoreActivity.class);
-        startActivity(intent);
+    @OnClick({R.id.tvLoginMore, R.id.tvDate})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tvLoginMore:
+                intent = new Intent(getActivity(), LoginPersonMoreActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tvDate:
+                customDatePicker1.show(tvDate.getText().toString());
+                break;
+        }
     }
 
     @Override
@@ -398,18 +478,29 @@ public class Fragment01 extends Fragment {
                     String data2 = b2.getString("data");
                     try {
                         JSONArray jsonArray = new JSONArray(data2);
+                        yingyunList.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             YingYunData yyBena = new YingYunData();
                             yyBena.setNum(jsonObject.getString("num"));
-                            yyBena.setType(jsonObject.getString("type"));
+                            if (jsonObject.getString("type") != null && jsonObject.getString("type").equals("收入")) {
+                                yyBena.setType(jsonObject.getString("type") + "(万)");
+                            } else if (jsonObject.getString("type") != null && jsonObject.getString("type").equals("成本")) {
+                                yyBena.setType(jsonObject.getString("type") + "(万)");
+                            } else if (jsonObject.getString("type") != null && jsonObject.getString("type").equals("里程")) {
+                                yyBena.setType(jsonObject.getString("type") + "(万公里)");
+                            } else if (jsonObject.getString("type") != null && jsonObject.getString("type").equals("人数")) {
+                                yyBena.setType(jsonObject.getString("type") + "(人)");
+                            } else if (jsonObject.getString("type") != null && jsonObject.getString("type").equals("客流量")) {
+                                yyBena.setType(jsonObject.getString("type") + "(人次)");
+                            }
                             yingyunList.add(yyBena);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     baseAdapterYY.notifyDataSetChanged();
-                    ProgressDialogUtil.stopLoad();
+                    getOAFlowNum();
                     break;
                 case TAG_FOUR:
                     Bundle b3 = msg.getData();
@@ -426,8 +517,33 @@ public class Fragment01 extends Fragment {
                     }
                     BarData dataNum = new BarData(labels, dataset);
                     mBarChart.setData(dataNum);
+                    ProgressDialogUtil.stopLoad();
+                    break;
+                case TAG_FIVE:
+                    willDoList.clear();
+                    Bundle bnum = msg.getData();
+                    String datanum = bnum.getString("data");
+                    WillDoNum beannum = new Gson().fromJson(datanum, WillDoNum.class);
+                    for (int i = 0; i < beannum.getResult().size(); i++) {
+                        willDoList.add(beannum.getResult().get(i));
+                    }
+                    if (willDoList.size()!=0){
+                        num=willDoList.size();
+                    }
+                    //添加模块
+                    addItem();
+                    setItemAdapter();
+                    break;
+                case TAG_SIX:
+                    String message1 = msg.getData().getString("error");
+                    Toast.makeText(getActivity(), message1, Toast.LENGTH_SHORT).show();
+                    ProgressDialogUtil.stopLoad();
+                    //添加模块
+                    addItem();
+                    setItemAdapter();
                     break;
             }
         }
     };
+
 }

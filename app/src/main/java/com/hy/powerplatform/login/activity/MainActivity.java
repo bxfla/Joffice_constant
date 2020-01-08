@@ -1,5 +1,6 @@
 package com.hy.powerplatform.login.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -7,11 +8,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -29,28 +32,32 @@ import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_FOUR;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
 
-public class MainActivity extends BaseActivity  implements RadioGroup.OnCheckedChangeListener{
+public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
     @BindView(R.id.header)
     Header header;
-    @BindView(R.id.frame_layout)
-    FrameLayout frameLayout;
     @BindView(R.id.rb1)
     RadioButton rb1;
     @BindView(R.id.rb2)
     RadioButton rb2;
     @BindView(R.id.radio_group)
     RadioGroup radioGroup;
+    @BindView(R.id.vp)
+    ViewPager vp;
+    @BindView(R.id.activity_main2)
+    LinearLayout activityMain2;
 
-    private Fragment01 fragment01;
-    private Fragment02 fragment02;
-    private FragmentManager manager;
+    private List<Fragment> fragmentList;
+    private FragmentTransaction fragmentTransaction;
 
     String versiondata = "";
     AlertDialogUtil alertDialogUtil;
@@ -79,23 +86,6 @@ public class MainActivity extends BaseActivity  implements RadioGroup.OnCheckedC
     private void exit() {
         if (!isExit) {
             isExit = true;
-//            alertDialogUtil.showDialog1("您确定要退出程序吗", new AlertDialogCallBack() {
-//
-//                @Override
-//                public void select(String data) {
-//
-//                }
-//
-//                @Override
-//                public void confirm() {
-//                    finish();
-//                }
-//
-//                @Override
-//                public void cancel() {
-//
-//                }
-//            });
             Toast.makeText(this, "再点一次退出程序", Toast.LENGTH_SHORT).show();
             mHandler.sendEmptyMessageDelayed(0, 2000);
         } else {
@@ -109,45 +99,26 @@ public class MainActivity extends BaseActivity  implements RadioGroup.OnCheckedC
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         alertDialogUtil = new AlertDialogUtil(this);
-        //默认选中第一个
-        RadioButton btn = (RadioButton) radioGroup.getChildAt(0);
-        btn.setChecked(true);
-        initFragment();
-        radioGroup.setOnCheckedChangeListener(MainActivity.this);
+        // 获取片段管理器
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        // 界面显示时 默认按钮1被选择及显示第一个界面
+        rb1.setChecked(true);
+        fragmentTransaction.replace(R.id.vp, new Fragment01()).commit();
+        // fragmentList用于存放片段 及 将片段添加进集合
+        fragmentList = new ArrayList<Fragment>();
+        Fragment fragment1 = new Fragment01();
+        Fragment fragment2 = new Fragment02();
+        fragmentList.add(fragment1);
+        fragmentList.add(fragment2);
+        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(), fragmentList, this);
+        vp.setAdapter(adapter);
+
+        radioGroup.check(R.id.tv1);
+        vp.setCurrentItem(0);
+
+        radioGroup.setOnCheckedChangeListener(this);
         getVersion();
-    }
-
-    private void getVersion() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + Constant.VERSIONNO;
-                DBHandler dbA = new DBHandler();
-                versiondata = dbA.getAPKVerson(url);
-                Message message = new Message();
-                if (versiondata.equals("")) {
-                    handler.sendEmptyMessage(TAG_TWO);
-                } else {
-                    handler.sendEmptyMessage(TAG_FOUR);
-                }
-//                message.what = TAG_FOUR;
-//                handler.sendMessage(message);
-            }
-        }).start();
-    }
-
-    /**
-     * 初始化第一个页面
-     */
-    private void initFragment() {
-        //获取管理器
-        manager = getSupportFragmentManager();
-        //通过管理器获取一个事件
-        FragmentTransaction transaction = manager.beginTransaction();
-        //添加第一个fragment到帧布局中
-        fragment01 = new Fragment01();
-        transaction.add(R.id.frame_layout, fragment01);
-        transaction.commit();
     }
 
     @Override
@@ -162,51 +133,64 @@ public class MainActivity extends BaseActivity  implements RadioGroup.OnCheckedC
 
     @Override
     protected void rightClient() {
+
     }
 
+    private void getVersion() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = Constant.BASE_URL2 + Constant.VERSIONNO;
+                DBHandler dbA = new DBHandler();
+                versiondata = dbA.getAPKVerson(url);
+                Message message = new Message();
+                if (versiondata.equals("")) {
+                    handler.sendEmptyMessage(TAG_TWO);
+                } else {
+                    handler.sendEmptyMessage(TAG_FOUR);
+                }
+//                message.what = TAG_FOUR;
+//                handler.sendMessage(message);
+            }
+        }).start();
+    }
 
     @Override
-    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-        switch (checkedId){
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
             case R.id.rb1:
-                FragmentTransaction ft1 = manager.beginTransaction();
-                hideAll(ft1);
-                if (fragment01 ==null){
-                    fragment01 = new Fragment01();
-                    ft1.add(R.id.frame_layout, fragment01);
-                }else {
-                    ft1.show(fragment01);
-                }
-                ft1.commit();
+                vp.setCurrentItem(0);
                 break;
             case R.id.rb2:
-                FragmentTransaction ft2 = manager.beginTransaction();
-                hideAll(ft2);
-                if (fragment02 ==null){
-                    fragment02 = new Fragment02();
-                    ft2.add(R.id.frame_layout, fragment02);
-                }else {
-                    ft2.show(fragment02);
-                }
-                ft2.commit();
+                vp.setCurrentItem(1);
+
                 break;
         }
     }
 
-    /**
-     * 隐藏所有fragment
-     * @param ft
-     */
-    private void hideAll(FragmentTransaction ft){
-        if (ft==null){
-            return;
+
+    public class MyPagerAdapter extends FragmentPagerAdapter {
+
+        private List<Fragment> list;
+        private Context context;
+
+        public MyPagerAdapter(FragmentManager fm, List<Fragment> list, Context context) {
+            super(fm);
+            this.list = list;
+            this.context = context;
         }
-        if (fragment01 !=null){
-            ft.hide(fragment01);
+
+
+        @Override
+        public Fragment getItem(int position) {
+            return list.get(position);
         }
-        if (fragment02 !=null){
-            ft.hide(fragment02);
+
+        @Override
+        public int getCount() {
+            return list.size();
         }
+
     }
 
     Handler handler = new Handler() {
@@ -222,7 +206,7 @@ public class MainActivity extends BaseActivity  implements RadioGroup.OnCheckedC
                     ProgressDialogUtil.stopLoad();
                     Gson gson = new Gson();
                     Version version = gson.fromJson(versiondata, Version.class);
-                    if (version!=null&&version.getData() != null) {
+                    if (version != null && version.getData() != null) {
                         String nnm = version.getData().getVersionNo();
                         String versionName = "";
                         int versionCode = 0;
@@ -240,11 +224,11 @@ public class MainActivity extends BaseActivity  implements RadioGroup.OnCheckedC
                             versionName = "";
                         }
 
-                        if (!nnm.equals(versionName)&&Double.valueOf(nnm)>Double.valueOf(versionName)){
+                        if (!nnm.equals(versionName) && Double.valueOf(nnm) > Double.valueOf(versionName)) {
 //                        if (!nnm.equals("2")) {
                             final String url = Constant.BASE_URL2 + "attachFiles/" + version.getData().getDownurl();
                             String data1 = version.getData().getSubstance();
-                            new AlertDialogUtil(MainActivity.this).showDialog2("检测到服务器上有新的版本，是否立即更新。\n"+data1, new AlertDialogCallBack() {
+                            new AlertDialogUtil(MainActivity.this).showDialog2("检测到服务器上有新的版本，是否立即更新。\n" + data1, new AlertDialogCallBack() {
                                 @Override
                                 public void select(String data) {
 
