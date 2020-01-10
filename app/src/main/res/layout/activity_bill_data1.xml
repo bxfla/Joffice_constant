@@ -660,7 +660,7 @@
                     android:visibility="gone"
                     android:id="@+id/etLeader1"
                     style="@style/textWrite"
-                    android:hint="分管领导签名" />
+                    android:hint="分管领导意见" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout

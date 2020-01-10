@@ -70,8 +70,8 @@ public class PhoneActivity extends BaseActivity {
                 holder.setText(R.id.tvName, resultBean.getUsername());
                 holder.setText(R.id.tv2, "部门");
                 holder.setText(R.id.tvPhone, resultBean.getDepNames());
-                holder.setText(R.id.tv3, "职位");
-                holder.setText(R.id.tvIdCard, resultBean.getRoleNames());
+                holder.setText(R.id.tv3, "手机号");
+                holder.setText(R.id.tvIdCard, resultBean.getPhone());
             }
         };
         recyclerView.setAdapter(baseAdapter);
@@ -178,9 +178,13 @@ public class PhoneActivity extends BaseActivity {
                 }
                 break;
             case TAG_FOUR:
-                profileId = data.getStringExtra("profileId");
-                userName = data.getStringExtra("userName");
-                tvName.setText(userName);
+                try {
+                    profileId = data.getStringExtra("profileId");
+                    userName = data.getStringExtra("userName");
+                    tvName.setText(userName);
+                }catch (Exception e) {
+
+            }
                 break;
         }
     }

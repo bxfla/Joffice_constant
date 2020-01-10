@@ -86,8 +86,10 @@ public class PersonChangeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        mBarChart.setDescription(null);
         tvName.setText("类型");
-        tvValue.setText("人数");
+        header.setRightTv(false);
+        tvValue.setText("人数(人)");
         initDatePicker();
         header.setTvTitle(getResources().getString(R.string.oaflow_statist_rb2));
         httpUtil = OkHttpUtil.getInstance(this);
@@ -174,10 +176,6 @@ public class PersonChangeActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        entries.clear();
-        labels.clear();
-        beanList.clear();
-        getData();
     }
 
     /**
@@ -194,6 +192,10 @@ public class PersonChangeActivity extends BaseActivity {
                 String date = time.split(" ")[0];
                 String date1 = date.split("-")[0] + "-" + date.split("-")[1];
                 tvDate.setText(date1);
+                entries.clear();
+                labels.clear();
+                beanList.clear();
+                getData();
             }
         }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(false); // 不显示时和分
@@ -279,6 +281,14 @@ public class PersonChangeActivity extends BaseActivity {
                     if (bean.getTotalCounts() != 0) {
                         recyclerView.setVisibility(View.VISIBLE);
                         llNoContent.setVisibility(View.GONE);
+                        PersonChange.ResultBean resultBean = new PersonChange.ResultBean();
+                        long month = 0;
+                        resultBean.setProject("合计");
+                        for (int i = 0; i < bean.getResult().size(); i++) {
+                            month = month+Long.parseLong(bean.getResult().get(i).getTotal());
+                        }
+                        resultBean.setTotal(String.valueOf(month));
+                        beanList.add(resultBean);
                         for (int i = 0; i < bean.getResult().size(); i++) {
                             beanList.add(bean.getResult().get(i));
                             float value = Float.parseFloat(bean.getResult().get(i).getTotal());

@@ -81,11 +81,12 @@
                     android:textColor="@color/black"/>
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <com.hy.powerplatform.my_utils.myViews.MyRecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="match_parent"
+                app:maxHeight="400dp">
+            </com.hy.powerplatform.my_utils.myViews.MyRecyclerView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

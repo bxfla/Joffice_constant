@@ -367,7 +367,7 @@
                     android:id="@+id/etLeader"
                     android:visibility="gone"
                     style="@style/textWrite"
-                    android:hint="部门领导签名" />
+                    android:hint="部门领导意见" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout

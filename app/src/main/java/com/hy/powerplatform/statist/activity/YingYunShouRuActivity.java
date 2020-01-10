@@ -49,7 +49,6 @@ import butterknife.OnClick;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.hy.powerplatform.R.id.tvName;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
 
@@ -67,6 +66,12 @@ public class YingYunShouRuActivity extends BaseActivity {
     LinearLayout llNoContent;
 
     PieDataSet pieDataSet;
+    @BindView(R.id.llDate)
+    LinearLayout llDate;
+    @BindView(R.id.tvName)
+    TextView tvName;
+    @BindView(R.id.tvValue)
+    TextView tvValue;
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapterPosition mAdapter;
     private CustomDatePickerMonth customDatePicker1;
@@ -83,22 +88,26 @@ public class YingYunShouRuActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        colors.add(Color.rgb(193,46,52));
-        colors.add(Color.rgb(75,0,130));
-        colors.add(Color.rgb(0,94,170));
-        colors.add(Color.rgb(51,156,168));
-        colors.add(Color.rgb(205,168,25));
-        colors.add(Color.rgb(50,164,135));
-        colors.add(Color.rgb(220,20,60));
-        colors.add(Color.rgb(0,128,0));
-        colors.add(Color.rgb(43,130,29));
-        colors.add(Color.rgb(128,128,0));
-        colors.add(Color.rgb(255,215,0));
-        colors.add(Color.rgb(255,99,71));
-        colors.add(Color.rgb(255,218,185));
-        colors.add(Color.rgb(230,182,0));
-        colors.add(Color.rgb(255,215,0));
-        colors.add(Color.rgb(106,90,205));
+        tvName.setText("方式");
+        tvValue.setText("金额（元）");
+        spreadLineChart.setDescription(null);
+        header.setRightTv(false);
+        colors.add(Color.rgb(193, 46, 52));
+        colors.add(Color.rgb(75, 0, 130));
+        colors.add(Color.rgb(0, 94, 170));
+        colors.add(Color.rgb(51, 156, 168));
+        colors.add(Color.rgb(205, 168, 25));
+        colors.add(Color.rgb(50, 164, 135));
+        colors.add(Color.rgb(220, 20, 60));
+        colors.add(Color.rgb(0, 128, 0));
+        colors.add(Color.rgb(43, 130, 29));
+        colors.add(Color.rgb(128, 128, 0));
+        colors.add(Color.rgb(255, 215, 0));
+        colors.add(Color.rgb(255, 99, 71));
+        colors.add(Color.rgb(255, 218, 185));
+        colors.add(Color.rgb(230, 182, 0));
+        colors.add(Color.rgb(255, 215, 0));
+        colors.add(Color.rgb(106, 90, 205));
         initDatePicker();
         header.setTvTitle(getResources().getString(R.string.oaflow_statist_rb11));
         httpUtil = OkHttpUtil.getInstance(this);
@@ -107,7 +116,7 @@ public class YingYunShouRuActivity extends BaseActivity {
         mAdapter = new BaseRecyclerAdapterPosition<YingYunShouRu>(this, R.layout.adapter_data_item, beanList) {
             @Override
             public void convert(BaseViewHolderPosition holder, final YingYunShouRu itemBean, int position) {
-                holder.setText(tvName, itemBean.getProject());
+                holder.setText(R.id.tvName, itemBean.getProject());
                 holder.setText(R.id.tvData, String.valueOf(itemBean.getTotal()));
                 if (position % 2 != 0) {
                     holder.setColor(R.id.ll);
@@ -208,10 +217,6 @@ public class YingYunShouRuActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        xValues.clear();
-        yValues.clear();
-        beanList.clear();
-        getData();
     }
 
     /**
@@ -228,6 +233,10 @@ public class YingYunShouRuActivity extends BaseActivity {
                 String date = time.split(" ")[0];
                 String date1 = date.split("-")[0] + "-" + date.split("-")[1];
                 tvDate.setText(date1);
+                xValues.clear();
+                yValues.clear();
+                beanList.clear();
+                getData();
             }
         }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(false); // 不显示时和分
@@ -255,7 +264,16 @@ public class YingYunShouRuActivity extends BaseActivity {
                     String data = b1.getString("data");
                     try {
                         JSONArray jsonArray = new JSONArray(data);
-                        for (int i = 0;i<jsonArray.length();i++){
+                        YingYunShouRu resultBean = new YingYunShouRu();
+                        float month = 0;
+                        resultBean.setProject("合计");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            month = month+Float.valueOf(jsonObject.getString("total"));
+                        }
+                        resultBean.setTotal(month);
+                        beanList.add(resultBean);
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             YingYunShouRu bean = new YingYunShouRu();
                             bean.setProject(jsonObject.getString("project"));
@@ -292,6 +310,7 @@ public class YingYunShouRuActivity extends BaseActivity {
             }
         }
     };
+
     public class CustomerValueFormatter implements ValueFormatter {
         private DecimalFormat mFormat;
 

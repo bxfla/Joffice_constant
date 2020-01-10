@@ -70,6 +70,15 @@
             android:text="详情"
             android:textSize="16dp" />
 
+        <TextView
+            android:id="@+id/tvSee"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:textSize="16dp"
+            android:textColor="@color/red"/>
+
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"

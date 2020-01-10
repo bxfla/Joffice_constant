@@ -586,12 +586,12 @@
                 <TextView
                     android:id="@+id/tvLeader1"
                     style="@style/textWrite"
-                    android:hint="信息技术领导签名" />
+                    android:hint="信息技术领导意见" />
 
                 <EditText
                     android:id="@+id/etLeader1"
                     style="@style/textWrite"
-                    android:hint="信息技术领导签名"
+                    android:hint="信息技术领导意见"
                     android:visibility="gone" />
             </LinearLayout>
 
@@ -618,12 +618,12 @@
                 <TextView
                     android:id="@+id/tvLeader2"
                     style="@style/textWrite"
-                    android:hint="监控操作员签名" />
+                    android:hint="监控操作员意见" />
 
                 <EditText
                     android:id="@+id/etLeader2"
                     style="@style/textWrite"
-                    android:hint="监控操作员签名"
+                    android:hint="监控操作员意见"
                     android:visibility="gone" />
             </LinearLayout>
 

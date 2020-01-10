@@ -1,7 +1,7 @@
 <resources>
     <string name="back">一键退出</string>
     <string name="lastone_question">已经是最后一题</string>
-    <string name="no_fuction">功能未开放</string>
+    <string name="no_fuction">功能开发中</string>
     <string name="cannot_isnull">用户信息不能为空</string>
     <string name="new_App">已经是最新版本</string>
     <string name="loading">加载中</string>
@@ -288,6 +288,7 @@
     <string name="oaflow_rb2">会议管理</string>
     <string name="oaflow_rb3">流程审批</string>
     <string name="oaflow_rb4">通讯录</string>
+    <string name="oaflow_rb5">督办</string>
 
     <string name="oaflow_metting_rb1">待我参加</string>
     <string name="oaflow_metting_rb2">我已参加</string>
@@ -302,18 +303,18 @@
     <string name="oaflow_operation_rb1">车辆档案</string>
     <string name="oaflow_operation_rb2">线路查询</string>
 
-    <string name="oaflow_safer_rb1">违章查询</string>
+    <string name="oaflow_safer_rb1">违章档案</string>
     <string name="oaflow_safer_rb2">事故档案</string>
 
-    <string name="oaflow_comper_rb1">生产营运</string>
-    <string name="oaflow_comper_rb2">营运指标</string>
+    <string name="oaflow_comper_rb1">营运指标</string>
+    <string name="oaflow_comper_rb2">生产营运</string>
     <string name="department">部门</string>
 
     <string name="oaflow_statist_rb1">人员统计</string>
     <string name="oaflow_statist_rb2">人员变动</string>
     <string name="oaflow_statist_rb3">年度里程</string>
     <string name="oaflow_statist_rb4">成本营收</string>
-    <string name="oaflow_statist_rb41">百公里营入</string>
+    <string name="oaflow_statist_rb41">百公里营收</string>
     <string name="oaflow_statist_rb42">百公里成本</string>
     <string name="oaflow_statist_rb5">能源比例</string>
     <string name="oaflow_statist_rb6">材料出库</string>

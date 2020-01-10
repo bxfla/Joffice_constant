@@ -66,6 +66,12 @@ public class YueDuWGCSActivity extends BaseActivity {
     LinearLayout llNoContent;
 
     PieDataSet pieDataSet;
+    @BindView(R.id.llDate)
+    LinearLayout llDate;
+    @BindView(R.id.tvName)
+    TextView tvName;
+    @BindView(R.id.tvValue)
+    TextView tvValue;
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapterPosition mAdapter;
     private CustomDatePickerMonth customDatePicker1;
@@ -82,6 +88,10 @@ public class YueDuWGCSActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        tvName.setText("原因");
+        tvValue.setText("次数（次）");
+        spreadLineChart.setDescription(null);
+        header.setRightTv(false);
         colors.add(Color.rgb(193, 46, 52));
         colors.add(Color.rgb(75, 0, 130));
         colors.add(Color.rgb(0, 94, 170));
@@ -178,7 +188,7 @@ public class YueDuWGCSActivity extends BaseActivity {
 
 //      mChart.setOnAnimationListener(this);
         //饼状图中间的文字
-        pieChart.setCenterText(getResources().getString(R.string.oaflow_statist_rb11));
+        pieChart.setCenterText(getResources().getString(R.string.oaflow_statist_rb10));
         //设置数据
         pieChart.setData(pieData);
         // undo all highlights
@@ -208,10 +218,6 @@ public class YueDuWGCSActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        xValues.clear();
-        yValues.clear();
-        beanList.clear();
-        getData();
     }
 
     /**
@@ -228,6 +234,10 @@ public class YueDuWGCSActivity extends BaseActivity {
                 String date = time.split(" ")[0];
                 String date1 = date.split("-")[0] + "-" + date.split("-")[1];
                 tvDate.setText(date1);
+                xValues.clear();
+                yValues.clear();
+                beanList.clear();
+                getData();
             }
         }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(false); // 不显示时和分
@@ -255,6 +265,15 @@ public class YueDuWGCSActivity extends BaseActivity {
                     String data = b1.getString("data");
                     try {
                         JSONArray jsonArray = new JSONArray(data);
+                        YueDuWGCS resultBean = new YueDuWGCS();
+                        float month = 0;
+                        resultBean.setIrregularities("合计");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            month = month+Float.valueOf(jsonObject.getString("sl"));
+                        }
+                        resultBean.setSl(String.valueOf(month));
+                        beanList.add(resultBean);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             YueDuWGCS bean = new YueDuWGCS();

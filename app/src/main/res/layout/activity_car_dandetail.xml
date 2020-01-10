@@ -172,7 +172,7 @@
                 android:orientation="horizontal">
                 <TextView
                     style="@style/oaTextView"
-                    android:text="车辆型号: *" />
+                    android:text="车辆类型: *" />
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"

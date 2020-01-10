@@ -203,7 +203,7 @@
                 <TextView
                     android:id="@+id/etLeader"
                     style="@style/oaEditText"
-                    android:hint="部门领导签名"/>
+                    android:hint="部门领导意见"/>
             </LinearLayout>
             <View style="@style/line"></View>
 
@@ -223,7 +223,7 @@
                 <TextView
                     android:id="@+id/etLeader1"
                     style="@style/oaEditText"
-                    android:hint="物业公司领导签名"/>
+                    android:hint="物业公司领导意见"/>
             </LinearLayout>
             <View style="@style/line"></View>
 
@@ -332,7 +332,7 @@
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/etLeader2"
-                    android:hint="财务审计领导签名"
+                    android:hint="财务审计领导意见"
                     style="@style/oaEditText"/>
             </LinearLayout>
             <View style="@style/line"></View>
@@ -352,7 +352,7 @@
                     android:layout_gravity="center_vertical"/>
                 <Spinner
                     android:id="@+id/spinnerMoney"
-                    android:hint="财务审计领导签名"
+                    android:hint="财务审计领导意见"
                     android:layout_weight="2.5"
                     android:layout_width="0dp"
                     android:layout_height="45dp"/>

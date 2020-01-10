@@ -48,7 +48,7 @@
         <TextView
             android:id="@+id/tvType"
             style="@style/oaEditText"
-            android:hint="请选择车牌号"/>
+            android:hint="请选择车型"/>
     </LinearLayout>
     <View style="@style/line"></View>
 

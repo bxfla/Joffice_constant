@@ -22,4 +22,8 @@ public class MyStringSpilt {
         String id = data1.substring(0, data1.indexOf("|"));
         return id;
     }
+    public String stringSpilt1(String data1){
+        String id = data1.substring(0, data1.indexOf(","));
+        return id;
+    }
 }

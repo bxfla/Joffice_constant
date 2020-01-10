@@ -66,10 +66,6 @@ public class CostComparisonActivity extends BaseActivity {
     LinearLayout llNoContent;
     @BindView(R.id.spread_line_chart)
     LineChart spreadLineChart;
-    @BindView(R.id.tvName)
-    TextView tvName;
-    @BindView(R.id.tvValue)
-    TextView tvValue;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.llDate)
@@ -90,16 +86,19 @@ public class CostComparisonActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        spreadLineChart.setDescription(null);
+        header.setRightTv(false);
         initDatePicker();
         header.setTvTitle(getResources().getString(R.string.oaflow_statist_rb4));
         httpUtil = OkHttpUtil.getInstance(this);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
-        mAdapter = new BaseRecyclerAdapterPosition<CostComparison>(this, R.layout.adapter_data_item, beanList) {
+        mAdapter = new BaseRecyclerAdapterPosition<CostComparison>(this, R.layout.adapter_loginperson, beanList) {
             @Override
             public void convert(BaseViewHolderPosition holder, final CostComparison itemBean, int position) {
-                holder.setText(R.id.tvName, itemBean.getKsType());
-                holder.setText(R.id.tvData, itemBean.getSr());
+                holder.setText(R.id.tvNum, itemBean.getKsType());
+                holder.setText(R.id.tvUserName, itemBean.getSr());
+                holder.setText(R.id.tvLoginNum, itemBean.getCb());
                 if (position % 2 != 0) {
                     holder.setColor(R.id.ll);
                 }
@@ -124,11 +123,6 @@ public class CostComparisonActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        xList.clear();
-        yList.clear();
-        yList1.clear();
-        beanList.clear();
-        getData();
     }
 
     /**
@@ -145,6 +139,12 @@ public class CostComparisonActivity extends BaseActivity {
                 String date = time.split(" ")[0];
                 String date1 = date.split("-")[0];
                 tvDate.setText(date1);
+                lineDataSets.clear();
+                xList.clear();
+                yList.clear();
+                yList1.clear();
+                beanList.clear();
+                getData();
             }
         }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(false); // 不显示时和分
@@ -199,7 +199,7 @@ public class CostComparisonActivity extends BaseActivity {
         for (int i = 0; i < beanList.size(); i++) {  //X轴显示的数据
             xList.add("");
         }
-        for (int i = 0; i < beanList.size(); i++) {//y轴的数据
+        for (int i = 1; i < beanList.size(); i++) {//y轴的数据
             float result = Float.parseFloat(beanList.get(i).getSr());
             float result1 = Float.parseFloat(beanList.get(i).getCb());
             yList.add(new Entry(result, i));
@@ -262,6 +262,18 @@ public class CostComparisonActivity extends BaseActivity {
                     String data = b1.getString("data");
                     try {
                         JSONArray jsonArray = new JSONArray(data);
+                        CostComparison resultBean = new CostComparison();
+                        double month = 0;
+                        double month1 = 0;
+                        resultBean.setKsType("合计");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            month = month+Double.valueOf(jsonObject.getString("sr"));
+                            month1 = month+Double.valueOf(jsonObject.getString("cb"));
+                        }
+                        resultBean.setSr(String.valueOf(month));
+                        resultBean.setCb(String.valueOf(month1));
+                        beanList.add(resultBean);
                         for (int i = 0;i<jsonArray.length();i++){
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             CostComparison bean = new CostComparison();

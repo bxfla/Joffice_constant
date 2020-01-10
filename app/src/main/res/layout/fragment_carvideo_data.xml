@@ -341,7 +341,7 @@
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/etLeader1"
-                    android:hint="信息技术领导签名"
+                    android:hint="信息技术领导意见"
                     style="@style/oaEditText"/>
             </LinearLayout>
             <View style="@style/line"></View>
@@ -362,7 +362,7 @@
                 <TextView
                     android:id="@+id/etLeader2"
                     style="@style/oaEditText"
-                    android:hint="监控操作员签名"/>
+                    android:hint="监控操作员意见"/>
             </LinearLayout>
             <View style="@style/line"></View>
 

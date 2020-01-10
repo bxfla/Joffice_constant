@@ -23,7 +23,6 @@ import com.hy.powerplatform.my_utils.utils.BaseViewHolder;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
 import com.hy.powerplatform.oa_flow.activity.PersonListActivity;
-import com.hy.powerplatform.operation.activity.CarDANDetailActivity;
 import com.hy.powerplatform.safer.bean.WeiZhangList;
 
 import java.io.IOException;
@@ -82,6 +81,7 @@ public class WeiZhangListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        header.setTvTitle(getResources().getString(R.string.oaflow_safer_rb1));
         initDatePicker();
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.getRecyclerView().setLayoutManager(manager);

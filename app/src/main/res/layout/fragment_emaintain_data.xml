@@ -198,7 +198,7 @@
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/tvLeader4"
-                    android:hint="设备使用人签名"
+                    android:hint="设备使用人意见"
                     style="@style/oaEditText"/>
             </LinearLayout>
             <View style="@style/line"></View>

@@ -186,7 +186,7 @@
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/etLeader4"
-                    android:hint="财审部门签名"
+                    android:hint="财审部门意见"
                     style="@style/oaEditText"/>
             </LinearLayout>
             <View style="@style/line"/>
@@ -205,7 +205,7 @@
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/etLeader5"
-                    android:hint="监察部门签名"
+                    android:hint="监察部门意见"
                     style="@style/oaEditText"/>
             </LinearLayout>
             <View style="@style/line"/>
@@ -224,7 +224,7 @@
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/etLeader6"
-                    android:hint="总经理签名"
+                    android:hint="总经理意见"
                     style="@style/oaEditText"/>
             </LinearLayout>
             <View style="@style/line"

@@ -12,6 +12,12 @@
         app:header_title="@string/oaflow_rb2">
     </com.hy.powerplatform.my_utils.myViews.Header>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

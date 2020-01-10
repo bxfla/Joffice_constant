@@ -86,8 +86,10 @@ public class HuiZongActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        spreadLineChart.setDescription(null);
+        header.setRightTv(false);
         tvName.setText("类型");
-        tvValue.setText("金额");
+        tvValue.setText("金额（元）");
         colors.add(Color.rgb(193, 46, 52));
         colors.add(Color.rgb(75, 0, 130));
         colors.add(Color.rgb(0, 94, 170));
@@ -171,10 +173,7 @@ public class HuiZongActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        xValues.clear();
-        yValues.clear();
-        beanList.clear();
-        getData();
+
     }
 
     /**
@@ -191,6 +190,10 @@ public class HuiZongActivity extends BaseActivity {
                 String date = time.split(" ")[0];
                 String date1 = date.split("-")[0] + "-" + date.split("-")[1];
                 tvDate.setText(date1);
+                xValues.clear();
+                yValues.clear();
+                beanList.clear();
+                getData();
             }
         }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(false); // 不显示时和分
@@ -264,6 +267,15 @@ public class HuiZongActivity extends BaseActivity {
                     String data = b1.getString("data");
                     try {
                         JSONArray jsonArray = new JSONArray(data);
+                        HuiZong resultBean = new HuiZong();
+                        float month = 0;
+                        resultBean.setYSYHMXB_Fuel("合计");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            month = month+Float.valueOf(jsonObject.getString("YSYHMXB_ZJE"));
+                        }
+                        resultBean.setYSYHMXB_ZJE(String.valueOf(month));
+                        beanList.add(resultBean);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             HuiZong bean = new HuiZong();

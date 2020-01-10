@@ -58,16 +58,18 @@ public class ShiYongListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-
+        header.setTvTitle(getResources().getString(R.string.oaflow_human_rb2));
+        header.setRightTv(false);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.getRecyclerView().setLayoutManager(manager);
         baseAdapter = new BaseRecyclerAdapter<ShiYongList.ResultBean>(this, R.layout.adapter_rzlist_item, beanList) {
             @Override
             public void convert(BaseViewHolder holder, final ShiYongList.ResultBean resultBean) {
                 holder.setText(R.id.tvName, resultBean.getFullname());
-                holder.setText(R.id.tv2, "档案号");
-                holder.setText(R.id.tvPhone, resultBean.getProfileNo());
-                holder.setText(R.id.tvIdCard, resultBean.getIdCard());
+                holder.setText(R.id.tv2, "部门");
+                holder.setText(R.id.tvPhone, resultBean.getDepName());
+                holder.setText(R.id.tv3, "岗位");
+                holder.setText(R.id.tvIdCard, resultBean.getPosition());
                 holder.setOnClickListener(R.id.ll, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -153,6 +155,10 @@ public class ShiYongListActivity extends BaseActivity {
                 profileId = data.getStringExtra("profileId");
                 userName = data.getStringExtra("userName");
                 tvName.setText(userName);
+                beanList.clear();
+                limit = 20;
+                start = 0;
+                getData(start, limit);
             }
         }
     }
@@ -169,10 +175,6 @@ public class ShiYongListActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        beanList.clear();
-        limit = 20;
-        start = 0;
-        getData(start, limit);
     }
 
     Handler handler = new Handler() {

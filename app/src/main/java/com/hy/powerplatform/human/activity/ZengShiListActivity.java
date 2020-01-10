@@ -58,7 +58,8 @@ public class ZengShiListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-
+        header.setTvTitle(getResources().getString(R.string.oaflow_human_rb3));
+        header.setRightTv(false);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.getRecyclerView().setLayoutManager(manager);
         baseAdapter = new BaseRecyclerAdapter<ZengShiList.ResultBean>(this, R.layout.adapter_rzlist_item, beanList) {
@@ -155,6 +156,10 @@ public class ZengShiListActivity extends BaseActivity {
                 userName = data.getStringExtra("userName");
                 eCode = data.getStringExtra("eCode");
                 tvName.setText(userName);
+                beanList.clear();
+                limit = 20;
+                start = 0;
+                getData(start, limit);
             }
         }
     }
@@ -171,10 +176,6 @@ public class ZengShiListActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        beanList.clear();
-        limit = 20;
-        start = 0;
-        getData(start, limit);
     }
 
     Handler handler = new Handler() {

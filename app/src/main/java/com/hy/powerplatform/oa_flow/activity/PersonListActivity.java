@@ -151,10 +151,33 @@ public class PersonListActivity extends BaseActivity implements PersonListAdapte
             @Override
             public void myTextViewClient(String name, String profileId,String userCode, String sex, String eCode) {
                 Intent intent = new Intent();
-                intent.putExtra("userName", name);
-                intent.putExtra("eCode", eCode);
-                intent.putExtra("profileId", profileId);
-                intent.putExtra("userCode", userCode);//将计算的值回传回去
+//                intent.putExtra("userName", name+"");
+//                intent.putExtra("eCode", eCode+"");
+//                intent.putExtra("profileId", profileId+"");
+//                intent.putExtra("userCode", userCode+"");//将计算的值回传回去
+
+                if (name.equals("")){
+                    intent.putExtra("userName", "");
+                }else {
+                    intent.putExtra("userName", name);
+                }
+
+                if (eCode.equals("")){
+                    intent.putExtra("eCode", "");
+                }else {
+                    intent.putExtra("eCode", eCode);
+                }
+                if (profileId.equals("")){
+                    intent.putExtra("profileId", "");
+                }else {
+                    intent.putExtra("profileId", profileId);
+                }
+
+                if (userCode.equals("")){
+                    intent.putExtra("userCode", "");
+                }else {
+                    intent.putExtra("userCode", userCode);
+                }
                 setResult(Constant.TAG_TWO, intent);
                 finish(); //结束当前的activity的生命周期
             }
@@ -295,9 +318,22 @@ public class PersonListActivity extends BaseActivity implements PersonListAdapte
     public void getAdapterPosition(String userName, String userCode,String profileId) {
         Intent intent = new Intent();
         // 获取用户计算后的结果
-        intent.putExtra("userName", userName);
-        intent.putExtra("userCode", userCode);//将计算的值回传回去
-        intent.putExtra("profileId", profileId);
+        if (userName.equals("")){
+            intent.putExtra("userName", "");
+        }else {
+            intent.putExtra("userName", userName);
+        }
+
+        if (userCode.equals("")){
+            intent.putExtra("userCode", "");
+        }else {
+            intent.putExtra("userCode", userCode);
+        }
+        if (profileId.equals("")){
+            intent.putExtra("profileId", "");
+        }else {
+            intent.putExtra("profileId", profileId);
+        }
         setResult(Constant.TAG_TWO, intent);
         finish(); //结束当前的activity的生命周期
     }

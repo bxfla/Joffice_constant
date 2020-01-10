@@ -88,8 +88,11 @@ public class CLXHTongJiActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        mBarChart.setDescription(null);
+        header.setRightTv(false);
         tvName.setText("类型");
-        tvValue.setText("金额");
+        tvValue.setText("金额(元)");
+        mBarChart.setDescription(null);
         initDatePicker();
         header.setTvTitle(getResources().getString(R.string.oaflow_statist_rb6));
         httpUtil = OkHttpUtil.getInstance(this);
@@ -173,10 +176,6 @@ public class CLXHTongJiActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        entries.clear();
-        labels.clear();
-        beanList.clear();
-        getData();
     }
 
     /**
@@ -193,6 +192,10 @@ public class CLXHTongJiActivity extends BaseActivity {
                 String date = time.split(" ")[0];
                 String date1 = date.split("-")[0] + "-" + date.split("-")[1];
                 tvDate.setText(date1);
+                entries.clear();
+                labels.clear();
+                beanList.clear();
+                getData();
             }
         }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(false); // 不显示时和分
@@ -220,6 +223,15 @@ public class CLXHTongJiActivity extends BaseActivity {
                     String data = b1.getString("data");
                     try {
                         JSONArray jsonArray = new JSONArray(data);
+                        CLXHTongJi bean1 = new CLXHTongJi();
+                        bean1.setTypeName("合计");
+                        double month = 0.0;
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            month = month+Double.parseDouble(jsonObject.getString("je"));
+                        }
+                        bean1.setJe(month);
+                        beanList.add(bean1);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             CLXHTongJi bean = new CLXHTongJi();

@@ -63,7 +63,7 @@ public class ShengChanYYListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         initDatePicker();
-
+        header.setRightTv(false);
         httpUtil = OkHttpUtil.getInstance(this);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
@@ -127,10 +127,6 @@ public class ShengChanYYListActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        beanList.clear();
-        limit = 20;
-        start = 0;
-        getData(start, limit);
     }
 
     /**
@@ -147,6 +143,10 @@ public class ShengChanYYListActivity extends BaseActivity {
                 String date = time.split(" ")[0];
                 String date1 = date.split("-")[0]+"-"+date.split("-")[1];
                 tvDate.setText(date1);
+                beanList.clear();
+                limit = 20;
+                start = 0;
+                getData(start, limit);
             }
         }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(false); // 不显示时和分

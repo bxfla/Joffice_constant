@@ -468,11 +468,11 @@
                     android:id="@+id/etLeader"
                     android:visibility="gone"
                     style="@style/textWrite"
-                    android:hint="部门领导签名"/>
+                    android:hint="部门领导意见"/>
                 <TextView
                     android:id="@+id/tvLeader"
                     style="@style/textWrite"
-                    android:hint="部门领导签名"/>
+                    android:hint="部门领导意见"/>
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -493,11 +493,11 @@
                 <EditText
                     android:id="@+id/etLeader1"
                     android:visibility="gone"
-                    android:hint="分管领导签名"
+                    android:hint="分管领导意见"
                     style="@style/textWrite"/>
                 <TextView
                     android:id="@+id/tvLeader1"
-                    android:hint="分管领导签名"
+                    android:hint="分管领导意见"
                     style="@style/textWrite"/>
             </LinearLayout>
             <View style="@style/line"></View>
@@ -520,11 +520,11 @@
                 <EditText
                     android:id="@+id/etLeaderCWZJ"
                     android:visibility="gone"
-                    android:hint="财务总监签名"
+                    android:hint="财务总监意见"
                     style="@style/textWrite"/>
                 <TextView
                     android:id="@+id/tvLeaderTCWZJ"
-                    android:hint="财务总监签名"
+                    android:hint="财务总监意见"
                     style="@style/textWrite"/>
             </LinearLayout>
             <View style="@style/line"></View>
@@ -546,11 +546,11 @@
                 <EditText
                     android:id="@+id/etLeader2"
                     android:visibility="gone"
-                    android:hint="总经理签名"
+                    android:hint="总经理意见"
                     style="@style/textWrite2"/>
                 <TextView
                     android:id="@+id/tvLeader2"
-                    android:hint="总经理签名"
+                    android:hint="总经理意见"
                     style="@style/textWrite2"/>
             </LinearLayout>
             <View style="@style/line"

@@ -272,7 +272,7 @@
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/tvLeader6"
-                    android:hint="办结人签名"
+                    android:hint="办结人意见"
                     style="@style/oaEditText"/>
                 <TextView
                     android:visibility="gone"

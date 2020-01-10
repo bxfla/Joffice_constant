@@ -227,6 +227,8 @@ public class Constant {
     public static final String  PERSONCHANGE = "hrm/getEmpDepChangeBar_bigDataEmpProfile.do";
     // 获取首页流程审核情况
     public static final String  OAFLOWNUM = "flow/getHistoryCountProcessRun.do";
+    // 公告状态
+    public static final String  NOTICETYPE = "info/addReadCountNews.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";

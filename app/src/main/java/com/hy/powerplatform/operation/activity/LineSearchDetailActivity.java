@@ -46,33 +46,34 @@ public class LineSearchDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        header.setTvTitle(getResources().getString(R.string.oaflow_operation_rb2));
         LineSearch.ResultBean bean = (LineSearch.ResultBean) getIntent().getSerializableExtra("bean");
         tvLineCode.setText(bean.getLineCode());
-        tvLineName.setText(bean.getLineName());
-        if (bean.getLineStatus().equals("0")){
+        tvLineName.setText(bean.getLineName()+"");
+        if (bean.getLineStatus()!=null&&bean.getLineStatus().equals("0")){
             tvLineStatus.setText("上下行");
         }
-        if (bean.getLineStatus().equals("1")){
+        if (bean.getLineStatus()!=null&&bean.getLineStatus().equals("1")){
             tvLineStatus.setText("环形");
         }
-        tvDepartment.setText(bean.getDepartment().getDepName());
-        tvStartTime.setText(bean.getBeginDate());
-        tvEndTime.setText(bean.getEndDate());
-        if (bean.getType().equals("0")){
+        tvDepartment.setText(bean.getDepartment().getDepName()+"");
+        tvStartTime.setText(bean.getBeginDate()+"");
+        tvEndTime.setText(bean.getEndDate()+"");
+        if (bean.getType()!=null&&bean.getType().equals("0")){
             tvStation.setText("使用中");
         }
-        if (bean.getType().equals("1")){
+        if (bean.getType()!=null&&bean.getType().equals("1")){
             tvStation.setText("已结束");
         }
-        if (bean.getType().equals("2")){
+        if (bean.getType()!=null&&bean.getType().equals("2")){
             tvStation.setText("测试");
         }
-        tvSmz.setText(bean.getSmz());
-        tvDDCode.setText(bean.getDdNo());
-        tvMoney.setText(bean.getLineMoney());
-        tvMile.setText(bean.getLineMile());
-        tvYYCar.setText(bean.getYyCar());
-        tvMemo.setText(bean.getMemo());
+        tvSmz.setText(bean.getSmz()+"");
+        tvDDCode.setText(bean.getDdNo()+"");
+        tvMoney.setText(bean.getLineMoney()+"");
+        tvMile.setText(bean.getLineMile()+"");
+        tvYYCar.setText(bean.getYyCar()+"");
+        tvMemo.setText(bean.getMemo()+"");
     }
 
     @Override

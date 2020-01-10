@@ -543,12 +543,12 @@
                 <TextView
                     android:id="@+id/tvLeader5"
                     style="@style/oaEditText"
-                    android:hint="办结人签名" />
+                    android:hint="办结人意见" />
 
                 <EditText
                     android:id="@+id/etLeader5"
                     style="@style/textWrite"
-                    android:hint="办结人签名"
+                    android:hint="办结人意见"
                     android:visibility="gone" />
                 <!--<TextView-->
                 <!--android:visibility="gone"-->

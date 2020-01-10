@@ -84,7 +84,7 @@ public class ShiGuListActivity extends BaseActivity {
         initDatePicker();
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.getRecyclerView().setLayoutManager(manager);
-        baseAdapter = new BaseRecyclerAdapter<ShiGuList.ResultBean>(this, R.layout.adapter_rzlist_item, beanList) {
+        baseAdapter = new BaseRecyclerAdapter<ShiGuList.ResultBean>(this, R.layout.adapter_sglist_item, beanList) {
             @Override
             public void convert(BaseViewHolder holder, final ShiGuList.ResultBean resultBean) {
                 holder.setText(R.id.tv1, "车牌号");
@@ -93,6 +93,11 @@ public class ShiGuListActivity extends BaseActivity {
                 holder.setText(R.id.tvPhone, resultBean.getDriverName());
                 holder.setText(R.id.tv3, "违章项目");
                 holder.setText(R.id.tvIdCard, resultBean.getAtReason());
+                if (resultBean.getShzt().equals("1")){
+                    holder.setText(R.id.tvType, "已审核");
+                }else {
+                    holder.setText(R.id.tvType, "未审核");
+                }
                 holder.setOnClickListener(R.id.ll, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

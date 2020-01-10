@@ -68,12 +68,18 @@ public class NoticeListActivity extends BaseActivity {
 //                String s = noticeBean.getDetails().replaceAll("<p>", "");
 //                s = s.replaceAll("</p>", "");
                 holder.setText(R.id.tvDetail, text);
+                if (noticeBean.getReadtimes().equals("null")){
+                    holder.setText(R.id.tvSee, "未查看");
+                }else {
+                    holder.setText(R.id.tvSee, "已查看");
+                }
                 holder.setOnClickListener(R.id.noticeItem, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(NoticeListActivity.this, NoticeDetailActivity.class);
                         intent.putExtra("bean", noticeBean);
                         startActivity(intent);
+                        finish();
                     }
                 });
             }
@@ -206,6 +212,12 @@ public class NoticeListActivity extends BaseActivity {
                             bean.setContent(jsonObject1.getString("content"));
                             bean.setAuthor(jsonObject1.getString("author"));
                             bean.setCreatetime(jsonObject1.getString("createtime"));
+                            bean.setEndtime(jsonObject1.getString("expTime"));
+                            bean.setFileName(jsonObject1.getString("fileName"));
+                            String s = jsonObject1.getString("readtimes");
+                            bean.setReadtimes(jsonObject1.getString("readtimes"));
+                            bean.setFileId(jsonObject1.getString("fileId"));
+                            bean.setId(jsonObject1.getString("newsId"));
                             beanList.add(bean);
                         }
                         if (jsonArray.length() != 0) {

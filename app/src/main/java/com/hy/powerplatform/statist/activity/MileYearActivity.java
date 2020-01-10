@@ -85,7 +85,10 @@ public class MileYearActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        mBarChart.setDescription(null);
         tvName.setText("月份");
+        tvValue.setText("里程(万公里)");
+        header.setRightTv(false);
         header.setTvTitle(getResources().getString(R.string.oaflow_statist_rb3));
         initDatePicker();
         httpUtil = OkHttpUtil.getInstance(this);
@@ -134,10 +137,6 @@ public class MileYearActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        entries.clear();
-        labels.clear();
-        beanList.clear();
-        getData();
     }
 
     /**
@@ -154,6 +153,10 @@ public class MileYearActivity extends BaseActivity {
                 String date = time.split(" ")[0];
                 String date1 = date.split("-")[0];
                 tvDate.setText(date1);
+                entries.clear();
+                labels.clear();
+                beanList.clear();
+                getData();
             }
         }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(false); // 不显示时和分
@@ -217,6 +220,16 @@ public class MileYearActivity extends BaseActivity {
                     if (bean.getTotalCounts() != 0) {
                         recyclerView.setVisibility(View.VISIBLE);
                         llNoContent.setVisibility(View.GONE);
+                        MileYear.ResultBean resultBean = new MileYear.ResultBean();
+                        double month = 0.0;
+                        resultBean.setMonthRq("合计");
+                        for (int i = 0; i < bean.getResult().size(); i++) {
+                            if (!bean.getResult().get(i).getFactMile().equals("0.0")){
+                                month = month+Double.valueOf(bean.getResult().get(i).getFactMile());
+                            }
+                        }
+                        resultBean.setFactMile(String.valueOf(month));
+                        beanList.add(resultBean);
                         for (int i = 0; i < bean.getResult().size(); i++) {
                             beanList.add(bean.getResult().get(i));
                             float value = Float.parseFloat(bean.getResult().get(i).getFactMile());

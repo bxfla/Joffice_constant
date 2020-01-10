@@ -19,8 +19,13 @@ import com.hy.powerplatform.my_utils.utils.BaseViewHolderPosition;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +44,7 @@ public class LoginPersonMoreActivity extends BaseActivity {
 
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapterPosition mAdapterLogin;
+    final HashMap<String, String> map1 = new HashMap();
     List<LoginPerson.ResultBean> loginPersonList = new ArrayList<>();
 
     @Override
@@ -84,7 +90,20 @@ public class LoginPersonMoreActivity extends BaseActivity {
     private void getLoginPerson() {
         ProgressDialogUtil.startLoad(LoginPersonMoreActivity.this, getResources().getString(R.string.get_data));
         final String path_url = Constant.BASE_URL2 + Constant.LOGINPERSON;
-        httpUtil.getAsynHttp(path_url, new OkHttpUtil.ResultCallback() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        //过去七天
+        c.setTime(new Date());
+        c.add(Calendar.DATE, -7);
+        Date d = c.getTime();
+        String day = format.format(d);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        String now = sdf.format(new Date());
+        String endDate = now.split(" ")[0];
+        map1.clear();
+        map1.put("beginDate",day);
+        map1.put("endDate",endDate);
+        httpUtil.postForm(path_url,map1, new OkHttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 //                Log.i("main", "response:" + e.toString());

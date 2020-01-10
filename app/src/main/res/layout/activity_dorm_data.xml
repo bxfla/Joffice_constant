@@ -440,12 +440,12 @@
                 <TextView
                     android:id="@+id/tvLeader"
                     style="@style/textWrite"
-                    android:hint="部门领导签名" />
+                    android:hint="部门领导意见" />
 
                 <EditText
                     android:id="@+id/etLeader"
                     style="@style/textWrite"
-                    android:hint="部门领导签名"
+                    android:hint="部门领导意见"
                     android:visibility="gone" />
             </LinearLayout>
 
@@ -472,12 +472,12 @@
                 <TextView
                     android:id="@+id/tvLeader1"
                     style="@style/textWrite"
-                    android:hint="物业公司领导签名" />
+                    android:hint="物业公司领导意见" />
 
                 <EditText
                     android:id="@+id/etLeader1"
                     style="@style/textWrite"
-                    android:hint="部门领导签名"
+                    android:hint="部门领导意见"
                     android:visibility="gone" />
             </LinearLayout>
 
@@ -633,7 +633,7 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="2.5"
-                    android:hint="财务审计领导签名"
+                    android:hint="财务审计领导意见"
                     android:visibility="gone" />
             </LinearLayout>
 
@@ -692,12 +692,12 @@
                 <TextView
                     android:id="@+id/tvLeader2"
                     style="@style/textWrite"
-                    android:hint="财务审计领导签名" />
+                    android:hint="财务审计领导意见" />
 
                 <EditText
                     android:id="@+id/etLeader2"
                     style="@style/textWrite"
-                    android:hint="财务审计领导签名"
+                    android:hint="财务审计领导意见"
                     android:visibility="gone" />
             </LinearLayout>
 

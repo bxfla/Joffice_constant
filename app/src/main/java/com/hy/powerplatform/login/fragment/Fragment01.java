@@ -35,6 +35,7 @@ import com.hy.powerplatform.login.bean.OAFlowNum;
 import com.hy.powerplatform.login.bean.YingYunData;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.OkHttpUtil;
+import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
 import com.hy.powerplatform.my_utils.utils.BaseRecyclerAdapter;
 import com.hy.powerplatform.my_utils.utils.BaseRecyclerAdapterPosition;
 import com.hy.powerplatform.my_utils.utils.BaseViewHolder;
@@ -54,6 +55,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -106,6 +108,7 @@ public class Fragment01 extends Fragment {
     Intent intent;
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapter mAdapter;
+    AlertDialogUtil alertDialogUtil;
     BaseRecyclerAdapter baseAdapterYY;
     private CustomDatePickerMonth customDatePicker1;
     BaseRecyclerAdapterPosition mAdapterLogin;
@@ -115,13 +118,16 @@ public class Fragment01 extends Fragment {
     List<YingYunData> yingyunList = new ArrayList<>();
     List<LoginPerson.ResultBean> loginPersonList = new ArrayList<>();
     List<WillDoNum.ResultBean> willDoList = new ArrayList<>();
+    final HashMap<String, String> map1 = new HashMap();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment01, container, false);
         unbinder = ButterKnife.bind(this, view);
+        mBarChart.setDescription(null);
         initDatePicker();
+        alertDialogUtil = new AlertDialogUtil(getActivity());
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerViewLogin.setLayoutManager(manager);
         //设置布局的方式
@@ -269,7 +275,20 @@ public class Fragment01 extends Fragment {
     private void getLoginPerson() {
         ProgressDialogUtil.startLoad(getActivity(), getResources().getString(R.string.get_data));
         final String path_url = Constant.BASE_URL2 + Constant.LOGINPERSON;
-        httpUtil.getAsynHttp(path_url, new OkHttpUtil.ResultCallback() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        //过去七天
+        c.setTime(new Date());
+        c.add(Calendar.DATE, -7);
+        Date d = c.getTime();
+        String day = format.format(d);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        String now = sdf.format(new Date());
+        String endDate = now.split(" ")[0];
+        map1.clear();
+        map1.put("beginDate",day);
+        map1.put("endDate",endDate);
+        httpUtil.postForm(path_url,map1, new OkHttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 //                Log.i("main", "response:" + e.toString());
@@ -349,18 +368,6 @@ public class Fragment01 extends Fragment {
         bean3.setName(getResources().getString(R.string.fragment_rb3));
         itemList.add(bean3);
 
-        ItemBean bean4 = new ItemBean();
-        int drawableId4 = getResources().getIdentifier("fragment_rb4", "drawable", getActivity().getPackageName());
-        bean4.setAddress(drawableId4);
-        bean4.setName(getResources().getString(R.string.fragment_rb4));
-//        itemList.add(bean4);
-
-        ItemBean bean5 = new ItemBean();
-        int drawableId5 = getResources().getIdentifier("fragment_rb5", "drawable", getActivity().getPackageName());
-        bean5.setAddress(drawableId5);
-        bean5.setName(getResources().getString(R.string.fragment_rb5));
-//        itemList.add(bean5);
-
         ItemBean bean6 = new ItemBean();
         int drawableId6 = getResources().getIdentifier("fragment_rb6", "drawable", getActivity().getPackageName());
         bean6.setAddress(drawableId6);
@@ -378,6 +385,18 @@ public class Fragment01 extends Fragment {
         bean8.setAddress(drawableId8);
         bean8.setName(getResources().getString(R.string.fragment_rb8));
         itemList.add(bean8);
+
+        ItemBean bean4 = new ItemBean();
+        int drawableId4 = getResources().getIdentifier("fragment_rb4", "drawable", getActivity().getPackageName());
+        bean4.setAddress(drawableId4);
+        bean4.setName(getResources().getString(R.string.fragment_rb4));
+        itemList.add(bean4);
+
+        ItemBean bean5 = new ItemBean();
+        int drawableId5 = getResources().getIdentifier("fragment_rb5", "drawable", getActivity().getPackageName());
+        bean5.setAddress(drawableId5);
+        bean5.setName(getResources().getString(R.string.fragment_rb5));
+        itemList.add(bean5);
     }
 
     private void setItemAdapter() {
@@ -405,11 +424,9 @@ public class Fragment01 extends Fragment {
                             intent = new Intent(getActivity(), OperationListActivity.class);
                             startActivity(intent);
                         } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb4))) {
-//                            intent = new Intent(getActivity(), RepairListActivity.class);
-//                            startActivity(intent);
+                            alertDialogUtil.showSmallDialog(getResources().getString(R.string.no_fuction));
                         } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb5))) {
-//                            intent = new Intent(getActivity(), MaterialListActivity.class);
-//                            startActivity(intent);
+                            alertDialogUtil.showSmallDialog(getResources().getString(R.string.no_fuction));
                         } else if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb6))) {
                             intent = new Intent(getActivity(), SaferListActivity.class);
                             startActivity(intent);

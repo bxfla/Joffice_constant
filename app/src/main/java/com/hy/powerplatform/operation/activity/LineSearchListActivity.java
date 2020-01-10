@@ -62,6 +62,8 @@ public class LineSearchListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        header.setTvTitle(getResources().getString(R.string.oaflow_operation_rb2));
+        header.setRightTv(false);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.getRecyclerView().setLayoutManager(manager);
         baseAdapter = new BaseRecyclerAdapter<LineSearch.ResultBean>(this, R.layout.adapter_rzlist_item, lineList) {
@@ -93,6 +95,10 @@ public class LineSearchListActivity extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 depId = departmentList.get(position).getDepIp();
+                lineList.clear();
+                limit = 20;
+                start = 0;
+                getDataList(start, limit);
             }
 
             @Override
@@ -100,7 +106,7 @@ public class LineSearchListActivity extends BaseActivity {
 
             }
         });
-        getDataList(start, limit);
+//        getDataList(start, limit);
         setClient();
     }
 
@@ -209,10 +215,6 @@ public class LineSearchListActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        lineList.clear();
-        limit = 20;
-        start = 0;
-        getDataList(start, limit);
     }
 
     Handler handler = new Handler() {
@@ -251,7 +253,7 @@ public class LineSearchListActivity extends BaseActivity {
                         spinner.setAdapter(spinnerAdapter);
                     }
                     ProgressDialogUtil.stopLoad();
-                    getDataList(start, limit);
+//                    getDataList(start, limit);
                     break;
                 case TAG_THERE:
                     Bundle b2 = msg.getData();

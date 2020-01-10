@@ -333,7 +333,7 @@
                 <TextView
                     android:id="@+id/etLeader3"
                     style="@style/textWrite2"
-                    android:hint="总经理签名" />
+                    android:hint="总经理意见" />
             </LinearLayout>
 
             <View

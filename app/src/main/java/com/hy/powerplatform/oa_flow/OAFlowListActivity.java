@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.hy.powerplatform.R;
+import com.hy.powerplatform.duban.activity.DBActivity;
 import com.hy.powerplatform.duban.bean.ItemBean;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
@@ -141,6 +142,12 @@ public class OAFlowListActivity extends BaseActivity {
         bean4.setAddress(drawableId4);
         bean4.setName(getResources().getString(R.string.oaflow_rb4));
         itemList.add(bean4);
+
+        ItemBean bean5 = new ItemBean();
+        int drawableId5 = getResources().getIdentifier("data_analysis", "drawable", getPackageName());
+        bean5.setAddress(drawableId5);
+        bean5.setName(getResources().getString(R.string.oaflow_rb5));
+        itemList.add(bean5);
     }
 
     private void setItemAdapter() {
@@ -169,6 +176,9 @@ public class OAFlowListActivity extends BaseActivity {
                             startActivity(intent);
                         }else if (itemBean.getName().equals(getResources().getString(R.string.oaflow_rb4))){
                             intent = new Intent(OAFlowListActivity.this, PhoneActivity.class);
+                            startActivity(intent);
+                        }else if (itemBean.getName().equals(getResources().getString(R.string.oaflow_rb5))){
+                            intent = new Intent(OAFlowListActivity.this, DBActivity.class);
                             startActivity(intent);
                         }
                     }

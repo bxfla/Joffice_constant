@@ -384,12 +384,12 @@
                 <TextView
                     android:id="@+id/tvLeader"
                     style="@style/textWrite"
-                    android:hint="部门领导签名" />
+                    android:hint="部门领导意见" />
                 <EditText
                     android:id="@+id/etLeader"
                     android:visibility="gone"
                     style="@style/textWrite"
-                    android:hint="部门领导签名" />
+                    android:hint="部门领导意见" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -413,12 +413,12 @@
                 <TextView
                     android:id="@+id/tvLeader1"
                     style="@style/textWrite"
-                    android:hint="分管领导签名" />
+                    android:hint="分管领导意见" />
                 <EditText
                     android:id="@+id/etLeader1"
                     android:visibility="gone"
                     style="@style/textWrite"
-                    android:hint="分管领导签名" />
+                    android:hint="分管领导意见" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -442,12 +442,12 @@
                 <TextView
                     android:id="@+id/tvLeader2"
                     style="@style/textWrite"
-                    android:hint="分管财务签名" />
+                    android:hint="分管财务意见" />
                 <EditText
                     android:id="@+id/etLeader2"
                     android:visibility="gone"
                     style="@style/textWrite"
-                    android:hint="分管财务签名" />
+                    android:hint="分管财务意见" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -464,7 +464,7 @@
                 <TextView
                     android:id="@+id/tvLeader3"
                     style="@style/textWrite2"
-                    android:hint="总经理签名" />
+                    android:hint="总经理意见" />
 
                 <View
                     android:layout_width="1dp"
@@ -476,7 +476,7 @@
                     android:id="@+id/etLeader3"
                     android:visibility="gone"
                     style="@style/textWrite"
-                    android:hint="总经理签名" />
+                    android:hint="总经理意见" />
             </LinearLayout>
             <View
                 style="@style/line"

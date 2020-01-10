@@ -783,13 +783,13 @@
                 <EditText
                     android:id="@+id/etLeader"
                     style="@style/textWrite"
-                    android:hint="部门领导签名"
+                    android:hint="部门领导意见"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader"
                     style="@style/textWrite"
-                    android:hint="部门领导签名" />
+                    android:hint="部门领导意见" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -813,13 +813,13 @@
                 <EditText
                     android:id="@+id/etLeader1"
                     style="@style/textWrite"
-                    android:hint="分管领导签名"
+                    android:hint="分管领导意见"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader1"
                     style="@style/textWrite"
-                    android:hint="分管领导签名" />
+                    android:hint="分管领导意见" />
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -842,13 +842,13 @@
                 <EditText
                     android:id="@+id/etLeader2"
                     style="@style/textWrite2"
-                    android:hint="总经理签名"
+                    android:hint="总经理意见"
                     android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLeader2"
                     style="@style/textWrite2"
-                    android:hint="总经理签名" />
+                    android:hint="总经理意见" />
             </LinearLayout>
             <View
                 style="@style/line"

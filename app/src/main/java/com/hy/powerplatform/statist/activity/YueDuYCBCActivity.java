@@ -88,8 +88,10 @@ public class YueDuYCBCActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        mBarChart.setDescription(null);
         tvName.setText("类型");
-        tvValue.setText("数值");
+        tvValue.setText("班次（趟）");
+        header.setRightTv(false);
         header.setTvTitle(getResources().getString(R.string.oaflow_statist_rb9));
         initDatePicker();
         httpUtil = OkHttpUtil.getInstance(this);
@@ -172,10 +174,6 @@ public class YueDuYCBCActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        entries.clear();
-        labels.clear();
-        beanList.clear();
-        getData();
     }
 
     /**
@@ -192,6 +190,10 @@ public class YueDuYCBCActivity extends BaseActivity {
                 String date = time.split(" ")[0];
                 String date1 = date.split("-")[0] + "-" + date.split("-")[1];
                 tvDate.setText(date1);
+                entries.clear();
+                labels.clear();
+                beanList.clear();
+                getData();
             }
         }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(false); // 不显示时和分
@@ -219,20 +221,33 @@ public class YueDuYCBCActivity extends BaseActivity {
                     String data = b1.getString("data");
                     try {
                         JSONArray jsonArray = new JSONArray(data);
+                        YueDuYCBC resultBean = new YueDuYCBC();
+                        float month = 0;
+                        resultBean.setType("合计");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            month = month+Float.parseFloat(jsonObject.getString("counts"));
+                        }
+                        resultBean.setCounts(month);
+                        beanList.add(resultBean);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             YueDuYCBC bean = new YueDuYCBC();
-                            bean.setCounts(Float.parseFloat(jsonObject.getString("counts")));
+                            bean.setCounts(Double.parseDouble(jsonObject.getString("counts")));
                             bean.setType(jsonObject.getString("type"));
                             beanList.add(bean);
+                        }
+
+                        for (int i = 1; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
                             float value = Float.parseFloat((jsonObject.getString("counts")));
-                            entries.add(new BarEntry(value, i));
+                            entries.add(new BarEntry(value, i-1));
                             labels.add(jsonObject.getString("type"));
                             dataset = new BarDataSet(entries, getResources().getString(R.string.oaflow_statist_rb9));
                             dataset.setColors(ColorTemplate.COLORFUL_COLORS);
                             dataSets.add(dataset);
                         }
-                        if (beanList.size() == 0) {
+                        if (beanList.size() == 1) {
                             recyclerView.setVisibility(View.GONE);
                             llNoContent.setVisibility(View.VISIBLE);
                             ProgressDialogUtil.stopLoad();

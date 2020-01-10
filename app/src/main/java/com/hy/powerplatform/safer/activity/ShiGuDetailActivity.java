@@ -98,9 +98,9 @@ public class ShiGuDetailActivity extends BaseActivity {
         tvSecurityAwardPenalties.setText(bean.getAtSecurityAwardPenalties());
         tvProcessingState.setText(bean.getAtProcessingState());
         if (bean.getShzt().equals("1")){
-            tvShzt.setText("已报修");
+            tvShzt.setText("已审核");
         }else {
-            tvShzt.setText("未报修");
+            tvShzt.setText("未审核");
         }
         tvAddBond.setText(bean.getAtAddBond());
     }

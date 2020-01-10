@@ -7,10 +7,55 @@ import java.io.Serializable;
  */
 
 public class NoticeList implements Serializable {
+    public String newsId;
     public String title;
     public String content;
     public String author;
+    public String endtime;
     public String createtime;
+    public String fileName;
+    public String fileId;
+    public String readtimes;
+
+    public String getId() {
+        return newsId;
+    }
+
+    public void setId(String newsId) {
+        this.newsId = newsId;
+    }
+
+    public String getReadtimes() {
+        return readtimes;
+    }
+
+    public void setReadtimes(String readtimes) {
+        this.readtimes = readtimes;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(String fileId) {
+        this.fileId = fileId;
+    }
+
+    public String getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
+    }
 
     public String getTitle() {
         return title;

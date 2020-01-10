@@ -88,9 +88,9 @@ public class CarDANListActivity extends BaseActivity {
             public void convert(BaseViewHolder holder, final CarDAN.ResultBean resultBean) {
                 holder.setText(R.id.tv1, "车牌号");
                 holder.setText(R.id.tvName, resultBean.getCarNo());
-                holder.setText(R.id.tv2, "车型");
+                holder.setText(R.id.tv2, "类型");
                 holder.setText(R.id.tvPhone, resultBean.getCarType());
-                holder.setText(R.id.tv2, "证书号");
+                holder.setText(R.id.tv3, "证书号");
                 holder.setText(R.id.tvIdCard, resultBean.getBusRegId());
                 holder.setOnClickListener(R.id.ll, new View.OnClickListener() {
                     @Override

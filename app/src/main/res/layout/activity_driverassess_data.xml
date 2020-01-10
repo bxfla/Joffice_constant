@@ -256,12 +256,12 @@
                 <TextView
                     android:id="@+id/tvLeader"
                     style="@style/textWrite"
-                    android:hint="部门领导签名"/>
+                    android:hint="部门领导意见"/>
                 <EditText
                     android:visibility="gone"
                     android:id="@+id/etLeader"
                     style="@style/textWrite"
-                    android:hint="部门领导签名"/>
+                    android:hint="部门领导意见"/>
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -283,13 +283,13 @@
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/tvLeader1"
-                    android:hint="监考人员签名"
+                    android:hint="监考人员意见"
                     style="@style/textWrite"/>
                 <EditText
                     android:visibility="gone"
                     android:id="@+id/etLeader1"
                     style="@style/textWrite"
-                    android:hint="监考人员签名"/>
+                    android:hint="监考人员意见"/>
             </LinearLayout>
             <View style="@style/line"></View>
             <LinearLayout
@@ -311,13 +311,13 @@
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/tvLeader2"
-                    android:hint="人力资源签名"
+                    android:hint="人力资源意见"
                     style="@style/textWrite"/>
                 <EditText
                     android:visibility="gone"
                     android:id="@+id/etLeader2"
                     style="@style/textWrite"
-                    android:hint="人力资源签名"/>
+                    android:hint="人力资源意见"/>
             </LinearLayout>
             <View style="@style/line"
                 android:layout_marginBottom="45dp"></View>

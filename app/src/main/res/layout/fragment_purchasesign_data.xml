@@ -577,7 +577,7 @@
                 <TextView
                     android:id="@+id/etLeader1"
                     style="@style/oaEditText"
-                    android:hint="部门领导签名" />
+                    android:hint="部门领导意见" />
             </LinearLayout>
 
             <View style="@style/line"></View>
@@ -601,7 +601,7 @@
                 <TextView
                     android:id="@+id/etLeader2"
                     style="@style/oaEditText"
-                    android:hint="资产归口部门领导签名" />
+                    android:hint="资产归口部门领导意见" />
             </LinearLayout>
 
             <LinearLayout
@@ -623,7 +623,7 @@
                 <TextView
                     android:id="@+id/etLeader3"
                     style="@style/oaEditText"
-                    android:hint="分管领导签名" />
+                    android:hint="分管领导意见" />
             </LinearLayout>
 
             <View style="@style/line"></View>
@@ -648,7 +648,7 @@
                 <EditText
                     android:id="@+id/etLeader6"
                     style="@style/oaEditText"
-                    android:hint="采购分管领导签名" />
+                    android:hint="采购分管领导意见" />
             </LinearLayout>
 
 
@@ -671,7 +671,7 @@
                 <TextView
                     android:id="@+id/etLeader4"
                     style="@style/oaEditText"
-                    android:hint="财务领导签名" />
+                    android:hint="财务领导意见" />
             </LinearLayout>
 
             <LinearLayout
@@ -693,7 +693,7 @@
                 <TextView
                     android:id="@+id/etLeader5"
                     style="@style/oaEditText"
-                    android:hint="总经理签名" />
+                    android:hint="总经理意见" />
             </LinearLayout>
 
             <View

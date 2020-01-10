@@ -289,7 +289,7 @@
                     <TextView
                         android:id="@+id/tvLeader"
                         style="@style/oaEditText2"
-                        android:hint="部门领导签名" />
+                        android:hint="部门领导意见" />
                 </LinearLayout>
                 <View style="@style/line"></View>
 
@@ -312,7 +312,7 @@
                     <TextView
                         android:id="@+id/tvLeader1"
                         style="@style/oaEditText2"
-                        android:hint="分管领导签名" />
+                        android:hint="分管领导意见" />
                 </LinearLayout>
                 <View style="@style/line"
                     android:visibility="gone"></View>
@@ -340,7 +340,7 @@
                         style="@style/oaEditText2"
                         android:textColor="@color/red"
                         android:textColorHint="@color/red"
-                        android:hint="总经理签名" />
+                        android:hint="总经理意见" />
                 </LinearLayout>
 
                 <View

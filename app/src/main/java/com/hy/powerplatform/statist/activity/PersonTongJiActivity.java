@@ -84,9 +84,11 @@ public class PersonTongJiActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        spreadLineChart.setDescription(null);
+        header.setRightTv(false);
         header.setTvTitle(getResources().getString(R.string.oaflow_statist_rb1));
         tvName.setText("岗位");
-        tvValue.setText("人数");
+        tvValue.setText("人数(人)");
         colors.add(Color.rgb(193, 46, 52));
         colors.add(Color.rgb(75, 0, 130));
         colors.add(Color.rgb(0, 94, 170));
@@ -170,10 +172,6 @@ public class PersonTongJiActivity extends BaseActivity {
 
     @Override
     protected void rightClient() {
-        xValues.clear();
-        yValues.clear();
-        beanList.clear();
-        getData();
     }
 
     /**
@@ -190,6 +188,10 @@ public class PersonTongJiActivity extends BaseActivity {
                 String date = time.split(" ")[0];
                 String date1 = date.split("-")[0] + "-" + date.split("-")[1];
                 tvDate.setText(date1);
+                xValues.clear();
+                yValues.clear();
+                beanList.clear();
+                getData();
             }
         }, "2000-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(false); // 不显示时和分
@@ -265,6 +267,15 @@ public class PersonTongJiActivity extends BaseActivity {
                     if (bean.getTotalCounts() != 0) {
                         recyclerView.setVisibility(View.VISIBLE);
                         llNoContent.setVisibility(View.GONE);
+                        PersonTongJi.ResultBean resultBean = new PersonTongJi.ResultBean();
+                        double month = 0;
+                        resultBean.setPosition("合计");
+                        for (int i = 0; i < bean.getResult().size(); i++) {
+                            month = month+Double.valueOf(bean.getResult().get(i).getTotal());
+                        }
+                        month = (double)Math.round(month*100)/100;
+                        resultBean.setTotal(String.valueOf(month));
+                        beanList.add(resultBean);
                         for (int i = 0; i < bean.getResult().size(); i++) {
                             beanList.add(bean.getResult().get(i));
                             if (bean.getResult().get(i).getPosition().equals("广告/出租/乐途/春城通")){
