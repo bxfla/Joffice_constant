@@ -104,7 +104,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         fragmentTransaction = fragmentManager.beginTransaction();
         // 界面显示时 默认按钮1被选择及显示第一个界面
         rb1.setChecked(true);
-        fragmentTransaction.replace(R.id.vp, new Fragment01()).commit();
+//        fragmentTransaction.replace(R.id.vp, new Fragment01()).commit();
         // fragmentList用于存放片段 及 将片段添加进集合
         fragmentList = new ArrayList<Fragment>();
         Fragment fragment1 = new Fragment01();

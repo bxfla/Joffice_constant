@@ -16,18 +16,18 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         sharedPreferencesHelper = new SharedPreferencesHelper(this, "login");
-        sharedPreferencesHelper.saveData(this,"Ip","58.17.74.135");
-        sharedPreferencesHelper.saveData(this,"Socket","6770");
-        sharedPreferencesHelper.saveData(this,"Found","joffice");
-        sharedPreferencesHelper.saveData(this,"Address","宜春");
-
-//测试
 //        sharedPreferencesHelper.saveData(this,"Ip","58.17.74.135");
-//        sharedPreferencesHelper.saveData(this,"Socket","6775");
+//        sharedPreferencesHelper.saveData(this,"Socket","6770");
 //        sharedPreferencesHelper.saveData(this,"Found","joffice");
 //        sharedPreferencesHelper.saveData(this,"Address","宜春");
 
-//        sharedPreferencesHelper.saveData(this, "Ip", "192.168.2.132");
+//测试
+        sharedPreferencesHelper.saveData(this,"Ip","58.17.74.135");
+        sharedPreferencesHelper.saveData(this,"Socket","6775");
+        sharedPreferencesHelper.saveData(this,"Found","joffice");
+        sharedPreferencesHelper.saveData(this,"Address","宜春");
+
+//        sharedPreferencesHelper.saveData(this, "Ip", "192.168.2.122");
 //        sharedPreferencesHelper.saveData(this, "Socket", "8080");
 //        sharedPreferencesHelper.saveData(this, "Found", "joffice");
 //        sharedPreferencesHelper.saveData(this, "Address", "宜春");

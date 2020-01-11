@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,7 +123,8 @@ public class Fragment01 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (null != view) {
+        Log.e("XXXCCCC", "111");
+        if (view != null) {
             ViewGroup parent = (ViewGroup) view.getParent();
             if (null != parent) {
                 parent.removeView(view);
@@ -534,21 +536,22 @@ public class Fragment01 extends Fragment {
                     Bundle b3 = msg.getData();
                     String data3 = b3.getString("data");
                     OAFlowNum bean3 = new Gson().fromJson(data3, OAFlowNum.class);
-                    entries.clear();
-                    labels.clear();
-                    dataSets.clear();
                     if (bean3.getTotalCounts() != 0) {
                         for (int i = 0; i < bean3.getResult().size(); i++) {
-                            if (!bean3.getResult().get(i).getName().equals("未启动")){
-                                entries.add(new BarEntry(Float.parseFloat(bean3.getResult().get(i).getNum()), i));
-                                labels.add(bean3.getResult().get(i).getName());
-                                dataset = new BarDataSet(entries, "流程统计图");
-                                dataset.setColors(ColorTemplate.COLORFUL_COLORS);
-                                dataSets.add(dataset);
-                            }
+                            entries.add(new BarEntry(Float.parseFloat(bean3.getResult().get(i).getNum()), i));
+                            labels.add(bean3.getResult().get(i).getName());
+                            dataset = new BarDataSet(entries, "流程统计图");
+                            dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                            dataSets.add(dataset);
                         }
                         BarData dataNum = new BarData(labels, dataset);
                         mBarChart.setData(dataNum);
+                        //通知BarData更新
+                        mBarChart.getBarData().notifyDataChanged();
+                        //通知BarChart更新
+                        mBarChart.notifyDataSetChanged();
+                        //使图表更新生效
+                        mBarChart.invalidate();
                     }
                     break;
                 case TAG_FIVE:

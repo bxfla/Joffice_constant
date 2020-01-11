@@ -3,7 +3,6 @@ package com.hy.powerplatform.duban.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.TextView;
@@ -21,9 +20,6 @@ import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.oa_flow.bean.File;
-
-import net.tsz.afinal.FinalHttp;
-import net.tsz.afinal.http.AjaxCallBack;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -246,33 +242,9 @@ public class DBChaKanCKActivity extends BaseActivity {
                     File file = gson2.fromJson(downloadData, File.class);
                     String filePath = file.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
-                    FinalHttp finalHttp = new FinalHttp();
-                    finalHttp.download(Constant.FIELDETAIL + filePath,
-                            Environment.getExternalStorageDirectory().getPath() + file.getData().getFileName(),
-                            new AjaxCallBack<File>() {
-                                        @Override
-                                        public void onStart() {
-                                            super.onStart();
-                                        }
-
-                                        @Override
-                                        public void onLoading(long count, long current) {
-                                            System.out.println(current + "~~~");
-                                            super.onLoading(count, current);
-                                        }
-
-                                        @Override
-                                        public void onSuccess(File t) {
-                                            super.onSuccess(t);
-                                        }
-
-                                        @Override
-                                        public void onFailure(Throwable t, int errorNo,
-                                                              String strMsg) {
-                                            super.onFailure(t, errorNo, strMsg);
-                                        }
-                                    });
                     Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setAction(android.content.Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));
                     startActivity(intent);
                     break;
