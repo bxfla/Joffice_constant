@@ -211,6 +211,7 @@ public class MyOverOpenDetailActivity extends BaseActivity {
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));
+                    intent.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
                     startActivity(intent);
                     break;
             }

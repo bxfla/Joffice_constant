@@ -104,7 +104,7 @@ public class Fragment01 extends Fragment {
     public ArrayList<String> labels = new ArrayList<String>();
 
     Unbinder unbinder;
-    int num =0;
+    int num = 0;
     Intent intent;
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapter mAdapter;
@@ -121,59 +121,65 @@ public class Fragment01 extends Fragment {
     final HashMap<String, String> map1 = new HashMap();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment01, container, false);
-        unbinder = ButterKnife.bind(this, view);
-        mBarChart.setDescription(null);
-        initDatePicker();
-        alertDialogUtil = new AlertDialogUtil(getActivity());
-        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-        recyclerViewLogin.setLayoutManager(manager);
-        //设置布局的方式
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
-        recyclerViewYY.setLayoutManager(layoutManager);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (null != view) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (null != parent) {
+                parent.removeView(view);
+            }
+        } else {
+            view = inflater.inflate(R.layout.fragment01, container, false);
+            unbinder = ButterKnife.bind(this, view);
+            httpUtil = OkHttpUtil.getInstance(getActivity());
+            mBarChart.setDescription(null);
+            getLoginPerson();
+            getOAFlowNum();
+            initDatePicker();
+            alertDialogUtil = new AlertDialogUtil(getActivity());
+            LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+            recyclerViewLogin.setLayoutManager(manager);
+            //设置布局的方式
+            GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
+            recyclerViewYY.setLayoutManager(layoutManager);
 //        //添加模块
 //        addItem();
 //        setItemAdapter();
-        mAdapterLogin = new BaseRecyclerAdapterPosition<LoginPerson.ResultBean>(getActivity(), R.layout.adapter_loginperson, loginPersonList) {
-            @Override
-            public void convert(BaseViewHolderPosition holder, final LoginPerson.ResultBean itemBean, int position) {
-                holder.setText(R.id.tvNum, position + 1 + "");
-                holder.setText(R.id.tvUserName, itemBean.getFullName());
-                holder.setText(R.id.tvLoginNum, String.valueOf(itemBean.getDlcs()));
-                if (position % 2 != 0) {
-                    holder.setColor(R.id.ll);
+            mAdapterLogin = new BaseRecyclerAdapterPosition<LoginPerson.ResultBean>(getActivity(), R.layout.adapter_loginperson, loginPersonList) {
+                @Override
+                public void convert(BaseViewHolderPosition holder, final LoginPerson.ResultBean itemBean, int position) {
+                    holder.setText(R.id.tvNum, position + 1 + "");
+                    holder.setText(R.id.tvUserName, itemBean.getFullName());
+                    holder.setText(R.id.tvLoginNum, String.valueOf(itemBean.getDlcs()));
+                    if (position % 2 != 0) {
+                        holder.setColor(R.id.ll);
+                    }
                 }
-            }
-        };
-        recyclerViewLogin.setAdapter(mAdapterLogin);
-        baseAdapterYY = new BaseRecyclerAdapter<YingYunData>(getActivity(), R.layout.adapter_yingyingdata_item, yingyunList) {
-            @Override
-            public void convert(BaseViewHolder holder, final YingYunData itemBean) {
-                holder.setText(R.id.tvName, itemBean.getType());
-                holder.setText(R.id.tv, itemBean.getNum());
-            }
-        };
-        recyclerViewYY.setAdapter(baseAdapterYY);
-        //设置单个点击事件
-        mBarChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry entry, int i, Highlight highlight) {
-                Toast.makeText(getActivity(), entry.getVal() + "", Toast.LENGTH_LONG).show();
-            }
+            };
+            recyclerViewLogin.setAdapter(mAdapterLogin);
+            baseAdapterYY = new BaseRecyclerAdapter<YingYunData>(getActivity(), R.layout.adapter_yingyingdata_item, yingyunList) {
+                @Override
+                public void convert(BaseViewHolder holder, final YingYunData itemBean) {
+                    holder.setText(R.id.tvName, itemBean.getType());
+                    holder.setText(R.id.tv, itemBean.getNum());
+                }
+            };
+            recyclerViewYY.setAdapter(baseAdapterYY);
+            //设置单个点击事件
+            mBarChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+                @Override
+                public void onValueSelected(Entry entry, int i, Highlight highlight) {
+                    Toast.makeText(getActivity(), entry.getVal() + "", Toast.LENGTH_LONG).show();
+                }
 
-            @Override
-            public void onNothingSelected() {
+                @Override
+                public void onNothingSelected() {
 
-            }
-        });
-        //设置显示动画效果
-        mBarChart.animateY(2000);
-        mBarChart.setMaxVisibleValueCount(60);
-
-        httpUtil = OkHttpUtil.getInstance(getActivity());
-        getLoginPerson();
+                }
+            });
+            //设置显示动画效果
+            mBarChart.animateY(2000);
+            mBarChart.setMaxVisibleValueCount(60);
+        }
         return view;
     }
 
@@ -220,9 +226,14 @@ public class Fragment01 extends Fragment {
      * 选择时间
      */
     private void initDatePicker() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM", Locale.CHINA);
-        String now = sdf.format(new Date());
-        tvDate.setText(now);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM", Locale.CHINA);
+        Calendar c = Calendar.getInstance();
+        //过去一月
+        c.setTime(new Date());
+        c.add(Calendar.MONTH, -1);
+        Date m = c.getTime();
+        String mon = format.format(m);
+        tvDate.setText(mon);
 
         customDatePicker1 = new CustomDatePickerMonth(getActivity(), new CustomDatePickerMonth.ResultHandler() {
             @Override
@@ -286,9 +297,9 @@ public class Fragment01 extends Fragment {
         String now = sdf.format(new Date());
         String endDate = now.split(" ")[0];
         map1.clear();
-        map1.put("beginDate",day);
-        map1.put("endDate",endDate);
-        httpUtil.postForm(path_url,map1, new OkHttpUtil.ResultCallback() {
+        map1.put("beginDate", day);
+        map1.put("endDate", endDate);
+        httpUtil.postForm(path_url, map1, new OkHttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 //                Log.i("main", "response:" + e.toString());
@@ -405,7 +416,7 @@ public class Fragment01 extends Fragment {
         mAdapter = new BaseRecyclerAdapter<ItemBean>(getActivity(), R.layout.adapter_maindata, itemList) {
             @Override
             public void convert(BaseViewHolder holder, final ItemBean itemBean) {
-                if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb1)) &&Integer.valueOf(num)!=0){
+                if (itemBean.getName().equals(getResources().getString(R.string.fragment_rb1)) && Integer.valueOf(num) != 0) {
                     holder.setVisitiomV(R.id.tvRolese);
                     holder.setText(R.id.tvRolese, String.valueOf(num));
                 }
@@ -517,24 +528,28 @@ public class Fragment01 extends Fragment {
                         e.printStackTrace();
                     }
                     baseAdapterYY.notifyDataSetChanged();
-                    getOAFlowNum();
+                    ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FOUR:
                     Bundle b3 = msg.getData();
                     String data3 = b3.getString("data");
                     OAFlowNum bean3 = new Gson().fromJson(data3, OAFlowNum.class);
+                    entries.clear();
+                    labels.clear();
+                    dataSets.clear();
                     if (bean3.getTotalCounts() != 0) {
                         for (int i = 0; i < bean3.getResult().size(); i++) {
-                            entries.add(new BarEntry(Float.parseFloat(bean3.getResult().get(i).getNum()), i));
-                            labels.add(bean3.getResult().get(i).getName());
-                            dataset = new BarDataSet(entries, "流程统计图");
-                            dataset.setColors(ColorTemplate.COLORFUL_COLORS);
-                            dataSets.add(dataset);
+                            if (!bean3.getResult().get(i).getName().equals("未启动")){
+                                entries.add(new BarEntry(Float.parseFloat(bean3.getResult().get(i).getNum()), i));
+                                labels.add(bean3.getResult().get(i).getName());
+                                dataset = new BarDataSet(entries, "流程统计图");
+                                dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                                dataSets.add(dataset);
+                            }
                         }
+                        BarData dataNum = new BarData(labels, dataset);
+                        mBarChart.setData(dataNum);
                     }
-                    BarData dataNum = new BarData(labels, dataset);
-                    mBarChart.setData(dataNum);
-                    ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_FIVE:
                     willDoList.clear();
@@ -544,8 +559,8 @@ public class Fragment01 extends Fragment {
                     for (int i = 0; i < beannum.getResult().size(); i++) {
                         willDoList.add(beannum.getResult().get(i));
                     }
-                    if (willDoList.size()!=0){
-                        num=willDoList.size();
+                    if (willDoList.size() != 0) {
+                        num = willDoList.size();
                     }
                     //添加模块
                     addItem();

@@ -11,7 +11,7 @@ public class DBCKXQ implements Serializable {
 
     /**
      * success : true
-     * data : {"version":null,"orgId":null,"orgPath":null,"operId":178,"workId":157,"operator":40351,"operatorName":"毕玉","operStatus":2,"operTime":"2019-12-04","submitTitle":null,"submitContext":null,"fileIds":null,"publishTime":"2019-12-03","operLog":null,"memo":null,"updateType":null,"num":null,"statusName":null,"statusType":null,"annotation":null,"identUrge":null,"judgeSMSzxr":null,"judgeSMSdbr":null,"superWorkTask":{"version":null,"orgId":null,"orgPath":null,"workId":157,"taskType":"公司任务","taskName":"啊啊啊","taskContext":"咯咯咯咯咯","planFinishTime":null,"fileIds":null,"supervisorIds":"41059,41058,41071,888888888","supervisorNames":"唐根六,王少云,晏慧锋,超级管理员","operatorIds":"40351,41097","operatorNames":"毕玉,毕芳琴","taskStatus":3,"creater":"1","createTime":"2019-12-03","updateTime":"2019-12-03","approver":1,"approveTime":"2019-12-03","fileNames":null,"createrName":"超级管理员","approverName":"超级管理员","statusName":null,"contactsName":"超级管理员","contactsId":"888888888","superWorkTaskFiles":[]},"superTaskOperFiles":[]}
+     * data : {"version":null,"orgId":null,"orgPath":null,"operId":262,"workId":131,"operator":9467,"operatorName":"易睿","operStatus":7,"operTime":"2020-01-02","submitTitle":"已完成整改","submitContext":"根据元旦安全检查所发现问题的整改要求，大为物业公司立即组织对所归属问题进行整改，除安全出口标志损坏还在采购及一个消防栓的玻璃还在定制中，其余均已整改完成。（摄像头故障为信息部工作职责，由信息部进行维修）","fileIds":"9758,9759,9760,9761,9762,9763,9764,9765","publishTime":"2019-12-31","operLog":null,"memo":"","updateType":null,"num":null,"statusName":"晏慧锋,张志平","statusType":null,"annotation":"需采购事宜，请抓紧完成，及早修复。\u2014\u2014张志平 2020-01-06 08:44:57","identUrge":null,"judgeSMSzxr":null,"judgeSMSdbr":null,"superWorkTask":{"version":null,"orgId":null,"orgPath":null,"workId":131,"taskType":"公司任务","taskName":"关于元旦安全检查问题的通报","taskContext":"请各部门各生产单位按照通知在1月3日下午下班前整改完毕，并提交整改情况。","planFinishTime":"2020-01-03","fileIds":"9739","supervisorIds":"9386,9387,9398,9390,9389,9391,9403,9388,9404","supervisorNames":"王少云,唐根六,晏慧锋,李健,袁斌,何爱民,张志平,刘永锋,谭军","operatorIds":"9467,9493,9421,9406,9414,9400,9471","operatorNames":"易睿,吴迪,欧阳翰,陆卫敏,刘晓霞,晏永金,凌凡","taskStatus":5,"creater":"9404","createTime":"2019-12-31","updateTime":"2019-12-31","approver":9404,"approveTime":"2019-12-31","fileNames":null,"createrName":"谭军","approverName":"谭军","statusName":null,"contactsName":"谭军","contactsId":"9404","superWorkTaskFiles":[]},"superTaskOperFiles":[{"version":null,"orgId":null,"orgPath":null,"fileId":9760,"fileName":"微信图片_202001021657402.jpg","filePath":"others/202001/6c1cc8f65dfa41038b0a2717c46ce5f8.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"51.21 KB","creator":"易睿","creatorId":9467,"totalBytes":52442,"delFlag":0,"globalType":null,"id":9760,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9762,"fileName":"微信图片_202001021657404.jpg","filePath":"others/202001/d0b45111158c47ac93fff4e2058dd864.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"44.71 KB","creator":"易睿","creatorId":9467,"totalBytes":45788,"delFlag":0,"globalType":null,"id":9762,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9761,"fileName":"微信图片_202001021657403.jpg","filePath":"others/202001/9207810d4fe447608c2c8ca48cb7529b.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"45.92 KB","creator":"易睿","creatorId":9467,"totalBytes":47017,"delFlag":0,"globalType":null,"id":9761,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9758,"fileName":"微信图片_20200102165740.jpg","filePath":"others/202001/ae32070e1d73411cb8cf9b82348e4cbd.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"56.06 KB","creator":"易睿","creatorId":9467,"totalBytes":57407,"delFlag":0,"globalType":null,"id":9758,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9765,"fileName":"微信图片_202001021657407.jpg","filePath":"others/202001/1729b9988a5f4b2bbe75b65415046117.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"27.17 KB","creator":"易睿","creatorId":9467,"totalBytes":27817,"delFlag":0,"globalType":null,"id":9765,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9764,"fileName":"微信图片_202001021657406.jpg","filePath":"others/202001/00a8cb5a853a4aac8fc52cb472f7d1bd.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"33.01 KB","creator":"易睿","creatorId":9467,"totalBytes":33801,"delFlag":0,"globalType":null,"id":9764,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9759,"fileName":"微信图片_202001021657401.jpg","filePath":"others/202001/ae5194a391ba4ab190ce8e46b35471c4.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"59.54 KB","creator":"易睿","creatorId":9467,"totalBytes":60971,"delFlag":0,"globalType":null,"id":9759,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9763,"fileName":"微信图片_202001021657405.jpg","filePath":"others/202001/012c4ba94ed5438d81b455cbbf787783.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"49.95 KB","creator":"易睿","creatorId":9467,"totalBytes":51153,"delFlag":0,"globalType":null,"id":9763,"firstKeyColumnName":"fileId"}]}
      */
 
     private boolean success;
@@ -33,38 +33,38 @@ public class DBCKXQ implements Serializable {
         this.data = data;
     }
 
-    public static class DataBean implements Serializable{
+    public static class DataBean implements Serializable {
         /**
          * version : null
          * orgId : null
          * orgPath : null
-         * operId : 178
-         * workId : 157
-         * operator : 40351
-         * operatorName : 毕玉
-         * operStatus : 2
-         * operTime : 2019-12-04
-         * submitTitle : null
-         * submitContext : null
-         * fileIds : null
-         * publishTime : 2019-12-03
+         * operId : 262
+         * workId : 131
+         * operator : 9467
+         * operatorName : 易睿
+         * operStatus : 7
+         * operTime : 2020-01-02
+         * submitTitle : 已完成整改
+         * submitContext : 根据元旦安全检查所发现问题的整改要求，大为物业公司立即组织对所归属问题进行整改，除安全出口标志损坏还在采购及一个消防栓的玻璃还在定制中，其余均已整改完成。（摄像头故障为信息部工作职责，由信息部进行维修）
+         * fileIds : 9758,9759,9760,9761,9762,9763,9764,9765
+         * publishTime : 2019-12-31
          * operLog : null
-         * memo : null
+         * memo :
          * updateType : null
          * num : null
-         * statusName : null
+         * statusName : 晏慧锋,张志平
          * statusType : null
-         * annotation : null
+         * annotation : 需采购事宜，请抓紧完成，及早修复。——张志平 2020-01-06 08:44:57
          * identUrge : null
          * judgeSMSzxr : null
          * judgeSMSdbr : null
-         * superWorkTask : {"version":null,"orgId":null,"orgPath":null,"workId":157,"taskType":"公司任务","taskName":"啊啊啊","taskContext":"咯咯咯咯咯","planFinishTime":null,"fileIds":null,"supervisorIds":"41059,41058,41071,888888888","supervisorNames":"唐根六,王少云,晏慧锋,超级管理员","operatorIds":"40351,41097","operatorNames":"毕玉,毕芳琴","taskStatus":3,"creater":"1","createTime":"2019-12-03","updateTime":"2019-12-03","approver":1,"approveTime":"2019-12-03","fileNames":null,"createrName":"超级管理员","approverName":"超级管理员","statusName":null,"contactsName":"超级管理员","contactsId":"888888888","superWorkTaskFiles":[]}
-         * superTaskOperFiles : []
+         * superWorkTask : {"version":null,"orgId":null,"orgPath":null,"workId":131,"taskType":"公司任务","taskName":"关于元旦安全检查问题的通报","taskContext":"请各部门各生产单位按照通知在1月3日下午下班前整改完毕，并提交整改情况。","planFinishTime":"2020-01-03","fileIds":"9739","supervisorIds":"9386,9387,9398,9390,9389,9391,9403,9388,9404","supervisorNames":"王少云,唐根六,晏慧锋,李健,袁斌,何爱民,张志平,刘永锋,谭军","operatorIds":"9467,9493,9421,9406,9414,9400,9471","operatorNames":"易睿,吴迪,欧阳翰,陆卫敏,刘晓霞,晏永金,凌凡","taskStatus":5,"creater":"9404","createTime":"2019-12-31","updateTime":"2019-12-31","approver":9404,"approveTime":"2019-12-31","fileNames":null,"createrName":"谭军","approverName":"谭军","statusName":null,"contactsName":"谭军","contactsId":"9404","superWorkTaskFiles":[]}
+         * superTaskOperFiles : [{"version":null,"orgId":null,"orgPath":null,"fileId":9760,"fileName":"微信图片_202001021657402.jpg","filePath":"others/202001/6c1cc8f65dfa41038b0a2717c46ce5f8.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"51.21 KB","creator":"易睿","creatorId":9467,"totalBytes":52442,"delFlag":0,"globalType":null,"id":9760,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9762,"fileName":"微信图片_202001021657404.jpg","filePath":"others/202001/d0b45111158c47ac93fff4e2058dd864.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"44.71 KB","creator":"易睿","creatorId":9467,"totalBytes":45788,"delFlag":0,"globalType":null,"id":9762,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9761,"fileName":"微信图片_202001021657403.jpg","filePath":"others/202001/9207810d4fe447608c2c8ca48cb7529b.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"45.92 KB","creator":"易睿","creatorId":9467,"totalBytes":47017,"delFlag":0,"globalType":null,"id":9761,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9758,"fileName":"微信图片_20200102165740.jpg","filePath":"others/202001/ae32070e1d73411cb8cf9b82348e4cbd.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"56.06 KB","creator":"易睿","creatorId":9467,"totalBytes":57407,"delFlag":0,"globalType":null,"id":9758,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9765,"fileName":"微信图片_202001021657407.jpg","filePath":"others/202001/1729b9988a5f4b2bbe75b65415046117.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"27.17 KB","creator":"易睿","creatorId":9467,"totalBytes":27817,"delFlag":0,"globalType":null,"id":9765,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9764,"fileName":"微信图片_202001021657406.jpg","filePath":"others/202001/00a8cb5a853a4aac8fc52cb472f7d1bd.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"33.01 KB","creator":"易睿","creatorId":9467,"totalBytes":33801,"delFlag":0,"globalType":null,"id":9764,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9759,"fileName":"微信图片_202001021657401.jpg","filePath":"others/202001/ae5194a391ba4ab190ce8e46b35471c4.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"59.54 KB","creator":"易睿","creatorId":9467,"totalBytes":60971,"delFlag":0,"globalType":null,"id":9759,"firstKeyColumnName":"fileId"},{"version":null,"orgId":null,"orgPath":null,"fileId":9763,"fileName":"微信图片_202001021657405.jpg","filePath":"others/202001/012c4ba94ed5438d81b455cbbf787783.jpg","createtime":"2020-01-02","ext":"jpg","fileType":"others","note":"49.95 KB","creator":"易睿","creatorId":9467,"totalBytes":51153,"delFlag":0,"globalType":null,"id":9763,"firstKeyColumnName":"fileId"}]
          */
 
-        private String version;
-        private String orgId;
-        private String orgPath;
+        private Object version;
+        private Object orgId;
+        private Object orgPath;
         private int operId;
         private int workId;
         private int operator;
@@ -75,40 +75,40 @@ public class DBCKXQ implements Serializable {
         private String submitContext;
         private String fileIds;
         private String publishTime;
-        private String operLog;
+        private Object operLog;
         private String memo;
-        private String updateType;
-        private String num;
+        private Object updateType;
+        private Object num;
         private String statusName;
-        private String statusType;
+        private Object statusType;
         private String annotation;
-        private String identUrge;
-        private String judgeSMSzxr;
-        private String judgeSMSdbr;
+        private Object identUrge;
+        private Object judgeSMSzxr;
+        private Object judgeSMSdbr;
         private SuperWorkTaskBean superWorkTask;
-        private List<?> superTaskOperFiles;
+        private List<SuperTaskOperFilesBean> superTaskOperFiles;
 
-        public String getVersion() {
+        public Object getVersion() {
             return version;
         }
 
-        public void setVersion(String version) {
+        public void setVersion(Object version) {
             this.version = version;
         }
 
-        public String getOrgId() {
+        public Object getOrgId() {
             return orgId;
         }
 
-        public void setOrgId(String orgId) {
+        public void setOrgId(Object orgId) {
             this.orgId = orgId;
         }
 
-        public String getOrgPath() {
+        public Object getOrgPath() {
             return orgPath;
         }
 
-        public void setOrgPath(String orgPath) {
+        public void setOrgPath(Object orgPath) {
             this.orgPath = orgPath;
         }
 
@@ -192,11 +192,11 @@ public class DBCKXQ implements Serializable {
             this.publishTime = publishTime;
         }
 
-        public String getOperLog() {
+        public Object getOperLog() {
             return operLog;
         }
 
-        public void setOperLog(String operLog) {
+        public void setOperLog(Object operLog) {
             this.operLog = operLog;
         }
 
@@ -208,19 +208,19 @@ public class DBCKXQ implements Serializable {
             this.memo = memo;
         }
 
-        public String getUpdateType() {
+        public Object getUpdateType() {
             return updateType;
         }
 
-        public void setUpdateType(String updateType) {
+        public void setUpdateType(Object updateType) {
             this.updateType = updateType;
         }
 
-        public String getNum() {
+        public Object getNum() {
             return num;
         }
 
-        public void setNum(String num) {
+        public void setNum(Object num) {
             this.num = num;
         }
 
@@ -232,11 +232,11 @@ public class DBCKXQ implements Serializable {
             this.statusName = statusName;
         }
 
-        public String getStatusType() {
+        public Object getStatusType() {
             return statusType;
         }
 
-        public void setStatusType(String statusType) {
+        public void setStatusType(Object statusType) {
             this.statusType = statusType;
         }
 
@@ -248,27 +248,27 @@ public class DBCKXQ implements Serializable {
             this.annotation = annotation;
         }
 
-        public String getIdentUrge() {
+        public Object getIdentUrge() {
             return identUrge;
         }
 
-        public void setIdentUrge(String identUrge) {
+        public void setIdentUrge(Object identUrge) {
             this.identUrge = identUrge;
         }
 
-        public String getJudgeSMSzxr() {
+        public Object getJudgeSMSzxr() {
             return judgeSMSzxr;
         }
 
-        public void setJudgeSMSzxr(String judgeSMSzxr) {
+        public void setJudgeSMSzxr(Object judgeSMSzxr) {
             this.judgeSMSzxr = judgeSMSzxr;
         }
 
-        public String getJudgeSMSdbr() {
+        public Object getJudgeSMSdbr() {
             return judgeSMSdbr;
         }
 
-        public void setJudgeSMSdbr(String judgeSMSdbr) {
+        public void setJudgeSMSdbr(Object judgeSMSdbr) {
             this.judgeSMSdbr = judgeSMSdbr;
         }
 
@@ -280,47 +280,47 @@ public class DBCKXQ implements Serializable {
             this.superWorkTask = superWorkTask;
         }
 
-        public List<?> getSuperTaskOperFiles() {
+        public List<SuperTaskOperFilesBean> getSuperTaskOperFiles() {
             return superTaskOperFiles;
         }
 
-        public void setSuperTaskOperFiles(List<?> superTaskOperFiles) {
+        public void setSuperTaskOperFiles(List<SuperTaskOperFilesBean> superTaskOperFiles) {
             this.superTaskOperFiles = superTaskOperFiles;
         }
 
-        public static class SuperWorkTaskBean {
+        public static class SuperWorkTaskBean implements Serializable {
             /**
              * version : null
              * orgId : null
              * orgPath : null
-             * workId : 157
+             * workId : 131
              * taskType : 公司任务
-             * taskName : 啊啊啊
-             * taskContext : 咯咯咯咯咯
-             * planFinishTime : null
-             * fileIds : null
-             * supervisorIds : 41059,41058,41071,888888888
-             * supervisorNames : 唐根六,王少云,晏慧锋,超级管理员
-             * operatorIds : 40351,41097
-             * operatorNames : 毕玉,毕芳琴
-             * taskStatus : 3
-             * creater : 1
-             * createTime : 2019-12-03
-             * updateTime : 2019-12-03
-             * approver : 1
-             * approveTime : 2019-12-03
+             * taskName : 关于元旦安全检查问题的通报
+             * taskContext : 请各部门各生产单位按照通知在1月3日下午下班前整改完毕，并提交整改情况。
+             * planFinishTime : 2020-01-03
+             * fileIds : 9739
+             * supervisorIds : 9386,9387,9398,9390,9389,9391,9403,9388,9404
+             * supervisorNames : 王少云,唐根六,晏慧锋,李健,袁斌,何爱民,张志平,刘永锋,谭军
+             * operatorIds : 9467,9493,9421,9406,9414,9400,9471
+             * operatorNames : 易睿,吴迪,欧阳翰,陆卫敏,刘晓霞,晏永金,凌凡
+             * taskStatus : 5
+             * creater : 9404
+             * createTime : 2019-12-31
+             * updateTime : 2019-12-31
+             * approver : 9404
+             * approveTime : 2019-12-31
              * fileNames : null
-             * createrName : 超级管理员
-             * approverName : 超级管理员
+             * createrName : 谭军
+             * approverName : 谭军
              * statusName : null
-             * contactsName : 超级管理员
-             * contactsId : 888888888
+             * contactsName : 谭军
+             * contactsId : 9404
              * superWorkTaskFiles : []
              */
 
-            private String version;
-            private String orgId;
-            private String orgPath;
+            private Object version;
+            private Object orgId;
+            private Object orgPath;
             private int workId;
             private String taskType;
             private String taskName;
@@ -337,35 +337,35 @@ public class DBCKXQ implements Serializable {
             private String updateTime;
             private int approver;
             private String approveTime;
-            private String fileNames;
+            private Object fileNames;
             private String createrName;
             private String approverName;
-            private String statusName;
+            private Object statusName;
             private String contactsName;
             private String contactsId;
             private List<?> superWorkTaskFiles;
 
-            public String getVersion() {
+            public Object getVersion() {
                 return version;
             }
 
-            public void setVersion(String version) {
+            public void setVersion(Object version) {
                 this.version = version;
             }
 
-            public String getOrgId() {
+            public Object getOrgId() {
                 return orgId;
             }
 
-            public void setOrgId(String orgId) {
+            public void setOrgId(Object orgId) {
                 this.orgId = orgId;
             }
 
-            public String getOrgPath() {
+            public Object getOrgPath() {
                 return orgPath;
             }
 
-            public void setOrgPath(String orgPath) {
+            public void setOrgPath(Object orgPath) {
                 this.orgPath = orgPath;
             }
 
@@ -497,11 +497,11 @@ public class DBCKXQ implements Serializable {
                 this.approveTime = approveTime;
             }
 
-            public String getFileNames() {
+            public Object getFileNames() {
                 return fileNames;
             }
 
-            public void setFileNames(String fileNames) {
+            public void setFileNames(Object fileNames) {
                 this.fileNames = fileNames;
             }
 
@@ -521,11 +521,11 @@ public class DBCKXQ implements Serializable {
                 this.approverName = approverName;
             }
 
-            public String getStatusName() {
+            public Object getStatusName() {
                 return statusName;
             }
 
-            public void setStatusName(String statusName) {
+            public void setStatusName(Object statusName) {
                 this.statusName = statusName;
             }
 
@@ -551,6 +551,182 @@ public class DBCKXQ implements Serializable {
 
             public void setSuperWorkTaskFiles(List<?> superWorkTaskFiles) {
                 this.superWorkTaskFiles = superWorkTaskFiles;
+            }
+        }
+
+        public static class SuperTaskOperFilesBean implements Serializable {
+            /**
+             * version : null
+             * orgId : null
+             * orgPath : null
+             * fileId : 9760
+             * fileName : 微信图片_202001021657402.jpg
+             * filePath : others/202001/6c1cc8f65dfa41038b0a2717c46ce5f8.jpg
+             * createtime : 2020-01-02
+             * ext : jpg
+             * fileType : others
+             * note : 51.21 KB
+             * creator : 易睿
+             * creatorId : 9467
+             * totalBytes : 52442
+             * delFlag : 0
+             * globalType : null
+             * id : 9760
+             * firstKeyColumnName : fileId
+             */
+
+            private Object version;
+            private Object orgId;
+            private Object orgPath;
+            private String fileId;
+            private String fileName;
+            private String filePath;
+            private String createtime;
+            private String ext;
+            private String fileType;
+            private String note;
+            private String creator;
+            private int creatorId;
+            private int totalBytes;
+            private int delFlag;
+            private Object globalType;
+            private int id;
+            private String firstKeyColumnName;
+
+            public Object getVersion() {
+                return version;
+            }
+
+            public void setVersion(Object version) {
+                this.version = version;
+            }
+
+            public Object getOrgId() {
+                return orgId;
+            }
+
+            public void setOrgId(Object orgId) {
+                this.orgId = orgId;
+            }
+
+            public Object getOrgPath() {
+                return orgPath;
+            }
+
+            public void setOrgPath(Object orgPath) {
+                this.orgPath = orgPath;
+            }
+
+            public String getFileId() {
+                return fileId;
+            }
+
+            public void setFileId(String fileId) {
+                this.fileId = fileId;
+            }
+
+            public String getFileName() {
+                return fileName;
+            }
+
+            public void setFileName(String fileName) {
+                this.fileName = fileName;
+            }
+
+            public String getFilePath() {
+                return filePath;
+            }
+
+            public void setFilePath(String filePath) {
+                this.filePath = filePath;
+            }
+
+            public String getCreatetime() {
+                return createtime;
+            }
+
+            public void setCreatetime(String createtime) {
+                this.createtime = createtime;
+            }
+
+            public String getExt() {
+                return ext;
+            }
+
+            public void setExt(String ext) {
+                this.ext = ext;
+            }
+
+            public String getFileType() {
+                return fileType;
+            }
+
+            public void setFileType(String fileType) {
+                this.fileType = fileType;
+            }
+
+            public String getNote() {
+                return note;
+            }
+
+            public void setNote(String note) {
+                this.note = note;
+            }
+
+            public String getCreator() {
+                return creator;
+            }
+
+            public void setCreator(String creator) {
+                this.creator = creator;
+            }
+
+            public int getCreatorId() {
+                return creatorId;
+            }
+
+            public void setCreatorId(int creatorId) {
+                this.creatorId = creatorId;
+            }
+
+            public int getTotalBytes() {
+                return totalBytes;
+            }
+
+            public void setTotalBytes(int totalBytes) {
+                this.totalBytes = totalBytes;
+            }
+
+            public int getDelFlag() {
+                return delFlag;
+            }
+
+            public void setDelFlag(int delFlag) {
+                this.delFlag = delFlag;
+            }
+
+            public Object getGlobalType() {
+                return globalType;
+            }
+
+            public void setGlobalType(Object globalType) {
+                this.globalType = globalType;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getFirstKeyColumnName() {
+                return firstKeyColumnName;
+            }
+
+            public void setFirstKeyColumnName(String firstKeyColumnName) {
+                this.firstKeyColumnName = firstKeyColumnName;
             }
         }
     }

@@ -269,10 +269,11 @@ public class CostComparisonActivity extends BaseActivity {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             month = month+Double.valueOf(jsonObject.getString("sr"));
-                            month1 = month+Double.valueOf(jsonObject.getString("cb"));
+                            month1 = month1+Double.valueOf(jsonObject.getString("cb"));
                         }
                         resultBean.setSr(String.valueOf(month));
-                        resultBean.setCb(String.valueOf(month1));
+                        java.text.DecimalFormat df = new java.text.DecimalFormat("#.00");
+                        resultBean.setCb(String.valueOf(df.format(month1)));
                         beanList.add(resultBean);
                         for (int i = 0;i<jsonArray.length();i++){
                             JSONObject jsonObject = jsonArray.getJSONObject(i);

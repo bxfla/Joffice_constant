@@ -252,8 +252,7 @@
                 <TextView
                     style="@style/oaTextView"
                     android:text="备注: *"
-                    android:layout_height="65dp"
-                    android:textColor="@color/color_bg_selected"/>
+                    android:layout_height="65dp" />
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp"
@@ -262,8 +261,7 @@
                 <TextView
                     android:id="@+id/tvMemo"
                     style="@style/oaEditText"
-                    android:hint=""
-                    android:textColor="@color/color_bg_selected"/>
+                    android:hint=""/>
             </LinearLayout>
             <View style="@style/line"></View>
 

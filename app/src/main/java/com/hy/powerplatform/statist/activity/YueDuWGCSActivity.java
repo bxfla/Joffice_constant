@@ -88,7 +88,7 @@ public class YueDuWGCSActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        tvName.setText("原因");
+        tvName.setText("类型");
         tvValue.setText("次数（次）");
         spreadLineChart.setDescription(null);
         header.setRightTv(false);

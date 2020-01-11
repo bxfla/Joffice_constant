@@ -1,7 +1,9 @@
 package com.hy.powerplatform.duban.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.TextView;
@@ -9,20 +11,34 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.hy.powerplatform.R;
+import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.duban.bean.DBCKXQ;
+import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.OkHttpUtil;
 import com.hy.powerplatform.my_utils.myViews.Header;
+import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
+import com.hy.powerplatform.oa_flow.bean.File;
+
+import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.http.AjaxCallBack;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_FOUR;
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_THERE;
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
 
 public class DBChaKanCKActivity extends BaseActivity {
 
@@ -45,7 +61,12 @@ public class DBChaKanCKActivity extends BaseActivity {
 
     Bundle bundle;
     Gson gson;
+    String downloadData = "";
     private OkHttpUtil httpUtil;
+    List<String> fileNameList = new ArrayList<>();
+    List<String> fileIdList = new ArrayList<>();
+    List<String> filePathList = new ArrayList<>();
+    List<DBCKXQ.DataBean.SuperTaskOperFilesBean> fileList = new ArrayList<>();
     final HashMap<String, String> map = new HashMap();
     String path_url = Constant.BASE_URL1 + Constant.DBCKXQ;
 
@@ -76,7 +97,7 @@ public class DBChaKanCKActivity extends BaseActivity {
                 Bundle b = new Bundle();
                 b.putString("data", data);
                 message.setData(b);
-                message.what = Constant.TAG_TWO;
+                message.what = TAG_TWO;
                 handler.sendMessage(message);
             }
         });
@@ -97,6 +118,67 @@ public class DBChaKanCKActivity extends BaseActivity {
 
     }
 
+    @OnClick(R.id.tvFJ)
+    public void onViewClicked() {
+        if (!tvFJ.getText().toString().equals("")) {
+            if (fileNameList.size() == 1) {
+                final String url = Constant.BASE_URL2 + Constant.FILEDATA + "?fileId=" + fileIdList.get(0);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        DBHandler dbA = new DBHandler();
+                        downloadData = dbA.OAQingJiaMyDetail(url);
+                        if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
+                            handler.sendEmptyMessage(TAG_THERE);
+                        } else {
+                            handler.sendEmptyMessage(TAG_FOUR);
+                        }
+                    }
+                }).start();
+            } else if (fileNameList.size() > 1) {
+                MyAlertDialog.MyListAlertDialog(this, fileNameList, new AlertDialogCallBackP() {
+                    @Override
+                    public void oneselect(final String data1) {
+                        String id = "";
+                        for (int i = 0; i < fileNameList.size(); i++) {
+                            if (fileNameList.get(i).equals(data1)) {
+                                id = fileIdList.get(i);
+                            }
+                        }
+                        final String url = Constant.BASE_URL2 + Constant.FILEDATA + "?fileId=" + id;
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                DBHandler dbA = new DBHandler();
+                                downloadData = dbA.OAQingJiaMyDetail(url);
+                                if (downloadData.equals("获取数据失败") || downloadData.equals("")) {
+                                    handler.sendEmptyMessage(TAG_THERE);
+                                } else {
+                                    handler.sendEmptyMessage(TAG_FOUR);
+                                }
+                            }
+                        }).start();
+                    }
+
+                    @Override
+                    public void select(List<String> list) {
+
+                    }
+
+                    @Override
+                    public void confirm() {
+
+                    }
+
+                    @Override
+                    public void cancel() {
+
+                    }
+                });
+            }
+        }
+    }
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -108,32 +190,32 @@ public class DBChaKanCKActivity extends BaseActivity {
                     ProgressDialogUtil.stopLoad();
                     Toast.makeText(DBChaKanCKActivity.this, error, Toast.LENGTH_SHORT).show();
                     break;
-                case Constant.TAG_TWO:
+                case TAG_TWO:
                     bundle = msg.getData();
                     String data = bundle.getString("data");
                     gson = new Gson();
                     DBCKXQ bean = gson.fromJson(data, DBCKXQ.class);
-                    if (bean.isSuccess()){
+                    if (bean.isSuccess()) {
                         tvZXR.setText(bean.getData().getOperatorName());
-                        if (bean.getData().getOperStatus()==1){
+                        if (bean.getData().getOperStatus() == 1) {
                             tvZT.setText("未查看");
-                        }else if (bean.getData().getOperStatus()==2){
+                        } else if (bean.getData().getOperStatus() == 2) {
                             tvZT.setText("已查看");
-                        }else if (bean.getData().getOperStatus()==3){
+                        } else if (bean.getData().getOperStatus() == 3) {
                             tvZT.setText("已接收");
-                        }else if (bean.getData().getOperStatus()==4){
+                        } else if (bean.getData().getOperStatus() == 4) {
                             tvZT.setText("已退回");
-                        }else if (bean.getData().getOperStatus()==5){
+                        } else if (bean.getData().getOperStatus() == 5) {
                             tvZT.setText("已提交");
-                        }else if (bean.getData().getOperStatus()==6){
+                        } else if (bean.getData().getOperStatus() == 6) {
                             tvZT.setText("已撤回");
-                        }else if (bean.getData().getOperStatus()==7){
+                        } else if (bean.getData().getOperStatus() == 7) {
                             tvZT.setText("已完成");
-                        }else if (bean.getData().getOperStatus()==8){
+                        } else if (bean.getData().getOperStatus() == 8) {
                             tvZT.setText("已冻结");
-                        }else if (bean.getData().getOperStatus()==9){
+                        } else if (bean.getData().getOperStatus() == 9) {
                             tvZT.setText("逾期完成");
-                        }else if (bean.getData().getOperStatus()==10){
+                        } else if (bean.getData().getOperStatus() == 10) {
                             tvZT.setText("未完成");
                         }
                         tvTime.setText(bean.getData().getOperTime());
@@ -141,8 +223,58 @@ public class DBChaKanCKActivity extends BaseActivity {
                         tvContent.setText(bean.getData().getSubmitContext());
                         tvMomo.setText(bean.getData().getMemo());
                         tvFJ.setText(bean.getData().getFileIds());
+
+                        fileList = bean.getData().getSuperTaskOperFiles();
+                        for (int i = 0; i < fileList.size(); i++) {
+                            fileNameList.add(fileList.get(i).getFileName());
+                            fileIdList.add(fileList.get(i).getFileId());
+                            filePathList.add(fileList.get(i).getFilePath());
+                        }
+                        if (fileNameList.size() != 0) {
+                            tvFJ.setText(fileNameList.toString());
+                        }
                     }
                     ProgressDialogUtil.stopLoad();
+                    break;
+
+                case TAG_THERE:
+                    Toast.makeText(DBChaKanCKActivity.this, "操作数据失败", Toast.LENGTH_SHORT).show();
+                    ProgressDialogUtil.stopLoad();
+                    break;
+                case TAG_FOUR:
+                    Gson gson2 = new Gson();
+                    File file = gson2.fromJson(downloadData, File.class);
+                    String filePath = file.getData().getFilePath();
+                    String url = Constant.FIELDETAIL + filePath;
+                    FinalHttp finalHttp = new FinalHttp();
+                    finalHttp.download(Constant.FIELDETAIL + filePath,
+                            Environment.getExternalStorageDirectory().getPath() + file.getData().getFileName(),
+                            new AjaxCallBack<File>() {
+                                        @Override
+                                        public void onStart() {
+                                            super.onStart();
+                                        }
+
+                                        @Override
+                                        public void onLoading(long count, long current) {
+                                            System.out.println(current + "~~~");
+                                            super.onLoading(count, current);
+                                        }
+
+                                        @Override
+                                        public void onSuccess(File t) {
+                                            super.onSuccess(t);
+                                        }
+
+                                        @Override
+                                        public void onFailure(Throwable t, int errorNo,
+                                                              String strMsg) {
+                                            super.onFailure(t, errorNo, strMsg);
+                                        }
+                                    });
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                    startActivity(intent);
                     break;
             }
         }

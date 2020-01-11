@@ -98,19 +98,6 @@ public class CLXHTongJiActivity extends BaseActivity {
         httpUtil = OkHttpUtil.getInstance(this);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
-        mAdapter = new BaseRecyclerAdapterPosition<CLXHTongJi>(this, R.layout.adapter_data_item, beanList) {
-            @Override
-            public void convert(BaseViewHolderPosition holder, final CLXHTongJi itemBean, int position) {
-                holder.setText(R.id.tvName, itemBean.getTypeName());
-                holder.setText(R.id.tvData, String.valueOf(itemBean.getJe()));
-                if (position % 2 != 0) {
-                    holder.setColor(R.id.ll);
-                }
-            }
-        };
-        recyclerView.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-
         mBarChart.getXAxis().setDrawLabels(false);
         //设置单个点击事件
         mBarChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
@@ -262,6 +249,17 @@ public class CLXHTongJiActivity extends BaseActivity {
                             mBarChart.invalidate();
                             recyclerView.setVisibility(View.VISIBLE);
                             llNoContent.setVisibility(View.GONE);
+                            mAdapter = new BaseRecyclerAdapterPosition<CLXHTongJi>(CLXHTongJiActivity.this, R.layout.adapter_data_item, beanList) {
+                                @Override
+                                public void convert(BaseViewHolderPosition holder, final CLXHTongJi itemBean, int position) {
+                                    holder.setText(R.id.tvName, itemBean.getTypeName());
+                                    holder.setText(R.id.tvData, String.valueOf(itemBean.getJe()));
+                                    if (position % 2 != 0) {
+                                        holder.setColor(R.id.ll);
+                                    }
+                                }
+                            };
+                            recyclerView.setAdapter(mAdapter);
                             mAdapter.notifyDataSetChanged();
                             ProgressDialogUtil.stopLoad();
                         }

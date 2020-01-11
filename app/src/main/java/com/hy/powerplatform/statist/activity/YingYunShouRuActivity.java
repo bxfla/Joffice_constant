@@ -88,7 +88,7 @@ public class YingYunShouRuActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        tvName.setText("方式");
+        tvName.setText("类型");
         tvValue.setText("金额（元）");
         spreadLineChart.setDescription(null);
         header.setRightTv(false);
