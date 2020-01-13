@@ -130,7 +130,6 @@
             <View style="@style/line"></View>
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:orientation="horizontal">
@@ -146,6 +145,7 @@
                     android:id="@+id/tvSFZZ"
                     style="@style/oaEditText"/>
             </LinearLayout>
+            <View style="@style/line"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"

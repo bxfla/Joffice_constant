@@ -97,7 +97,7 @@ public class UriToPathUtil {
                 return imageUri.getLastPathSegment();
             return getDataColumn(context, imageUri, null, null);
         }
-        // File
+        // Filed
         else if ("file".equalsIgnoreCase(imageUri.getScheme())) {
             return imageUri.getPath();
         }

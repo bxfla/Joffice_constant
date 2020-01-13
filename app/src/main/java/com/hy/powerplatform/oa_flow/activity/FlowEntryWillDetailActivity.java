@@ -34,7 +34,7 @@ import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.oa_flow.adapter.FlowMessageAdapter;
-import com.hy.powerplatform.oa_flow.bean.File;
+import com.hy.powerplatform.oa_flow.bean.Filed;
 import com.hy.powerplatform.oa_flow.bean.FlowContractPerson;
 import com.hy.powerplatform.oa_flow.bean.FlowEntry;
 import com.hy.powerplatform.oa_flow.bean.FlowMessage1;
@@ -1499,8 +1499,8 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     break;
                 case TAG_NINE:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(downloadData, File.class);
-                    String filePath = file.getData().getFilePath();
+                    Filed filed = gson2.fromJson(downloadData, Filed.class);
+                    String filePath = filed.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));

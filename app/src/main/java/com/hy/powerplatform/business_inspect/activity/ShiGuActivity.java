@@ -623,7 +623,7 @@ public class ShiGuActivity extends BaseActivity implements CorrelationView {
 //                if (mResults.size() == 1) {
 //                    if (imageView1.getDrawable() != null) {
 //                        RequestParams params = new RequestParams();
-//                        File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + "shigu0" + ".png");
+//                        Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + "shigu0" + ".png");
 //                        String sdpath = Environment.getExternalStorageDirectory()
 //                                + "/" + dirPath;// 获取sdcard的根路径
 //                        String filepath = "shigu0" + ".png";
@@ -666,7 +666,7 @@ public class ShiGuActivity extends BaseActivity implements CorrelationView {
                 if (tag) {
 //                    if (imageView1.getDrawable() != null) {
 //                        RequestParams params = new RequestParams();
-//                        File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + "shigu0" + ".png");
+//                        Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + "shigu0" + ".png");
 //                        String sdpath = Environment.getExternalStorageDirectory()
 //                                + "/" + dirPath;// 获取sdcard的根路径
 //                        String filepath = "shigu0" + ".png";

@@ -298,7 +298,7 @@
 
     <string name="oaflow_human_rb1">应聘人员</string>
     <string name="oaflow_human_rb2">实习驾驶员</string>
-    <string name="oaflow_human_rb3">正式员工</string>
+    <string name="oaflow_human_rb3">档案查询</string>
 
     <string name="oaflow_operation_rb1">车辆档案</string>
     <string name="oaflow_operation_rb2">线路查询</string>

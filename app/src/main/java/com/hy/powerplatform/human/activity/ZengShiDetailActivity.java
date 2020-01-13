@@ -52,7 +52,22 @@ public class ZengShiDetailActivity extends BaseActivity {
         tvName.setText(bean.getFullname());
 
         tvZZMM.setText(bean.getParty());
-        tvSFZZ.setText(bean.getAge());
+        String sfzz = bean.getIsWork();
+        if(sfzz.equals("0")){
+            tvSFZZ.setText("试用");
+        }else if(sfzz.equals("1")){
+            tvSFZZ.setText("在职");
+        }else if(sfzz.equals("2")){
+            tvSFZZ.setText("离职");
+        }else if(sfzz.equals("3")){
+            tvSFZZ.setText("退休");
+        }else if(sfzz.equals("4")){
+            tvSFZZ.setText("离休");
+        }else if(sfzz.equals("5")){
+            tvSFZZ.setText("死亡");
+        }else if(sfzz.equals("6")){
+            tvSFZZ.setText("待岗");
+        }
         tvWork.setText(bean.getPosition());
         tvDep.setText(bean.getDepName());
         tvRZTime.setText(bean.getNowWorkDate());

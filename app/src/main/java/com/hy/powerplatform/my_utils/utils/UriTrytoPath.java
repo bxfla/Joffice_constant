@@ -59,7 +59,7 @@ public class UriTrytoPath {
                 return imageUri.getLastPathSegment();
             return getDataColumn(context, imageUri, null, null);
         }
-        // File
+        // Filed
         else if ("file".equalsIgnoreCase(imageUri.getScheme())) {
             return imageUri.getPath();
         }

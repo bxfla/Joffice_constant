@@ -642,7 +642,7 @@ public class SufferNoPassFragment extends Fragment implements CarCodeView, Inspe
 //                for (int j = 0; j < imageList.size(); j++) {
 //                    map_photoName.put(smallTypeList01.get(i), String.valueOf(i) + ".png");
 //                    RequestParams params = new RequestParams();
-//                    File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(i) + ".png");
+//                    Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(i) + ".png");
 //                    String sdpath = Environment.getExternalStorageDirectory()
 //                            + "/" + dirPath;// 获取sdcard的根路径
 //                    String filepath = imageList.get(j).get(key);

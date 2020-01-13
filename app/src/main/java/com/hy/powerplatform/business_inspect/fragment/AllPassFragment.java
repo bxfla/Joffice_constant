@@ -768,7 +768,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnBabuzouPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -803,7 +803,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnDaisuyzPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -838,7 +838,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnYibiaojcPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -873,7 +873,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnQiqongPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -908,7 +908,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnDangweiPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -943,7 +943,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnDengguangPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -978,7 +978,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnKgqbPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1013,7 +1013,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnZengjiandPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1048,7 +1048,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnZongdianyuanPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1086,7 +1086,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfYrybPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1121,7 +1121,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfYuyantaiduPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1156,7 +1156,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfPutonghuaPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1191,7 +1191,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfZhaoguPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1226,7 +1226,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfShudaoPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1261,7 +1261,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfBaozhanqiPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1296,7 +1296,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfWenduPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1331,7 +1331,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfWeishengPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1366,7 +1366,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfBaifangPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1401,7 +1401,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfZhanshipaiPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1436,7 +1436,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfWeizhanPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1471,7 +1471,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfErcijzPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1506,7 +1506,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfYiweishipinPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1541,7 +1541,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfZhongdianzhanjcPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1921,7 +1921,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcWmjsPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1956,7 +1956,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcPwjsPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -1991,7 +1991,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcJczPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2026,7 +2026,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcAnjianPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2061,7 +2061,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcZdgfyyPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2096,7 +2096,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcYingjiPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2131,7 +2131,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcDanzhanPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2166,7 +2166,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcYindaockPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2201,7 +2201,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcZdzskPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2237,7 +2237,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfYrybPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2272,7 +2272,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfYuyantaiduPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2307,7 +2307,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfPutonghuaPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2342,7 +2342,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfZhaoguPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2377,7 +2377,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfShudaoPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2412,7 +2412,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfBaozhanqiPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2447,7 +2447,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfWenduPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2482,7 +2482,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfWeishengPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2517,7 +2517,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfBaifangPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2552,7 +2552,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfZhanshipaiPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2587,7 +2587,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfWeizhanPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2622,7 +2622,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfErcijzPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2657,7 +2657,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfYiweishipinPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -2692,7 +2692,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!fwgfZhongdianzhanjcPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3259,7 +3259,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcWmjsPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3294,7 +3294,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcPwjsPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3329,7 +3329,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcJczPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3364,7 +3364,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcAnjianPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3399,7 +3399,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcZdgfyyPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3434,7 +3434,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcYingjiPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3469,7 +3469,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcDanzhanPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3504,7 +3504,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcYindaockPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3539,7 +3539,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!aqxcZdzskPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath+"/"+String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3574,7 +3574,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnBabuzouPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3609,7 +3609,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnDaisuyzPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3644,7 +3644,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnYibiaojcPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3679,7 +3679,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnQiqongPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3714,7 +3714,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnDangweiPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3749,7 +3749,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnDengguangPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3784,7 +3784,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnKgqbPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3819,7 +3819,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnZengjiandPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";
@@ -3854,7 +3854,7 @@ public class AllPassFragment extends Fragment implements CarCodeView, InspectAll
 //            }
 //            if (!jsjnZongdianyuanPic.isEmpty()) {
 //                RequestParams params = new RequestParams();
-//                File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
+//                Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + String.valueOf(num) + ".png");
 //                String sdpath = Environment.getExternalStorageDirectory()
 //                        + "/" + dirPath;// 获取sdcard的根路径
 //                String filepath = String.valueOf(num) + ".png";

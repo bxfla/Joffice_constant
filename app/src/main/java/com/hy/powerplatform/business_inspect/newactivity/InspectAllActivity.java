@@ -676,17 +676,17 @@ public class InspectAllActivity extends BaseActivity implements InspectAllView,
         matrix.setScale(0.5f, 0.5f);
         Bitmap bm = Bitmap.createBitmap(cbitmap01, 0, 0, cbitmap01.getWidth(),
                 cbitmap01.getHeight(), matrix, true);
-//        File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" +
+//        Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" +
 //                String.valueOf(position)
 //                + System.currentTimeMillis() + random.nextInt(10) + ".png");
 //        OkHttpClient client = new OkHttpClient();
-//        List<File> fileList = new ArrayList<>();
+//        List<Filed> fileList = new ArrayList<>();
 //        fileList.add(file);
 //
 //        // mImgUrls为存放图片的url集合
 //        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
 //        for (int i = 0; i < fileList.size(); i++) {
-//            File f = new File(String.valueOf(fileList.get(i)));
+//            Filed f = new Filed(String.valueOf(fileList.get(i)));
 //            if (f != null) {
 //                builder.addFormDataPart("img", f.getName());
 //            }

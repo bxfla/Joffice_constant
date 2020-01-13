@@ -604,7 +604,7 @@ public class HealthNoPassFragment extends Fragment implements CarCodeView, Inspe
 //                            imageList1.get(j).put(key,name);
 //                            map_photoName.put(smallTypeList02.get(i), name);
 //                            final RequestParams params = new RequestParams();
-//                            File file = new File(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + imageList.get(j).get(key));
+//                            Filed file = new Filed(Environment.getExternalStorageDirectory() + "/" + dirPath + "/" + imageList.get(j).get(key));
 //                            String sdpath = Environment.getExternalStorageDirectory()
 //                                    + "/" + dirPath;// 获取sdcard的根路径
                             final RequestParams params = new RequestParams();

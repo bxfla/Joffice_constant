@@ -32,7 +32,7 @@ import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerDay;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerMin;
-import com.hy.powerplatform.oa_flow.bean.File;
+import com.hy.powerplatform.oa_flow.bean.Filed;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -698,8 +698,8 @@ public class DBDetailActivity extends BaseActivity {
                     break;
                 case Constant.TAG_EIGHT:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(downloadData, File.class);
-                    String filePath = file.getData().getFilePath();
+                    Filed filed = gson2.fromJson(downloadData, Filed.class);
+                    String filePath = filed.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));

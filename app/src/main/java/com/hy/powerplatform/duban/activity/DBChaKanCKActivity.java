@@ -19,7 +19,7 @@ import com.hy.powerplatform.my_utils.base.OkHttpUtil;
 import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
-import com.hy.powerplatform.oa_flow.bean.File;
+import com.hy.powerplatform.oa_flow.bean.Filed;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -239,8 +239,8 @@ public class DBChaKanCKActivity extends BaseActivity {
                     break;
                 case TAG_FOUR:
                     Gson gson2 = new Gson();
-                    File file = gson2.fromJson(downloadData, File.class);
-                    String filePath = file.getData().getFilePath();
+                    Filed filed = gson2.fromJson(downloadData, Filed.class);
+                    String filePath = filed.getData().getFilePath();
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -251,4 +251,5 @@ public class DBChaKanCKActivity extends BaseActivity {
             }
         }
     };
+
 }

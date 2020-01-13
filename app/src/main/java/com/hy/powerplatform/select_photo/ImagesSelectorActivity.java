@@ -224,7 +224,7 @@ public class ImagesSelectorActivity extends BaseActivity
 //                    ImageListContent.addItem(item);
 //
 //                    // find the parent folder for this image, and add path to folderList if not existed
-//                    String folderPath = new File(path).getParentFile().getAbsolutePath();
+//                    String folderPath = new Filed(path).getParentFile().getAbsolutePath();
 //                    FolderItem folderItem = FolderListContent.getItem(folderPath);
 //                    if (folderItem == null) {
 //                        // does not exist, create it
@@ -406,7 +406,7 @@ public class ImagesSelectorActivity extends BaseActivity
             Toast.makeText(this, R.string.msg_no_camera, Toast.LENGTH_SHORT).show();
         }
 
-//        File file = null;
+//        Filed file = null;
 //        try {
 //            file = FileUtils.createTmpFile(this);
 //        } catch (IOException e) {
