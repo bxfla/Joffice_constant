@@ -41,10 +41,12 @@
         <TextView
             android:id="@+id/tvmyName"
             style="@style/TextView"
-            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingLeft="15dp"
+            android:gravity="center_vertical"
             android:textColor="@color/xiaohei" />
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -71,7 +73,10 @@
         <TextView
             android:id="@+id/tvMyStatus"
             style="@style/TextView"
-            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingLeft="15dp"
+            android:gravity="center_vertical"
             android:textColor="@color/xiaohei" />
     </LinearLayout>
     <View
@@ -101,7 +106,109 @@
         <TextView
             android:id="@+id/tvVersion"
             style="@style/TextView"
-            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingLeft="15dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/xiaohei" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/shouye" />
+
+    <LinearLayout
+        style="@style/linerlayout"
+        android:background="@color/whith">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/bussiness_man" />
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="登录次数"
+            android:textColor="@color/xiaohei" />
+
+        <TextView
+            android:id="@+id/tvLoginNum"
+            style="@style/TextView"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingLeft="15dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/xiaohei" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/shouye" />
+
+    <LinearLayout
+        style="@style/linerlayout"
+        android:background="@color/whith">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/descending" />
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="上次登录IP"
+            android:textColor="@color/xiaohei" />
+
+        <TextView
+            android:id="@+id/tvOldIp"
+            style="@style/TextView"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingLeft="15dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/xiaohei" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/shouye" />
+
+    <LinearLayout
+        style="@style/linerlayout"
+        android:background="@color/whith">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/address" />
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="上次登录时间"
+            android:textColor="@color/xiaohei" />
+
+        <TextView
+            android:id="@+id/tvOldLogin"
+            style="@style/TextView"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingLeft="15dp"
+            android:gravity="center_vertical"
             android:textColor="@color/xiaohei" />
     </LinearLayout>
     <View

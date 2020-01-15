@@ -229,6 +229,8 @@ public class Constant {
     public static final String  OAFLOWNUM = "flow/getHistoryCountProcessRun.do";
     // 公告状态
     public static final String  NOTICETYPE = "info/addReadCountNews.do";
+    // 个人中心数据
+    public static final String  PERSONCENTER = "system/getLogTimeByIpAppUser.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";
