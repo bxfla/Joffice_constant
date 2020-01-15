@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import com.hy.powerplatform.R;
+import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
@@ -28,6 +29,8 @@ public class OperationListActivity extends BaseActivity {
     @BindView(R.id.rb2)
     RadioButton rb2;
     Intent intent;
+    String rights;
+    String userStatus;
     AlertDialogUtil alertDialogUtil;
 
     @Override
@@ -35,6 +38,14 @@ public class OperationListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         alertDialogUtil = new AlertDialogUtil(this);
+        userStatus = new SharedPreferencesHelper(this, "login").getData(this, "userStatus", "");
+        rights = new SharedPreferencesHelper(this, "login").getData(this, "rights", "");
+        if (rights.contains(",CarManeger")) {
+            rb1.setVisibility(View.GONE);
+        }
+        if (rights.contains(",LineInfoView")) {
+            rb2.setVisibility(View.GONE);
+        }
     }
 
     @Override

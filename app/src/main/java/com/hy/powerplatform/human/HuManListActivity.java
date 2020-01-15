@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import com.hy.powerplatform.R;
+import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.human.activity.ShiYongListActivity;
 import com.hy.powerplatform.human.activity.YingPinListActivity;
 import com.hy.powerplatform.human.activity.ZengShiListActivity;
@@ -28,6 +29,8 @@ public class HuManListActivity extends BaseActivity {
     @BindView(R.id.rb3)
     RadioButton rb3;
     Intent intent;
+    String rights;
+    String userStatus;
     AlertDialogUtil alertDialogUtil;
 
     @Override
@@ -35,6 +38,17 @@ public class HuManListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         alertDialogUtil = new AlertDialogUtil(this);
+        userStatus = new SharedPreferencesHelper(this, "login").getData(this, "userStatus", "");
+        rights = new SharedPreferencesHelper(this, "login").getData(this, "rights", "");
+        if (rights.contains(",ResumeView")) {
+           rb1.setVisibility(View.GONE);
+        }
+        if (rights.contains(",DriverPracticeFileView")) {
+            rb2.setVisibility(View.GONE);
+        }
+        if (rights.contains(",EmpNormalSearchView")) {
+            rb3.setVisibility(View.GONE);
+        }
     }
 
     @Override

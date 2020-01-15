@@ -111,6 +111,10 @@ public class FlowEntryDetailActivity extends BaseActivity {
     TextView tvLeader5W;
     @BindView(R.id.tvLeader6W)
     TextView tvLeader6W;
+    @BindView(R.id.tvLeaderNum)
+    TextView tvLeaderNum;
+    @BindView(R.id.tvLeaderNumW)
+    TextView tvLeaderNumW;
     private String res;
 
     String xiangguanfujian = "";
@@ -127,6 +131,7 @@ public class FlowEntryDetailActivity extends BaseActivity {
         tvLeaderW.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader1W.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeaderNum.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader3W.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
@@ -290,6 +295,7 @@ public class FlowEntryDetailActivity extends BaseActivity {
                     String idCard = bean.getMainform().get(0).getSfzh();
                     String sex = bean.getMainform().get(0).getXb();
                     String carType = bean.getMainform().get(0).getZjcx();
+                    String ygbh = bean.getMainform().get(0).getYgbh();
                     xiangguanfujian = bean.getMainform().get(0).getXiangguanfujian();
                     if (xiangguanfujian.equals("")) {
                         llData.setVisibility(View.GONE);
@@ -315,6 +321,7 @@ public class FlowEntryDetailActivity extends BaseActivity {
                     etPhone.setText(phone);
                     etIdNum.setText(idCard);
                     spinnerSex.setText(sex);
+                    tvLeaderNumW.setText(ygbh);
                     spinnerCarType.setText(carType);
                     if (fgs.equals("营运一分公司")) {
                         rb1.setChecked(true);

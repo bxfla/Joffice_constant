@@ -58,7 +58,12 @@ public class LineSearchDetailActivity extends BaseActivity {
         }
         tvDepartment.setText(bean.getDepartment().getDepName()+"");
         tvStartTime.setText(bean.getBeginDate()+"");
-        tvEndTime.setText(bean.getEndDate()+"");
+        if (bean.getEndDate()==null){
+            tvEndTime.setText("");
+        }else {
+            tvEndTime.setText(bean.getEndDate()+"");
+        }
+
         if (bean.getType()!=null&&bean.getType().equals("0")){
             tvStation.setText("使用中");
         }

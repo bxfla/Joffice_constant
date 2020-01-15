@@ -184,7 +184,13 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
     TextView tvLeader6W;
     @BindView(R.id.tvLeader5W)
     TextView tvLeader5W;
-    private String name, taskId, res, fullnameUId, fullname, cwsjbyj, yyglbyj, xxjsbyj, cctkjyxgsyj, zhglbyj, rlzyb1, jbbmyj = "";
+    @BindView(R.id.tvLeaderNum)
+    TextView tvLeaderNum;
+    @BindView(R.id.tvLeaderNumW)
+    TextView tvLeaderNumW;
+    @BindView(R.id.etLeaderNumW)
+    EditText etLeaderNumW;
+    private String name, taskId, res, fullnameUId, fullname, cwsjbyj, yyglbyj, xxjsbyj,ygbh, cctkjyxgsyj, zhglbyj, rlzyb1, jbbmyj = "";
     private String mainId, signaName, destName, destType, checkTask = "", qianzhiData = "";
     String leader = "";
     String leaderCode = "";
@@ -193,7 +199,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
     String tag = "noEnd";
     String comment = "";
     String selectName;
-    String cwreout, yyreout, xxreout, cctreout, zhreout, rlreout, jbbmreout, flowAssignld, serialNumber = "";
+    String cwreout, yyreout, xxreout, cctreout, zhreout, rlreout, jbbmreout, flowAssignld, serialNumber = "",ygbhreout = "";
     String zjce1, zjce2, zjce3 = "";
     String tagData = "";
     String[] bigNametemp = null;
@@ -717,6 +723,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                 zhglbyj = bean.getMainform().get(0).getZhglbyj();
                 rlzyb1 = bean.getMainform().get(0).getRlzybyj();
                 jbbmyj = bean.getMainform().get(0).getJbbmyj();
+                ygbh = bean.getMainform().get(0).getYgbh();
                 userName = new SharedPreferencesHelper(FlowEntryWillDetailActivity.this,
                         "login").getData(FlowEntryWillDetailActivity.this, "userStatus", "");
                 userCode = new SharedPreferencesHelper(FlowEntryWillDetailActivity.this,
@@ -779,6 +786,24 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         xxjsbyj = xxjsbyj + "," + jsonArray.toString();
                         xxjsbyj = xxjsbyj.toString().replace("],[", ",");
                     }
+                }
+                if (etLeaderNumW.getVisibility() == View.VISIBLE) {
+                    comment = etLeaderNumW.getText().toString();
+//                    try {
+//                        jsonObject.put("ui", userCode);
+//                        jsonObject.put("un", userName);
+//                        jsonObject.put("c", str);
+//                        jsonObject.put("v", etLeaderNumW.getText().toString());
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    jsonArray.put(jsonObject);
+//                    if (xxjsbyj.equals("")) {
+//                        xxjsbyj = jsonArray.toString();
+//                    } else {
+//                        xxjsbyj = xxjsbyj + "," + jsonArray.toString();
+//                        xxjsbyj = xxjsbyj.toString().replace("],[", ",");
+//                    }
                 }
                 if (etLeader3.getVisibility() == View.VISIBLE) {
                     comment = etLeader3.getText().toString();
@@ -864,12 +889,12 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     rlzy3 = "on";
                 }
                 if (comment.equals("")) {
-                    if (!cwreout.equals("2") && !yyreout.equals("2") && !xxreout.equals("2")
+                    if (!cwreout.equals("2") && !yyreout.equals("2") && !xxreout.equals("2")&& !ygbhreout.equals("2")
                             && !cctreout.equals("2") && !zhreout.equals("2") && !rlreout.equals("2")) {
                         comment = "";
                         personSession();
                     } else if (!rlzyb1.equals("") && !zhglbyj.equals("") && !cctkjyxgsyj.equals("")
-                            && !xxjsbyj.equals("") && !yyglbyj.equals("") && !cwsjbyj.equals("")) {
+                            && !ygbh.equals("")&& !xxjsbyj.equals("") && !yyglbyj.equals("") && !cwsjbyj.equals("")) {
                         comment = "";
                         personSession();
                     } else {
@@ -937,6 +962,12 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                 String phone = tvPhone.getText().toString();
                 String idCard = tvIdNum.getText().toString();
                 String sex = tvSex.getText().toString();
+                String ygbh = "";
+                if (tvLeaderNumW.getVisibility()==View.VISIBLE){
+                    ygbh = tvLeaderNumW.getText().toString();
+                }else {
+                    ygbh = etLeaderNumW.getText().toString();
+                }
                 String fgs = "";
                 if (rbC1.isChecked()) {
                     fgs = rbC1.getText().toString();
@@ -1094,7 +1125,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     upData = dbA.OAEntryLeader(url, person, phone, idCard, sex, zjce1, zjce2, zjce3,
                             rlzy1, rlzy2, rlzy3, userCode, destName, taskId, flowAssignld, mainId,
                             cwsjbyj, yyglbyj, xxjsbyj, cctkjyxgsyj, zhglbyj, rlzyb1, comment, signaName,
-                            jbbmyj, fgs);
+                            jbbmyj, fgs,ygbh);
                     if (upData.equals("")) {
                         handler.sendEmptyMessage(TAG_THERE);
                     } else {
@@ -1137,6 +1168,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     String phone = bean.getMainform().get(0).getLxdh();
                     String idCard = bean.getMainform().get(0).getSfzh();
                     String sex = bean.getMainform().get(0).getXb();
+                    String ygbh = bean.getMainform().get(0).getYgbh();
                     runID = bean.getMainform().get(0).getRunId();
                     xiangguanfujian = bean.getMainform().get(0).getXiangguanfujian();
                     if (xiangguanfujian.equals("")) {
@@ -1177,6 +1209,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         JSONObject jsonObject = new JSONObject(formRights);
                         cwreout = jsonObject.getString("cwsjbyj");
                         yyreout = jsonObject.getString("yyglbyj");
+                        ygbhreout = jsonObject.getString("ygbh");
                         xxreout = jsonObject.getString("xxjsbyj");
                         cctreout = jsonObject.getString("cctkjyxgsyj");
                         zhreout = jsonObject.getString("zhglbyj");
@@ -1207,9 +1240,14 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         if (xxreout.equals("2")) {
                             tvLeader2.setVisibility(View.GONE);
                             etLeader2.setVisibility(View.VISIBLE);
+                            tvLeaderNumW.setVisibility(View.GONE);
+                            etLeaderNumW.setVisibility(View.VISIBLE);
                         } else {
                             tvLeader2.setVisibility(View.VISIBLE);
                             etLeader2.setVisibility(View.GONE);
+                            tvLeaderNumW.setVisibility(View.VISIBLE);
+                            etLeaderNumW.setVisibility(View.GONE);
+                            tvLeaderNum.setTextColor(getResources().getColor(R.color.order_stop_black));
                             tvLeader2W.setTextColor(getResources().getColor(R.color.order_stop_black));
                         }
                         if (cctreout.equals("2")) {
@@ -1302,6 +1340,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     tvSex.setText(sex);
                     tvData.setText(xiangguanfujian);
                     tvCarType.setText(zjce1);
+                    tvLeaderNumW.setText(ygbh);
 
                     String word7 = "";
                     if (jbbmyj != null && !jbbmyj.equals("")) {

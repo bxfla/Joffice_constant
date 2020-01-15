@@ -175,10 +175,14 @@ public class SelectOneCarActivity extends BaseActivity implements SelectOneCarAd
         selectCar = listCarCode.get(position).getName();
         selectCarId = listCarCode.get(position).getValue();
         Intent i = new Intent();
-        i.putExtra("bian", selectCar);
-        i.putExtra("bianId", selectCarId);
-        setResult(Constant.TAG_THERE, i);
-        finish();
+        if (selectCar==null||selectCar.equals("")||selectCarId==null||selectCarId.equals("")){
+            i.putExtra("bian", selectCar);
+            i.putExtra("bianId", selectCarId);
+            setResult(Constant.TAG_THERE, i);
+            finish();
+        }else {
+            finish();
+        }
     }
 
 

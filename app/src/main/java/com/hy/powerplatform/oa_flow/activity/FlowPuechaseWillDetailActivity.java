@@ -1194,6 +1194,10 @@ public class FlowPuechaseWillDetailActivity extends BaseActivity {
                 cb12.setVisibility(View.VISIBLE);
             }
         }
+        ll1.setVisibility(View.GONE);
+        ll2.setVisibility(View.GONE);
+        ll5.setVisibility(View.GONE);
+        ll6.setVisibility(View.GONE);
         ProgressDialogUtil.stopLoad();
     }
 

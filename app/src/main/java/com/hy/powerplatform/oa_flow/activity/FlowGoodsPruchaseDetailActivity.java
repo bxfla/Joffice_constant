@@ -132,8 +132,6 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
     TextView tvAllNum;
     @BindView(R.id.tvAllMoney)
     TextView tvAllMoney;
-    @BindView(R.id.tvOther)
-    TextView tvOther;
     @BindView(R.id.btnHistory)
     Button btnHistory;
     @BindView(R.id.recyclerView)
@@ -426,7 +424,6 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
                     etShenQingRen.setText(person);
                     tvTime.setText(time);
                     etApplication.setText(yt);
-                    tvOther.setText(other);
                     tvAllMoney.setText(allMoney);
                     tvAllNum.setText(allNum);
 

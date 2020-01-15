@@ -27,6 +27,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
 import com.hy.powerplatform.R;
+import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.comper.ComperListActivity;
 import com.hy.powerplatform.duban.bean.ItemBean;
 import com.hy.powerplatform.human.HuManListActivity;
@@ -106,6 +107,8 @@ public class Fragment01 extends Fragment {
 
     Unbinder unbinder;
     int num = 0;
+    String rights;
+    String userStatus;
     Intent intent;
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapter mAdapter;
@@ -132,6 +135,8 @@ public class Fragment01 extends Fragment {
         } else {
             view = inflater.inflate(R.layout.fragment01, container, false);
             unbinder = ButterKnife.bind(this, view);
+            userStatus = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "userStatus", "");
+            rights = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "rights", "");
             httpUtil = OkHttpUtil.getInstance(getActivity());
             mBarChart.setDescription(null);
             getLoginPerson();
@@ -363,29 +368,51 @@ public class Fragment01 extends Fragment {
     }
 
     private void addItem() {
+        itemList.clear();
         ItemBean bean1 = new ItemBean();
         int drawableId1 = getResources().getIdentifier("fragment_rb1", "drawable", getActivity().getPackageName());
         bean1.setAddress(drawableId1);
         bean1.setName(getResources().getString(R.string.fragment_rb1));
-        itemList.add(bean1);
+        if (rights.contains(",NoticeView")||rights.contains(",MyJoinConferenceView")||rights.contains(",MyJoinedConferenceView")
+            ||rights.contains(",WaitOpenConferenceView")||rights.contains(",HaveOpenConferenceView")||rights.contains(",ConfSummaryView")
+            ||rights.contains(",NewProcess")||rights.contains(",MyTaskView")||rights.contains(",MyProcessRunView")
+            ||rights.contains(",RelevantProcessRunView")||rights.contains(",RevokeFlowDetailView")||rights.contains(",FileSendView")
+            ||rights.contains(",SuperWorkTaskView")||rights.contains(",SuperWorkTaskView")||rights.contains(",SuperTaskOperView")
+            ||rights.contains(",SuperWorkTaskSuperView")) {
+            itemList.add(bean1);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean1);
+        }
 
         ItemBean bean2 = new ItemBean();
         int drawableId2 = getResources().getIdentifier("fragment_rb2", "drawable", getActivity().getPackageName());
         bean2.setAddress(drawableId2);
         bean2.setName(getResources().getString(R.string.fragment_rb2));
-        itemList.add(bean2);
+        if (rights.contains(",ResumeView")||rights.contains(",DriverPracticeFileView")||rights.contains(",EmpNormalSearchView")) {
+            itemList.add(bean2);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean2);
+        }
 
         ItemBean bean3 = new ItemBean();
         int drawableId3 = getResources().getIdentifier("fragment_rb3", "drawable", getActivity().getPackageName());
         bean3.setAddress(drawableId3);
         bean3.setName(getResources().getString(R.string.fragment_rb3));
-        itemList.add(bean3);
+        if (rights.contains(",CarManeger")||rights.contains(",LineInfoView")) {
+            itemList.add(bean3);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean3);
+        }
 
         ItemBean bean6 = new ItemBean();
         int drawableId6 = getResources().getIdentifier("fragment_rb6", "drawable", getActivity().getPackageName());
         bean6.setAddress(drawableId6);
         bean6.setName(getResources().getString(R.string.fragment_rb6));
-        itemList.add(bean6);
+        if (rights.contains(",ViolationRecordView")||rights.contains(",AccidentBasicInformationView")) {
+            itemList.add(bean6);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean6);
+        }
 
         ItemBean bean7 = new ItemBean();
         int drawableId7 = getResources().getIdentifier("fragment_rb7", "drawable", getActivity().getPackageName());
@@ -397,7 +424,11 @@ public class Fragment01 extends Fragment {
         int drawableId8 = getResources().getIdentifier("fragment_rb8", "drawable", getActivity().getPackageName());
         bean8.setAddress(drawableId8);
         bean8.setName(getResources().getString(R.string.fragment_rb8));
-        itemList.add(bean8);
+        if (rights.contains(",OperationIndexReportView")||rights.contains(",ProductionOperationAnalysisView")) {
+            itemList.add(bean8);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean8);
+        }
 
         ItemBean bean4 = new ItemBean();
         int drawableId4 = getResources().getIdentifier("fragment_rb4", "drawable", getActivity().getPackageName());

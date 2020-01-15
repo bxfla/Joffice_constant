@@ -34,6 +34,8 @@ public class MettingListActivity extends BaseActivity {
     RecyclerView recyclerView;
 
     Intent intent;
+    String rights;
+    String userStatus;
     BaseRecyclerAdapter mAdapter;
     AlertDialogUtil alertDialogUtil;
     List<ItemBean> itemList = new ArrayList<>();
@@ -43,6 +45,8 @@ public class MettingListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         alertDialogUtil = new AlertDialogUtil(this);
+        rights = new SharedPreferencesHelper(this, "login").getData(this, "rights", "");
+        userStatus = new SharedPreferencesHelper(this, "login").getData(this, "userStatus", "");
         addItem();
         setItemAdapter();
     }
@@ -63,24 +67,33 @@ public class MettingListActivity extends BaseActivity {
     }
 
     private void addItem() {
-        String item = new SharedPreferencesHelper(this,"login").getData(this,"rights","");
         ItemBean bean1 = new ItemBean();
         int drawableId1 = getResources().getIdentifier("oaflow_metting_rb1", "drawable", getPackageName());
         bean1.setAddress(drawableId1);
         bean1.setName(getResources().getString(R.string.oaflow_metting_rb1));
-        itemList.add(bean1);
+        if (rights.contains(",MyJoinConferenceView")) {
+            itemList.add(bean1);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean1);
+        }
 
         ItemBean bean2 = new ItemBean();
         int drawableId2 = getResources().getIdentifier("oaflow_metting_rb2", "drawable", getPackageName());
         bean2.setAddress(drawableId2);
         bean2.setName(getResources().getString(R.string.oaflow_metting_rb2));
-        itemList.add(bean2);
+        if (rights.contains(",MyJoinedConferenceView")) {
+            itemList.add(bean2);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean2);
+        }
 
         ItemBean bean3 = new ItemBean();
         int drawableId3 = getResources().getIdentifier("oaflow_metting_rb3", "drawable", getPackageName());
         bean3.setAddress(drawableId3);
         bean3.setName(getResources().getString(R.string.oaflow_metting_rb3));
-        if (item.contains("WaitOpenConferenceView")){
+        if (rights.contains(",WaitOpenConferenceView")) {
+            itemList.add(bean3);
+        }else if (userStatus.equals("超级管理员")){
             itemList.add(bean3);
         }
 
@@ -88,7 +101,9 @@ public class MettingListActivity extends BaseActivity {
         int drawableId4 = getResources().getIdentifier("oaflow_metting_rb4", "drawable", getPackageName());
         bean4.setAddress(drawableId4);
         bean4.setName(getResources().getString(R.string.oaflow_metting_rb4));
-        if (item.contains("HaveOpenConferenceView")){
+        if (rights.contains(",HaveOpenConferenceView")) {
+            itemList.add(bean4);
+        }else if (userStatus.equals("超级管理员")){
             itemList.add(bean4);
         }
 
@@ -96,7 +111,11 @@ public class MettingListActivity extends BaseActivity {
         int drawableId5 = getResources().getIdentifier("oaflow_metting_rb5", "drawable", getPackageName());
         bean5.setAddress(drawableId5);
         bean5.setName(getResources().getString(R.string.oaflow_metting_rb5));
-        itemList.add(bean5);
+        if (rights.contains(",ConfSummaryView")) {
+            itemList.add(bean5);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean5);
+        }
     }
 
     private void setItemAdapter() {

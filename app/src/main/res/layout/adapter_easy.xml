@@ -9,6 +9,7 @@
         android:layout_height="45dp"
         android:textSize="15dp"
         android:maxLines="1"
+        android:paddingLeft="10dp"
         android:gravity="center_vertical"
         android:textColor="@color/black"/>
     <View

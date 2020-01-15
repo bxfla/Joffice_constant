@@ -1,6 +1,7 @@
 package com.hy.powerplatform.oa_flow.phone;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -72,6 +73,19 @@ public class PhoneActivity extends BaseActivity {
                 holder.setText(R.id.tvPhone, resultBean.getDepNames());
                 holder.setText(R.id.tv3, "手机号");
                 holder.setText(R.id.tvIdCard, resultBean.getPhone());
+                holder.setOnClickListener(R.id.tvIdCard, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(resultBean.getPhone()==null||resultBean.getPhone().equals("")){
+
+                        }else {
+                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                            Uri data = Uri.parse("tel:" + resultBean.getPhone());
+                            intent.setData(data);
+                            startActivity(intent);
+                        }
+                    }
+                });
             }
         };
         recyclerView.setAdapter(baseAdapter);

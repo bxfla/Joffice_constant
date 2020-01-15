@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.hy.powerplatform.R;
+import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.duban.activity.DBActivity;
 import com.hy.powerplatform.duban.bean.ItemBean;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
@@ -46,6 +47,8 @@ public class OAFlowListActivity extends BaseActivity {
     RecyclerView recyclerView;
 
     int num =0;
+    String rights;
+    String userStatus;
     Intent intent;
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapter mAdapter;
@@ -58,6 +61,8 @@ public class OAFlowListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         alertDialogUtil = new AlertDialogUtil(this);
+        rights = new SharedPreferencesHelper(this, "login").getData(this, "rights", "");
+        userStatus = new SharedPreferencesHelper(this, "login").getData(this, "userStatus", "");
 //        //添加模块
 //        addItem();
 //        setItemAdapter();
@@ -123,31 +128,54 @@ public class OAFlowListActivity extends BaseActivity {
         int drawableId1 = getResources().getIdentifier("oaflow_rb1", "drawable", getPackageName());
         bean1.setAddress(drawableId1);
         bean1.setName(getResources().getString(R.string.oaflow_rb1));
-        itemList.add(bean1);
+        if (rights.contains(",NoticeView")) {
+            itemList.add(bean1);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean1);
+        }
 
         ItemBean bean2 = new ItemBean();
         int drawableId2 = getResources().getIdentifier("oaflow_rb2", "drawable", getPackageName());
         bean2.setAddress(drawableId2);
         bean2.setName(getResources().getString(R.string.oaflow_rb2));
-        itemList.add(bean2);
+        if (rights.contains(",MyJoinConferenceView")||rights.contains(",MyJoinedConferenceView")||rights.contains(",WaitOpenConferenceView")
+                ||rights.contains(",HaveOpenConferenceView")||rights.contains(",ConfSummaryView")) {
+            itemList.add(bean2);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean2);
+        }
 
         ItemBean bean3 = new ItemBean();
         int drawableId3 = getResources().getIdentifier("oaflow_rb3", "drawable", getPackageName());
         bean3.setAddress(drawableId3);
         bean3.setName(getResources().getString(R.string.oaflow_rb3));
-        itemList.add(bean3);
+        if (rights.contains(",NewProcess")||rights.contains(",MyTaskView")||rights.contains(",MyProcessRunView")
+                ||rights.contains(",RelevantProcessRunView")||rights.contains(",RevokeFlowDetailView")) {
+            itemList.add(bean3);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean3);
+        }
 
         ItemBean bean4 = new ItemBean();
         int drawableId4 = getResources().getIdentifier("oaflow_rb4", "drawable", getPackageName());
         bean4.setAddress(drawableId4);
         bean4.setName(getResources().getString(R.string.oaflow_rb4));
-        itemList.add(bean4);
+        if (rights.contains(",FileSendView")) {
+            itemList.add(bean4);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean4);
+        }
 
         ItemBean bean5 = new ItemBean();
         int drawableId5 = getResources().getIdentifier("data_analysis", "drawable", getPackageName());
         bean5.setAddress(drawableId5);
         bean5.setName(getResources().getString(R.string.oaflow_rb5));
-        itemList.add(bean5);
+        if (rights.contains(",SuperWorkTaskView")||rights.contains(",SuperWorkTaskView")||rights.contains(",SuperTaskOperView")
+                ||rights.contains(",SuperWorkTaskSuperView")) {
+            itemList.add(bean5);
+        }else if (userStatus.equals("超级管理员")){
+            itemList.add(bean5);
+        }
     }
 
     private void setItemAdapter() {

@@ -87,7 +87,16 @@ public class MyEntry implements Serializable {
         private String cwsjbyj;
         private String xmUId;
         private String jbbmyj;
+        private String ygbh;
         private String LiuShuiHao;
+
+        public String getYgbh() {
+            return ygbh;
+        }
+
+        public void setYgbh(String ygbh) {
+            this.ygbh = ygbh;
+        }
 
         public String getZhunJiaCheXing() {
             return ZhunJiaCheXing;

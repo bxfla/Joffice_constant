@@ -304,9 +304,11 @@ public class ShiGuListActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case TAG_ONE:
-                busName = data.getStringExtra("bian");
-                busCode = data.getStringExtra("bianId");
-                tvCarName.setText(busName);
+                if (resultCode == Constant.TAG_THERE) {
+                    busName = data.getStringExtra("bian");
+                    busCode = data.getStringExtra("bianId");
+                    tvCarName.setText(busName);
+                }
                 break;
             case TAG_TWO:
                 if (data != null) {

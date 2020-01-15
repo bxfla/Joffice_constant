@@ -70,7 +70,10 @@ public class ZengShiDetailActivity extends BaseActivity {
         }
         tvWork.setText(bean.getPosition());
         tvDep.setText(bean.getDepName());
-        tvRZTime.setText(bean.getNowWorkDate());
+        String date = bean.getNowWorkDate();
+        if (date!=null&&!date.equals("")){
+            tvRZTime.setText(bean.getNowWorkDate().split(" ")[0]);
+        }
         tvPhone.setText(bean.getMobile());
         tvIdCard.setText(bean.getIdCard());
     }

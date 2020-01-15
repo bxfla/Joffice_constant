@@ -123,18 +123,18 @@ public class DbManager {
         List<PersonList> listInspectDrive = new ArrayList<>();
         while (cursor.moveToNext()){
             PersonList bean = new PersonList();
-//            String fullname = cursor.getString(cursor.getColumnIndex(Constant.FULLNAME));
-//            String eCard = cursor.getString(cursor.getColumnIndex(Constant.ECARD));
-//            String profileId = cursor.getString(cursor.getColumnIndex(Constant.PROFILEID));
-//            String userCode = cursor.getString(cursor.getColumnIndex(Constant.USERCODE));
-//            String sex = cursor.getString(cursor.getColumnIndex(Constant.SEX));
-//            PersonList.DataBean resultBean = new PersonList.DataBean(fullname,eCard,profileId,userCode,sex);
-//            bean.setFullname(cursor.getString(cursor.getColumnIndex(Constant.FULLNAME)));
-//            bean.setECard(cursor.getString(cursor.getColumnIndex(Constant.ECARD)));
-//            bean.setProfileId(cursor.getString(cursor.getColumnIndex(Constant.PROFILEID)));
-//            bean.setSex(cursor.getString(cursor.getColumnIndex(Constant.SEX)));
-//            bean.setUserCode(cursor.getString(cursor.getColumnIndex(Constant.USERCODE)));
-//            listInspectDrive.add(bean);
+            String fullname = cursor.getString(cursor.getColumnIndex(Constant.FULLNAME));
+            String eCard = cursor.getString(cursor.getColumnIndex(Constant.ECARD));
+            String profileId = cursor.getString(cursor.getColumnIndex(Constant.PROFILEID));
+            String userCode = cursor.getString(cursor.getColumnIndex(Constant.USERCODE));
+            String sex = cursor.getString(cursor.getColumnIndex(Constant.SEX));
+            bean.setFullname(cursor.getString(cursor.getColumnIndex(Constant.FULLNAME)));
+            bean.seteCard(cursor.getString(cursor.getColumnIndex(Constant.ECARD)));
+            bean.setProfileId(cursor.getString(cursor.getColumnIndex(Constant.PROFILEID)));
+            bean.setSex(cursor.getString(cursor.getColumnIndex(Constant.SEX)));
+            bean.setUserCode(cursor.getString(cursor.getColumnIndex(Constant.USERCODE)));
+            bean.setLetters(cursor.getString(cursor.getColumnIndex(Constant.SORT)));
+            listInspectDrive.add(bean);
         }
         return listInspectDrive;
     }

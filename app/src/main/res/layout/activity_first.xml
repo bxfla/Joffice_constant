@@ -8,7 +8,13 @@
     android:orientation="vertical"
     tools:context=".login.activity.FirstActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_welcome"/>
+
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/llHeard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,6 +39,7 @@
     </LinearLayout>
 
     <TextView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/welcome_user_app"
@@ -42,6 +49,7 @@
         android:textSize="17dp"/>
 
     <TextView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

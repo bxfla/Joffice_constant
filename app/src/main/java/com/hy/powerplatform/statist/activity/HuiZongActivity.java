@@ -17,6 +17,7 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.hy.powerplatform.R;
@@ -205,7 +206,7 @@ public class HuiZongActivity extends BaseActivity {
      * 设置样式
      */
     public void showChart(PieChart pieChart, PieData pieData) {
-        pieChart.setHoleColorTransparent(true);
+//        pieChart.setHoleColorTransparent(true);
         pieChart.setHoleRadius(56f);  //半径
         pieChart.setTransparentCircleRadius(60f); // 半透明圈
         //pieChart.setHoleRadius(0)  //实心圆
@@ -220,6 +221,7 @@ public class HuiZongActivity extends BaseActivity {
         pieChart.setRotationEnabled(true); // 可以手动旋转
         // display percentage values
         pieChart.setUsePercentValues(true);  //显示成百分比
+        pieChart.setDrawSliceText(false);
         // mChart.setUnit(" €");
         // mChart.setDrawUnitsInChart(true);
 
@@ -290,11 +292,17 @@ public class HuiZongActivity extends BaseActivity {
                         //设置个饼状图之间的距离
                         pieDataSet.setSliceSpace(0f);
                         pieDataSet.setColors(colors);
+                        pieDataSet.setSliceSpace(0f);
+                        pieDataSet.setSelectionShift(5f);
+                        pieDataSet.setSelectionShift(15f);
+                        pieDataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+                        pieDataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
                         DisplayMetrics metrics = getResources().getDisplayMetrics();
                         float px = 5 * (metrics.densityDpi / 160f);
                         pieDataSet.setSelectionShift(px); // 选中态多出的长度
                         PieData pieData = new PieData(xValues, pieDataSet);
                         pieData.setValueFormatter(new CustomerValueFormatter());
+                        pieData.setValueFormatter(new PercentFormatter());//是否显示百分号
                         showChart(spreadLineChart, pieData);
                         if (beanList.size() == 0) {
                             recyclerView.setVisibility(View.GONE);
@@ -324,7 +332,7 @@ public class HuiZongActivity extends BaseActivity {
 
         @Override
         public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-            return mFormat.format(value);//数据前或者后可根据自己想要显示的方式添加
+            return mFormat.format(value+"%");//数据前或者后可根据自己想要显示的方式添加
         }
     }
 }

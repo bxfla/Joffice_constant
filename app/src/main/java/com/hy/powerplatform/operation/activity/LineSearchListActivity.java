@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.refreshview.CustomRefreshView;
 import com.google.gson.Gson;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
@@ -22,8 +22,8 @@ import com.hy.powerplatform.my_utils.utils.BaseRecyclerAdapter;
 import com.hy.powerplatform.my_utils.utils.BaseViewHolder;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.operation.bean.Department;
-import com.hy.powerplatform.operation.bean.LineSearch;
 import com.hy.powerplatform.operation.bean.DepartmentData;
+import com.hy.powerplatform.operation.bean.LineSearch;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,10 +46,8 @@ public class LineSearchListActivity extends BaseActivity {
     @BindView(R.id.spinner)
     Spinner spinner;
     @BindView(R.id.recyclerView)
-    CustomRefreshView recyclerView;
+    RecyclerView recyclerView;
 
-    int limit = 20;
-    int start = 0;
     String depId = "";
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapter baseAdapter;
@@ -65,7 +63,7 @@ public class LineSearchListActivity extends BaseActivity {
         header.setTvTitle(getResources().getString(R.string.oaflow_operation_rb2));
         header.setRightTv(false);
         LinearLayoutManager manager = new LinearLayoutManager(this);
-        recyclerView.getRecyclerView().setLayoutManager(manager);
+        recyclerView.setLayoutManager(manager);
         baseAdapter = new BaseRecyclerAdapter<LineSearch.ResultBean>(this, R.layout.adapter_rzlist_item, lineList) {
             @Override
             public void convert(BaseViewHolder holder, final LineSearch.ResultBean resultBean) {
@@ -96,9 +94,7 @@ public class LineSearchListActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 depId = departmentList.get(position).getDepIp();
                 lineList.clear();
-                limit = 20;
-                start = 0;
-                getDataList(start, limit);
+                getDataList();
             }
 
             @Override
@@ -107,7 +103,6 @@ public class LineSearchListActivity extends BaseActivity {
             }
         });
 //        getDataList(start, limit);
-        setClient();
     }
 
     /**
@@ -147,14 +142,14 @@ public class LineSearchListActivity extends BaseActivity {
 
     /**
      * 获取数据
-     * @param start
-     * @param limit
      */
-    private void getDataList(int start, int limit) {
+    private void getDataList() {
         ProgressDialogUtil.startLoad(this, getResources().getString(R.string.get_data));
-        final String path_url = Constant.BASE_URL2 + Constant.LINESEARCH + "?start=" + start + "&limit=" + limit;
+        final String path_url = Constant.BASE_URL2 + Constant.LINESEARCH;
         map.clear();
         map.put("depId", depId);
+        map.put("start","0");
+        map.put("limit","1000");
         httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -177,28 +172,6 @@ public class LineSearchListActivity extends BaseActivity {
                 message.setData(b);
                 message.what = Constant.TAG_THERE;
                 handler.sendMessage(message);
-            }
-        });
-    }
-
-    /**
-     * 滑动监听
-     */
-    private void setClient() {
-        recyclerView.setOnLoadListener(new CustomRefreshView.OnLoadListener() {
-            @Override
-            public void onRefresh() {
-                lineList.clear();
-                start = 0;
-                limit = 20;
-                getDataList(start, limit);
-            }
-
-            @Override
-            public void onLoadMore() {
-                start = limit;
-                limit += 20;
-                getDataList(start, limit);
             }
         });
     }
@@ -263,30 +236,8 @@ public class LineSearchListActivity extends BaseActivity {
                         for (int i = 0; i < bean2.getResult().size(); i++) {
                             lineList.add(bean2.getResult().get(i));
                         }
-                        if (bean2.getResult().size() == 0 && lineList.size() != 0) {
-                            if (recyclerView != null) {
-                                recyclerView.complete();
-                                recyclerView.onNoMore();
-                                baseAdapter.notifyDataSetChanged();
-                            }
-                        } else if (bean2.getResult().size() != 0 && lineList.size() != 0 && bean2.getResult().size() < 20) {
-                            if (recyclerView != null) {
-                                recyclerView.complete();
-                                recyclerView.onNoMore();
-                                baseAdapter.notifyDataSetChanged();
-                            }
-                        } else {
-                            if (recyclerView != null) {
-                                recyclerView.complete();
-                                baseAdapter.notifyDataSetChanged();
-                            }
-                        }
-                        baseAdapter.notifyDataSetChanged();
-                    } else {
-                        recyclerView.complete();
-                        recyclerView.onNoMore();
-                        baseAdapter.notifyDataSetChanged();
                     }
+                    baseAdapter.notifyDataSetChanged();
                     ProgressDialogUtil.stopLoad();
                     break;
             }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,12 +23,15 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
+import com.hy.powerplatform.database.DbManager;
+import com.hy.powerplatform.database.MyDatabaseHelper;
 import com.hy.powerplatform.login.bean.Version;
 import com.hy.powerplatform.login.fragment.Fragment01;
 import com.hy.powerplatform.login.fragment.Fragment02;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBack;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
+import com.hy.powerplatform.my_utils.base.MyApplication;
 import com.hy.powerplatform.my_utils.myViews.Header;
 import com.hy.powerplatform.my_utils.utils.AlertDialogUtil;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
@@ -55,7 +59,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     ViewPager vp;
     @BindView(R.id.activity_main2)
     LinearLayout activityMain2;
-
+    SQLiteDatabase db;
+    MyDatabaseHelper helper;
     private List<Fragment> fragmentList;
     private FragmentTransaction fragmentTransaction;
 
@@ -98,6 +103,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        helper = DbManager.getInstance(MyApplication.getContextObject());
+        db = helper.getWritableDatabase();
         alertDialogUtil = new AlertDialogUtil(this);
         // 获取片段管理器
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -228,7 +235,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //                        if (!nnm.equals("2")) {
                             final String url = Constant.BASE_URL2 + "attachFiles/" + version.getData().getDownurl();
                             String data1 = version.getData().getSubstance();
-                            new AlertDialogUtil(MainActivity.this).showDialog2("检测到服务器上有新的版本，是否立即更新。\n" + data1, new AlertDialogCallBack() {
+                            db.delete("ycPerson",null,null);
+                            new AlertDialogUtil(MainActivity.this).showDialog2("检测到服务器上有新的版本，是否更新。\n" + data1, new AlertDialogCallBack() {
                                 @Override
                                 public void select(String data) {
 

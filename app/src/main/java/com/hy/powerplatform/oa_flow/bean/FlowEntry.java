@@ -9,18 +9,18 @@ import java.util.List;
 
 public class FlowEntry implements Serializable {
 
-
     /**
      * success : true
-     * taskId : 8200044
-     * pkValue : mainId
-     * formRights : {'rlzybyj':'1','fgs':'1','lxdh':'1','xb':'1','zhglbyj':'1','cwsjbyj':'2','sfzh':'1','LiuShuiHao':'1','rlzyb1':'1','yyglbyj':'1','ZhunJiaCheXing1':'1','rlzyb2':'1','ZhunJiaCheXing3':'1','xm':'1','rlzyb3':'1','cctkjyxgsyj':'1','xiangguanfujian':'1','xxjsbyj':'1','ZhunJiaCheXing':'1','jbbmyj':'1','zjcx':'1'}
-     * mainform : [{"ZhunJiaCheXing":"","ZhunJiaCheXing1":"","ZhunJiaCheXing3":"","xm":"彭兵","sfzh":"362201197907086010","runId":51547,"rlzybyj":"","xxjsbyj":"","rlzyb1":"","rlzyb2":"","rlzyb3":"","yyglbyj":"","mainId":25,"xb":"男","zhglbyj":"","fgs":"","$type$":"WF_jsyrzlcbnews","zjcx":"A1,A2,D","cctkjyxgsyj":"","xiangguanfujian":"","lxdh":"13870589739","cwsjbyj":"","xmUId":"","jbbmyj":"","LiuShuiHao":"No.20190314017"}]
+     * taskId : 10020048
+     * pkValue : 162
+     * formRights : {'lxdh':'1','xb':'1','xxjsbyj':'1','cwsjbyj':'1','sfzh':'1','xingmingA':'1','LiuShuiHao':'1','rlzyb1':'1','jbbmyj':'1','xiangguanfujian':'1','ygbh':'1','fgs':'1','cctkjyxgsyj':'1','zhglbyj':'1','yyglbyj':'1','rlzyb2':'1','ZhunJiaCheXing3':'1','ZhunJiaCheXing1':'1','xm':'1','rlzyb3':'1','rlzybyj':'1','zjcx':'1','ZhunJiaCheXing':'1'}
+     * mainform : [{"ZhunJiaCheXing":"","ygbh":"","ZhunJiaCheXing1":"","ZhunJiaCheXing3":"","xm":"周建平","sfzh":"370724199102011212","runId":52390,"rlzybyj":"","xxjsbyj":"","rlzyb1":"","rlzyb2":"","rlzyb3":"","yyglbyj":"[{\"ui\":\"9403\",\"un\":\"张志平\",\"c\":\"2020-01-10 15:49\",\"v\":\"测试\"}]","mainId":162,"xingmingA":"","xb":"男","zhglbyj":"","fgs":"营运一分公司","$type$":"WF_jsyrzlcbnews","zjcx":"A1","cctkjyxgsyj":"","xiangguanfujian":"","lxdh":"12345678910","cwsjbyj":"[{\"ui\":\"9455\",\"un\":\"张敏\",\"c\":\"2020-01-10 11:31\",\"v\":\"测试\"}]","xmUId":"","jbbmyj":"","LiuShuiHao":"No.20200110007"}]
      * formDefId : 10117
      * preTaskName :
      * isSignTask : false
-     * trans : [{"destType":"task","destination":"营运管理部","name":"to 分配部门","source":"财务审计部"}]
-     * runId : 51547
+     * trans : [{"destType":"task","destination":"信息技术部","name":"to 信息技术部","source":"信息技术部负责人"}]
+     * runId : 52390
+     * revoke : false
      */
 
     private boolean success;
@@ -34,14 +34,6 @@ public class FlowEntry implements Serializable {
     private boolean revoke;
     private List<MainformBean> mainform;
     private List<TransBean> trans;
-
-    public boolean isRevoke() {
-        return revoke;
-    }
-
-    public void setRevoke(boolean revoke) {
-        this.revoke = revoke;
-    }
 
     public boolean isSuccess() {
         return success;
@@ -107,6 +99,14 @@ public class FlowEntry implements Serializable {
         this.runId = runId;
     }
 
+    public boolean isRevoke() {
+        return revoke;
+    }
+
+    public void setRevoke(boolean revoke) {
+        this.revoke = revoke;
+    }
+
     public List<MainformBean> getMainform() {
         return mainform;
     }
@@ -123,36 +123,39 @@ public class FlowEntry implements Serializable {
         this.trans = trans;
     }
 
-    public static class MainformBean {
+    public static class MainformBean implements Serializable {
         /**
          * ZhunJiaCheXing :
+         * ygbh :
          * ZhunJiaCheXing1 :
          * ZhunJiaCheXing3 :
-         * xm : 彭兵
-         * sfzh : 362201197907086010
-         * runId : 51547
+         * xm : 周建平
+         * sfzh : 370724199102011212
+         * runId : 52390
          * rlzybyj :
          * xxjsbyj :
          * rlzyb1 :
          * rlzyb2 :
          * rlzyb3 :
-         * yyglbyj :
-         * mainId : 25
+         * yyglbyj : [{"ui":"9403","un":"张志平","c":"2020-01-10 15:49","v":"测试"}]
+         * mainId : 162
+         * xingmingA :
          * xb : 男
          * zhglbyj :
-         * fgs :
+         * fgs : 营运一分公司
          * $type$ : WF_jsyrzlcbnews
-         * zjcx : A1,A2,D
+         * zjcx : A1
          * cctkjyxgsyj :
          * xiangguanfujian :
-         * lxdh : 13870589739
-         * cwsjbyj :
+         * lxdh : 12345678910
+         * cwsjbyj : [{"ui":"9455","un":"张敏","c":"2020-01-10 11:31","v":"测试"}]
          * xmUId :
          * jbbmyj :
-         * LiuShuiHao : No.20190314017
+         * LiuShuiHao : No.20200110007
          */
 
         private String ZhunJiaCheXing;
+        private String ygbh;
         private String ZhunJiaCheXing1;
         private String ZhunJiaCheXing3;
         private String xm;
@@ -165,6 +168,7 @@ public class FlowEntry implements Serializable {
         private String rlzyb3;
         private String yyglbyj;
         private int mainId;
+        private String xingmingA;
         private String xb;
         private String zhglbyj;
         private String fgs;
@@ -184,6 +188,14 @@ public class FlowEntry implements Serializable {
 
         public void setZhunJiaCheXing(String ZhunJiaCheXing) {
             this.ZhunJiaCheXing = ZhunJiaCheXing;
+        }
+
+        public String getYgbh() {
+            return ygbh;
+        }
+
+        public void setYgbh(String ygbh) {
+            this.ygbh = ygbh;
         }
 
         public String getZhunJiaCheXing1() {
@@ -280,6 +292,14 @@ public class FlowEntry implements Serializable {
 
         public void setMainId(int mainId) {
             this.mainId = mainId;
+        }
+
+        public String getXingmingA() {
+            return xingmingA;
+        }
+
+        public void setXingmingA(String xingmingA) {
+            this.xingmingA = xingmingA;
         }
 
         public String getXb() {
@@ -379,12 +399,12 @@ public class FlowEntry implements Serializable {
         }
     }
 
-    public static class TransBean {
+    public static class TransBean implements Serializable {
         /**
          * destType : task
-         * destination : 营运管理部
-         * name : to 分配部门
-         * source : 财务审计部
+         * destination : 信息技术部
+         * name : to 信息技术部
+         * source : 信息技术部负责人
          */
 
         private String destType;

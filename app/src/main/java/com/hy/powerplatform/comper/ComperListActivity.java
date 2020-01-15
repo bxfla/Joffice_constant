@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import com.hy.powerplatform.R;
+import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.comper.activity.ShengChanYYListActivity;
 import com.hy.powerplatform.comper.activity.YingYunZBActivity;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
@@ -25,6 +26,8 @@ public class ComperListActivity extends BaseActivity {
     @BindView(R.id.rb2)
     RadioButton rb2;
     Intent intent;
+    String rights;
+    String userStatus;
     AlertDialogUtil alertDialogUtil;
 
     @Override
@@ -32,6 +35,14 @@ public class ComperListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         alertDialogUtil = new AlertDialogUtil(this);
+        userStatus = new SharedPreferencesHelper(this, "login").getData(this, "userStatus", "");
+        rights = new SharedPreferencesHelper(this, "login").getData(this, "rights", "");
+        if (rights.contains(",OperationIndexReportView")) {
+            rb1.setVisibility(View.GONE);
+        }
+        if (rights.contains(",ProductionOperationAnalysisView")) {
+            rb2.setVisibility(View.GONE);
+        }
     }
 
     @Override

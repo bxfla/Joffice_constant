@@ -133,6 +133,10 @@ public class FragmentEntryData extends Fragment {
     TextView tvLeader5W;
     @BindView(R.id.tvLeader6W)
     TextView tvLeader6W;
+    @BindView(R.id.tvLeaderNum)
+    TextView tvLeaderNum;
+    @BindView(R.id.tvLeaderNumW)
+    TextView tvLeaderNumW;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -190,6 +194,7 @@ public class FragmentEntryData extends Fragment {
         tvLeader4W.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader5W.setTextColor(getResources().getColor(R.color.order_stop_black));
         tvLeader6W.setTextColor(getResources().getColor(R.color.order_stop_black));
+        tvLeaderNum.setTextColor(getResources().getColor(R.color.order_stop_black));
         return view;
     }
 

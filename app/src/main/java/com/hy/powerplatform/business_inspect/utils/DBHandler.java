@@ -4056,7 +4056,7 @@ public class DBHandler {
                                 String carType1, String carType2, String carType3, String rlzy1,
                                 String rlzy2, String rlzy3, String userCode, String destName, String taskId, String flowAssignld,
                                 String mainId, String cwsjbyj, String yyglbyj, String xxjsbyj, String cctkjyxgsyj, String zhglbyj,
-                                String rlzyb1, String comment, String signaName, String jbbmyj, String fgs) {
+                                String rlzyb1, String comment, String signaName, String jbbmyj, String fgs,String ygbh) {
         HttpClient httpClient = new DefaultHttpClient();
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
         HttpPost httpRequst = new HttpPost(url);
@@ -4078,6 +4078,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("sfzh", idCard));
         nvs.add(new BasicNameValuePair("xmUId", userCode));
         nvs.add(new BasicNameValuePair("fgs", fgs));
+        nvs.add(new BasicNameValuePair("ygbh", ygbh));
 
         nvs.add(new BasicNameValuePair("zjcx1", carType1));
         nvs.add(new BasicNameValuePair("zjcx2", carType2));

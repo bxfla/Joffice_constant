@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            app:header_is_right_tv_visiable="true"
+            app:header_is_left_iv_visiable="false"
             app:header_title="@string/logo_small_text">
         </com.hy.powerplatform.my_utils.myViews.Header>
     </LinearLayout>
