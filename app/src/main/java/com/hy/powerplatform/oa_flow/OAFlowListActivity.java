@@ -14,6 +14,9 @@ import com.hy.powerplatform.R;
 import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.duban.activity.DBActivity;
 import com.hy.powerplatform.duban.bean.ItemBean;
+import com.hy.powerplatform.login.bean.DbNum;
+import com.hy.powerplatform.login.bean.GgNum;
+import com.hy.powerplatform.login.bean.HyNum;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.OkHttpUtil;
@@ -36,7 +39,10 @@ import butterknife.ButterKnife;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_FIVE;
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_FOUR;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_ONE;
+import static com.hy.powerplatform.my_utils.base.Constant.TAG_THERE;
 import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
 
 public class OAFlowListActivity extends BaseActivity {
@@ -47,6 +53,9 @@ public class OAFlowListActivity extends BaseActivity {
     RecyclerView recyclerView;
 
     int num =0;
+    int numhy =0;
+    int numgg =0;
+    int numdb =0;
     String rights;
     String userStatus;
     Intent intent;
@@ -103,6 +112,99 @@ public class OAFlowListActivity extends BaseActivity {
                 b.putString("data", data);
                 message.setData(b);
                 message.what = TAG_TWO;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
+    /**
+     * 获取督办数量
+     */
+    private void getDbNum() {
+        final String path_url = Constant.BASE_URL2 + Constant.DBNUM;
+        httpUtil.getAsynHttp(path_url, new OkHttpUtil.ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+//                Log.i("main", "response:" + e.toString());
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("error", e.toString());
+                message.setData(b);
+                message.what = TAG_ONE;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+//                Log.i("main", "response:" + response.body().string());
+                String data = response.body().string();
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("data", data);
+                message.setData(b);
+                message.what = TAG_THERE;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
+    /**
+     * 获取公告数量
+     */
+    private void getGgNum() {
+        final String path_url = Constant.BASE_URL2 + Constant.GGNUM;
+        httpUtil.getAsynHttp(path_url, new OkHttpUtil.ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+//                Log.i("main", "response:" + e.toString());
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("error", e.toString());
+                message.setData(b);
+                message.what = TAG_ONE;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+//                Log.i("main", "response:" + response.body().string());
+                String data = response.body().string();
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("data", data);
+                message.setData(b);
+                message.what = TAG_FOUR;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
+    /**
+     * 获取会议数量
+     */
+    private void getHyNum() {
+        final String path_url = Constant.BASE_URL2 + Constant.HYNUM;
+        httpUtil.getAsynHttp(path_url, new OkHttpUtil.ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+//                Log.i("main", "response:" + e.toString());
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("error", e.toString());
+                message.setData(b);
+                message.what = TAG_ONE;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+//                Log.i("main", "response:" + response.body().string());
+                String data = response.body().string();
+                Message message = new Message();
+                Bundle b = new Bundle();
+                b.putString("data", data);
+                message.setData(b);
+                message.what = TAG_FIVE;
                 handler.sendMessage(message);
             }
         });
@@ -188,6 +290,18 @@ public class OAFlowListActivity extends BaseActivity {
                     holder.setVisitiomV(R.id.tvRolese);
                     holder.setText(R.id.tvRolese, String.valueOf(num));
                 }
+                if (itemBean.getName().equals(getResources().getString(R.string.oaflow_rb1)) &&Integer.valueOf(numgg)!=0){
+                    holder.setVisitiomV(R.id.tvRolese);
+                    holder.setText(R.id.tvRolese, String.valueOf(numgg));
+                }
+                if (itemBean.getName().equals(getResources().getString(R.string.oaflow_rb2)) &&Integer.valueOf(numhy)!=0){
+                    holder.setVisitiomV(R.id.tvRolese);
+                    holder.setText(R.id.tvRolese, String.valueOf(numhy));
+                }
+                if (itemBean.getName().equals(getResources().getString(R.string.oaflow_rb5)) &&Integer.valueOf(numdb)!=0){
+                    holder.setVisitiomV(R.id.tvRolese);
+                    holder.setText(R.id.tvRolese, String.valueOf(numdb));
+                }
                 holder.setText(R.id.textView, itemBean.getName());
                 holder.setImageResource(R.id.imageView, itemBean.getAddress());
                 holder.setOnClickListener(R.id.linearLayout, new View.OnClickListener() {
@@ -227,8 +341,10 @@ public class OAFlowListActivity extends BaseActivity {
                     Toast.makeText(OAFlowListActivity.this, message, Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     //添加模块
+                    itemList.clear();
                     addItem();
                     setItemAdapter();
+                    ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_TWO:
                     willDoList.clear();
@@ -242,7 +358,36 @@ public class OAFlowListActivity extends BaseActivity {
                         num=0;
                         num=willDoList.size();
                     }
+                    getDbNum();
+                    break;
+                case TAG_THERE:
+                    numdb = 0;
+                    Bundle dbNum = msg.getData();
+                    String dbNumData = dbNum.getString("data");
+                    DbNum beanDbNum = new Gson().fromJson(dbNumData, DbNum.class);
+                    numdb = numdb+Integer.parseInt(beanDbNum.getResult().get(0).getDshnum());
+                    numdb = numdb+Integer.parseInt(beanDbNum.getResult().get(0).getDzxnum());
+                    getGgNum();
+                    break;
+                case TAG_FOUR:
+                    numgg = 0;
+                    Bundle ggNum = msg.getData();
+                    String ggNumData = ggNum.getString("data");
+                    GgNum beanGgNum = new Gson().fromJson(ggNumData, GgNum.class);
+                    numgg = numgg+Integer.parseInt(beanGgNum.getResult().get(0).getNum());
+                    getHyNum();
+                    break;
+                case TAG_FIVE:
+                    numhy = 0;
+                    Bundle hyNum = msg.getData();
+                    String hyNumData = hyNum.getString("data");
+                    HyNum beanHyNum = new Gson().fromJson(hyNumData, HyNum.class);
+                    numhy = numhy+Integer.parseInt(beanHyNum.getResult().get(0).getDcjnum());
+//                    numhy = numhy+Integer.parseInt(beanHyNum.getResult().get(0).getYcjnum());
+                    numhy = numhy+Integer.parseInt(beanHyNum.getResult().get(0).getDknum());
+//                    numhy = numhy+Integer.parseInt(beanHyNum.getResult().get(0).getYknum());
                     //添加模块
+                    itemList.clear();
                     addItem();
                     setItemAdapter();
                     ProgressDialogUtil.stopLoad();

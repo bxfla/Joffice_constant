@@ -5,5 +5,5 @@ package com.hy.powerplatform.business_inspect.presenter;
  */
 
 public interface CorrelationPresenter {
-    void getCorrelationPresenterData(String busCode,String rq);
+    void getCorrelationPresenterData(String busCode, String rq);
 }

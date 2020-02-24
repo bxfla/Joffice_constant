@@ -10,5 +10,5 @@ import com.hy.powerplatform.my_utils.base.BaseModeBackLisenter;
  */
 
 public interface LingLiaoItemModel {
-    void getDriverModel(String httpTag,String ziCode, Context context, BaseModeBackLisenter baseModeBackLisenter);
+    void getDriverModel(String httpTag, String ziCode, Context context, BaseModeBackLisenter baseModeBackLisenter);
 }

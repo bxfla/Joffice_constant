@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -29,10 +30,36 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="15dp"></android.support.v7.widget.RecyclerView>
-
             <View
                 style="@style/HourLine"
                 android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:text="更新历史"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+                <!--跑马灯-->
+                <com.sunfusheng.marqueeview.MarqueeView
+                    android:id="@+id/tvUpData"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    app:mvAnimDuration="1000"
+                    app:mvDirection="bottom_to_top"
+                    app:mvInterval="3000"
+                    app:mvTextColor="@color/colorAccent"
+                    app:mvTextSize="16sp"
+                    android:layout_marginLeft="17dp"
+                    app:mvSingleLine="true"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,7 +70,7 @@
                     android:layout_height="45dp"
                     android:layout_marginLeft="20dp"
                     android:gravity="center_vertical"
-                    android:text="指标显示"
+                    android:text="收入成本"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
                 <TextView
@@ -56,17 +83,37 @@
                     android:textColor="@color/color_bg_selected"
                     android:textSize="16dp" />
             </LinearLayout>
-
             <View style="@style/HourLine"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewYY"
                 android:layout_width="match_parent"
                 android:layout_height="150dp">
             </android.support.v7.widget.RecyclerView>
-
             <View
                 style="@style/HourLine"
                 android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:id="@+id/llZB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:text="指标显示"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+                <View style="@style/HourLine"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerViewZB"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -146,14 +193,39 @@
 
             <View style="@style/HourLine"/>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginLeft="20dp"
-                android:gravity="center_vertical"
-                android:text="流程统计"
-                android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:text="流程统计"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+                <TextView
+                    android:id="@+id/tvDepartment"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:text="请选择部门"
+                    android:textColor="@color/color_bg_selected"
+                    android:textSize="16dp" />
+                <Spinner
+                    android:visibility="gone"
+                    android:id="@+id/spDepartment"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/color_bg_selected"
+                    android:textSize="16dp" />
+            </LinearLayout>
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/mBarChart"

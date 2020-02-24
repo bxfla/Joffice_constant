@@ -102,15 +102,26 @@
             android:gravity="center_vertical"
             android:text="当前版本"
             android:textColor="@color/xiaohei" />
-
-        <TextView
-            android:id="@+id/tvVersion"
-            style="@style/TextView"
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:paddingLeft="15dp"
-            android:gravity="center_vertical"
-            android:textColor="@color/xiaohei" />
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tvVersion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="15dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/xiaohei" />
+            <TextView
+                android:id="@+id/tvVersionH"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="更新历史"
+                android:gravity="center"
+                android:layout_gravity="right"
+                android:textColor="@color/color_bg_selected" />
+        </FrameLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"

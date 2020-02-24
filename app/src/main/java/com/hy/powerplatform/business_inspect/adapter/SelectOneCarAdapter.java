@@ -59,7 +59,7 @@ public class SelectOneCarAdapter extends RecyclerView.Adapter<SelectOneCarAdapte
     }
 
     @Override
-    public SelectOneCarAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_selectonecar, parent, false);
         final ViewHolder holder = new ViewHolder(view);
 //        //recyclerView监听事件
@@ -82,7 +82,7 @@ public class SelectOneCarAdapter extends RecyclerView.Adapter<SelectOneCarAdapte
     }
 
     @Override
-    public void onBindViewHolder(SelectOneCarAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvNam.setText(beanList.get(position).getName());
         holder.position = position;
     }

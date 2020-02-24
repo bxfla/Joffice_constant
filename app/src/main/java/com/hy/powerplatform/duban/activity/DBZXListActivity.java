@@ -102,24 +102,44 @@ public class DBZXListActivity extends BaseActivity {
                 }
                 if (resultBean.getOperStatus()==1){
                     holder.setText(R.id.tvStaue, "未查看");
+                    holder.setColor(R.id.tvStaue, "1");
+                    holder.setColor(R.id.tvSeeStaue, "1");
                 }else if (resultBean.getOperStatus()==2){
                     holder.setText(R.id.tvStaue, "已查看");
+                    holder.setColor(R.id.tvStaue, "2");
+                    holder.setColor(R.id.tvSeeStaue, "2");
                 }else if (resultBean.getOperStatus()==3){
                     holder.setText(R.id.tvStaue, "已接收");
+                    holder.setColor(R.id.tvStaue, "3");
+                    holder.setColor(R.id.tvSeeStaue, "3");
                 }else if (resultBean.getOperStatus()==4){
                     holder.setText(R.id.tvStaue, "已退回");
+                    holder.setColor(R.id.tvStaue, "4");
+                    holder.setColor(R.id.tvSeeStaue, "4");
                 }else if (resultBean.getOperStatus()==5){
                     holder.setText(R.id.tvStaue, "已提交");
+                    holder.setColor(R.id.tvStaue, "5");
+                    holder.setColor(R.id.tvSeeStaue, "5");
                 }else if (resultBean.getOperStatus()==6){
                     holder.setText(R.id.tvStaue, "已撤回");
+                    holder.setColor(R.id.tvStaue, "6");
+                    holder.setColor(R.id.tvSeeStaue, "6");
                 }else if (resultBean.getOperStatus()==7){
                     holder.setText(R.id.tvStaue, "已完成");
+                    holder.setColor(R.id.tvStaue, "7");
+                    holder.setColor(R.id.tvSeeStaue, "7");
                 }else if (resultBean.getOperStatus()==8){
                     holder.setText(R.id.tvStaue, "已冻结");
+                    holder.setColor(R.id.tvStaue, "8");
+                    holder.setColor(R.id.tvSeeStaue, "8");
                 }else if (resultBean.getOperStatus()==9){
                     holder.setText(R.id.tvStaue, "逾期完成");
+                    holder.setColor(R.id.tvStaue, "9");
+                    holder.setColor(R.id.tvSeeStaue, "9");
                 }else if (resultBean.getOperStatus()==10){
                     holder.setText(R.id.tvStaue, "未完成");
+                    holder.setColor(R.id.tvStaue, "10");
+                    holder.setColor(R.id.tvSeeStaue, "10");
                 }
                 holder.setOnClickListener(R.id.ll, new View.OnClickListener() {
                     @Override
@@ -174,7 +194,7 @@ public class DBZXListActivity extends BaseActivity {
         Calendar c = Calendar.getInstance();
         //过去七天
         c.setTime(new Date());
-        c.add(Calendar.DATE, -30);
+        c.add(Calendar.DATE, -365);
         Date d = c.getTime();
         String day = format.format(d);
         tvStartTime.setText(day);
@@ -259,9 +279,9 @@ public class DBZXListActivity extends BaseActivity {
         path_url = Constant.BASE_URL1 + Constant.DBZXLIST+"?start="+start+"&limit="+limit;
         ProgressDialogUtil.startLoad(this, getResources().getString(R.string.get_data));
         final HashMap<String, String> map = new HashMap();
-        map.put("Q_createTime_D_GE", tvStartTime.getText().toString().trim());
-        map.put("Q_createTime_D_LE", tvEndTime.getText().toString().trim());
-        map.put("Q_operatorName_L_EQ", "");
+//        map.put("Q_createTime_D_GE", tvStartTime.getText().toString().trim());
+//        map.put("Q_createTime_D_LE", tvEndTime.getText().toString().trim());
+//        map.put("Q_operatorName_L_EQ", "");
         String zt = "";
         if (spinnerType.getSelectedItem().toString().trim().equals("未查看")){
             zt = "1";

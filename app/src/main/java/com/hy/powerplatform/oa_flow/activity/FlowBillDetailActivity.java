@@ -333,6 +333,7 @@ public class FlowBillDetailActivity extends BaseActivity {
                     }
                     adapter = new FlowMessageAdapter(FlowBillDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
+                    Toast.makeText(FlowBillDetailActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_ONE:

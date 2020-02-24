@@ -29,14 +29,14 @@ public class InboxListAdapter extends RecyclerView.Adapter<InboxListAdapter.View
     }
 
     @Override
-    public InboxListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_inboxlist,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(InboxListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvTitle.setText(beanList.get(position).getMail().getSubject());
         holder.tvPerson.setText(beanList.get(position).getMail().getSender());
         holder.tvTime.setText(beanList.get(position).getMail().getSendTime());

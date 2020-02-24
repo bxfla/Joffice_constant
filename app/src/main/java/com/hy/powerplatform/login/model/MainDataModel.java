@@ -9,5 +9,5 @@ import com.hy.powerplatform.my_utils.base.BaseModeBackLisenter;
  */
 
 public interface MainDataModel {
-    void getMainDataModelData(String httpTag,String userName, Context context, BaseModeBackLisenter baseModeBackLisenter);
+    void getMainDataModelData(String httpTag, String userName, Context context, BaseModeBackLisenter baseModeBackLisenter);
 }

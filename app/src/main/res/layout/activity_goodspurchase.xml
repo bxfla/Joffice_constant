@@ -213,7 +213,8 @@
                         android:id="@+id/etDepartment1"
                         style="@style/oaEditText"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp" />
+                        android:layout_height="45dp"
+                        android:gravity="center"/>
 
                     <View style="@style/line"></View>
 
@@ -221,7 +222,8 @@
                         android:id="@+id/etDepartment2"
                         style="@style/oaEditText"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp" />
+                        android:layout_height="45dp"
+                        android:gravity="center"/>
 
                     <View style="@style/line"></View>
 
@@ -229,7 +231,8 @@
                         android:id="@+id/etDepartment3"
                         style="@style/oaEditText"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp" />
+                        android:layout_height="45dp"
+                        android:gravity="center"/>
 
                     <View style="@style/line"></View>
 
@@ -237,14 +240,16 @@
                         android:id="@+id/etDepartment4"
                         style="@style/oaEditText"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp" />
+                        android:layout_height="45dp"
+                        android:gravity="center"/>
                     <View style="@style/line"></View>
 
                     <TextView
                         android:id="@+id/etDepartment5"
                         style="@style/oaEditText"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp" />
+                        android:layout_height="45dp"
+                        android:gravity="center"/>
 
 
                     <TextView

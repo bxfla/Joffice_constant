@@ -931,24 +931,33 @@
         <activity android:name=".oa_flow.notice.NoticeListActivity" />
         <activity android:name=".oa_flow.notice.NoticeDetailActivity" />
         <activity android:name=".oa_flow.metting.MettingListActivity" />
-        <activity android:name=".oa_flow.metting.activity.MyWillOpenListActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".oa_flow.metting.activity.MyWillOpenDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".oa_flow.metting.activity.MyOverOpenListActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".oa_flow.metting.activity.MyOverOpenDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".oa_flow.metting.activity.WillOpenListActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".oa_flow.metting.activity.WillOpenDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".oa_flow.metting.activity.OverOpenListActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".oa_flow.metting.activity.OverOpenDetailActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".oa_flow.metting.activity.JiYaoListActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity
+            android:name=".oa_flow.metting.activity.MyWillOpenListActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".oa_flow.metting.activity.MyWillOpenDetailActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".oa_flow.metting.activity.MyOverOpenListActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".oa_flow.metting.activity.MyOverOpenDetailActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".oa_flow.metting.activity.WillOpenListActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".oa_flow.metting.activity.WillOpenDetailActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".oa_flow.metting.activity.OverOpenListActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".oa_flow.metting.activity.OverOpenDetailActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".oa_flow.metting.activity.JiYaoListActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".safer.SaferListActivity" />
         <activity android:name=".safer.activity.WeiZhangListActivity" />
         <activity android:name=".safer.activity.WeiZhangDetailActivity" />
@@ -962,14 +971,17 @@
         <activity android:name=".login.activity.LoginPersonMoreActivity" />
         <activity android:name=".statist.StatistListActivity" />
         <activity android:name=".statist.activity.PersonTongJiActivity" />
-        <activity android:name=".statist.activity.MileYearActivity"/>
-        <activity android:name=".statist.activity.CostComparisonActivity"/>
-        <activity android:name=".statist.activity.HuiZongActivity"/>
-        <activity android:name=".statist.activity.CLXHTongJiActivity"/>
-        <activity android:name=".statist.activity.YueDuYCBCActivity"/>
-        <activity android:name=".statist.activity.YueDuWGCSActivity"/>
-        <activity android:name=".statist.activity.YingYunShouRuActivity"/>
-        <activity android:name=".statist.activity.PersonChangeActivity"/>
+        <activity android:name=".statist.activity.MileYearActivity" />
+        <activity android:name=".statist.activity.CostComparisonActivity" />
+        <activity android:name=".statist.activity.HuiZongActivity" />
+        <activity android:name=".statist.activity.CLXHTongJiActivity" />
+        <activity android:name=".statist.activity.YueDuYCBCActivity" />
+        <activity android:name=".statist.activity.YueDuWGCSActivity" />
+        <activity android:name=".statist.activity.YingYunShouRuActivity" />
+        <activity android:name=".statist.activity.PersonChangeActivity" />
+        <activity android:name=".oa_flow.activity.EntryPersonActivity" />
+        <activity android:name=".login.activity.AppUpHistoryActivity"/>
+        <activity android:name=".oa_flow.activity.FlowAssessActivity"/>
     </application>
 
 </manifest>

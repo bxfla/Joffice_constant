@@ -260,6 +260,7 @@ public class FlowFuKuanLiuChengDetailActivity extends BaseActivity {
                     }
                     adapter = new FlowMessageAdapter(FlowFuKuanLiuChengDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
+                    Toast.makeText(FlowFuKuanLiuChengDetailActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_ONE:

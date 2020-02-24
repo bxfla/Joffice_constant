@@ -43,9 +43,9 @@ public class GetDataThread {
                     CarCode.DataBean carCode = new CarCode.DataBean(carName, carvalue);
                     listCarCode.add(carCode);
                     ContentValues values = new ContentValues();
-                    values.put(com.hy.powerplatform.database.Constant.CARNAME, carName);
-                    values.put(com.hy.powerplatform.database.Constant.CARVALUE, carvalue);
-                    db.insert(com.hy.powerplatform.database.Constant.TABBLE_CAR_NAME, null, values);
+                    values.put(Constant.CARNAME, carName);
+                    values.put(Constant.CARVALUE, carvalue);
+                    db.insert(Constant.TABBLE_CAR_NAME, null, values);
                     values.clear();
                 }
             }

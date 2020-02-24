@@ -26,14 +26,14 @@ public class YeWuHisAdapter extends RecyclerView.Adapter<YeWuHisAdapter.ViewHold
     }
 
     @Override
-    public YeWuHisAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_yewuhis_item,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(YeWuHisAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvCarNo.setText(beanList.get(position).getCarNo());
         holder.tvJSR.setText(beanList.get(position).getJcr());
         holder.tvDate.setText(beanList.get(position).getJcDate());

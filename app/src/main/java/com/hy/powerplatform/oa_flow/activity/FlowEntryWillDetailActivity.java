@@ -199,7 +199,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
     String tag = "noEnd";
     String comment = "";
     String selectName;
-    String cwreout, yyreout, xxreout, cctreout, zhreout, rlreout, jbbmreout, flowAssignld, serialNumber = "",ygbhreout = "";
+    String cwreout, yyreout, xxreout, cctreout, zhreout, rlreout, jbbmreout, flowAssignld, serialNumber = "";//,ygbhreout = ""
     String zjce1, zjce2, zjce3 = "";
     String tagData = "";
     String[] bigNametemp = null;
@@ -889,7 +889,7 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                     rlzy3 = "on";
                 }
                 if (comment.equals("")) {
-                    if (!cwreout.equals("2") && !yyreout.equals("2") && !xxreout.equals("2")&& !ygbhreout.equals("2")
+                    if (!cwreout.equals("2") && !yyreout.equals("2") && !xxreout.equals("2")
                             && !cctreout.equals("2") && !zhreout.equals("2") && !rlreout.equals("2")) {
                         comment = "";
                         personSession();
@@ -1209,12 +1209,33 @@ public class FlowEntryWillDetailActivity extends BaseActivity {
                         JSONObject jsonObject = new JSONObject(formRights);
                         cwreout = jsonObject.getString("cwsjbyj");
                         yyreout = jsonObject.getString("yyglbyj");
-                        ygbhreout = jsonObject.getString("ygbh");
+//                        ygbhreout = jsonObject.getString("ygbh");
                         xxreout = jsonObject.getString("xxjsbyj");
                         cctreout = jsonObject.getString("cctkjyxgsyj");
                         zhreout = jsonObject.getString("zhglbyj");
                         rlreout = jsonObject.getString("rlzybyj");
                         jbbmreout = jsonObject.getString("jbbmyj");
+                        if (cwreout==null){
+                            cwreout = "";
+                        }
+                        if (yyreout==null){
+                            yyreout = "";
+                        }
+                        if (xxreout==null){
+                            xxreout = "";
+                        }
+                        if (cctreout==null){
+                            cctreout = "";
+                        }
+                        if (zhreout==null){
+                            zhreout = "";
+                        }
+                        if (rlreout==null){
+                            rlreout = "";
+                        }
+                        if (jbbmreout==null){
+                            jbbmreout = "";
+                        }
                         if (cwreout.equals("2")) {
                             tvLeader.setVisibility(View.GONE);
                             etLeader.setVisibility(View.VISIBLE);

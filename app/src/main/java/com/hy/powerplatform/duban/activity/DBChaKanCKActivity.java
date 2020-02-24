@@ -244,7 +244,7 @@ public class DBChaKanCKActivity extends BaseActivity {
                     String url = Constant.FIELDETAIL + filePath;
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setAction(android.content.Intent.ACTION_VIEW);
+                    intent.setAction(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));
                     startActivity(intent);
                     break;

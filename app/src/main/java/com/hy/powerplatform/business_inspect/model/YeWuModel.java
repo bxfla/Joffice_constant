@@ -9,6 +9,6 @@ import com.hy.powerplatform.my_utils.base.BaseModeBackLisenter;
  */
 
 public interface YeWuModel {
-    void getYeWuModelData(String httpTag,String beginDate,String endDate,String operCode,
-                             Context context, BaseModeBackLisenter baseModeBackLisenter);
+    void getYeWuModelData(String httpTag, String beginDate, String endDate, String operCode,
+                          Context context, BaseModeBackLisenter baseModeBackLisenter);
 }

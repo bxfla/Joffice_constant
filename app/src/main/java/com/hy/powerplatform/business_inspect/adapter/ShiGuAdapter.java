@@ -28,14 +28,14 @@ public class ShiGuAdapter extends RecyclerView.Adapter <ShiGuAdapter.ViewHolder>
     }
 
     @Override
-    public ShiGuAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adaptershigu_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(ShiGuAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         try {
             holder.imageView.setImageBitmap(MediaStore.Images.Media.getBitmap(context.getContentResolver(), beanList.get(position)));
         } catch (IOException e) {

@@ -5,5 +5,5 @@ package com.hy.powerplatform.oa_flow.presenter;
  */
 
 public interface FlowListPresenter {
-    void getFlowListPresenter(String size,String page,String userName);
+    void getFlowListPresenter(String size, String page, String userName);
 }

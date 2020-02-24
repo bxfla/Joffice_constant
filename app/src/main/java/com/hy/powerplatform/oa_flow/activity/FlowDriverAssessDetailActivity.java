@@ -284,6 +284,7 @@ public class FlowDriverAssessDetailActivity extends BaseActivity {
                     }
                     adapter = new FlowMessageAdapter(FlowDriverAssessDetailActivity.this,flowList);
                     recyclerView.setAdapter(adapter);
+                    Toast.makeText(FlowDriverAssessDetailActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_ONE:

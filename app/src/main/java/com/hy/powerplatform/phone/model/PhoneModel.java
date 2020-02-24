@@ -9,5 +9,5 @@ import com.hy.powerplatform.my_utils.base.BaseModeBackLisenter;
  */
 
 public interface PhoneModel {
-    void getPhoneModelData(String httpTag,String userId,Context context, BaseModeBackLisenter baseModeBackLisenter);
+    void getPhoneModelData(String httpTag, String userId, Context context, BaseModeBackLisenter baseModeBackLisenter);
 }

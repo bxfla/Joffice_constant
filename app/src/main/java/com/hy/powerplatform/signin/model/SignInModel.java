@@ -9,6 +9,6 @@ import com.hy.powerplatform.my_utils.base.BaseModeBackLisenter;
  */
 
 public interface SignInModel {
-    void getSignInModelData(String httpTag, String userName, String addr, String rq, String sj,String gps,String photo,
-                          Context context, BaseModeBackLisenter baseModeBackLisenter);
+    void getSignInModelData(String httpTag, String userName, String addr, String rq, String sj, String gps, String photo,
+                            Context context, BaseModeBackLisenter baseModeBackLisenter);
 }

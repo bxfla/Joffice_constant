@@ -343,6 +343,7 @@ public class FlowCarSafeDetailActivity extends BaseActivity {
                     }
                     adapter = new FlowMessageAdapter(FlowCarSafeDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
+                    Toast.makeText(FlowCarSafeDetailActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_ONE:

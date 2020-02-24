@@ -5,5 +5,5 @@ package com.hy.powerplatform.business_inspect.presenter;
  */
 
 public interface YeWuListPresenter {
-    void getYeWuListPresenterData(String beginDate,String endDate,String operCode);
+    void getYeWuListPresenterData(String beginDate, String endDate, String operCode);
 }

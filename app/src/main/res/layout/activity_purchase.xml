@@ -243,6 +243,7 @@
                     <TextView
                         android:id="@+id/etDepartment1"
                         style="@style/oaEditText"
+                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
 
@@ -259,6 +260,7 @@
                     <TextView
                         android:id="@+id/etDepartment3"
                         style="@style/oaEditText"
+                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
 
@@ -267,6 +269,7 @@
                     <TextView
                         android:id="@+id/etDepartment4"
                         style="@style/oaEditText"
+                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
 
@@ -275,6 +278,7 @@
                     <TextView
                         android:id="@+id/etDepartment5"
                         style="@style/oaEditText"
+                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="45dp" />
 

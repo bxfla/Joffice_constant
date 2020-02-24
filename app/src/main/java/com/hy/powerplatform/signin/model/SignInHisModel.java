@@ -10,5 +10,5 @@ import com.hy.powerplatform.my_utils.base.BaseModeBackLisenter;
 
 public interface SignInHisModel {
     void getSignInHisModelData(String httpTag, String beginDate, String endDate, String userCode,
-                            Context context, BaseModeBackLisenter baseModeBackLisenter);
+                               Context context, BaseModeBackLisenter baseModeBackLisenter);
 }

@@ -118,6 +118,7 @@ public class ListActivity extends BaseActivity {
                 numList.remove(2);
             }
             if (!dataList.contains(Constant.DRIVERASSESSNAME)
+                    && !dataList.contains(Constant.ASSESSNAME)
                     && !dataList.contains(Constant.CHUCAINAME)
                     && !dataList.contains(Constant.LEAVERNAME)
                     && !dataList.contains(Constant.ENTRYNAMENAME)

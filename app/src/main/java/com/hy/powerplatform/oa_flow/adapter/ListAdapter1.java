@@ -31,14 +31,14 @@ public class ListAdapter1  extends RecyclerView.Adapter<ListAdapter1.ViewHolder>
     }
 
     @Override
-    public ListAdapter1.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_flowlist,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ListAdapter1.ViewHolder holder, final int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.textView.setText(beanList.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,5 +10,5 @@ import com.hy.powerplatform.my_utils.base.BaseModeBackLisenter;
  */
 
 public interface MainTainListModel {
-    void getMainTainListModel(String httpTag, String startTime,String endTime, String type, Context context, BaseModeBackLisenter baseModeBackLisenter);
+    void getMainTainListModel(String httpTag, String startTime, String endTime, String type, Context context, BaseModeBackLisenter baseModeBackLisenter);
 }

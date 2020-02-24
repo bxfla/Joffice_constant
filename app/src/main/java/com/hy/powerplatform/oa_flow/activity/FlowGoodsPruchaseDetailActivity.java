@@ -358,6 +358,7 @@ public class FlowGoodsPruchaseDetailActivity extends BaseActivity {
                     }
                     adapter = new FlowMessageAdapter(FlowGoodsPruchaseDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
+                    Toast.makeText(FlowGoodsPruchaseDetailActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_ONE:

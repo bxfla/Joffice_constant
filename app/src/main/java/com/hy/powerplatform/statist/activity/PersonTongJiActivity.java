@@ -30,6 +30,7 @@ import com.hy.powerplatform.my_utils.utils.BaseRecyclerAdapterPosition;
 import com.hy.powerplatform.my_utils.utils.BaseViewHolderPosition;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
 import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerMonth;
+import com.hy.powerplatform.statist.bean.Department;
 import com.hy.powerplatform.statist.bean.PersonTongJi;
 
 import java.io.IOException;
@@ -71,6 +72,8 @@ public class PersonTongJiActivity extends BaseActivity {
     BaseRecyclerAdapterPosition mAdapter;
     private CustomDatePickerMonth customDatePicker1;
     final HashMap<String, String> map = new HashMap();
+    List<Department.DataBean.ChildrenBeanX.ChildrenBean> departmentList = new ArrayList<>();
+    List<String> departNameList = new ArrayList<>();
     List<PersonTongJi.ResultBean> beanList = new ArrayList<>();
 
     PieDataSet pieDataSet;
@@ -272,16 +275,16 @@ public class PersonTongJiActivity extends BaseActivity {
                         double month = 0;
                         resultBean.setPosition("合计");
                         for (int i = 0; i < bean.getResult().size(); i++) {
-                            month = month+Double.valueOf(bean.getResult().get(i).getTotal());
+                            month = month + Double.valueOf(bean.getResult().get(i).getTotal());
                         }
-                        month = (double)Math.round(month*100)/100;
+                        month = (double) Math.round(month * 100) / 100;
                         resultBean.setTotal(String.valueOf(month));
                         beanList.add(resultBean);
                         for (int i = 0; i < bean.getResult().size(); i++) {
                             beanList.add(bean.getResult().get(i));
-                            if (bean.getResult().get(i).getPosition().equals("广告/出租/乐途/春城通")){
+                            if (bean.getResult().get(i).getPosition().equals("广告/出租/乐途/春城通")) {
                                 xValues.add("广告");
-                            }else if (bean.getResult().get(i).getPosition().equals("营运分公司及修理厂工作人员")){
+                            } else if (bean.getResult().get(i).getPosition().equals("营运分公司及修理厂工作人员")) {
                                 xValues.add("工作人员");
                             } else {
                                 xValues.add(bean.getResult().get(i).getPosition());
@@ -325,7 +328,7 @@ public class PersonTongJiActivity extends BaseActivity {
 
         @Override
         public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-            return mFormat.format(value+"%");//数据前或者后可根据自己想要显示的方式添加
+            return mFormat.format(value + "%");//数据前或者后可根据自己想要显示的方式添加
         }
     }
 }

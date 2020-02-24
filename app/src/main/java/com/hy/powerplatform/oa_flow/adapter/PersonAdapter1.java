@@ -23,7 +23,7 @@ public class PersonAdapter1 extends BaseAdapter implements SectionIndexer {
      * 自定义回调接口
      */
     public interface CallBackPosition {
-        public void  myTextViewClient(String name, String profileId, String userCode, String sex,String eCode);
+        public void  myTextViewClient(String name, String profileId, String userCode, String sex, String eCode);
     }
 
     public void setOnClientMyTextView(CallBackPosition callBackPosition){

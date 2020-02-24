@@ -156,7 +156,7 @@ public class OkHttpUtil {
 
     //创建接口，回调给调用者
     public interface ResultCallback{
-        void onError(Request request,Exception e);
+        void onError(Request request, Exception e);
         void onResponse(Response response) throws IOException;
     }
 }

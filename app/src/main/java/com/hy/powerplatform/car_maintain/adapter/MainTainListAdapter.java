@@ -31,7 +31,7 @@ public class MainTainListAdapter extends RecyclerView.Adapter<MainTainListAdapte
     }
 
     @Override
-    public MainTainListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.adapter_maintain_list,parent,false);
         final ViewHolder holder=new ViewHolder(view);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +48,7 @@ public class MainTainListAdapter extends RecyclerView.Adapter<MainTainListAdapte
     }
 
     @Override
-    public void onBindViewHolder(MainTainListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvCode.setText(beanList.get(position).getMeasureBusNo());
         holder.tvCarDode.setText(beanList.get(position).getCarNo());
         holder.tvDriver.setText(beanList.get(position).getDriverName());

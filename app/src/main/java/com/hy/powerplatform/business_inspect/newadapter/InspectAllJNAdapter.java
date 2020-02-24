@@ -26,7 +26,7 @@ public class InspectAllJNAdapter extends RecyclerView.Adapter<InspectAllJNAdapte
     public GetJNItemPosition getJNItemPosition;
 
     public interface GetJNItemPosition {
-        void getJNPosition(int position,String tag);
+        void getJNPosition(int position, String tag);
     }
 
     public void setOnInnerItemOnClickListener(GetJNItemPosition getJNItemPosition){

@@ -373,7 +373,7 @@ public class DBGuanLiActivity extends BaseActivity {
                     Bundle b = msg.getData();
                     String error = b.getString("error");
                     ProgressDialogUtil.stopLoad();
-                    tvOverTime.setText("");
+//                    tvOverTime.setText("");
                     llTiaoJian1.setVisibility(View.GONE);
                     Toast.makeText(DBGuanLiActivity.this, error, Toast.LENGTH_SHORT).show();
                     break;
@@ -409,7 +409,7 @@ public class DBGuanLiActivity extends BaseActivity {
                         recyclerView.complete();
                         recyclerView.onNoMore();
                     }
-                    tvOverTime.setText("");
+//                    tvOverTime.setText("");
                     llTiaoJian1.setVisibility(View.GONE);
                     ProgressDialogUtil.stopLoad();
                     break;

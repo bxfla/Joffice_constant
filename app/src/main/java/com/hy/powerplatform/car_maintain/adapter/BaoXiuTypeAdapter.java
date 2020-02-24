@@ -40,14 +40,14 @@ public class BaoXiuTypeAdapter extends RecyclerView.Adapter<BaoXiuTypeAdapter.Vi
     }
 
     @Override
-    public BaoXiuTypeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_selectdata,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(BaoXiuTypeAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.textView.setText(dataList.get(position));
         holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -30,14 +30,14 @@ public class FlowLeaveListAdapter extends RecyclerView.Adapter<FlowLeaveListAdap
     }
 
     @Override
-    public FlowLeaveListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_flowlist,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(FlowLeaveListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.textView.setText(beanList1.get(position).getSubject());
         holder.mPosition = position;
     }

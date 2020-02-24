@@ -48,7 +48,7 @@ public class ZengShiListActivity extends BaseActivity {
     String data;
     int limit = 20;
     int start = 0;
-    String userName="",profileId="",eCode="";
+    String userName="",profileId="",eCode="",userCode="";
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapter baseAdapter;
     final HashMap<String, String> map = new HashMap();
@@ -92,7 +92,7 @@ public class ZengShiListActivity extends BaseActivity {
         ProgressDialogUtil.startLoad(this, getResources().getString(R.string.get_data));
         final String path_url = Constant.BASE_URL2 + Constant.ZENGSHI + "?start=" + start + "&limit=" + limit;
         map.clear();
-        map.put("code", eCode);
+        map.put("code", userCode);
         httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -155,6 +155,7 @@ public class ZengShiListActivity extends BaseActivity {
                 profileId = data.getStringExtra("profileId");
                 userName = data.getStringExtra("userName");
                 eCode = data.getStringExtra("eCode");
+                userCode = data.getStringExtra("userCode");
                 tvName.setText(userName);
                 beanList.clear();
                 limit = 20;
@@ -193,6 +194,7 @@ public class ZengShiListActivity extends BaseActivity {
                     String data = b1.getString("data");
                     ZengShiList bean = new Gson().fromJson(data, ZengShiList.class);
                     if (bean.getTotalCounts() != 0) {
+                        beanList.clear();
                         for (int i = 0; i < bean.getResult().size(); i++) {
                             beanList.add(bean.getResult().get(i));
                         }

@@ -107,31 +107,27 @@
             <TextView
                 android:id="@+id/textView3"
                 style="@style/ycTextView"
-                android:text="入职流程" />
+                android:text="驾驶员入职流程" />
 
             <ImageView style="@style/ycGO"/>
         </LinearLayout>
     </FrameLayout>
 
     <FrameLayout
-        android:visibility="gone"
-        android:id="@+id/flOverTime"
+        android:id="@+id/flwoekEnter"
         style="@style/ycFrameLayout">
 
         <LinearLayout
-            android:id="@+id/llOverTime"
+            android:id="@+id/llwoekEnter"
             style="@style/ycLinearLayout">
 
             <ImageView
                 style="@style/ycImageView"
-                android:src="@drawable/flow_item10" />
+                android:src="@drawable/flow_item11" />
 
             <TextView
                 style="@style/ycTextView"
-                android:text="加班申请"/>
-            <TextView
-                android:id="@+id/tvOverTime"
-                style="@style/numTextView" />
+                android:text="员工入职"/>
             <ImageView style="@style/ycGO" />
         </LinearLayout>
     </FrameLayout>

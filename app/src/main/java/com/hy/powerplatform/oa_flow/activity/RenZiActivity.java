@@ -51,14 +51,8 @@ public class RenZiActivity extends BaseActivity {
     LinearLayout llEntry;
     @BindView(R.id.tvEntry)
     TextView tvEntry;
-    @BindView(R.id.llOverTime)
-    LinearLayout llOverTime;
-    @BindView(R.id.tvOverTime)
-    TextView tvOverTime;
     List<MyNum.ResultBean> beanList = new ArrayList<>();
     Intent intent;
-    @BindView(R.id.inNoContent)
-    LinearLayout llNoContent;
     @BindView(R.id.flDriverAssess)
     FrameLayout flDriverAssess;
     @BindView(R.id.flChuCai)
@@ -67,22 +61,28 @@ public class RenZiActivity extends BaseActivity {
     FrameLayout flLeave;
     @BindView(R.id.flEntry)
     FrameLayout flEntry;
-    @BindView(R.id.flOverTime)
-    FrameLayout flOverTime;
 
     String rolues;
     List<String> dataList = new ArrayList<>();
+    @BindView(R.id.llNoContent)
+    LinearLayout llNoContent;
+    @BindView(R.id.textView3)
+    TextView textView3;
+    @BindView(R.id.llwoekEnter)
+    LinearLayout llwoekEnter;
+    @BindView(R.id.flwoekEnter)
+    FrameLayout flwoekEnter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        rolues = new SharedPreferencesHelper(this,"login").getData(this,"rolues","");
-        String userName = new SharedPreferencesHelper(this,"login").getData(this,"userStatus","");
+        rolues = new SharedPreferencesHelper(this, "login").getData(this, "rolues", "");
+        String userName = new SharedPreferencesHelper(this, "login").getData(this, "userStatus", "");
 
-        if (userName.equals("超级管理员")){
+        if (userName.equals("超级管理员")) {
             getData();
-        }else {
+        } else {
             getJsonData();
         }
     }
@@ -109,32 +109,36 @@ public class RenZiActivity extends BaseActivity {
     private void getJsonData() {
         try {
             JSONArray jsonArray = new JSONArray(rolues);
-            for (int i = 0;i<jsonArray.length();i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 dataList.add(jsonObject.getString("name"));
             }
 
+            //&& !dataList.contains(Constant.ASSESSNAME)
             if (!dataList.contains(Constant.DRIVERASSESSNAME)
-                    &&!dataList.contains(Constant.CHUCAINAME)
-                    &&!dataList.contains(Constant.LEAVERNAME)
-                    &&!dataList.contains(Constant.ENTRYNAMENAME)
-                    &&!dataList.contains(Constant.OVERTINENAME)){
+                    && !dataList.contains(Constant.CHUCAINAME)
+                    && !dataList.contains(Constant.LEAVERNAME)
+                    && !dataList.contains(Constant.ENTRYNAMENAME)
+                    && !dataList.contains(Constant.OVERTINENAME)) {
                 llNoContent.setVisibility(View.VISIBLE);
-            }else {
-                if (!dataList.contains(Constant.DRIVERASSESSNAME) ){
+            } else {
+                if (!dataList.contains(Constant.DRIVERASSESSNAME)) {
                     flDriverAssess.setVisibility(View.GONE);
                 }
-                if (!dataList.contains(Constant.CHUCAINAME)){
+                if (!dataList.contains(Constant.ASSESSNAME)) {
+                    flwoekEnter.setVisibility(View.GONE);
+                }
+                if (!dataList.contains(Constant.CHUCAINAME)) {
                     flChuCai.setVisibility(View.GONE);
                 }
-                if (!dataList.contains(Constant.LEAVERNAME)){
+                if (!dataList.contains(Constant.LEAVERNAME)) {
                     flLeave.setVisibility(View.GONE);
                 }
-                if (!dataList.contains(Constant.ENTRYNAMENAME)){
+                if (!dataList.contains(Constant.ENTRYNAMENAME)) {
                     flEntry.setVisibility(View.GONE);
                 }
-                if (!dataList.contains(Constant.OVERTINENAME)){
-                    flOverTime.setVisibility(View.GONE);
+                if (!dataList.contains(Constant.ENTRYNAMENAME)) {
+                    flEntry.setVisibility(View.GONE);
                 }
 //                getData();
             }
@@ -164,11 +168,15 @@ public class RenZiActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.llDriverAssess, R.id.llChuCai, R.id.llLeave, R.id.llEntry, R.id.llOverTime})
+    @OnClick({R.id.llDriverAssess, R.id.llChuCai, R.id.llLeave, R.id.llEntry,R.id.llwoekEnter})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.llDriverAssess:
                 intent = new Intent(this, FlowDriverAssessActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.llwoekEnter:
+                intent = new Intent(this, FlowAssessActivity.class);
                 startActivity(intent);
                 break;
             case R.id.llChuCai:
@@ -183,10 +191,10 @@ public class RenZiActivity extends BaseActivity {
                 intent = new Intent(this, FlowEntryActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.llOverTime:
-                intent = new Intent(this, FlowOverTimeActivity.class);
-                startActivity(intent);
-                break;
+//            case R.id.llOverTime:
+//                intent = new Intent(this, FlowOverTimeActivity.class);
+//                startActivity(intent);
+//                break;
         }
     }
 
@@ -200,8 +208,6 @@ public class RenZiActivity extends BaseActivity {
             tvEntry.setText("");
             tvChuCai.setVisibility(View.GONE);
             tvChuCai.setText("");
-            tvOverTime.setVisibility(View.GONE);
-            tvOverTime.setText("");
             tvDriverAssess.setVisibility(View.GONE);
             tvDriverAssess.setText("");
             String data = String.valueOf(msg.getData().get("data"));
@@ -226,10 +232,10 @@ public class RenZiActivity extends BaseActivity {
                             tvChuCai.setVisibility(View.VISIBLE);
                             tvChuCai.setText(beanList.get(i).getSl());
                         }
-                        if (beanList.get(i).getFormDefId().equals(Constant.OVERTIME)) {
-                            tvOverTime.setVisibility(View.VISIBLE);
-                            tvOverTime.setText(beanList.get(i).getSl());
-                        }
+//                        if (beanList.get(i).getFormDefId().equals(Constant.OVERTIME)) {
+//                            tvOverTime.setVisibility(View.VISIBLE);
+//                            tvOverTime.setText(beanList.get(i).getSl());
+//                        }
                         if (beanList.get(i).getFormDefId().equals(Constant.DRIVERASSESS)) {
                             tvDriverAssess.setVisibility(View.VISIBLE);
                             tvDriverAssess.setText(beanList.get(i).getSl());
@@ -242,4 +248,5 @@ public class RenZiActivity extends BaseActivity {
             }
         }
     };
+
 }

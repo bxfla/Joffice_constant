@@ -37,6 +37,7 @@ public class Constant {
     public static final int TAG_SEVEN=7;
     public static final int TAG_EIGHT=8;
     public static final int TAG_NINE=9;
+    public static final int TAG_TEN=10;
     // request参数
     public static final int REQ_QR_CODE = 11002; // // 打开扫描界面请求码
     public static final int REQ_PERM_CAMERA = 11003; // 打开摄像头
@@ -110,6 +111,8 @@ public class Constant {
     public static final String  NULLIFY = "flow/discardProcessRun.do";
     // 督办列表
     public static final String  DBLIST = "task/myTaskListSuperWorkTask.do";
+    // 代办督办列表
+    public static final String  DBLIST1 = "task/mySuperList2SuperWorkTask.do";
     // 督办确认编辑
     public static final String  DBQRBJ = "task/saveSuperWorkTask.do";
     // 督办确认提交
@@ -208,6 +211,12 @@ public class Constant {
     // 统计分析（一级菜单）
     //人员统计分析
     public static final String  PERSONTJ = "hrm/postCountListEmpProfile.do";
+    //获取所有部门
+    public static final String  DEPARTMENTS = "system/treeNewOrganization.do?demId=1";
+    //获取更新历史
+    public static final String  APPUPDATA = "system/listAppVersionSetting.do";
+    //获取首页指标数据
+    public static final String  ZB = "system/getIndexReportIndexAuthority.do";
 
     //年度每月里程
     public static final String  YEARMILE = "busmanager/getMile_bigDataDriverMileDetail.do";
@@ -231,6 +240,14 @@ public class Constant {
     public static final String  NOTICETYPE = "info/addReadCountNews.do";
     // 个人中心数据
     public static final String  PERSONCENTER = "system/getLogTimeByIpAppUser.do";
+    // 获取督办数量
+    public static final String  DBNUM = "task/getSuperviseCountSuperTaskOper.do";
+    // 获取公告数量
+    public static final String  GGNUM = "info/getNoticeCountNews.do";
+    // 获取会议数量
+    public static final String  HYNUM = "admin/getMeetingCountConference.do";
+    // 获取入职人员
+    public static final String  ENTRYPERSON = "hrm/getListResume.do";
 
     public static final String  LEAVERNAME = "请假流程";
     public static final String  PAYFLOWNAME = "付款程序审批单";
@@ -255,6 +272,7 @@ public class Constant {
     public static final String  CARSAFENAME = "车辆保险费审批单";
     public static final String  CARVIDEONAME = "车载监控视频调阅审批";
     public static final String  DRIVERASSESSNAME = "驾驶员考核评分表";
+    public static final String  ASSESSNAME = "员工入职";
     public static final String  USERCARNAME = "公务车用车派车单";
     public static final String  DINNERNAME = "接待用餐审批表";
     public static final String  COMPLAINNAME = "安全服务部投诉转办单";
@@ -282,6 +300,7 @@ public class Constant {
     public static final String  GHCONTRACTSINGLE = "10129";
     public static final String  PUECHASEFLOW = "10103";
     public static final String  ENTRY = "10117";
+    public static final String  WORKENTRY = "10142";
     public static final String  OUTMESSAGE = "10076";
     public static final String  WORKPUECHASE = "86";
     public static final String  REPAIR = "10105";
@@ -320,6 +339,7 @@ public class Constant {
     public static final String  ZGSFLOWDIFID = "20504";//20513
     public static final String  PUECHASEFLOWDIFID = "20271";
     public static final String  ENTRYDIFID = "10105";
+    public static final String  WORKENTRYDIFID = "20534";
     public static final String  OUTMESSAGEDIFID = "20200";
     public static final String  WORKPUECHASEDIFID = "10092";
     public static final String  REPAIRDIFID = "20307";

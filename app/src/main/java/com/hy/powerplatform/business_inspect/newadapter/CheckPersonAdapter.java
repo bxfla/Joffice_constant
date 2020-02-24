@@ -37,14 +37,14 @@ public class CheckPersonAdapter extends RecyclerView.Adapter<CheckPersonAdapter.
     }
 
     @Override
-    public CheckPersonAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_checkperson, parent, false);
         ViewHolder viewHolser = new ViewHolder(view);
         return viewHolser;
     }
 
     @Override
-    public void onBindViewHolder(final CheckPersonAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvName.setText(beanList.get(position).getFullname());
         holder.position1 = position;
         holder.tvName.setOnClickListener(new View.OnClickListener() {

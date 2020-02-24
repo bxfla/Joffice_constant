@@ -1,5 +1,6 @@
 package com.hy.powerplatform.login.fragment;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.SharedPreferencesHelper;
+import com.hy.powerplatform.login.activity.AppUpHistoryActivity;
 import com.hy.powerplatform.login.bean.PersonContent;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.OkHttpUtil;
@@ -26,6 +28,7 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -58,6 +61,8 @@ public class Fragment02 extends Fragment {
     TextView tvOldIp;
     @BindView(R.id.tvOldLogin)
     TextView tvOldLogin;
+    @BindView(R.id.tvVersionH)
+    TextView tvVersionH;
     private OkHttpUtil httpUtil;
     String versionName;
     int versionCode;
@@ -134,12 +139,17 @@ public class Fragment02 extends Fragment {
                     Bundle b1 = msg.getData();
                     String data = b1.getString("data");
                     PersonContent bean = new Gson().fromJson(data, PersonContent.class);
-                    tvLoginNum.setText(bean.getResult().get(0).getNum()+"");
-                    tvOldIp.setText(bean.getResult().get(0).getLogIp()+"");
-                    tvOldLogin.setText(bean.getResult().get(0).getLogTime()+"");
+                    tvLoginNum.setText(bean.getResult().get(0).getNum() + "");
+                    tvOldIp.setText(bean.getResult().get(0).getLogIp() + "");
+                    tvOldLogin.setText(bean.getResult().get(0).getLogTime() + "");
                     break;
             }
         }
     };
 
+    @OnClick(R.id.tvVersionH)
+    public void onViewClicked() {
+        Intent intent = new Intent(getActivity(), AppUpHistoryActivity.class);
+        startActivity(intent);
+    }
 }

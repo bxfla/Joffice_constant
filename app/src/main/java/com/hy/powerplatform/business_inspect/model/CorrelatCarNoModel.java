@@ -9,5 +9,5 @@ import com.hy.powerplatform.my_utils.base.BaseModeBackLisenter;
  */
 
 public interface CorrelatCarNoModel {
-    void getCorrelatCarNoModelData(String httpTag,String lineCode,String rq, Context context, BaseModeBackLisenter baseModeBackLisenter);
+    void getCorrelatCarNoModelData(String httpTag, String lineCode, String rq, Context context, BaseModeBackLisenter baseModeBackLisenter);
 }

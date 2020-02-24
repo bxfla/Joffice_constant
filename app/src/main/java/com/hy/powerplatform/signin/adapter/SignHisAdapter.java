@@ -26,14 +26,14 @@ public class SignHisAdapter extends RecyclerView.Adapter<SignHisAdapter.ViewHold
     }
 
     @Override
-    public SignHisAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_signhis_item,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(SignHisAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvDate.setText(beanList.get(position).getRq());
         holder.tvTime.setText(beanList.get(position).getSj());
         holder.tvName.setText(beanList.get(position).getUserName());

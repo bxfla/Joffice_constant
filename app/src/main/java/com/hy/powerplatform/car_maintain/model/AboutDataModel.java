@@ -10,5 +10,5 @@ import com.hy.powerplatform.my_utils.base.BaseModeBackLisenter;
  */
 
 public interface AboutDataModel {
-    void getAboutDataModel(String httpTag,String busCode, Context context, BaseModeBackLisenter baseModeBackLisenter);
+    void getAboutDataModel(String httpTag, String busCode, Context context, BaseModeBackLisenter baseModeBackLisenter);
 }

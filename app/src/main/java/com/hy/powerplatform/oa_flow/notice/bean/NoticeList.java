@@ -16,6 +16,23 @@ public class NoticeList implements Serializable {
     public String fileName;
     public String fileId;
     public String readtimes;
+    public String readUserids;
+
+    public String getNewsId() {
+        return newsId;
+    }
+
+    public void setNewsId(String newsId) {
+        this.newsId = newsId;
+    }
+
+    public String getReadUserids() {
+        return readUserids;
+    }
+
+    public void setReadUserids(String readUserids) {
+        this.readUserids = readUserids;
+    }
 
     public String getId() {
         return newsId;

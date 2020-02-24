@@ -265,6 +265,7 @@ public class FlowChuCaiDetailActivity extends BaseActivity {
                     }
                     adapter = new FlowMessageAdapter(FlowChuCaiDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
+                    Toast.makeText(FlowChuCaiDetailActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_ONE:

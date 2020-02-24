@@ -27,14 +27,14 @@ public class FlowMessageAdapter extends RecyclerView.Adapter<FlowMessageAdapter.
     }
 
     @Override
-    public FlowMessageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_flowmessage,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(FlowMessageAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tvTask.setText(beanList.get(position).getActivityName());
         holder.tvPerson.setText(beanList.get(position).getCreatorName());
         holder.tvStartTime.setText(beanList.get(position).getCreatetime());

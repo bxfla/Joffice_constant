@@ -304,6 +304,7 @@ public class FlowSaferllDetailActivity extends BaseActivity {
                     }
                     adapter = new FlowMessageAdapter(FlowSaferllDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
+                    Toast.makeText(FlowSaferllDetailActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_ONE:

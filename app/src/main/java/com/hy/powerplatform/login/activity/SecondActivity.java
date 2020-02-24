@@ -61,7 +61,7 @@ public class SecondActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + Constant.VERSIONNO;
+                String url = Constant.BASE_URL2 + Constant.VERSIONNO;
                 DBHandler dbA = new DBHandler();
                 versiondata = dbA.getAPKVerson(url);
                 Message message = new Message();

@@ -84,9 +84,9 @@ public interface RetrofitService {
      * @return
      */
     @GET("hrm/saveDataAttendanceSheet.do")
-    Observable<SignIn> SignIn (@Query("username") String userName,@Query("addr") String addr,
-                               @Query("rq") String rq, @Query("sj") String sj,@Query("gps") String gps,
-                               @Query("photo") String photo);
+    Observable<SignIn> SignIn(@Query("username") String userName, @Query("addr") String addr,
+                              @Query("rq") String rq, @Query("sj") String sj, @Query("gps") String gps,
+                              @Query("photo") String photo);
 
     /**
      * 签到历史
@@ -96,8 +96,8 @@ public interface RetrofitService {
      * @return
      */
     @GET("hrm/listMobileAttendanceSheet.do")
-    Observable<SignHis> SignInHis (@Query("beginDate") String beginDate, @Query("endDate") String endDate,
-                                   @Query("userCode") String userCode);
+    Observable<SignHis> SignInHis(@Query("beginDate") String beginDate, @Query("endDate") String endDate,
+                                  @Query("userCode") String userCode);
 
     /**
      * 卫生检查记录
@@ -107,29 +107,29 @@ public interface RetrofitService {
      * @return
      */
     @GET("starkh/listMobileWeishengJc.do")
-    Observable<YeWuList> YeWuHis (@Query("beginDate") String beginDate, @Query("endDate") String endDate,
-                                  @Query("operCode") String operCode);
+    Observable<YeWuList> YeWuHis(@Query("beginDate") String beginDate, @Query("endDate") String endDate,
+                                 @Query("operCode") String operCode);
 
     /**
      * 获取车牌号
      * @return
      */
     @GET("admin/getBusStoreCar.do")
-    Observable<CarCode> carCode ();
+    Observable<CarCode> carCode();
 
     /**
      * 获取关联数据
      * @return
      */
     @GET("admin/getBusLineAll2Car.do")
-    Observable<Correlat> getCorrelation (@Query("busCode")String busCode,@Query("rq")String rq);
+    Observable<Correlat> getCorrelation(@Query("busCode") String busCode, @Query("rq") String rq);
 
     /**
      * 获取车辆关联数据
      * @return
      */
     @GET("admin/getBusByLineCodeCar.do")
-    Observable<CarCode> getCorrelatCarNo (@Query("lineCode")String lineCode, @Query("rq")String rq);
+    Observable<CarCode> getCorrelatCarNo(@Query("lineCode") String lineCode, @Query("rq") String rq);
 
 
     /**
@@ -138,7 +138,7 @@ public interface RetrofitService {
      */
 //    @GET("system/getLineStoreAllLineInfo.do")
     @GET("system/getLineStoreLineInfo.do")
-    Observable<InspectLine> inspectLine ();
+    Observable<InspectLine> inspectLine();
 
     /**
      * 获取驾驶员
@@ -221,7 +221,7 @@ public interface RetrofitService {
      * @return
      */
     @GET("starkh/getYouFuStoreCheckClassification.do")
-    Observable<InspectStarte> inspectStarte ();
+    Observable<InspectStarte> inspectStarte();
 
     /**
      * 获取检查人
@@ -229,35 +229,35 @@ public interface RetrofitService {
      * ?depId=385&iswork=1
      */
     @GET("hrm/profileListEmpProfile.do")
-    Observable<CheckPerson> getCheckPerson ();
+    Observable<CheckPerson> getCheckPerson();
 
     /**
      * 获取督办检查人
      */
     @GET("system/dialogAppUser.do?curDep=true")
-    Observable<DBCheckPerson> getDBCheckPerson ();
+    Observable<DBCheckPerson> getDBCheckPerson();
 
     /**
      * 技术获取检查人
      * @return
      */
     @GET("hrm/profileListEmpProfile.do?depId=440&iswork=1")
-    Observable<CheckPerson> getKillCheckPerson ();
+    Observable<CheckPerson> getKillCheckPerson();
 
     /**
      * 获取卫生检查人
      * @return
      */
     @GET("hrm/profileListEmpProfile.do?depId=450&iswork=1")
-    Observable<CheckPerson> getHealthCheckPerson ();
+    Observable<CheckPerson> getHealthCheckPerson();
 
     /**
      * 维修车辆数据列表
      * @return
      */
     @GET("repair/listMeasureBus.do")
-    Observable<MainTainList> getMainTainListData (@Query("Q_createDate_D_GE") String starTime,
-                                                  @Query("endDate") String endTime,@Query("Q_busCode_S_EQ") String Q_busCode_S_EQ);
+    Observable<MainTainList> getMainTainListData(@Query("Q_createDate_D_GE") String starTime,
+                                                 @Query("endDate") String endTime, @Query("Q_busCode_S_EQ") String Q_busCode_S_EQ);
 
 
     /**
@@ -265,7 +265,7 @@ public interface RetrofitService {
      * @return
      */
     @GET("admin/getBusBydepCar.do")
-    Observable<zhibianhao> getZiBianHao ();
+    Observable<zhibianhao> getZiBianHao();
 
 
     /**
@@ -273,65 +273,65 @@ public interface RetrofitService {
      * @return
      */
     @GET("system/getLineStoreAllLineInfo.do")
-    Observable<Line> getLine ();
+    Observable<Line> getLine();
 
     /**
      * 获取维修司机
      * @return
      */
     @GET("hrm/selectJSYEmpProfile.do")
-    Observable<Driver> getDriver ();
+    Observable<Driver> getDriver();
 
     /**
      * 获取维修检查人
      * @return
      */
     @GET("system/comboItemDictionary.do?nodeKey=weixiujianyanren")
-    Observable<JianChaRen> getJianChaRen ();
+    Observable<JianChaRen> getJianChaRen();
 
     /**
      * 获取维修维修厂
      * @return
      */
     @GET("system/comboItemDictionary.do?nodeKey=weixiuchang")
-    Observable<WeiXiuChang> getWeiXiuChang ();
+    Observable<WeiXiuChang> getWeiXiuChang();
 
     /**
      * 获取维修维修类型
      * @return
      */
     @GET("system/comboItemDictionary.do?nodeKey=baoxiuleixing")
-    Observable<BaoXiuType> getBaoXiuType ();
+    Observable<BaoXiuType> getBaoXiuType();
 
     /**
      * 获取维修关联数据
      * @return
      */
     @GET("admin/getBusLineAllNewCar.do")
-    Observable<AboutData> getAboutData (@Query("busCode") String busCode);
+    Observable<AboutData> getAboutData(@Query("busCode") String busCode);
 
     /**
      * 获取维修维修领料列表
      * @return
      */
     @GET("repair/listAppMeasureBusWare.do")
-    Observable<LingLiao> getLingLiao (@Query("createDate") String createDate,
-                                      @Query("endDate") String endDate,
-                                      @Query("busCode") String type);
+    Observable<LingLiao> getLingLiao(@Query("createDate") String createDate,
+                                     @Query("endDate") String endDate,
+                                     @Query("busCode") String type);
 
     /**
      * 获取维修维修领料Item列表
      * @return
      */
     @GET("repair/getMeasureBus.do")
-    Observable<LingLiaoItem> getLingLiaoItem (@Query("no") String xiCode);
+    Observable<LingLiaoItem> getLingLiaoItem(@Query("no") String xiCode);
 
     /**
      * 获取维修维维修领料添加项
      * @return
      */
     @GET("system/appTreeGlobalType.do?catKey=WZCLLB")
-    Observable<ClassIfy> getClassIfy ();
+    Observable<ClassIfy> getClassIfy();
 
 
     /**

@@ -28,14 +28,14 @@ public class WeeklyListAdapter extends RecyclerView.Adapter<WeeklyListAdapter.Vi
     }
 
     @Override
-    public WeeklyListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_smart, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(WeeklyListAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tvName.setText(beanList.get(position).getUserName());
         holder.tvDepart.setText(beanList.get(position).getDepName());
         holder.tvDate.setText(beanList.get(position).getDayTime());

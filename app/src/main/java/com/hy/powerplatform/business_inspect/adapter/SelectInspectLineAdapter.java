@@ -48,7 +48,7 @@ public class SelectInspectLineAdapter extends RecyclerView.Adapter<SelectInspect
     }
 
     @Override
-    public SelectInspectLineAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_selectonecar,parent,false);
         final ViewHolder holder=new ViewHolder(view);
 //        //recyclerView监听事件
@@ -67,7 +67,7 @@ public class SelectInspectLineAdapter extends RecyclerView.Adapter<SelectInspect
     }
 
     @Override
-    public void onBindViewHolder(SelectInspectLineAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvNam.setText(beanList.get(position).getLineCode());
     }
 

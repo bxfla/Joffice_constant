@@ -5,5 +5,5 @@ package com.hy.powerplatform.business_inspect.presenter;
  */
 
 public interface HisPresenter {
-    void getHisPresenterData(String starTime,String endTime,String userCode);
+    void getHisPresenterData(String starTime, String endTime, String userCode);
 }

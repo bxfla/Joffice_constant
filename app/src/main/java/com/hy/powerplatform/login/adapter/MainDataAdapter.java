@@ -33,14 +33,14 @@ public class MainDataAdapter extends RecyclerView.Adapter<MainDataAdapter.ViewHo
     }
 
     @Override
-    public MainDataAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_maindata,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(MainDataAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.textView.setText(beanList.get(position).getModuleName());
         holder.imageView.setImageResource(imageList.get(position));
         if (beanList.get(position).getModuleName().equals("待办流程")&&num!=null&&!num.equals("")&&Integer.valueOf(num)!=0){

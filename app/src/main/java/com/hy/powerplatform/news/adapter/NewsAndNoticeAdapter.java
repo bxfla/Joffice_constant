@@ -45,7 +45,7 @@ public class NewsAndNoticeAdapter extends RecyclerView.Adapter<NewsAndNoticeAdap
     }
 
     @Override
-    public NewsAndNoticeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_newandnotice,parent,false);
         final ViewHolder holder=new ViewHolder(view);
         //recyclerView监听事件
@@ -83,7 +83,7 @@ public class NewsAndNoticeAdapter extends RecyclerView.Adapter<NewsAndNoticeAdap
     }
 
     @Override
-    public void onBindViewHolder(NewsAndNoticeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvTitle.setText(showMDeptList.get(position).title);
         holder.tvContent.setHtml(showMDeptList.get(position).content,500);
         holder.tvTime.setText(showMDeptList.get(position).time);

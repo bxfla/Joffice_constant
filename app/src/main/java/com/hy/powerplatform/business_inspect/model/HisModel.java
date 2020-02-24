@@ -9,6 +9,6 @@ import com.hy.powerplatform.my_utils.base.BaseModeBackLisenter;
  */
 
 public interface HisModel {
-    void getHisModelData(String httpTag,String starTime,String endTime,String userCode,
-                             Context context, BaseModeBackLisenter baseModeBackLisenter);
+    void getHisModelData(String httpTag, String starTime, String endTime, String userCode,
+                         Context context, BaseModeBackLisenter baseModeBackLisenter);
 }

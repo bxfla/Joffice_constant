@@ -206,7 +206,7 @@ public class FragmentPurchaseData extends Fragment {
     String userDepart = "";
     String isShow = "true";
     String aboutData, aboutDep = "";
-    double AllMoney1 = 0.0, AllMoney2 = 0.0, AllMoney3 = 0.0, AllMoney4 = 0.0, AllMoney5 = 0.0;
+    double AllMoney1 = 0.0, AllMoney2 = 0.0, AllMoney3 = 0.0, AllMoney4 = 0.0, AllMoney5 = 0.0, OtherMoney = 0.0;
     double numS1 = 0, numS2 = 0, numS3 = 0, numS4 = 0, numS5 = 0;
     double moneyS1 = 0.0, moneyS2 = 0.0, moneyS3 = 0.0, moneyS4 = 0.0, moneyS5 = 0.0;
     String department1 = "", department2 = "", department3 = "", department4 = "";
@@ -227,6 +227,29 @@ public class FragmentPurchaseData extends Fragment {
         String department = new SharedPreferencesHelper(getActivity(), "login").getData(getActivity(), "depName", "");
         etPerson.setText(userName);
         etClass.setText(department);
+
+        etOtherMoney.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().equals("")) {
+                    OtherMoney = (Double.valueOf(s.toString()));
+                    tvAllMoney.setText(new BigDecimal(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5+OtherMoney).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+                } else {
+                    OtherMoney = 0.0;
+                    tvAllMoney.setText(new BigDecimal(AllMoney1 + AllMoney2 + AllMoney3 + AllMoney4 + AllMoney5+OtherMoney).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+                }
+            }
+        });
 
         etAllMoney1.addTextChangedListener(new TextWatcher() {
             @Override

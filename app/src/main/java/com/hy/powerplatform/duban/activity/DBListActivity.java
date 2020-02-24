@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.refreshview.CustomRefreshView;
 import com.google.gson.Gson;
 import com.hy.powerplatform.R;
-import com.hy.powerplatform.duban.bean.DBList;
+import com.hy.powerplatform.duban.bean.DBList1;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.OkHttpUtil;
@@ -77,12 +77,18 @@ public class DBListActivity extends BaseActivity {
     String data = "";
     int limit = 20;
     int start = 0;
+    @BindView(R.id.tvStartTime1)
+    TextView tvStartTime1;
+    @BindView(R.id.line1)
+    View line1;
+    @BindView(R.id.tvEndTime1)
+    TextView tvEndTime1;
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapter baseAdapter;
     List<String> listTag = new ArrayList<String>();
     final HashMap<String, String> map = new HashMap();
     List<String> listType = new ArrayList<String>();
-    List<DBList.ResultBean> beanList = new ArrayList<>();
+    List<DBList1.ResultBean> beanList = new ArrayList<>();
     private CustomDatePickerDay customDatePicker1, customDatePicker2, customDatePicker3;
     String path_url;
 
@@ -114,17 +120,19 @@ public class DBListActivity extends BaseActivity {
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.getRecyclerView().setLayoutManager(manager);
-        baseAdapter = new BaseRecyclerAdapter<DBList.ResultBean>(this, R.layout.adapter_dblist_item, beanList) {
+        baseAdapter = new BaseRecyclerAdapter<DBList1.ResultBean>(this, R.layout.adapter_dblist_item, beanList) {
             @Override
-            public void convert(BaseViewHolder holder, final DBList.ResultBean resultBean) {
+            public void convert(BaseViewHolder holder, final DBList1.ResultBean resultBean) {
                 holder.setText(R.id.tvTaskName, resultBean.getTaskName());
                 holder.setText(R.id.tvContent, resultBean.getTaskContext());
-                holder.setText(R.id.tvTime, resultBean.getCreateTime());
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                String time = format.format(new Date(resultBean.getCreateTime().getTime()));
+                holder.setText(R.id.tvTime, time);
                 holder.setOnClickListener(R.id.ll, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(DBListActivity.this,DBDetailActivity.class);
-                        intent.putExtra("bean",resultBean);
+                        Intent intent = new Intent(DBListActivity.this, DBDetailActivity.class);
+                        intent.putExtra("bean", resultBean);
                         startActivity(intent);
                     }
                 });
@@ -144,7 +152,7 @@ public class DBListActivity extends BaseActivity {
         beanList.clear();
         limit = 20;
         start = 0;
-        getData(start,limit);
+        getData(start, limit);
     }
 
     @Override
@@ -162,7 +170,7 @@ public class DBListActivity extends BaseActivity {
         beanList.clear();
         limit = 20;
         start = 0;
-        getData(start,limit);
+        getData(start, limit);
     }
 
     public void getData(final int start, final int limit) {
@@ -219,7 +227,7 @@ public class DBListActivity extends BaseActivity {
 //            }
 //        });
 
-        path_url = Constant.BASE_URL1 + Constant.DBLIST+"?start="+start+"&limit="+limit;
+        path_url = Constant.BASE_URL1 + Constant.DBLIST1 + "?start=" + start + "&limit=" + limit;
         ProgressDialogUtil.startLoad(this, getResources().getString(R.string.get_data));
         map.clear();
         map.put("startTime", tvStartTime.getText().toString().trim());
@@ -231,19 +239,19 @@ public class DBListActivity extends BaseActivity {
         map.put("planFinishTime", tvOverTime.getText().toString().trim());
 
         String zt = "";
-        if (spinnerZT.getSelectedItem().toString().trim().equals("已编辑未提交")){
+        if (spinnerZT.getSelectedItem().toString().trim().equals("已编辑未提交")) {
             zt = "1";
-        }else if (spinnerZT.getSelectedItem().toString().trim().equals("已提交未发布")){
+        } else if (spinnerZT.getSelectedItem().toString().trim().equals("已提交未发布")) {
             zt = "2";
-        }else if (spinnerZT.getSelectedItem().toString().trim().equals("已发布待执行")){
+        } else if (spinnerZT.getSelectedItem().toString().trim().equals("已发布待执行")) {
             zt = "3";
-        }else if (spinnerZT.getSelectedItem().toString().trim().equals("已提交待确认")){
+        } else if (spinnerZT.getSelectedItem().toString().trim().equals("已提交待确认")) {
             zt = "4";
-        }else if (spinnerZT.getSelectedItem().toString().trim().equals("执行完成")){
+        } else if (spinnerZT.getSelectedItem().toString().trim().equals("执行完成")) {
             zt = "5";
-        }else if (spinnerZT.getSelectedItem().toString().trim().equals("已撤回")){
+        } else if (spinnerZT.getSelectedItem().toString().trim().equals("已撤回")) {
             zt = "6";
-        }else if (spinnerZT.getSelectedItem().toString().trim().equals("暂停执行")){
+        } else if (spinnerZT.getSelectedItem().toString().trim().equals("暂停执行")) {
             zt = "7";
         }
         map.put("taskStatus", zt);
@@ -306,11 +314,11 @@ public class DBListActivity extends BaseActivity {
         c.add(Calendar.DATE, -30);
         Date d = c.getTime();
         String day = format.format(d);
-        tvStartTime.setText(day);
+        tvStartTime1.setText(day);
         System.out.println("过去七天：" + day);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         String now = sdf.format(new Date());
-        tvEndTime.setText(now.split(" ")[0]);
+        tvEndTime1.setText(now.split(" ")[0]);
         tvOverTime1.setText(now.split(" ")[0]);
 
         customDatePicker1 = new CustomDatePickerDay(this, new CustomDatePickerDay.ResultHandler() {
@@ -318,6 +326,7 @@ public class DBListActivity extends BaseActivity {
             public void handle(String time) { // 回调接口，获得选中的时间
                 if (sendHttpContent(time.split(" ")[0])) {
                     tvStartTime.setText(time.split(" ")[0]);
+                    tvStartTime1.setText(time.split(" ")[0]);
                 } else {
                     Toast.makeText(DBListActivity.this, "请选择正确时间", Toast.LENGTH_SHORT).show();
                 }
@@ -332,6 +341,7 @@ public class DBListActivity extends BaseActivity {
                 tvEndTime.setText(time.split(" ")[0]);
                 if (sendHttpContent1(time.split(" ")[0])) {
                     tvEndTime.setText(time.split(" ")[0]);
+                    tvEndTime1.setText(time.split(" ")[0]);
                 } else {
                     Toast.makeText(DBListActivity.this, "请选择正确时间", Toast.LENGTH_SHORT).show();
                 }
@@ -353,13 +363,13 @@ public class DBListActivity extends BaseActivity {
 
     private boolean sendHttpContent(String startTime1) {
         Date startTime = null, endTime = null;
-        if (tvStartTime.getText().toString().isEmpty() || tvStartTime.getText().toString().isEmpty()) {
+        if (tvStartTime1.getText().toString().isEmpty() || tvStartTime1.getText().toString().isEmpty()) {
             Toast.makeText(this, "起止时间不能为空", Toast.LENGTH_SHORT).show();
         } else {
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 startTime = sdf1.parse(startTime1);
-                endTime = sdf1.parse(tvEndTime.getText().toString());
+                endTime = sdf1.parse(tvEndTime1.getText().toString());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -395,14 +405,20 @@ public class DBListActivity extends BaseActivity {
         return true;
     }
 
-    @OnClick({R.id.tvStartTime, R.id.tvEndTime, R.id.llTiaoJian, R.id.tvOverTime})
+    @OnClick({R.id.tvStartTime, R.id.tvEndTime, R.id.llTiaoJian, R.id.tvOverTime,R.id.tvStartTime1, R.id.tvEndTime1})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvStartTime:
-                customDatePicker1.show(tvStartTime.getText().toString());
+                customDatePicker1.show(tvStartTime1.getText().toString());
                 break;
             case R.id.tvEndTime:
-                customDatePicker2.show(tvEndTime.getText().toString());
+                customDatePicker2.show(tvEndTime1.getText().toString());
+                break;
+            case R.id.tvStartTime1:
+                customDatePicker1.show(tvStartTime1.getText().toString());
+                break;
+            case R.id.tvEndTime1:
+                customDatePicker2.show(tvEndTime1.getText().toString());
                 break;
             case R.id.tvOverTime:
                 customDatePicker3.show(tvOverTime1.getText().toString());
@@ -434,31 +450,31 @@ public class DBListActivity extends BaseActivity {
                     Bundle b1 = msg.getData();
                     String data = b1.getString("data");
                     Gson gsonF = new Gson();
-                    DBList bean = gsonF.fromJson(data, DBList.class);
+                    DBList1 bean = gsonF.fromJson(data, DBList1.class);
                     if (bean.getTotalCounts() != 0) {
                         for (int i = 0; i < bean.getResult().size(); i++) {
                             beanList.add(bean.getResult().get(i));
                         }
-                        if (bean.getResult().size() == 0&&beanList.size()!=0){
+                        if (bean.getResult().size() == 0 && beanList.size() != 0) {
                             if (recyclerView != null) {
                                 recyclerView.complete();
                                 recyclerView.onNoMore();
                                 baseAdapter.notifyDataSetChanged();
                             }
-                        }else if (bean.getResult().size() != 0&&beanList.size()!=0&&bean.getResult().size()<20){
+                        } else if (bean.getResult().size() != 0 && beanList.size() != 0 && bean.getResult().size() < 20) {
                             if (recyclerView != null) {
                                 recyclerView.complete();
                                 recyclerView.onNoMore();
                                 baseAdapter.notifyDataSetChanged();
                             }
-                        }else {
+                        } else {
                             if (recyclerView != null) {
                                 recyclerView.complete();
                                 baseAdapter.notifyDataSetChanged();
                             }
                         }
                         baseAdapter.notifyDataSetChanged();
-                    }else {
+                    } else {
                         recyclerView.complete();
                         recyclerView.onNoMore();
                         baseAdapter.notifyDataSetChanged();
@@ -470,5 +486,4 @@ public class DBListActivity extends BaseActivity {
             }
         }
     };
-
 }

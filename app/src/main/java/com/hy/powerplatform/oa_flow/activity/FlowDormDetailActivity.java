@@ -343,6 +343,7 @@ public class FlowDormDetailActivity extends BaseActivity {
                     }
                     adapter = new FlowMessageAdapter(FlowDormDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
+                    Toast.makeText(FlowDormDetailActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_ONE:

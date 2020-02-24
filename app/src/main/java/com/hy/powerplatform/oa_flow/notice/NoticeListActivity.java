@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.refreshview.CustomRefreshView;
 import com.hy.powerplatform.R;
+import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.base.OkHttpUtil;
@@ -46,6 +48,7 @@ public class NoticeListActivity extends BaseActivity {
 
     int limit = 20;
     int start = 0;
+    String userId;
     private OkHttpUtil httpUtil;
     BaseRecyclerAdapter baseAdapter;
     final HashMap<String, String> map = new HashMap();
@@ -56,7 +59,7 @@ public class NoticeListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         httpUtil = OkHttpUtil.getInstance(this);
-
+        userId = new SharedPreferencesHelper(NoticeListActivity.this,"login").getData(NoticeListActivity.this,"userId","");
         baseAdapter = new BaseRecyclerAdapter<NoticeList>(this, R.layout.adapter_notice_item, beanList) {
             @Override
             public void convert(BaseViewHolder holder, final NoticeList noticeBean) {
@@ -68,7 +71,8 @@ public class NoticeListActivity extends BaseActivity {
 //                String s = noticeBean.getDetails().replaceAll("<p>", "");
 //                s = s.replaceAll("</p>", "");
                 holder.setText(R.id.tvDetail, text);
-                if (noticeBean.getReadtimes().equals("null")){
+                Log.e("XXX",noticeBean.getReadUserids());
+                if (!noticeBean.getReadUserids().contains(","+userId+",")){
                     holder.setText(R.id.tvSee, "未查看");
                 }else {
                     holder.setText(R.id.tvSee, "已查看");
@@ -79,13 +83,11 @@ public class NoticeListActivity extends BaseActivity {
                         Intent intent = new Intent(NoticeListActivity.this, NoticeDetailActivity.class);
                         intent.putExtra("bean", noticeBean);
                         startActivity(intent);
-                        finish();
                     }
                 });
             }
         };
         recyclerView.setAdapter(baseAdapter);
-
         getData(start, limit);
         setClient();
     }
@@ -112,14 +114,21 @@ public class NoticeListActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getData(start, limit);
+    }
+
     private void getData(final int start, final int limit) {
         ProgressDialogUtil.startLoad(this, getResources().getString(R.string.get_data));
         final String path_url = Constant.BASE_URL2 + Constant.NOTICE + "?start=" + start + "&limit=" + limit;
         map.clear();
-        map.put("Q_isNotice_SN_EQ", "1  ");
+        map.put("Q_isNotice_SN_EQ", "1");
         map.put("sort", "newsId");
         map.put("dir", "DESC");
-        map.put("Q_status_SN_EQ", "1");
+//        map.put("Q_status_SN_EQ", "1");
+        map.put("searchAll", "false");
         httpUtil.postForm(path_url, map, new OkHttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -139,6 +148,7 @@ public class NoticeListActivity extends BaseActivity {
                 Message message = new Message();
                 Bundle b = new Bundle();
                 b.putString("data", data);
+                Log.e("XXX",data);
                 message.setData(b);
                 message.what = TAG_TWO;
                 handler.sendMessage(message);
@@ -202,6 +212,7 @@ public class NoticeListActivity extends BaseActivity {
                 case TAG_TWO:
                     Bundle b1 = msg.getData();
                     String data = b1.getString("data");
+                    beanList.clear();
                     try {
                         JSONObject jsonObject = new JSONObject(data);
                         JSONArray jsonArray = jsonObject.getJSONArray("result");
@@ -218,6 +229,7 @@ public class NoticeListActivity extends BaseActivity {
                             bean.setReadtimes(jsonObject1.getString("readtimes"));
                             bean.setFileId(jsonObject1.getString("fileId"));
                             bean.setId(jsonObject1.getString("newsId"));
+                            bean.setReadUserids(jsonObject1.getString("readUserids"));
                             beanList.add(bean);
                         }
                         if (jsonArray.length() != 0) {

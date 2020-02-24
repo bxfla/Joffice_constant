@@ -1,5 +1,6 @@
 package com.hy.powerplatform.oa_flow.fragment;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,9 +21,9 @@ import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBackP;
 import com.hy.powerplatform.my_utils.myViews.MyAlertDialog;
-import com.hy.powerplatform.my_utils.utils.IDCardSession;
 import com.hy.powerplatform.my_utils.utils.PhoneSession;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
+import com.hy.powerplatform.oa_flow.activity.EntryPersonActivity;
 import com.hy.powerplatform.oa_flow.bean.Name;
 import com.leon.lfilepickerlibrary.LFilePicker;
 import com.leon.lfilepickerlibrary.utils.Constant;
@@ -31,7 +32,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,10 +48,10 @@ import static com.hy.powerplatform.my_utils.base.Constant.TAG_TWO;
 
 public class FragmentEntryData extends Fragment {
 
-    @BindView(R.id.etPerson)
-    EditText etPerson;
-    @BindView(R.id.spinnerSex)
-    Spinner spinnerSex;
+    @BindView(R.id.tvPerson)
+    TextView tvPerson;
+    @BindView(R.id.etSex)
+    EditText etSex;
     @BindView(R.id.etPhone)
     EditText etPhone;
     @BindView(R.id.etIdNum)
@@ -68,7 +68,6 @@ public class FragmentEntryData extends Fragment {
     Button btnUp;
     Unbinder unbinder;
 
-    List<String> listSex = new ArrayList<String>();
     List<String> listCarType = new ArrayList<String>();
     List<String> listYY = new ArrayList<String>();
     List<String> listRZ = new ArrayList<String>();
@@ -143,8 +142,6 @@ public class FragmentEntryData extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_entry_data, container, false);
         unbinder = ButterKnife.bind(this, view);
-        listSex.add("男");
-        listSex.add("女");
 
         listCarType.add("A1");
         listCarType.add("A3");
@@ -157,10 +154,6 @@ public class FragmentEntryData extends Fragment {
         listRZ.add("签订合同");
         listRZ.add("领取服装");
         listRZ.add("开介绍信到公司");
-
-        sexAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listSex);
-        sexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerSex.setAdapter(sexAdapter);
 
         carTypedAapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listCarType);
         carTypedAapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -261,9 +254,13 @@ public class FragmentEntryData extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.tvData, R.id.btnUp})
+    @OnClick({R.id.tvData, R.id.btnUp,R.id.tvPerson})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tvPerson:
+                Intent intent = new Intent(getActivity(), EntryPersonActivity.class);
+                startActivityForResult(intent,TAG_ONE);
+                break;
             case R.id.tvData:
 //                if (ContextCompat.checkSelfPermission(getActivity(),
 //                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -278,10 +275,10 @@ public class FragmentEntryData extends Fragment {
 //                }
                 break;
             case R.id.btnUp:
-                final String person = etPerson.getText().toString().trim();
+                final String person = tvPerson.getText().toString().trim();
                 final String phone = etPhone.getText().toString().trim();
                 final String idCard = etIdNum.getText().toString().trim();
-                final String sex = String.valueOf(spinnerSex.getSelectedItem());
+                final String sex = etSex.getText().toString();
                 final String carType = etCarType.getText().toString().trim();
                 zjcx1 = carType;
                 if (person.equals("")) {
@@ -304,18 +301,34 @@ public class FragmentEntryData extends Fragment {
                     Toast.makeText(getActivity(), "准驾车型不能为空", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                try {
-                    if (!IDCardSession.IDCardValidate(idCard)) {
-                        Toast.makeText(getActivity(), "身份证号格式错误", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    if (!IDCardSession.IDCardValidate(idCard)) {
+//                        Toast.makeText(getActivity(), "身份证号格式错误", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    }
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
                 ProgressDialogUtil.startLoad(getActivity(), "获取数据中");
                 getSenPiPersonOne();
 //                ProgressDialogUtil.startLoad(getActivity(), "上传数据中");
 //                UpContractData();
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case TAG_ONE:
+                if (resultCode==TAG_ONE){
+                    tvPerson.setText(data.getStringExtra("fullname"));
+                    etPhone.setText(data.getStringExtra("mobile"));
+                    etIdNum.setText(data.getStringExtra("idNo"));
+                    etSex.setText(data.getStringExtra("sex"));
+                    etCarType.setText(data.getStringExtra("vehicleClass"));
+                }
                 break;
         }
     }
@@ -345,11 +358,11 @@ public class FragmentEntryData extends Fragment {
                     }
                     uId = selectList.get(0) + "," + uId;
                 }
-                final String person = etPerson.getText().toString();
+                final String person = tvPerson.getText().toString();
                 final String phone = etPhone.getText().toString();
                 final String idCard = etIdNum.getText().toString();
                 final String carType = etCarType.getText().toString();
-                final String sex = String.valueOf(spinnerSex.getSelectedItem());
+                final String sex = etSex.getText().toString();
                 String res = dbA.OAEntryUp(turl, userDepart, uId, person, phone, idCard,
                         sex, carType, liushuihao);
                 if (res.equals("")) {

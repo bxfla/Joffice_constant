@@ -30,14 +30,14 @@ public class FlowHistoryListAdapter extends RecyclerView.Adapter<FlowHistoryList
     }
 
     @Override
-    public FlowHistoryListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_smart,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(FlowHistoryListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.textTitle.setText(beanList1.get(position).getProcessName().toString());
         holder.textName.setText(beanList1.get(position).getCreator().toString());
         holder.textTime.setText(beanList1.get(position).getCreatetime().toString());

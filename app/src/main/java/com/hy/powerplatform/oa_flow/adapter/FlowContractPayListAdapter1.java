@@ -30,14 +30,14 @@ public class FlowContractPayListAdapter1 extends RecyclerView.Adapter<FlowContra
     }
 
     @Override
-    public FlowContractPayListAdapter1.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_flowlist1,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(FlowContractPayListAdapter1.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.textView.setText(beanList1.get(position).getSubject());
         String status = beanList1.get(position).getStatus();
         if (status.equals("0")){

@@ -31,14 +31,14 @@ public class MainFlowAdapter extends RecyclerView.Adapter<MainFlowAdapter.ViewHo
     }
 
     @Override
-    public MainFlowAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_flowitem,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(MainFlowAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.textView.setText(beanList.get(position).getModuleName());
         holder.imageView.setImageResource(imageList.get(position));
         holder.mPosition = position;

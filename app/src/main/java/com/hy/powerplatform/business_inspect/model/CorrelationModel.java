@@ -9,5 +9,5 @@ import com.hy.powerplatform.my_utils.base.BaseModeBackLisenter;
  */
 
 public interface CorrelationModel {
-    void getCorrelationModelData(String httpTag,String busCode,String rq, Context context, BaseModeBackLisenter baseModeBackLisenter);
+    void getCorrelationModelData(String httpTag, String busCode, String rq, Context context, BaseModeBackLisenter baseModeBackLisenter);
 }

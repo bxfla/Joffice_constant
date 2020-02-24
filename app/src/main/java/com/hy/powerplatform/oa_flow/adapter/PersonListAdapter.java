@@ -24,7 +24,7 @@ public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.Vi
     Context context;
 
     public interface OnGetAdapterPositionListener  {
-        void getAdapterPosition(String userName,String userCode,String ProfileId);
+        void getAdapterPosition(String userName, String userCode, String ProfileId);
     }
     public void sendOnGetAdapterPositionListener(OnGetAdapterPositionListener onGetAdapterPositionListener){
         this.onGetAdapterPositionListener = onGetAdapterPositionListener;
@@ -36,14 +36,14 @@ public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.Vi
     }
 
     @Override
-    public PersonListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_flowlist,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(PersonListAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.textView.setText(beanList.get(position).getFullname());
         if (onGetAdapterPositionListener!=null) {
             holder.textView.setOnClickListener(new View.OnClickListener() {

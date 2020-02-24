@@ -26,7 +26,7 @@ public class InspectAllAQAdapter extends RecyclerView.Adapter<InspectAllAQAdapte
     public GetItemPosition getItemPosition;
 
     public interface GetItemPosition {
-        void getPosition(int position,String tag);
+        void getPosition(int position, String tag);
     }
 
     public void setOnInnerItemOnClickListener(GetItemPosition getItemPosition){
@@ -39,14 +39,14 @@ public class InspectAllAQAdapter extends RecyclerView.Adapter<InspectAllAQAdapte
     }
 
     @Override
-    public InspectAllAQAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_inspectstarte, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(final InspectAllAQAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvName.setText(beanList.get(position));
         holder.position =position;
         holder.tvGet.setOnClickListener(new View.OnClickListener() {

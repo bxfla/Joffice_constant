@@ -78,13 +78,14 @@ public class NoticeDetailActivity extends BaseActivity {
         tvTime.setText(bean.getCreatetime());
         tvEndTime.setText(bean.getEndtime());
         String data= bean.getFileName();
-        if (!data.substring(data.length()-1,data.length()).equals(",")){
-            tvData.setText(bean.getFileName());
-        }else {
-            tvData.setText(bean.getFileName().substring(0,bean.getFileName().length()-1));
-        }
         if (bean.getFileName().equals("")){
             llData.setVisibility(View.GONE);
+        }else {
+            if (!data.substring(data.length()-1,data.length()).equals(",")){
+                tvData.setText(bean.getFileName());
+            }else {
+                tvData.setText(bean.getFileName().substring(0,bean.getFileName().length()-1));
+            }
         }
         fileId = bean.fileId;
         newId = bean.newsId;

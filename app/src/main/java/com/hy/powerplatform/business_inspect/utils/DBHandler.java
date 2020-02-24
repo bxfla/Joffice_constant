@@ -2887,7 +2887,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
         nvs.add(new BasicNameValuePair("taskId", taskId));
-        nvs.add(new BasicNameValuePair("defId", com.hy.powerplatform.my_utils.base.Constant.CONTRACTSIGNDIFID));
+        nvs.add(new BasicNameValuePair("defId", Constant.CONTRACTSIGNDIFID));
         nvs.add(new BasicNameValuePair("signalName", signaName));
         nvs.add(new BasicNameValuePair("destName", destName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
@@ -2953,7 +2953,7 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("useTemplate", ""));
         nvs.add(new BasicNameValuePair("flowAssignld", flowAssignld));
         nvs.add(new BasicNameValuePair("taskId", taskId));
-        nvs.add(new BasicNameValuePair("defId", com.hy.powerplatform.my_utils.base.Constant.GHCONTRACTSIGNDIFID));
+        nvs.add(new BasicNameValuePair("defId", Constant.GHCONTRACTSIGNDIFID));
         nvs.add(new BasicNameValuePair("signalName", signaName));
         nvs.add(new BasicNameValuePair("destName", destName));
         nvs.add(new BasicNameValuePair("sendMsg", "true"));
@@ -4160,6 +4160,71 @@ public class DBHandler {
         nvs.add(new BasicNameValuePair("zhglbyj", ""));
         nvs.add(new BasicNameValuePair("rlzybyj", ""));
         nvs.add(new BasicNameValuePair("jbbmyj", ""));
+        try {
+            Log.e("XXXXH", nvs.toString());
+            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
+            httpRequst.setEntity(uefEntity);
+            HttpResponse res = httpClient.execute(httpRequst);
+            HttpEntity entity = res.getEntity();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+            StringBuffer sb = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            reader.close();
+            Log.i("sb=", sb.toString());
+            JSONObject json_ = new JSONObject(sb.toString());
+            if (json_ != null) {
+                String msg = json_.get("success").toString();
+                if (msg.equals("true")) {
+                    return "";
+                } else {
+                    return msg;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+        return "保存失败";
+    }
+
+
+    //员工入职待办签字
+    public String OAWorkEntryUp(String turl, String uName, String uId, String person, String phone, String idCard
+            , String sex, String carType, String liushuihao, String bumenDid, String bumen) {
+        HttpClient httpClient = new DefaultHttpClient();
+        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+        HttpPost httpRequst = new HttpPost(turl);
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+        httpRequst.setHeader("Cookie", Session);
+        nvs.add(new BasicNameValuePair("useTemplate", "false"));
+        nvs.add(new BasicNameValuePair("defId", Constant.WORKENTRYDIFID));
+        nvs.add(new BasicNameValuePair("destName", uName));
+        nvs.add(new BasicNameValuePair("startFlow", "true"));
+        nvs.add(new BasicNameValuePair("sendMsg", "true"));
+        nvs.add(new BasicNameValuePair("sendMail", "true"));
+        nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
+        nvs.add(new BasicNameValuePair("flowAssignId", uName + "|" + uId));
+        nvs.add(new BasicNameValuePair("flowVars", "{}"));
+        nvs.add(new BasicNameValuePair("formDefId", Constant.WORKENTRY));
+
+        nvs.add(new BasicNameValuePair("xm", person));
+        nvs.add(new BasicNameValuePair("lxdh", phone));
+        nvs.add(new BasicNameValuePair("sfzh", idCard));
+        nvs.add(new BasicNameValuePair("xb", sex));
+        nvs.add(new BasicNameValuePair("LiuShuiHao", liushuihao));
+
+        nvs.add(new BasicNameValuePair("zjcx", carType));
+        nvs.add(new BasicNameValuePair("bumenDid", bumenDid));
+        nvs.add(new BasicNameValuePair("bumen", bumen));
+
+        nvs.add(new BasicNameValuePair("jbbmyj", ""));
+        nvs.add(new BasicNameValuePair("cwsjbyj", ""));
+        nvs.add(new BasicNameValuePair("xxjsbyj", ""));
+        nvs.add(new BasicNameValuePair("gonghao", ""));
+        nvs.add(new BasicNameValuePair("cctkjyxgsyj", ""));
         try {
             Log.e("XXXXH", nvs.toString());
             UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");

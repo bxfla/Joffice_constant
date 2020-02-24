@@ -26,7 +26,7 @@ public class InspectAllGFAdapter extends RecyclerView.Adapter<InspectAllGFAdapte
     public GetGFItemPosition getGFItemPosition;
 
     public interface GetGFItemPosition {
-        void getGFPosition(int position,String tag);
+        void getGFPosition(int position, String tag);
     }
 
     public void setOnInnerItemOnClickListener(GetGFItemPosition getGFItemPosition){

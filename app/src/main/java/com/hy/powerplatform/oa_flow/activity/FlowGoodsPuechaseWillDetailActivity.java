@@ -1053,9 +1053,9 @@ public class FlowGoodsPuechaseWillDetailActivity extends BaseActivity {
                 cb9.setVisibility(View.VISIBLE);
             }
         }
-        ll1.setVisibility(View.GONE);
-        ll2.setVisibility(View.GONE);
-        ll3.setVisibility(View.GONE);
+//        ll1.setVisibility(View.GONE);
+//        ll2.setVisibility(View.GONE);
+//        ll3.setVisibility(View.GONE);
         ProgressDialogUtil.stopLoad();
 //        getLastPerson();
     }

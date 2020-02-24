@@ -39,7 +39,7 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
 //    }
 
     @Override
-    public MyEventAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_myinform,parent,false);
         final ViewHolder holder=new ViewHolder(view);
         //recyclerView监听事件
@@ -59,7 +59,7 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(MyEventAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 //        holder.tvTitle.setText("新闻标题");
 //        holder.tvContent.setText("各市煤炭管理部门、各省属煤炭企业:为进一步加强全省煤炭生产事中事后监管，严防超能力生产，经研究，省煤炭局决定自即日起开展全省煤矿按核定能力组织生产专项检查。现将有关事项通知如下 ");
 //        holder.tvTime.setText("2018.5.4");

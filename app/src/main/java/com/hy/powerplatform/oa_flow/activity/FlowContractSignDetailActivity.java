@@ -270,6 +270,7 @@ public class FlowContractSignDetailActivity extends BaseActivity {
                     }
                     adapter = new FlowMessageAdapter(FlowContractSignDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
+                    Toast.makeText(FlowContractSignDetailActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_ONE:

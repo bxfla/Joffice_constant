@@ -17,7 +17,16 @@ public class OAFlowNum implements Serializable {
 
     private boolean success;
     private int totalCounts;
+    private String mag;
     private List<ResultBean> result;
+
+    public String getMag() {
+        return mag;
+    }
+
+    public void setMag(String msg) {
+        this.mag = msg;
+    }
 
     public boolean isSuccess() {
         return success;

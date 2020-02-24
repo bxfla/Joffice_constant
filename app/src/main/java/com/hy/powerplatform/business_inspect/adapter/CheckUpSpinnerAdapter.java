@@ -26,7 +26,7 @@ public class CheckUpSpinnerAdapter extends RecyclerView.Adapter<CheckUpSpinnerAd
     Context mContext;
 
     public interface GetItemTextViewPosition {
-        void getItemPosition(int position,String tag);
+        void getItemPosition(int position, String tag);
     }
 
     public void setItemPosition(GetItemTextViewPosition getItemTextViewPosition) {
@@ -39,14 +39,14 @@ public class CheckUpSpinnerAdapter extends RecyclerView.Adapter<CheckUpSpinnerAd
     }
 
     @Override
-    public CheckUpSpinnerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.adapter_spinner,parent,false);
         final ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(final CheckUpSpinnerAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mTextView.setText(beanList.get(position).getProjectName());
         holder.position =position;
         holder.tvUpImageView.setOnClickListener(new View.OnClickListener() {

@@ -341,6 +341,7 @@ public class FlowInstallDetailActivity extends BaseActivity {
                     }
                     adapter = new FlowMessageAdapter(FlowInstallDetailActivity.this, flowList);
                     recyclerView.setAdapter(adapter);
+                    Toast.makeText(FlowInstallDetailActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_ONE:

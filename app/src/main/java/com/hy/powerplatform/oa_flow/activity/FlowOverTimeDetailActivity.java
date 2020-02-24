@@ -290,6 +290,7 @@ public class FlowOverTimeDetailActivity extends BaseActivity {
                     }
                     adapter = new FlowMessageAdapter(FlowOverTimeDetailActivity.this,flowList);
                     recyclerView.setAdapter(adapter);
+                    Toast.makeText(FlowOverTimeDetailActivity.this, "查询成功", Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.stopLoad();
                     break;
                 case TAG_ONE:

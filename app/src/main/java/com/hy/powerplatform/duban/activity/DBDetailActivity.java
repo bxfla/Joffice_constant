@@ -19,6 +19,7 @@ import com.hy.powerplatform.R;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.duban.bean.DBFile;
 import com.hy.powerplatform.duban.bean.DBList;
+import com.hy.powerplatform.duban.bean.DBList1;
 import com.hy.powerplatform.duban.bean.DBUp;
 import com.hy.powerplatform.duban.bean.DBUp1;
 import com.hy.powerplatform.my_utils.base.AlertDialogCallBack;
@@ -35,7 +36,9 @@ import com.hy.powerplatform.my_utils.utils.time_select.CustomDatePickerMin;
 import com.hy.powerplatform.oa_flow.bean.Filed;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -118,7 +121,7 @@ public class DBDetailActivity extends BaseActivity {
         alertDialogUtil = new AlertDialogUtil(this);
         httpUtil = OkHttpUtil.getInstance(this);
         Intent intent = getIntent();
-        DBList.ResultBean bean = (DBList.ResultBean) intent.getSerializableExtra("bean");
+        DBList1.ResultBean bean = (DBList1.ResultBean) intent.getSerializableExtra("bean");
         status = String.valueOf(bean.getTaskStatus());
         tvType.setText(bean.getTaskType());
         if (status.equals("1")){
@@ -128,7 +131,9 @@ public class DBDetailActivity extends BaseActivity {
         }else {
             tvRW.setText(bean.getTaskName());
         }
-        tvJHWCSJ.setText(bean.getPlanFinishTime());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String planTime = format.format(new Date(bean.getPlanFinishTime().getTime()));
+        tvJHWCSJ.setText(planTime);
         if (status.equals("1")){
             etContent.setVisibility(View.VISIBLE);
             tvContent.setVisibility(View.GONE);
@@ -140,9 +145,12 @@ public class DBDetailActivity extends BaseActivity {
         lxrCode = bean.getContactsId();
         tvDBR.setText(bean.getSupervisorNames());
         tvZXR.setText(bean.getOperatorNames());
-        tvFBSJ.setText(bean.getApproveTime());
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        String approveTime = format1.format(new Date(bean.getApproveTime().getTime()));
+        tvJHWCSJ.setText(planTime);
+        tvFBSJ.setText(approveTime);
         tvLXR.setText(bean.getContactsName());
-        tvFJ.setText(bean.getFileNames() + "");
+//        tvFJ.setText(bean.getFileNames() + "");
         workId = String.valueOf(bean.getWorkId());
         userName = bean.getSupervisorNames();
         userCode = bean.getSupervisorIds();

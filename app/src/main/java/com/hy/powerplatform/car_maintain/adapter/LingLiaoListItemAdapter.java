@@ -32,7 +32,7 @@ public class LingLiaoListItemAdapter extends RecyclerView.Adapter<LingLiaoListIt
     }
 
     @Override
-    public LingLiaoListItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_lingliaoitem, parent, false);
         final ViewHolder holder = new ViewHolder(view);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +49,7 @@ public class LingLiaoListItemAdapter extends RecyclerView.Adapter<LingLiaoListIt
     }
 
     @Override
-    public void onBindViewHolder(LingLiaoListItemAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvNo.setText(beanList.get(position).getApplyNo());
         holder.tvZNo.setText(beanList.get(position).getMaterialCode());
         holder.tvKNum.setText(beanList.get(position).getNum()+"");
