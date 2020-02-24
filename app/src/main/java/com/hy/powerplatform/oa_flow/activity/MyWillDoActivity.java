@@ -310,6 +310,14 @@ public class MyWillDoActivity extends BaseActivity implements MyWillDoAdapter.On
             intent.putExtra("piId", beanList.get(position).getPiId());
             intent.putExtra("executionId", beanList.get(position).getExecutionId());
             startActivity(intent);
+        }else if (beanList.get(position).getFormDefId().equals(Constant.WORKENTRY)) {
+            intent = new Intent(this, FlowAssessWillDetailActivity.class);
+            intent.putExtra("activityName", beanList.get(position).getActivityName());
+            intent.putExtra("taskId", beanList.get(position).getTaskId());
+            String s = beanList.get(position).getPiId();
+            intent.putExtra("piId", beanList.get(position).getPiId());
+            intent.putExtra("executionId", beanList.get(position).getExecutionId());
+            startActivity(intent);
         } else if (beanList.get(position).getFormDefId().equals(Constant.LEAVER)) {
             intent = new Intent(this, FlowLeaveWillDetailActivity.class);
             intent.putExtra("activityName", beanList.get(position).getActivityName());

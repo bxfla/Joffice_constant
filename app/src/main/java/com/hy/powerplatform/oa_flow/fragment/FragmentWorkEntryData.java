@@ -416,7 +416,7 @@ public class FragmentWorkEntryData extends Fragment {
                                     public void run() {
                                         String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
                                         DBHandler dbA = new DBHandler();
-                                        res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.ENTRYDIFID, namelist.get(0));
+                                        res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.WORKENTRYDIFID, namelist.get(0));
                                         userDepart = namelist.get(0);
                                         if (res.equals("保存失败") || res.equals("")) {
                                             handler.sendEmptyMessage(TAG_TWO);
@@ -437,7 +437,7 @@ public class FragmentWorkEntryData extends Fragment {
                                                 String url = com.hy.powerplatform.my_utils.base.Constant.BASE_URL2 + com.hy.powerplatform.my_utils.base.Constant.NOENDPERSON;
                                                 DBHandler dbA = new DBHandler();
                                                 userDepart = data;
-                                                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.ENTRYDIFID, data);
+                                                res = dbA.OAQingJiaMorNext(url, com.hy.powerplatform.my_utils.base.Constant.WORKENTRYDIFID, data);
                                                 if (res.equals("保存失败") || res.equals("")) {
                                                     handler.sendEmptyMessage(TAG_TWO);
                                                 } else {

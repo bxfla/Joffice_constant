@@ -236,6 +236,10 @@ public class MyFlowListActivity extends BaseActivity implements MyFlowListAdapte
             intent = new Intent(this, FlowEntryDetailActivity.class);
             intent.putExtra("bean", beanList.get(position).getRunId());
             startActivity(intent);
+        }else if (beanList.get(position).getFormDefId().equals(Constant.WORKENTRY)) {
+            intent = new Intent(this, FlowAssessDetailActivity.class);
+            intent.putExtra("bean", beanList.get(position).getRunId());
+            startActivity(intent);
         } else if (beanList.get(position).getFormDefId().equals(Constant.LEAVER)) {
             intent = new Intent(this, FlowLeaveDetailActivity.class);
             intent.putExtra("bean", beanList.get(position).getRunId());

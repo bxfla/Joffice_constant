@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.refreshview.CustomRefreshView;
 import com.hy.powerplatform.R;
 import com.hy.powerplatform.SharedPreferencesHelper;
 import com.hy.powerplatform.my_utils.base.BaseActivity;
@@ -44,9 +45,9 @@ public class NoticeListActivity extends BaseActivity {
     @BindView(R.id.header)
     Header header;
     @BindView(R.id.recyclerView)
-    CustomRefreshView recyclerView;
+    RecyclerView recyclerView;
 
-    int limit = 20;
+    int limit = 1000;
     int start = 0;
     String userId;
     private OkHttpUtil httpUtil;
@@ -58,6 +59,8 @@ public class NoticeListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(manager);
         httpUtil = OkHttpUtil.getInstance(this);
         userId = new SharedPreferencesHelper(NoticeListActivity.this,"login").getData(NoticeListActivity.this,"userId","");
         baseAdapter = new BaseRecyclerAdapter<NoticeList>(this, R.layout.adapter_notice_item, beanList) {
@@ -89,29 +92,6 @@ public class NoticeListActivity extends BaseActivity {
         };
         recyclerView.setAdapter(baseAdapter);
         getData(start, limit);
-        setClient();
-    }
-
-    /**
-     * 滑动监听
-     */
-    private void setClient() {
-        recyclerView.setOnLoadListener(new CustomRefreshView.OnLoadListener() {
-            @Override
-            public void onRefresh() {
-                beanList.clear();
-                start = 0;
-                limit = 20;
-                getData(start, limit);
-            }
-
-            @Override
-            public void onLoadMore() {
-                start = limit;
-                limit += 20;
-                getData(start, limit);
-            }
-        });
     }
 
     @Override
@@ -232,31 +212,32 @@ public class NoticeListActivity extends BaseActivity {
                             bean.setReadUserids(jsonObject1.getString("readUserids"));
                             beanList.add(bean);
                         }
-                        if (jsonArray.length() != 0) {
-                            if (jsonArray.length() == 0 && beanList.size() != 0) {
-                                if (recyclerView != null) {
-                                    recyclerView.complete();
-                                    recyclerView.onNoMore();
-                                    baseAdapter.notifyDataSetChanged();
-                                }
-                            } else if (jsonArray.length() != 0 && beanList.size() != 0 && jsonArray.length() < 20) {
-                                if (recyclerView != null) {
-                                    recyclerView.complete();
-                                    recyclerView.onNoMore();
-                                    baseAdapter.notifyDataSetChanged();
-                                }
-                            } else {
-                                if (recyclerView != null) {
-                                    recyclerView.complete();
-                                    baseAdapter.notifyDataSetChanged();
-                                }
-                            }
-                            baseAdapter.notifyDataSetChanged();
-                        } else {
-                            recyclerView.complete();
-                            recyclerView.onNoMore();
-                            baseAdapter.notifyDataSetChanged();
-                        }
+                        baseAdapter.notifyDataSetChanged();
+//                        if (jsonArray.length() != 0) {
+//                            if (jsonArray.length() == 0 && beanList.size() != 0) {
+//                                if (recyclerView != null) {
+//                                    recyclerView.complete();
+//                                    recyclerView.onNoMore();
+//                                    baseAdapter.notifyDataSetChanged();
+//                                }
+//                            } else if (jsonArray.length() != 0 && beanList.size() != 0 && jsonArray.length() < 20) {
+//                                if (recyclerView != null) {
+//                                    recyclerView.complete();
+//                                    recyclerView.onNoMore();
+//                                    baseAdapter.notifyDataSetChanged();
+//                                }
+//                            } else {
+//                                if (recyclerView != null) {
+//                                    recyclerView.complete();
+//                                    baseAdapter.notifyDataSetChanged();
+//                                }
+//                            }
+//                            baseAdapter.notifyDataSetChanged();
+//                        } else {
+//                            recyclerView.complete();
+//                            recyclerView.onNoMore();
+//                            baseAdapter.notifyDataSetChanged();
+//                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

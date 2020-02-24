@@ -18,7 +18,7 @@ import com.hy.powerplatform.R;
 import com.hy.powerplatform.business_inspect.utils.DBHandler;
 import com.hy.powerplatform.my_utils.base.Constant;
 import com.hy.powerplatform.my_utils.utils.ProgressDialogUtil;
-import com.hy.powerplatform.oa_flow.activity.FlowEntryDetailActivity;
+import com.hy.powerplatform.oa_flow.activity.FlowAssessDetailActivity;
 import com.hy.powerplatform.oa_flow.adapter.FlowContractPayListAdapter;
 import com.hy.powerplatform.oa_flow.bean.MyLeave;
 
@@ -80,7 +80,7 @@ public class FragmentWorkEntryList extends Fragment implements FlowContractPayLi
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = Constant.BASE_URL2 + Constant.MYLIST+start+"&limit="+limit+"&Q_subject_S_LK="+Constant.ENTRYNAMENAME;
+                String url = Constant.BASE_URL2 + Constant.MYLIST+start+"&limit="+limit+"&Q_subject_S_LK="+Constant.ASSESSNAME;
                 DBHandler dbA = new DBHandler();
                 res = dbA.OAQingJiaMy(url);
                 if (res.equals("获取数据失败") || res.equals("")) {
@@ -117,7 +117,7 @@ public class FragmentWorkEntryList extends Fragment implements FlowContractPayLi
     @Override
     public void getAdapterPosition(int position) {
         MyLeave.ResultBean bean = beanList.get(position);
-        Intent intent = new Intent(getActivity(), FlowEntryDetailActivity.class);
+        Intent intent = new Intent(getActivity(), FlowAssessDetailActivity.class);
         intent.putExtra("bean", bean.getRunId());
         startActivity(intent);
     }

@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -37,8 +38,15 @@ public class MyAlertDialog {
 //                R.layout.alert_item, new String[]{"name"},
 //                new int[]{R.id.tv_name});
         AlertDialogAdapter adapter = new AlertDialogAdapter(context,nameList,isShow);
-
         listView.setAdapter(adapter);
+        int totalHeight = 0;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View listItem = adapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
         linearLayoutMain.addView(listView);// 往这个布局中加入listview
 
         final AlertDialog dialog = new AlertDialog.Builder(context)

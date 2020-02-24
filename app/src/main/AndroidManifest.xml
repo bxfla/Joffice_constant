@@ -106,8 +106,8 @@
 
         <service
             android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
+            android:enabled="true"/>
+            <!--android:process=":remote" />-->
         <!-- 程序自启动 -->
         <receiver
             android:name=".MyReceiver"
@@ -981,7 +981,11 @@
         <activity android:name=".statist.activity.PersonChangeActivity" />
         <activity android:name=".oa_flow.activity.EntryPersonActivity" />
         <activity android:name=".login.activity.AppUpHistoryActivity"/>
-        <activity android:name=".oa_flow.activity.FlowAssessActivity"/>
+        <activity android:name=".oa_flow.activity.FlowAssessActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".oa_flow.activity.FlowAssessDetailActivity"/>
+        <activity android:name=".oa_flow.activity.FlowAssessWillDetailActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
     </application>
 
 </manifest>

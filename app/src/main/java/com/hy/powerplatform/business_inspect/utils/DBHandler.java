@@ -4126,7 +4126,72 @@ public class DBHandler {
         return "保存失败";
     }
 
-    //驾驶员入职待办签字
+    //员工入职待办签字
+    public String OAWillAssessLeader(String url, String person, String phone, String idCard, String sex,
+                                String department, String userCode, String destName, String taskId, String flowAssignld,
+                                String mainId, String jsbmyj, String cwsjbyj, String xxjsbyj, String cctkjyxgsyj,
+                                String ygbh, String comment, String signaName, String carType) {
+        HttpClient httpClient = new DefaultHttpClient();
+        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+        HttpPost httpRequst = new HttpPost(url);
+        String Session = new SharedPreferencesHelper(MyApplication.getContext(), "login").getData(MyApplication.getContext(), "session", "");
+        httpRequst.setHeader("Cookie", Session);
+        nvs.add(new BasicNameValuePair("useTemplate", ""));
+        nvs.add(new BasicNameValuePair("flowAssignId", flowAssignld));
+        nvs.add(new BasicNameValuePair("taskId", taskId));
+        nvs.add(new BasicNameValuePair("signalName", signaName));
+        nvs.add(new BasicNameValuePair("destName", destName));
+        nvs.add(new BasicNameValuePair("sendMsg", "true"));
+        nvs.add(new BasicNameValuePair("sendMail", "true"));
+        nvs.add(new BasicNameValuePair("sendFQRMsg", "false"));
+        nvs.add(new BasicNameValuePair("comments", comment));
+        nvs.add(new BasicNameValuePair("mainId", mainId));
+        nvs.add(new BasicNameValuePair("formDefId", Constant.WORKENTRY));
+        nvs.add(new BasicNameValuePair("xm", person));
+        nvs.add(new BasicNameValuePair("lxdh", phone));
+        nvs.add(new BasicNameValuePair("sfzh", idCard));
+        nvs.add(new BasicNameValuePair("xmUId", userCode));
+        nvs.add(new BasicNameValuePair("zjcx", carType));
+        nvs.add(new BasicNameValuePair("bumen", department));
+        nvs.add(new BasicNameValuePair("sex", sex));
+        nvs.add(new BasicNameValuePair("gonghao", ygbh));
+
+        nvs.add(new BasicNameValuePair("jbbmyj", jsbmyj));
+        nvs.add(new BasicNameValuePair("cwsjbyj", cwsjbyj));
+        nvs.add(new BasicNameValuePair("xxjsbyj", xxjsbyj));
+        nvs.add(new BasicNameValuePair("cctkjyxgsyj", cctkjyxgsyj));
+        try {
+            Log.e("XXXXH", nvs.toString());
+            UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvs, "utf-8");
+            httpRequst.setEntity(uefEntity);
+            HttpResponse res = httpClient.execute(httpRequst);
+            HttpEntity entity = res.getEntity();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+            StringBuffer sb = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            reader.close();
+            Log.i("sb=", sb.toString());
+            JSONObject json_ = new JSONObject(sb.toString());
+            if (json_ != null) {
+                String msg = json_.get("success").toString();
+                if (msg.equals("true")) {
+                    return "";
+                } else {
+                    String s = json_.getString("message");
+                    return s;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+        return "保存失败";
+    }
+
+    //驾驶员入职发布
     public String OAEntryUp(String turl, String uName, String uId, String person, String phone, String idCard
             , String sex, String carType, String liushuihao) {
         HttpClient httpClient = new DefaultHttpClient();
